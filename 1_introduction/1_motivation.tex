@@ -14,19 +14,19 @@ Over the years, the popularity of the Internet grew and connecting computers bec
 Thanks to wireless technologies, devices can connect to the Internet without having to be connected to a network.
 
 Nowadays, everyday objects like cars or washing machines start to be connected to the Internet to exchange information.
-This is what is currently known as the \emph{Internet of Things (IoT)} \citep{atzori_internet_2010}.
-The IoT represent a natural distributed way of creating \emph{Ambient Intelligence (AmI)} environments.
-In AmI the environment transparently senses and reacts to the human needs. % cita a Internet
+This is what is currently known as the \emph{Internet of Things (IoT)} \cite{atzori_internet_2010}.
+The IoT represent a natural distributed way of creating \emph{Ambient Intelligence (AmI)} environments \cite{caceres_ubicomp_2012}. % mencionar ubicomp o pervasive?
+In AmI the environment transparently senses and reacts to the human needs.
 Thus, the washing machine could plan to finish washing the clothes two minutes before the car gets home.
 
 \medskip
 
 Integrating these devices is not trivial as they usually communicate using different protocols.
-To solve this problem, the \emph{Web of Things (WoT)} initiative proposes to use well-established web standards to ease their communication. % cita a tesis de Guinard
-This, together with the already existing tools and libraries from the web world, simplifies its adoption to developers. % cita trabajo de Guinard
+To solve this problem, the \emph{Web of Things (WoT)} initiative proposes to use well-established web standards to ease their communication \cite{guinard_thesis_2011}.
+This, together with the already existing tools and libraries from the web world, simplifies its adoption to developers \cite{guinard_search_2011}.
 Besides, the WoT naturally integrates with the currently widely used RESTful web applications.
 
-Parallel to this initiative, \emph{Tuplespaces} proposes a different integration style based on the \emph{blackboard model}. % cita a tuplespaces
+Parallel to this initiative, \emph{Tuplespaces} \cite{gelernter_generative_1985} proposes a different integration style based on the \emph{blackboard model}.
 In tuplespaces participants cooperate with each other by writing and reading information on a shared \emph{space}.
 The main benefit of this paradigm is its higher-level of decoupling.
 Tuplespaces are considered:
@@ -38,14 +38,14 @@ and c) reference-autonomous, since applications should not need to know where th
 
 One common problem of both the WoT and Tuplespaces is that the format of the data they exchange is multifarious and application domain dependent.
 This implies that data will not be meaningful in other domains unless a specialized system converts and reinterprets them.
-A way to solve this problem is annotating the data semantically as proposed by the WWW. % citar web semántica
+A way to solve this problem is annotating the data semantically as proposed by the WWW \cite{berners-lee_semantic_2001}.
 
 Specifically, the Triple Space Computing (TSC) paradigm proposes sharing this semantic knowledge on shared spaces following the Tuplespaces approach.
 Besides, as it will be shown later on, TSC is also compatible with the WoT in many ways.
 % distributed
 
 However, adding semantics to the IoT, or more generally to AmI environments, may suppose a burden for resource constrained devices.
-To reduce this overhead in such devices, part of this computation is usually delegated to intermediaries \citep{honkola_smart-m3_2010}. % todavía no poner esta cita
+To reduce this overhead in such devices, part of this computation is usually delegated to intermediaries \cite{honkola_smart-m3_2010}. % todavía no poner esta cita
 This approach reduces the overhead of semantically annotated data but brings other problems.
 (1) When devices rely on others to provide information, it is not guarantee that the information accessed will accurately represent the last information available in the data providers (i.e., the sensors).
 (2) Once we rely on those intermediaries, it is required them to be available at all time.
