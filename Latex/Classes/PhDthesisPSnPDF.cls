@@ -233,7 +233,7 @@
 \usepackage{multirow}
 
 % Introduce slash \
-\usepackage{slashbox}
+%\usepackage{slashbox}
 
 
 % Watermarks
