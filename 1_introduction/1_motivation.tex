@@ -9,9 +9,58 @@
 
 %\InsertFig{computing_machinery_and_intelligence}{fig:Computing machinery and intelligence}{Computing machinery and intelligence.}{See Macro.tex for a detailed explanation of the InsertFig function}{1}{}
 
+Originally, the Internet was basically composed of a small number of computers that were physically connected to a wired network.
+Over the years, the popularity of the Internet grew and connecting computers became easier and cheaper.
+Thanks to wireless technologies, devices can connect to the Internet without having to be connected to a network.
 
-Lorem ipsum dolor sit amet.
+Nowadays, everyday objects like cars or washing machines start to be connected to the Internet to exchange information.
+This is what is currently known as the \emph{Internet of Things (IoT)} \citep{atzori_internet_2010}.
+The IoT represent a natural distributed way of creating \emph{Ambient Intelligence (AmI)} environments.
+In AmI the environment transparently senses and reacts to the human needs. % cita a Internet
+Thus, the washing machine could plan to finish washing the clothes two minutes before the car gets home.
 
-% ----------------------------------------------------------------------
+\medskip
 
+Integrating these devices is not trivial as they usually communicate using different protocols.
+To solve this problem, the \emph{Web of Things (WoT)} initiative proposes to use well-established web standards to ease their communication. % cita a tesis de Guinard
+This, together with the already existing tools and libraries from the web world, simplifies its adoption to developers. % cita trabajo de Guinard
+Besides, the WoT naturally integrates with the currently widely used RESTful web applications.
 
+Parallel to this initiative, \emph{Tuplespaces} proposes a different integration style based on the \emph{blackboard model}. % cita a tuplespaces
+In tuplespaces participants cooperate with each other by writing and reading information on a shared \emph{space}.
+The main benefit of this paradigm is its higher-level of decoupling.
+Tuplespaces are considered:
+a) time-autonomous, because one application can store information in the common space and other applications consume it later in an asynchronous way;
+b) location-autonomous, since applications can run in different environments as long as they support tuple spaces;
+and c) reference-autonomous, since applications should not need to know where the space is physically stored.
+
+\medskip
+
+One common problem of both the WoT and Tuplespaces is that the format of the data they exchange is multifarious and application domain dependent.
+This implies that data will not be meaningful in other domains unless a specialized system converts and reinterprets them.
+A way to solve this problem is annotating the data semantically as proposed by the WWW. % citar web semántica
+
+Specifically, the Triple Space Computing (TSC) paradigm proposes sharing this semantic knowledge on shared spaces following the Tuplespaces approach.
+Besides, as it will be shown later on, TSC is also compatible with the WoT in many ways.
+% distributed
+
+However, adding semantics to the IoT, or more generally to AmI environments, may suppose a burden for resource constrained devices.
+To reduce this overhead in such devices, part of this computation is usually delegated to intermediaries \citep{honkola_smart-m3_2010}. % todavía no poner esta cita
+This approach reduces the overhead of semantically annotated data but brings other problems.
+(1) When devices rely on others to provide information, it is not guarantee that the information accessed will accurately represent the last information available in the data providers (i.e., the sensors).
+(2) Once we rely on those intermediaries, it is required them to be available at all time.
+Otherwise, the devices would not be able to talk to each other.
+
+% definir más claramente si IoT o AmI
+In this thesis, we propose to adapt TSC to the IoT and AmI environments in a fully distributed way.
+To fulfill such an ambitious goal, we need to carefully consider the restrictions imposed by such environments.
+Two key aspects to take into account are the limited energy autonomy or computational capacity of many devices.
+Similarly, our solution should be flexible enough to support a wide range of scenarios.
+% hacer guiño a WoT por algún lado o va a quedar un poco cojo
+
+This thesis addresses different key aspects of this adaptation:
+a) its compatibility with the Wot;
+b) how any participant should search for content on the spaces;
+and c) how to write content in the space to change the state of the objects.
+Finally, we also present the incarnation of some of this ideas in a middleware,
+and some scenarios where it has been used.
