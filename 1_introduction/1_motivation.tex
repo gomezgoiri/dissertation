@@ -1,9 +1,3 @@
-
-% this file is called up by thesis.tex
-% content in this file will be fed into the main document
-
-%------------------------------------------------------------------------- 
-
 \section{Motivation}
 \label{sec:Motivation}
 
@@ -13,26 +7,31 @@ Originally, the Internet was basically composed of a small number of computers t
 Over the years, the popularity of the Internet grew and connecting computers became easier and cheaper.
 Thanks to wireless technologies, devices can connect to the Internet without having to be connected to a network.
 
+% Terminos a aclarar: IoT, ubicomp o pervasive y AmI (y Context Awareness?)
 Nowadays, everyday objects like cars or washing machines start to be connected to the Internet to exchange information.
 This is what is currently known as the \emph{Internet of Things (IoT)} \cite{atzori_internet_2010}.
-The IoT represent a natural distributed way of creating \emph{Ambient Intelligence (AmI)} environments \cite{caceres_ubicomp_2012}. % mencionar ubicomp o pervasive?
-In AmI the environment transparently senses and reacts to the human needs.
-Thus, the washing machine could plan to finish washing the clothes two minutes before the car gets home.
+The objects of the IoT, together with end-user devices such as smartphones or tablets, constitutes the clearest sign of the Ubiquitous computing (Ubicomp) prominence in our current lives \cite{caceres_ubicomp_2012}.
+But the real power of Ubicomp, as envisioned by Weiser in the early nineties \cite{weiser1991computer}, \emph{comes not from any one of these devices, it emerges from the interaction of all of them}.
+
+Furthermore, Weiser defended that all these devices should imperceptibly work on our behalf.
+This idea is particularly stressed by the concept of \emph{Ambient Intelligence (AmI)} \cite{ramos_ambient_2008}.
+For instance, the washing machine could plan to finish washing the clothes two minutes before the car gets home.
 
 \medskip
 
-Integrating these devices is not trivial as they usually communicate using different protocols.
+But integrating devices to accomplish such task is not trivial as they usually communicate using different protocols.
+% TODO hacer un acercamiento más elegante a WoT
 To solve this problem, the \emph{Web of Things (WoT)} initiative proposes to use well-established web standards to ease their communication \cite{guinard_thesis_2011}.
 This, together with the already existing tools and libraries from the web world, simplifies its adoption to developers \cite{guinard_search_2011}.
 Besides, the WoT naturally integrates with the currently widely used RESTful web applications.
 
-Parallel to this initiative, \emph{Tuplespaces} \cite{gelernter_generative_1985} proposes a different integration style based on the \emph{blackboard model}.
+Parallel to this initiative, \emph{tuplespaces} (or \emph{space-based computing}) \cite{gelernter_generative_1985} proposes a different integration style based on the \emph{blackboard model}.
 In tuplespaces participants cooperate with each other by writing and reading information on a shared \emph{space}.
 The main benefit of this paradigm is its higher-level of decoupling.
-Tuplespaces are considered:
-a) time-autonomous, because one application can store information in the common space and other applications consume it later in an asynchronous way;
-b) location-autonomous, since applications can run in different environments as long as they support tuple spaces;
-and c) reference-autonomous, since applications should not need to know where the space is physically stored.
+Tuplespaces are
+\emph{time-autonomous}, because one application can store information in the common space and other applications consume it later in an asynchronous way;
+\emph{location-autonomous}, since applications can run in different environments as long as they support tuple spaces;
+and \emph{reference-autonomous}, since applications should not need to know where the space is physically stored.
 
 \medskip
 
@@ -41,15 +40,16 @@ This implies that data will not be meaningful in other domains unless a speciali
 A way to solve this problem is annotating the data semantically as proposed by the WWW \cite{berners-lee_semantic_2001}.
 
 Specifically, the Triple Space Computing (TSC) paradigm proposes sharing this semantic knowledge on shared spaces following the Tuplespaces approach.
-Besides, as it will be shown later on, TSC is also compatible with the WoT in many ways.
+Besides, we argue that TSC is also compatible with the WoT.
 % distributed
 
 However, adding semantics to the IoT, or more generally to AmI environments, may suppose a burden for resource constrained devices.
 To reduce this overhead in such devices, part of this computation is usually delegated to intermediaries \cite{honkola_smart-m3_2010}. % todavía no poner esta cita
-This approach reduces the overhead of semantically annotated data but brings other problems.
-(1) When devices rely on others to provide information, it is not guarantee that the information accessed will accurately represent the last information available in the data providers (i.e., the sensors).
-(2) Once we rely on those intermediaries, it is required them to be available at all time.
-Otherwise, the devices would not be able to talk to each other.
+This approach reduces the overhead of semantically annotated data but brings other problems:
+\begin{enumerate}
+ \item When devices rely on others to provide information, it is not guarantee that the information accessed will accurately represent the last information available in the data providers (i.e., the sensors).
+ \item Once we rely on those intermediaries, it is required them to be available at all time. Otherwise, the devices would not be able to talk to each other.
+\end{enumerate}
 
 % definir más claramente si IoT o AmI
 In this thesis, we propose to adapt TSC to the IoT and AmI environments in a fully distributed way.
