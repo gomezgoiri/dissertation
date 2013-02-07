@@ -1,5 +1,47 @@
 \section{Integrating Things}
 \label{sec:integration}
 
-%\InsertFig{computing_machinery_and_intelligence}{fig:Computing machinery and intelligence}{Computing machinery and intelligence.}{See Macro.tex for a detailed explanation of the InsertFig function}{1}{}
+The way in which the applications integrate is driven by how the participants communicate.
+Coulouris et al. \cite{coulouris_distributed_2012} define two communication styles on the upper layer of a middleware (see Figure~\ref{}): % figura 4.1 modificada para incluir elementos
+the remote invocation and the indirect communication.
 
+The \emph{remote invocation} involves the most common two-way exchange between senders and receivers in a distributed system.
+On contrast, the \emph{indirect communication} comprehends decoupled communications between senders and receivers.
+Specifically, they are space uncoupled, because the sender does not need to know the receiver;
+and time uncoupled, because senders and receivers do not need to exists in the same time.
+
+Within the \emph{remote invocation} style, RESTful style and the well known set of WS-* standards probably represent the most popular substyles.
+In Section~\ref{sec:remote_invocation}, we analyze their application to the Ubicomp field, particularly focusing on the IoT.
+
+Tuple Spaces, is a type of indirect communication where the entities write data in a persistent space and read specifying patterns of interest.
+In Section~\ref{sec:indirect_communication}, we study the most relevant Tuple Space solutions proposed for the ubiquitous computing.
+
+
+\subsection{Remote invocation}
+\label{sec:remote_invocation}
+
+As stated before RESTful style and the set of WS-* standards are probably the most common remote invocation substyles used in the Internet today.
+The use of both substyles in resource-constrained devices is represented by \textit{Device Profile for Web Services} (DPWS) \cite{moritz_devices_2010}, based on SOAP,
+and the Web of Things (WoT) \cite{guinard_internet_2011}. % Mejor poner su tesis?
+
+% decir que mola mas REST porque es menos rollo para los cacharros y para los desarrolladores.
+% una tendencia que se confirma a nivel global en internet (coger alguna referencia de Guinard)
+
+In the RESTful style basic CRUD operations are defined over the information units identified by an URL, which is completely compliant with the standard HTTP features.
+In other words, using the HTTP layer as an application layer and not just as a transport layer (as WS-*does), avoids the definition of extra protocols keeping the applications simpler.
+Similarly, WoT stresses the benefits of defining REST interfaces which expose the capabilities of the different objects to enhance their integration with traditional web applications in a more web-developer friendly manner
+\cite{dguinard-rest-vs-ws}.
+
+Even though WoT exposes the access to each resource through the URL which identifies it, we believe that these
+resources can be accessed through a common API in an associative way instead of always referring to them by their
+identifier. Specifically, the resources used in our API are the core concepts of Triple Space Computing paradigm, i.e.
+spaces, graphs and templates.
+
+% WoT necesita de Web Semántica, se analizará más tarde
+
+
+\subsection{Indirect Communication}
+\label{sec:indirect_communication}
+
+
+% tuple spaces: 19.3 Interoperation del libro de Gordon Blair tiene un estado del arte majo
