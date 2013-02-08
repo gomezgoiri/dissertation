@@ -39,6 +39,7 @@ REpresentational State Transfer (REST) was designed to build large-scale distrib
 so it is often used in conjunction with well-known web standards such as HTTP, URI or MIME.
 This standards already have many libraries and tools available, which eases the adoption of this style by developers.
 Besides, REST naturally integrates with the World Wide Web because it uses the Web as an application architecture instead of as a transport layer as WS-* services do.
+% ppios en los que se basa sacados del artículo de pautasso o del blog de Fieldman
 
 
 \medskip
@@ -57,7 +58,7 @@ Even in that case, DPWS will still cover some missing features of the RESTful ap
 % no menciono que sean más pesados para cacharros porque no he encontrado un sitio en el que defiendan que DPWS lo es
 
 
-The Web of Things initiative encourages the use of REST-based solutions embedding web servers in daily objects \cite{guinard_internet_2011}.
+The \emph{Web of Things} initiative encourages the use of REST-based solutions embedding web servers in daily objects \cite{guinard_internet_2011}.
 In this way, the objects can integrate with the WWW as first-class citizens of the Web.
 This integration brings the following benefits:
 \begin{itemize}
@@ -72,8 +73,13 @@ But besides the functional differences, one of the major advantages of REST comp
 Guinard et al. proved that developers consider it easier to learn and find it more suitable for programming smart things \cite{}.
 This makes WoT solutions more popular for resource constrained devices than the WS-* based ones.
 
-% WoT necesita de Web Semántica, se analizará más tarde
 
+% mencionar CoAP y demás protocolos?
+% A prove of this success/popularity is the raise of new protocols...
+% WoT has been leveraged to run in devices as constrained as the ones from the Wireless Sensor Networks.
+% The special needs of this kind of sensors has brought the need of new protocols such as CoAP which try to adapt HTTP to UDP environments.
+
+% WoT necesita de Web Semántica, se analizará más tarde
 
 
 
@@ -81,4 +87,72 @@ This makes WoT solutions more popular for resource constrained devices than the 
 \label{sec:indirect_communication}
 
 
-% tuple spaces: 19.3 Interoperation del libro de Gordon Blair tiene un estado del arte majo
+% definir si en mayusculas, en minusculas o cómo coño: tuplespace, tuple space, Tuple Space?
+Space-based (or Tuple Space) computing has its roots in the Linda parallel programming language \cite{gelernter_generative_1985}.
+In this communication model different processes read (both destructively or non-destructively) and write pieces of information so-called tuples in a space.
+This space can be centralized or distributed over different nodes.
+So far, Tuple Space have been adapted to ubiquitous computing by different authors.
+
+
+% esquemita majo de Tuplespaces
+
+
+\emph{The event heap} [Johanson and Fox 2004] is a system used for a specific use case. % CITE
+In this scenario there are rooms with different devices deployed and where mobile devices can enter.
+Each room has its own space where the devices exchanging tuples to cooperate.
+For example, a video can be presented in a display and through a remote controller, the user can place the tuple for pausing it.
+The display consumes these kind of tuples, so it pauses the video whenever somebody places that tuple on the space.
+This system is simple to implement but is limited since it centralizes the space in a single machine per room. % CONFIRMAR ESTO
+
+
+\emph{L2imbo} [Davies et al. 1998, friday 1999] replicates the tuples to avoid a single point of failure. % CITE
+Each node joined to a space uses an IP multicast address to exchange messages with other nodes in that space.
+Writing into a space involves sending a multicast message to inform to the rest of the nodes of the tuple written.
+Reading operation usually requires local reading.
+Destructive reading of the tuple is more complex as it requires a global withdrawal.
+Only the owner of a tuple can remove it from the space.
+The ownership of a tuple initially belongs to its creator, but can be transferred. % ver qué añadió Friday
+
+
+\emph{LIME} (Linda in a Mobile Environment) \cite{picco_lime:_1999} is a TS solution for mobile systems.
+In LIME each mobile device has its own space where it generally writes its tuples.
+This space is shared with other devices creating federated spaces, i.e. the aggregation of different shared spaces.
+In this way, each mobile can access to tuples in other mobiles whenever they become available.
+They also proposed a new writing primitive to insert tuples in remote spaces.
+% ejemplo de service discovery?
+
+This is difficult to implement and some authors complain about the unrealistic assumptions they make to simplify the problem \cite{coulouris_distributed_2012}. % cita al libro
+These assumptions are the uniform multicast connectivity between devices whose tuple spaces are aggregated and the serialized and ordered connections and disconnections.
+In any case, LIME was adapted to several platforms to run both in embedded and mobile devices \cite{murphy_transiently_2006}.
+
+
+In the \emph{TOTA} (Tuples On The Air) Project [Mamei and Zambonelli 2009] tuples are disseminated to different devices. % CITE
+To that end, each tuple has 3 fields:
+1) the content of the tuple,
+2) a rule which defines how it should be propagated,
+3) a rule to define its maintenance.
+For instance, they consider a museum where a visitor writes a query tuple describing a piece of art he wants to see.
+The propagation rule defines that it should be propagated to all nodes in the vicinity, increasing the distance by one each time.
+The tuple is configured to be deleted after a time-to-live period using its maintenance rule.
+When the it reaches the room where the piece of art is located, the piece of art will write a response tuple.
+This response tuple jumps from a device to another until it reaches the device which queried for it.
+
+
+\bigskip
+
+% comparación de todas ellas
+% de entre los que ofrecen distribución: este no mola por esto, esto otro mola por esto otro, etc.
+
+Within this solutions, \emph{The event heap} is not considered because of its centralized nature.
+Both L2imbo, LIME and TOTA present different ways to disseminate the tuples.
+The replication which L2imbo proposes may not be feasible for devices with constrained memory or storage capacity.
+Particularly, in spaces populated by many devices like the Internet of Things too many tuples could be generated.
+% need to configure the network
+
+TOTA is useful for spatially connected adhoc environments, but it does not seem to suit well on networks where all the nodes can reach each other.
+In this case, all the tuples could be replicated on the rest of the nodes showing the same limitations as L2imbo.% COMPROBAR LEYENDO CON ATENCION LO DE TOTA
+
+Finally, despite of their unrealistic assumptions LIME proposes a model where each tuple is responsible of its own part of the space.
+They share spaces whenever they become available.
+
+% TODO tabla comparativa? distributed, ad-hoc, federated
