@@ -4,40 +4,77 @@
 The way in which the applications integrate is driven by how the participants communicate.
 Coulouris et al. \cite{coulouris_distributed_2012} define two communication styles on the upper layer of a middleware (see Figure~\ref{}): % figura 4.1 modificada para incluir elementos
 the remote invocation and the indirect communication.
+% TODO figura middleware
 
-The \emph{remote invocation} involves the most common two-way exchange between senders and receivers in a distributed system.
-On contrast, the \emph{indirect communication} comprehends decoupled communications between senders and receivers.
+
+The \emph{remote invocation} involves the most common two-way exchange between senders and receivers in distributed systems.
+In contrast, the \emph{indirect communication} comprehends decoupled communications between senders and receivers.
 Specifically, they are space uncoupled, because the sender does not need to know the receiver;
 and time uncoupled, because senders and receivers do not need to exists in the same time.
 
-Within the \emph{remote invocation} style, RESTful style and the well known set of WS-* standards probably represent the most popular substyles.
+
+Within the \emph{remote invocation} style, RESTful style \cite{fielding_architectural_2000} and the well known set of WS-* \cite{} standards probably represent the most popular substyles.
+% TODO poner esta referencia en WS-* cuando el ACM deje de banearme
+% http://dl.acm.org/citation.cfm?id=1965308
 In Section~\ref{sec:remote_invocation}, we analyze their application to the Ubicomp field, particularly focusing on the IoT.
+
 
 Tuple Spaces, is a type of indirect communication where the entities write data in a persistent space and read specifying patterns of interest.
 In Section~\ref{sec:indirect_communication}, we study the most relevant Tuple Space solutions proposed for the ubiquitous computing.
 
 
+
 \subsection{Remote invocation}
 \label{sec:remote_invocation}
 
-As stated before RESTful style and the set of WS-* standards are probably the most common remote invocation substyles used in the Internet today.
-The use of both substyles in resource-constrained devices is represented by \textit{Device Profile for Web Services} (DPWS) \cite{moritz_devices_2010}, based on SOAP,
+As stated before, RESTful style and the set of WS-* standards are probably the most common remote invocation substyles used currently in the Internet.
+Their advantages and disadvantages were extensively discussed by Pautasso et al. \cite{pautasso_restful_2008}.
+WS-* web services, also called ``Big Web services'', offer more features such as transactions, reliability or message-level security.
+However, they also require further architectural decisions on different layers of the WS-* stack.
+These decisions make the people perceive it as more complex than the RESTful style. % CITE
+
+
+The RESTful style has gained momentum during the last decade as a simpler alternative to services.
+REpresentational State Transfer (REST) was designed to build large-scale distributed hypermedia systems,
+so it is often used in conjunction with well-known web standards such as HTTP, URI or MIME.
+This standards already have many libraries and tools available, which eases the adoption of this style by developers.
+Besides, REST naturally integrates with the World Wide Web because it uses the Web as an application architecture instead of as a transport layer as WS-* services do.
+
+
+\medskip
+
+
+The use of both substyles in resource-constrained devices is represented by
+\textit{Device Profile for Web Services} (DPWS) \cite{moritz_devices_2010}, based on WS-*,
 and the Web of Things (WoT) \cite{guinard_internet_2011}. % Mejor poner su tesis?
 
-% decir que mola mas REST porque es menos rollo para los cacharros y para los desarrolladores.
-% una tendencia que se confirma a nivel global en internet (coger alguna referencia de Guinard)
 
-In the RESTful style basic CRUD operations are defined over the information units identified by an URL, which is completely compliant with the standard HTTP features.
-In other words, using the HTTP layer as an application layer and not just as a transport layer (as WS-*does), avoids the definition of extra protocols keeping the applications simpler.
-Similarly, WoT stresses the benefits of defining REST interfaces which expose the capabilities of the different objects to enhance their integration with traditional web applications in a more web-developer friendly manner
-\cite{dguinard-rest-vs-ws}.
+DPWS defines a subset of WS-* to make it suitable for resource-constrained devices.
+%DPWS is claimed to be used in industrial environments.
+Its most remarkable features are: decentralized multicast-based discovery, secure message transmission, subscription and event notifications.
+Moritz et al. compared DPWS with the REST approach coming to the conclusion that DPWS can be restricted to be fully compatible with the RESTful style.
+Even in that case, DPWS will still cover some missing features of the RESTful approach such as eventing and discovery \cite{moritz_devices_2010}.
+% no menciono que sean más pesados para cacharros porque no he encontrado un sitio en el que defiendan que DPWS lo es
 
-Even though WoT exposes the access to each resource through the URL which identifies it, we believe that these
-resources can be accessed through a common API in an associative way instead of always referring to them by their
-identifier. Specifically, the resources used in our API are the core concepts of Triple Space Computing paradigm, i.e.
-spaces, graphs and templates.
+
+The Web of Things initiative encourages the use of REST-based solutions embedding web servers in daily objects \cite{guinard_internet_2011}.
+In this way, the objects can integrate with the WWW as first-class citizens of the Web.
+This integration brings the following benefits:
+\begin{itemize}
+  \item The smart-things can be linked to enable its discovery by browsing. This involves using the tool most users are familiar with: the browser.
+  \item They can be bookmarked or shared through social networks \cite{guinard_sharing_2010}.
+  \item They can be integrated with other web applications using through mashups \cite{ostermaier_webplug:_2010}. % cita a pintus, stirbu y a todo el mundo
+  \item Mechanisms such as searching, caching, load-balancing and indexing can be used over the objects to achieve the scalability of the web. % cita al indio
+\end{itemize}
+
+
+But besides the functional differences, one of the major advantages of REST compared with the WS-* is that is perceived as simpler.
+Guinard et al. proved that developers consider it easier to learn and find it more suitable for programming smart things \cite{}.
+This makes WoT solutions more popular for resource constrained devices than the WS-* based ones.
 
 % WoT necesita de Web Semántica, se analizará más tarde
+
+
 
 
 \subsection{Indirect Communication}
