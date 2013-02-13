@@ -35,4 +35,5 @@
 # Added by me
 *.backup
 *.brf
-dissertation.pdf # not the images in PDF!
+# just the dissertation, not the images in PDF!
+/dissertation.pdf
