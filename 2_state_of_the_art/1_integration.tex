@@ -2,9 +2,11 @@
 \label{sec:integration}
 
 The way in which the applications integrate is driven by how the participants communicate.
-Coulouris et al. \cite{coulouris_distributed_2012} define two communication styles on the upper layer of a middleware (see Figure~\ref{}): % figura 4.1 modificada para incluir elementos
+Coulouris et al. \cite{coulouris_distributed_2012} define two communication styles on the upper layer of a middleware (see Figure~\ref{fig:middleware_layers}): % figura 4.1 modificada para incluir elementos
 the remote invocation and the indirect communication.
-% TODO figura middleware
+
+\InsertFig{middleware_layers}{fig:middleware_layers}{Middleware layers according to Coulouris et al. classification \cite{coulouris_distributed_2012}.}{}{1}{}
+% According to Coulouris et al. HTTP is An example of a request-reply protocol!
 
 
 The \emph{remote invocation} involves the most common two-way exchange between senders and receivers in distributed systems.
@@ -13,9 +15,7 @@ Specifically, they are space uncoupled, because the sender does not need to know
 and time uncoupled, because senders and receivers do not need to exists in the same time.
 
 
-Within the \emph{remote invocation} style, RESTful style \cite{fielding_architectural_2000} and the well known set of WS-* \cite{} standards probably represent the most popular substyles.
-% TODO poner esta referencia en WS-* cuando el ACM deje de banearme
-% http://dl.acm.org/citation.cfm?id=1965308
+Within the \emph{remote invocation} style, RESTful style \cite{fielding_architectural_2000} and the well known set of WS-* \cite{alonso_web_2010} standards probably represent the most popular substyles.
 In Section~\ref{sec:remote_invocation}, we analyze their application to the Ubicomp field, particularly focusing on the IoT.
 
 
@@ -72,6 +72,8 @@ This integration brings the following benefits:
 But besides the functional differences, one of the major advantages of REST compared with the WS-* is that is perceived as simpler.
 Guinard et al. proved that developers consider it easier to learn and find it more suitable for programming smart things \cite{}.
 This makes WoT solutions more popular for resource constrained devices than the WS-* based ones.
+
+% Mencionar un par de trabajos sobre móviles con servidores web embebidos, para que se vea que no es sólo WoT
 
 
 % mencionar CoAP y demás protocolos?
