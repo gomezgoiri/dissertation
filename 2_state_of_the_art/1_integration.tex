@@ -1,6 +1,19 @@
 \section{Integrating Things}
 \label{sec:integration}
 
+% TODO Introducir middleware antes de hablar de él => si no, queda un poco WTF
+% 
+% En el libro de Coulouris (pag 17):
+% Middleware • The term middleware applies to a software layer that provides a
+% programming abstraction as well as masking the heterogeneity of the underlying
+% networks, hardware, operating systems and programming languages.
+%
+% Otra del mismo libro:
+% The task of middleware is to provide a higher-level
+% programming abstraction for the development of distributed systems and, through
+% layering, to abstract over heterogeneity in the underlying infrastructure to promote
+% interoperability and portability.
+
 The way in which the applications integrate is driven by how the participants communicate.
 Coulouris et al. \cite{coulouris_distributed_2012} define two communication styles on the upper layer of a middleware (see Figure~\ref{fig:middleware_layers}): % figura 4.1 modificada para incluir elementos
 the remote invocation and the indirect communication.
@@ -11,14 +24,17 @@ the remote invocation and the indirect communication.
 
 The \emph{remote invocation} involves the most common two-way exchange between senders and receivers in distributed systems.
 In contrast, the \emph{indirect communication} comprehends decoupled communications between senders and receivers.
-Specifically, they are space uncoupled, because the sender does not need to know the receiver;
-and time uncoupled, because senders and receivers do not need to exists in the same time.
+%Specifically, they are space uncoupled, because the sender does not need to know the receiver;
+%and time uncoupled, because senders and receivers do not need to exists in the same time.
+% Ojo cuidado porque según esto mi middleware va a dejar de ser time uncoupled! (mirar Figure 6.1 para mayor concrección)
+% En esa misma sección aclara que algunas implementaciones no son time-uncoupled.
 
 
 Within the \emph{remote invocation} style, RESTful style \cite{fielding_architectural_2000} and the well known set of WS-* \cite{alonso_web_2010} standards probably represent the most popular substyles.
 In Section~\ref{sec:remote_invocation}, we analyze their application to the Ubicomp field, particularly focusing on the IoT.
 
 
+% Otros técnicas indirectas:  group communication, publish-subscribe system, message queue systems, shared memory–based approaches
 Tuple Spaces, is a type of indirect communication where the entities write data in a persistent space and read specifying patterns of interest.
 In Section~\ref{sec:indirect_communication}, we study the most relevant Tuple Space solutions proposed for the ubiquitous computing.
 
