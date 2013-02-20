@@ -24,10 +24,6 @@ the remote invocation and the indirect communication.
 
 The \emph{remote invocation} involves the most common two-way exchange between senders and receivers in distributed systems.
 In contrast, the \emph{indirect communication} comprehends decoupled communications between senders and receivers.
-%Specifically, they are space uncoupled, because the sender does not need to know the receiver;
-%and time uncoupled, because senders and receivers do not need to exists in the same time.
-% Ojo cuidado porque según esto mi middleware va a dejar de ser time uncoupled! (mirar Figure 6.1 para mayor concrección)
-% En esa misma sección aclara que algunas implementaciones no son time-uncoupled.
 
 
 Within the \emph{remote invocation} style, RESTful style \cite{fielding_architectural_2000} and the well known set of WS-* \cite{alonso_web_2010} standards probably represent the most popular substyles.
@@ -104,15 +100,44 @@ This makes WoT solutions more popular for resource constrained devices than the 
 \subsection{Indirect Communication}
 \label{sec:indirect_communication}
 
+The indirect communication style comprehends all the techniques with no direct coupling between the sender and the receiver.
+The group communication, publish-subscribe systems, message queues or shared memory approaches are examples of indirect communication.
+These paradigms are characterized by two key properties \cite{coulouris_distributed_2012}:
+
+\begin{itemize}
+ \item \emph{Space uncoupling}, which is achieved when the sender does not need to know the receiver and vice versa.
+ \item \emph{Time uncoupling}, which happens when senders and receivers do not need to exists in the same time.
+\end{itemize}
+
+% Ojo cuidado porque según esto mi middleware va a dejar de ser time uncoupled! (mirar Figure 6.1 para mayor concrección)
+% En esa misma sección aclara que algunas implementaciones no son time-uncoupled.
+% por otro lado, asíncronismo != time uncoupling
+
+Tuple Space computing, also called space-based computing, offers an improvement of the shared memory approach.
+Whereas the shared memory works at byte-level and accessing to memory addresses,
+the Tuple Space works with semi-structured data which is accessed in an associative manner.
 
 % definir si en mayusculas, en minusculas o cómo coño: tuplespace, tuple space, Tuple Space?
-Space-based (or Tuple Space) computing has its roots in the Linda parallel programming language \cite{gelernter_generative_1985}.
-In this communication model different processes read (both destructively or non-destructively) and write pieces of information so-called tuples in a space.
-This space can be centralized or distributed over different nodes.
-So far, Tuple Space have been adapted to ubiquitous computing by different authors.
+Tuple Space (TS) has its roots in the Linda parallel programming language \cite{gelernter_generative_1985}.
+In this communication model different processes read and write pieces of information so-called tuples in a common space.
+Tuples are composed by one or more typed data fields (e.g. $<"aitor",1984>$ or $<3,7,21.0>$).
+The tuples are accessed associatively using a template.
+A template provides either a value or type for different fields (e.g. $<String,1984>$ or $<Integer, Integer, Float>$).
+The operations over the space are defined by different primitives.
+Although the primitives may change from implementation to implementation, the most common ones allow to:
+
+\begin{itemize}
+  \item \emph{Access the tuples non-destructively}, using a primitive which is usually called \emph{read} or \emph{rd}.
+	This primitive returns a tuple from the space which matches the given template without changing the space.
+  \item \emph{Access the tuples destructively}, using a primitive which is usually called \emph{take} or \emph{in}.
+	This primitive extracts a tuple which matches the given template from the space.
+  \item \emph{Write a new tuple into the space}. This primitive is usually called \emph{write} or \emph{out}.
+\end{itemize}
+
+So far, Tuple Space has been adapted to ubiquitous computing by different authors.
 
 
-% esquemita majo de Tuplespaces
+% TODO esquemita majo de Tuplespaces
 
 
 \emph{The event heap} [Johanson and Fox 2004] is a system used for a specific use case. % CITE
@@ -174,3 +199,18 @@ Finally, despite of their unrealistic assumptions LIME proposes a model where ea
 They share spaces whenever they become available.
 
 % TODO tabla comparativa? distributed, ad-hoc, federated
+
+\begin{table}%[position specifier]
+  \centering
+  \begin{tabular}{c|cccc}%p{5cm}}
+      ~ & The event heap & L2imbo & LIME & TOTA \\
+      \hline
+      \hline
+      Distributed & No & Yes & Yes & Yes \\
+      Goal & x & Availability & Federation & Ad-hoc \\
+      % Scalability?
+      % Coger propiedades del libro de sistemas distribuidos?
+  \end{tabular}
+  \caption{Comparison of the most prominent Tuple Space alternatives for ubiquitous computing.} % no columpiarme, o poner todas o ninguna?
+  \label{tab:myfirsttable}
+\end{table}
