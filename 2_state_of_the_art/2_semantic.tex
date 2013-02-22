@@ -1,9 +1,134 @@
-\section{Looking for Application level Interoperability}
+\section{Looking for Application-level Interoperability}
 \label{sec:interoperability}
-
-But a common problem of many of the current integration models as the ones scrutinized in the previous section is...
-
 % centrarse en el ejemplo de interoperabilidad d nivel de aplicaciones
+
+A common problem of most of the solutions used in Ubicomp is the use of application domain dependent data formats.
+% learn about the data-schema, learn about the syntax and the meaning??? mirar cómo lo explican en otros lados
+These formats require developers of new applications to learn about the syntax and the meaning of that data in order to be able to reuse that information.
+This is the case of the solutions scrutinized in the previous section.
+
+\medskip
+
+% TODO mejor que listar "lo que un developer" debería hacer, listarlo mejor como requisitos para que 2 aplicaciones YA existentes puedan usar datos las una de la otra.
+On the one hand, a developer using a Tuple Space middleware could try to reuse the data from another application.
+Let us imagine an \emph{application A} where some devices (masters) write tasks of the same type in a space.
+For the same application, some other devices (workers) take each tuple representing the task, perform the task, and write the result in the same space.
+Providing that a new \emph{application B} needs the same type of task to be done, a clever can try to reuse the work done by the workers.
+To take advantage of these workers already implemented and deployed, he needs to:
+\begin{itemize}
+ \item Use the same space as the \emph{application A}.
+ \item Write the tasks in the same format as the \emph{application A}.
+	For that, he should be able to figure out the kind of tuple a worker consumes.
+ \item Read the results by using the proper template.
+	Therefore, he should know how the workers represent the result in the \emph{application A}.
+\end{itemize}
+
+While the first step may be trivial, the second and third steps require the developer to carefully study the \emph{application A}.
+Specifically, he will need to know the number and the type of fields of the tuples which represent a task and a result.
+This process is inherently manual, and therefore it is a stumbling block to achieve application-level interoperability.
+
+\medskip
+
+On the other hand, most of the solutions in the WoT use common web media formats such as HyperText Markup Language (HTML) or JavaScript Object Notation (JSON). % link
+HTML is oriented for humans while JSON is a machine processable format.
+Imagine a developer wants to regulate the brightness of a room by using some existing and already deployed WoT-enabled devices.
+A device provides temperature through a REST \emph{service A} and other device has a REST \emph{service B} to switch on or switch off the lights.
+Then, the developer will need to know:
+\begin{itemize}
+ \item The URL of the service A which provides the temperature.
+ \item The URL of the service B which controls the lights of the room.
+ \item The media-types that the service A returns.
+ \item The media-types that the service B accepts.
+ \item Once he has chosen a media-type, the syntax of the result provided by the service A.
+ \item Once he has chosen a media-type, the syntax of the piece of data the service B is able to interpret.
+\end{itemize}
+
+The first two steps require the developer to browse and identify the key services.
+This identification needs of a human interpretation unless the services provide some semantics in their description. % RESTdesc
+The remaining steps require the developer to study each service to create and send or receive and interpret each piece of data.
+Furthermore, imagine that someone replaces the temperature sensor with a new one used in a third application.
+Let us assume that the service which will now return the temperature uses the same URL and returns the same media-type as the previous one.
+Even in that case, if the second device provides the temperature using a different syntax, the light regulation application will not work anymore.
+
+\medskip
+
+% no me acaba de convencer este parrafo introductorio
+In conclusion, the systems analyzed use information not meaningful for other applications or domains.
+One solution to that problem is to use specialized systems which convert and reinterpret the data from one domain to the other.
+Other one is to promote the use of standardized models to express the data.
+In the next section we will analyze how the Semantic Web tackles these problems.
+
+
+\subsection{The Semantic Web}
 
 % explicar web semántica en plan facilon
 % mencionar LOD
+% poner ejemplo de interoperabilidad
+% hablar de aquello de que la interoperabilidad sólo no sirve de nada
+
+
+
+\subsection{The Semantic Web in the Ubiquitous computing}
+
+% como los smart environments describen contexto usando web semántica
+
+% uso concreto por parte de soluciones significativas: siempre centralizando el uso de semántica en cacharros grandes
+
+% intro a que ahora se va a hablar de soluciones IoT que usen semántica
+
+% Semántica en IoT: SmartM3 => guardar esta para la sección de TSC!
+Adding semantics works well for devices with high computational capacity but may add too much overhead for most of the devices in the IoT.
+To reduce this overhead in such devices, part of this computation is usually delegated to an intermediary.
+Some noteworthy examples are Smart-M3 \citep{honkola_smart-m3_2010} and the one proposed by \citet{broring_semantic_2009}.
+%In Smart-M3 These intermediaries are called knowledge processors.
+
+These intermediaries or \emph{Semantic Gateways} are in charge of managing the semantic annotation.
+The devices send raw data (which can be compressed) to the intermediaries and the gateways annotate the content semantically.
+Thus, the devices do not have to care about any semantic aspect and just collect the data as they did before.
+
+These \emph{Semantic Gateways} reduce the load to embedded devices with limited resources by decreasing the number of requests they have to provide.
+In addition, a centralized intermediary can gather all the information and thus, reduce the complexity of managing a distributed environment.
+
+However, as previously explained, using intermediaries to store the semantic data of resource constrained devices also has some drawbacks.
+On the one hand, centralization does not faithfully represent mobility situations were individuals carry their own semantic information in their personal devices.
+In addition, the data obtained from an intermediary will always be less fresh than the one obtained where it is generated (i.e., sensors).
+On the other hand, the servers are critical in centralized systems and therefore, their availability determines the operation of these solutions.
+They also impose a burden on the maintenance which may be worthless in some simple scenarios.
+
+
+\subsection{The Semantic Web in resource constrained devices}
+% enumerar aquellas características de IoT???
+% sacar algo del paper que habla de los retos de usar semántica en IoT
+
+% pero ahora los cacharros cada vez son más potentes y no es difícil imaginar un mundo poblado por ellos blablah
+
+% WoT y aquel que hacía cosas de móviles
+
+% TODO generalizar a resource-constrained devices
+In the Web of Things, multiple solutions have considered using semantics to enrich the data definition in a machine processable manner.
+Generally, these solutions embed the metadata in HTML using microdata, microformats or RDFa \citep{mayer_extensible_2011}.
+These contents are returned by the Internet connected objects and are used to enhance the findability of the data by search engines.
+% Ontologías no se pueden definir, tiene que haber consenso en su uso por parte de las máquinas de búsqueda.
+% en vez de eso, queremos mejorar la busqueda por parte de los cacharros, no de los search engines
+This approach does not focus on making the devices able to search and interact with others.
+% end-to-end search
+Instead, it considers them as mere human-oriented information providers which should be indexed by third party search services.
+% aquí se puede enganchar también el discurso de Doulkeridis2007desent: coverage and scalability, freshness y monopoly
+
+A more general way to represent semantic data is using RDF based representations (i.e., full semantics).
+SPITFIRE European project\footnote{\url{http://spitfire-project.eu}} represents the most remarkable effort on gathering full semantics and the WoT.
+It focuses on fully integrating sensor data with the Linked Open Data (LOD). 
+The LOD are datasets which follow a series of principles on how to open and publish data.
+The goal of the LOD is to publish linked terms using full semantics.
+
+SPITFIRE shares with our solution the vision of a world populated by devices acting as semantic data providers no matter how small they are \citep{hasemann_rdf_2012}.
+Therefore, many of their efforts are complimentary to this work.
+%This is done by defining an ontology for mapping other common ontologies and providing semi-automatic generation of semantic annotations from raw data.
+%They also propose an abstraction to represent real-world entities (virtual sensors) using data provided by low-level sensors.
+%Finally, and more specific to this work, they propose a searching model which predicts the current state of things by computing their periodic patterns in past states.
+To search within these providers, \citet{pfisterer_spitfire:_2011} proposes a model which predicts the current state of things by computing their periodic patterns in past states.
+Again, the goal of this method is to adapt search engines to the new fashion of data provided on the \emph{Semantic Web of Things}.
+
+Instead, we propose a model to enhance the search capability of web-connected things in a distributed fashion.
+We aim to promote the interaction and collaboration between any devices in these environments.
+Not only sensors, but also regular computers or mobile devices \citep{balandin_access_2011}.
