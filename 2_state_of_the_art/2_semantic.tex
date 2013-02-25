@@ -61,9 +61,49 @@ In the next section we will analyze how the Semantic Web tackles these problems.
 
 \subsection{The Semantic Web}
 
-% explicar web semántica en plan facilon
-% mencionar LOD
-% poner ejemplo de interoperabilidad
+A problem of the initial view of the Web was that it was human-centered.
+Regardeless of wether the contents were machine processable, a human needed to interpret them to give them a meaning.
+% mirar a ver cuando se empezó a usar SW de verdad, porque en el artículo de 2001 dan a enterder que se llevaba un tiempo usando
+In the early 2000s Berners Lee et al.\cite{berners-lee_semantic_2001} proposed the use of what they called the Semantic Web (SW) to solve that problem.
+The SW was conceived as an extension of the ordinary web which would bring structure to its content.
+As the ordinary web, the SW benefits from the universality the hypertext provides by linking \emph{anything with anything}.
+Besides, like the Internet, the SW is intended to be as decentralized as possible.
+
+The Semantic Web and its key features are defined by the \emph{World Wide Web Consortium} \cite{semanticWeb-FAQ} as:
+\begin{quote}
+The vision of the Semantic Web is to extend principles of the Web from documents to data.
+Data should be accessed using the general Web architecture using, e.g., URI-s;
+data should be \emph{related to one another} just as documents (or portions of documents) are already.
+This also means creation of a common framework that allows data to be \emph{shared and reused} across application, enterprise, and community boundaries,
+to be \emph{processed automatically} by tools as well as manually, including revealing possible \emph{new relationships} among pieces of data.
+\end{quote}
+
+Meaning is expressed in the Semantic Web as sets of triples.
+Each triple is composed by a subject, a predicate and an object like in a normal sentence (see Figure~XX).
+In that way, in Berners Lee et al. words \emph{a document can assert that things (people, web pages or whatever) have properties (such as "is a sister of," "is the author of") with certain values (another person, another Web page)}.
+A key difference with a normal sentence is that each element is usually unambiguously defined by an URI.
+These URIs form links between different triples as shown by the example of the Figure~XX.
+% This set of triples can be expressed in multiple formats such as RDF, Turtle, Notation3 or NTriples. % TODO citas
+
+% Figura/figuras de tripletas
+
+A problem with the information described so far is that two different databases may use different URIs to express the same concept.
+To overcome this the SW offers collections of information called ontologies.
+An ontology is a document which expresses the relations between terms commonly using a taxonomy and a set of rules to infer content.
+The taxonomy defines the classes of a given domain and how they relate with each other.
+
+Of course, different content providers could provide similar data described according to different ontologies.
+Fortunately, ontologies can be easily mapped by providing equivalence relations within them.
+In the same way, an ontology can be extended to adapt it to different application domains.
+In any case, the reuse of the same models is beneficial and is therefore promoted through standardization.
+
+Remarkably, the use of the SW has been promoted in the last years with the Linked Open Data (LOD) initiative.
+The LOD are datasets which follow a series of principles on how to open and publish data.
+The ultimate goal of the LOD is to publish linked terms using full semantics.
+
+
+\subsection{The Semantic Web and the interoperability}
+% TODO poner ejemplo de interoperabilidad para enganchar con lo de arriba? ponerlo directamente arriba?
 % hablar de aquello de que la interoperabilidad sólo no sirve de nada
 
 
