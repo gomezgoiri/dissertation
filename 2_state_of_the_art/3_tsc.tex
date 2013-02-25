@@ -10,7 +10,10 @@
 % Tanasescu
 % swarm
 % decir que tiene mucho que ver con distributed triple stores
+% analizarlos también??? vaya pereza! -> igual comentar diferencia y dejar el análisis para la sección tosca de IGWS
 
+The most straightforward approach which mixes up Semantic Web with tuplespaces is Triple Space Computing (TSC) \cite{fensel_triple-space_2004}.
+TSC uses similar primitives with RDF triples as exchanged units.
 
 
 \InsertFig{venn-sec3}{fig:venn_tuplespaces_semantics}{
@@ -18,3 +21,31 @@
 }{
   Scope of this section.
 }{0.6}{}
+
+
+In recent years, both semantic tuplespaces or more generic tuplespaces works have been presented as a solution for the
+problems brought forward by a wide range of application fields. Each solution presents a different strategy to
+distribute the shared tuples over the space in the most convenient way.
+
+In the centralized tuplespaces we can find solutions which mainly focus on offering access to a space stored in a unique
+machine. This access is carried out by the clients using different methods which encapsulate the coordination primitives
+as in Semantic Web Spaces \cite{nixon_towards_2007}. Remarkably, recently the Smart M3 middleware proposed an
+architecture where so called Semantic Information Brokers (SIB) store the information and perform reasoning
+process on behalf of the clients or Knowledge Processors (KP). Unfortunately, no scenario with more than a SIB has been
+presented yet, making it de facto centralized.
+
+TripCom\footnote{TripCom (IST-4-027324-STP, www.tripcom.org)} uses a hybrid solution where information is distributed on
+an overlay network made up of different kernels using a distributed hash table. Each kernel stores some triples and
+knows where the rest of the triples are located by using a hash function. The clients have to know one of these
+kernels to address their queries through them. TripCom was conceived to store a huge amount of RDF triples taking
+special care of the scalability issues.
+
+Other tuplespaces solutions have used a negative broadcasting strategy
+\cite{krummenacher_open_2009,murphy_transiently_2006,gomez-goiri_semantic_2011}, where the writings are
+performed locally and the queries are broadcasted to all the reachable nodes which belong to a space. As can be seen,
+this strategy ensures that all the possible answers will be received, but at a high resource consuming cost.
+
+
+
+% TODO CONCLUSION
+Although both semantic space-based and Triple Spaces implementations exist, none of them has been specifically designed to be run in devices with constrained capabilities apart from our solution.
