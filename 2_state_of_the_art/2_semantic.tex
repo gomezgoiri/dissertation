@@ -64,7 +64,7 @@ In the next section we will analyze how the Semantic Web tackles these problems.
 A problem of the initial view of the Web was that it was human-centered.
 Regardeless of wether the contents were machine processable, a human needed to interpret them to give them a meaning.
 % mirar a ver cuando se empezó a usar SW de verdad, porque en el artículo de 2001 dan a enterder que se llevaba un tiempo usando
-In the early 2000s Berners Lee et al.\cite{berners-lee_semantic_2001} proposed the use of what they called the Semantic Web (SW) to solve that problem.
+In the early 2000s Berners Lee et al. \cite{berners-lee_semantic_2001} proposed the use of what they called the Semantic Web (SW) to solve that problem.
 The SW was conceived as an extension of the ordinary web which would bring structure to its content.
 As the ordinary web, the SW benefits from the universality the hypertext provides by linking \emph{anything with anything}.
 Besides, like the Internet, the SW is intended to be as decentralized as possible.
@@ -79,13 +79,22 @@ to be \emph{processed automatically} by tools as well as manually, including rev
 \end{quote}
 
 Meaning is expressed in the Semantic Web as sets of triples.
-Each triple is composed by a subject, a predicate and an object like in a normal sentence (see Figure~XX).
-In that way, in Berners Lee et al. words \emph{a document can assert that things (people, web pages or whatever) have properties (such as "is a sister of," "is the author of") with certain values (another person, another Web page)}.
-A key difference with a normal sentence is that each element is usually unambiguously defined by an URI.
-These URIs form links between different triples as shown by the example of the Figure~XX.
+Each triple is composed by a subject, a predicate and an object like in a normal sentence (see Figure~\ref{fig:triples_example}).
+In that way, in Berners Lee et al. words \cite{berners-lee_semantic_2001}, \emph{a document can assert that things (people, web pages or whatever) have properties (such as "is a sister of," "is the author of") with certain values (another person, another Web page)}.
+A key difference with a normal sentence is that each concept is unambiguously defined by an URI.
+These URIs form links between different triples as shown by the example of the Figure~\ref{fig:triples_example}.
 % This set of triples can be expressed in multiple formats such as RDF, Turtle, Notation3 or NTriples. % TODO citas
 
-% Figura/figuras de tripletas
+
+\InsertFig{triples_example}{fig:triples_example}{
+  Sample triples using different ontologies.
+}{
+  The triples are expressed both grafically and in the RDF triple form.
+  They describe academic and personal details about the author of this thesis.
+  For that, multiple ontologies are used.
+  Note that we use aliases, known as prefixes in most Semantic formats, to shorten some URIs and enhance the clarity of the Figure.
+}{1}{}
+
 
 A problem with the information described so far is that two different databases may use different URIs to express the same concept.
 To overcome this the SW offers collections of information called ontologies.
