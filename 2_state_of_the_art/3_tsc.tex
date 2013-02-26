@@ -14,6 +14,38 @@
 
 The most straightforward approach which mixes up Semantic Web with tuplespaces is Triple Space Computing (TSC) \cite{fensel_triple-space_2004}.
 TSC uses similar primitives with RDF triples as exchanged units.
+Therefore TSC can benefit from the autonomies introduced by both Tuple Spaces and the Semantic Web:
+
+% página 7 de bundler
+
+\begin{itemize}
+  \item Time autonomy.
+  \item Space/reference autonomy.
+  \item 
+\end{itemize}
+
+
+
+The Triple Space Computing paradigm defines reading and writing primitives to access to a common space where semantic
+knowledge is held. By reading and writing in such a decoupled manner, three levels of autonomy are reached: a) time,
+since one application can store information in the common space and other applications consume it later in an
+asynchronous way; b) location, since applications can run in different environments as long as they support tuple
+spaces; and c) reference, since applications should not need to know where the space is physically stored. Additionally,
+the information stored in a semantic format brings the data schema autonomy, which enhances the interoperability of the
+applications built on top of TSC. This way, two applications using standard ontologies can interact among them
+automatically enriching one each other, as long as they use the same space and standard and linked ontologies.
+
+TSC is completely compliant with the RESTful style, the resources (an space or an RDF graph) can be accessed using their
+identifying URL and the appropriate HTTP verb, to create (HTTP POST/write), remove (HTTP DELETE/take) or retrieve (HTTP
+GET/read or query) semantic content. The use of HTTP brings huge benefits in terms of integration and adoption ease in
+new platforms.
+
+Although in this work we focus on a key aspect of this implementation, i.e. how the data is spread among the different
+objects belonging to a space, it should not be forgotten the underlying HTTP TSC implementation, which guides the design
+of the strategies and supports the simulation process.
+
+
+
 
 
 \InsertFig{venn-sec3}{fig:venn_tuplespaces_semantics}{
@@ -46,6 +78,83 @@ performed locally and the queries are broadcasted to all the reachable nodes whi
 this strategy ensures that all the possible answers will be received, but at a high resource consuming cost.
 
 
+Several approaches exist in the field of semantic tuplespace \cite{nixon_tuplespace-based_2008}.
+Conceptual Spaces, or cSpaces, were born to study the applicability of semantic tuplespaces to different scenarios
+including ubiquitous computing. Semantic Web Spaces propose some new primitives defining
+two different data coordination views: data view (with syntactically valid RDF and Linda primitives) and information view
+(with consistent and satisfiable data and new primitives). sTuples was conceived by Nokia Research Center as a pervasive
+computing work and provides description logics reasoning and a semantic extension of JavaSpace tuplespace middleware.
+
+None of this projects were fully distributed and they were deployed over more or less a client-based architecture which did not implement
+the tuplespace paradigm itself in mobile peers and which restricted the reasoning process to few powerful devices.
+
+In Triple Space Computing the tuples are expressed in form of triples. Currently, two main pure Triple Space Computing
+middleware implementation exist: tsc++ and TripCom.
+
+TripCom\footnote{TripCom (IST-4-027324-STP, www.tripcom.org)} has different kernels hosted in servers which can distribute the semantic data
+through themselves, but once again, is too server centered. TripCom clients are not part of the space and they could hardly be, because of
+the complexity of this software which is oriented to run on powerful machines (it is designed to be able to run even different modules of the
+same kernel in different machines).
+
+The first Triple Space project was called TSC. In TSC, triples can be interlinked to form graphs and semantic
+algorithms are implemented for template matching. It also offers a transactional context and a simple form to publish and subscribe to certain patterns.
+tsc++ \cite{krummenacher_open_2009} is a new version of the former TSC project\cite{fensel_triple-space_2004} which basically offers
+the same API in a distributed way. To do that, tsc++ uses Jxta Peer To Peer \footnote{https://jxta.dev.java.net/} framework to perform the
+coordination and Sesame \cite{broekstra_sesame:_2002} and Owlim \cite{kiryakov_owlimpragmatic_2005} to store triples of each peer.
+
+The nodes in tsc++ not only can query the space, but they can also store their own information, enabling the distribution
+of the space over all the peers by means of the strategy known as negative broadcast. In negative broadcasting the nodes
+of a group write the information locally and read querying to the rest of the nodes. This seems to adapt to
+ubiquitous system, where different devices share heterogeneous data entering and leaving the system, compromising data consistency
+and availability. In this aspect a sensor can provide information, but when it leaves the space, its information is automatically
+removed from there since it is not longer available to the rest of the nodes. Anyway, as explained in section \ref{sec:services},
+negative broadcasting needs to be adapted to those cases in which a device wants to remotely change the state of actuators managed
+by another device.
+
+Nevertheless, tsc++ lacks some of the advantages of other alternatives: it does not make inference, it does not allow expressive querying
+and last but not least, it has not been designed for devices with reduced computing capabilities, because tsc++ middleware focused on
+architecture and implementation in large scale and we focus in the short scale (local area networks with an intelligent environment).
+
+Los Triple Spaces derivan de tuplespaces y este paradigma a su vez procede del lenguaje de programación paralela Linda \cite{gelernter_generative_1985}, desarrollado en Yale en la década de los ochenta. En tuplespace distintos procesos se coordinan entre si escribiendo, leyendo y eliminando tuplas (con forma clave/valor) en un espacio de memoria compartido. En TS, a su vez, las unidades de intercambio utilizadas son tripletas RDF, procedentes del mundo de la Web Semántica, que pueden ser procesadas en conjunto por un motor de inferencia.
+
+A parte de las soluciones que siguen el paradigma Triple Space como tal, existen otras pertenecientes al modelo tuplespace que comparten elementos comunes con TS por usar la semánticas como base para definir la informacion intercambiada. En el campo de los \textit{tuplespaces} semánticos existen múltiples soluciones \cite{nixon_tuplespace-based_2008}. Los \textit{Conceptual Spaces} \cite{martin-recuerda_towards_2005}, o cSpaces, nacieron para estudiar la aplicabilidad de los \textit{tuplespaces} semánticos en diferentes escenarios, incluyendo la computación ubicua.
+En cSpace las tuplas están formadas por 7 campos, y en uno de ellos la información se expresa usando lógica de primer orden (idealmente), lógica descriptiva o tripletas RDF.
+
+Los \textit{Semantic Web Spaces} \cite{tolksdorf_coordination_2006,tolksdorf_towards_2008} proponen nuevas primitivas para extender el modelo de coordinación Linda, definiendo dos vistas de coordinación de información diferentes: vista de datos (con grafos RDF sintácticamente válidos y primitivas propias de Linda) y la vista de información (con información consistente y satisfactible, y nuevas primitivas). En \textit{Semantic Web Spaces} las tuplas están formadas por tripletas RDF y URIs como identificadores de cada tupla y los espacios se organizan en espacios anidados jerárquicamente que pueden tener restricciones de acceso y permiten razonamiento RDF Schema.
+
+sTuples \cite{khushraj_stuples:_2004} fue concebido por Nokia Research Center como un trabajo de computación ubicua que provee razonamiento de lógica descriptiva y extensión semántica del middleware de \textit{tuplespace} JavaSpace. En sTuples existe una elemento denominado gestor (o \textit{manager}) encargado de mediar entre los clientes, servicios y agentes recomendadores.
+
+De las soluciones anteriormente mencionadas, ninguna puede considerarse como totalmente distribuida. Su despliegue se realiza sobre una arquitectura en la que los móviles son simples clientes que no implementan el paradigma del \textit{tuplespace}. Dicho de otra forma, estas soluciones restringen el proceso de computación a dispositivos con mayor potencia relegando a los primeros en un papel plenamente secundario en los sistemas planteados. Debido a que la información en IoT es a menudo generada en dispositivos embebidos y su validez expira con extremada rapidez (al tratarse de información proveniente de sensores), estos enfoques no son validos al requerir intermediarios y no permitir el acceso directo a dicha información. Por otro lado, en el caso de la información almacenada en un dispositivo móvil, otros aspectos relacionados con la privacidad de la misma dificultan el uso de intermediarios en muchos escenarios.
+
+En el apartado de tuplespaces no semánticos, cabe hacer mención a LIME \footnote{http://lime.sourceforge.net/}, una solución diseñada para ser ejecutada en dispositivos con capacidades computacionales limitadas y en entornos cambiantes, semejantes a los que se quieren cubrir en la tesis propuesta. LIME es un middleware basado en Linda que tiene tres implementaciones para distintos tipos de dispositivos: LIME, TinyLIME y TeenyLIME. Si bien en Linda se tiene un espacio global compartido en el que leer, escribir y eliminar tuplas, en LIME (Linda in a Mobile Environment)\cite{murphy_lime:_2006} proponen distribuir dicho espacio en distintos dispositivos móviles. La idea es que los espacios de cada dispositivo se compartan transparentemente con aquellos otros dispositivos que estén en rango y por tanto tengan acceso físico a los mismos, formando así una suerte de \textit{espacios federados}. De este modo, cada dispositivo accederá a través de un tuplespace virtual cuyos contenidos variarán en la medida en la que 
+el patrón de conectividad de los dispositivos que colaboran compartiendo sus espacios cambie.
+
+TinyLIME\cite{curino_mobile_2005} es una extensión de Lime para entornos de redes de sensores, que adapta el modelo de tuplespace federado para permitir acceso a los datos de los sensores. Los dispositivos que forman las redes de sensores y los dispositivos móviles comparten muchas semejanzas, pero la existencia de esta versión se justifica en la medida en la que las redes de sensores tienen que estar conectadas a una estación base. Así, TinyLime propone una implementación más eficiente en la que el tuplespace reside en la estación base, que permite ver los datos concretos de un sensor u otro en la medida en los que tenga conectividad con los mismos.
+
+TeenyLIME\cite{costa_teenylime:_2006}, propone usar el modelo de LIME en los propios dispositivos con sensores y actuadores para permitir por un lado la recolección de datos como por otro la coordinación entre dichos dispositivos. La literatura en torno a LIME es extensa \cite{picco_understanding_1998,murphy_enabling_2000,picco_lime:_1999,picco_developing_2000,murphy_lime:_2001,picco_exploiting_2002,handorean_service_2002,handorean_coordination_2003,murphy_using_2004,curino_tinylime:_2005,murphy_transiently_2006,curino_mobile_2005,murphy_using_2006,murphy_lime:_2006,costa_teenylime:_2006,costa_programming_2007,ceriotti_monitoring_2009,ceriotti_is_2011}, y ha permitido llegar a conclusiones tales como que la adopción de tuplespace en entornos móviles permite diseños más simples, limpios y reusables \cite{curino_tinylime:_2005}.
+
+El principal punto en el que difiere LIME y la solución que se pretende crear en el marco del desarrollo de la tesis, es que ninguna de las versiones de LIME contempla el uso de semántica que permita inferir nuevo conocimiento. Si bien esta decisión puede contribuir a realizar una solución más ligera, el uso de semántica como base para describir la información existente en los espacios no debería impedir a dispositivos sencillos hacer un uso sencillo de dicha información. Por contra, no disponer de dicha información expresada en un formato altamente expresivo, si que impediría a máquinas con la capacidad suficiente tener un mayor aprovechamiento de dichos datos.
+
+Finalmente, en lo que a TS propiamente dicho se refiere, actualmente existen dos implementaciones del middleware de computación Triple Space: tsc++ y TripCom. TripCom\cite{tripcom_2011} dispone de diferentes núcleos alojados en servidores que pueden distribuir la información semántica entre ellos. En TripCom los clientes no son parte del espacio, y por la complejidad del software, orientado a ejecutarse en máquinas potentes donde los módulos que componen el núcleo pueden llegar a desplegarse en diferentes máquinas, sería imposible que lo fuesen. Es por tanto una solución realizada pensando en grandes sistemas y no en entornos con multitud de dispositivos con capacidades reducidas como IoT.
+
+TSC fue el primer proyecto \textit{Triple Space}. En TSC, las tripletas se interrelacionan para formar grafos y permiten realizar consultas sobre ellos a través de plantillas. También ofrece un contexto transaccional y un procedimiento para publicar y suscribirse a diferentes patrones. Tsc++ \cite{krummenacher_open_2009} es una nueva versión del proyecto TSC original \cite{fensel_triple-space_2004}, que básicamente ofrece la misma API de una manera distribuida. Para ello, tsc++ utiliza el \textit{framework} Peer to Peer Jxta \footnote{https://jxta.dev.java.net/} para llevar a cabo la coordinación entre nodos y Sesame \cite{broekstra_sesame:_2002} y Owlim \cite{kiryakov_owlimpragmatic_2005} para almacenar las tripletas en cada uno.
+
+Los nodos en tsc++ almacenan su propia información permitiendo la distribución del espacio a través de todos los nodos que lo forman. Esta estrategia, donde la información se escribe en local y las consultas se propagan al resto de nodos de un grupo, es conocida como \textit{negative broadcasting}. \textit{Negative broadcasting} se adapta al funcionamiento de los sistemas ubicuos donde diferentes dispositivos comparten información heterogénea entrando y saliendo del sistema, comprometiendo la consistencia y la disponibilidad de la información. En este aspecto un sensor puede proveer una determinada información, pero cuando abandona el espacio su información se elimina automáticamente, ya que no está disponible para el resto de nodos. En cualquier caso, esta estrategia también presenta limitaciones en los casos en los que un dispositivo quiere modificar remotamente el estado de un actuador gestionado por otro dispositivo.
+
+Resumiendo, de todas las soluciones tuplespace analizadas, las que resultan especialmente relevantes son LIME y tsc++. La primera por su orientación a dispositivos con capacidad de computo limitada y tsc++ por ser una solución de \textit{Triple Space} con una estrategia de distribución de tripletas en todos los nodos lo suficientemente sencilla y flexible como para poder ser adaptada y ser usada en los entornos para los que la tesis plantea adaptar TS. La combinación de muchas características de ambas soluciones en conjunción con aspectos no tratados como el tratamiento más complejo de los contenidos dentro de un mismo espacio ofrecería una solución mucho más adecuada para entornos IoT.
+
+
+
+\subsection{Conclusion}
+
+% Parámetros para comparativa:
+%	1. niveles de autonomía
+%	2. centralizado / distribuído
+%	3. centrado en ubicomp o no
+%	4. basado en clientes tontos
+%	5. Implementado?
+%	6. Implementación disponible
+%	7. Otras características
 
 % TODO CONCLUSION
 Although both semantic space-based and Triple Spaces implementations exist, none of them has been specifically designed to be run in devices with constrained capabilities apart from our solution.
