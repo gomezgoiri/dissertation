@@ -84,6 +84,7 @@ SWS are virtually partitioned using contexts, which provide a simple form of acc
 Clients can allocate contexts to control their view privately or share it with other clients. % This allow clustering ¿WTF?
 The different active spaces and the tuples they contain are represented in a meta-space using a meta-model ontology.
 This ontology also allows to express the hierarchical relation between the spaces and security policies.
+% por lo que entiendo, está centralizadísimo
 
 % arquitectura
 The prototype contains three main components: publication, retrieval and security.
@@ -94,20 +95,49 @@ The security component restrict the access of client to spaces according to the 
 
 
 
+\subsection{sTuples}
+
+% modelo propuesto
+sTuples \cite{khushraj_stuples:_2004} was conceived by Nokia Research Center as a pervasive computing work.
+It extends the JavaSpace middleware, a object-oriented Tuple Space, using a semantic match over the semantic tuples.
+To do that, a semantic tuple is an object with a field with the semantic description in the DAML+OIL format. % definir DAML+OIL o citarlo?
+
+
+% cosas relativas al despliegue
+The space is centralized and uses a framework called Vigil to create clients and services. % cita Vigil?
+Vigil acts as a communication gateway with several protocols and is directly integrated with sTuples.
+
+
+% arquitectura
+The JavaSpace extension is done in sTuples through two components: the Tuple Manager and the Tuple Matcher.
+The manager adds, removes or states changes of tuples.
+Every insertion requires the semantic data to be asserted.
+The matcher implements the algorithm to matching templates.
+Besides, specialized agents reside on the space to offer added functionality to the users.
+For instance, they implemented recommendations, subscriptions and task-executions in their prototype.
+
+
+
 \subsection{Conceptual Spaces}
+
+% modelo propuesto
+
+% cosas relativas al despliegue
+
+% arquitectura
+
 
 Conceptual Spaces, or cSpaces, were born to study the applicability of semantic tuplespaces to different scenarios including ubiquitous computing.
 
 
-\subsection{sTuples}
- sTuples was conceived by Nokia Research Center as a pervasive
-computing work and provides description logics reasoning and a semantic extension of JavaSpace tuplespace middleware.
-
-
-sTuples \cite{khushraj_stuples:_2004} fue concebido por Nokia Research Center como un trabajo de computación ubicua que provee razonamiento de lógica descriptiva y extensión semántica del middleware de \textit{tuplespace} JavaSpace. En sTuples existe una elemento denominado gestor (o \textit{manager}) encargado de mediar entre los clientes, servicios y agentes recomendadores.
-
 
 \subsection{tsc++}
+
+% modelo propuesto
+
+% cosas relativas al despliegue
+
+% arquitectura
 
 tsc++ \cite{krummenacher_open_2009} is a new version of the former TSC project\cite{fensel_triple-space_2004} which basically offers
 the same API in a distributed way. To do that, tsc++ uses Jxta Peer To Peer \footnote{https://jxta.dev.java.net/} framework to perform the
@@ -156,6 +186,13 @@ same kernel in different machines).
 
 \subsection{Smart-M3}
 
+% modelo propuesto
+
+% cosas relativas al despliegue
+
+% arquitectura
+
+
 Remarkably, recently the Smart M3 middleware proposed an
 architecture where so called Semantic Information Brokers (SIB) store the information and perform reasoning
 process on behalf of the clients or Knowledge Processors (KP). Unfortunately, no scenario with more than a SIB has been
@@ -163,6 +200,12 @@ presented yet, making it de facto centralized.
 
 
 \subsection{TuCSoN}
+
+% modelo propuesto
+
+% cosas relativas al despliegue
+
+% arquitectura
 
 
 
