@@ -13,14 +13,24 @@ Particularly, it benefits from the autonomies introduced by both TS and the SW:
   \item Space uncoupling.
   \item Time uncoupling.
   \item Data-schema uncoupling. % explicar?
+% 	enhances the interoperability of the
+% 	applications built on top of TSC. This way, two applications using standard ontologies can interact among them
+% 	automatically enriching one each other, as long as they use the same space and standard and linked ontologies.
 \end{itemize}
 
 
-In this section we provide a chronological review of the existing Semantic Tuple Spaces solutions.
+In this section we provide a review of the existing Semantic Tuple Spaces solutions. % citar nixon_tuplespace-based_2008 ???
 To summarize, we present a comparison of them at the end of the section, analyzing their limitations.
 
 
-\subsection{TSC (2007)}
+\InsertFig{venn-sec3}{fig:venn_tuplespaces_semantics}{
+  Semantic Tuple Spaces.
+}{
+  Scope of this section.
+}{0.6}{}
+
+
+\subsection{TSC}
 % modelo propuesto
 TSC \cite{fensel_tsc_2007} is the middleware which first implemented the ideas of Fensel et al. \cite{fensel_triple-space_2004}.
 TSC aims to propose a Triple Space Computing infrastructure based on REST.
@@ -56,13 +66,14 @@ The coordination layer replicates named graphs to all involved TS kernels and th
 % http://tsc.deri.at/deliverables/D31/D31.html
 To do that, they use a peer-to-peer implementation of a virtual shared data space. % cita a CORSO?
 % decir que ofrece transaccionalidad gracias a CORSO? transactionality
+% It also offers a transactional context and a simple form to publish and subscribe to certain patterns.
 
 
 
 \subsection{Semantic Web Spaces}
 
 % modelo propuesto
-Semantic Web Spaces (SWS) defines two different data coordination views: data view and information view.
+Semantic Web Spaces (SWS) defines two different data coordination views: data view and information view. %TODO CITE
 In both views the tuples are represented with 3 fields which correspond with RDF triples' subject, predicate and subject.
 The data view stores syntactically valid RDF and is accessed using Linda primitives.
 The information view stores consistent and satisfiable data and offers new access primitives.
@@ -72,6 +83,7 @@ This view takes into account the knowledge defined by ontologies to perform sema
 SWS are virtually partitioned using contexts, which provide a simple form of access control.
 Clients can allocate contexts to control their view privately or share it with other clients. % This allow clustering ¿WTF?
 The different active spaces and the tuples they contain are represented in a meta-space using a meta-model ontology.
+This ontology also allows to express the hierarchical relation between the spaces and security policies.
 
 % arquitectura
 The prototype contains three main components: publication, retrieval and security.
@@ -81,7 +93,8 @@ The security component restrict the access of client to spaces according to the 
 % dicen que experimentaron problemas de escalabilidad
 
 
-\subsection{Conceptual Spaces ()}
+
+\subsection{Conceptual Spaces}
 
 Conceptual Spaces, or cSpaces, were born to study the applicability of semantic tuplespaces to different scenarios including ubiquitous computing.
 
@@ -91,74 +104,11 @@ Conceptual Spaces, or cSpaces, were born to study the applicability of semantic 
 computing work and provides description logics reasoning and a semantic extension of JavaSpace tuplespace middleware.
 
 
+sTuples \cite{khushraj_stuples:_2004} fue concebido por Nokia Research Center como un trabajo de computación ubicua que provee razonamiento de lógica descriptiva y extensión semántica del middleware de \textit{tuplespace} JavaSpace. En sTuples existe una elemento denominado gestor (o \textit{manager}) encargado de mediar entre los clientes, servicios y agentes recomendadores.
+
 
 \subsection{tsc++}
 
-
-\subsection{Triple Space Communication (TripCom)}
-% modelo propuesto
-Semantic Web Spaces propose some new primitives defining
-two different data coordination views: data view (with syntactically valid RDF and Linda primitives) and information view
-(with consistent and satisfiable data and new primitives).
-% definen 2 vistas con primitivas
-% los espacios pueden ser nested o flat
-% tuplas son tripletas (3 campos)
-
-% cosas relativas al despliegue
-
-
-% arquitectura
-
-
-\subsection{Smart-M3 (2010)}
-
-\subsection{TuCSoN (2012)}
-
-
-The Triple Space Computing paradigm defines reading and writing primitives to access to a common space where semantic
-knowledge is held. By reading and writing in such a decoupled manner, three levels of autonomy are reached: a) time,
-since one application can store information in the common space and other applications consume it later in an
-asynchronous way; b) location, since applications can run in different environments as long as they support tuple
-spaces; and c) reference, since applications should not need to know where the space is physically stored. Additionally,
-the information stored in a semantic format brings the data schema autonomy, which enhances the interoperability of the
-applications built on top of TSC. This way, two applications using standard ontologies can interact among them
-automatically enriching one each other, as long as they use the same space and standard and linked ontologies.
-
-
-\InsertFig{venn-sec3}{fig:venn_tuplespaces_semantics}{
-  Semantic Tuple Spaces.
-}{
-  Scope of this section.
-}{0.6}{}
-
-TripCom\footnote{TripCom (IST-4-027324-STP, www.tripcom.org)} uses a hybrid solution where information is distributed on
-an overlay network made up of different kernels using a distributed hash table. Each kernel stores some triples and
-knows where the rest of the triples are located by using a hash function. The clients have to know one of these
-kernels to address their queries through them. TripCom was conceived to store a huge amount of RDF triples taking
-special care of the scalability issues.
-
-Other tuplespaces solutions have used a negative broadcasting strategy
-\cite{krummenacher_open_2009,murphy_transiently_2006,gomez-goiri_semantic_2011}, where the writings are
-performed locally and the queries are broadcasted to all the reachable nodes which belong to a space. As can be seen,
-this strategy ensures that all the possible answers will be received, but at a high resource consuming cost.
-
-Several approaches exist in the field of semantic tuplespace \cite{nixon_tuplespace-based_2008}.
-Conceptual Spaces, or cSpaces, were born to study the applicability of semantic tuplespaces to different scenarios
-including ubiquitous computing. 
-
-None of this projects were fully distributed and they were deployed over more or less a client-based architecture which did not implement
-the tuplespace paradigm itself in mobile peers and which restricted the reasoning process to few powerful devices.
-
-In Triple Space Computing the tuples are expressed in form of triples. Currently, two main pure Triple Space Computing
-middleware implementation exist: tsc++ and TripCom.
-
-TripCom\footnote{TripCom (IST-4-027324-STP, www.tripcom.org)} has different kernels hosted in servers which can distribute the semantic data
-through themselves, but once again, is too server centered. TripCom clients are not part of the space and they could hardly be, because of
-the complexity of this software which is oriented to run on powerful machines (it is designed to be able to run even different modules of the
-same kernel in different machines).
-
-The first Triple Space project was called TSC. In TSC, triples can be interlinked to form graphs and semantic
-algorithms are implemented for template matching. It also offers a transactional context and a simple form to publish and subscribe to certain patterns.
 tsc++ \cite{krummenacher_open_2009} is a new version of the former TSC project\cite{fensel_triple-space_2004} which basically offers
 the same API in a distributed way. To do that, tsc++ uses Jxta Peer To Peer \footnote{https://jxta.dev.java.net/} framework to perform the
 coordination and Sesame \cite{broekstra_sesame:_2002} and Owlim \cite{kiryakov_owlimpragmatic_2005} to store triples of each peer.
@@ -176,21 +126,44 @@ Nevertheless, tsc++ lacks some of the advantages of other alternatives: it does 
 and last but not least, it has not been designed for devices with reduced computing capabilities, because tsc++ middleware focused on
 architecture and implementation in large scale and we focus in the short scale (local area networks with an intelligent environment).
 
-Los Triple Spaces derivan de tuplespaces y este paradigma a su vez procede del lenguaje de programación paralela Linda \cite{gelernter_generative_1985}, desarrollado en Yale en la década de los ochenta. En tuplespace distintos procesos se coordinan entre si escribiendo, leyendo y eliminando tuplas (con forma clave/valor) en un espacio de memoria compartido. En TS, a su vez, las unidades de intercambio utilizadas son tripletas RDF, procedentes del mundo de la Web Semántica, que pueden ser procesadas en conjunto por un motor de inferencia.
 
-A parte de las soluciones que siguen el paradigma Triple Space como tal, existen otras pertenecientes al modelo tuplespace que comparten elementos comunes con TS por usar la semánticas como base para definir la informacion intercambiada. En el campo de los \textit{tuplespaces} semánticos existen múltiples soluciones \cite{nixon_tuplespace-based_2008}.
+\subsection{Triple Space Communication (TripCom)}
+% modelo propuesto
+Semantic Web Spaces propose some new primitives defining
+two different data coordination views: data view (with syntactically valid RDF and Linda primitives) and information view
+(with consistent and satisfiable data and new primitives).
+% definen 2 vistas con primitivas
+% los espacios pueden ser nested o flat
+% tuplas son tripletas (3 campos)
 
-Los \textit{Semantic Web Spaces} \cite{tolksdorf_coordination_2006,tolksdorf_towards_2008} proponen nuevas primitivas para extender el modelo de coordinación Linda, definiendo dos vistas de coordinación de información diferentes: vista de datos (con grafos RDF sintácticamente válidos y primitivas propias de Linda) y la vista de información (con información consistente y satisfactible, y nuevas primitivas). En \textit{Semantic Web Spaces} las tuplas están formadas por tripletas RDF y URIs como identificadores de cada tupla y los espacios se organizan en espacios anidados jerárquicamente que pueden tener restricciones de acceso y permiten razonamiento RDF Schema.
-
-sTuples \cite{khushraj_stuples:_2004} fue concebido por Nokia Research Center como un trabajo de computación ubicua que provee razonamiento de lógica descriptiva y extensión semántica del middleware de \textit{tuplespace} JavaSpace. En sTuples existe una elemento denominado gestor (o \textit{manager}) encargado de mediar entre los clientes, servicios y agentes recomendadores.
+% cosas relativas al despliegue
 
 
-In the centralized tuplespaces we can find solutions which mainly focus on offering access to a space stored in a unique
-machine. This access is carried out by the clients using different methods which encapsulate the coordination primitives
-as in Semantic Web Spaces \cite{nixon_towards_2007}. Remarkably, recently the Smart M3 middleware proposed an
+% arquitectura
+
+TripCom\footnote{TripCom (IST-4-027324-STP, www.tripcom.org)} uses a hybrid solution where information is distributed on
+an overlay network made up of different kernels using a distributed hash table. Each kernel stores some triples and
+knows where the rest of the triples are located by using a hash function. The clients have to know one of these
+kernels to address their queries through them. TripCom was conceived to store a huge amount of RDF triples taking
+special care of the scalability issues.
+
+
+TripCom\footnote{TripCom (IST-4-027324-STP, www.tripcom.org)} has different kernels hosted in servers which can distribute the semantic data
+through themselves, but once again, is too server centered. TripCom clients are not part of the space and they could hardly be, because of
+the complexity of this software which is oriented to run on powerful machines (it is designed to be able to run even different modules of the
+same kernel in different machines).
+
+
+\subsection{Smart-M3}
+
+Remarkably, recently the Smart M3 middleware proposed an
 architecture where so called Semantic Information Brokers (SIB) store the information and perform reasoning
 process on behalf of the clients or Knowledge Processors (KP). Unfortunately, no scenario with more than a SIB has been
 presented yet, making it de facto centralized.
+
+
+\subsection{TuCSoN}
+
 
 
 \subsection{Conclusion} % comparison
@@ -208,6 +181,10 @@ presented yet, making it de facto centralized.
 %	6. Implementación disponible
 %	7. Otras características
 %	8. dependencias: librerias, etc. (para decir que lo nuestro se puede implementar en casi cualquier plataforma de forma fácil)
+
+
+
+None of this projects were fully distributed and they were deployed over more or less a client-based architecture which did not implement the tuplespace paradigm itself in mobile peers and which restricted the reasoning process to few powerful devices.
 
 De las soluciones anteriormente mencionadas, ninguna puede considerarse como totalmente distribuida. Su despliegue se realiza sobre una arquitectura en la que los móviles son simples clientes que no implementan el paradigma del \textit{tuplespace}. Dicho de otra forma, estas soluciones restringen el proceso de computación a dispositivos con mayor potencia relegando a los primeros en un papel plenamente secundario en los sistemas planteados. Debido a que la información en IoT es a menudo generada en dispositivos embebidos y su validez expira con extremada rapidez (al tratarse de información proveniente de sensores), estos enfoques no son validos al requerir intermediarios y no permitir el acceso directo a dicha información. Por otro lado, en el caso de la información almacenada en un dispositivo móvil, otros aspectos relacionados con la privacidad de la misma dificultan el uso de intermediarios en muchos escenarios.
 
