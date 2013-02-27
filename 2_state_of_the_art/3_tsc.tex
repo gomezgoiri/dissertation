@@ -121,23 +121,38 @@ For instance, they implemented recommendations, subscriptions and task-execution
 \subsection{Conceptual Spaces}
 
 % modelo propuesto
+Conceptual Spaces, or CSpaces, were born to study the applicability of semantic Tuple Spaces to different scenarios including ubiquitous computing.
+The tuples contain seven different fields enabling to express logic theories using different formal languages.
+Other remarkable fields are used to define the version, specify the creator or to define to which subspaces the tuple belongs. % explicar los 7 campos?
 
 % cosas relativas al despliegue
+The spaces in CSpaces can be individual or shared.
+The individual belongs to a single process and the shared one allows access to all the processes who have agreed on.
 
 % arquitectura
-
-
-Conceptual Spaces, or cSpaces, were born to study the applicability of semantic tuplespaces to different scenarios including ubiquitous computing.
+%Es una IDEA y NO la habían IMPLEMENTADO (posteriormente hicieron un prototipo limitado para un paper de 2006).
+They proposed the same three types of nodes as TSC.
+They intended to implement individual spaces in heavy-clients and shared spaces in servers.
+They first considered a centralized implementation for the shared-spaces, % lo dicen en la comparativa
+and later on a P2P network of the nodes managing a shared-space. % paper de después
+In any case, to the best of our knowledge, this conceptual exercise never went beyond a rather limited prototype.
+% TODO confirmar 100%
 
 
 
 \subsection{tsc++}
 
 % modelo propuesto
+Tsc++ \cite{krummenacher_open_2009} is a new version of the TSC project build on top of the \emph{Jxta} P2P framework \footnote{https://jxta.dev.java.net/}. % cita?
+
 
 % cosas relativas al despliegue
+Instead of replicating each space in the different kernels as TSC does, tsc++ proposes to store each content locally.
+Therefore, to query over the data, the queries are spread to the rest of the nodes in the space.
 
 % arquitectura
+
+% data access, communication/coordination, subscripción
 
 tsc++ \cite{krummenacher_open_2009} is a new version of the former TSC project\cite{fensel_triple-space_2004} which basically offers
 the same API in a distributed way. To do that, tsc++ uses Jxta Peer To Peer \footnote{https://jxta.dev.java.net/} framework to perform the
@@ -228,17 +243,6 @@ presented yet, making it de facto centralized.
 
 
 None of this projects were fully distributed and they were deployed over more or less a client-based architecture which did not implement the tuplespace paradigm itself in mobile peers and which restricted the reasoning process to few powerful devices.
-
-De las soluciones anteriormente mencionadas, ninguna puede considerarse como totalmente distribuida. Su despliegue se realiza sobre una arquitectura en la que los móviles son simples clientes que no implementan el paradigma del \textit{tuplespace}. Dicho de otra forma, estas soluciones restringen el proceso de computación a dispositivos con mayor potencia relegando a los primeros en un papel plenamente secundario en los sistemas planteados. Debido a que la información en IoT es a menudo generada en dispositivos embebidos y su validez expira con extremada rapidez (al tratarse de información proveniente de sensores), estos enfoques no son validos al requerir intermediarios y no permitir el acceso directo a dicha información. Por otro lado, en el caso de la información almacenada en un dispositivo móvil, otros aspectos relacionados con la privacidad de la misma dificultan el uso de intermediarios en muchos escenarios.
-
-Finalmente, en lo que a TS propiamente dicho se refiere, actualmente existen dos implementaciones del middleware de computación Triple Space: tsc++ y TripCom. TripCom\cite{tripcom_2011} dispone de diferentes núcleos alojados en servidores que pueden distribuir la información semántica entre ellos. En TripCom los clientes no son parte del espacio, y por la complejidad del software, orientado a ejecutarse en máquinas potentes donde los módulos que componen el núcleo pueden llegar a desplegarse en diferentes máquinas, sería imposible que lo fuesen. Es por tanto una solución realizada pensando en grandes sistemas y no en entornos con multitud de dispositivos con capacidades reducidas como IoT.
-
-TSC fue el primer proyecto \textit{Triple Space}. En TSC, las tripletas se interrelacionan para formar grafos y permiten realizar consultas sobre ellos a través de plantillas. También ofrece un contexto transaccional y un procedimiento para publicar y suscribirse a diferentes patrones. Tsc++ \cite{krummenacher_open_2009} es una nueva versión del proyecto TSC original \cite{fensel_triple-space_2004}, que básicamente ofrece la misma API de una manera distribuida. Para ello, tsc++ utiliza el \textit{framework} Peer to Peer Jxta \footnote{https://jxta.dev.java.net/} para llevar a cabo la coordinación entre nodos y Sesame \cite{broekstra_sesame:_2002} y Owlim \cite{kiryakov_owlimpragmatic_2005} para almacenar las tripletas en cada uno.
-
-Los nodos en tsc++ almacenan su propia información permitiendo la distribución del espacio a través de todos los nodos que lo forman. Esta estrategia, donde la información se escribe en local y las consultas se propagan al resto de nodos de un grupo, es conocida como \textit{negative broadcasting}. \textit{Negative broadcasting} se adapta al funcionamiento de los sistemas ubicuos donde diferentes dispositivos comparten información heterogénea entrando y saliendo del sistema, comprometiendo la consistencia y la disponibilidad de la información. En este aspecto un sensor puede proveer una determinada información, pero cuando abandona el espacio su información se elimina automáticamente, ya que no está disponible para el resto de nodos. En cualquier caso, esta estrategia también presenta limitaciones en los casos en los que un dispositivo quiere modificar remotamente el estado de un actuador gestionado por otro dispositivo.
-
-Resumiendo, de todas las soluciones tuplespace analizadas, las que resultan especialmente relevantes son LIME y tsc++. La primera por su orientación a dispositivos con capacidad de computo limitada y tsc++ por ser una solución de \textit{Triple Space} con una estrategia de distribución de tripletas en todos los nodos lo suficientemente sencilla y flexible como para poder ser adaptada y ser usada en los entornos para los que la tesis plantea adaptar TS. La combinación de muchas características de ambas soluciones en conjunción con aspectos no tratados como el tratamiento más complejo de los contenidos dentro de un mismo espacio ofrecería una solución mucho más adecuada para entornos IoT.
-
 
 
 % Apoyar mi comparativa en lo que dice Bundler? (pag 16)
