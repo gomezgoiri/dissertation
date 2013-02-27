@@ -21,18 +21,16 @@ To summarize, we present a comparison of them at the end of the section, analyzi
 
 
 \subsection{TSC (2007)}
-% descripción
-TSC \cite{fensel_tsc_2007} middleware which first implemented the ideas of Fensel et al. \cite{fensel_triple-space_2004}.
+% modelo propuesto
+TSC \cite{fensel_tsc_2007} is the middleware which first implemented the ideas of Fensel et al. \cite{fensel_triple-space_2004}.
 TSC aims to propose a Triple Space Computing infrastructure based on REST.
-REST is a stateless infrastructure the resources are identified by URIs.
-Equivalently, TSC proposes the use of tuples identified by URIs which correspond with RDF triples.
-In a later work,  Krummenacher et al. \cite{krummenacher2006specification} propose to use identifiers just for a set of triples (i.e. RDF graphs).
+Equivalently to REST, TSC proposes a stateless infrastructure where the resources are identified by URIs.
+In the first approximation, each tuple was considered a resource.
+These tuples correspond with RDF triples.
+In a later work,  Krummenacher et al. \cite{krummenacher2006specification} proposed to use identifiers just for a set of triples (i.e. RDF graphs).
 % bundler cita el de "WWW: or what's wrong with the web" para explicar eso último
 They argue that resources usually need to be modeled using more than just a triple.
 Besides, the use of graphs reduces the complexity on storage.
-
-
-% modelo propuesto
 To cope with the heterogeneity of data and scalability issues, they propose the use of independent spaces identified by their own URI.
 Using these disjoint spaces, they can restrict the number of participant in each one.
 
@@ -49,7 +47,7 @@ They present 3 different types of nodes:
 \end{itemize}
 
 
-% implementación
+% arquitectura
 TSC consist of three main components: a mediation engine, a data access layer and a coordination layer.
 The mediation engine manages data heterogeneity by intermediating between nodes using different data schemas.
 The data access layer ensures persistence of the data, supports template matching and provides some reasoning over the knowledge stored.
@@ -60,6 +58,59 @@ To do that, they use a peer-to-peer implementation of a virtual shared data spac
 % decir que ofrece transaccionalidad gracias a CORSO? transactionality
 
 
+
+\subsection{Semantic Web Spaces}
+
+% modelo propuesto
+Semantic Web Spaces (SWS) defines two different data coordination views: data view and information view.
+In both views the tuples are represented with 3 fields which correspond with RDF triples' subject, predicate and subject.
+The data view stores syntactically valid RDF and is accessed using Linda primitives.
+The information view stores consistent and satisfiable data and offers new access primitives.
+This view takes into account the knowledge defined by ontologies to perform semantic matching over inferred triples.
+
+% cosas relativas al despliegue
+SWS are virtually partitioned using contexts, which provide a simple form of access control.
+Clients can allocate contexts to control their view privately or share it with other clients. % This allow clustering ¿WTF?
+The different active spaces and the tuples they contain are represented in a meta-space using a meta-model ontology.
+
+% arquitectura
+The prototype contains three main components: publication, retrieval and security.
+The publication component describes how the platform communicates with the clients or storage managers.
+The retrieval component process queries and can reason to enhance results. % no se razona cada vez que se inserta una tupla
+The security component restrict the access of client to spaces according to the policies defined.  % hablan de agentes
+% dicen que experimentaron problemas de escalabilidad
+
+
+\subsection{Conceptual Spaces ()}
+
+Conceptual Spaces, or cSpaces, were born to study the applicability of semantic tuplespaces to different scenarios including ubiquitous computing.
+
+
+\subsection{sTuples}
+ sTuples was conceived by Nokia Research Center as a pervasive
+computing work and provides description logics reasoning and a semantic extension of JavaSpace tuplespace middleware.
+
+
+
+\subsection{tsc++}
+
+
+\subsection{Triple Space Communication (TripCom)}
+% modelo propuesto
+Semantic Web Spaces propose some new primitives defining
+two different data coordination views: data view (with syntactically valid RDF and Linda primitives) and information view
+(with consistent and satisfiable data and new primitives).
+% definen 2 vistas con primitivas
+% los espacios pueden ser nested o flat
+% tuplas son tripletas (3 campos)
+
+% cosas relativas al despliegue
+
+
+% arquitectura
+
+
+\subsection{Smart-M3 (2010)}
 
 \subsection{TuCSoN (2012)}
 
@@ -91,13 +142,9 @@ Other tuplespaces solutions have used a negative broadcasting strategy
 performed locally and the queries are broadcasted to all the reachable nodes which belong to a space. As can be seen,
 this strategy ensures that all the possible answers will be received, but at a high resource consuming cost.
 
-
 Several approaches exist in the field of semantic tuplespace \cite{nixon_tuplespace-based_2008}.
 Conceptual Spaces, or cSpaces, were born to study the applicability of semantic tuplespaces to different scenarios
-including ubiquitous computing. Semantic Web Spaces propose some new primitives defining
-two different data coordination views: data view (with syntactically valid RDF and Linda primitives) and information view
-(with consistent and satisfiable data and new primitives). sTuples was conceived by Nokia Research Center as a pervasive
-computing work and provides description logics reasoning and a semantic extension of JavaSpace tuplespace middleware.
+including ubiquitous computing. 
 
 None of this projects were fully distributed and they were deployed over more or less a client-based architecture which did not implement
 the tuplespace paradigm itself in mobile peers and which restricted the reasoning process to few powerful devices.
@@ -131,8 +178,7 @@ architecture and implementation in large scale and we focus in the short scale (
 
 Los Triple Spaces derivan de tuplespaces y este paradigma a su vez procede del lenguaje de programación paralela Linda \cite{gelernter_generative_1985}, desarrollado en Yale en la década de los ochenta. En tuplespace distintos procesos se coordinan entre si escribiendo, leyendo y eliminando tuplas (con forma clave/valor) en un espacio de memoria compartido. En TS, a su vez, las unidades de intercambio utilizadas son tripletas RDF, procedentes del mundo de la Web Semántica, que pueden ser procesadas en conjunto por un motor de inferencia.
 
-A parte de las soluciones que siguen el paradigma Triple Space como tal, existen otras pertenecientes al modelo tuplespace que comparten elementos comunes con TS por usar la semánticas como base para definir la informacion intercambiada. En el campo de los \textit{tuplespaces} semánticos existen múltiples soluciones \cite{nixon_tuplespace-based_2008}. Los \textit{Conceptual Spaces} \cite{martin-recuerda_towards_2005}, o cSpaces, nacieron para estudiar la aplicabilidad de los \textit{tuplespaces} semánticos en diferentes escenarios, incluyendo la computación ubicua.
-En cSpace las tuplas están formadas por 7 campos, y en uno de ellos la información se expresa usando lógica de primer orden (idealmente), lógica descriptiva o tripletas RDF.
+A parte de las soluciones que siguen el paradigma Triple Space como tal, existen otras pertenecientes al modelo tuplespace que comparten elementos comunes con TS por usar la semánticas como base para definir la informacion intercambiada. En el campo de los \textit{tuplespaces} semánticos existen múltiples soluciones \cite{nixon_tuplespace-based_2008}.
 
 Los \textit{Semantic Web Spaces} \cite{tolksdorf_coordination_2006,tolksdorf_towards_2008} proponen nuevas primitivas para extender el modelo de coordinación Linda, definiendo dos vistas de coordinación de información diferentes: vista de datos (con grafos RDF sintácticamente válidos y primitivas propias de Linda) y la vista de información (con información consistente y satisfactible, y nuevas primitivas). En \textit{Semantic Web Spaces} las tuplas están formadas por tripletas RDF y URIs como identificadores de cada tupla y los espacios se organizan en espacios anidados jerárquicamente que pueden tener restricciones de acceso y permiten razonamiento RDF Schema.
 
