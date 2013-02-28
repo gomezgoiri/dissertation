@@ -222,16 +222,33 @@ and management API to configure the each kernel.
 \subsection{Smart-M3}
 
 % modelo propuesto
+Smart-M3 is an open-source distributed middleware which uses RDF graphs. % CITA
+It supports three types of primitives: Tuple Space-based primitives, subscriptions and a query over a whole space.
+Smart-M3 defines two types of nodes: Semantic Information Brokers (SIB) and Knowledge Processors (KP).
+The SIBs store the knowledge and perform reasoning process on behalf of the KPs.
+A KP access to a SIB using two different types of interfaces (called KPI):
+\begin{itemize}
+  \item The low-level API uses triples as a base.
+  \item The high-level API allows the developer to use ontological entities such as classes, relations and individuals.
+\end{itemize}
+
 
 % cosas relativas al despliegue
+The space can be distributed over more than a SIB using a \emph{distributed deductive closure}. % CITA?
+However, to the best of our knowledge no evaluation with more than a SIB has been presented yet, making it de facto an centralized space.
+For the communication between SIBs and KPs, Smart-M3 defines a protocol called \emph{Smart Access Protocol (SSAP)}.
+SSAP can be implemented on top of different communication mechanisms (e.g. SOA, XMPP, Bluetooth or TCP/IP) making the solution communication agnostic. % TODO acrónimos?
+
 
 % arquitectura
+A SIB is divided in 5 layers: transport, request handling, graph operations, triple operation and persistent store.
+The transport layer has different processes for each communication mechanism supported.
+Once the SSAP operations have been extracted, the request handling creates a thread for each primitive.
+The graph operations work with primitives using RDF graphs and communicates with triple operations.
+In the triple operation, expressive queries may need to be translated to query the store.
+% decir que también soporta subscripción?
 
-
-Remarkably, recently the Smart M3 middleware proposed an
-architecture where so called Semantic Information Brokers (SIB) store the information and perform reasoning
-process on behalf of the clients or Knowledge Processors (KP). Unfortunately, no scenario with more than a SIB has been
-presented yet, making it de facto centralized.
+% dibujo?
 
 
 \subsection{TuCSoN}
