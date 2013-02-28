@@ -143,33 +143,29 @@ In any case, to the best of our knowledge, this conceptual exercise never went b
 \subsection{tsc++}
 
 % modelo propuesto
-Tsc++ \cite{krummenacher_open_2009} is a new version of the TSC project build on top of the \emph{Jxta} P2P framework \footnote{https://jxta.dev.java.net/}. % cita?
+Tsc++ \cite{krummenacher_open_2009} is a new version of the TSC project build on top of the \emph{Jxta} P2P framework \footnote{https://jxta.dev.java.net/}. % cita a blunder tb % jxta de otra forma?
+Therefore, although the model is equivalent to TSC, its implementation changes.
 
 
 % cosas relativas al despliegue
-Instead of replicating each space in the different kernels as TSC does, tsc++ proposes to store each content locally.
-Therefore, to query over the data, the queries are spread to the rest of the nodes in the space.
+Instead of replicating each space in the different kernels as TSC does, tsc++ proposes to divide the spaces among the participants.
+Therefore, a space corresponds with a group a nodes.
+These nodes follow a simple flooding-based strategy to distribute their information called \emph{negative broadcasting}.
+In negative broadcasting each node writes the information locally and read querying to the rest of the nodes of the space.
+
 
 % arquitectura
+Tsc++ has 3 main components: the communication and the data access.
+The data access layer relies on a semantic repository to perform queries and store the triples.
+% mencionar que son Sesame \cite{broekstra_sesame:_2002} y Owlim \cite{kiryakov_owlimpragmatic_2005} ???
+The communication layer maps the reading coordination primitives to group communication.
+Besides, it offers a subscription mechanism independent to the content stored in the space which uses triples and templates as a basis.
 
-% data access, communication/coordination, subscripción
 
-tsc++ \cite{krummenacher_open_2009} is a new version of the former TSC project\cite{fensel_triple-space_2004} which basically offers
-the same API in a distributed way. To do that, tsc++ uses Jxta Peer To Peer \footnote{https://jxta.dev.java.net/} framework to perform the
-coordination and Sesame \cite{broekstra_sesame:_2002} and Owlim \cite{kiryakov_owlimpragmatic_2005} to store triples of each peer.
+% it does not make inference
+% it does not allow expressive querying
+% it has not been designed for devices with reduced computing capabilities, because tsc++ middleware focused on architecture and implementation in large scale and we focus in the short scale (local area networks with an intelligent environment).
 
-The nodes in tsc++ not only can query the space, but they can also store their own information, enabling the distribution
-of the space over all the peers by means of the strategy known as negative broadcast. In negative broadcasting the nodes
-of a group write the information locally and read querying to the rest of the nodes. This seems to adapt to
-ubiquitous system, where different devices share heterogeneous data entering and leaving the system, compromising data consistency
-and availability. In this aspect a sensor can provide information, but when it leaves the space, its information is automatically
-removed from there since it is not longer available to the rest of the nodes. Anyway, as explained in section \ref{sec:services},
-negative broadcasting needs to be adapted to those cases in which a device wants to remotely change the state of actuators managed
-by another device.
-
-Nevertheless, tsc++ lacks some of the advantages of other alternatives: it does not make inference, it does not allow expressive querying
-and last but not least, it has not been designed for devices with reduced computing capabilities, because tsc++ middleware focused on
-architecture and implementation in large scale and we focus in the short scale (local area networks with an intelligent environment).
 
 
 \subsection{Triple Space Communication (TripCom)}
@@ -240,6 +236,22 @@ presented yet, making it de facto centralized.
 %	7. Otras características
 %	8. dependencias: librerias, etc. (para decir que lo nuestro se puede implementar en casi cualquier plataforma de forma fácil)
 
+
+discussión de cómo se adaptan las distintas alternativas a ubicomp en cacharros
+
+
+% data access, communication/coordination, subscripción
+
+tsc++ \cite{krummenacher_open_2009} is a new version of the former TSC project\cite{fensel_triple-space_2004} which basically offers
+the same API in a distributed way. To do that, tsc++ uses Jxta Peer To Peer \footnote{https://jxta.dev.java.net/} framework to perform the
+coordination and Sesame \cite{broekstra_sesame:_2002} and Owlim \cite{kiryakov_owlimpragmatic_2005} to store triples of each peer.
+
+This seems to adapt to
+ubiquitous system, where different devices share heterogeneous data entering and leaving the system, compromising data consistency
+and availability. In this aspect a sensor can provide information, but when it leaves the space, its information is automatically
+removed from there since it is not longer available to the rest of the nodes. Anyway, as explained in section \ref{sec:services},
+negative broadcasting needs to be adapted to those cases in which a device wants to remotely change the state of actuators managed
+by another device.
 
 
 None of this projects were fully distributed and they were deployed over more or less a client-based architecture which did not implement the tuplespace paradigm itself in mobile peers and which restricted the reasoning process to few powerful devices.
