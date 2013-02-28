@@ -251,13 +251,32 @@ In the triple operation, expressive queries may need to be translated to query t
 % dibujo?
 
 
+
 \subsection{TuCSoN}
 
 % modelo propuesto
+Nardini et al. \cite{TODO} explores the use of Description Logics on top of an existing \emph{tuple centre} implementation called TuCSoN. % TODO CITA
+A tuple centre is a tuple space where the behavior can be programmed as a result of the basic coordination primitives.
+TuCSoN aims to provide \emph{tuple centres} that agents can use through Linda-type primitives.
+This interaction can cause reactions which trigger behavior previously implemented in the \emph{tuple centre}.
 
 % cosas relativas al despliegue
+In TuCSoN each \emph{tuple centre} is deployed in device's port and it is identified by a name.
+The communication with each centre is direct, not based in any underlying network. % no les mola P2P decian en algun lado
+The agents can access to remote \emph{tuple centres} and migrate to them, but these interactions need to be programmed.
 
 % arquitectura
+Nardini et al. defines a domain ontology attached to each centre to provide semantic interpretation to the tuples stored.
+They extend TuCSoN providing semantic tuples, templates, primitives, reactions and matching mechanism.
+\begin{itemize}
+  \item The semantic tuples express the logic terms.
+  \item The semantic template defines a language based on logic.
+  \item To discriminate common syntactic primitives from semantic ones they use a keyword.
+  \item The semantic reactions redefine events, guards and reactions enabling the use of first-order-logic.
+	The events define when a reaction should be triggered.
+	The reaction guard represent a set of conditions which need to be satisfied to execute a reaction.
+  \item For the semantic matching mechanism they integrate TuCSoN with a reasoner (Pellet). % citar pellet?
+\end{itemize}
 
 
 
@@ -276,6 +295,11 @@ In the triple operation, expressive queries may need to be translated to query t
 %	6. Implementación disponible
 %	7. Otras características
 %	8. dependencias: librerias, etc. (para decir que lo nuestro se puede implementar en casi cualquier plataforma de forma fácil)
+
+
+theoretical counterpart of OWL DL [7]. Since OWL is the W3C standard ontology description language for the Semantic Web,
+and the standard de-facto for semantic applications in general, we adopt OWL as the ontology language for the domain
+ontologies associated to ReSpecT semantic tuple centres in TuCSoN. While for the details of OWL we forward interested
 
 
 discussión de cómo se adaptan las distintas alternativas a ubicomp en cacharros
