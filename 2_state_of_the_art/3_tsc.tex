@@ -143,13 +143,13 @@ In any case, to the best of our knowledge, this conceptual exercise never went b
 \subsection{tsc++}
 
 % modelo propuesto
-Tsc++ \cite{krummenacher_open_2009} is a new version of the TSC project build on top of the \emph{Jxta} P2P framework \footnote{https://jxta.dev.java.net/}. % cita a blunder tb % jxta de otra forma?
-Therefore, although the model is equivalent to TSC, its implementation changes.
+Tsc++ \cite{krummenacher_open_2009} is a new version of the TSC project.
+Therefore, although the model is equivalent to TSC, its implementation completely changes.
 
 
 % cosas relativas al despliegue
 Instead of replicating each space in the different kernels as TSC does, tsc++ proposes to divide the spaces among the participants.
-Therefore, a space corresponds with a group a nodes.
+Therefore, a space corresponds with a group a nodes on the \emph{Jxta} P2P framework \footnote{https://jxta.dev.java.net/}. % cita a blunder tb % jxta de otra forma?
 These nodes follow a simple flooding-based strategy to distribute their information called \emph{negative broadcasting}.
 In negative broadcasting each node writes the information locally and read querying to the rest of the nodes of the space.
 
@@ -169,30 +169,54 @@ Besides, it offers a subscription mechanism independent to the content stored in
 
 
 \subsection{Triple Space Communication (TripCom)}
+
 % modelo propuesto
-Semantic Web Spaces propose some new primitives defining
-two different data coordination views: data view (with syntactically valid RDF and Linda primitives) and information view
-(with consistent and satisfiable data and new primitives).
-% definen 2 vistas con primitivas
-% los espacios pueden ser nested o flat
-% tuplas son tripletas (3 campos)
+TripCom\footnote{TripCom (IST-4-027324-STP, www.tripcom.org)} is a Triple Space solution which works with RDF triples as resources.
+The most remarkable aspects of the model proposed by TripCom are:
+\begin{itemize}
+  \item The use of subspaces to form form nested multiple spaces.
+	Using them it restricts the communication to a part of the whole space achieving local scalability and completeness.
+  \item A mechanism to overlap spaces called \emph{scopes}.
+	Using the scopes the client can have a temporary copy of some tuples.
+	Insertion and deletion would not apply to the whole Triple Space.
+  \item A meta-space to describe the relations between spaces or to which graph a tuple belongs.
+  \item Different types of templates can be used to query the space, from simple wildcard-based templates to more expressive SPARQL queries.
+  \item New primitives: read at triple or a graph level or writing multiple triples at once.
+  \item A subscription mechanism.
+\end{itemize}
+
 
 % cosas relativas al despliegue
+To access to a space a client needs to contact a TripCom instance, i.e. kernel.
+Each kernel stores one or more subspaces and can contact other kernels responsible for different spaces.
+To do that, if the space URL is provided, it simply resolves this URL using DNS to contact the other kernel.
+Otherwise, the kernel uses 4 different strategies:
+\begin{itemize}
+  \item Triple Provider. It uses shortcuts to know who answered a query in the past.
+  \item Recommender. It uses shortcuts to know which kernel successfully routed a query in the past.
+  \item Indexing - DHT.
+	It creates indexes using a hash function over the subject, predicate, object and space url.
+	Then, it stores these indexes in a distributed database which relies in a structured P2P system. % mencionar PGrid???
+\end{itemize}
 
 
 % arquitectura
+A TripCom kernel has several components which communicate with each other using a Tuple Space solution.
+The most important components regarding how the triples are distributed are:
+\begin{itemize}
+  \item Triple Store Adapter.
+	It acts as a gateway with the selected repository.
+  \item Query Processor. It descomposes query into subqueries.
+	Then, to answer each subquery the kernel: a) queries the local data store or b) forwards it to other kernel.
+  \item Distribution Manager.
+	Forwards queries or write requests to the appropiate kernels.
+\end{itemize}
+Apart from these, there are also security, mediation, metadata and transaction managers.
+On top of these components, TripCom offers three different APIs:
+Triple Space API to map the primitives,
+web service API, which offers higher level service consumption API
+and management API to configure the each kernel.
 
-TripCom\footnote{TripCom (IST-4-027324-STP, www.tripcom.org)} uses a hybrid solution where information is distributed on
-an overlay network made up of different kernels using a distributed hash table. Each kernel stores some triples and
-knows where the rest of the triples are located by using a hash function. The clients have to know one of these
-kernels to address their queries through them. TripCom was conceived to store a huge amount of RDF triples taking
-special care of the scalability issues.
-
-
-TripCom\footnote{TripCom (IST-4-027324-STP, www.tripcom.org)} has different kernels hosted in servers which can distribute the semantic data
-through themselves, but once again, is too server centered. TripCom clients are not part of the space and they could hardly be, because of
-the complexity of this software which is oriented to run on powerful machines (it is designed to be able to run even different modules of the
-same kernel in different machines).
 
 
 \subsection{Smart-M3}
@@ -253,6 +277,16 @@ removed from there since it is not longer available to the rest of the nodes. An
 negative broadcasting needs to be adapted to those cases in which a device wants to remotely change the state of actuators managed
 by another device.
 
+
+TripCom\footnote{TripCom (IST-4-027324-STP, www.tripcom.org)} has different kernels hosted in servers which can distribute the semantic data
+through themselves, but once again, is too server centered. TripCom clients are not part of the space and they could hardly be, because of
+the complexity of this software which is oriented to run on powerful machines (it is designed to be able to run even different modules of the
+same kernel in different machines).
+
+TripCom\footnote{TripCom (IST-4-027324-STP, www.tripcom.org)} has different kernels hosted in servers which can distribute the semantic data
+through themselves, but once again, is too server centered. TripCom clients are not part of the space and they could hardly be, because of
+the complexity of this software which is oriented to run on powerful machines (it is designed to be able to run even different modules of the
+same kernel in different machines).
 
 None of this projects were fully distributed and they were deployed over more or less a client-based architecture which did not implement the tuplespace paradigm itself in mobile peers and which restricted the reasoning process to few powerful devices.
 
