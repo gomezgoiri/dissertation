@@ -288,6 +288,8 @@ They extend TuCSoN providing semantic tuples, templates, primitives, reactions a
 
 
 \subsection{Comparison}
+% TODO CSpaces no hace más que liar el analisis, me planteo no incluirlo
+%		Porque es muy bonito poner ideas felices, pero no ha sido implementado nunca!
 
 
 \subsubsection{Tuple Space model}
@@ -324,20 +326,83 @@ The adoption of more complex querying languages such as SPARQL can be done as a 
 The Table~\ref{tab:compAdds} summarizes the additional mechanisms provided by the solutions analyzed.
 Most of them offer subscription mechanisms which are particularly useful for distributed environments.
 Although this dissertation focuses more in the querying mechanism, in the Chapter~\ref{cha:implementation} we will propose a subscription mechanism.
-Other solutions offer transactionality, but we have discarded its usage due to the hard implementation for distributed systems running on dynamic environments.
+Other solutions offer , but we have discarded its usage due to the hard implementation for distributed systems running on dynamic environments.
 
 
 \input{2_state_of_the_art/tables/additional}
 
 
 
-\subsubsection{Semantic model}
+\subsubsection{Use of semantics}
+% TODO evitar verengenales que no comprendo y que sólo me complican la vida
+
+The Table~\ref{tab:comparisonSemantics} shows different features regarding the semantic model proposed by each solution.
+First we can see how most of the solutions use the standard Semantic Web language RDF to express knowledge.
+The use of RDF does not impose or limits the use of more advanced languages such as RDFS or OWL.
+
+CSpaces and Nardini et al. propose the use of a language-independent first-order logic (FOL).
+However, since most advanced reasoners only implement a subset of FOL, any implementation is limited by them. % también estas
+% theoretical counterpart of OWL DL [7]. Since OWL is the W3C standard ontology description language for the Semantic Web,
+% and the standard de-facto for semantic applications in general, we adopt OWL as the ontology language for the domain
+% ontologies associated to ReSpecT semantic tuple centres in TuCSoN. While for the details of OWL we forward interested
+
+Reasoning is used both to validate the data inserted into the space or to query over inferred triples.
+We do not validate the data inserted on the space to reduce the insertion time.
+The possibility of querying over the inferred knowledge is limited by the availability of reasoners.
+As will be shown in the next sections, nowadays there is no reasoner light enough to run in a reasonable time span in small devices.
+Therefore, reasoning is not mandatory in our solution.
+In any case, the use of reasoners over local content is tangential to the model proposed in this thesis.
+
+Semantic matching is usually derived from the reasoning process.
+Although it is a desirable characteristic, it is not imposed by any mean.
+For our solution, describing the data semantically is a first step towards semantically interpreting it.
+
+
+\input{2_state_of_the_art/tables/semantics}
 
 
 
 \subsubsection{Distribution}
+%	2. centralizado / distribuído
+%	4. basado en clientes tontos
 
-\subsubsection{Suitability for Ubicomp}
+Centralized Tuple Spaces are much simpler and easier to implement.
+Therefore, they usually offer more features than the distributed ones.
+However, they also impose a single-point-of-failure.
+
+This thesis aims to solve that by proposing a distributed model.
+Within the distributed Tuple Spaces, a wide range of distribution strategies have been detected.
+The Table~\ref{tab:comparisonDistribution} summarizes the space distribution strategy adopted by each solution.
+
+TSC uses flooding to replicate the knowledge in all the nodes.
+Tsc++ propagates the queries in flooding-based approaches.
+TripCom is built on top of a structured-network which imposes where the content is stored.
+The suitability of these models is subject of analysis the Chapter~XX.
+
+% TODO reescribir desde aquí
+
+%In this thesis, we aim to implement a completely distributed Semantic Tuple Space.
+%In that space all the nodes should be able to participate trying to avoid any distinction between clients and servers.
+%Ubicomp is be characterized for being populated by very dynamic nodes.
+%This nodes usually face severe computation and energy autonomy restrictions.
+
+
+
+% TODO y así te evitas engorrosas explicaciones aquí
+%We argue that the replication is not suitable for devices with severe storage, memory and computation restrictions.
+%Flooding-based queries does not scalable for spaces with many nodes, .
+%Finally structured networks does not comply on
+
+\input{2_state_of_the_art/tables/distribution}
+
+
+
+\subsubsection{Implementations}
+%	5. Implementado?
+%	6. Implementación disponible
+%	Interoperability
+%	Multiplatform
+%	8. dependencias: librerias, etc. (para decir que lo nuestro se puede implementar en casi cualquier plataforma de forma fácil)
 
 
 
@@ -347,26 +412,13 @@ Other solutions offer transactionality, but we have discarded its usage due to t
 % poner tabla
 % extraer algunas conclusiones de lo que falta
 
-% Parámetros para comparativa:
-%	1. niveles de autonomía
-%	2. centralizado / distribuído
-%	3. centrado en ubicomp o no
-%	4. basado en clientes tontos
-%	5. Implementado?
-%	6. Implementación disponible
-%	7. Otras características
-%	8. dependencias: librerias, etc. (para decir que lo nuestro se puede implementar en casi cualquier plataforma de forma fácil)
+% Suitability for Ubicomp
 
-
-theoretical counterpart of OWL DL [7]. Since OWL is the W3C standard ontology description language for the Semantic Web,
-and the standard de-facto for semantic applications in general, we adopt OWL as the ontology language for the domain
-ontologies associated to ReSpecT semantic tuple centres in TuCSoN. While for the details of OWL we forward interested
-
+% tono general: están muy bien de características, pero a la hora de hacerlo distribuido falla
+% hacen aguas en proponer un modelo que pueda ser usado más allá del client-servidor
 
 discussión de cómo se adaptan las distintas alternativas a ubicomp en cacharros
 
-
-% data access, communication/coordination, subscripción
 
 tsc++ \cite{krummenacher_open_2009} is a new version of the former TSC project\cite{fensel_triple-space_2004} which basically offers
 the same API in a distributed way. To do that, tsc++ uses Jxta Peer To Peer \footnote{https://jxta.dev.java.net/} framework to perform the
@@ -379,11 +431,6 @@ removed from there since it is not longer available to the rest of the nodes. An
 negative broadcasting needs to be adapted to those cases in which a device wants to remotely change the state of actuators managed
 by another device.
 
-
-TripCom\footnote{TripCom (IST-4-027324-STP, www.tripcom.org)} has different kernels hosted in servers which can distribute the semantic data
-through themselves, but once again, is too server centered. TripCom clients are not part of the space and they could hardly be, because of
-the complexity of this software which is oriented to run on powerful machines (it is designed to be able to run even different modules of the
-same kernel in different machines).
 
 TripCom\footnote{TripCom (IST-4-027324-STP, www.tripcom.org)} has different kernels hosted in servers which can distribute the semantic data
 through themselves, but once again, is too server centered. TripCom clients are not part of the space and they could hardly be, because of
