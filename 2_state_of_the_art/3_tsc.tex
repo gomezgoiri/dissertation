@@ -289,17 +289,51 @@ They extend TuCSoN providing semantic tuples, templates, primitives, reactions a
 
 \subsection{Comparison}
 
+
 \subsubsection{Tuple Space model}
+
+A Tuple Space model is mainly characterized by the information hold (i.e. \emph{tuple}),
+how it is hold (i.e. the \emph{space} model)
+and how a node can query the space (i.e. the type of \emph{query}).
+The Table~\ref{tab:comparisonTS} summarizes the model used in each of the semantic Tuple Spaces.
+
+The \emph{flat} model is the simplest manner of disjoining spaces.
+Identifying this spaces with URIs, one can link them in the knowledge similarly to what other tuple models do (e.g. Nardini et al or CSpaces). % comprobar
+More sophisticated models propose virtual view of spaces (i.e. scopes) or hierarchies between spaces.
+Nevertheless, we argue that this models are not easy to implement in a distributed way. % extenderlo despues?
+
+The most common tuple model is the three-field tuple with \emph{subject}, \emph{predicate} and \emph{object}.
+Other solutions propose their own tuple format.
+We believe that for a developer used to work with the Semantic Web the use of RDF triples is straightforward.
+Grouping these triples in RDF graphs also provides a useful abstraction for resources.
+% TODO aclarar bien porqu TSC se centra en grafos y tsc++ no!
+
+Regarding the queries, all the solutions offer graph patterns-based queries.
+These queries can be easily processed by any device, whereas complex queries need parsers.
+These parsers are not always available for resource constrained platforms.
+Therefore, in this thesis we focus on queries based on graph patterns.
+The adoption of more complex querying languages such as SPARQL can be done as a future work. % cita SPARQL?
+
 
 \input{2_state_of_the_art/tables/ts_model}
 
+
+
 \subsubsection{Additional features}
+
+The Table~\ref{tab:compAdds} summarizes the additional mechanisms provided by the solutions analyzed.
+Most of them offer subscription mechanisms which are particularly useful for distributed environments.
+Although this dissertation focuses more in the querying mechanism, in the Chapter~\ref{cha:implementation} we will propose a subscription mechanism.
+Other solutions offer transactionality, but we have discarded its usage due to the hard implementation for distributed systems running on dynamic environments.
 
 
 \input{2_state_of_the_art/tables/additional}
 
 
+
 \subsubsection{Semantic model}
+
+
 
 \subsubsection{Distribution}
 
