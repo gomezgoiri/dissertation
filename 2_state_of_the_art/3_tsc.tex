@@ -377,7 +377,7 @@ The Table~\ref{tab:comparisonDistribution} summarizes the space distribution str
 TSC uses flooding to replicate the knowledge in all the nodes.
 Tsc++ propagates the queries in flooding-based approaches.
 TripCom is built on top of a structured-network which imposes where the content is stored.
-The suitability of these models is subject of analysis the Chapter~XX.
+The suitability of these models is subject of analysis in the Chapter~XX.
 
 % TODO reescribir desde aquí
 
@@ -408,40 +408,23 @@ The suitability of these models is subject of analysis the Chapter~XX.
 
 \subsection{Conclusion}
 
-% presentar características
-% poner tabla
 % extraer algunas conclusiones de lo que falta
-
-% Suitability for Ubicomp
-
 % tono general: están muy bien de características, pero a la hora de hacerlo distribuido falla
 % hacen aguas en proponer un modelo que pueda ser usado más allá del client-servidor
+% Suitability for Ubicomp
 
-discussión de cómo se adaptan las distintas alternativas a ubicomp en cacharros
-
-
-tsc++ \cite{krummenacher_open_2009} is a new version of the former TSC project\cite{fensel_triple-space_2004} which basically offers
-the same API in a distributed way. To do that, tsc++ uses Jxta Peer To Peer \footnote{https://jxta.dev.java.net/} framework to perform the
-coordination and Sesame \cite{broekstra_sesame:_2002} and Owlim \cite{kiryakov_owlimpragmatic_2005} to store triples of each peer.
-
-This seems to adapt to
-ubiquitous system, where different devices share heterogeneous data entering and leaving the system, compromising data consistency
-and availability. In this aspect a sensor can provide information, but when it leaves the space, its information is automatically
-removed from there since it is not longer available to the rest of the nodes. Anyway, as explained in section \ref{sec:services},
-negative broadcasting needs to be adapted to those cases in which a device wants to remotely change the state of actuators managed
-by another device.
+So far, semantic Tuple Spaces solutions have offered a sophisticated models with interesting additional features.
+However, in most of the cases this is possible by delegating such tasks on a subset of more powerful and static nodes.
+Therefore, the distribution of the space is restricted to some nodes when in the best case, or centralized in a unique node in the worst case.
+In these cases, the rest of the nodes are head toward the use of the space as simple clients.
 
 
-TripCom\footnote{TripCom (IST-4-027324-STP, www.tripcom.org)} has different kernels hosted in servers which can distribute the semantic data
-through themselves, but once again, is too server centered. TripCom clients are not part of the space and they could hardly be, because of
-the complexity of this software which is oriented to run on powerful machines (it is designed to be able to run even different modules of the
-same kernel in different machines).
+In this thesis we will explore the most decentralized case: the one in which each node manages its own information.
+Doing so, a user can carry out his profile in the smart-phone or a sensor can provide the last measures on-demand.
+% sólo tsc++ seguía esa premisa
 
-None of this projects were fully distributed and they were deployed over more or less a client-based architecture which did not implement the tuplespace paradigm itself in mobile peers and which restricted the reasoning process to few powerful devices.
-
-
-% Apoyar mi comparativa en lo que dice Bundler? (pag 16)
-% El paper comparativo extrae un montón de características
+% qué es necesario para cumplir esa visión y porque las alternativas vistas no se ajustan:
+% dependencias mínimas, protocolos estándares, etc.
 
 
 % TODO CONCLUSION

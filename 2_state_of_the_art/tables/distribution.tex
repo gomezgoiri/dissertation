@@ -1,0 +1,28 @@
+
+
+\begin{table}[htbp]
+\caption{Distribution of the spaces.}
+
+% TODO En Languages decir si se basa en RDF o FOL, el hecho de que luego se use OWL para definir conocimiento, se sobreentiende
+% TODO añadir reglas?
+% TODO añadir Validity and consistency?
+% TODO añadir semantic clustering
+
+\begin{tabular}{ l p{3cm} p{7cm} }
+\hline 
+  & Distributed  & Strategy \tabularnewline
+\hline 
+ TSC & Yes & Replication of all the triples + client/server \tabularnewline % Possitive broadcasting
+ SWS &  No & - \tabularnewline
+ sTuples & No & - \tabularnewline
+ CSpaces & Yes & Structured network + client/server \tabularnewline % no implementado :-S
+ tsc++ & Yes & Flooding-based strategies \tabularnewline % Flooding, RW, etc.
+ TripCom & Yes & Structured network + client/server \tabularnewline
+ Smart-M3 & Yes (theoretical) & - \tabularnewline % decidir si me convence que no haya sido implementado, TODO citar al tipo que dijo como hacer SIBs distribuidos
+ Nardini et al. & No & - \tabularnewline
+\hline 
+\end{tabular}
+\label{tab:comparisonDistribution}
+\end{table}
+
+% TODO añadir tabla con análisis de las autonomías?
