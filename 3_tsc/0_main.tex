@@ -25,9 +25,35 @@ Historical methodology, as I see it, is a product of common sense applied to cir
 
 % 1. Intro (refiriendome descaradamente al estado del arte)
 %  	Extensible a otros Ubicomp
+In recent years, Internet of Things (IoT) is becoming a reality due to the increasing number of everyday objects containing embedded devices.
+The use of these everyday objects together with the rising of mobile computing greatly contributes to the Ubicomp vision.
+In the beginning the community put more effort on those devices' connectivity issues, materialized in the spread of technologies such as Zigbee, 6LoWPAN or Bluetooth.
+However, nowadays the community is focusing on higher levels of the architecture.
+These architectures define models in which the applications are built using the capabilities of these objects.
+These models have been thoroughly described in the previous chapter.
+In the present chapter we will focus on the comparison of the Web of Things (WoT) and Triple Space Computing (TSC).
+
+On the one hand, the WoT is an approach which fully integrates real-world objects and devices in the web.
+This is done by embedding web servers into them and adopting the REST architectural style to provide information on demand.
+This style is highly decoupled because it focuses on accessing in a simple way to the data itself and not in complex protocols of communication between objects, making the services reusable and easily understandable by developers.
+
+On the other hand, TSC is a paradigm where Semantic Web techniques are used to define the knowledge which is exchanged using a distributed shared space.
+The idea of sharing information through a common space corresponds to the \textit{blackboard model}, used in context aware environments, which makes each process very autonomous from the rest.
+The Semantic Web defines the information in a very expressive and machine understandable way (new data can be even inferred), and it has also been widely adopted in context-aware environments.
+Thus, TSC can be seen as the conjunction of two well accepted data distribution and modelling standards.
+
+Both WoT and TSC can be considered resource oriented solutions since they put emphasis in giving access to data resources.
+However, their differences make also them suitable for different purposes.
+% TODO reescribir esto TAAAAANTO
+While TSC enables expressive queries, dynamic discovery and non human-mediated cooperation among objects, the WoT adopts the scalable properties of the World Wide Web and it is entirely based on web standards.
+In this chapter we explain how to take advantage of both approaches, bringing together the best of both worlds.
+
+
+
 % 2. Comparativa
 % 3. Ventajas ppales de cada uno
 % 4. Integración de WoT con TSC
 %	a) uso de gateways (a veces útil, pero no nuestro objetivo)
 %	b) interfaces HTTP (como de hecho hacen muchas soluciones)
 % 5. otra forma de aunar las ventajas de ambos? => construir un TSC compatible con WoT (on top of that) <= integración profunda
+%	esto trae problemas: cap 4 y cap 5
