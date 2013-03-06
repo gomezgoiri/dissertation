@@ -80,13 +80,13 @@ latex: clean
 	cp ${FILE_TEX}.pdf time-machine/${DATESTAMP}/${FILE_TEX}.pdf
 
 pdflatex: clean	
-	pdflatex ${FILE_TEX}.tex
+	pdflatex -shell-escape ${FILE_TEX}.tex
 	# Uncomment makeindex if the document contains an index
 	makeindex ${FILE_TEX}.nlo -s nomencl.ist -o ${FILE_TEX}.nls
 	bibtex ${FILE_TEX}
-	pdflatex ${FILE_TEX}.tex
-	pdflatex ${FILE_TEX}.tex
-	pdflatex ${FILE_TEX}.tex
+	pdflatex -shell-escape ${FILE_TEX}.tex
+	pdflatex -shell-escape ${FILE_TEX}.tex
+	pdflatex -shell-escape ${FILE_TEX}.tex
 	# Backup tex, bib and generated pdf files
 	# There is one backup per day
 	mkdir -p time-machine/${DATESTAMP}
