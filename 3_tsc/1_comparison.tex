@@ -1,4 +1,4 @@
-\section{WoT and TSC}
+\section{WoT and TSC Comparison}
 % 2. Comparativa
 \label{sec:wot_tsc_comparison}
 
@@ -7,7 +7,6 @@
 In this section, the strengths and weaknesses of both TS and REST approaches will be discussed and compared.
 Then, their compatibility is shown by proposing two ways to use WoT solutions inside a TS environment and \textit{viceversa}.
 
-\subsection{Comparison} %Strenghts and weaknesses
 The similarities and differences between WoT and TS which are summarized in the Table \ref{tab:comparison} are detailed below.
 
 \begin{table}[ht!]
@@ -31,7 +30,7 @@ The similarities and differences between WoT and TS which are summarized in the 
 \label{tab:comparison}
 \end{table}
 
-\subsubsection{Architecture}
+\subsection{Architecture}
 Both approaches are based on resource oriented architectures. WoT uses the REST architectural style, where the contents are directly addressable by
 URLs to manipulate them, and TS creates, removes and modifies RDF triples or graphs, i.e. sets of interlinked triples, in a space formed by peers
 in a P2P network.
@@ -41,7 +40,7 @@ TS relies on a distributed shared memory which makes each process within a space
 information is stored, just the URI of the space it wants to query. Furthermore, the OtsoPack solution is fully distributed and conceived not to depend
 on any centralized, previous known, intermediary server.
 
-\subsubsection{Communication protocol}
+\subsection{Communication protocol}
 Our TS solution currently uses Jxta\footnote{http://jxta.kenai.com/}, a language and platform independent \textit{Peer to Peer} protocol, to
 interconnect the nodes and manage the groups (spaces) where they belong. Unfortunately, the mobile version relies in a Jxta gateway called Rendezvous
 to propagate the messages to other nodes of the group, making some previous configuration necessary and potentially creating a bottleneck. Anyway,
@@ -51,7 +50,7 @@ reimplementation of our network communication through HTTP.
 Even if it is not mandatory to comply with the RESTful style, WoT usually employs the HTTP protocol as a communication layer because of its
 simplicity and wide adoption to ensure ample deployment.
 
-\subsubsection{Operations}
+\subsection{Operations}
 WoT uses HTTP verbs to retrieve, create, modify or delete web resources. Retrieval is done using HTTP GET, creation by means of HTTP POST,
 modifications with HTTP PUT and removals with HTTP DELETE. Finally, the HTTP OPTIONS command is used to introspectively find out what operations are
 allowed for any URL.
@@ -61,7 +60,7 @@ TS and tuplespace solutions offer different primitives to write, read and delete
 for a type of content in a space, event notification or traditional request-reply style service consumption. Anyway, in this thesis we are going to focus in the
 first ones because they are inherent to the TS paradigm. % innecesario mencionarlo?
 
-\subsubsection{Format}
+\subsection{Format}
 WoT usually returns a human readable HTML representation for a resource and XML or JSON common web representations to be used in mashups. One of the
 key mechanisms that WoT inherits from HTTP is \textit{content negotiation}, which enables clients and servers to negotiate the requested and
 provided representations for any given resource.
@@ -70,7 +69,7 @@ TS does not provide this response format negotiation mechanism. So, OtsoPack int
 representation of semantic data. In any case, other alternative semantic representations (e.g. RDF/XML, OWL/XML, Turtle or N3) could be
 easily adopted as they basically describe the same RDF triples under different textual wrappers.
 
-\subsubsection{Developer aid}%Actors}
+\subsection{Developer aid}%Actors}
 In ROA an agreement about the data being exchanged and how it can be accessed is needed to develop applications.
 On the one hand, WoT can define machine processable data using XML or JSON, but thanks to the Semantic Web TS can go one step
 further formally defining them and making them also ``machine understandable'' (i.e. it is capable of inferring new knowledge and make
@@ -84,7 +83,7 @@ to use them.
 %browse-ability of the object by the user using HTML. TS is a solution for the Semantic Web, which aims to provide a machine understandable
 %web using ontologies and defining properties to enable inference.
 
-\subsubsection{Coupling}
+\subsection{Coupling}
 \label{sec:coupling}
 The REST style describes loosely coupled services due to the platform independent, asynchronous and few self describing messages
 \cite{pautasso_why_2009}. In a very similar manner, TS offers different kind of autonomies \cite{krummenacher_www_2005}:
@@ -101,7 +100,7 @@ In spite of the outlined decoupling nature of both approaches, the data definiti
 While in WoT each resource defines its own data formats and contents themselves, in TS the ontology in which the semantic
 concepts are described must be known by each part of a distributed application to effectively cooperate among them.
 
-\subsubsection{Discovery}
+\subsection{Discovery}
 One of the main drawbacks in WoT is the lack of a discovery mechanism for new objects and the data they provide. Even when this data can be linked
 in each object response (using HATEOAS) and microformats are sometimes included to ease the search-ability of these objects by search engines, it is difficult for an
 object which may change of location and context to be referred. Thus, WoT may have a tendency to create isolated islands of data. Several workarounds
@@ -113,7 +112,8 @@ TS provides a transparent data level discovery mechanism to the user since when 
 node joint to this space. In OtsoPack the space management and communication relies on Jxta, a protocol which can be used at any level (even if we
 have mainly used it on local environments using Jxta's discovery layer's capabilities).
 
-\subsubsection{Scalability}
+\subsection{Scalability}
+% TODO reescribir
 The scalability of WoT is argued to be well proved since the World Wide Web is the most practical scalable system. As many objects as
 necessary could be added to WWW without making it worse. 
 
@@ -122,19 +122,19 @@ and uses flooding (each query is spread to the rest of the peers which belong to
 we are working on implementing Semantic Overlay Networks (SON) to let the objects automatically divide the spaces into smaller ones and address queries
 just to the appropriate nodes which conform a semantically related space.
 
-\begin{figure} [htbp]
-	\centering
-		\includegraphics[width=\linewidth]{./img/esquemaSON/arquitectura.png}
-	\caption{Proposed distributed SON-based solution.}
-	\label{fig:changeToSON}
-\end{figure}
+% \begin{figure} [htbp]
+% 	\centering
+% 		\includegraphics[width=\linewidth]{./img/esquemaSON/arquitectura.png}
+% 	\caption{Proposed distributed SON-based solution.}
+% 	\label{fig:changeToSON}
+% \end{figure}
+% 
+% As can be appreciated in Figure \ref{fig:changeToSON}, the proposed solution aims to split the spaces up into smaller subspaces.
+% To do so, semantically similar contents are placed together in the same subspaces. E.g. \textit{subspaceA} contains \textit{graph1}
+% and \textit{graph2} which describe ``light'' related knowledge. In the meantime, the nodes from the original space (\textit{space1}) can organize
+% themselves to create another \textit{subspaceB} containing the relevant data for describing ``mobile phones''.
 
-As can be appreciated in Figure \ref{fig:changeToSON}, the proposed solution aims to split the spaces up into smaller subspaces.
-To do so, semantically similar contents are placed together in the same subspaces. E.g. \textit{subspaceA} contains \textit{graph1}
-and \textit{graph2} which describe ``light'' related knowledge. In the meantime, the nodes from the original space (\textit{space1}) can organize
-themselves to create another \textit{subspaceB} containing the relevant data for describing ``mobile phones''.
-
-\subsubsection{Semantics}
+\subsection{Semantics}
 On the one hand, WoT uses predefined microformats to embed semantic information into human readable pages. Doing so, the search process performed
 by search engines is enhanced \cite{guinard_internet_2011}. On the other hand, TS allows the usage of full semantics, more expressive than microformats,
 using RDF as a base. This makes TS capable of using standard query languages such as SPARQL and it becomes also independent of third parties' products to search data.
