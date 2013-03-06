@@ -1,0 +1,168 @@
+% SECCIÓN: QUÉ HEMOS IMPLEMENTADO EN NUESTRA IMPLEMENTACIÓN
+
+\section{Adapting the proposed interface to AmI}
+
+Once the conceptual model has been presented, its adaptation to the necessities of Ambient Intelligence applications
+which guided the architecture design will be described in depth. The implementation is characterized by the three big
+components described in the Figure \ref{fig:architecture} (i.e. data access, network and security layers).
+
+\InsertFig{architectureOverview}{fig:architecture}{
+  Basic architecture of Otsopack
+}{
+}{0.6}{}
+
+\subsection{Data access}
+
+The data access layer manages the triples stored in each Otsopack instance. They are stored using a semantic web
+framework (microjena is used by default, but Sesame has been used in the Java SE version of Otsopack, and other
+frameworks could be integrated by implementing the access interface). These frameworks enable managing serialization
+formats and making different types of queries over the stored data.
+
+Furthermore, if the semantic web framework supports reasoning, they can add new triples to the graph, inferring them
+from the stored data. For instance, it may process that ``if it is stored that Thor is son of Odin, given that
+\codigo{sonof} is the reverse property for \codigo{father of}, infer that Odin is father of Thor''. Further queries
+requesting graphs for \codigo{Odin  father of ?} would return the graph where this was inferred. This feature increases
+the expressiveness of the operations as well as the amount of possible interactions between different applications,
+given that more requests can match the same template.
+
+\subsection{Network}
+
+\subsubsection{Knowledge distribution}
+
+% implementation insights: using Negative Broadcasting
+
+As previously stated, Triple Spaces provides reference autonomy, so applications do not know where the information is
+physically located. They just access \emph{the space} requesting, removing and providing information. The conceptual
+scheme is therefore the one shown in Figure \ref{fig:conceptual-scheme}: multiple nodes interacting in different spaces
+(represented with clouds), each space containing multiple graphs (represented with papers) composed by a set of triples
+(represented with lines within each paper).
+
+\InsertFig{virtual}{fig:conceptual-scheme}{
+  Conceptual view of the knowledge distribution.
+}{
+}{0.8}{}
+
+\InsertFig{real}{fig:real-scheme}{
+  Real view of the knowledge distribution.
+}{
+}{0.8}{}
+
+
+However, IoT and AmI environments are mainly populated by mobile devices and sensors, consequently it becomes necessary
+to consider highly dynamic situations where the nodes frequently join and leave the spaces and the information they hold
+constantly changes. As a consequence, we resolved to adopt a distributed strategy which would locally store or even
+generate on demand the information necessary to answer a query. Doing so, we ensured the freshness of the responses
+regarding the sensed data.
+
+Our implementation of TS does this by allowing each distributed node, no matter how complex or simple it is, to manage
+its own information and to establish a communication channel with the space it wants to join to, i.e. with each of the
+nodes belonging to it. Queries are propagated to other nodes which previously joined that space (regardless of who they
+are at each moment) and possible responses are received from them using the same communication channel. Therefore, the
+real scheme used is presented in Figure \ref{fig:real-scheme}, where each node actually has the sets of graphs locally.
+Further discussion about knowledge distribution strategies is presented in \cite{gomezgoiri2012assessing}.
+
+\subsubsection{Space Managers}
+
+HTTP is a client-server protocol and therefore is conceived to perform unicast communication. However, the semantic
+information is distributed among the different nodes belonging to a space and as a result more than a node may contain
+relevant information to answer to the read, take or query primitive. To overcome this discordance, multiple unicast
+channels should be established each time a node needs to execute one of these primitives.
+
+With location agnostic primitives as the ones of TSC, it becomes necessary to know how to address the request to the
+interested nodes. Since the HTTP protocol does not solve this problem, we design a  simple, to facilitate its
+adoption by a wide range of embedded platforms; but yet flexible, to enable many different scenarios, discovery
+mechanism based on the so called Space Managers. % TODO frase liosa
+
+The Space Manager (SM) is a module which maintains a list of alive nodes per space. It can be deployed both with the
+rest of Otsopack or independently, remotely (using the HTTP API) or locally, in just a node or in every node and manage
+just one or many, making it suitable for many scenarios:
+\begin{itemize}
+ \item scn1: each node has his local SM with a list of the remaining nodes
+ \item scn2: each node is connected to a central SM
+ \item scn3: each node is connected to several SM avoiding bottlenecks
+\end{itemize}
+
+At first sight, implementing this module could seem a futile work since there are already production-ready protocols
+such as zeroconf / mDNS that support discovery in a multicast environment. These protocols could be used at the
+discovery layer and later rely on HTTP to communicate semantic information with each node. However, they all rely in
+UDP to communicate with other nodes, which works very efficiently in local networks but it will hardly be used through
+different networks, specially when mixing different networks. For instance, the mobile device of a user, connected to
+the Internet through 3G, will not be able to connect to a local sensor using UDP-based protocols. While the Space
+Manager at this stage has not implemented COMET (HTTP Server Push), it has been designed to support it in the near
+future, so the implementation of the Space Manager module is just the first step towards supporting a rich variety of
+potential networks.
+
+To discover which nodes belong to each space, different strategies can be used alone or in conjunction with others by a
+SM. In the most basic one, the active nodes can be defined in the SM in memory or in a file. Other supported option is
+to actively join to a space manager. The system also supports active notifications from the nodes to state they are
+going to leave the space, or passive notifications, internally processed when the space manager is not pulled often
+enough by them or they are not reachable for long enough. In order to perform these operations, an optional RESTful
+interface is provided.
+
+In an upper layer, it is possible to manage the discovery of the SMs. Depending on the particular deployment, it is
+useful to have the address of the SM HTTP URL hardcoded or in a configuration file, or available in a QR code in the
+room where the system is deployed. However, in more dynamic situations, this static configuration may be a problem, so
+Otsopack also provides a solution based on multicast sockets to discover SMs that are announcing their location.
+As a result, it is possible to configure the application to enter in a network and automatically connect to the Space
+Managers located in it.
+
+This way, limited sensors will only implement the basic primitives, and a SM will be configured to know that those
+sensors are in those addresses. The implementation running in the sensor does not need to implement any discovery
+mechanism to be reached by the rest of the nodes. In order to support limited actuators, there is another component
+called multicast gateway, which offers the HTTP interface detailed in the previous section, and which acts as a gateway
+to a particular space. This way, the limited actuator can also avoid implementing the discovery mechanisms letting the
+interaction with the SMs and the final nodes to the multicast gateway.
+
+The primitives presented in the previous section are guaranteed to be synchronous at node level, not at space level.
+As a result, during the processing of an operation where different nodes are contacted, the information might be
+retrieved in different moments, becoming weakly consistent from the overall view. If applications try to rely on
+Otsopack to use any coordination pattern, this must be done at graph level. Finally, the distribution components rely on
+internal parallel queues for performing the parallel requests. If there are 100 nodes in a space, the system will not
+perform 100 requests at the same time, but it will have several threads performing them and taking the rest from the
+queue. As soon as the conditions to return the results to the application are met, the rest of the request in the queue
+are canceled. For instance, in a \textit{read} operation, a single graph is being searched, so as soon as it is found,
+the rest of the nodes will not be contacted.
+
+% 
+% La idea es que lo que hacemos es como esto (ConcurrentNavigableMap de Java):
+% 
+%   The view's iterator is a "weakly consistent" iterator that will never throw ConcurrentModificationException, and
+%   guarantees to traverse elements as they existed upon construction of the iterator, and may (but is not guaranteed to)
+%   reflect any modifications subsequent to construction.
+% 
+% Comparado con HashMap:
+% 
+%   The iterators returned by all of this class's "collection view methods" are fail-fast: if the map is structurally
+%   modified at any time after the iterator is created, in any way except through the iterator's own remove method, the
+%   iterator will throw a ConcurrentModificationException. Thus, in the face of concurrent modification, the iterator
+%   fails quickly and cleanly, rather than risking arbitrary, non-deterministic behavior at an undetermined time in the
+%   future.
+% 
+
+\subsection{Security} % no lo veo claro, pero si no lo metemos aquí, lo dejamos para luego?
+
+Security is important at different levels in Ambient Intelligence applications. Given the data-centric nature of the
+framework, there are mainly two core concepts: a) a data provider may only grant access to certain data to a certain set
+of users and b) a data consumer may trust only a set of providers for certain set of acquired data. A derived issue is
+how to authenticate each other in such dynamic scenarios.
+
+In order to support the first requirement, an OpenID-based solutions has been built. An Identity Provider has been
+implemented, which makes possible data consumers to securely identify themselves to the data providers, and data
+providers can establish which graphs can be accessed by which users, as long as the data providers knew the user.
+Therefore, when applications query for some information in the space, if the application does not provide credentials
+then the data providers will return different amounts of information (only showing restricted graphs if the valid user
+is requesting them). For the second requirement, work has been placed to make restrictions about who can be trusted for
+certain information, but the server-to-client authentication has not been implemented yet.
+
+% 
+% YO (PABLO) ESTO LO METERÍA EN EVALUACIÓN, TEMA TIEMPOS Y ESO
+% 
+% \subsection{Levels of implementation}
+%
+% Comentar que se puede hacer diferentes versiones e interactuar entre ellas. Lo más básico es las primitivas que se
+% usen, y luego ya comentar que de hecho nosotros tenemos dos implementaciones, una en Python que soporta lo que soporta,
+% y otra en Java que está descrita en la siguiente sección
+% 
+%(Ya se que no hemos desarrollado nada, pero dado que es lo más propio de coordinación, ¿retomamos la idea feliz de
+%patrones adaptados a nuestras necesidades de razonamiento?  quizás, aquí podría encajar el uso de ejemplillos tontunos
+%apoyandonos en jenabeans)

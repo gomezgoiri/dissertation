@@ -4,9 +4,12 @@
 
 %: ----------------------- introduction file header -----------------------
 \begin{savequote}[50mm]
-The logic of validation allows us to move between the two limits of dogmatism and skepticism. 
-\qauthor{Paul Ricoeur}
+I said explain it to me! Not talk science.
+\qauthor{Doug \textit{(Déjà Vu)}}
 \end{savequote}
+
+
+\newcommand{\chaimplpath}{6_implementation}}
 
 
 \chapter{Implementation}
@@ -14,19 +17,27 @@ The logic of validation allows us to move between the two limits of dogmatism an
 
 % the code below specifies where the figures are stored
 \ifpdf
-    \graphicspath{{4_experiments_and_results/figures/PNG/}{4_experiments_and_results/figures/PDF/}{4_experiments_and_results/figures/}}
+    \graphicspath{{\chaimplpath/figures/PNG/}{\chaimplpath/figures/PDF/}{\chaimplpath/figures/}}
 \else
-    \graphicspath{{4_experiments_and_results/figures/EPS/}{4_experiments_and_results/figures/}}
+    \graphicspath{{\chaimplpath/figures/EPS/}{\chaimplpath/figures/}}
 \fi
 
 
 %------------------------------------------------------------------------- 
 
-Nulla sit amet metus nibh, at auctor enim.
+% INTRO:
+% implementación de las ideas vistas con anterioridad
+% TODO igual estaría bien meterlo antes de la sección 4, dado que se usa en su evaluación datos de aquí
 
-
-
-
+\input{\chaimplpath/1_intro}
+\input{\chaimplpath/2_designhttp}
+% añadir otro para explicar el mecanismo de subscripción implementado??
+% (o implementarlo dentro de los existentes)
+\input{\chaimplpath/3_implementation}
+\input{\chaimplpath/4_casestudy}
+% añadir uno extra para mencionar los proyectos en los que ha sido usado?
+% \input{\chaimplpath/}
+\input{\chaimplpath/5_conclusions}
 
 
 % ----------------------------------------------------------------------
