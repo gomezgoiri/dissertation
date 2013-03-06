@@ -1,0 +1,115 @@
+\section{Experimental Environment}
+\label{environment}
+We have used simulation to study the performance of our solution and compare it with a flooding-based one.
+Using simulation, we can evaluate multiple scenarios and repeat experiments for different approaches under the same conditions.
+
+\subsection{Methodology}
+Table~\ref{tab:configurationParameters} shows the main parameters of our simulator.
+We vary these parameters to simulate a wide range of scenarios.
+% Dado que los revisores parece que no hicieron cado de este aviso, mejor quitarlo.
+% We omit topology considerations as we assume devices have IP connectivity.
+
+
+\begin{table}
+\centering
+\caption {Configuration Parameters.}
+\begin{tabular}{l p{7cm}}
+\hline
+Name & Description \\
+\hline
+Network size & The number of nodes in a network. In the simulations conducted, all the nodes are \emph{Providers}. \\
+Number of writes & Amount of write primitives performed during the simulation period. \\
+Number of queries & Amount of queries performed during the simulation period. \\
+Number of \emph{Consumers} & Amount of nodes querying to other nodes in the space. \\
+Distribution strategy & Our solution or negative broadcasting (\emph{nb}). \\
+& In \emph{nb} nodes write locally and spread the queries to the rest of the nodes in the space. \\
+% TODO ENERO
+Drop interval & At the beginning of this interval a node abruptly leaves the network. \\
+& At the end, the node joins the network and a new one is chosen to leave it. \\
+\hline
+\end{tabular}
+\label{tab:configurationParameters}
+\end{table}
+
+% Since we wanted to simulate the Triple Space Computing paradigm over HTTP, the communication between the nodes was point to point and the data exchanged were RDF Triples.
+% The node discovery process was ignored since it will show similar additional overhead for each strategy.
+% It can be considered transversal to what was being measured.
+% IG: version del parrafo anterior
+% AG: Ok, pero esta es una de las cosas que en el uptade debería volar o cambiar. Sobre todo, porque no hablamos de TSC
+%     en ningún otro lado. Puede ser más fácil aún, ya que como asumimos que queremos semántica en WoT, el HTTP está
+%     justificado per se.
+As we simulate HTTP, we assume a point to point communication between devices which exchange Triples.
+We discuss how the discovery process affects the solution in Section~\ref{sec:dynamic}.
+% TODO ENERO
+In the rest of the sections we omit the node discovery process as it represents the same overhead for all strategies.
+
+%To represent the data managed by each node, we first considered using LUBM\footnote{\url{http://swat.cse.lehigh.edu/projects/lubm/}}, a synthetic benchmark.
+%Unfortunately, it creates instances from very few classes for each node, which makes all the nodes to have the same TBox.
+%In our opinion, this does not faithfully represent Internet of Things scenarios with heterogeneous devices sharing disparate information.
+
+%In our second attempt, we found a dataset which could represent this heterogeneity.
+To represent the data managed by each node, we used data from diverse sensor network environments.
+These data follow the \textit{Semantic Sensor Network Ontology} (SSN)\footnote{\url{http://www.w3.org/2005/Incubator/ssn/XGR-ssn-20110628/}}.
+% created by the W3C Semantic Sensor Network Incubator Group. to represent diverse sensor network environments.
+SSN has been used in many projects and scenarios to describe semantically the data provided by heterogeneous sensors.
+% TODO IG hasta aqui hemos llegado
+Specifically, we used data from the following datasets:
+AEMET metereological dataset\footnote{\url{http://datahub.io/dataset/aemet}},
+University of Luebeck Wisebed Sensor Readings\footnote{\url{http://thedatahub.org/dataset/university-of-luebeck-wisebed-sensor-readings}},
+\emph{Kno.e.sis} Linked Sensor Data\footnote{\url{http://wiki.knoesis.org/index.php/LinkedSensorData}}
+and Bizkaisense\footnote{\url{http://helheim.deusto.es/bizkaisense/}}.%http://dev.morelab.deusto.es/bizkaisense
+These datasets contain descriptions about the sensing stations and the data sensed by them during certain periods.
+The analogy between meteorology stations which have different sensors and the IoT devices is reasonable.
+The datasets have been adapted to provide just one measure of each sensor at each moment (to emulate the storage restrictions from embedded devices) and to use as many stations as nodes has the network (depending on the network size).
+
+However, not only sensors can be found in AmI environments.
+Personal devices such as mobile phones usually populate them also.
+To represent such circumstance, we added semantic data of people to represent their profiles\footnote{\url{http://www.morelab.deusto.es/joseki/articles}}.
+
+% poner disponible el código
+We use SimPy\footnote{\url{http://simpy.sourceforge.net}} to simulate each scenario.
+SimPy is a process-based discrete-event simulation language for Python.
+To accurately simulate the time needed by each node to provide a response, we considered measures taken from real embedded web servers running on an IP gateway\footnote{\url{http://tinyurl.com/connectportx2}} for XBee sensors'\footnote{\url{http://tinyurl.com/xbee-sensors}}, on a
+FoxG20\footnote{\url{http://www.acmesystems.it}} and on a Samsung Galaxy Tab.
+Besides, we also provide measures taken from a regular computer.
+Table~\ref{tab:measures_embedded} shows the measures used for the parametrization.
+
+\begin{table}
+  \caption{Mean of the measurements taken in different devices with the standard deviation in parenthesis (milliseconds).}
+  \label{tab:measures_embedded}
+  \begin{center}
+	\begin{tabular}{|c|c|c|c|c|}
+	  \hline
+	  Concurrent & \multirow{2}{*}{XBee} & \multirow{2}{*}{FoxG20} & Regular  & Samsung \\
+	  requests   &  ~    &   ~     & computer & Galaxy tab \\
+	  \hline
+	  1  &  77 (1)	&  17 (0)  &   5 (1)  &  223 (349) \\
+	  5  & 392 (8)	&  97 (16) &   8 (4)  &  256 (76)  \\
+	  10 & 775 (8)	& 174 (28) &  13 (8)  &  372 (171) \\
+	  15 &  -   	& 282 (43) &  18 (13) &  497 (191) \\
+% Tampoco creo que haga falta tanto detalle, ¿cuando se van a dar tantas peticiones concurrentes?
+%	  20 &  -	    & 375 (30) &  23 (13) &  661 (444) \\
+%	  25 &  -	    & 460 (30) &  30 (18) &  748 (288) \\
+%	  30 &  -	    & 540 (35) &  38 (22) &  929 (805) \\
+%	  35 &  -	    & 632 (29) &  38 (20) & 1029 (672) \\
+	  \hline
+	\end{tabular}
+  \end{center}
+\end{table}
+
+\subsection{Performance Metrics}
+To evaluate the fundamental properties of the strategies, we use the following metrics:
+\begin{itemize}
+  \item \textit{Precision}: the fraction of nodes which answered relevant results (those responses which were not
+\textit{not found} responses). It measures the exactness of the results.
+  \item \textit{Recall}: the fraction of relevant answers that are returned. It measures the completeness of the results.% overload, failed search, etc.
+  \item \textit{Size}: the size of each type of clue.
+%  \item \textit{Throughput}: the average rate of successful message delivery over a communication channel.
+%  \item \textit{Idle time}: the average time each node is in an idle state and therefore is consuming less energy.
+%  \item \textit{Failed requests}: the amount of request which could not be answered due to the physical limitations of
+% the nodes (i.e. both due to timeouts or connection rejections when the server is overloaded).
+  \item \textit{Total requests}: the number of HTTP requests performed during a simulation.
+  \item \textit{Response time}: the average response time needed to obtain the response to a query, read or take
+primitive.
+  \item \textit{Active time}: the total time spent by each node either querying other nodes or handling a query.
+\end{itemize}

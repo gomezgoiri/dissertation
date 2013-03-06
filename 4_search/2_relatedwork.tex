@@ -1,0 +1,169 @@
+\section{Background}
+\label{background}
+% enumerar características de IoT para que se vea el criterio en base al cual evaluamos las soluciones posibles
+% Para enfatizar que sí es algo IoT lo que presentamos.
+As stated by the \emph{Internet-of-Things Architecture} European project \citep{walewski_project_2011}, the IoT requires the following features:
+\emph{interoperability}, to face the heterogeneity of technologies in the IoT;
+\emph{scalability}, to cope with a greater amount of devices;
+\emph{manageability} of the devices;
+ability to face \emph{mobility} situations;
+\emph{security} and privacy; and
+% definición de reliability modificada yendo a la fuente de iot-a.eu
+\emph{reliability}, to handle connectivity losses in various ad-hoc-like ways.
+We will use these terms to compare our solution with others
+\footnote{Security and privacy are out of the scope of this thesis. They can be considered transversal.}.
+
+\subsection{Sharing Semantic Knowledge in Peer-to-peer}
+The problem of sharing semantic knowledge distributedly has gained attention since the first steps of the Semantic Web.
+Multiple architectures from the \emph{Peer-to-peer} (P2P) communication model have been used \citep{filali2011survey}.
+The P2P architectures are commonly categorized as \emph{unstructured}, \emph{structured}, and \emph{hybrid}.
+
+% Parte del de P-Grid, parte de la survey
+% RDFS+ de zhou del 2010 (este es el que clasifica trabajos como de un tipo u otro)
+% muhleisen2011survey
+% Cuidado: llaman a los protocolos de gossiping epidemic por su forma de propagar consultas
+\noindent\textbf{Unstructured.}
+In this category, the peers are unaware of the resources stored by other peers.
+Therefore, the connections between the peers are based on randomized approaches.
+The simplest solution is using flooding \citep{halevy_piazza:_2003,krummenacher_open_2009} which broadcasts every query to all peers to obtain high accuracy.
+Other solutions restrict the broadcast by using random routing which leads to less accurate results.
+Both cases are inefficient and do not scale well.
+To reduce the negative effects of randomness, \citet{zhou_building_2009} uses metadata of neighbor nodes to route the queries and reorganize the topology. % in S-RDF
+Interestingly, our solution also uses metadata from other nodes.
+However, we do not focus on the network layer and therefore, we do not change the topology.
+In contrast, we change the duties of the nodes according to their capabilities.
+% edutella al ppio (luego paso a ser super-peers)
+
+% Parte este discurso está sacado de la intro de "P-Grid: A Self-organizing Structured P2P System"
+% Otro ejemplo sería swarm-based
+\noindent\textbf{Structured.}
+In this category, the peers  maintain information about the resource of other peers.
+The most common solutions are those based on distributed hash tables (DHT).
+DHT solutions calculate the hash functions over the content which needs to be stored or retrieved.
+Using this hash, one can know who is the peer in charge of managing this particular content.
+% link con lo de arriba
+Consequently, the queries can be directed to the appropriate peers generating fewer messages.
+Unfortunately, peers joining or leaving these systems result in expensive restructuraction operations.
+This maintenance cost makes this solution impractical for networks with high peer mobility (e.g., the IoT).
+In addition, the hash function does not consider the different capabilities for the peers.
+For example, we have to control the storage and the battery of small devices.
+% What if a limited device exhausts its storage or faces much more requests than a powerful server?
+% zhou2009 también defiende lo mismo
+% "We believe that an unstructured P2P paradigm can better model our collaborative scenario in which peers maintain
+% their triples and share them with others."
+% "We recognize and respect the rights of individuals to maintain their own data, which precludes highly scalable
+%  techniques such as DHTs."
+% Otras razones de peso defendidas en la intro: freshness, dependencia de otros
+Some examples of DHT-based solutions are
+RDFPeers \citep{cai_rdfpeers:_2004},
+GridVine \citep{cudre-mauroux_gridvine:_2007},
+TripCom\footnote{TripCom (IST-4-027324-STP, www.tripcom.org)}
+% ellos lo consideran semi-descentralizado y los kernels funcionan por DHT
+or the two architectural solutions proposed by SQPeers \citep{kokkinidis_query_2006}.
+% otras aproximaciones como en uso de Semantic Overlay Networks, swarm-based (ignorar para aclarar el hilo)
+% AG: estas son las más susceptibles de cambiar!
+
+\noindent\textbf{Hybrid.}
+Finally, the \emph{hybrid} architectures differentiate between a set of peers so-called super-peers in charge of complex tasks and the common ones.
+The super-peers are usually connected through structured networks while the normal peers rely on any of those super-peers to perform tasks (e.g., query routing).
+Edutella \citep{nejdl_super-peer-based_2003} and the second solution proposed by SQPeers \citep{kokkinidis_query_2006} are two examples of hybrid architectures.
+
+\noindent\textbf{Our approach.}
+% nos apoyamos en los super-peers sin dejar de tener nodos independientes (una vez tienen las clues)
+% porque nosotros nos hemos decantado por esto? comparar con otras categorias y con soluciones de su categoría.
+Following this categorization, our solution is a hybrid architecture since some of the nodes in our architecture have special responsibilities.
+In particular, we use intermediaries which store what Edutella and SQPeers call indices.
+The main difference with these solutions is that the intermediary role is not fix. % as with other super-peers.
+Instead, the nodes dynamically decide which one should intermediate according to their energy autonomy and capacities.
+Thus, we aim to ease the deployment of our solution and make it flexible and able to adapt to multiple scenarios.
+At the same time, the most powerful devices can support those that are resource constrained.
+
+
+\subsection{Semantics in the Internet of Things}
+% intro a que ahora se va a hablar de soluciones IoT que usen semántica
+Having analyzed non-specific solutions for distributed semantic architectures, the next step is to evaluate the use of semantics from the IoT perspective.
+
+% Semántica en IoT: SmartM3
+Adding semantics works well for devices with high computational capacity but may add too much overhead for most of the devices in the IoT.
+To reduce this overhead in such devices, part of this computation is usually delegated to an intermediary.
+Some noteworthy examples are Smart-M3 \citep{honkola_smart-m3_2010} and the one proposed by \citet{broring_semantic_2009}.
+%In Smart-M3 These intermediaries are called knowledge processors.
+
+These intermediaries or \emph{Semantic Gateways} are in charge of managing the semantic annotation.
+The devices send raw data (which can be compressed) to the intermediaries and the gateways annotate the content semantically.
+Thus, the devices do not have to care about any semantic aspect and just collect the data as they did before.
+
+These \emph{Semantic Gateways} reduce the load to embedded devices with limited resources by decreasing the number of requests they have to provide.
+In addition, a centralized intermediary can gather all the information and thus, reduce the complexity of managing a distributed environment.
+
+However, as previously explained, using intermediaries to store the semantic data of resource constrained devices also has some drawbacks.
+On the one hand, centralization does not faithfully represent mobility situations were individuals carry their own semantic information in their personal devices.
+In addition, the data obtained from an intermediary will always be less fresh than the one obtained where it is generated (i.e., sensors).
+On the other hand, the servers are critical in centralized systems and therefore, their availability determines the operation of these solutions.
+They also impose a burden on the maintenance which may be worthless in some simple scenarios.
+
+
+\subsection{Semantics in the Web of Things}
+In the Web of Things, multiple solutions have considered using semantics to enrich the data definition in a machine processable manner.
+Generally, these solutions embed the metadata in HTML using microdata, microformats or RDFa \citep{mayer_extensible_2011}.
+These contents are returned by the Internet connected objects and are used to enhance the findability of the data by search engines.
+% Ontologías no se pueden definir, tiene que haber consenso en su uso por parte de las máquinas de búsqueda.
+% en vez de eso, queremos mejorar la busqueda por parte de los cacharros, no de los search engines
+This approach does not focus on making the devices able to search and interact with others.
+% end-to-end search
+Instead, it considers them as mere human-oriented information providers which should be indexed by third party search services.
+% aquí se puede enganchar también el discurso de Doulkeridis2007desent: coverage and scalability, freshness y monopoly
+
+A more general way to represent semantic data is using RDF based representations (i.e., full semantics).
+SPITFIRE European project\footnote{\url{http://spitfire-project.eu}} represents the most remarkable effort on gathering full semantics and the WoT.
+It focuses on fully integrating sensor data with the Linked Open Data (LOD). 
+The LOD are datasets which follow a series of principles on how to open and publish data.
+The goal of the LOD is to publish linked terms using full semantics.
+
+SPITFIRE shares with our solution the vision of a world populated by devices acting as semantic data providers no matter how small they are \citep{hasemann_rdf_2012}.
+Therefore, many of their efforts are complimentary to this work.
+%This is done by defining an ontology for mapping other common ontologies and providing semi-automatic generation of semantic annotations from raw data.
+%They also propose an abstraction to represent real-world entities (virtual sensors) using data provided by low-level sensors.
+%Finally, and more specific to this work, they propose a searching model which predicts the current state of things by computing their periodic patterns in past states.
+To search within these providers, \citet{pfisterer_spitfire:_2011} proposes a model which predicts the current state of things by computing their periodic patterns in past states.
+Again, the goal of this method is to adapt search engines to the new fashion of data provided on the \emph{Semantic Web of Things}.
+
+Instead, we propose a model to enhance the search capability of web-connected things in a distributed fashion.
+We aim to promote the interaction and collaboration between any devices in these environments.
+Not only sensors, but also regular computers or mobile devices \citep{balandin_access_2011}.
+
+% ¿Mereceria la pena rescatar el porque DNS no se puede usar sin mas en nuestro caso?
+% Yo lo he quitado creyendo que NO por:
+%      - Simplificar y no enmarañar mas el discurso.
+%      - Es una cosa que me parece basica si se comprende el problema.
+
+% Most WoT solutions, use DNS-based discovery to locate the REST services \emph{Providers} \cite{ishaq_facilitating_2012}.
+% In semantic WoT, the use of DNS-based discovery arises as a solution to locate the device holding the response for a specific request.
+% Providing that the query already includes the URL of the host that contains the requested information (see Figure \ref{fig:triple}),
+% we could easily locate such device using standard network protocols.
+% Unfortunately, this does not always apply to Semantic Web for two reasons:
+% \begin{enumerate}[(a)]
+%  \item sometimes URIs are not URLs and therefore, they cannot be used as locators but just as identifiers.
+%  \item the nature of the semantic web encourages to link concepts, so the same URI may be included in multiple graphs
+% stored in different devices.
+% \end{enumerate}
+% Therefore, any DNS-based resolution strategy should be used only as a complementary mechanism for our clue-based solution.
+% 
+% \begin{figure}
+% \centering
+% \includegraphics[width=0.8\columnwidth]{./img/RDFTriple/RDFTriple.pdf}
+% \caption{Basic composition of a RDF triple, two examples and a wildcard based template where both examples match.
+% \textit{ontprefix} is an alias, known as prefix in most
+% Semantic languages, for the beginning of an URI.}
+% \label{fig:triple}
+% \end{figure}
+% 
+% Without a DNS-based system, we need to share enough information with the \emph{Consumers} to deduce the relevant \emph{Providers}.
+% At the same time, according to the resource constrained devices needs, we want to avoid sharing too much information between the nodes.
+% This results in a conflict of interests which should be solved with a trade-off. % IG: esta frase es la descripcion de un trade-off en si
+
+
+% ---------------------------------
+% nuestra solución manageable: self-management, self-optimisation;
+% NOT: self-healing (auto-curación), self-protection
+% freshness: real-time semantic view of the context
