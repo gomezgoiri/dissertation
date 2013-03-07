@@ -1,4 +1,4 @@
-\section{Semantic Tuple Spaces}
+\section{Semantic \aclp{ts}}
 \label{sec:tsc_soa}
 
 % Tanasescu
@@ -6,7 +6,7 @@
 % decir que tiene mucho que ver con distributed triple stores
 % analizarlos también??? vaya pereza! -> igual comentar diferencia y dejar el análisis para la sección tosca de IGWS
 
-Semantic Tuple Spaces aim to join Tuple Spaces with the Semantic Web to propose a more uncoupled solution.
+Semantic \aclp{ts} aim to join \aclp{ts} with the Semantic Web to propose a more uncoupled solution.
 Particularly, it benefits from the autonomies introduced by both TS and the SW:
 
 \begin{itemize}
@@ -19,12 +19,12 @@ Particularly, it benefits from the autonomies introduced by both TS and the SW:
 \end{itemize}
 
 
-In this section we provide a review of the existing Semantic Tuple Spaces solutions. % citar nixon_tuplespace-based_2008 ???
+In this section we provide a review of the existing Semantic \aclp{ts} solutions. % citar nixon_tuplespace-based_2008 ???
 To summarize, we present a comparison of them at the end of the section, analyzing their limitations.
 
 
 \InsertFig{venn-sec3}{fig:venn_tuplespaces_semantics}{
-  Semantic Tuple Spaces.
+  Semantic \aclp{ts}.
 }{
   Scope of this section.
 }{0.6}{}
@@ -99,7 +99,7 @@ The security component restrict the access of client to spaces according to the 
 
 % modelo propuesto
 sTuples \cite{khushraj_stuples:_2004} was conceived by Nokia Research Center as a pervasive computing work.
-It extends the JavaSpace middleware, a object-oriented Tuple Space, using a semantic match over the semantic tuples.
+It extends the JavaSpace middleware, a object-oriented \acl{ts}, using a semantic match over the semantic tuples.
 To do that, a semantic tuple is an object with a field with the semantic description in the DAML+OIL format. % definir DAML+OIL o citarlo?
 
 
@@ -121,7 +121,7 @@ For instance, they implemented recommendations, subscriptions and task-execution
 \subsection{Conceptual Spaces}
 
 % modelo propuesto
-Conceptual Spaces, or CSpaces, were born to study the applicability of semantic Tuple Spaces to different scenarios including ubiquitous computing.
+Conceptual Spaces, or CSpaces, were born to study the applicability of semantic \aclp{ts} to different scenarios including \acl{ubicomp}.
 The tuples contain seven different fields enabling to express logic theories using different formal languages.
 Other remarkable fields are used to define the version, specify the creator or to define to which subspaces the tuple belongs. % explicar los 7 campos?
 
@@ -201,7 +201,7 @@ Otherwise, the kernel uses 4 different strategies:
 
 
 % arquitectura
-A TripCom kernel has several components which communicate with each other using a Tuple Space solution.
+A TripCom kernel has several components which communicate with each other using a \acl{ts} solution.
 The most important components regarding how the triples are distributed are:
 \begin{itemize}
   \item Triple Store Adapter.
@@ -223,7 +223,7 @@ and management API to configure the each kernel.
 
 % modelo propuesto
 Smart-M3 is an open-source distributed middleware which uses RDF graphs. % CITA
-It supports three types of primitives: Tuple Space-based primitives, subscriptions and a query over a whole space.
+It supports three types of primitives: \acl{ts}-based primitives, subscriptions and a query over a whole space.
 Smart-M3 defines two types of nodes: Semantic Information Brokers (SIB) and Knowledge Processors (KP).
 The SIBs store the knowledge and perform reasoning process on behalf of the KPs.
 A KP access to a SIB using two different types of interfaces (called KPI):
@@ -292,12 +292,12 @@ They extend TuCSoN providing semantic tuples, templates, primitives, reactions a
 %		Porque es muy bonito poner ideas felices, pero no ha sido implementado nunca!
 
 
-\subsubsection{Tuple Space model}
+\subsubsection{\acl{ts} model}
 
-A Tuple Space model is mainly characterized by the information hold (i.e. \emph{tuple}),
+A \acl{ts} model is mainly characterized by the information hold (i.e. \emph{tuple}),
 how it is hold (i.e. the \emph{space} model)
 and how a node can query the space (i.e. the type of \emph{query}).
-The Table~\ref{tab:comparisonTS} summarizes the model used in each of the semantic Tuple Spaces.
+The Table~\ref{tab:comparisonTS} summarizes the model used in each of the semantic \aclp{ts}.
 
 The \emph{flat} model is the simplest manner of disjoining spaces.
 Identifying this spaces with URIs, one can link them in the knowledge similarly to what other tuple models do (e.g. Nardini et al or CSpaces). % comprobar
@@ -366,12 +366,12 @@ For our solution, describing the data semantically is a first step towards seman
 %	2. centralizado / distribuído
 %	4. basado en clientes tontos
 
-Centralized Tuple Spaces are much simpler and easier to implement.
+Centralized \aclp{ts} are much simpler and easier to implement.
 Therefore, they usually offer more features than the distributed ones.
 However, they also impose a single-point-of-failure.
 
 This thesis aims to solve that by proposing a distributed model.
-Within the distributed Tuple Spaces, a wide range of distribution strategies have been detected.
+Within the distributed \aclp{ts}, a wide range of distribution strategies have been detected.
 The Table~\ref{tab:comparisonDistribution} summarizes the space distribution strategy adopted by each solution.
 
 TSC uses flooding to replicate the knowledge in all the nodes.
@@ -381,7 +381,7 @@ The suitability of these models is subject of analysis in the Chapter~XX.
 
 % TODO reescribir desde aquí
 
-%In this thesis, we aim to implement a completely distributed Semantic Tuple Space.
+%In this thesis, we aim to implement a completely distributed Semantic \acl{ts}.
 %In that space all the nodes should be able to participate trying to avoid any distinction between clients and servers.
 %Ubicomp is be characterized for being populated by very dynamic nodes.
 %This nodes usually face severe computation and energy autonomy restrictions.
@@ -413,7 +413,7 @@ The suitability of these models is subject of analysis in the Chapter~XX.
 % hacen aguas en proponer un modelo que pueda ser usado más allá del client-servidor
 % Suitability for Ubicomp
 
-So far, semantic Tuple Spaces solutions have offered a sophisticated models with interesting additional features.
+So far, semantic \aclp{ts} solutions have offered a sophisticated models with interesting additional features.
 However, in most of the cases this is possible by delegating such tasks on a subset of more powerful and static nodes.
 Therefore, the distribution of the space is restricted to some nodes when in the best case, or centralized in a unique node in the worst case.
 In these cases, the rest of the nodes are head toward the use of the space as simple clients.

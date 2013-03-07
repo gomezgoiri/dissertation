@@ -27,12 +27,12 @@ In contrast, the \emph{indirect communication} comprehends decoupled communicati
 
 
 Within the \emph{remote invocation} style, RESTful style \cite{fielding_architectural_2000} and the well known set of WS-* \cite{alonso_web_2010} standards probably represent the most popular substyles.
-In Section~\ref{sec:remote_invocation}, we analyze their application to the Ubicomp field, particularly focusing on the IoT.
+In Section~\ref{sec:remote_invocation}, we analyze their application to the Ubicomp field, particularly focusing on the \ac{iot}.
 
 
 % Otros técnicas indirectas:  group communication, publish-subscribe system, message queue systems, shared memory–based approaches
 Tuple Spaces, is a type of indirect communication where the entities write data in a persistent space and read specifying patterns of interest.
-In Section~\ref{sec:indirect_communication}, we study the most relevant Tuple Space solutions proposed for the ubiquitous computing.
+In Section~\ref{sec:indirect_communication}, we study the most relevant \acl{ts} solutions proposed for the \acl{ubicomp}.
 
 
 
@@ -65,7 +65,7 @@ and the Web of Things (WoT) \cite{guinard_internet_2011}. % Mejor poner su tesis
 
 
 \InsertFig{venn-sec1_1}{fig:venn_ubicomp}{
-  Integration approaches for Ubicomp apart from Tuple Spaces.
+  Integration approaches for Ubicomp apart from \aclp{ts}.
 }{
   Scope of this subsection.
 }{0.6}{}
@@ -92,17 +92,17 @@ This integration brings the following benefits:
 
 But besides the functional differences, one of the major advantages of REST compared with the WS-* is that is perceived as simpler.
 Guinard et al. proved that developers consider it easier to learn and find it more suitable for programming smart things \cite{}.
-This makes WoT solutions more popular for resource constrained devices than the WS-* based ones.
+This makes \ac{wot} solutions more popular for resource constrained devices than the WS-* based ones.
 
-% Mencionar un par de trabajos sobre móviles con servidores web embebidos, para que se vea que no es sólo WoT
+% Mencionar un par de trabajos sobre móviles con servidores web embebidos, para que se vea que no es sólo \ac{wot}
 
 
 % mencionar CoAP y demás protocolos?
 % A prove of this success/popularity is the raise of new protocols...
-% WoT has been leveraged to run in devices as constrained as the ones from the Wireless Sensor Networks.
+% \ac{wot} has been leveraged to run in devices as constrained as the ones from the Wireless Sensor Networks.
 % The special needs of this kind of sensors has brought the need of new protocols such as CoAP which try to adapt HTTP to UDP environments.
 
-% WoT necesita de Web Semántica, se analizará más tarde
+% \ac{wot} necesita de Web Semántica, se analizará más tarde
 
 
 
@@ -113,7 +113,7 @@ The indirect communication style comprehends all the techniques with no direct c
 The group communication, publish-subscribe systems, message queues or shared memory approaches are examples of indirect communication.
 These paradigms are characterized by two key properties \cite{gelernter_generative_1985,coulouris_distributed_2012}
 \footnote{
-  We use the terminology of the  Tuple Spaces' seminal paper \cite{gelernter_generative_1985}, but please note that:
+  We use the terminology of the  \aclp{ts}' seminal paper \cite{gelernter_generative_1985}, but please note that:
   % nomenclature, naming or terminology?
   \begin{itemize}
     %\item Gelernter et al. stated that \emph{distributed sharing} was just a consequence of the these properties.
@@ -144,7 +144,7 @@ These paradigms are characterized by two key properties \cite{gelernter_generati
 \end{itemize}
 
 \InsertFig{venn-sec1_2}{fig:venn_tuplespaces_ubicomp}{
-  Tuple Spaces solutions for Ubicomp.
+  \aclp{ts} solutions for Ubicomp.
 }{
   Scope of this subsection.
 }{0.6}{}
@@ -153,12 +153,12 @@ These paradigms are characterized by two key properties \cite{gelernter_generati
 % En esa misma sección aclara que algunas implementaciones no son time-uncoupled.
 % por otro lado, asíncronismo != time uncoupling
 
-Tuple Space computing, also called space-based computing, offers an improvement of the shared memory approach.
+\acl{ts} computing, also called space-based computing, offers an improvement of the shared memory approach.
 Whereas the shared memory works at byte-level and accessing to memory addresses,
-the Tuple Space works with semi-structured data which is accessed in an associative manner.
+the \acl{ts} works with semi-structured data which is accessed in an associative manner.
 
-% definir si en mayusculas, en minusculas o cómo coño: tuplespace, tuple space, Tuple Space?
-Tuple Space (TS) has its roots in the Linda parallel programming language \cite{gelernter_generative_1985}.
+% definir si en mayusculas, en minusculas o cómo coño: tuplespace, tuple space, \acl{ts}?
+\acf{ts} has its roots in the Linda parallel programming language \cite{gelernter_generative_1985}.
 In this communication model different processes read and write pieces of information so-called tuples in a common space.
 Tuples are composed by one or more typed data fields (e.g. $<"aitor",1984>$ or $<3,7,21.0>$).
 The tuples are accessed associatively using a template.
@@ -174,7 +174,7 @@ Although the primitives may change from implementation to implementation, the mo
   \item \emph{Write a new tuple into the space}. This primitive is usually called \emph{write} or \emph{out}.
 \end{itemize}
 
-So far, Tuple Space has been adapted to ubiquitous computing by different authors.
+So far, \acl{ts} has been adapted to \acl{ubicomp} by different authors.
 
 % TODO leer artículos que me faltan y corregir
 \emph{The event heap} [Johanson and Fox 2004] is a system used for a specific use case. % CITE
@@ -248,6 +248,6 @@ They share spaces whenever they become available.
       % Scalability?
       % Coger propiedades del libro de sistemas distribuidos?
   \end{tabular}
-  \caption{Comparison of the most prominent Tuple Space alternatives for ubiquitous computing.} % no columpiarme, o poner todas o ninguna?
+  \caption{Comparison of the most prominent \acl{ts} alternatives for \acl{ubicomp}.} % no columpiarme, o poner todas o ninguna?
   \label{tab:myfirsttable}
 \end{table}

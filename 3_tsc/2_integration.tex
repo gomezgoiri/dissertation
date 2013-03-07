@@ -1,29 +1,29 @@
-\section{First steps towards the integration of the WoT and TSC}
+\section{First steps towards the integration of the \acs{wot} and \acs{tsc}}
 % 2. Comparativa
 \label{sec:integration_wot_tsc}
 
 % TODO rehacer taaanto :-)
 
 
-% existe gente que ha dicho que TSC encaja con el pto de vista REST
+% existe gente que ha dicho que \ac{tsc} encaja con el pto de vista REST
 
 
 % remarcar que en los primeros intentos se intentó esto, y luego lo otro
 
-\subsection{Using WoT in a TSC solution}
+\subsection{Using \acs{wot} in a \acs{tsc} solution}
 \label{sec:wotints}
-To demonstrate the complete compatibility between TS and WoT approaches, we first used a WoT solution in a TS node. We used a gateway \cite{guinard_resource_2010} which provides access to sensors and actuators through RESTful services. To adapt it to the TS paradigm, we added to it a new data representation using a set of semantic triples (in this first approach, the solution is dependent on the ontology of the scenario).
+To demonstrate the complete compatibility between \ac{tsc} and \ac{wot} approaches, we first used a \ac{wot} solution in a \ac{tsc} node. We used a gateway \cite{guinard_resource_2010} which provides access to sensors and actuators through RESTful services. To adapt it to the \ac{tsc} paradigm, we added to it a new data representation using a set of semantic triples (in this first approach, the solution is dependent on the ontology of the scenario).
 
 In OtsoPack, each node is mainly made up of two parts: the network layer and the data access layer. While the first one has the responsibility of
 keep a node communicated with the rest of the nodes of the space, the second one stores the triples managed by this node.
 In OtsoSE we have replaced this data access layer to obtain the semantic information from the gateway instead of from a semantic repository.
-Doing so, the TS primitives addressed to the gateway are translated into an HTTP request as summarized in Table \ref{tab:TS2WoT}.
+Doing so, the \ac{tsc} primitives addressed to the gateway are translated into an HTTP request as summarized in Table \ref{tab:TS2WoT}.
 \begin{table*}[t!] % http://en.wikibooks.org/wiki/LaTeX/Floats,_Figures_and_Captions#Wide_figures_in_two_column_documents
 \centering
-\caption {Mappings between OtsoPack's primitives and HTTP requests addressed to a WoT solution.}
+\caption {Mappings between OtsoPack's primitives and HTTP requests addressed to a \ac{wot} solution.}
 \begin{tabular}{|c|p{10cm}|}
 \hline
-TS primitive & HTTP request \\
+\acs{tsc} primitive & HTTP request \\
 \hline \hline
 read(spaceURI,[graphURI]) & HTTP GET over [graphURI] \\
 \hline
@@ -60,11 +60,11 @@ its state.
 
 % mapping
 % decir que ya hay muchos que intentaron esto antes: TSC?
-\subsection{Making TSC nodes part of the WoT}
+\subsection{Making \acs{tsc} nodes part of the \acs{wot}}
 
 \begin{table*}[t!] % http://en.wikibooks.org/wiki/LaTeX/Floats,_Figures_and_Captions#Wide_figures_in_two_column_documents
 \centering
-\caption {Examples of REST access to TS (\textit{sp:ex} is a space URI, \textit{sp:gr1} is a graph URI and templates are expressed between quotes)}
+\caption {Examples of REST access to \ac{tsc} (\textit{sp:ex} is a space URI, \textit{sp:gr1} is a graph URI and templates are expressed between quotes)}
 \begin{tabular}{|c|l|l|}
 \hline
 HTTP request & URL & Returns \\
@@ -88,8 +88,8 @@ DELETE & http://nodeuri/sp:ex/graphs/object/sp:o1 & \texttt{take(sp:ex,"?s ?p <s
 \label{tab:WoT2TS}
 \end{table*}
 
-In this section, a proposal to make any TS node WoT compliant is explained. To do that access to a TS should be provided through a RESTful service
-(as shown in Table \ref{tab:WoT2TS}). As in TS, spaces, graphs, subjects, predicates and objects are identified by URIs, in order not to make the
+In this section, a proposal to make any \ac{tsc} node \ac{wot} compliant is explained. To do that access to a \ac{tsc} should be provided through a RESTful service
+(as shown in Table \ref{tab:WoT2TS}). As in \ac{tsc}, spaces, graphs, subjects, predicates and objects are identified by URIs, in order not to make the
 requesting URLs too long, each node should provide a prefix mechanism to enable the URI shortening at \textit{http://nodeuri/prefixes/}.
 This node will return all the prefixes used by this node, so they can be used inside any URL by simply using a name followed by '':`` and the last part of the URI.
 

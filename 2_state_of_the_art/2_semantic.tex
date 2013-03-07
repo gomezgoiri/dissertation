@@ -30,9 +30,9 @@ This process is inherently manual, and therefore it is a stumbling block to achi
 
 \medskip
 
-On the other hand, most of the solutions in the WoT use common web media formats such as HyperText Markup Language (HTML) or JavaScript Object Notation (JSON). % link
+On the other hand, most of the solutions in the \ac{wot} use common web media formats such as HyperText Markup Language (HTML) or JavaScript Object Notation (JSON). % link
 HTML is oriented for humans while JSON is a machine processable format.
-Imagine a developer wants to regulate the brightness of a room by using some existing and already deployed WoT-enabled devices.
+Imagine a developer wants to regulate the brightness of a room by using some existing and already deployed \acs{wot}-enabled devices.
 A device provides temperature through a REST \emph{service A} and other device has a REST \emph{service B} to switch on or switch off the lights.
 Then, the developer will need to know:
 \begin{itemize}
@@ -59,29 +59,29 @@ Even in that case, if the second device provides the temperature using a differe
 In conclusion, the systems analyzed use information not meaningful for other applications or domains.
 One solution to that problem is to use specialized systems which convert and reinterpret the data from one domain to the other.
 Other one is to promote the use of standardized models to express the data.
-In the next section we will analyze how the Semantic Web tackles these problems.
+In the next section we will analyze how the \acl{sw} tackles these problems.
 
 
-\subsection{The Semantic Web}
+\subsection{The \acl{sw}}
 
 A problem of the initial view of the Web was that it was human-centered.
 Regardeless of wether the contents were machine processable, a human needed to interpret them to give them a meaning.
 % mirar a ver cuando se empezó a usar SW de verdad, porque en el artículo de 2001 dan a enterder que se llevaba un tiempo usando
-In the early 2000s Berners Lee et al. \cite{berners-lee_semantic_2001} proposed the use of what they called the Semantic Web (SW) to solve that problem.
+In the early 2000s Berners Lee et al. \cite{berners-lee_semantic_2001} proposed the use of what they called the \acf{sw} to solve that problem.
 The SW was conceived as an extension of the ordinary web which would bring structure to its content.
 As the ordinary web, the SW benefits from the universality the hypertext provides by linking \emph{anything with anything}.
 Besides, like the Internet, the SW is intended to be as decentralized as possible.
 
-The Semantic Web and its key features are defined by the \emph{World Wide Web Consortium} \cite{semanticWeb-FAQ} as:
+The \acl{sw} and its key features are defined by the \emph{World Wide Web Consortium} \cite{semanticWeb-FAQ} as:
 \begin{quote}
-The vision of the Semantic Web is to extend principles of the Web from documents to data.
+The vision of the \acl{sw} is to extend principles of the Web from documents to data.
 Data should be accessed using the general Web architecture using, e.g., URI-s;
 data should be \emph{related to one another} just as documents (or portions of documents) are already.
 This also means creation of a common framework that allows data to be \emph{shared and reused} across application, enterprise, and community boundaries,
 to be \emph{processed automatically} by tools as well as manually, including revealing possible \emph{new relationships} among pieces of data.
 \end{quote}
 
-Meaning is expressed in the Semantic Web as sets of triples.
+Meaning is expressed in the \acl{sw} as sets of triples.
 Each triple is composed by a subject, a predicate and an object like in a normal sentence (see Figure~\ref{fig:triples_example}).
 In that way, in Berners Lee et al. words \cite{berners-lee_semantic_2001}, \emph{a document can assert that things (people, web pages or whatever) have properties (such as "is a sister of," "is the author of") with certain values (another person, another Web page)}.
 A key difference with a normal sentence is that each concept is unambiguously defined by an URI.
@@ -115,13 +115,13 @@ The ultimate goal of the LOD is to publish linked terms using full semantics.
 
 
 \InsertFig{venn-sec2}{fig:venn_semantics_ubicomp}{
-  The Semantic Web for Ubicomp.
+  The \acl{sw} for Ubicomp.
 }{
   Scope of this section.
 }{0.6}{}
 
 
-\subsection{The Semantic Web in the Ubiquitous computing}
+\subsection{The \acl{sw} in the Ubiquitous computing}
 
 % como los smart environments describen contexto usando web semántica
 
@@ -130,7 +130,7 @@ The ultimate goal of the LOD is to publish linked terms using full semantics.
 % intro a que ahora se va a hablar de soluciones IoT que usen semántica
 
 % Semántica en IoT: SmartM3 => guardar esta para la sección de TSC!
-Adding semantics works well for devices with high computational capacity but may add too much overhead for most of the devices in the IoT.
+Adding semantics works well for devices with high computational capacity but may add too much overhead for most of the devices in the \ac{iot}.
 To reduce this overhead in such devices, part of this computation is usually delegated to an intermediary.
 Some noteworthy examples are Smart-M3 \citep{honkola_smart-m3_2010} and the one proposed by \citet{broring_semantic_2009}.
 %In Smart-M3 These intermediaries are called knowledge processors.
@@ -149,7 +149,7 @@ On the other hand, the servers are critical in centralized systems and therefore
 They also impose a burden on the maintenance which may be worthless in some simple scenarios.
 
 
-\subsection{The Semantic Web in resource constrained devices}
+\subsection{The \acl{sw} in resource constrained devices}
 % enumerar aquellas características de IoT???
 % sacar algo del paper que habla de los retos de usar semántica en IoT
 
@@ -169,7 +169,7 @@ Instead, it considers them as mere human-oriented information providers which sh
 % aquí se puede enganchar también el discurso de Doulkeridis2007desent: coverage and scalability, freshness y monopoly
 
 A more general way to represent semantic data is using RDF based representations (i.e., full semantics).
-SPITFIRE European project\footnote{\url{http://spitfire-project.eu}} represents the most remarkable effort on gathering full semantics and the WoT.
+SPITFIRE European project\footnote{\url{http://spitfire-project.eu}} represents the most remarkable effort on gathering full semantics and the \ac{wot}.
 It focuses on fully integrating sensor data with the Linked Open Data (LOD). 
 The LOD are datasets which follow a series of principles on how to open and publish data.
 The goal of the LOD is to publish linked terms using full semantics.
@@ -180,7 +180,7 @@ Therefore, many of their efforts are complimentary to this work.
 %They also propose an abstraction to represent real-world entities (virtual sensors) using data provided by low-level sensors.
 %Finally, and more specific to this work, they propose a searching model which predicts the current state of things by computing their periodic patterns in past states.
 To search within these providers, \citet{pfisterer_spitfire:_2011} proposes a model which predicts the current state of things by computing their periodic patterns in past states.
-Again, the goal of this method is to adapt search engines to the new fashion of data provided on the \emph{Semantic Web of Things}.
+Again, the goal of this method is to adapt search engines to the new fashion of data provided on the \emph{\acl{sw} of Things}.
 
 Instead, we propose a model to enhance the search capability of web-connected things in a distributed fashion.
 We aim to promote the interaction and collaboration between any devices in these environments.
