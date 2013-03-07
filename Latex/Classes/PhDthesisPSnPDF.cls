@@ -364,6 +364,9 @@
 % Advisor
 \def\advisor#1{\gdef\@advisor{#1}}
 
+% Text advisor two
+\def\textadvisortwo#1{\gdef\@textadvisortwo{#1}}
+
 % Advisor two
 \def\advisortwo#1{\gdef\@advisortwo{#1}}
 
@@ -410,8 +413,8 @@
     {\@collegeordept \par}
 	\vspace*{1ex}
     {\@textadvisor \@advisor \par}
-    %{\@textadvisor \@advisortwo \par}
-    {\@advisortwo \par}
+    {\@textadvisortwo ~ \@advisortwo \par}
+    %{\@advisortwo \par}
 	\vspace*{4ex}
 }%end large
   \end{center}

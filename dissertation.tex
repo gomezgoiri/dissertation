@@ -13,6 +13,7 @@
 %\usepackage{longtable}
 \usepackage{algpseudocode}
 \usepackage{minted}
+ \usepackage{acronym}
 
 
 %: Macro file for Latex
@@ -42,8 +43,7 @@
 \fi
 
 
-% Title of the dissertation
-\title{Dissertation Title}
+
 
 
 % ----------------------------------------------------------------------
@@ -52,18 +52,7 @@
 \crest{\includegraphics[width=2cm]{Deusto_Shield}}
 % Full logo
 %\crest{\includegraphics[width=6cm]{UDeusto}}
-\university{Universidad de Deusto}
-\degree{Tesis doctoral presentada por }
-\author{Name surname} 
-\collegeordept{dentro del Programa de Doctorado en Your programme name}
-\textadvisor{Dirigida por }
-\advisor{Dr. Name surname }
-\advisortwo{y Dr. Name surname}
-\textsignaturecandidate{El doctorando}
-\textsignatureadvisor{El director}
-\cityofbirth{Bilbao}
-%\degreedate{\monthname \ \the\year}
-\degreedate{Month de \the\year}
+\input{metadata}
 
 
 % ----------------------------------------------------------------------
@@ -175,12 +164,6 @@
 
 %\renewcommand{\chaptername}{} % uncomment to print only "1" not "Chapter 1"
 \pagestyle{fancy}
-
-
-
-% TODO Definir palabras rollo Tuple Spaces para ser uniforme a lo largo del texto y no llamarle tspaces, tuplespaces, o tuple spaces
-%\newcommand{\primquery}{\emph{query}}
-
 
 
 %: ----------------------- subdocuments ------------------------

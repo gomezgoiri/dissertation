@@ -9,23 +9,23 @@ Thanks to wireless technologies, devices can connect to the Internet without hav
 
 % Terminos a aclarar: IoT, ubicomp o pervasive y AmI (y Context Awareness?)
 Nowadays, everyday objects like cars or washing machines start to be connected to the Internet to exchange information.
-This is what is currently known as the \emph{Internet of Things (IoT)} \cite{atzori_internet_2010}.
-The objects of the IoT, together with end-user devices such as smartphones or tablets, constitutes the clearest sign of the Ubiquitous computing (Ubicomp) prominence in our current lives \cite{caceres_ubicomp_2012}.
-But the real power of Ubicomp, as envisioned by Weiser in the early nineties \cite{weiser1991computer}, \emph{comes not from any one of these devices, it emerges from the interaction of all of them}.
+This is what is currently known as the \ac{iot} \cite{atzori_internet_2010}.
+The objects of the IoT, together with end-user devices such as smartphones or tablets, constitutes the clearest sign of the \ac{ubicomp} prominence in our current lives \cite{caceres_ubicomp_2012}.
+But the real power of \ac{ubicomp}, as envisioned by Weiser in the early nineties \cite{weiser1991computer}, \emph{comes not from any one of these devices, it emerges from the interaction of all of them}.
 
 Furthermore, Weiser defended that all these devices should imperceptibly work on our behalf.
-This idea is particularly stressed by the concept of \emph{Ambient Intelligence (AmI)} \cite{ramos_ambient_2008}.
+This idea is particularly stressed by the concept of \ac{ami} \cite{ramos_ambient_2008}.
 For instance, the washing machine could plan to finish washing the clothes two minutes before the car gets home.
 
 \medskip
 
 But integrating devices to accomplish such task is not trivial as they usually communicate using different protocols.
 % TODO hacer un acercamiento más elegante a WoT
-To solve this problem, the \emph{Web of Things (WoT)} initiative proposes to use well-established web standards to ease their communication \cite{guinard_thesis_2011}.
+To solve this problem, the \ac{wot} initiative proposes to use well-established web standards to ease their communication \cite{guinard_thesis_2011}.
 This, together with the already existing tools and libraries from the web world, simplifies its adoption to developers \cite{guinard_search_2011}.
 Besides, the WoT naturally integrates with the currently widely used RESTful web applications.
 
-Parallel to this initiative, \emph{tuplespaces} (or \emph{space-based computing}) \cite{gelernter_generative_1985} proposes a different integration style based on the \emph{blackboard model}.
+Parallel to this initiative, \aclp{ts} (or \emph{space-based computing}) \cite{gelernter_generative_1985} proposes a different integration style based on the \emph{blackboard model}.
 In tuplespaces participants cooperate with each other by writing and reading information on a shared \emph{space}.
 The main benefit of this paradigm is its higher-level of decoupling.
 Tuplespaces are
@@ -35,15 +35,15 @@ and \emph{reference-autonomous}, since applications should not need to know wher
 
 \medskip
 
-One common problem of both the WoT and Tuplespaces is that the format of the data they exchange is multifarious and application domain dependent.
+One common problem of both the \ac{wot} and \aclp{ts} is that the format of the data they exchange is multifarious and application domain dependent.
 This implies that data will not be meaningful in other domains unless a specialized system converts and reinterprets them.
 A way to solve this problem is annotating the data semantically as proposed by the WWW \cite{berners-lee_semantic_2001}.
 
-Specifically, the Triple Space Computing (TSC) paradigm \cite{fensel_triple-space_2004} proposes sharing this semantic knowledge on shared spaces following the Tuplespaces approach.
-Besides, we argue that TSC is also compatible with the WoT.
+Specifically, the \ac{tsc} paradigm \cite{fensel_triple-space_2004} proposes sharing this semantic knowledge on shared spaces following the \aclp{ts} approach.
+Besides, we argue that \ac{tsc} is also compatible with the \ac{wot}.
 % distributed
 
-However, adding semantics to the IoT, or more generally to AmI environments, may suppose a burden for resource constrained devices.
+However, adding semantics to the \ac{iot}, or more generally to \ac{ami} environments, may suppose a burden for resource constrained devices.
 To reduce this overhead in such devices, part of this computation is usually delegated to intermediaries \cite{honkola_smart-m3_2010}. % todavía no poner esta cita
 This approach reduces the overhead of semantically annotated data but brings other problems:
 \begin{enumerate}
@@ -52,14 +52,14 @@ This approach reduces the overhead of semantically annotated data but brings oth
 \end{enumerate}
 
 % definir más claramente si IoT o AmI
-In this thesis, we propose to adapt TSC to the IoT and AmI environments in a fully distributed way.
+In this thesis, we propose to adapt \ac{tsc} to the \ac{iot} and \ac{ami} environments in a fully distributed way.
 To fulfill such an ambitious goal, we need to carefully consider the restrictions imposed by such environments.
 Two key aspects to take into account are the limited energy autonomy or computational capacity of many devices.
 Similarly, our solution should be flexible enough to support a wide range of scenarios.
 % hacer guiño a WoT por algún lado o va a quedar un poco cojo
 
 This thesis addresses different key aspects of this adaptation:
-a) its compatibility with the Wot;
+a) its compatibility with the \ac{wot};
 b) how any participant should search for content on the spaces;
 and c) how to write content in the space to change the state of the objects.
 Finally, we also present the incarnation of some of this ideas in a middleware,
