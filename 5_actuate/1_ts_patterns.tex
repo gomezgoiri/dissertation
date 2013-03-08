@@ -13,12 +13,7 @@ Finally, the Section~\ref{sec:envisaged_scenarios} shows an example of how they 
 \label{sec:ts_patterns}
 
 According to Freeman et al. \cite{freeman_javaspaces_1999} there are four main application patterns which can be used with \ac{ts}:
-\begin{itemize}
- \item Replicated-worker pattern
- \item Marketplace pattern
- \item Command pattern
- \item Specialist patterns
-\end{itemize}
+replicated-worker pattern, marketplace pattern, command pattern and specialist patterns.
 
 
 \subsubsection{Replicated-worker pattern}
@@ -113,15 +108,15 @@ The subscription primitives the developer should use are the following ones:
 \begin{itemize}
   \item \emph{Subscribe}. The node subscribes to the given template returning an URI which identifies the subscription.
     \begin{minted}{java}
-      public String subscribe(String spaceURI, NotificableTemplate template, INotificationListener listener) throws SpaceNotExistsException, SubscriptionException;
+URI subscribe(space_uri, template, listener)
     \end{minted}
   \item \emph{Unsubscribe}. Unsubscribes to a subscription given its subscription URI.
     \begin{minted}{java}
-      public void unsubscribe(String spaceURI, String subscriptionURI) throws SpaceNotExistsException, SubscriptionException;
+void unsubscribe(space_uri, String subscriptionURI)
     \end{minted}
   \item \emph{Notify}.
     \begin{minted}{java}
-      public void notify(String spaceURI, NotificableTemplate template) throws SpaceNotExistsException,  SubscriptionException;
+void notify(space_uri, template)
     \end{minted}
 \end{itemize}
 
