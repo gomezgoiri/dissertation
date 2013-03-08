@@ -9,6 +9,7 @@ Historical methodology, as I see it, is a product of common sense applied to cir
 \end{savequote}
 
 
+
 \newcommand{\primquery}{\emph{query}}
 \newcommand{\primread}{\emph{read}}
 \newcommand{\primtake}{\emph{take}}
@@ -17,12 +18,13 @@ Historical methodology, as I see it, is a product of common sense applied to cir
 
 \chapter{Triple Space Computing for resource constrained devices}
 \label{cha:tsc}
+\newcommand{\pathchapthree}{3_tsc}
 
 % the code below specifies where the figures are stored
 \ifpdf
-    \graphicspath{{3_overall_methodology/figures/PNG/}{3_overall_methodology/figures/PDF/}{3_overall_methodology/figures/}}
+    \graphicspath{{\pathchapthree/figures/PNG/}{\pathchapthree/figures/PDF/}{\pathchapthree/figures/}}
 \else
-    \graphicspath{{3_overall_methodology/figures/EPS/}{3_overall_methodology/figures/}}
+    \graphicspath{{\pathchapthree/figures/EPS/}{\pathchapthree/figures/}}
 \fi
 
 
@@ -55,6 +57,6 @@ While \ac{tsc} enables expressive queries, dynamic discovery and non human-media
 In this chapter we explain how to take advantage of both approaches, bringing together the best of both worlds.
 
 
-\input{3_tsc/1_comparison}
-\input{3_tsc/2_integration}
-\input{3_tsc/3_conclusion}
+\input{\pathchapthree/1_comparison}
+\input{\pathchapthree/2_integration}
+\input{\pathchapthree/3_conclusion}

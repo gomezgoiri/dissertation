@@ -14,12 +14,13 @@ You gotta decide whether you’re a wolf or a sheep
 
 \chapter{State of the Art}
 \label{cha:stateoftheart}
+\newcommand{\pathchaptwo}{2_state_of_the_art}
 
 % the code below specifies where the figures are stored
 \ifpdf
-    \graphicspath{{2_state_of_the_art/figures/PNG/}{2_state_of_the_art/figures/PDF/}{2_state_of_the_art/figures/}}
+    \graphicspath{{\pathchaptwo/figures/PNG/}{\pathchaptwo/figures/PDF/}{\pathchaptwo/figures/}}
 \else
-    \graphicspath{{2_state_of_the_art/figures/EPS/}{2_state_of_the_art/figures/}}
+    \graphicspath{{\pathchaptwo/figures/EPS/}{\pathchaptwo/figures/}}
 \fi
 
 
@@ -39,9 +40,9 @@ Finally, we will analyze the works which use an specific semantic integration pa
 
 
 % TODO valorar meter en otra sección descripción de IoT y UbiComp y sus características?
-\input{2_state_of_the_art/1_integration}
-\input{2_state_of_the_art/2_semantic}
-\input{2_state_of_the_art/3_tsc}
+\input{\pathchaptwo/1_integration}
+\input{\pathchaptwo/2_semantic}
+\input{\pathchaptwo/3_tsc}
 
 
 
