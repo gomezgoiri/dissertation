@@ -3,14 +3,11 @@
 
 % TODO hacer un esquemita chulo con las distintas partes en colores e irlo poniendolo parcialmente en cada sección
 
-The remainder of this thesis is structured as follow:
-Chapter~\ref{cha:stateoftheart} analyses the state of the art in three of areas:
-the \acl{iot}, the \ac{sw} and \acl{tsc}.
-It compares the existing solutions and studies their advantages and limitations.
+The remainder of this dissertation is structured as follows:
+Chapter~\ref{cha:stateoftheart} first presents some relevant works in the field of \acl{ubicomp} regarding application integration and the \ac{sw}. % se entiende que en ambos casos es sobre ubicomp?
+Then, it analyses the state of the art of the \acl{tsc} comparing the existing solutions and studying their advantages and limitations.
 
-% problema de siempre AmI o IoT?
-% mirar mejor cómo meterlo, si en el estado del arte o donde
-Chapter~\ref{cha:tsc} discusses the best strategies to adapt \ac{tsc} to the \ac{iot}.
+Chapter~\ref{cha:tsc} discusses the best strategies to adapt \ac{tsc} to the \ac{ubicomp} in a fully distributed way.
 Besides, we explore the compatibility of \ac{tsc} with the \ac{wot} vision.
 
 Chapter~\ref{cha:searching} describes the core of this thesis.
@@ -26,11 +23,12 @@ Ideally, this changes should be done by writing into the space new semantic info
 But due to the information dissemination strategy proposed in Chapter~\ref{cha:searching},
 some new communication primitives are needed to inform the appropriate devices.
 Particularly, we study two different ways of making these changes:
-a service-based approach and a straightforward writing approach. % where the devices express their interest to the rest of participants.
+a tasks-based approach and a straightforward REST services consumption approach.
 
-Chapter~\ref{cha:implementation} demonstrates the feasibility of some of the ideas expressed in the previous chapters.
-To that end, we have developed a middleware called \emph{Otsopack} which implements the \ac{tsc} for resource constrained devices.
-This middleware is assessed both in a quantitative and in a qualitative way. % measurements and scenarios
+% Me sigue dando cosica no comentar nada de Otsopack.
+% Chapter~\ref{cha:implementation} demonstrates the feasibility of some of the ideas expressed in the previous chapters.
+% To that end, we have developed a middleware called \emph{Otsopack} which implements the \ac{tsc} for resource constrained devices.
+% This middleware is assessed both in a quantitative and in a qualitative way. % measurements and scenarios
 
 Each chapter evaluates our proposals, discusses the related work, and states our intermediate conclusions.
 
