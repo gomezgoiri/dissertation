@@ -13,7 +13,7 @@
 %\usepackage{longtable}
 \usepackage{algpseudocode}
 \usepackage{minted}
-\usepackage{acronym}
+\usepackage[printonlyused]{acronym}
 
 
 %: Macro file for Latex
@@ -82,10 +82,10 @@
 
 \maketitle  % command to print the title page with above variables
 
+
+
 % Title back
 \include{0_frontmatter/title_back}
-
-
 
 
 
@@ -145,6 +145,8 @@
 
 %\printnomenclature[1.5cm] % [] = distance between entry and description
 
+% I don't know why it does not work.
+% TODO fix or remove (acronyms are already listed)
 \printnomenclature % [] = distance between entry and description
 
 \label{sec:glossary} % target name for links to glossary
