@@ -11,19 +11,75 @@ I tell you what, I speak slow so those of you with a Phd can understand.
 
 \chapter{Conclusions}
 \label{cha:conclusions}
+\newcommand{\pathchapseven}{7_conclusion}
+
 
 % the code below specifies where the figures are stored
 \ifpdf
-    \graphicspath{{5_conclusion/figures/PNG/}{5_conclusion/figures/PDF/}{5_conclusion/figures/}}
+    \graphicspath{{\pathchapseven/figures/PNG/}{\pathchapseven/figures/PDF/}{\pathchapseven/figures/}}
 \else
-    \graphicspath{{5_conclusion/figures/EPS/}{5_conclusion/figures/}}
+    \graphicspath{{\pathchapseven/figures/EPS/}{\pathchapseven/figures/}}
 \fi
 
 
 %------------------------------------------------------------------------- 
 
-\subsection{On the interoperability and the Semantic web}
+% 3 ptos con los que quiero que el lector se quede: searching, acting y compatibility with WoT
+% findings
+
+This dissertations has explored the design of a completely distributed \ac{tsc} middleware.
+In this middleware, each node is responsible of its own information, but together with other nodes they create a virtual space. % virtual, concept
+Writing and reading from this space, the nodes communicate in a much more decoupled indirect style.
+
+The distribution of the information avoids the dependency of the participants on other devices, but arises other challenges.
+We have tackled two main challenges: how to search in a decentralized way and how to act on the environment through the space.
+Besides, after an analysis we acknowledged the importance and benefits that the upcoming \ac{wot} has brought to the \acl{ubicomp}.
+This has lead us to have make our final solution compatible with the \ac{wot} and other REST services.
+
+To enhance the search process between devices limiting their dependencies in others we designed an architecture.
+This architecture dynamically chooses an intermediary according to its capabilities to support the most limited devices.
+The final result is that less requests are required in overall, specifically reducing the load on resource constrained devices.
+
+% TODO refinar cuando esté hecha esa parte
+We also presented two different acting mechanisms: X and Y.
+Comparing them we reach to the conclusion that X proposes a less decoupled design, which in turn depends on a subscription mechanism.
+This subscription mechanism is particularly challenging on dynamic environments.
+The Y solution is more straightforward and more based in REST services consumption.
+In contrast, it depends on reasoners and on some additional information about the services offered by the rest of the nodes.
+
+Besides, we have guided our design to build the middleware over a REST interface.
+Using that interface, each node exposes the semantic resources, i.e. RDF triples grouped in RDF graphs, it manages.
+This enables the consumption of these contents by other semantic \ac{wot} solutions or REST services, even if they are not part of our middleware.
+
+
+% Contributions (por si necesito ideas)
+% \item Analysis of strengths and weaknesses of both \ac{wot} and \ac{tsc} and comparison of both approaches.
+% \item Design and implementation of a RESTful interface which makes possible to build a \ac{tsc} on top of it. % TODO revisar y poner todos los peros que haga falta para no traicionar la idea de Fielding
+%       This resource-oriented interface enables the access to the the semantic knowledge provided by each device.
+%       By doing so, we keep our middleware compliant with the \ac{wot} idea. % o integrable con otros servicios, o...
+%       % es como explicar una dualidad: puedes usar nuestro middleware usando las primitivas de TSC, pero también puedes usarlo simplemente porque te viene bien para WoT semántico
+% \item A search-aware architecture which promotes the end-to-end communication between devices. % and balances their load by administrative tasks according to their capacities.
+%       This architecture tries to minimize the requests devices have to handle by enhancing their search mechanism.
+%       The extra-tasks introduced by this enhancement are performed by nodes chosen according to their capacities.
+% \item Design and comparison of two approaches which enable to act on the environment by writing in the fully distributed space.
+% \item Exploration of the use of semantic content in several current embedded platforms.
+%       We have tested several platforms, semantic frameworks and reasoners to verify the feasibility of the ideas presented in the dissertation.
+% \item Design and implementation of most of the ideas presented in a middleware publicly available called \emph{Otsopack}. % al primo no le gustará, pero insisto
+%       This middleware has been used in several projects for a range of scenarios.
+
+
+% (possitive) leasons learnt:
+% 1. middleware fácilmente implementable en distintas plataformas
+% 2. la semántica al principio es complicada, pero muestra sus beneficios en el largo plazo facilitando la integración de apps
+
+
+\section{Limitations and future work}
+
+% On the interoperability and the Semantic web
 % hablar del paper de SW en IoT de que la anotando cosas semánticamente sólo no se logra automáticamente Interop
 % pero decir que lo nuestro es un primer paso en paralelo a otros que puedan solucionar los otros problemas
+
+% semantica y cacharros pequeños, sigue siendo algo difícil. Necesidad de razonadores ligeros.
+
 
 % ----------------------------------------------------------------------
