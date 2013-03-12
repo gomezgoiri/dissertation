@@ -45,27 +45,77 @@ In Section~\ref{sec:indirect_communication}, we study the most relevant \acl{ts}
 
 % TODO definir en algun lado que es REST y que es WS-*???
 
+% De Guinard 2011 rest-vs-ws
+% 
+% WS-* These services declare their functionality and interfaces in a Web Ser-
+% vices Description Language (WSDL) file. Client requests and service response
+% objects are encapsulated using the Simple Object Access Protocol (SOAP) and
+% transmitted over the network, usually using the HTTP protocol. Further WS-
+% * standards define concepts such as addressing, security, discovery or service
+% composition. Although WS-* was initially created to achieve interoperability of
+% enterprise applications, work has been done to adapt it to the needs of resource-
+% constrained devices [10, 13]. Furthermore, lighter forms of WS-* services, such
+% as the Devices Profile for Web Services (DPWS)1, were proposed [6].
+% 
+% REST At the core of a RESTful architecture [3] lie resources that are uniquely
+% identified through Uniform Resource Identifiers (URIs). The Web is an imple-
+% mentation of RESTful principles – it uses URLs to identify resources and HTTP
+% as their service interface. Resources can have several representation formats (e.g.,
+% HTML, JSON2 ) negotiated at run time using HTTP content negotiation. In a
+% typical REST request, the client discovers the URL of a service it wants to call by
+% browsing or crawling its HTML representation. The client then sends an HTTP
+% call to this URL with a given verb (GET, POST, PUT, etc.), a number of options
+% (e.g., accepted format), and a payload in the negotiated format (e.g., XML or
+% JSON). Several recent research projects implement RESTful Web services for
+% smart things [2] within what has become to be known as the Web of Things [5].
+
+
+% De Pautasso 2008
+% 
+% REpresentational State Transfer (REST) was originally introduc-
+% ed as an architectural style for building large-scale distributed hy-
+% permedia systems. This architectural style is a rather abstract entity,
+% whose principles have been used to explain the excellent scalability
+% of the HTTP 1.0 protocol and have also constrained the design of
+% its following version, HTTP 1.1. Thus, the term REST very often
+% is used in conjunction with HTTP.
+
+
 As stated before, the RESTful style and the set of WS-* standards are probably the most common remote invocation substyles currently used in the Internet.
 Their advantages and disadvantages were extensively discussed by Pautasso et al. \cite{pautasso_restful_2008}.
+
+WS-* standards syntactically describe the services' functionality and interfaces using \ac{wsdl}.
+The communication between providers and consumers is usually transmitted over the \ac{http} in messages encapsulated using \ac{soap}.
 WS-* web services, also called ``Big Web services'', offer more features such as transactions, reliability or message-level security.
 However, they also require further architectural decisions on different layers of the WS-* stack.
 These decisions make the people perceive it as more complex than the RESTful style \cite{guinard_search_2011}.
 
 
-The RESTful style has gained momentum during the last decade as a simpler alternative to services.
-REpresentational State Transfer (REST) was designed to build large-scale distributed hypermedia systems,
-so it is often used in conjunction with well-known web standards such as HTTP, URI or MIME.
+Probably thanks to that perception, \ac{rest} has gained momentum during the last decade. %  simpler alternative for services
+% la explicación de los principios los he sacado sobre todo de pautasso_restful_2008, pero he intentado no plagiar las frases.
+The \acl{rest} is defined by four principles \cite{fielding_architectural_2000}:
+\begin{enumerate}
+  \item The resources are identified with \acp{uri}.
+  \item They are manipulated through a uniform interface.
+	  This interface offers creation, reading, updating and deletion operations.
+  \item The resources are decoupled from their representation so the content can be accessed in different formats.
+  \item The interactions are stateful and hypertext-driven.
+	This means that the state transitions are guided by the actions identified in the hypermedia by the server.
+	% De Wikipedia: This means that clients make state transitions only through actions that are dynamically identified within hypermedia by the server.
+\end{enumerate}
+
+These principles are implemented by the Web,
+so \ac{rest}  is often used in conjunction with well-known web standards such as \ac{http}, \ac{uri} or \ac{mime}.
 This standards already have many libraries and tools available, which eases the adoption of this style by developers.
 Besides, REST naturally integrates with the World Wide Web because it uses the Web as an application architecture instead of as a transport layer as WS-* services do.
-% ppios en los que se basa sacados del artículo de pautasso o del blog de Fieldman
 
 
-\medskip
+\bigskip
 
 
 The use of both substyles in resource-constrained devices is represented by
-\textit{Device Profile for Web Services} (DPWS) \cite{moritz_devices_2010}, based on WS-*,
-and the Web of Things (WoT) \cite{guinard_internet_2011}. % Mejor poner su tesis?
+\ac{dpws} \cite{moritz_devices_2010}, based on WS-*,
+and the \ac{wot} \cite{guinard_internet_2011}. % Mejor poner su tesis?
 
 
 \InsertFig{venn-sec1_1}{fig:venn_ubicomp}{
