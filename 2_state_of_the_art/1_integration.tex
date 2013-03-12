@@ -107,45 +107,48 @@ The \acl{rest} is defined by four principles \cite{fielding_architectural_2000}:
 These principles are implemented by the Web,
 so \ac{rest}  is often used in conjunction with well-known web standards such as \ac{http}, \ac{uri} or \ac{mime}.
 This standards already have many libraries and tools available, which eases the adoption of this style by developers.
-Besides, REST naturally integrates with the World Wide Web because it uses the Web as an application architecture instead of as a transport layer as WS-* services do.
-
+Besides, REST naturally integrates with the \ac{www} because it uses the Web as an application architecture instead of as a transport layer as WS-* services do.
+% ojo a la frase: "se integra con la web porque usa la web como app architecture"
 
 \bigskip
 
 
 The use of both substyles in resource-constrained devices is represented by
 \ac{dpws} \cite{moritz_devices_2010}, based on WS-*,
-and the \ac{wot} \cite{guinard_internet_2011}. % Mejor poner su tesis?
+and the \ac{wot} \cite{guinard_internet_2011}. % o mejor poner su tesis?
 
 
 \InsertFig{venn-sec1_1}{fig:venn_ubicomp}{
-  Integration approaches for Ubicomp apart from \aclp{ts}.
+  Non-semantic integration approaches for \ac{ubicomp} apart from \aclp{ts}.
 }{
   Scope of this subsection.
 }{0.6}{}
 
 
-DPWS defines a subset of WS-* to make it suitable for resource-constrained devices.
-%DPWS is claimed to be used in industrial environments.
+\ac{dpws} defines a subset of WS-* to make it suitable for resource-constrained devices.
+%\ac{dpws} is claimed to be used in industrial environments.
 Its most remarkable features are: decentralized multicast-based discovery, secure message transmission, subscription and event notifications.
-Moritz et al. compared DPWS with the REST approach coming to the conclusion that DPWS can be restricted to be fully compatible with the RESTful style.
-Even in that case, DPWS will still cover some missing features of the RESTful approach such as eventing and discovery \cite{moritz_devices_2010}.
-% no menciono que sean más pesados para cacharros porque no he encontrado un sitio en el que defiendan que DPWS lo es
+Moritz et al. compared \ac{dpws} with the \ac{rest} approach coming to the conclusion that \ac{dpws} can be restricted to be fully compatible with the RESTful style.
+Even in that case, \ac{dpws} will still cover some missing features of the RESTful approach such as eventing and discovery \cite{moritz_devices_2010}.
+% no menciono que sean más pesados para cacharros porque no he encontrado un sitio en el que defiendan que \ac{dpws} lo es (si que hay alguno que comparan REST y SOA, pero no DPWS)
 
 
-The \emph{Web of Things} initiative encourages the use of REST-based solutions embedding web servers in daily objects \cite{guinard_internet_2011}.
-In this way, the objects can integrate with the WWW as first-class citizens of the Web.
+The \acl{wot} initiative encourages the use of \acs{rest}-based solutions embedding web servers in daily objects \cite{guinard_internet_2011}.
+In this way, the objects can integrate with the \ac{www} as first-class citizens. % decir ``f-c cit of the Web" es reiterativo ya que WWW==web
 This integration brings the following benefits:
 \begin{itemize}
   \item The smart-things can be linked to enable its discovery by browsing. This involves using the tool most users are familiar with: the browser.
   \item They can be bookmarked or shared through social networks \cite{guinard_sharing_2010}.
-  \item They can be integrated with other web applications using through mashups \cite{ostermaier_webplug:_2010}. % cita a pintus, stirbu y a todo el mundo
+  % explicar qué es un mashup?
+  \item They can be integrated with other web applications through mash-ups \cite{guinard_towards_2009,ostermaier_webplug:_2010,pintus_anatomy_2011}.
+  % TODO citar al canadiense tb? pintus, stirbu y a todo el mundo
   \item Mechanisms such as searching, caching, load-balancing and indexing can be used over the objects to achieve the scalability of the web. % cita al indio
 \end{itemize}
 
 
 But besides the functional differences, one of the major advantages of REST compared with the WS-* is that is perceived as simpler.
-Guinard et al. proved that developers consider it easier to learn and find it more suitable for programming smart things \cite{}.
+Guinard et al. proved that developers consider it easier to learn and find it more suitable for programming smart things \cite{guinard_search_2011}.
+% lo he comentado antes, no sé si no me estoy repitiendo más que el ajo...
 This makes \ac{wot} solutions more popular for resource constrained devices than the WS-* based ones.
 
 % Mencionar un par de trabajos sobre móviles con servidores web embebidos, para que se vea que no es sólo \ac{wot}
@@ -156,8 +159,7 @@ This makes \ac{wot} solutions more popular for resource constrained devices than
 % \ac{wot} has been leveraged to run in devices as constrained as the ones from the Wireless Sensor Networks.
 % The special needs of this kind of sensors has brought the need of new protocols such as CoAP which try to adapt HTTP to UDP environments.
 
-% \ac{wot} necesita de Web Semántica, se analizará más tarde
-
+% necesita comparativa esta parte?
 
 
 \subsection{Indirect Communication}
