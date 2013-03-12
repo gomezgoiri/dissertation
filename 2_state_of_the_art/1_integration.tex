@@ -1,22 +1,25 @@
-\section{Integrating Things}
+\section{Application Integration}
 \label{sec:integration}
 
-% TODO Introducir middleware antes de hablar de él => si no, queda un poco WTF
-% 
-% En el libro de Coulouris (pag 17):
+% Definiciones de middleware en el libro de Coulouris:
+%
+% (pag 17):
 % Middleware • The term middleware applies to a software layer that provides a
 % programming abstraction as well as masking the heterogeneity of the underlying
 % networks, hardware, operating systems and programming languages.
 %
-% Otra del mismo libro:
+% (en otra parte):
 % The task of middleware is to provide a higher-level
 % programming abstraction for the development of distributed systems and, through
 % layering, to abstract over heterogeneity in the underlying infrastructure to promote
 % interoperability and portability.
 
-The way in which the applications integrate is driven by how the participants communicate.
-Coulouris et al. \cite{coulouris_distributed_2012} define two communication styles on the upper layer of a middleware (see Figure~\ref{fig:middleware_layers}): % figura 4.1 modificada para incluir elementos
-the remote invocation and the indirect communication.
+
+The integration of two applications is driven by how they communicate.
+To ease that communication the applications use middlewares.
+A middleware is a software layer which provides a higher level of abstraction and masks the underlying heterogeneity.
+Coulouris et al. \cite{coulouris_distributed_2012} define two communication styles on the upper layer of a middleware: % figura 4.1 modificada para incluir elementos
+the remote invocation and the indirect communication (see Figure~\ref{fig:middleware_layers}).
 
 \InsertFig{middleware_layers}{fig:middleware_layers}{Middleware layers}{Middleware layers according to Coulouris et al. classification \cite{coulouris_distributed_2012}.}{1}{}
 % According to Coulouris et al. HTTP is An example of a request-reply protocol!
@@ -27,11 +30,12 @@ In contrast, the \emph{indirect communication} comprehends decoupled communicati
 
 
 Within the \emph{remote invocation} style, RESTful style \cite{fielding_architectural_2000} and the well known set of WS-* \cite{alonso_web_2010} standards probably represent the most popular substyles.
-In Section~\ref{sec:remote_invocation}, we analyze their application to the Ubicomp field, particularly focusing on the \ac{iot}.
+In Section~\ref{sec:remote_invocation}, we analyze their application to the \ac{ubicomp} field, particularly focusing on the \ac{iot}.
 
 
 % Otros técnicas indirectas:  group communication, publish-subscribe system, message queue systems, shared memory–based approaches
-Tuple Spaces, is a type of indirect communication where the entities write data in a persistent space and read specifying patterns of interest.
+\aclp{ts} is a paradigm which promotes indirect communication.
+In \ac{ts} the entities write data in a persistent space and read it specifying patterns of interest.
 In Section~\ref{sec:indirect_communication}, we study the most relevant \acl{ts} solutions proposed for the \acl{ubicomp}.
 
 
@@ -41,11 +45,11 @@ In Section~\ref{sec:indirect_communication}, we study the most relevant \acl{ts}
 
 % TODO definir en algun lado que es REST y que es WS-*???
 
-As stated before, RESTful style and the set of WS-* standards are probably the most common remote invocation substyles currently used in the Internet.
+As stated before, the RESTful style and the set of WS-* standards are probably the most common remote invocation substyles currently used in the Internet.
 Their advantages and disadvantages were extensively discussed by Pautasso et al. \cite{pautasso_restful_2008}.
 WS-* web services, also called ``Big Web services'', offer more features such as transactions, reliability or message-level security.
 However, they also require further architectural decisions on different layers of the WS-* stack.
-These decisions make the people perceive it as more complex than the RESTful style. % CITE
+These decisions make the people perceive it as more complex than the RESTful style \cite{guinard_search_2011}.
 
 
 The RESTful style has gained momentum during the last decade as a simpler alternative to services.
@@ -174,6 +178,7 @@ Although the primitives may change from implementation to implementation, the mo
   \item \emph{Write a new tuple into the space}. This primitive is usually called \emph{write} or \emph{out}.
 \end{itemize}
 
+% Ignorar esta sección? Es realmente necesaria cuando ya he puesto la comparativa de TSC?
 So far, \acl{ts} has been adapted to \acl{ubicomp} by different authors.
 
 % TODO leer artículos que me faltan y corregir
