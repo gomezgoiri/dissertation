@@ -90,15 +90,16 @@ We opted for a distributed solution at the expense of limiting some of the featu
 % usar sus características a la hora de valorar nuestra solución TSC en futuras secciones?
 
 
-\emph{L2imbo} [Davies et al. 1998, friday 1999] replicates the tuples to avoid a single point of failure. % CITE
+\emph{L$^2$imbo} \citep{davies_l2imbo:_1998,friday_experiences_1999} replicates the tuples to avoid a single point of failure.
 Each node joined to a space uses an IP multicast address to exchange messages with other nodes in that space.
 Writing into a space involves sending a multicast message to inform to the rest of the nodes of the tuple written.
 Reading operation usually requires local reading.
 Destructive reading of the tuple is more complex as it requires a global withdrawal.
-Only the owner of a tuple can remove it from the space.
-The ownership of a tuple initially belongs to its creator, but can be transferred. % ver qué añadió Friday
+In \emph{L$^2$imbo} only the owner of a tuple can remove it from the space.
+The ownership of a tuple initially belongs to its creator, but can be transferred. % TODO ver qué añadió Friday
 
 
+ % meter mas citas de LIME que estas 2?
 \emph{LIME} (Linda in a Mobile Environment) \citep{picco_lime:_1999} is a TS solution for mobile systems.
 In LIME each mobile device has its own space where it generally writes its tuples.
 This space is shared with other devices creating federated spaces, i.e. the aggregation of different shared spaces.
@@ -106,12 +107,12 @@ In this way, each mobile can access to tuples in other mobiles whenever they bec
 They also proposed a new writing primitive to insert tuples in remote spaces.
 % ejemplo de service discovery?
 
-This is difficult to implement and some authors complain about the unrealistic assumptions they make to simplify the problem \citep{coulouris_distributed_2012}. % cita al libro
+This is difficult to implement and \citet{coulouris_distributed_2012} complain about the unrealistic assumptions they make to simplify the problem. % cita al libro
 These assumptions are the uniform multicast connectivity between devices whose tuple spaces are aggregated and the serialized and ordered connections and disconnections.
 In any case, LIME was adapted to several platforms to run both in embedded and mobile devices \citep{murphy_transiently_2006}.
 
 
-In the \emph{TOTA} (Tuples On The Air) Project [Mamei and Zambonelli 2009] tuples are disseminated to different devices. % CITE
+In the \emph{TOTA} (Tuples On The Air) Project \citep{mamei_programming_2009} tuples are disseminated to different devices.
 To that end, each tuple has 3 fields:
 1) the content of the tuple,
 2) a rule which defines how it should be propagated,
