@@ -1,0 +1,156 @@
+\subsection{Indirect Communication}
+\label{sec:indirect_communication}
+
+The indirect communication style comprehends all the techniques with no direct coupling between the sender and the receiver.
+The group communication, publish-subscribe systems, message queues or shared memory approaches are examples of indirect communication
+These paradigms are characterized by two key properties \citep{gelernter_generative_1985,coulouris_distributed_2012}
+\footnote{
+  We use the terminology of the  \aclp{ts}' seminal paper \citep{gelernter_generative_1985}, but please note that:
+  % nomenclature, naming or terminology?
+  \begin{itemize}
+    %\item Gelernter et al. stated that \emph{distributed sharing} was just a consequence of the these properties.
+    \item The \emph{space uncoupling} property is referred as \emph{reference autonomy} by some authors \citep{fensel_triple-space_2004}.
+	  % El primero fue un tal Angerer en el 2002, pero en un artículo en alemán.
+	  % En el 2003 hay un artículo suyo en Internet, pero no sé si mencionarlo.
+    \item These authors mention a third property confusingly called \emph{space autonomy} (or \emph{location autonomy}).
+	  According to \citet{fensel_triple-space_2004} this autonomy is achieved because:
+	  \begin{quote}
+	    The processes can run in completely different computational environments as long as both can access the same space.
+	  \end{quote}
+  \end{itemize}
+}
+:
+
+\begin{itemize}
+ \item \emph{Space uncoupling}, which is achieved when the sender does not need to know the receiver or receivers and vice versa.
+ \item \emph{Time uncoupling}, which happens when senders and receivers do not need to exists in the same time\footnote{
+	  Although some authors \citep{fensel_triple-space_2004,krummenacher_www_2005} explain this property just in terms of communication asynchrony,
+	  % mencionar a otros? o no porque simplemente siguen lo dicho por Fensel?
+	  % a Bundler no lo cito, porque era una master thesis "sólo"
+	  % en este caso cito a krummenacher porque en esa publicación lo define directamente como el no uso de comunicación sincrona
+	  \citet{coulouris_distributed_2012} make a clear distinction between them.
+	  In their words, a communication is asynchronous when \emph{a sender sends a message and then continues without blocking},
+	  whereas time uncoupling adds an extra dimension: \emph{the sender and the receiver can have independent existences}.
+	  }.
+ 
+\end{itemize}
+
+\InsertFig{venn-sec1_2}{fig:venn_tuplespaces_ubicomp}{
+  \aclp{ts} solutions for Ubicomp.
+}{
+  Scope of this subsection.
+}{0.6}{}
+
+% Ojo cuidado porque según esto mi middleware va a dejar de ser time uncoupled! (mirar Figure 6.1 para mayor concrección)
+% En esa misma sección aclara que algunas implementaciones no son time-uncoupled.
+% por otro lado, asíncronismo != time uncoupling
+
+\acl{ts} computing, also called space-based computing, offers an improvement of the shared memory approach.
+Whereas the shared memory works at byte-level and accessing to memory addresses,
+the \acl{ts} works with semi-structured data which is accessed in an associative manner.
+
+% definir si en mayusculas, en minusculas o cómo coño: tuplespace, tuple space, \acl{ts}?
+\acf{ts} has its roots in the Linda parallel programming language \citep{gelernter_generative_1985}.
+In this communication model different processes read and write pieces of information so-called tuples in a common space.
+Tuples are composed by one or more typed data fields (e.g. $<"aitor",1984>$ or $<3,7,21.0>$).
+The tuples are accessed associatively using a template.
+A template provides either a value or type for different fields (e.g. $<String,1984>$ or $<Integer, Integer, Float>$).
+The operations over the space are defined by different primitives.
+Although the primitives may change from implementation to implementation, the most common ones allow to:
+
+\begin{itemize}
+  \item \emph{Access the tuples non-destructively}, using a primitive which is usually called \emph{read} or \emph{rd}.
+	This primitive returns a tuple from the space which matches the given template without changing the space.
+  \item \emph{Access the tuples destructively}, using a primitive which is usually called \emph{take} or \emph{in}.
+	This primitive extracts a tuple which matches the given template from the space.
+  \item \emph{Write a new tuple into the space}. This primitive is usually called \emph{write} or \emph{out}.
+\end{itemize}
+
+
+
+\subsubsection{\acs{ts} on \acs{ubicomp}}
+% Ignorar esta sección? Es realmente necesaria cuando ya he puesto la comparativa de TSC?
+So far, \acl{ts} has been adapted to \acl{ubicomp} by different authors.
+
+% TODO leer artículos que me faltan y corregir
+The \emph{event heap} \citep{johanson_extending_2004} is a system used for a specific \ac{ubicomp} sub-domain: interactive workspaces.
+In this scenario there are rooms with different devices deployed and where mobile devices can enter.
+Each room has its own space where the devices exchanging tuples to cooperate.
+%For example, a video can be presented in a display and through a remote controller, the user can place the tuple for pausing it.
+%The display consumes these kind of tuples, so it pauses the video whenever somebody places that tuple on the space.
+% This system is simple to implement but is limited since it centralizes the space in a single machine per room.
+This work merely identifies the requirements of these environments and the properties which solve them.
+Then, it discusses how these properties can be satisfied using \ac{ts} or some extensions.
+Finally they compare its implementation both with other \acp{ts} implementations or other coordination infrastructures. % e.g. RMI, MOM, Pub/sub
+
+% usar sus características a la hora de comparar nuestra solución TSC con otras???
+Although the analysis presented by \citeauthor{johanson_extending_2004} seems
+
+
+\emph{L2imbo} [Davies et al. 1998, friday 1999] replicates the tuples to avoid a single point of failure. % CITE
+Each node joined to a space uses an IP multicast address to exchange messages with other nodes in that space.
+Writing into a space involves sending a multicast message to inform to the rest of the nodes of the tuple written.
+Reading operation usually requires local reading.
+Destructive reading of the tuple is more complex as it requires a global withdrawal.
+Only the owner of a tuple can remove it from the space.
+The ownership of a tuple initially belongs to its creator, but can be transferred. % ver qué añadió Friday
+
+
+\emph{LIME} (Linda in a Mobile Environment) \citep{picco_lime:_1999} is a TS solution for mobile systems.
+In LIME each mobile device has its own space where it generally writes its tuples.
+This space is shared with other devices creating federated spaces, i.e. the aggregation of different shared spaces.
+In this way, each mobile can access to tuples in other mobiles whenever they become available.
+They also proposed a new writing primitive to insert tuples in remote spaces.
+% ejemplo de service discovery?
+
+This is difficult to implement and some authors complain about the unrealistic assumptions they make to simplify the problem \citep{coulouris_distributed_2012}. % cita al libro
+These assumptions are the uniform multicast connectivity between devices whose tuple spaces are aggregated and the serialized and ordered connections and disconnections.
+In any case, LIME was adapted to several platforms to run both in embedded and mobile devices \citep{murphy_transiently_2006}.
+
+
+In the \emph{TOTA} (Tuples On The Air) Project [Mamei and Zambonelli 2009] tuples are disseminated to different devices. % CITE
+To that end, each tuple has 3 fields:
+1) the content of the tuple,
+2) a rule which defines how it should be propagated,
+3) a rule to define its maintenance.
+For instance, they consider a museum where a visitor writes a query tuple describing a piece of art he wants to see.
+The propagation rule defines that it should be propagated to all nodes in the vicinity, increasing the distance by one each time.
+The tuple is configured to be deleted after a time-to-live period using its maintenance rule.
+When the it reaches the room where the piece of art is located, the piece of art will write a response tuple.
+This response tuple jumps from a device to another until it reaches the device which queried for it.
+
+
+
+\subsubsection{Discussion}
+
+% comparación de todas ellas
+% de entre los que ofrecen distribución: este no mola por esto, esto otro mola por esto otro, etc.
+
+Within this solutions, \emph{The event heap} is not considered because of its centralized nature.
+Both L2imbo, LIME and TOTA present different ways to disseminate the tuples.
+The replication which L2imbo proposes may not be feasible for devices with constrained memory or storage capacity.
+Particularly, in spaces populated by many devices like the Internet of Things too many tuples could be generated.
+% need to configure the network
+
+TOTA is useful for spatially connected adhoc environments, but it does not seem to suit well on networks where all the nodes can reach each other.
+In this case, all the tuples could be replicated on the rest of the nodes showing the same limitations as L2imbo.% COMPROBAR LEYENDO CON ATENCION LO DE TOTA
+
+Finally, despite of their unrealistic assumptions LIME proposes a model where each tuple is responsible of its own part of the space.
+They share spaces whenever they become available.
+
+% TODO tabla comparativa? distributed, ad-hoc, federated
+
+\begin{table}%[position specifier]
+  \centering
+  \begin{tabular}{c|cccc}%p{5cm}}
+      ~ & The event heap & L2imbo & LIME & TOTA \\
+      \hline
+      \hline
+      Distributed & No & Yes & Yes & Yes \\
+      Goal & x & Availability & Federation & Ad-hoc \\
+      % Scalability?
+      % Coger propiedades del libro de sistemas distribuidos?
+  \end{tabular}
+  \caption{Comparison of the most prominent \acl{ts} alternatives for \acl{ubicomp}.} % no columpiarme, o poner todas o ninguna?
+  \label{tab:myfirsttable}
+\end{table}
