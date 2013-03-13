@@ -4,7 +4,7 @@
 % TODO: other name? ``defined layers'' o así? cómo decir ``mira, lo importante es que puede haber diferentes grados de
 % implementación aquí gracias al diseño que mostramos en esta sección en 5 palabras???
 
-So far, the compatibility of Triple Spaces with the HTTP RESTful style has been proved both from a formal \cite{hernandez_formal_2010} and qualitative point of view \cite{gomez-goiri_complementarity_2011}.
+So far, the compatibility of Triple Spaces with the HTTP RESTful style has been proved both from a formal \citep{hernandez_formal_2010} and qualitative point of view \citep{gomez-goiri_complementarity_2011}.
 In this section our model towards the achievement of this mapping will be discussed in detail.
 
 \subsection{TSC resources}
@@ -36,7 +36,7 @@ For example, the template \texttt{?s foaf:knows kth:sven} could be employed to s
 \subsection{Adopted TSC primitives}
 \label{sec:primitives}
 
-TSC derives some primitives originally defined in the Linda language \cite{gelernter_generative_1985} to access to the semantic information hold in each graph.
+TSC derives some primitives originally defined in the Linda language \citep{gelernter_generative_1985} to access to the semantic information hold in each graph.
 In this section, these primitives will be explained.
 
 \begin{itemize}
@@ -122,7 +122,7 @@ However, this HTTP mapping is all a data provider needs to serve information in 
 Otsopack is compliant with the standardized HTTP status codes sent back as part of the header in the response (e.g. when no significant result can be found for a primitive the 404 error is returned).
 This adoption - apart from enhancing the compatibility with other web applications - enables the modular adoption of our API and if a node does not offer a wildcard based \textit{query}, it will not affect the behavior of the rest of the nodes of an space.
 Instead, they will interpret these cases as empty responses.
-This modularity becomes crucial to ease the partial adoption on new platforms \cite{gomez-goiri_collaboration_2011}.
+This modularity becomes crucial to ease the partial adoption on new platforms \citep{gomez-goiri_collaboration_2011}.
 
 \subsection{Content Negotiation}
 Another key aspect of the HTTP protocol we have taken advantage of is the \textit{content negotiation}.

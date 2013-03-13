@@ -243,7 +243,7 @@
 
 %\bibliographystyle{unsrt} % Defines the bibliography style
 
-\bibliographystyle{alpha} % Defines the bibliography style
+%\bibliographystyle{alpha} % Defines the bibliography style
 
 %\bibliographystyle{apa-good} % Defines the bibliography style
 %\bibliographystyle{natbib} % Defines the bibliography style
@@ -271,7 +271,8 @@
 % in-text refs: author (year) without brackets
 % ref list: alphabetical; author(s) in normal font; last name, initials; page(s)
 
-%\bibliographystyle{plainnat} % calls style file plainnat.bst
+% Other styles such as alpha don't go well with natbib, and I want to use \citep, \citeauthor, etc.!
+\bibliographystyle{plainnat} % calls style file plainnat.bst
 % in-text refs: author (year) without brackets
 % (this works with package natbib)
 

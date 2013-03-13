@@ -32,12 +32,12 @@ To summarize, we present a comparison of them at the end of the section, analyzi
 
 \subsection{TSC}
 % modelo propuesto
-TSC \cite{fensel_tsc_2007} is the middleware which first implemented the ideas of Fensel et al. \cite{fensel_triple-space_2004}.
+TSC \citep{fensel_tsc_2007} is the middleware which first implemented the ideas of Fensel et al. \citep{fensel_triple-space_2004}.
 TSC aims to propose a Triple Space Computing infrastructure based on REST.
 Equivalently to REST, TSC proposes a stateless infrastructure where the resources are identified by URIs.
 In the first approximation, each tuple was considered a resource.
 These tuples correspond with RDF triples.
-In a later work,  Krummenacher et al. \cite{krummenacher2006specification} proposed to use identifiers just for a set of triples (i.e. RDF graphs).
+In a later work,  Krummenacher et al. \citep{krummenacher2006specification} proposed to use identifiers just for a set of triples (i.e. RDF graphs).
 % bundler cita el de "WWW: or what's wrong with the web" para explicar eso último
 They argue that resources usually need to be modeled using more than just a triple.
 Besides, the use of graphs reduces the complexity on storage.
@@ -98,7 +98,7 @@ The security component restrict the access of client to spaces according to the 
 \subsection{sTuples}
 
 % modelo propuesto
-sTuples \cite{khushraj_stuples:_2004} was conceived by Nokia Research Center as a pervasive computing work.
+sTuples \citep{khushraj_stuples:_2004} was conceived by Nokia Research Center as a pervasive computing work.
 It extends the JavaSpace middleware, a object-oriented \acl{ts}, using a semantic match over the semantic tuples.
 To do that, a semantic tuple is an object with a field with the semantic description in the DAML+OIL format. % definir DAML+OIL o citarlo?
 
@@ -143,7 +143,7 @@ In any case, to the best of our knowledge, this conceptual exercise never went b
 \subsection{tsc++}
 
 % modelo propuesto
-Tsc++ \cite{krummenacher_open_2009} is a new version of the TSC project.
+Tsc++ \citep{krummenacher_open_2009} is a new version of the TSC project.
 Therefore, although the model is equivalent to TSC, its implementation completely changes.
 
 
@@ -157,7 +157,7 @@ In negative broadcasting each node writes the information locally and read query
 % arquitectura
 Tsc++ has 3 main components: the communication and the data access.
 The data access layer relies on a semantic repository to perform queries and store the triples.
-% mencionar que son Sesame \cite{broekstra_sesame:_2002} y Owlim \cite{kiryakov_owlimpragmatic_2005} ???
+% mencionar que son Sesame \citep{broekstra_sesame:_2002} y Owlim \citep{kiryakov_owlimpragmatic_2005} ???
 The communication layer maps the reading coordination primitives to group communication.
 Besides, it offers a subscription mechanism independent to the content stored in the space which uses triples and templates as a basis.
 
@@ -262,7 +262,7 @@ In the triple operation, expressive queries may need to be translated to query t
 \subsection{Nardini et al.}
 
 % modelo propuesto
-Nardini et al. \cite{TODO} explores the use of Description Logics on top of an existing \emph{tuple centre} implementation called TuCSoN. % TODO CITA
+Nardini et al. \citep{TODO} explores the use of Description Logics on top of an existing \emph{tuple centre} implementation called TuCSoN. % TODO CITA
 A tuple centre is a tuple space where the behavior can be programmed as a result of the basic coordination primitives.
 TuCSoN aims to provide \emph{tuple centres} that agents can use through Linda-type primitives.
 This interaction can cause reactions which trigger behavior previously implemented in the \emph{tuple centre}.

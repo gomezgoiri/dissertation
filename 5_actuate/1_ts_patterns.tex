@@ -12,7 +12,7 @@ Finally, the Section~\ref{sec:envisaged_scenarios} shows an example of how they 
 \subsection{\ac{ts} patterns}
 \label{sec:ts_patterns}
 
-According to Freeman et al. \cite{freeman_javaspaces_1999} there are four main application patterns which can be used with \ac{ts}:
+According to Freeman et al. \citep{freeman_javaspaces_1999} there are four main application patterns which can be used with \ac{ts}:
 replicated-worker pattern, marketplace pattern, command pattern and specialist patterns.
 
 
@@ -166,7 +166,7 @@ When the second one is below the first one, it generates a ``decrease temperatur
 In this case, the FoxG20 periodically checks just for orders it can fulfill and it understands and consumes them with a \textit{take primitive}.
 
 On the other hand, a message delivery system has been designed using TS in order to avoid the sedentary lifestyle of a certain user by giving him different warnings.
-Taking into account the expected steps which should have been completed in each moment of the day (10.000 steps are recommended in average for an adult \cite{tudor2002taking}), different priority level messages are created to warn the user about his situation.
+Taking into account the expected steps which should have been completed in each moment of the day (10.000 steps are recommended in average for an adult \citep{tudor2002taking}), different priority level messages are created to warn the user about his situation.
 To figure out this, a master node reads the number of steps covered by a user in that day\footnote{http://code.google.com/p/pedometer/} and his age both from the TS node deployed on his Android phone.
 To achieve it, the semantic information is used to find the accelerometers embedded in a user mobile and his age. Depending on the priority of the messages, different devices which belong to that user, defined in the ontology, look for those messages.
 If the priority level is low, the user can be warned in a less intrusive way than if the priority is high. Hence, room's light brightness can be increased for low priority notifications, a chumby for normal priority ones or the message can be shown directly in his mobile phone when the user should have covered many more steps than he has walked (high priority).

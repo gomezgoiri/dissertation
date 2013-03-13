@@ -18,10 +18,10 @@
 The integration of two applications is driven by how they communicate.
 To ease that communication the applications use middlewares.
 A middleware is a software layer which provides a higher level of abstraction and masks the underlying heterogeneity.
-Coulouris et al. \cite{coulouris_distributed_2012} define two communication styles on the upper layer of a middleware: % figura 4.1 modificada para incluir elementos
+\citet{coulouris_distributed_2012} define two communication styles on the upper layer of a middleware: % figura 4.1 modificada para incluir elementos
 the remote invocation and the indirect communication (see Figure~\ref{fig:middleware_layers}).
 
-\InsertFig{middleware_layers}{fig:middleware_layers}{Middleware layers}{Middleware layers according to Coulouris et al. classification \cite{coulouris_distributed_2012}.}{1}{}
+\InsertFig{middleware_layers}{fig:middleware_layers}{Middleware layers}{Middleware layers according to \citet{coulouris_distributed_2012} classification.}{1}{}
 % According to Coulouris et al. HTTP is An example of a request-reply protocol!
 
 
@@ -29,7 +29,7 @@ The \emph{remote invocation} involves the most common two-way exchange between s
 In contrast, the \emph{indirect communication} comprehends decoupled communications between senders and receivers.
 
 
-Within the \emph{remote invocation} style, RESTful style \cite{fielding_architectural_2000} and the well known set of WS-* \cite{alonso_web_2010} standards probably represent the most popular substyles.
+Within the \emph{remote invocation} style, RESTful style \citep{fielding_architectural_2000} and the well known set of WS-* \citep{alonso_web_2010} standards probably represent the most popular substyles.
 In Section~\ref{sec:remote_invocation}, we analyze their application to the \ac{ubicomp} field, particularly focusing on the \ac{iot}.
 
 

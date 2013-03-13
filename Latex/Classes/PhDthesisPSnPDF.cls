@@ -58,11 +58,13 @@
 \usepackage[usenames, dvipsnames]{color}
 \usepackage[perpage]{footmisc}
 
+% http://merkel.zoneo.net/Latex/natbib.php
 %\usepackage[round, sort, numbers, authoryear]{natbib}
 %\usepackage[sort, numbers, authoryear]{natbib}
-%\usepackage[numbers]{natbib}
+\usepackage[numbers]{natbib}
 
-\usepackage[round, sort, numbers]{natbib}
+%\usepackage[round, sort, authoryear]{natbib}
+%\usepackage[round, sort, numbers]{natbib}
 \bibpunct{[}{]}{,}{n}{}{;}
 
 \usepackage{ifthen}

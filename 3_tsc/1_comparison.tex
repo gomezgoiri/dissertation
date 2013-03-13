@@ -86,7 +86,7 @@ to use them.
 \subsection{Coupling}
 \label{sec:coupling}
 The REST style describes loosely coupled services due to the platform independent, asynchronous and few self describing messages
-\cite{pautasso_why_2009}. In a very similar manner, \ac{tsc} offers different kind of autonomies \cite{krummenacher_www_2005}:
+\citep{pautasso_why_2009}. In a very similar manner, \ac{tsc} offers different kind of autonomies \citep{krummenacher_www_2005}:
 \textit{time autonomy} (because of its asynchronous nature), \textit{location autonomy} (information providers and consumers are independent
 from where the data is stored), \textit{reference autonomy} (nodes do not need to know each other) and
 \textit{data schema autonomy} (it follows the RDF specification making it independent of nodes internal data schema).
@@ -94,7 +94,7 @@ from where the data is stored), \textit{reference autonomy} (nodes do not need t
 %Remarkably, \ac{tsc} guarantees four basic types of autonomies: \textit{space autonomy} (processes can be run in very different computational
 %environments such as Android, Java ME devices or PCs, they just use a common coordination language), \textit{reference autonomy}
 %(nodes do not need to know each other), \textit{time autonomy} (they communicate asynchronously) and \textit{data schema autonomy} (since
-%written and read data is based on RDF triples, \ac{tsc} nodes are independent of their internal data schemas) \cite{fensel_triple-space_2004}.
+%written and read data is based on RDF triples, \ac{tsc} nodes are independent of their internal data schemas) \citep{fensel_triple-space_2004}.
 
 In spite of the outlined decoupling nature of both approaches, the data definition can be considered a coupling mode indeed.
 While in \ac{wot} each resource defines its own data formats and contents themselves, in \ac{tsc} the ontology in which the semantic
@@ -105,8 +105,8 @@ One of the main drawbacks in \ac{wot} is the lack of a discovery mechanism for n
 in each object response (using HATEOAS) and microformats are sometimes included to ease the search-ability of these objects by search engines, it is difficult for an
 object which may change of location and context to be referred. Thus, \ac{wot} may have a tendency to create isolated islands of data. Several workarounds
 have been proposed to overcome this limitation, such as using a central repository\footnote{http://www.pachube.com/}, a framework which uses federated
-repositories responsible for different administrative domains \cite{stirbu_towards_2008} or making each connected sensor announce itself to let an
-intermediary know its presence \cite{kamilaris_smart_2010}.
+repositories responsible for different administrative domains \citep{stirbu_towards_2008} or making each connected sensor announce itself to let an
+intermediary know its presence \citep{kamilaris_smart_2010}.
 
 \ac{tsc} provides a transparent data level discovery mechanism to the user since when a node joins a space (i.e. a group), its data become queriable by any other
 node joint to this space. In OtsoPack the space management and communication relies on Jxta, a protocol which can be used at any level (even if we
@@ -117,7 +117,7 @@ have mainly used it on local environments using Jxta's discovery layer's capabil
 The scalability of \ac{wot} is argued to be well proved since the World Wide Web is the most practical scalable system. As many objects as
 necessary could be added to WWW without making it worse. 
 
-Although Jxta scalability has been discussed and addressed in several works \cite{antoniu_performance_2007}, since our solution is fully decentralized
+Although Jxta scalability has been discussed and addressed in several works \citep{antoniu_performance_2007}, since our solution is fully decentralized
 and uses flooding (each query is spread to the rest of the peers which belong to a space), its scalability is expected to be poor. To overcome this limitation,
 we are working on implementing Semantic Overlay Networks (SON) to let the objects automatically divide the spaces into smaller ones and address queries
 just to the appropriate nodes which conform a semantically related space.
@@ -136,7 +136,7 @@ just to the appropriate nodes which conform a semantically related space.
 
 \subsection{Semantics}
 On the one hand, \ac{wot} uses predefined microformats to embed semantic information into human readable pages. Doing so, the search process performed
-by search engines is enhanced \cite{guinard_internet_2011}. On the other hand, \ac{tsc} allows the usage of full semantics, more expressive than microformats,
+by search engines is enhanced \citep{guinard_internet_2011}. On the other hand, \ac{tsc} allows the usage of full semantics, more expressive than microformats,
 using RDF as a base. This makes \ac{tsc} capable of using standard query languages such as SPARQL and it becomes also independent of third parties' products to search data.
 
 
