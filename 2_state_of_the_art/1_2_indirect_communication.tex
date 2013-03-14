@@ -83,39 +83,3 @@ The propagation rule defines that it should be propagated to all nodes in the vi
 The tuple is configured to be deleted after a time-to-live period using its maintenance rule.
 When the it reaches the room where the piece of art is located, the piece of art will write a response tuple.
 This response tuple jumps from a device to another until it reaches the device which queried for it.
-
-
-
-\subsubsection{Discussion}
-
-% comparación de todas ellas
-% de entre los que ofrecen distribución: este no mola por esto, esto otro mola por esto otro, etc.
-
-Within this solutions, \emph{The event heap} is not considered because of its centralized nature.
-Both L2imbo, LIME and TOTA present different ways to disseminate the tuples.
-The replication which L2imbo proposes may not be feasible for devices with constrained memory or storage capacity.
-Particularly, in spaces populated by many devices like the Internet of Things too many tuples could be generated.
-% need to configure the network
-
-TOTA is useful for spatially connected adhoc environments, but it does not seem to suit well on networks where all the nodes can reach each other.
-In this case, all the tuples could be replicated on the rest of the nodes showing the same limitations as L2imbo.% COMPROBAR LEYENDO CON ATENCION LO DE TOTA
-
-Finally, despite of their unrealistic assumptions LIME proposes a model where each tuple is responsible of its own part of the space.
-They share spaces whenever they become available.
-
-% TODO tabla comparativa? distributed, ad-hoc, federated
-
-\begin{table}%[position specifier]
-  \centering
-  \begin{tabular}{c|cccc}%p{5cm}}
-      ~ & The event heap & L2imbo & LIME & TOTA \\
-      \hline
-      \hline
-      Distributed & No & Yes & Yes & Yes \\
-      Goal & x & Availability & Federation & Ad-hoc \\
-      % Scalability?
-      % Coger propiedades del libro de sistemas distribuidos?
-  \end{tabular}
-  \caption{Comparison of the most prominent \acl{ts} alternatives for \acl{ubicomp}.} % no columpiarme, o poner todas o ninguna?
-  \label{tab:myfirsttable}
-\end{table}
