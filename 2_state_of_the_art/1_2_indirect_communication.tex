@@ -1,55 +1,10 @@
-\subsection{Indirect Communication}
-\label{sec:indirect_communication}
-
-The indirect communication style comprehends all the techniques with no direct coupling between the sender and the receiver.
-The group communication, publish-subscribe systems, message queues or shared memory approaches are examples of indirect communication
-These paradigms are characterized by two key properties \citep{gelernter_generative_1985,coulouris_distributed_2012}
-\footnote{
-  We use the terminology of the  \aclp{ts}' seminal paper \citep{gelernter_generative_1985}, but please note that:
-  % nomenclature, naming or terminology?
-  \begin{itemize}
-    %\item Gelernter et al. stated that \emph{distributed sharing} was just a consequence of the these properties.
-    \item The \emph{space uncoupling} property is referred as \emph{reference autonomy} by some authors \citep{fensel_triple-space_2004}.
-	  % El primero fue un tal Angerer en el 2002, pero en un artículo en alemán.
-	  % En el 2003 hay un artículo suyo en Internet, pero no sé si mencionarlo.
-    \item These authors mention a third property confusingly called \emph{space autonomy} (or \emph{location autonomy}).
-	  According to \citet{fensel_triple-space_2004} this autonomy is achieved because:
-	  \begin{quote}
-	    The processes can run in completely different computational environments as long as both can access the same space.
-	  \end{quote}
-  \end{itemize}
-}
-:
-
-\begin{itemize}
- \item \emph{Space uncoupling}, which is achieved when the sender does not need to know the receiver or receivers and vice versa.
- \item \emph{Time uncoupling}, which happens when senders and receivers do not need to exists in the same time\footnote{
-	  Although some authors \citep{fensel_triple-space_2004,krummenacher_www_2005} explain this property just in terms of communication asynchrony,
-	  % mencionar a otros? o no porque simplemente siguen lo dicho por Fensel?
-	  % a Bundler no lo cito, porque era una master thesis "sólo"
-	  % en este caso cito a krummenacher porque en esa publicación lo define directamente como el no uso de comunicación sincrona
-	  \citet{coulouris_distributed_2012} make a clear distinction between them.
-	  In their words, a communication is asynchronous when \emph{a sender sends a message and then continues without blocking},
-	  whereas time uncoupling adds an extra dimension: \emph{the sender and the receiver can have independent existences}.
-	  }.
- 
-\end{itemize}
-
-\InsertFig{venn-sec1_2}{fig:venn_tuplespaces_ubicomp}{
-  \aclp{ts} solutions for Ubicomp.
-}{
-  Scope of this subsection.
-}{0.6}{}
+\subsection{\acl{ts}}
+\label{sec:tuplespaces_eoa}
 
 % Ojo cuidado porque según esto mi middleware va a dejar de ser time uncoupled! (mirar Figure 6.1 para mayor concrección)
 % En esa misma sección aclara que algunas implementaciones no son time-uncoupled.
 % por otro lado, asíncronismo != time uncoupling
 
-\acl{ts} computing, also called space-based computing, offers an improvement of the shared memory approach.
-Whereas the shared memory works at byte-level and accessing to memory addresses,
-the \acl{ts} works with semi-structured data which is accessed in an associative manner.
-
-% definir si en mayusculas, en minusculas o cómo coño: tuplespace, tuple space, \acl{ts}?
 \acf{ts} has its roots in the Linda parallel programming language \citep{gelernter_generative_1985}.
 In this communication model different processes read and write pieces of information so-called tuples in a common space.
 Tuples are composed by one or more typed data fields (e.g. $<"aitor",1984>$ or $<3,7,21.0>$).
@@ -67,8 +22,14 @@ Although the primitives may change from implementation to implementation, the mo
 \end{itemize}
 
 
+\InsertFig{venn-sec1_2}{fig:venn_tuplespaces_ubicomp}{
+  \aclp{ts} solutions for Ubicomp.
+}{
+  Scope of this subsection.
+}{0.6}{}
 
-\subsubsection{\acs{ts} on \acs{ubicomp}}
+\bigskip
+
 % Ignorar esta sección? Es realmente necesaria cuando ya he puesto la comparativa de TSC?
 So far, \acl{ts} has been adapted to \acl{ubicomp} by different authors.
 
