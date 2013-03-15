@@ -6,14 +6,16 @@ Within them, we can see how \ac{wot} has gained much more attention both for its
 % o decir REST based solutions para no centrar mucho en IoT
 Besides, the availability of tools and libraries for many mobile and embedded platforms ease its adoption.
 
+
 However, as any remote invocation style it introduces coupling between senders and receivers.
 % de johanson_extending_2004 he sacado esas características, no la particularización a WoT
-These complicates the application changes for in the short-term and in the long-term \citep{johanson_extending_2004}.
+These complicates the application changes both in the short-term and in the long-term \citep{johanson_extending_2004}.
 In the short-term because nodes constantly join and leave the environment due to mobility or to failures.
 In the long-term because the space is used to solve new problems and the obsolete devices are replaced with new technology.
 Furthermore, the human interaction is eased by minimizing the configurations.
 % quizá lo de johanson_extending_2004 se podría retomar en el capítulo cha:tsc
 In Chapter~\ref{cha:tsc}, we deeply compare both \ac{rest} and \ac{ts} to see how they can benefit each other.
+
 
 \bigskip
 
@@ -25,14 +27,16 @@ In Section~\ref{sec:remote_invocation} we have studied the \ac{ts} solutions for
 Within these solutions, \emph{The event heap} is not considered because of its centralized nature.
 The rest present different ways to disseminate the tuples. %  L2imbo, LIME and TOTA
 
-The replication which L$*^2$imbo proposes may not be feasible for devices with constrained memory or storage capacity.
+The replication which L$^2$imbo proposes may not be feasible for devices with constrained memory or storage capacity.
 Particularly, in spaces populated by many devices like the Internet of Things a large amount of tuples can be generated.
 % need to configure the network
 
 TOTA is useful for spatially connected \emph{ad hoc} environments, but it does not seem to suit well on networks where all the nodes can reach each other.
-In this case, all the tuples could be replicated on the rest of the nodes showing the same limitations as L$^2$imbo.% COMPROBAR LEYENDO CON ATENCION LO DE TOTA
+In this case, all the tuples could be replicated on the rest of the nodes showing the same limitations as L$^2$imbo.
+% TODO COMPROBAR LEYENDO CON ATENCION LO DE TOTA!!!
 Furthermore, \emph{ad hoc} environments are not the focus of our solution since we assume the connectivity between all the devices in a space.
 
+% TODO no darle tan duro que si no a ver como luego me comparo con ellos :-)
 Finally, despite of their unrealistic assumptions LIME proposes a model where each tuple is responsible of its own part of the space.
 They share spaces whenever they become available.
 
@@ -55,7 +59,7 @@ They share spaces whenever they become available.
 
 \medskip
 
-In our model, we argue that in a \ac{ubicomp} environment each node should manage their own semantic information.
+In our model, we argue that in an \ac{ubicomp} environment each node should manage their own semantic information.
 By delegating responsibility 
 we naturally represent mobility scenarios where users carry their own profiles in their mobiles to new spaces 
 and 
