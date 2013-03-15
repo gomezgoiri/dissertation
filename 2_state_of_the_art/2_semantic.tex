@@ -3,25 +3,29 @@
 % centrarse en el ejemplo de interoperabilidad d nivel de aplicaciones
 % TODO reducir este rollo infame de intro
 
-A common problem of most of the solutions used in Ubicomp is the use of application domain dependent data formats.
+A common problem of most of the solutions used in \ac{ubicomp} is the use of application domain dependent data formats.
 % learn about the data-schema, learn about the syntax and the meaning??? mirar cómo lo explican en otros lados
 These formats require developers of new applications to learn about the syntax and the meaning of that data in order to be able to reuse that information.
-This is the case of the solutions scrutinized in the previous section.
+As analyzed in Section~\ref{sec:closer} This is the case of the solutions scrutinized in the previous section.
 
-\medskip
+
+\subsection{A closer look to application-level Interoperability}
+\label{sec:closer}
 
 % TODO mejor que listar "lo que un developer" debería hacer, listarlo mejor como requisitos para que 2 aplicaciones YA existentes puedan usar datos las una de la otra.
-On the one hand, a developer using a Tuple Space middleware could try to reuse the data from another application.
-Let us imagine an \emph{application A} where some devices (masters) write tasks of the same type in a space.
-For the same application, some other devices (workers) take each tuple representing the task, perform the task, and write the result in the same space.
-Providing that a new \emph{application B} needs the same type of task to be done, a clever can try to reuse the work done by the workers.
-To take advantage of these workers already implemented and deployed, he needs to:
+On the one hand, a developer using \ac{ts} could try to reuse the data from another \emph{application A}.
+% Let us imagine an \emph{application A} where some devices (masters) write tasks of the same type in a space.
+% For the same application, some other devices (workers) take each tuple representing the task, perform the task, and write the result in the same space.
+% Providing that a new \emph{application B} needs the same type of task to be done, a clever can try to reuse the work done by the workers.
+%To take advantage of these workers already implemented and deployed, he needs to:
+To do that he should:
 \begin{itemize}
- \item Use the same space as the \emph{application A}.
- \item Write the tasks in the same format as the \emph{application A}.
-	For that, he should be able to figure out the kind of tuple a worker consumes.
+ \item Use the same space.% as the \emph{application A}.
  \item Read the results by using the proper template.
-	Therefore, he should know how the workers represent the result in the \emph{application A}.
+	Therefore he needs to know the format of the tuples written by  \emph{application A}.
+ \item Write the information in the same format, if he wants to enable two-way interoperability.
+      % For that, he should be able to figure out the kind of tuple a worker consumes.
+
 \end{itemize}
 
 While the first step may be trivial, the second and third steps require the developer to carefully study the \emph{application A}.
@@ -30,23 +34,31 @@ This process is inherently manual, and therefore it is a stumbling block to achi
 
 \medskip
 
-On the other hand, most of the solutions in the \ac{wot} use common web media formats such as HyperText Markup Language (HTML) or JavaScript Object Notation (JSON). % link
-HTML is oriented for humans while JSON is a machine processable format.
-Imagine a developer wants to regulate the brightness of a room by using some existing and already deployed \acs{wot}-enabled devices.
-A device provides temperature through a REST \emph{service A} and other device has a REST \emph{service B} to switch on or switch off the lights.
-Then, the developer will need to know:
+Similarly, for each application willing to reuse other application's services in \ac{wot} a developer should know:
 \begin{itemize}
- \item The URL of the service A which provides the temperature.
- \item The URL of the service B which controls the lights of the room.
- \item The media-types that the service A returns.
- \item The media-types that the service B accepts.
- \item Once he has chosen a media-type, the syntax of the result provided by the service A.
- \item Once he has chosen a media-type, the syntax of the piece of data the service B is able to interpret.
+ \item The URL
+ \item The media-types that it returns
+ \item For an specific media-type, the syntax of the result provided by the service % e.g. URL
 \end{itemize}
 
-The first two steps require the developer to browse and identify the key services.
+% On the other hand, most of the solutions in the \ac{wot} use common web media formats such as HyperText Markup Language (HTML) or JavaScript Object Notation (JSON). % link
+% HTML is oriented for humans while JSON is a machine processable format.
+% Imagine a developer wants to regulate the brightness of a room by using some existing and already deployed \acs{wot}-enabled devices.
+% A device provides temperature through a REST \emph{service A} and other device has a REST \emph{service B} to switch on or switch off the lights.
+% Then, the developer will need to know:
+% \begin{itemize}
+%  \item The URL of the service A which provides the temperature.
+%  \item The URL of the service B which controls the lights of the room.
+%  \item The media-types that the service A returns.
+%  \item The media-types that the service B accepts.
+%  \item Once he has chosen a media-type, the syntax of the result provided by the service A.
+%  \item Once he has chosen a media-type, the syntax of the piece of data the service B is able to interpret.
+% \end{itemize}
+
+The first step requires the developer to browse and identify the key services.
 This identification needs of a human interpretation unless the services provide some semantics in their description. % RESTdesc
 The remaining steps require the developer to study each service to create and send or receive and interpret each piece of data.
+
 Furthermore, imagine that someone replaces the temperature sensor with a new one used in a third application.
 Let us assume that the service which will now return the temperature uses the same URL and returns the same media-type as the previous one.
 Even in that case, if the second device provides the temperature using a different syntax, the light regulation application will not work anymore.
@@ -56,7 +68,7 @@ Even in that case, if the second device provides the temperature using a differe
 % TODO poner ejemplo de interoperabilidad para enganchar con lo de arriba? ponerlo directamente arriba?
 
 % no me acaba de convencer este parrafo introductorio
-In conclusion, the systems analyzed use information not meaningful for other applications or domains.
+In conclusion, the systems analyzed in the previous section use information not meaningful for other applications or domains.
 One solution to that problem is to use specialized systems which convert and reinterpret the data from one domain to the other.
 Other one is to promote the use of standardized models to express the data.
 In the next section we will analyze how the \acl{sw} tackles these problems.
