@@ -13,14 +13,69 @@ Vivamus laoreet lacinia elit sit amet vehicula.
 
 \end{abstracts}
 
+
+
 \begin{resumen}        %this creates the heading for the abstract page
 \selectlanguage{spanish}
 % Pon tu resumen aquí.
 
-Lorem ipsum dolor sit amet.
+En los ultimos años el aumento de dispositivos móviles y embebidos conectados a Internet ha sido notable.
+En el futúro, se preveé que esta tendencia no haga más que aumentar.
+Por lo tanto, la forma de integrar eficazmente estos dispositivos y las aplicaciones construidas sobre ellos resulta vital.
+
+
+El paradigma de \aclp{ts} constituye una forma indirecta y altamente desacoplada de comunicación entre los dispositivos.
+En este paradigma los procesos se coordinan escribiendo y leyendo en un espacio común de forma asociativa.
+
+
+%Otra piedra angular de esta tesis es el uso de 
+Por otro lado, la web semántica permite describir el conocimiento compartido en dichos espacios.
+De esta forma, se busca reaprovechar el conocimiento de forma que se promueve interoperabilidad a nivel de aplicación.
+De la conjunción entre la \acf{ws} y \acf{ts} nació \ac{tsc}.
+
+
+Tradicionalmente el espacio de \ac{tsc} se ha centralizado en uno o un subconjunto de los dispositivos/participantes.
+No obstante, en esta tesis exploramos la completa distribución del espacio entre todos los dispositivos, incluidos móviles y dispositivos embebidos.
+De esta forma se accede a los datos allí donde se generan, en los dispositivos directamente conectados a los sensores y actuadores.
+Además, se ajusta de forma natural a escenarios de movilidad donde los dispositivos transportan sus datos de un espacio a otro.
+Pero esta distribución conlleva no pocos retos.
+En esta tesis contemplamos ambas la búsqueda en dichos espacios y la actuación a través de la escritura en los mismos.
+
+
+Para la búsqueda dentro de los espacios de conocimiento, proponemos una arquitectura que permita tener noción de lo que otros nodos comparten.
+De esta forma se puede dirigir la busqueda a aquellos dispositivos que tienen datos relevantes para una consulta dada.
+Así, se pretende perseguir un menor nivel de actividad en dispositivos con limitaciones de autonomía energética.
+Para la compartición de dichos datos, se elige dinámicamente un dispositivo acorde a sus capacidades.
+En cualquier caso, este nodo no intermedia entre los consumidores y los proveedores a la hora de realizar una consulta, de forma que se promueve la comunicación directa entre los dispositivos.
+
+
+Para actuar sobre el entorno a través de la escritura en el espacio proponemos y comparamos dos alternativas.
+La primera consiste en escribir tareas en el espacio que otros dispositivos leen y resuelven.
+Los resultados para dichas tareas son escritos de nuevo en el espacio y leídos por el dispositivo de origen.
+Para la correcta coordinación entre el nodo que realiza la tarea y el que la pide, se necesita un mecanismo de suscripción.
+
+
+La segunda aproximación trata de razonar sobre la descripción semántica de servicios REST de otros dispositivos.
+Con ellos, consigue saber de qué forma los debe invocar para conseguir el estado final deseado.
+
+
+\bigskip
+
+
+Además, en esta disertación exploramos la compatibilidad de \ac{tsc} con la web de las cosas (\acs{wot}).
+La web de las cosas busca integrar los dispositivos de forma natural con la web.
+Concretamente, propone embeber servidores web en los dispositivos para que estos faciliten sus recursos siguiendo el estilo RESTful.
+Esto tiene la ventaja de que se integra de forma natural con la web, un sistema que se ha mostrado eficaz en terminos de escalabilidad y con el que la mayoría de usuarios está habituado.
+En esta tesis defendemos que permitiendo que los dispositivos faciliten sus datos acorde con el estilo REST, podemos lograr compatibilidad con la inminente web de las cosas.
+
+
+Por otro lado, el uso de REST sobre HTTP, facilita la adopción de nuestro middleware en nuevas plataformas.
+La mayoría de plataformas móviles o embebidas ofrecen hoy en día multitud de herramientas y librerías HTTP.
+Finalmente, cabe destacar el hecho de que estas ideas han sido implementadas en un middleware open-source disponible para multiples plataforma denominado \emph{Otsopack}.
 
 
 \end{resumen}
+
 
 
 \begin{laburpena}        %this creates the heading for the abstract page
