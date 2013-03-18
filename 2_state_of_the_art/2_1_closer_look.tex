@@ -2,7 +2,7 @@
 \label{sec:closer}
 
 % TODO mejor que listar "lo que un developer" debería hacer, listarlo mejor como requisitos para que 2 aplicaciones YA existentes puedan usar datos las una de la otra.
-On the one hand, a developer using \ac{ts} could try to reuse the data from another \emph{application A}.
+A developer using \ac{ts} could try to reuse the data from another \emph{application A}.
 % Let us imagine an \emph{application A} where some devices (masters) write tasks of the same type in a space.
 % For the same application, some other devices (workers) take each tuple representing the task, perform the task, and write the result in the same space.
 % Providing that a new \emph{application B} needs the same type of task to be done, a clever can try to reuse the work done by the workers.
@@ -10,24 +10,25 @@ On the one hand, a developer using \ac{ts} could try to reuse the data from anot
 To do that he should:
 \begin{itemize}
  \item Use the same space.% as the \emph{application A}.
- \item Read the results by using the proper template.
-	Therefore he needs to know the format of the tuples written by  \emph{application A}.
- \item Write the information in the same format, if he wants to enable two-way interoperability.
+ \item Read the results by using a proper template.
+	Therefore he needs to know the format of the tuples written by \emph{application A}.
+ \item Write the information in the same format, if he wants to enable two-way interoperability
+      (i.e. allow \emph{application A} consume the new application's data).
       % For that, he should be able to figure out the kind of tuple a worker consumes.
 
 \end{itemize}
 
 While the first step may be trivial, the second and third steps require the developer to carefully study the \emph{application A}.
-Specifically, he will need to know the number and the type of fields of the tuples which represent a task and a result.
-This process is inherently manual, and therefore it is a stumbling block to achieve application-level interoperability.
+%Specifically, he needs to know the number and the type of fields of the tuples which represent a task and a result.
+Since this process is inherently manual, it is a stumbling block to achieve application-level interoperability.
 
 \medskip
 
-Similarly, for each application willing to reuse other application's services in \ac{wot} a developer should know:
+Similarly, for each application willing to reuse other application's service in \ac{wot} a developer should know:
 \begin{itemize}
- \item The URL
- \item The media-types that it returns
- \item For an specific media-type, the syntax of the result provided by the service % e.g. URL
+ \item The URL.
+ \item The media-types that it returns.
+ \item For an specific media-type, the syntax of the result provided by the service. % e.g. URL
 \end{itemize}
 
 % On the other hand, most of the solutions in the \ac{wot} use common web media formats such as HyperText Markup Language (HTML) or JavaScript Object Notation (JSON). % link
@@ -48,9 +49,12 @@ The first step requires the developer to browse and identify the key services.
 This identification needs of a human interpretation unless the services provide some semantics in their description. % RESTdesc
 The remaining steps require the developer to study each service to create and send or receive and interpret each piece of data.
 
-Furthermore, imagine that someone replaces the temperature sensor with a new one used in a third application.
+Furthermore, the different services will be hardly exchangeable.
+Let us imagine that there is an hypothetical temperature regulation application which use the data from a temperature sensor.
+This sensor provides the data in a RESTful manner.
+Now, let us imagine that someone replaces the sensor with a new one used in a third application.
 Let us assume that the service which will now return the temperature uses the same URL and returns the same media-type as the previous one.
-Even in that case, if the second device provides the temperature using a different syntax, the light regulation application will not work anymore.
+Even in that case, if the second device provides the temperature using a different syntax, the application will not work anymore.
 
 \medskip
 
