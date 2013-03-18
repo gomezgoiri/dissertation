@@ -1,5 +1,9 @@
-% reescribirlo como una misma cosa
+% TODO
+%  + reescribirlo como una misma cosa?
+%  + añadirle una 
+
 \subsection{\acs{sw} by using Intermediaries}
+\label{sec:sw_intermediaries}
 
 % como los smart environments describen contexto usando web semántica
 
@@ -11,6 +15,17 @@ Adding semantics works well for devices with high computational capacity but may
 To reduce this overhead in such devices, part of this computation is usually delegated to an intermediary.
 Some noteworthy example is the one proposed by \citet{broring_semantic_2009}.
 % buscar otros ejemplos de enjundia
+% The Context Broker Architecture (CoBrA)[Che04] 
+% Gu et al. (2007)
+% AlarmNet (2008)
+
+
+\InsertFig{venn-sec2}{fig:venn_semantics_ubicomp}{
+  The \acl{sw} for \acl{ubicomp}.
+}{
+  Scope of this section.
+}{0.6}{}
+
 
 These intermediaries or \emph{Semantic Gateways} are in charge of managing the semantic annotation.
 The devices send raw data (which can be compressed) to the intermediaries and the gateways annotate the content semantically.
@@ -19,7 +34,7 @@ Thus, the devices do not have to care about any semantic aspect and just collect
 These \emph{Semantic Gateways} reduce the load to embedded devices with limited resources by decreasing the number of requests they have to provide.
 In addition, a centralized intermediary can gather all the information and thus, reduce the complexity of managing a distributed environment.
 
-However, as previously explained, using intermediaries to store the semantic data of resource constrained devices also has some drawbacks.
+However, using intermediaries to store the semantic data of resource constrained devices also has some drawbacks.
 On the one hand, centralization does not faithfully represent mobility situations were individuals carry their own semantic information in their personal devices.
 In addition, the data obtained from an intermediary will always be less fresh than the one obtained where it is generated (i.e., sensors).
 On the other hand, the servers are critical in centralized systems and therefore, their availability determines the operation of these solutions.
@@ -29,6 +44,7 @@ They also impose a burden on the maintenance which may be worthless in some simp
 % diferenciar de una forma menos descarada?
 
 \subsection{\acs{sw} in Providers}
+\label{sec:sw_providers}
 % enumerar aquellas características de IoT???
 % sacar algo del paper que habla de los retos de usar semántica en IoT
 
@@ -50,9 +66,9 @@ Instead, it considers them as mere human-oriented information providers which sh
 
 A more general way to represent semantic data is using RDF based representations (i.e., full semantics).
 SPITFIRE European project\footnote{\url{http://spitfire-project.eu}} represents the most remarkable effort on gathering full semantics and the \ac{wot}.
-It focuses on fully integrating sensor data with the Linked Open Data (LOD). 
-The LOD are datasets which follow a series of principles on how to open and publish data.
-The goal of the LOD is to publish linked terms using full semantics.
+It focuses on fully integrating sensor data with the \ac{lod}. 
+The \ac{lod} are datasets which follow a series of principles on how to open and publish data.
+The goal of the \ac{lod} is to publish linked terms using full semantics.
 
 SPITFIRE shares with our solution the vision of a world populated by devices acting as semantic data providers no matter how small they are \citep{hasemann_rdf_2012}.
 Therefore, many of their efforts are complimentary to this work.
