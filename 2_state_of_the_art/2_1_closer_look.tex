@@ -11,7 +11,7 @@ To do that he should:
 \begin{itemize}
  \item Use the same space.% as the \emph{application A}.
  \item Read the results by using a proper template.
-	Therefore he needs to know the format of the tuples written by \emph{application A}.
+	Therefore, he needs to know the format of the tuples written by \emph{application A}.
  \item Write the information in the same format, if he wants to enable two-way interoperability
       (i.e. allow \emph{application A} consume the new application's data).
       % For that, he should be able to figure out the kind of tuple a worker consumes.
@@ -24,11 +24,11 @@ Since this process is inherently manual, it is a stumbling block to achieve appl
 
 \medskip
 
-Similarly, for each application willing to reuse other application's service in \ac{wot} a developer should know:
+Similarly, for each application willing to reuse other application's service in \ac{wot}, a developer should know:
 \begin{itemize}
  \item The URL.
- \item The media-types that it returns.
- \item For an specific media-type, the syntax of the result provided by the service. % e.g. URL
+ \item The media-types it returns or it accepts as input.
+ \item For an specific media-type, the syntax of the result provided by the service or the data provided to the service. % e.g. URL
 \end{itemize}
 
 % On the other hand, most of the solutions in the \ac{wot} use common web media formats such as HyperText Markup Language (HTML) or JavaScript Object Notation (JSON). % link
@@ -50,9 +50,9 @@ This identification needs of a human interpretation unless the services provide 
 The remaining steps require the developer to study each service to create and send or receive and interpret each piece of data.
 
 Furthermore, the different services will be hardly exchangeable.
-Let us imagine that there is an hypothetical temperature regulation application which use the data from a temperature sensor.
+Let us imagine that there is an hypothetical temperature regulation application which uses the data acquired from a temperature sensor.
 This sensor provides the data in a RESTful manner.
-Now, let us imagine that someone replaces the sensor with a new one used in a third application.
+Now, let us imagine that somebody replaces the sensor with a new one used in a third application.
 Let us assume that the service which will now return the temperature uses the same URL and returns the same media-type as the previous one.
 Even in that case, if the second device provides the temperature using a different syntax, the application will not work anymore.
 
