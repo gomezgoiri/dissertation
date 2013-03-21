@@ -243,7 +243,7 @@ and management \acs{api} to configure the each kernel.
 \subsection{Smart-M3}
 
 % modelo propuesto
-Smart-M3 is an open-source distributed middleware which uses \ac{rdf} graphs. % CITA
+Smart-M3 \citep{honkola_smart-m3_2010} is an open-source distributed middleware which uses \ac{rdf} graphs.
 It supports three types of primitives: \acl{ts}-based primitives, subscriptions and a query over a whole space.
 Smart-M3 defines two types of nodes: Semantic Information Brokers (SIB) and Knowledge Processors (KP).
 The SIBs store the knowledge and perform reasoning process on behalf of the KPs.
@@ -255,18 +255,20 @@ A KP access to a SIB using two different types of interfaces (called KPI):
 
 
 % cosas relativas al despliegue
-The space can be distributed over more than a SIB using a \emph{distributed deductive closure}. % CITA?
+The space can be distributed over more than a SIB using a \emph{distributed deductive closure}.
+ % TODO asegurarse 100% de esto que voy a decir!
 However, to the best of our knowledge no evaluation with more than a SIB has been presented yet, making it de facto an centralized space.
-For the communication between SIBs and KPs, Smart-M3 defines a protocol called \emph{Smart Access Protocol (SSAP)}.
+For the communication between SIBs and KPs, Smart-M3 defines a protocol called \emph{Smart Access Protocol (SSAP)}. % decir que está basado en XML?
 SSAP can be implemented on top of different communication mechanisms (e.g. SOA, XMPP, Bluetooth or TCP/IP) making the solution communication agnostic. % TODO acrónimos?
 
 
 % arquitectura
+% TODO repasar cómo está escrito, porque con esos nombres queda un poco confuso
 A SIB is divided in 5 layers: transport, request handling, graph operations, triple operation and persistent store.
 The transport layer has different processes for each communication mechanism supported.
 Once the SSAP operations have been extracted, the request handling creates a thread for each primitive.
-The graph operations work with primitives using \ac{rdf} graphs and communicates with triple operations.
-In the triple operation, expressive queries may need to be translated to query the store.
+The \emph{graph operations} layer works with primitives which use \acs{rdf} graphs and it uses the underlying \emph{triple operations}. % ¿?
+In the \emph{triple operation}, expressive queries may need to be translated to query the store.
 % decir que también soporta subscripción?
 
 % dibujo?
@@ -283,7 +285,7 @@ In the triple operation, expressive queries may need to be translated to query t
 \subsection{Nardini et al.}
 
 % modelo propuesto
-\citet{nardini_semantic_2013} explores the use of Description Logics on top of an existing \emph{tuple centre} implementation called TuCSoN. % TODO CITA
+\citet{nardini_semantic_2013} explores the use of Description Logics on top of an existing \emph{tuple centre} implementation called TuCSoN. % TODO CITA TuCSoN???
 A tuple centre is a tuple space where the behavior can be programmed as a result of the basic coordination primitives.
 TuCSoN aims to provide \emph{tuple centres} that agents can use through Linda-type primitives.
 This interaction can cause reactions which trigger behavior previously implemented in the \emph{tuple centre}.
