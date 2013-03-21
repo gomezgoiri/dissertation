@@ -7,8 +7,8 @@
 % decir que tiene mucho que ver con distributed triple stores
 % analizarlos también??? vaya pereza! -> igual comentar diferencia y dejar el análisis para la sección tosca de IGWS
 
-Semantic \aclp{ts} aim to join \aclp{ts} with the Semantic Web to propose a more uncoupled solution.
-Particularly, it benefits from the autonomies introduced by both TS and the SW:
+Semantic \aclp{ts} aim to join \aclp{ts} with the \acl{sw} to propose a more uncoupled solution.
+Particularly, it benefits from the autonomies introduced by both \ac{ts} and the \ac{sw}:
 
 \begin{itemize}
   \item Space uncoupling.
@@ -34,38 +34,38 @@ To summarize, we present a comparison of them at the end of the section, analyzi
 \subsection{TSC}
 % modelo propuesto
 TSC \citep{fensel_tsc_2007} is the middleware which first implemented the ideas of Fensel et al. \citep{fensel_triple-space_2004}.
-TSC aims to propose a Triple Space Computing infrastructure based on REST.
-Equivalently to REST, TSC proposes a stateless infrastructure where the resources are identified by URIs.
+TSC explores a \acl{tsc} infrastructure based on the \ac{rest} architectural style.
+Equivalently to \ac{rest}, TSC proposes a stateless infrastructure where the resources are identified by \acp{uri}.
 In the first approximation, each tuple was considered a resource.
-These tuples correspond with RDF triples.
-In a later work,  Krummenacher et al. \citep{krummenacher2006specification} proposed to use identifiers just for a set of triples (i.e. RDF graphs).
+These tuples correspond with \ac{rdf} triples.
+In a later work,  Krummenacher et al. \citep{krummenacher2006specification} proposed to use identifiers just for a set of triples (i.e. \ac{rdf} graphs).
 % bundler cita el de "WWW: or what's wrong with the web" para explicar eso último
 They argue that resources usually need to be modeled using more than just a triple.
 Besides, the use of graphs reduces the complexity on storage.
-To cope with the heterogeneity of data and scalability issues, they propose the use of independent spaces identified by their own URI.
+To cope with the heterogeneity of data and scalability issues, they propose the use of independent spaces identified by their own \ac{uri}.
 Using these disjoint spaces, they can restrict the number of participant in each one.
 
 
 % cosas relativas al despliegue
-TSC combines client/server and peer-to-peer architectures using a hybrid super-peer one.
+TSC combines client/server and \ac{p2p} architectures using a hybrid super-peer one.
 The super-peers of this architecture communicate with each other using a middleware which offers a virtual shared memory space of Java objects.
 They present 3 different types of nodes:
 \begin{itemize}
   \item The \emph{servers} are the responsible for storing and replicating the spaces.
   \item The \emph{heavy clients} are not always connected to the system, but they have the same responsibilities as the \emph{servers}.
 	They can work off-line with their replicas.
-  \item The \emph{light clients} can access to the spaces using proxies or an HTTP API.
+  \item The \emph{light clients} can access to the spaces using proxies or an \ac{http} \acs{api}.
 \end{itemize}
 
 
 % arquitectura
 TSC consist of three main components: a mediation engine, a data access layer and a coordination layer.
 The mediation engine manages data heterogeneity by intermediating between nodes using different data schemas.
-The data access layer ensures persistence of the data, supports template matching and provides some reasoning over the knowledge stored.
+The data access layer ensures persistence of data, supports template matching and provides some reasoning over the knowledge stored.
 The coordination layer replicates named graphs to all involved TS kernels and therefore has to be synchronized with the data access.
 % http://tsc.deri.at/deliverables/D21.html
 % http://tsc.deri.at/deliverables/D31/D31.html
-To do that, they use a peer-to-peer implementation of a virtual shared data space. % cita a CORSO?
+To do that, they use a \ac{p2p} implementation of a virtual shared data space. % cita a CORSO?
 % decir que ofrece transaccionalidad gracias a CORSO? transactionality
 % It also offers a transactional context and a simple form to publish and subscribe to certain patterns.
 
@@ -74,10 +74,10 @@ To do that, they use a peer-to-peer implementation of a virtual shared data spac
 \subsection{Semantic Web Spaces}
 
 % modelo propuesto
-Semantic Web Spaces (SWS) defines two different data coordination views: data view and information view. %TODO CITE
-In both views the tuples are represented with 3 fields which correspond with RDF triples' subject, predicate and subject.
-The data view stores syntactically valid RDF and is accessed using Linda primitives.
-The information view stores consistent and satisfiable data and offers new access primitives.
+Semantic Web Spaces (SWS) \citep{tolksdorf_coordination_2006} defines two different data coordination views: data view and information view.
+In both views the tuples are represented with three fields which correspond with \ac{rdf} triples' subject, predicate and object.
+The data view stores syntactically valid \ac{rdf} and it is accessed using Linda primitives.
+The information view stores consistent and satisfiable data which are managed using new primitives.
 This view takes into account the knowledge defined by ontologies to perform semantic matching over inferred triples.
 
 % cosas relativas al despliegue
@@ -99,21 +99,21 @@ The security component restrict the access of client to spaces according to the 
 \subsection{sTuples}
 
 % modelo propuesto
-sTuples \citep{khushraj_stuples:_2004} was conceived by Nokia Research Center as a pervasive computing work.
+STuples \citep{khushraj_stuples:_2004} was conceived by Nokia Research Center as a pervasive computing work.
 It extends the JavaSpace middleware, a object-oriented \acl{ts}, using a semantic match over the semantic tuples.
 To do that, a semantic tuple is an object with a field with the semantic description in the DAML+OIL format. % definir DAML+OIL o citarlo?
 
 
 % cosas relativas al despliegue
 The space is centralized and uses a framework called Vigil to create clients and services. % cita Vigil?
-Vigil acts as a communication gateway with several protocols and is directly integrated with sTuples.
+Vigil acts as a communication gateway with several protocols and it is directly integrated with sTuples.
 
 
 % arquitectura
 The JavaSpace extension is done in sTuples through two components: the Tuple Manager and the Tuple Matcher.
 The manager adds, removes or states changes of tuples.
 Every insertion requires the semantic data to be asserted.
-The matcher implements the algorithm to matching templates.
+The matcher implements the algorithm to match templates.
 Besides, specialized agents reside on the space to offer added functionality to the users.
 For instance, they implemented recommendations, subscriptions and task-executions in their prototype.
 
@@ -123,16 +123,18 @@ For instance, they implemented recommendations, subscriptions and task-execution
 
 % modelo propuesto
 Conceptual Spaces, or CSpaces, were born to study the applicability of semantic \aclp{ts} to different scenarios including \acl{ubicomp}.
-The tuples contain seven different fields enabling to express logic theories using different formal languages.
+Tuples in CSpaces contain seven different fields.
+Some fields enable to express logic theories using different formal languages.
 Other remarkable fields are used to define the version, specify the creator or to define to which subspaces the tuple belongs. % explicar los 7 campos?
 
 % cosas relativas al despliegue
 The spaces in CSpaces can be individual or shared.
-The individual belongs to a single process and the shared one allows access to all the processes who have agreed on.
+An individual space belongs to a single process.
+A shared one allows access to all the processes who have agreed on.
 
 % arquitectura
 %Es una IDEA y NO la habían IMPLEMENTADO (posteriormente hicieron un prototipo limitado para un paper de 2006).
-They proposed the same three types of nodes as TSC.
+CSpaces differentiates between the same three types of nodes as TSC.
 They intended to implement individual spaces in heavy-clients and shared spaces in servers.
 They first considered a centralized implementation for the shared-spaces, % lo dicen en la comparativa
 and later on a P2P network of the nodes managing a shared-space. % paper de después
@@ -144,15 +146,28 @@ In any case, to the best of our knowledge, this conceptual exercise never went b
 \subsection{tsc++}
 
 % modelo propuesto
-Tsc++ \citep{krummenacher_open_2009} is a new version of the TSC project.
+Tsc++ \citep{krummenacher_open_2009,blunder_distributed_2009} is a new version of the TSC project.
 Therefore, although the model is equivalent to TSC, its implementation completely changes.
 
 
 % cosas relativas al despliegue
+% Páginas 54 y 55
 Instead of replicating each space in the different kernels as TSC does, tsc++ proposes to divide the spaces among the participants.
-Therefore, a space corresponds with a group a nodes on the \emph{Jxta} P2P framework \footnote{https://jxta.dev.java.net/}. % cita a blunder tb % jxta de otra forma?
-These nodes follow a simple flooding-based strategy to distribute their information called \emph{negative broadcasting}.
-In negative broadcasting each node writes the information locally and read querying to the rest of the nodes of the space.
+Therefore, a space corresponds with a group a nodes on the \emph{Jxta} \ac{p2p} framework \footnote{https://jxta.dev.java.net/}. % jxta de otra forma?
+These nodes write their information locally and discover information in other nodes using some special nodes.
+This special nodes in Jxta are called \emph{rendezvous} (RDV).
+Tsc++ proposes and evaluates two discovery algorithms: flooding and random walk (RDW).
+\begin{itemize}
+  \item The flooding algorithm sends the request to a RDV, which propagates it to all the known nodes.
+	If this nodes are RDV, they may propagate the request until a number of maximum hops is reached.
+  \item The RDW algorithm chooses one peer to send the message to after the request has been processed in the current one.
+	In Tsc++ the request is sent to a RDV which creates a list of all the nodes and sends it to the first one in the list.
+	At each step a new node from that list will be chosen.
+	Besides, the \emph{walk} ends when a result is returned or when a maximum number of hops is reached if no response was found.
+\end{itemize}
+% De dónde leches saqué esto de NB?
+%These nodes follow a simple flooding-based strategy to distribute their information called \emph{negative broadcasting}.
+%In negative broadcasting each node writes the information locally and read querying to the rest of the nodes of the space.
 
 
 % arquitectura
@@ -160,6 +175,8 @@ Tsc++ has 3 main components: the communication and the data access.
 The data access layer relies on a semantic repository to perform queries and store the triples.
 % mencionar que son Sesame \citep{broekstra_sesame:_2002} y Owlim \citep{kiryakov_owlimpragmatic_2005} ???
 The communication layer maps the reading coordination primitives to group communication.
+% No evaluan el mecanismo de subscripción porque dicen que se basa en DHT y que como es escalable no necesita más evaluación
+% No me queda claro de qué forma usan DHT sobre los nodos RDV que son los que miran las subscripciones cómo están.
 Besides, it offers a subscription mechanism independent to the content stored in the space which uses triples and templates as a basis.
 
 
@@ -172,32 +189,35 @@ Besides, it offers a subscription mechanism independent to the content stored in
 \subsection{Triple Space Communication (TripCom)}
 
 % modelo propuesto
-TripCom\footnote{TripCom (IST-4-027324-STP, www.tripcom.org)} is a Triple Space solution which works with RDF triples as resources.
+TripCom\footnote{TripCom (IST-4-027324-STP, www.tripcom.org)} is a Triple Space solution which works with \ac{rdf} triples as resources.
 The most remarkable aspects of the model proposed by TripCom are:
 \begin{itemize}
   \item The use of subspaces to form form nested multiple spaces.
-	Using them it restricts the communication to a part of the whole space achieving local scalability and completeness.
+	Using them it restricts the communication to a part of the whole space.
+	This restriction leads to local scalability and completeness.
   \item A mechanism to overlap spaces called \emph{scopes}.
-	Using the scopes the client can have a temporary copy of some tuples.
-	Insertion and deletion would not apply to the whole Triple Space.
+	Using the scopes a client can have a temporary copy of some tuples.
+	However, any insertion and deletion would not apply to the whole Triple Space.
   \item A meta-space to describe the relations between spaces or to which graph a tuple belongs.
   \item Different types of templates can be used to query the space, from simple wildcard-based templates to more expressive SPARQL queries.
-  \item New primitives: read at triple or a graph level or writing multiple triples at once.
+  \item New primitives: read at triple or a graph level and writing multiple triples at once.
   \item A subscription mechanism.
 \end{itemize}
 
 
 % cosas relativas al despliegue
 To access to a space a client needs to contact a TripCom instance, i.e. kernel.
+% TODO Duda inglés, está bien hecho eso de "sujeto verbo objeto and verbo" o debería ser "sujeto verbo objeto and sujeto verbo objeto"???
+% TODO Uniformizarlo a lo largo del texto
 Each kernel stores one or more subspaces and can contact other kernels responsible for different spaces.
-To do that, if the space URL is provided, it simply resolves this URL using DNS to contact the other kernel.
+To do that, if the space \ac{url} is provided, it simply resolves this \ac{url} using \ac{dns} to contact the other kernel.
 Otherwise, the kernel uses 4 different strategies:
 \begin{itemize}
   \item Triple Provider. It uses shortcuts to know who answered a query in the past.
   \item Recommender. It uses shortcuts to know which kernel successfully routed a query in the past.
-  \item Indexing - DHT.
-	It creates indexes using a hash function over the subject, predicate, object and space url.
-	Then, it stores these indexes in a distributed database which relies in a structured P2P system. % mencionar PGrid???
+  \item Indexing - \ac{dht}.
+	It creates indexes using a hash function over the subject, predicate, object and space \ac{url}.
+	Then, it stores these indexes in a distributed database which relies in a structured \ac{p2p} system. % mencionar PGrid???
 \end{itemize}
 
 
@@ -213,17 +233,17 @@ The most important components regarding how the triples are distributed are:
 	Forwards queries or write requests to the appropiate kernels.
 \end{itemize}
 Apart from these, there are also security, mediation, metadata and transaction managers.
-On top of these components, TripCom offers three different APIs:
-Triple Space API to map the primitives,
-web service API, which offers higher level service consumption API
-and management API to configure the each kernel.
+On top of these components, TripCom offers three different \acp{api}:
+Triple Space \acs{api} to map the primitives,
+web service \acs{api}, which offers higher level service consumption \acs{api}
+and management \acs{api} to configure the each kernel.
 
 
 
 \subsection{Smart-M3}
 
 % modelo propuesto
-Smart-M3 is an open-source distributed middleware which uses RDF graphs. % CITA
+Smart-M3 is an open-source distributed middleware which uses \ac{rdf} graphs. % CITA
 It supports three types of primitives: \acl{ts}-based primitives, subscriptions and a query over a whole space.
 Smart-M3 defines two types of nodes: Semantic Information Brokers (SIB) and Knowledge Processors (KP).
 The SIBs store the knowledge and perform reasoning process on behalf of the KPs.
@@ -245,7 +265,7 @@ SSAP can be implemented on top of different communication mechanisms (e.g. SOA, 
 A SIB is divided in 5 layers: transport, request handling, graph operations, triple operation and persistent store.
 The transport layer has different processes for each communication mechanism supported.
 Once the SSAP operations have been extracted, the request handling creates a thread for each primitive.
-The graph operations work with primitives using RDF graphs and communicates with triple operations.
+The graph operations work with primitives using \ac{rdf} graphs and communicates with triple operations.
 In the triple operation, expressive queries may need to be translated to query the store.
 % decir que también soporta subscripción?
 
@@ -307,8 +327,8 @@ Nevertheless, we argue that this models are not easy to implement in a distribut
 
 The most common tuple model is the three-field tuple with \emph{subject}, \emph{predicate} and \emph{object}.
 Other solutions propose their own tuple format.
-We believe that for a developer used to work with the Semantic Web the use of RDF triples is straightforward.
-Grouping these triples in RDF graphs also provides a useful abstraction for resources.
+We believe that for a developer used to work with the Semantic Web the use of \ac{rdf} triples is straightforward.
+Grouping these triples in \ac{rdf} graphs also provides a useful abstraction for resources.
 % TODO aclarar bien porqu TSC se centra en grafos y tsc++ no!
 
 Regarding the queries, all the solutions offer graph patterns-based queries.
@@ -339,11 +359,11 @@ Other solutions offer , but we have discarded its usage due to the hard implemen
 % TODO evitar verengenales que no comprendo y que sólo me complican la vida
 
 The Table~\ref{tab:comparisonSemantics} shows different features regarding the semantic model proposed by each solution.
-First we can see how most of the solutions use the standard Semantic Web language RDF to express knowledge.
-The use of RDF does not impose or limits the use of more advanced languages such as RDFS or OWL.
+First we can see how most of the solutions use the standard Semantic Web language \ac{rdf} to express knowledge.
+The use of \ac{rdf} does not impose or limits the use of more advanced languages such as \ac{rdfs} or \ac{owl}.
 
-CSpaces and Nardini et al. propose the use of a language-independent first-order logic (FOL).
-However, since most advanced reasoners only implement a subset of FOL, any implementation is limited by them. % también estas
+CSpaces and Nardini et al. propose the use of a language-independent \ac{fol}.
+However, since most advanced reasoners only implement a subset of \ac{fol}, any implementation is limited by them. % también estas
 % theoretical counterpart of OWL DL [7]. Since OWL is the W3C standard ontology description language for the Semantic Web,
 % and the standard de-facto for semantic applications in general, we adopt OWL as the ontology language for the domain
 % ontologies associated to ReSpecT semantic tuple centres in TuCSoN. While for the details of OWL we forward interested
