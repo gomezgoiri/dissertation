@@ -147,23 +147,23 @@ In any case, to the best of our knowledge, this conceptual exercise never went b
 
 % modelo propuesto
 Tsc++ \citep{krummenacher_open_2009,blunder_distributed_2009} is a new version of the TSC project.
-Therefore, although the model is equivalent to TSC, its implementation completely changes.
+Although the conceptual model is equivalent to TSC, its implementation completely changes.
 
 
 % cosas relativas al despliegue
 % Páginas 54 y 55
-Instead of replicating each space in the different kernels as TSC does, tsc++ proposes to divide the spaces among the participants.
+Tsc++ proposes to divide the spaces among the participants instead of replicating each space in the different kernels as TSC does.
 Therefore, a space corresponds with a group a nodes on the \emph{Jxta} \ac{p2p} framework \footnote{https://jxta.dev.java.net/}. % jxta de otra forma?
 These nodes write their information locally and discover information in other nodes using some special nodes.
 This special nodes in Jxta are called \emph{rendezvous} (RDV).
 Tsc++ proposes and evaluates two discovery algorithms: flooding and random walk (RDW).
 \begin{itemize}
   \item The flooding algorithm sends the request to a RDV, which propagates it to all the known nodes.
-	If this nodes are RDV, they may propagate the request until a number of maximum hops is reached.
-  \item The RDW algorithm chooses one peer to send the message to after the request has been processed in the current one.
-	In Tsc++ the request is sent to a RDV which creates a list of all the nodes and sends it to the first one in the list.
-	At each step a new node from that list will be chosen.
-	Besides, the \emph{walk} ends when a result is returned or when a maximum number of hops is reached if no response was found.
+	If this nodes are RDV, they may also propagate the request until a number of maximum hops is reached.
+  \item The RDW algorithm chooses a new peer to send the message to after the request has been processed in the previous one.
+	In Tsc++ the request is sent to a RDV which creates a list of peers and sends it to the first one in the list.
+	Afterwards, the first node sends the request to a new node from that list.
+	This step is repeated until a maximum number of hops is reached or a result is returned.
 \end{itemize}
 % De dónde leches saqué esto de NB?
 %These nodes follow a simple flooding-based strategy to distribute their information called \emph{negative broadcasting}.
@@ -171,7 +171,7 @@ Tsc++ proposes and evaluates two discovery algorithms: flooding and random walk 
 
 
 % arquitectura
-Tsc++ has 3 main components: the communication and the data access.
+Tsc++ has two main components: the communication and the data access.
 The data access layer relies on a semantic repository to perform queries and store the triples.
 % mencionar que son Sesame \citep{broekstra_sesame:_2002} y Owlim \citep{kiryakov_owlimpragmatic_2005} ???
 The communication layer maps the reading coordination primitives to group communication.
@@ -186,23 +186,24 @@ Besides, it offers a subscription mechanism independent to the content stored in
 
 
 
-\subsection{Triple Space Communication (TripCom)}
+\subsection{Triple Space Communication}
 
 % modelo propuesto
-TripCom\footnote{TripCom (IST-4-027324-STP, www.tripcom.org)} is a Triple Space solution which works with \ac{rdf} triples as resources.
+Triple Space Communication\footnote{TripCom (IST-4-027324-STP, www.tripcom.org)} (TripCom) is a Triple Space solution which works with \ac{rdf} triples as resources.
 The most remarkable aspects of the model proposed by TripCom are:
 \begin{itemize}
-  \item The use of subspaces to form form nested multiple spaces.
+  \item The use of subspaces to form nested multiple spaces.
 	Using them it restricts the communication to a part of the whole space.
 	This restriction leads to local scalability and completeness.
   \item A mechanism to overlap spaces called \emph{scopes}.
-	Using the scopes a client can have a temporary copy of some tuples.
+	Using \emph{scopes} a client can create a temporary copy of some tuples.
 	However, any insertion and deletion would not apply to the whole Triple Space.
-  \item A meta-space to describe the relations between spaces or to which graph a tuple belongs.
+  \item A meta-space to describe the relations between spaces or to which graph a tuple belongs to.
   \item Different types of templates can be used to query the space, from simple wildcard-based templates to more expressive SPARQL queries.
-  \item New primitives: read at triple or a graph level and writing multiple triples at once.
+  \item New primitives to read at triple or at graph level and to write multiple triples at once.
   \item A subscription mechanism.
 \end{itemize}
+% TODO No poner las antiguas??
 
 
 % cosas relativas al despliegue
@@ -210,7 +211,7 @@ To access to a space a client needs to contact a TripCom instance, i.e. kernel.
 % TODO Duda inglés, está bien hecho eso de "sujeto verbo objeto and verbo" o debería ser "sujeto verbo objeto and sujeto verbo objeto"???
 % TODO Uniformizarlo a lo largo del texto
 Each kernel stores one or more subspaces and can contact other kernels responsible for different spaces.
-To do that, if the space \ac{url} is provided, it simply resolves this \ac{url} using \ac{dns} to contact the other kernel.
+To do that, if the space \ac{url} is provided, it simply resolves this \ac{url} using \ac{dns} and contacts the other kernel.
 Otherwise, the kernel uses 4 different strategies:
 \begin{itemize}
   \item Triple Provider. It uses shortcuts to know who answered a query in the past.
@@ -282,10 +283,10 @@ In the \emph{triple operation}, expressive queries may need to be translated to 
 
 
 
-\subsection{Nardini et al.}
+\subsection{\citeauthor{nardini_semantic_2013}}
 
 % modelo propuesto
-\citet{nardini_semantic_2013} explores the use of Description Logics on top of an existing \emph{tuple centre} implementation called TuCSoN. % TODO CITA TuCSoN???
+\citet{nardini_semantic_2013} explore the use of Description Logics on top of an existing \emph{tuple centre} implementation called TuCSoN. % TODO CITA TuCSoN???
 A tuple centre is a tuple space where the behavior can be programmed as a result of the basic coordination primitives.
 TuCSoN aims to provide \emph{tuple centres} that agents can use through Linda-type primitives.
 This interaction can cause reactions which trigger behavior previously implemented in the \emph{tuple centre}.
