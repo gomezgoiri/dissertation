@@ -331,9 +331,10 @@ and how a node can query the space (i.e. the type of \emph{query}).
 The Table~\ref{tab:comparisonTS} summarizes the model used in each of the semantic \aclp{ts}.
 
 The \emph{flat} model is the simplest manner of disjoining spaces.
-Identifying this spaces with URIs, one can link them in the knowledge similarly to what other tuple models do (e.g. Nardini et al or CSpaces). % comprobar
+Identifying this spaces with URIs, one can link them in the knowledge similarly to what other tuple models do (e.g. Nardini et al or CSpaces). % TODO comprobar
 More sophisticated models propose virtual view of spaces (i.e. scopes) or hierarchies between spaces.
 Nevertheless, we argue that this models are not easy to implement in a distributed way. % extenderlo despues?
+% TODO y qué?
 
 The most common tuple model is the three-field tuple with \emph{subject}, \emph{predicate} and \emph{object}.
 Other solutions propose their own tuple format.
@@ -343,9 +344,10 @@ Grouping these triples in \ac{rdf} graphs also provides a useful abstraction for
 
 Regarding the queries, all the solutions offer graph patterns-based queries.
 These queries can be easily processed by any device, whereas complex queries need parsers.
-These parsers are not always available for resource constrained platforms.
+% TODO decir que se puede simplificar en consultas tipo patrones y no al revés!
+Query parsers are not always available for resource constrained platforms.
 Therefore, in this thesis we focus on queries based on graph patterns.
-The adoption of more complex querying languages such as SPARQL can be done as a future work. % cita SPARQL?
+The adoption of more complex querying languages such as SPARQL can be done as a future work. % TODO cita SPARQL?
 
 
 \input{2_state_of_the_art/tables/ts_model}
