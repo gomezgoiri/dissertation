@@ -244,11 +244,11 @@ and management \acs{api} to configure the each kernel.
 \subsection{Smart-M3}
 
 % modelo propuesto
-Smart-M3 \citep{honkola_smart-m3_2010} is an open-source distributed middleware which uses \ac{rdf} graphs.
-It supports three types of primitives: \acl{ts}-based primitives, subscriptions and a query over a whole space.
-Smart-M3 defines two types of nodes: Semantic Information Brokers (SIB) and Knowledge Processors (KP).
+Smart-M3 \citep{honkola_smart-m3_2010} focuses on solving interoperability issues of different devices and protocols.
+This open-source middleware supports three types of primitives: \acl{ts}-based primitives, subscriptions and a query over a whole space.
+To that end, it  distinguish between two types of nodes: Semantic Information Brokers (SIB) and Knowledge Processors (KP).
 The SIBs store the knowledge and perform reasoning process on behalf of the KPs.
-A KP access to a SIB using two different types of interfaces (called KPI):
+A KP accesses to a SIB using two different types of interfaces (called KPI):
 \begin{itemize}
   \item The low-level API uses triples as a base.
   \item The high-level API allows the developer to use ontological entities such as classes, relations and individuals.
@@ -264,15 +264,21 @@ SSAP can be implemented on top of different communication mechanisms (e.g. SOA, 
 
 
 % arquitectura
-% TODO repasar cómo está escrito, porque con esos nombres queda un poco confuso
-A SIB is divided in 5 layers: transport, request handling, graph operations, triple operation and persistent store.
-The transport layer has different processes for each communication mechanism supported.
-Once the SSAP operations have been extracted, the request handling creates a thread for each primitive.
-The \emph{graph operations} layer works with primitives which use \acs{rdf} graphs and it uses the underlying \emph{triple operations}. % ¿?
+% DUDA enfatizar que una capa usa a la de abajo?
+A SIB is divided in five layers: transport, request handling, graph operations, triple operation and persistent store (see Figure~\ref{fig:smartm3_archi}).
+The \emph{transport layer} has different processes for each communication mechanism supported.
+Once the SSAP operations have been extracted, the \emph{request handling} creates a thread for each primitive.
+The \emph{graph operations} layer works with primitives which use \acs{rdf} graphs.
 In the \emph{triple operation}, expressive queries may need to be translated to query the store.
 % decir que también soporta subscripción?
 
-% dibujo?
+% Esto es para que el parrafo de arriba se entienda mejor
+\InsertFig{smartm3_architecture}{fig:smartm3_archi}{
+  Architecture of an Smart-M3 SIB.
+}{
+  Image extracted from \citep{honkola_smart-m3_2010}.
+  % More info
+}{0.6}{}
 
 % De: http://www.diem.fi/files/KP_reference%20implementation.pdf
 %  The Semantic Information Broker is the information repository of the Smart 
@@ -286,34 +292,35 @@ In the \emph{triple operation}, expressive queries may need to be translated to 
 \subsection{\citeauthor{nardini_semantic_2013}}
 
 % modelo propuesto
-\citet{nardini_semantic_2013} explore the use of Description Logics on top of an existing \emph{tuple centre} implementation called TuCSoN. % TODO CITA TuCSoN???
-A tuple centre is a tuple space where the behavior can be programmed as a result of the basic coordination primitives.
+\citet{nardini_semantic_2013} explore the use of Description Logics on top of an existing \emph{tuple centre} implementation called TuCSoN \cite{omicini_tucson:_1998}.
+A tuple centre is a \ac{ts} where the behavior can be programmed as a result of the basic coordination primitives.
 TuCSoN aims to provide \emph{tuple centres} that agents can use through Linda-type primitives.
 This interaction can cause reactions which trigger behavior previously implemented in the \emph{tuple centre}.
 
 % cosas relativas al despliegue
-In TuCSoN each \emph{tuple centre} is deployed in device's port and it is identified by a name.
+In TuCSoN each \emph{tuple centre} is deployed in a device's port and is identified by a name.
 The communication with each centre is direct, not based in any underlying network. % no les mola P2P decian en algun lado
 The agents can access to remote \emph{tuple centres} and migrate to them, but these interactions need to be programmed.
 
 % arquitectura
-Nardini et al. defines a domain ontology attached to each centre to provide semantic interpretation to the tuples stored.
+According to \citeauthor{nardini_semantic_2013} each centre has a domain ontology attached.
+These ontologies provide a semantic interpretation to the tuples stored in each centre.
 They extend TuCSoN providing semantic tuples, templates, primitives, reactions and matching mechanism.
 \begin{itemize}
   \item The semantic tuples express the logic terms.
   \item The semantic template defines a language based on logic.
   \item To discriminate common syntactic primitives from semantic ones they use a keyword.
-  \item The semantic reactions redefine events, guards and reactions enabling the use of first-order-logic.
+  \item The semantic reactions redefine TuCSoN's events, guards and reactions enabling the use of first-order-logic.
 	The events define when a reaction should be triggered.
 	The reaction guard represent a set of conditions which need to be satisfied to execute a reaction.
-  \item For the semantic matching mechanism they integrate TuCSoN with a reasoner (Pellet). % citar pellet?
+  \item For the semantic matching mechanism they integrate TuCSoN with a reasoner (Pellet). % TODO citar pellet?
 \end{itemize}
 
 
 
 \subsection{Comparison}
 % TODO CSpaces no hace más que liar el analisis, me planteo no incluirlo
-%		Porque es muy bonito poner ideas felices, pero no ha sido implementado nunca!
+%	Porque es muy bonito poner ideas felices, pero no ha sido implementado nunca!
 
 
 \subsubsection{\acl{ts} model}
