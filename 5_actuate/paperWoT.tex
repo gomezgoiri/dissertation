@@ -1,0 +1,43 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+
+%opening
+\title{}
+\author{}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+
+\end{abstract}
+
+
+% Goal with the paper: Concise, not too ambitious but yet formal in the evaluation and findings.
+% General question: How to Act on a distributed space over HTTP?
+% Personal interest: test Restdesc on a Raspberry Pi, advance in Section 5
+% Main idea: compare the 2 actuation approaches described in Section 5
+%	1) a node which wants to actuate over the space, gets Restdescs of others, reasons and performs a HTTP request.
+%	2) a node writes a task a space (in its own memory), another is notified about that writing, gets the task, performs the task and writes the results.
+%		Problem: This second approach is quite complicated (you need a subscription system, to model tasks and agree on that model)
+%		Otsopack has a subscription system, but it is quite limited and might be difficult to explain together with so many other things (because of the space)
+%	3) Another solution?
+% General problems:
+%	+ What if a node wants to actuate over a light and 2 different nodes manage that parameter. What would be an acceptable change in the environment?
+%	+ Contradictory tasks?
+% Evaluation (ideas):
+%	+ Implement a simple scenario in both ways.
+%		Too much work (silly problems which take time). I may need help from a colleague. Not sure if anybody will accept to do it.
+%	+ How much time, energy and/or memory does the first approach take depending on how many Restdesc we use as input.
+%	+ Total communications needed in each solution (the subscription adds overhead, but also getting all the restdescs from other nodes)
+%	+ Time required to act into the space with each solution (for different size of the network?).
+%	+ Lines of code for each solution,.
+%	+ Other subjective features.
+% Contributions:
+%	+ Act on a completely distributed space build on top of HTTP (REST?) <= indirect communication model to ease developer
+%	+ Check feasibility of reasoning in current platforms.
+
+\section{}
+
+\end{document}
