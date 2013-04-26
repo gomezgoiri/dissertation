@@ -41,19 +41,23 @@
 
 % ----------------------------------------------------------------------------------
 % Más ideas:
-% (primo, vete decidiendo inline si tienen cientific soundness para tí o cuales tienen potencial)
+% (primo, vete decidiendo inline si tienen scientific soundness para tí o cuales tienen potencial)
 
 
 % ------------ las del mail ------------
 % 1. Actuar en un espacio distribuido usando descripciones REST semánticas (interoperabilidad).
 %    Aquí lo de la comparación era para aportar algo distinto al trabajo a los del ETH. Que en una master tesis proponían un escenario en el que usaban Restdesc para actuar en el espacio según las preferencias del usuario.
+% IG> esto seria basicamente hacer REST semantico y probarlo en varios bichos. No lo veo muy research.
 % 2. Abordar alguno de los problemas que quedaban sueltos en el ETH (pero eso podría no ser cosa de un mes)
 %       a) ¿qué hacer cuando 2 actuadores actuan sobre la misma propiedad? => resolución de conflictos
+% IG> esto puede tener sentido si mueves alguna cosa de otro ambito y cambia significativamente. However, no veo que haya un cambio en este escenario. Si lo hay, mola.
 %       b) ¿qué pasa si los objetivos se describen muy vagamente?
+% IG> que tipo de objetivos?
 %       c) si 2 sensores miden distintas temperaturas, ¿cómo saber si se ha actuado correctamente? => incertidumbre (hay compañeros trabajando en esto)
+% IG> no se que podrias usar para tratar incertidumbre. Esto es mas razonamiento. Lo veo un poco alejado
 % 3. Adaptar TSC para que todo esto no sea un cristo para el programador. Ocultar la complejidad de todo esto.
 %    Esto implicaría una evaluación con personas, lo cual sería jodido (y no estoy acostumbrado a ello).
-
+% IG> Una interfaz para programarlos a todos? Y que segun el dispositivo se actue diferente? Esto puede molar. Tu programas algo en general y segun el dispositivo se hace de una forma o de otra. Si se te ocurren ejemplos...
 
 % ------------ nuevas mail ------------
 % 1. Abordar el reto de la autonomía temporal (que se ha dejado de lado en todo momento)
@@ -61,6 +65,7 @@
 %      b. Nodo A se va
 %      c. Nodo B se une
 %      d. Nodo B usa la información de A para hacer algo
+% IG> Esto no lo tratas al escribir en el espacio?
 %    Problemas:
 %      + no parece muy específico de IoT o UbiComp
 %      + complejidad
@@ -74,6 +79,7 @@
 %      d. Actuador actúa jodiendo las preferencias del Nodo A
 %    Algo así como asociar una marca de tiempo y que los actuadores hagan media o lo que sea.
 %    Tirando del hilo, si almacenan las ordenes, es posible que las propaguen a otros sensores interesados si estos se unen al espacio más tarde.
+% IG> puede ser...alguna propuesta mas concreta?
 %
 % 3. Actuar a través de los actuadores con más "energía"
 %     Posibles actuadores (para encontrar escenario inspirador en el que encaje):
@@ -82,9 +88,11 @@
 %         + diferentes pantallas (e.g. la del portatil, móvil, un OLED conectado a un dispositivo embebido)
 %         ( también tenemos un relé preparado, con lo que cualquier cosa que se conecte a la red eléctrica podría ser un actuador, lo malo que no autónomo )
 %     Que si aparece otro en el espacio se turnen o lo que sea.
+% IG> No pillo esta mucho. Envias el trabajo a bichos gordos?
 %
 % 4. Posibilitar la cooperación entre sensores
 %     Usando patron de workflow, o haciendo que ellos se regulen entre sí de alguna forma.
+% IG> Puede estar interesante. Algo mas concreto?
 
 \section{}
 
