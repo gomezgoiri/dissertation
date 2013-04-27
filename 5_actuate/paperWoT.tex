@@ -14,6 +14,21 @@
 \end{abstract}
 
 
+% 3. Adaptar TSC para que todo esto no sea un cristo para el programador. Ocultar la complejidad de todo esto.
+%    Esto implicaría una evaluación con personas, lo cual sería jodido (y no estoy acostumbrado a ello).
+% IG> Una interfaz para programarlos a todos? Y que segun el dispositivo se actue diferente? Esto puede molar. Tu programas algo en general y segun el dispositivo se hace de una forma o de otra. Si se te ocurren ejemplos...
+% AG> Hablamos de 2 cosas distintas. No se si pillo tu idea :-)
+% IG> lenguaje de alto nivel, traducción a algo, etc.
+%	"obtener temperatura" => retorno 1 valor
+%	"obtener temperatura" => retorno una media
+%	"escribo tarea de alto nivel" => middleware distribuye
+%	"enseñar mensaje al usuario" => evaluar 
+%	tarea de forma general => el espacio se encarga de interpretarla y distribuirla
+%	reglas prestablecidas, o que las facilite el usuario
+%	qué actuador tiene más energía, cúal es más grande, etc.
+
+
+
 % Goal with the paper: Concise, not too ambitious but yet formal in the evaluation and findings.
 % General question: How to Act on a distributed space over HTTP?
 % Personal interest: test Restdesc on a Raspberry Pi, advance in Section 5
@@ -57,6 +72,9 @@
 % IG> puede ser...alguna propuesta mas concreta?
 % AG> más?
 
+% Locking, lock remoto, lock temporal, etc.
+% Qué abstracción añadir a esto?
+
 % 4. Posibilitar la cooperación entre sensores
 %     Usando patron de workflow, o haciendo que ellos se regulen entre sí de alguna forma.
 % IG> Puede estar interesante. Algo mas concreto?
@@ -64,14 +82,6 @@
 
 
 % ------------ No se entienden ------------ 
-
-%       b) ¿qué pasa si los objetivos se describen muy vagamente?
-% IG> que tipo de objetivos?
-% AG> objetivos de Restdesc. Simplificando, tú dices "quiero luz" y el te busca un plan para conseguirlo invocando servicios REST.
-% 3. Adaptar TSC para que todo esto no sea un cristo para el programador. Ocultar la complejidad de todo esto.
-%    Esto implicaría una evaluación con personas, lo cual sería jodido (y no estoy acostumbrado a ello).
-% IG> Una interfaz para programarlos a todos? Y que segun el dispositivo se actue diferente? Esto puede molar. Tu programas algo en general y segun el dispositivo se hace de una forma o de otra. Si se te ocurren ejemplos...
-% AG> Hablamos de 2 cosas distintas. No se si pillo tu idea :-)
 
 % 1. Abordar el reto de la autonomía temporal (que se ha dejado de lado en todo momento)
 %      a. Nodo A escribe
@@ -84,6 +94,9 @@
 %      + no parece muy específico de IoT o UbiComp
 %      + complejidad
 %      + no sé si tiene sentido en este contexto que venga un móvil con unas preferencias al espacio, se vaya y luego el entorno se ajuste a sus necesidades
+%       b) ¿qué pasa si los objetivos se describen muy vagamente?
+% IG> que tipo de objetivos?
+% AG> objetivos de Restdesc. Simplificando, tú dices "quiero luz" y el te busca un plan para conseguirlo invocando servicios REST.
 
 % 3. Actuar a través de los actuadores con más "energía"
 %     Posibles actuadores (para encontrar escenario inspirador en el que encaje):
@@ -94,11 +107,13 @@
 %     Que si aparece otro en el espacio se turnen o lo que sea.
 % IG> No pillo esta mucho. Envias el trabajo a bichos gordos?
 
+
 % ------------ No convencen ------------ 
 
 % 1. Actuar en un espacio distribuido usando descripciones REST semánticas (interoperabilidad).
 %    Aquí lo de la comparación era para aportar algo distinto al trabajo a los del ETH. Que en una master tesis proponían un escenario en el que usaban Restdesc para actuar en el espacio según las preferencias del usuario.
 % IG> esto seria basicamente hacer REST semantico y probarlo en varios bichos. No lo veo muy research.
+
 % 2. Abordar alguno de los problemas que quedaban sueltos en el ETH (pero eso podría no ser cosa de un mes)
 %       a) ¿qué hacer cuando 2 actuadores actuan sobre la misma propiedad? => resolución de conflictos
 % IG> esto puede tener sentido si mueves alguna cosa de otro ambito y cambia significativamente. However, no veo que haya un cambio en este escenario. Si lo hay, mola.
