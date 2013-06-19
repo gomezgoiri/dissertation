@@ -4,6 +4,7 @@
 
 \acf{rest} is an architectural style proposed by \citet{fielding_architectural_2000}.
 % descripción de propiedades de REST: hipermedia distribuído
+% que es hipertexto? http://roy.gbiv.com/untangled/2008/rest-apis-must-be-hypertext-driven#comment-718
 It aims to cover certain properties, explained in Section~\ref{sec:network_properties}.
 % Estilos de los que se deriva: ¿?
 To achieve these properties, \ac{rest} establishes the following constraints from other network-based architectural styles:
@@ -16,9 +17,15 @@ To achieve these properties, \ac{rest} establishes the following constraints fro
                    This constraint is composed by the following ones:
 	\begin{itemize}
 	  % explicados en sección 5.2 de Fielding, resumir?
-	  \item \emph{Identification of resources}
+	  \item \emph{Identification of resources}.
+	             Resources are the conceptual targets of hypertext references.
+	             Their identification offers a generic interface to access and changes the values of a resource.
 	  \item \emph{Manipulation of resources through representations}
+	             Representations are composed by a sequence of bytes and the metadata to describe those bytes.
 	  \item \emph{Self-descriptive messages}
+	  % : interaction is stateless between requests,
+	  % standard methods and media types are used to indicate semantics and exchange
+	  % information, and responses explicitly indicate cacheability.
 	  \item \emph{Hypermedia as the engine of application state}
 	\end{itemize}
  \item \textbf{Layered system}: each layer provides services to the top layer (e.g. TCP/IP). % TODO usar acrónimo!
@@ -27,62 +34,52 @@ To achieve these properties, \ac{rest} establishes the following constraints fro
 \end{itemize}
 
 
-Furthermore, \citeauthor{fielding_architectural_2000} remarks the following features as \textbf{musts} a \ac{rest} solution contains\citep{fielding_rest_2008}:
+% Furthermore, \citeauthor{fielding_architectural_2000} remarks the following features as \textbf{musts} a \ac{rest} solution contains\citep{fielding_rest_2008}:
 % descripción de requisitos REST: untangled
 
-A REST API should not be dependent on any single communication protocol, though its successful mapping to a given protocol may be dependent on the availability of metadata, choice of methods, etc. In general, any protocol element that uses a URI for identification must allow any URI scheme to be used for the sake of that identification. [Failure here implies that identification is not separated from interaction.]
-A REST API should not contain any changes to the communication protocols aside from filling-out or fixing the details of underspecified bits of standard protocols, such as HTTP’s PATCH method or Link header field. Workarounds for broken implementations (such as those browsers stupid enough to believe that HTML defines HTTP’s method set) should be defined separately, or at least in appendices, with an expectation that the workaround will eventually be obsolete. [Failure here implies that the resource interfaces are object-specific, not generic.]
-A REST API should spend almost all of its descriptive effort in defining the media type(s) used for representing resources and driving application state, or in defining extended relation names and/or hypertext-enabled mark-up for existing standard media types. Any effort spent describing what methods to use on what URIs of interest should be entirely defined within the scope of the processing rules for a media type (and, in most cases, already defined by existing media types). [Failure here implies that out-of-band information is driving interaction instead of hypertext.]
-A REST API must not define fixed resource names or hierarchies (an obvious coupling of client and server). Servers must have the freedom to control their own namespace. Instead, allow servers to instruct clients on how to construct appropriate URIs, such as is done in HTML forms and URI templates, by defining those instructions within media types and link relations. [Failure here implies that clients are assuming a resource structure due to out-of band information, such as a domain-specific standard, which is the data-oriented equivalent to RPC's functional coupling].
-A REST API should never have “typed” resources that are significant to the client. Specification authors may use resource types for describing server implementation behind the interface, but those types must be irrelevant and invisible to the client. The only types that are significant to a client are the current representation’s media type and standardized relation names. [ditto]
-A REST API should be entered with no prior knowledge beyond the initial URI (bookmark) and set of standardized media types that are appropriate for the intended audience (i.e., expected to be understood by any client that might use the API). From that point on, all application state transitions must be driven by client selection of server-provided choices that are present in the received representations or implied by the user’s manipulation of those representations. The transitions may be determined (or limited by) the client’s knowledge of media types and resource communication mechanisms, both of which may be improved on-the-fly (e.g., code-on-demand). [Failure here implies that out-of-band information is driving interaction instead of hypertext.]
+% A REST API should not be dependent on any single communication protocol, though its successful mapping to a given protocol may be dependent on the availability of metadata, choice of methods, etc. In general, any protocol element that uses a URI for identification must allow any URI scheme to be used for the sake of that identification. [Failure here implies that identification is not separated from interaction.]
+% A REST API should not contain any changes to the communication protocols aside from filling-out or fixing the details of underspecified bits of standard protocols, such as HTTP’s PATCH method or Link header field. Workarounds for broken implementations (such as those browsers stupid enough to believe that HTML defines HTTP’s method set) should be defined separately, or at least in appendices, with an expectation that the workaround will eventually be obsolete. [Failure here implies that the resource interfaces are object-specific, not generic.]
+% A REST API should spend almost all of its descriptive effort in defining the media type(s) used for representing resources and driving application state, or in defining extended relation names and/or hypertext-enabled mark-up for existing standard media types. Any effort spent describing what methods to use on what URIs of interest should be entirely defined within the scope of the processing rules for a media type (and, in most cases, already defined by existing media types). [Failure here implies that out-of-band information is driving interaction instead of hypertext.]
+% A REST API must not define fixed resource names or hierarchies (an obvious coupling of client and server). Servers must have the freedom to control their own namespace. Instead, allow servers to instruct clients on how to construct appropriate URIs, such as is done in HTML forms and URI templates, by defining those instructions within media types and link relations. [Failure here implies that clients are assuming a resource structure due to out-of band information, such as a domain-specific standard, which is the data-oriented equivalent to RPC's functional coupling].
+% A REST API should never have “typed” resources that are significant to the client. Specification authors may use resource types for describing server implementation behind the interface, but those types must be irrelevant and invisible to the client. The only types that are significant to a client are the current representation’s media type and standardized relation names. [ditto]
+% A REST API should be entered with no prior knowledge beyond the initial URI (bookmark) and set of standardized media types that are appropriate for the intended audience (i.e., expected to be understood by any client that might use the API). From that point on, all application state transitions must be driven by client selection of server-provided choices that are present in the received representations or implied by the user’s manipulation of those representations. The transitions may be determined (or limited by) the client’s knowledge of media types and resource communication mechanisms, both of which may be improved on-the-fly (e.g., code-on-demand). [Failure here implies that out-of-band information is driving interaction instead of hypertext.]
 
 
 \subsection{Architectural Properties for Network-based Styles}
 \label{sec:network_properties}
 
-In \citeauthor{fielding_architectural_2000}'s words, the relevant properties which describe a network-based system are the following ones:
-\begin{itemize}
- \item xX
-\end{itemize}
+
+
+In \citeauthor{fielding_architectural_2000}'s words, the relevant properties which describe a network-based system are the following ones \footnote{We refer to the reader to \citet{fielding_architectural_2000} for more thorough explanation}:
+% verificar que no se parece demasiado a sus definiciones o sino poner cursiva.
+\begin{description}
+  \item[Performance] is divided into network performance, user-perceived performance and efficiency.
+		    The first is affected by the styles in the number of interactions and the granularity of data elements.
+		    The second property refers to the impact a user in front of an application perceives.
+		    The third is achieved by minimizing the use of the network.
+  \item[Scalability] measures how an architecture supports a big amount of components and interactions between them.
+  \item[Simplicity] is achieved through the separation of concerns for the components and the generality of architectural elements.
+  \item[Modifiability] encompasses evolvability, extensibility and customization.
+		      The first refers to the degree in which a component can be implemented without negatively impacting on others.
+		      The second measures the ability to add functionality to the system.
+		      The third is the ability to customize the behavior of an architectural element temporarily.
+  \item[Configurability] is related with the extensibility and the reusability.
+  \item[Reusability] is the ability to reuse components, connectors or data elements without modifying other apps.
+  \item[Visibility] is the ability of a component of monitoring or mediating in the interaction between other two components.
+  \item[Portability] is the ability of working in different environments.
+  \item[Reliability] is the degree in which an architecture depends on the failures of the system or components, connectors or partially incorrect data.
+\end{description}
+
+
+% Requisitos de ealy web, propiedades deseables
+%   Low entry-barrier
+%   Extensibilidad
+%   Distributed Hypermedia
+%   Internet-scale
 
 % una tablita de cómo hereda propiedades de los estilos anteriores?
 % y si quieren más información, que miren en la tesis de fielding.
 
-
-% Requisitos de WWW
-    Low entry-barrier
-        la participación es voluntaria
-        LEB para permitir su adopción suficiente
-        hypermedia para lectores:
-            simplicidad y generalidad
-                misma interfaz en todas las fuentes de información
-            flexibilidad
-                con links puedes estructurar ilimitadamente
-            manipulación directa de links
-                guian al lextor por la aplicación
-            simple queries
-                introducción directa de datos de usuario y renderización (¿se referirá a introducir la URL?)
-        hypermedia para autores:
-            la disponibilidad parcial no previene crear contenidos
-            lenguaje de hipertexto es simple y posible de usar con las herramientas existentes
-        app developers
-            todos los protocolos se definían como texto
-            la comunicación se puede ver y evaluar usando htas de red existentes
-    Extensibilidad
-    Distributed Hypermedia
-        hipermedia: control de la app embebido en la presentación
-        la información puede almacenarse en localizaciones remotas
-        large-grain data transfer
-            requiere mover información desde donde se almacena a donde se usa
-        la usabilidad es sensible a la latencia percibida por el usuario
-            tiempo transcurrido entre clicar el link y renderizar el resultado
-    Internet-scale
-        Anarchic Scalability
-        Independent Deployment
-% propiedades deseables de la web
-% estilos que las añaden
-% comparar las extensiones con las restricciones añadidas por el estilo
 
 
 \subsection{Implementation of \ac{rest} style}
