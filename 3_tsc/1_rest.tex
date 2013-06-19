@@ -9,11 +9,11 @@ It aims to cover certain properties, explained in Section~\ref{sec:network_prope
 % Estilos de los que se deriva: ¿?
 To achieve these properties, \ac{rest} establishes the following constraints from other network-based architectural styles:
 % explicarlo o es demasiado obvio?
-\begin{itemize}
- \item \textbf{Client-server} (CS)
- \item \textbf{Stateless}: the state is fully stored in the client and therefore each request has all the information needed to process it.
- \item \textbf{Cache}: when added to the CS constraint, this style replicates content obtained from a server in the client.
- \item \textbf{Uniform interface}: is the key constraint which distinguishes \ac{rest} from other architectural styles.
+\begin{description}
+ \item[Client-server] (CS)
+ \item[Stateless] the state is fully stored in the client and therefore each request has all the information needed to process it.
+ \item[Cache] when added to the CS constraint, this style replicates content obtained from a server in the client.
+ \item[Uniform interface] is the key constraint which distinguishes \ac{rest} from other architectural styles.
                    This constraint is composed by the following ones:
 	\begin{itemize}
 	  % explicados en sección 5.2 de Fielding, resumir?
@@ -28,10 +28,10 @@ To achieve these properties, \ac{rest} establishes the following constraints fro
 	  % information, and responses explicitly indicate cacheability.
 	  \item \emph{Hypermedia as the engine of application state}
 	\end{itemize}
- \item \textbf{Layered system}: each layer provides services to the top layer (e.g. TCP/IP). % TODO usar acrónimo!
- \item \textbf{Code-On-Demand}: the client has a set of resources which does not know how to process.
+ \item[Layered system] each layer provides services to the top layer (e.g. TCP/IP). % TODO usar acrónimo!
+ \item[Code-On-Demand] the client has a set of resources which does not know how to process.
        That \emph{know-how} is downloaded from the server.
-\end{itemize}
+\end{description}
 
 
 % Furthermore, \citeauthor{fielding_architectural_2000} remarks the following features as \textbf{musts} a \ac{rest} solution contains\citep{fielding_rest_2008}:
@@ -50,7 +50,7 @@ To achieve these properties, \ac{rest} establishes the following constraints fro
 
 
 
-In \citeauthor{fielding_architectural_2000}'s words, the relevant properties which describe a network-based system are the following ones \footnote{We refer to the reader to \citet{fielding_architectural_2000} for more thorough explanation}:
+In \citeauthor{fielding_architectural_2000}'s words, the relevant properties which describe a network-based system are the following ones \footnote{We refer to the reader to \citet{fielding_architectural_2000} for the complete thorough analysis.}:
 % verificar que no se parece demasiado a sus definiciones o sino poner cursiva.
 \begin{description}
   \item[Performance] is divided into network performance, user-perceived performance and efficiency.
@@ -70,6 +70,29 @@ In \citeauthor{fielding_architectural_2000}'s words, the relevant properties whi
   \item[Reliability] is the degree in which an architecture depends on the failures of the system or components, connectors or partially incorrect data.
 \end{description}
 
+\begin{center}
+\begin{tabular}{lccccccccccccc}
+Style &
+\rotatebox{90}{Net Perform} &
+\rotatebox{90}{UP Perform} &
+\rotatebox{90}{Efficiency} &
+\rotatebox{90}{Scalability} &
+\rotatebox{90}{Simplicity} &
+\rotatebox{90}{Evolvability} &
+\rotatebox{90}{Extensibility} &
+\rotatebox{90}{Customiz.} &
+\rotatebox{90}{Configur.} &
+\rotatebox{90}{Reusability} &
+\rotatebox{90}{Visibility} &
+\rotatebox{90}{Portability} &
+\rotatebox{90}{Reliability} \\
+\hline
+Early web & $-$ & $\pm$ & $+$ & $+++$ & $++$ & $++$ & ~ & ~ & ~ & $+$ & $+$ & $+$ & $+$ \\
+REST & $-$ & $++$ & $++$ & $++++$ & $+++\pm$ & $++$ & $+$ & ~ & $+$ & $+$ & $\pm$ & $+$ & $+$ \\ % LCODC$SS + Uniform Interface (simple, visible, reusable)
+TSC & × & × & × & × & × & × & × & × & × & × & × & × & ×\\
+\hline
+\end{tabular}
+\end{center}
 
 % Requisitos de ealy web, propiedades deseables
 %   Low entry-barrier
