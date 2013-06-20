@@ -11,26 +11,26 @@ It aims to cover certain properties, explained in Section~\ref{sec:network_prope
 To achieve these properties, \ac{rest} establishes the following constraints from other network-based architectural styles:
 % explicarlo o es demasiado obvio?
 \begin{description}
- \item[Client-server] (CS)
- \item[Stateless] the state is fully stored in the client and therefore each request has all the information needed to process it.
- \item[Cache] when added to the CS constraint, this style replicates content obtained from a server in the client.
- \item[Uniform interface] is the key constraint which distinguishes \ac{rest} from other architectural styles.
+ \item[Client-server (CS)]
+ \item[Stateless (S)] the state is fully stored in the client and therefore each request has all the information needed to process it.
+ \item[Cache (\$)] when added to the CS constraint, this style replicates content obtained from a server in the client.
+ \item[Uniform interface (U)] is the key constraint which distinguishes \ac{rest} from other architectural styles.
                    This constraint is composed by the following ones:
-	\begin{itemize}
-	  % explicados en sección 5.2 de Fielding, resumir?
-	  \item \emph{Identification of resources}.
-	             Resources are the conceptual targets of hypertext references.
-	             Their identification offers a generic interface to access and changes the values of a resource.
-	  \item \emph{Manipulation of resources through representations}
-	             Representations are composed by a sequence of bytes and the metadata to describe those bytes.
-	  \item \emph{Self-descriptive messages}
-	  % : interaction is stateless between requests,
-	  % standard methods and media types are used to indicate semantics and exchange
-	  % information, and responses explicitly indicate cacheability.
-	  \item \emph{Hypermedia as the engine of application state}
-	\end{itemize}
- \item[Layered system] each layer provides services to the top layer (e.g. TCP/IP). % TODO usar acrónimo!
- \item[Code-On-Demand] the client has a set of resources which does not know how to process.
+    \begin{itemize}
+	% explicados en sección 5.2 de Fielding, resumir?
+	\item \emph{Identification of resources (ID)}.
+		    Resources are the conceptual targets of hypertext references.
+		    Their identification offers a generic interface to access and changes the values of a resource.
+	\item \emph{Manipulation of resources through representations (REP)}
+		    Representations are composed by a sequence of bytes and the metadata to describe those bytes.
+	\item \emph{Self-descriptive messages (DESC)}
+	% : interaction is stateless between requests,
+	% standard methods and media types are used to indicate semantics and exchange
+	% information, and responses explicitly indicate cacheability.
+	\item \emph{Hypermedia as the engine of application state (HATEOAS)}
+    \end{itemize}
+ \item[Layered system (L)] each layer provides services to the top layer (e.g. TCP/IP). % TODO usar acrónimo!
+ \item[Code-On-Demand (COD)] the client has a set of resources which does not know how to process.
        That \emph{know-how} is downloaded from the server.
 \end{description}
 
@@ -47,7 +47,7 @@ To achieve these properties, \ac{rest} establishes the following constraints fro
 
 
 
-\section{Protocols for \acl{rest}}
+\section{Protocols to Follow the \ac{rest} Style}
 \label{sec:protocols}
 
 % hablar un poco de HTTP y CoAP y decir por qué no hablamos más a menudo de CoAP
@@ -85,6 +85,53 @@ However, we have chosen to work with \ac{http} for the following reasons:
 
 \section{\acl{tsc}}
 \label{sec:tsc_vs_rest}
+
+\ac{tsc} consist of a shared space which is accessed using some known primitives.
+\emph{Per se}, \ac{tsc} does not contradict in any sense the \ac{rest} principles:
+
+\begin{description}
+ \item[CS]. Providing the access to each space is centralized in a machine, clients can access to it using \emph{CS}.
+           This does not prevent to use a distributed semantic repository in the backend.
+ \item[S]. The primitives to access the space imply simple read and writes which do not store any state in the server.
+ \item[\$] The semantic content stored in the space can be cached.
+           However, the dynamism of the underlying network makes caching challenging to configure. % quería poner "tune up" pero "configure" me ha sonado más fino
+ \item[U]
+    \begin{itemize}
+	\item \emph{ID}. There are types of identified resources in \ac{tsc}: spaces, RDF Graphs and certain elements of the RDF Triples.
+	                 All of them are identified by URIs.
+	                 The space can be seen as a coarse-grained view of the underlying graphs. % TODO coarse grained es lo contrario de fine-grained?
+	                 The graphs have sets of triples which are usually related and describe a unit of knowledge. % A RDF triple by itself cannot transmit too much information
+	                 Self-identified triple's subjects, predicates or objects are the source of concept linking.
+	\item \emph{REP}. The RDF graphs and triples mentioned above can be represented using different standard serializations.
+	\item \emph{DESC}. The messages derived from the primitives can be self-describing.
+	\item \emph{HATEOAS}. This is the most challenging property to achieve with RDF-based representations.
+	                      However, some relevant solutions propose means to fulfill this property.
+    \end{itemize}
+ \item[L] each layer provides services to the top layer (e.g. TCP/IP). % TODO usar acrónimo!
+ \item[COD] the client has a set of resources which does not know how to process.
+       That \emph{know-how} is downloaded from the server.
+\end{description}
+
+
+
+That is, considering
+
+% acceso a fuentes de datos como si estuviesen en una BBDD, eso no debería impedir
+This primitives imply writing and reading from that space.
+% presentar interfaz HTTP
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 % presentar en qué consistirá la base de nuestra implementación
 
