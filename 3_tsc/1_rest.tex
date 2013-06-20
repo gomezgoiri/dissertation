@@ -1,6 +1,7 @@
 %    propiedades aportadas por REST a IoT
 
 \section{\acl{rest}}
+\label{sec:rest}
 
 \acf{rest} is an architectural style proposed by \citet{fielding_architectural_2000}.
 % descripción de propiedades de REST: hipermedia distribuído
@@ -45,8 +46,64 @@ To achieve these properties, \ac{rest} establishes the following constraints fro
 % A REST API should be entered with no prior knowledge beyond the initial URI (bookmark) and set of standardized media types that are appropriate for the intended audience (i.e., expected to be understood by any client that might use the API). From that point on, all application state transitions must be driven by client selection of server-provided choices that are present in the received representations or implied by the user’s manipulation of those representations. The transitions may be determined (or limited by) the client’s knowledge of media types and resource communication mechanisms, both of which may be improved on-the-fly (e.g., code-on-demand). [Failure here implies that out-of-band information is driving interaction instead of hypertext.]
 
 
+
+\section{Protocols for \acl{rest}}
+\label{sec:protocols}
+
+% hablar un poco de HTTP y CoAP y decir por qué no hablamos más a menudo de CoAP
+
+Historically, \acf{http} has been considered a suitable protocol to follow the \ac{rest} style. % TODO cite
+\ac{http} is a simple protocol whose adoption by computing platforms is massive.
+
+
+However, in the last few years \acf{coap} has emerged as a specialized web transfer protocol for resource constrained devices. % has emerged, has arisen?
+Some noteworthy features of \ac{coap} are
+(1) the reduced message size,
+(2) the use of UDP as a transport layer (with the possibility of using \emph{multicast} communication),
+(3) similarity with \ac{http} (both to reuse its properties and to ease cross-protocol proxying),
+(4) a resource discovery mechanism. % TODO cita a CORE
+% mencionar seguridad?
+
+
+One could defend that to design a lightweight \ac{tsc} solution \ac{coap} should be used as a baseline.
+However, we have chosen to work with \ac{http} for the following reasons:
+\begin{itemize}
+  \item RDF-based media-formats can be rather verbosed.
+	This contrasts with \ac{coap}'s message size limitations.
+	Dealing with this limitations was not one main goals of the thesis.
+	However, we have considered them at some points of the dissertation to avoid unrealistic assumptions.
+  \item \ac{coap} is an ongoing standard.
+        Therefore, its definition slightly changes in each draft version.
+        A practical limitation of this is that at the moment there are few libraries
+        and tools to work with \ac{coap}.
+        This limits the range of platforms which could adopt any solution proposed.
+  \item Due to its similarities with \ac{coap}, the future adoption of the latter should be relatively straightforward.
+        % sin contar con los aspectos destacados anteriormente
+\end{itemize}
+
+
+
+\section{\acl{tsc}}
+\label{sec:tsc_vs_rest}
+
+% presentar en qué consistirá la base de nuestra implementación
+
+% compararlo en términos de las propiedades comentadas anteriormente
+%    Cache => guay pero para datos que cambian tan a menudo es un tema complejo
+
+
+% REST no dice nada, pero de facto el protocolo es HTTP
+% durante el desarrollo de esta tesis en resource constrained ha surgido CoAP
+%   muchas de las cosas aquí comentadas son iguales o mejor sobre CoAP
+%   de todas formas, ha habido algo que ha guiado nuestro diseño: librerias existentes => afecta a plataformas
+%         si, pero para eso está lo de layered approach! => motivos prácticos
+
+% Para la comparativa final sólo
+
 \subsection{Architectural Properties for Network-based Styles}
 \label{sec:network_properties}
+
+% Cómo afecta la app propuesta => ir actualizando al final de otras secciones???
 
 
 
