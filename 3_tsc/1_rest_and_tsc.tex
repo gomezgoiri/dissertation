@@ -126,11 +126,173 @@ However, we have chosen to work with \ac{http} for the following reasons:
 \end{description}
 
 
-% Discussión profunda de SPARQL y REST???
+% CITAR:
+% So far, the compatibility of \ac{tsc} with the \acs{http} RESTful style has been proved from a formal \cite{hernandez_formal_2010} point of view.
+% Papers sobre TSC y su discurso sobre la WWW
+
 % Algunas ideas rescatables de la anterior intro:
 % Both \ac{wot} and \ac{tsc} can be considered resource oriented solutions since they put emphasis in giving access to data resources.
 % While \ac{tsc} enables expressive queries, dynamic discovery and non human-mediated cooperation among objects, the \ac{wot} adopts the scalable properties of the World Wide Web and it is entirely based on web standards.
-% In this chapter we explain how to take advantage of both approaches, bringing together the best of both worlds.
 
 
-% presentar interfaz HTTP
+\subsection{Aligning \acs{tsc} with \acs{http}}
+
+% TODO Revisar cosas del texto original que no encajaban aquí (están comentadas)
+
+In this section, we present a \ac{tsc} \acs{api} over \ac{http} to give a practical overview of \ac{tsc}'s \acs{rest}fulness.
+
+
+\subsubsection{\acs{tsc} resources}
+
+Three key concepts are important to understand the resources: agents share information in a common \textbf{space}.
+A space is identified by an \acs{uri}.
+Therefore, all the operations in \ac{tsc} are performed against a particular space.
+%By default, all applications connect to a common standard space, but they can optionally choose to connect to a particular private space.
+Within a space, the information is stored in sets of \textbf{triples} called \textbf{graphs}.
+Each graph can also be identified by an \acs{uri}.
+The \acs{rdf} \textbf{triples} are the underlying concept of all the \ac{sw} languages.
+Each triple is composed by a subject (which is a \acs{uri}), a predicate (also a \acs{uri}) and a value (which can be a \acs{uri} or a literal), as shown in the Figure~\ref{fig:triples_example}.
+
+As detailed later, most common operations in \ac{tsc} attempt to add or remove graphs.
+% este es un tema "delicado" desde el punto de vista de TSC, así que mejor si lo tratamos a parte:
+% as well as to query for graphs or for sets of triples retrieved from different graphs.
+In order to perform the queries, which enable the selection of a subset of the semantic content hold in a given space, a \textbf{template} is required.
+The wildcard templates used by default
+\footnote{
+  % Por qué no SPARQL?
+  More sophisticated query languages like SPARQL (\url{http://www.w3.org/TR/rdf-sparql-query/}) could be used. % sophisticated o expressive?
+  However, not many embedded platforms have parsers for these languages available.
+  This could be an obstacle for the adoption of the middleware.
+  Therefore, we have opted for using wildcard templates, which are in turn much more simple to process.
+  In any case, the nodes able to parse these query languages can easily decompose a query on wildcard templates.
+}
+are special triples with optional wildcard subject, predicate and/or object.
+For example, the template \texttt{?s foaf:knows gomezgoiri:aitor} could be employed to select instances which represent people who know Aitor (see Figure~\ref{fig:tsc_resources}).
+
+% TODO Discussión profunda de SPARQL y REST???
+
+\InsertFig{tsc_resources}{fig:tsc_resources}{
+  Schematic view of a space with four graphs and sample triples for one of these graphs.
+}{
+  Aliases for the beginning of most URIs, known as prefixes in most Semantic languages, are used for the lack of clarity.
+}{1}{}
+
+
+\subsubsection{Adopted \acs{tsc} primitives}
+\label{sec:primitives}
+
+\acs{tsc} derives some primitives originally defined in the Linda language \citep{gelernter_generative_1985} to access to the semantic information hold in each graph.
+In this section, we explain these primitives.
+
+\begin{itemize}
+ \item The \textbf{write} primitive allows writing a graph into a given space (identified by its \acs{uri}).
+	The set of triples received by this primitive will be stored together in the same graph, returning the \acs{uri} which identifies that graph.
+	The graph \acs{uri} can be used to access directly to that graph later on, or to create new triples and relate contents.
+
+  \begin{lstlisting}
+    write(space_URI, triples): URI              [1]
+  \end{lstlisting}
+
+
+  \item The \textbf{read} returns a graph belonging to a given space which contains at least a triple matching the given template or has the given \acs{uri} as its identifier.
+	If more than one graph fulfill one of these conditions, just one of them is returned (nondeterministically).
+	It should be remarked that it has been designed as a non blocking operation.
+% why?
+  \item The \textbf{take} primitive behaves like a destructive \textbf{read}, deleting the graph returned from the space.
+
+  \begin{lstlisting}
+    read(space_URI, graph_URI): triples         [2]
+    read(space_URI, template): triples          [3]
+    take(space_URI, graph_URI): triples         [4]
+    take(space_URI, template): triples          [5]
+  \end{lstlisting}
+
+
+  \item The \textbf{query} primitive aims to see the space as a whole triplestore, returning all the triples matching the given template.
+	
+	The \ac{rest}fulness of this primitive could be argued since it does not operate at resource level,
+	but mixing several resources.
+	
+	However, we believe that it is useful to have an endpoint for the queries which involve many graphs.
+	\citet{kjernsmo_necessity_2012} discusses this topic in depth. % TODO Mirar otras citas???
+	
+  \begin{lstlisting}
+    query(space_URI,template): triples          [6]
+  \end{lstlisting}
+
+%  \item Space management primitives.
+%	A node can join or leave a space using \linebreak \texttt{joinSpace(space\_URI)} or \texttt{leaveSpace(space\_URI)}.
+\end{itemize}
+
+
+
+\subsubsection{\acs{http} \acs{api} for \acs{tsc}}
+\label{sec:httpapi}
+
+As both \ac{tsc} and \ac{http} are \ac{rest} compliant, their similarities are evident.
+In the same way \ac{tsc} has the already explained primitives, \ac{http} has verbs to get, create, update or remove resources (GET, PUT, POST, DELETE).
+%The main purpose of \acs{tsc} primitives is not to access data but to coordinate the nodes accessing to that data.
+Consequently, the translation between these two worlds is straightforward.
+
+\begin{sloppypar}
+According to the \ac{rest} principles the interaction with an API must be hypertext-driven \citep{fielding_rest_2008}.
+Therefore, the human-oriented representation of the \ac{api} should be completely \emph{browseable} (e.g. using \acs{html}).
+Regarding the machine-oriented (i.e. semantic) representation of the \ac{api}, several solutions to enable hypermedia driving have been proposed by \citet{verborgh_functional_2012} and \citet{kjernsmo_necessity_2012}. % mencionar que son experimentales?
+Independently of the mechanism adopted, in this section we propose a optional \ac{api} which tries to stress \ac{tsc}'s compliance with \ac{http}.
+\end{sloppypar}
+
+The list of spaces a node is joined to are available under \textit{/spaces}.
+Each space is identified by an \acs{uri} (e.g. \url{http://space1}).
+All the resources of that space, both real (i.e. graphs) or virtual (i.e. query) are listed under $/spaces/\{space\_uri\}$ (summarized by \emph{sp} from now on).
+Each graph is available on ${\{sp\}/graph/\{graph\_uri\}}$.
+If we make an \acs{http} DELETE to that resource, under \ac{tsc}'s perspective, we take that graph from the space.
+The rest of the mappings are shown in the Table~\ref{tab:tscAPI}.
+
+\begin{table} %http://en.wikibooks.org/wiki/LaTeX/Floats,_Figures_and_Captions#Wide_figures_in_two_column_documents
+  \centering
+  \caption {
+    \acs{http} mapping for the primitives detailed in the Section~\ref{sec:primitives}. \textit{sp} is a space \acs{uri},
+    \textit{g} is a graph \acs{uri}, \textit{s}, \textit{p} and \textit{o-uri} are subject, predicate and object \acsp{uri} or wildcards (represented with an as \textit{*}).
+    When the template's object is a literal, it can be expressed specifying its value (\textit{o-val}) and its type (\textit{o-type}).
+    \medskip
+  }
+  \begin{tabular}{c|l|c}
+      \acs{http} request & \acs{url} & Returns \\
+      \hline
+      POST & \{sp\}/graphs/ & [1] \\
+      GET & \{sp\}/graphs/\{g\} & [2] \\
+      GET & \{sp\}/graphs/wildcards/\{s\}/\{p\}/\{o-uri\} & [3] \\
+      & \{sp\}/graphs/wildcards/\{s\}/\{p\}/\{o-type\}/\{o-val\} & \\
+      DELETE & \{sp\}/graphs/\{g\} & [4] \\
+      DELETE & \{sp\}/graphs/wildcards/\{s\}/\{p\}/\{o-uri\} & [5] \\
+      & \{sp\}/graphs/wildcards/\{s\}/\{p\}/\{o-type\}/\{o-val\} & \\
+      GET & \{sp\}/query/wildcards/\{s\}/\{p\}/\{o-uri\} &  [6] \\
+      & \{sp\}/query/wildcards/\{s\}/\{p\}/\{o-type\}/\{o-val\} & \\
+  \end{tabular}
+  \label{tab:tscAPI}
+\end{table}
+
+
+\paragraph{Status Codes}
+The \acs{api} should be compliant with the standardized \acs{http} status codes.
+These codes are sent back in the response as part of the header.
+For instance, the \ac{tsc} middleware returns the 404 error when no significant result can be found for a primitive.
+This adoption, apart from enhancing the compatibility with other web applications, could enable the modular adoption of the API.
+For example, if a node does not offer a wildcard based \textit{query}, it will not affect the behavior of the rest of the nodes of an space.
+Instead, they will interpret these cases as empty responses.
+This modularity becomes crucial to ease the partial adoption on new platforms.
+
+\paragraph{Content Negotiation}
+Another key aspect of the \acs{http} protocol the \acs{api} should take advantage of is the \textit{content negotiation}.
+This mechanism allows to specify the desired representation for a content on the client side and to express what representation is sent as a response from the data provider side.
+For that purpose, the client adds an \textit{Accept} field to the \acs{http} header with a weighted list of media types it understands.
+Then, the server will answer with the best possible format it knows about, specifying the \textit{Content-type} in the response.
+
+The benefits of using this mechanism in a \ac{tsc} middleware are two-fold.
+Firstly, it enhances the browsability of the primitives with human understandable \acs{http} responses.
+Secondly, it allows different semantic representations (e.g. RDF/XML\footnote{\url{http://www.w3.org/TR/REC-rdf-syntax/}}, N-Triples\footnote{\url{http://www.w3.org/2001/sw/RDFCore/ntriples/}} or N3\footnote{\url{http://www.w3.org/TeamSubmission/n3/}}).
+The latter characteristic becomes crucial since not all the nodes may understand all the formats (e.g. a mobile phone may not have a RDF/XML parser).
+%This is true even if all the languages use the same basic concepts (i.e. \acs{rdf} Triples).
+In these cases, the compatibility of both sides can be ensured through a conversion carried out in the server side.
+Furthermore, expressing the preference for a semantic format can be useful too in other cases.
+For example, to obtain the less verbose answer.

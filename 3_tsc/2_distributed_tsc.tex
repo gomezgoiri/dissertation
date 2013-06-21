@@ -22,139 +22,31 @@
 % condiciones relajadas: consistencia, razonamiento distribuído
 
 
-
 % SECCIÓN: CUÁL ES EL DISEÑO GENERAL QUE SE PODRÍA UTILIZAR DESDE FUERA Y QUE HA MOTIVADO NUESTRA IMPLEMENTACIÓN
-\section{Designing Triple Spaces over a canonical RESTful interface}
 % ALGO QUE DIGA QUE NO DEPENDE DE OTSOPACK
 % TODO: other name? ``defined layers'' o así? cómo decir ``mira, lo importante es que puede haber diferentes grados de
 % implementación aquí gracias al diseño que mostramos en esta sección en 5 palabras???
 
-So far, the compatibility of Triple Spaces with the HTTP RESTful style has been proved both from a formal \citep{hernandez_formal_2010} and qualitative point of view \citep{gomez-goiri_complementarity_2011}.
-In this section our model towards the achievement of this mapping will be discussed in detail.
-
-\subsection{TSC resources}
-
-As was previously stated, our RESTful API is based on the Triple Space Computing paradigm, which is a Tuplespace variation where the information is stored in RDF.
-Three key concepts are important at this point: agents share information in a common \textbf{space}.
-A space is identified by an URI.
-Therefore, all the operations performed in Triple Space are performed against a particular space.
-By default, all applications should connect to a common standard space, but they can optionally choose to connect to a particular private space.
-Within a space, the information is stored in sets of \textbf{triples} called \textbf{graphs}.
-Each graph can also be identified by an URI. The RDF \textbf{triples} are the underlying concept of all the Semantic Web languages.
-Each triple is composed by a subject (which is a URI), a predicate (also a URI) and a value (which can be a URI or a literal), as shown in the Figure \ref{fig:ontology}.
-
-As detailed later, the operations supported by Otsopack attempt to add or remove graphs, as well as to query for graphs or query for sets of triples retrieved from different graphs.
-In order to perform the queries, which enable the selection of a subset of the semantic content hold in a given space, a \textbf{template} is required.
-Although more sophisticated query languages like SPARQL exist, in Otsopack wildcard templates are used, which are special triples with optional wildcard subject, predicate and/or objects.
-For example, the template \texttt{?s foaf:knows kth:sven} could be employed to select instances which represent people who know Sven (see Figure \ref{fig:ontology}).
-
-
-\InsertFig{semanticExample}{fig:ontology}{
-  Semantic example
-}{
-  Sample triples expressed both grafically and in the RDF triple form.
-  At the bottom a template example is shown.
-  Aliases for the beginning of most URIs, known as prefixes in most Semantic languages, are used for the lack of clarity.
-}{1}{}
-
-
-\subsection{Adopted TSC primitives}
-\label{sec:primitives}
-
-TSC derives some primitives originally defined in the Linda language \citep{gelernter_generative_1985} to access to the semantic information hold in each graph.
-In this section, these primitives will be explained.
-
-\begin{itemize}
- \item The \textbf{write} primitive allows writing a graph into a given space (identified by its URI). The set of
-triples received by this primitive will be stored together in the same graph, returning the URI which identifies that
-graph. The graph URI can be used to access directly to that graph later on, or to create new triples and relate
-contents.
-
-  \begin{lstlisting}
-    write(space_URI, triples): URI                [1]
-  \end{lstlisting}
-
-
-  \item The \textbf{read} returns a graph belonging to a given space which contains at least a triple matching the given
-template or has the given URI as its identifier. If more than one graph fulfill one of these conditions, just one of
-them is returned (nondeterministically). It should be remarked that it has been designed as a non blocking operation.
-% why?
-  \item The \textbf{take} primitive behaves like a destructive \textbf{read}, deleting the graph returned from the
-space.
-
-  \begin{lstlisting}
-    read(space_URI, graph_URI): triples           [2]
-    read(space_URI, template): triples            [3]
-    take(space_URI, graph_URI): triples           [4]
-    take(space_URI, template): triples            [5]
-  \end{lstlisting}
-
-
-  \item The \textbf{query} primitive aims to see the space as a whole triplestore, returning all the triples matching
-the given template.
-  \begin{lstlisting}
-    query(space_URI,template): triples            [6]
-  \end{lstlisting}
-
-  \item Space management primitives. A node can join or leave a space using \linebreak \texttt{joinSpace(space\_URI)} or
-\texttt{leaveSpace(space\_URI)}.
-\end{itemize}
-
-
-
-\subsection{HTTP API for TSC}
-In the same way TSC has the explained primitives, HTTP has verbs to get, create, update or remove resources (GET,
-PUT, POST, DELETE). Although the main purpose of TSC primitives is not the access to the data but the coordination of
-the nodes accessing to that data, as both the RESTful style and TSC are resource oriented architectures, the translation
-between these two worlds is straightforward (see Table \ref{tab:otsopackAPI}).
-
-
-\begin{table} %http://en.wikibooks.org/wiki/LaTeX/Floats,_Figures_and_Captions#Wide_figures_in_two_column_documents
-\centering
-\caption {HTTP mapping for the primitives detailed in the section \ref{sec:primitives}. \textit{sp} is a
-space URI, \textit{g} is a graph URI, \textit{s}, \textit{p} and \textit{o-uri} are subject, predicate and object URIs
-or wildcards (represented with an as \textit{*}). When the template's object is a literal, it can be expressed
-specifying its value (\textit{o-val}) and its type (\textit{o-type}).}
-\begin{tabular}{|c|l|c|}
-\hline
-HTTP request & URL & Returns \\
-\hline \hline
-GET & \{sp\}/query/wildcards/\{s\}/\{p\}/\{o-uri\} &  [6] \\
- & \{sp\}/query/wildcards/\{s\}/\{p\}/\{o-type\}/\{o-val\} & \\
-GET & \{sp\}/graphs/\{g\} & [2] \\
-GET & \{sp\}/graphs/wildcards/\{s\}/\{p\}/\{o-uri\} & [3] \\
- & \{sp\}/graphs/wildcards/\{s\}/\{p\}/\{o-type\}/\{o-val\} & \\
-DELETE & \{sp\}/graphs/\{g\} & [4] \\
-DELETE & \{sp\}/graphs/wildcards/\{s\}/\{p\}/\{o-uri\} & [5] \\
- & \{sp\}/graphs/wildcards/\{s\}/\{p\}/\{o-type\}/\{o-val\} & \\
-% ver como poner esto en una sola línea: As in our solution writings are made locally, POST is not mapped with
-% write primitive} \\
-\hline
-\end{tabular}
-\label{tab:otsopackAPI}
-\end{table}
-
 % Lo que quiero (yo Pablo) decir aquí es que sigue siendo distribuído aunque parezca que es uno a uno.
 
-\subsubsection{Distribution}
 
-The HTTP mapping presented is done among a \textit{client} and a \textit{server}.
-However, as previously detailed, Triple Spaces provides reference autonomy, so a consumer will query the space without knowing the particular addresses of the nodes composing that space.
-This autonomy is managed at other upper and optional layers explained in the following section, which manage the discovery.
-However, this HTTP mapping is all a data provider needs to serve information in the space, and it is also what a data consumer needs to interrogate a multicast provider (a component provided by Otsopack to contact multiple nodes in a particular space).
+\subsection{Distributed \ac{tsc}}
 
-\subsubsection{Status Codes}
-Otsopack is compliant with the standardized HTTP status codes sent back as part of the header in the response (e.g. when no significant result can be found for a primitive the 404 error is returned).
-This adoption - apart from enhancing the compatibility with other web applications - enables the modular adoption of our API and if a node does not offer a wildcard based \textit{query}, it will not affect the behavior of the rest of the nodes of an space.
-Instead, they will interpret these cases as empty responses.
-This modularity becomes crucial to ease the partial adoption on new platforms \citep{gomez-goiri_collaboration_2011}.
+% ahora vamos a empezar a joder el tema de TSC suponiendo que lo distribuimos a través de HTTP
+% y lo justificamos xD
 
-\subsection{Content Negotiation}
-Another key aspect of the HTTP protocol we have taken advantage of is the \textit{content negotiation}.
-This mechanism allows to specify the desired representation for a content on the client side and to express what representation is sent as a response from the data provider side.
-For that purpose the client adds an \textit{Accept} field to the HTTP header with a weighted list of media types it understands and the server answers with the best possible format it knows about, specifying the \textit{Content-type} in the response.
+The \acs{http} mapping is done among a \textit{client} and a \textit{server}.
+However, as previously detailed, \ac{tsc} provides reference autonomy, so a consumer will query the space without knowing the particular addresses of the nodes composing that space.
+This autonomy is managed at other upper and optional layers explained in the following section.
+However, this \acs{http} mapping is all a data provider needs to serve information in the space.
+% Quitado porque ni yo mismo lo entendía ahora...
+%, and it is also what a data consumer needs to interrogate a multicast provider (a component provided by Otsopack to contact multiple nodes in a particular space).
 
-In Otsopack this mechanisms not only enhance the browsability of the primitives with human understandable HTML responses, but they allows different Semantic representations (e.g. RDF/XML\footnote{http://www.w3.org/TR/REC-rdf-syntax/}, N-Triples\footnote{http://www.w3.org/2001/sw/RDFCore/ntriples/} or N3\footnote{http://www.w3.org/TeamSubmission/n3/}).
-This characteristic becomes crucial since not all the nodes may understand all the languages (e.g. a mobile phone may not have a RDF/XML parser), even if they all use the same basic concepts: RDF Triples.
-The compatibility of both sides can be ensured through a conversion carried out in the server side.
-On the other hand, even if both the server and the client know how to use different languages, the preference of some of them can be easily expressed to achieve other goals (e.g. to obtain the less verbosed answer).
+
+\footnote{
+  Note that the write primitive is explicitly excluded from the table.
+  This primitive could be directly mapped to a \acs{http} POST,
+  but we defend that each node should manage its own information
+  (see Section~\ref{sec:knowledge_distribution}).
+  Therefore, the \acs{http} \acs{api} does not allow remote writing.
+}
