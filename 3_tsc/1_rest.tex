@@ -16,19 +16,19 @@ To achieve these properties, \ac{rest} establishes the following constraints fro
  \item[Cache (\$)] when added to the CS constraint, this style replicates content obtained from a server in the client.
  \item[Uniform interface (U)] is the key constraint which distinguishes \ac{rest} from other architectural styles.
                    This constraint is composed by the following ones:
-    \begin{itemize}
+    \begin{description}
 	% explicados en sección 5.2 de Fielding, resumir?
-	\item \emph{Identification of resources (ID)}.
+	\item[Identification of resources (ID):]
 		    Resources are the conceptual targets of hypertext references.
 		    Their identification offers a generic interface to access and changes the values of a resource.
-	\item \emph{Manipulation of resources through representations (REP)}
+	\item[Manipulation of resources through representations (REP):]
 		    Representations are composed by a sequence of bytes and the metadata to describe those bytes.
-	\item \emph{Self-descriptive messages (DESC)}
+	\item[Self-descriptive messages (DESC):]
 	% : interaction is stateless between requests,
 	% standard methods and media types are used to indicate semantics and exchange
 	% information, and responses explicitly indicate cacheability.
-	\item \emph{Hypermedia as the engine of application state (HATEOAS)}
-    \end{itemize}
+	\item[Hypermedia as the engine of application state (HATEOAS):]
+    \end{description}
  \item[Layered system (L)] each layer provides services to the top layer (e.g. TCP/IP). % TODO usar acrónimo!
  \item[Code-On-Demand (COD)] the client has a set of resources which does not know how to process.
        That \emph{know-how} is downloaded from the server.
@@ -47,7 +47,7 @@ To achieve these properties, \ac{rest} establishes the following constraints fro
 
 
 
-\section{Protocols to Follow the \ac{rest} Style}
+\section{Suitable Protocols for \ac{rest}}
 \label{sec:protocols}
 
 % hablar un poco de HTTP y CoAP y decir por qué no hablamos más a menudo de CoAP
@@ -90,34 +90,33 @@ However, we have chosen to work with \ac{http} for the following reasons:
 \emph{Per se}, \ac{tsc} does not contradict in any sense the \ac{rest} principles:
 
 \begin{description}
- \item[CS]. Providing the access to each space is centralized in a machine, clients can access to it using \emph{CS}.
+ \item[CS:] Providing the access to each space is centralized in a machine, clients can access to it using \emph{CS}.
            This does not prevent to use a distributed semantic repository in the backend.
- \item[S]. The primitives to access the space imply simple read and writes which do not store any state in the server.
- \item[\$] The semantic content stored in the space can be cached.
+ \item[S:] The primitives to access the space imply simple read and writes which do not store any state in the server.
+ \item[\$:] The semantic content stored in the space can be cached.
            However, the dynamism of the underlying network makes caching challenging to configure. % quería poner "tune up" pero "configure" me ha sonado más fino
- \item[U]
-    \begin{itemize}
-	\item \emph{ID}. There are types of identified resources in \ac{tsc}: spaces, RDF Graphs and certain elements of the RDF Triples.
+ \item[U:]
+    \begin{description}
+	\item[ID:] There are types of identified resources in \ac{tsc}: spaces, RDF Graphs and certain elements of the RDF Triples.
 	                 All of them are identified by URIs.
 	                 The space can be seen as a coarse-grained view of the underlying graphs. % TODO coarse grained es lo contrario de fine-grained?
 	                 The graphs have sets of triples which are usually related and describe a unit of knowledge. % A RDF triple by itself cannot transmit too much information
 	                 Self-identified triple's subjects, predicates or objects are the source of concept linking.
-	\item \emph{REP}. The RDF graphs and triples mentioned above can be represented using different standard serializations.
-	\item \emph{DESC}. The messages derived from the primitives can be self-describing.
-	\item \emph{HATEOAS}. This is the most challenging property to achieve with RDF-based representations.
-	                      However, some relevant solutions propose means to fulfill this property.
-    \end{itemize}
- \item[L] each layer provides services to the top layer (e.g. TCP/IP). % TODO usar acrónimo!
- \item[COD] the client has a set of resources which does not know how to process.
-       That \emph{know-how} is downloaded from the server.
+	\item[REP:] The RDF graphs and triples mentioned above can be represented using different standard serializations.
+	\item[DESC:] The messages derived from the primitives can be self-describing.
+	\item[HATEOAS:] This is the most challenging property to achieve with RDF-based representations.
+	                      However, some relevant solutions propose means to fulfill this property \cite{verborgh_functional_2012}. % TODO citar más de este y de otros que han hablado LOD, SPARQL y RESTful
+    \end{description}
+ \item[L:] encapsulation of functionalities can be achieved through a layered system.
+ \item[COD:] Although it may not be as common as scripting in browsing,
+            the know how can be downloaded from the server:
+            \begin{enumerate}
+	      \item Modeling it through ontologies.
+	      \item Through semantically expressed rules which are processed with an inference engine (e.g. N3 rules) \citep{verborgh_functional_2012}.
+            \end{enumerate}
 \end{description}
 
 
-
-That is, considering
-
-% acceso a fuentes de datos como si estuviesen en una BBDD, eso no debería impedir
-This primitives imply writing and reading from that space.
 % presentar interfaz HTTP
 
 
