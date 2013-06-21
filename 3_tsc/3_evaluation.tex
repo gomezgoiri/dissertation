@@ -9,6 +9,73 @@
 %      RESTful semántico
 
 
+
+
+
+\subsection{Architectural Properties for Network-based Styles}
+\label{sec:network_properties}
+
+% Cómo afecta la app propuesta => ir actualizando al final de otras secciones???
+
+
+
+In \citeauthor{fielding_architectural_2000}'s words, the relevant properties which describe a network-based system are the following ones \footnote{We refer to the reader to \citet{fielding_architectural_2000} for the complete thorough analysis.}:
+% verificar que no se parece demasiado a sus definiciones o sino poner cursiva.
+\begin{description}
+  \item[Performance] is divided into network performance, user-perceived performance and efficiency.
+		    The first is affected by the styles in the number of interactions and the granularity of data elements.
+		    The second property refers to the impact a user in front of an application perceives.
+		    The third is achieved by minimizing the use of the network.
+  \item[Scalability] measures how an architecture supports a big amount of components and interactions between them.
+  \item[Simplicity] is achieved through the separation of concerns for the components and the generality of architectural elements.
+  \item[Modifiability] encompasses evolvability, extensibility and customization.
+		      The first refers to the degree in which a component can be implemented without negatively impacting on others.
+		      The second measures the ability to add functionality to the system.
+		      The third is the ability to customize the behavior of an architectural element temporarily.
+  \item[Configurability] is related with the extensibility and the reusability.
+  \item[Reusability] is the ability to reuse components, connectors or data elements without modifying other apps.
+  \item[Visibility] is the ability of a component of monitoring or mediating in the interaction between other two components.
+  \item[Portability] is the ability of working in different environments.
+  \item[Reliability] is the degree in which an architecture depends on the failures of the system or components, connectors or partially incorrect data.
+\end{description}
+
+\begin{center}
+\begin{tabular}{lccccccccccccc}
+Style &
+\rotatebox{90}{Net Perform} &
+\rotatebox{90}{UP Perform} &
+\rotatebox{90}{Efficiency} &
+\rotatebox{90}{Scalability} &
+\rotatebox{90}{Simplicity} &
+\rotatebox{90}{Evolvability} &
+\rotatebox{90}{Extensibility} &
+\rotatebox{90}{Customiz.} &
+\rotatebox{90}{Configur.} &
+\rotatebox{90}{Reusability} &
+\rotatebox{90}{Visibility} &
+\rotatebox{90}{Portability} &
+\rotatebox{90}{Reliability} \\
+\hline
+Early web & $-$ & $\pm$ & $+$ & $+++$ & $++$ & $++$ & ~ & ~ & ~ & $+$ & $+$ & $+$ & $+$ \\
+REST & $-$ & $++$ & $++$ & $++++$ & $+++\pm$ & $++$ & $+$ & ~ & $+$ & $+$ & $\pm$ & $+$ & $+$ \\ % LCODC$SS + Uniform Interface (simple, visible, reusable)
+TSC (own) & × & × & × & × & × & × & × & × & × & × & × & × & ×\\
+\hline
+\end{tabular}
+\end{center}
+
+% Requisitos de ealy web, propiedades deseables
+%   Low entry-barrier
+%   Extensibilidad
+%   Distributed Hypermedia
+%   Internet-scale
+
+% una tablita de cómo hereda propiedades de los estilos anteriores?
+% y si quieren más información, que miren en la tesis de fielding.
+
+
+
+
+
 \section{\acs{wot} and \acs{tsc} Comparison}
 % 2. Comparativa
 \label{sec:wot_tsc_comparison}

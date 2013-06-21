@@ -1,6 +1,8 @@
 %    propiedades aportadas por REST a IoT
 
-\section{\acl{rest}}
+\section{On the \acs{rest}fulness of \acs{tsc}}
+
+\subsection{\acl{rest}}
 \label{sec:rest}
 
 \acf{rest} is an architectural style proposed by \citet{fielding_architectural_2000}.
@@ -23,11 +25,11 @@ To achieve these properties, \ac{rest} establishes the following constraints fro
 		    Their identification offers a generic interface to access and changes the values of a resource.
 	\item[Manipulation of resources through representations (REP):]
 		    Representations are composed by a sequence of bytes and the metadata to describe those bytes.
-	\item[Self-descriptive messages (DESC):]
+	\item[Self-descriptive messages (DESC):] % TODO explicar esto bien
 	% : interaction is stateless between requests,
 	% standard methods and media types are used to indicate semantics and exchange
 	% information, and responses explicitly indicate cacheability.
-	\item[Hypermedia as the engine of application state (HATEOAS):]
+	\item[Hypermedia as the engine of application state (HATEOAS):] % TODO explicar esto bien
     \end{description}
  \item[Layered system (L)] each layer provides services to the top layer (e.g. TCP/IP). % TODO usar acrónimo!
  \item[Code-On-Demand (COD)] the client has a set of resources which does not know how to process.
@@ -47,7 +49,7 @@ To achieve these properties, \ac{rest} establishes the following constraints fro
 
 
 
-\section{Suitable Protocols for \ac{rest}}
+\subsection{Suitable Protocols for \ac{rest}}
 \label{sec:protocols}
 
 % hablar un poco de HTTP y CoAP y decir por qué no hablamos más a menudo de CoAP
@@ -81,9 +83,16 @@ However, we have chosen to work with \ac{http} for the following reasons:
         % sin contar con los aspectos destacados anteriormente
 \end{itemize}
 
+% Ideas no usadas:
+% REST no dice nada, pero de facto el protocolo es HTTP
+% durante el desarrollo de esta tesis en resource constrained ha surgido CoAP
+%   muchas de las cosas aquí comentadas son iguales o mejor sobre CoAP
+%   de todas formas, ha habido algo que ha guiado nuestro diseño: librerias existentes => afecta a plataformas
+%         si, pero para eso está lo de layered approach! => motivos prácticos
 
 
-\section{\acl{tsc}}
+
+\subsection{\acl{tsc}}
 \label{sec:tsc_vs_rest}
 
 \ac{tsc} consist of a shared space which is accessed using some known primitives.
@@ -117,96 +126,11 @@ However, we have chosen to work with \ac{http} for the following reasons:
 \end{description}
 
 
+% Discussión profunda de SPARQL y REST???
+% Algunas ideas rescatables de la anterior intro:
+% Both \ac{wot} and \ac{tsc} can be considered resource oriented solutions since they put emphasis in giving access to data resources.
+% While \ac{tsc} enables expressive queries, dynamic discovery and non human-mediated cooperation among objects, the \ac{wot} adopts the scalable properties of the World Wide Web and it is entirely based on web standards.
+% In this chapter we explain how to take advantage of both approaches, bringing together the best of both worlds.
+
+
 % presentar interfaz HTTP
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-% presentar en qué consistirá la base de nuestra implementación
-
-% compararlo en términos de las propiedades comentadas anteriormente
-%    Cache => guay pero para datos que cambian tan a menudo es un tema complejo
-
-
-% REST no dice nada, pero de facto el protocolo es HTTP
-% durante el desarrollo de esta tesis en resource constrained ha surgido CoAP
-%   muchas de las cosas aquí comentadas son iguales o mejor sobre CoAP
-%   de todas formas, ha habido algo que ha guiado nuestro diseño: librerias existentes => afecta a plataformas
-%         si, pero para eso está lo de layered approach! => motivos prácticos
-
-% Para la comparativa final sólo
-
-\subsection{Architectural Properties for Network-based Styles}
-\label{sec:network_properties}
-
-% Cómo afecta la app propuesta => ir actualizando al final de otras secciones???
-
-
-
-In \citeauthor{fielding_architectural_2000}'s words, the relevant properties which describe a network-based system are the following ones \footnote{We refer to the reader to \citet{fielding_architectural_2000} for the complete thorough analysis.}:
-% verificar que no se parece demasiado a sus definiciones o sino poner cursiva.
-\begin{description}
-  \item[Performance] is divided into network performance, user-perceived performance and efficiency.
-		    The first is affected by the styles in the number of interactions and the granularity of data elements.
-		    The second property refers to the impact a user in front of an application perceives.
-		    The third is achieved by minimizing the use of the network.
-  \item[Scalability] measures how an architecture supports a big amount of components and interactions between them.
-  \item[Simplicity] is achieved through the separation of concerns for the components and the generality of architectural elements.
-  \item[Modifiability] encompasses evolvability, extensibility and customization.
-		      The first refers to the degree in which a component can be implemented without negatively impacting on others.
-		      The second measures the ability to add functionality to the system.
-		      The third is the ability to customize the behavior of an architectural element temporarily.
-  \item[Configurability] is related with the extensibility and the reusability.
-  \item[Reusability] is the ability to reuse components, connectors or data elements without modifying other apps.
-  \item[Visibility] is the ability of a component of monitoring or mediating in the interaction between other two components.
-  \item[Portability] is the ability of working in different environments.
-  \item[Reliability] is the degree in which an architecture depends on the failures of the system or components, connectors or partially incorrect data.
-\end{description}
-
-\begin{center}
-\begin{tabular}{lccccccccccccc}
-Style &
-\rotatebox{90}{Net Perform} &
-\rotatebox{90}{UP Perform} &
-\rotatebox{90}{Efficiency} &
-\rotatebox{90}{Scalability} &
-\rotatebox{90}{Simplicity} &
-\rotatebox{90}{Evolvability} &
-\rotatebox{90}{Extensibility} &
-\rotatebox{90}{Customiz.} &
-\rotatebox{90}{Configur.} &
-\rotatebox{90}{Reusability} &
-\rotatebox{90}{Visibility} &
-\rotatebox{90}{Portability} &
-\rotatebox{90}{Reliability} \\
-\hline
-Early web & $-$ & $\pm$ & $+$ & $+++$ & $++$ & $++$ & ~ & ~ & ~ & $+$ & $+$ & $+$ & $+$ \\
-REST & $-$ & $++$ & $++$ & $++++$ & $+++\pm$ & $++$ & $+$ & ~ & $+$ & $+$ & $\pm$ & $+$ & $+$ \\ % LCODC$SS + Uniform Interface (simple, visible, reusable)
-TSC & × & × & × & × & × & × & × & × & × & × & × & × & ×\\
-\hline
-\end{tabular}
-\end{center}
-
-% Requisitos de ealy web, propiedades deseables
-%   Low entry-barrier
-%   Extensibilidad
-%   Distributed Hypermedia
-%   Internet-scale
-
-% una tablita de cómo hereda propiedades de los estilos anteriores?
-% y si quieren más información, que miren en la tesis de fielding.
-
-
-
-\subsection{Implementation of \ac{rest} style}
-% Mención breve a HTTP y CoAP?
