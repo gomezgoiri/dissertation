@@ -1,39 +1,96 @@
+\section{Distributed \ac{tsc}}
+
 % cómo y porqué hacer un TSC distribuído
-% condiciones de REST que no cumpliría
+In the previous subsection, we showed a basic alignment between \ac{tsc} and \ac{http} to stress the closeness between \ac{tsc} and \ac{rest}.
+An important point of this alignment was the access to the data in client-server basis.
+This implies that all the data of a space goes through a server. % para posiblemente almacenarlo en otras máquinas
+
+% Pero un entorno Ubicomp es eminentemente distribuído
+However, the data in a \ac{ubicomp} environment is not generated in a single point.
+%   La información se genera en fuentes separadas, ¿cómo accedo a los últimos datos?
+In fact, each sensor in an intelligent environment is potentially generating data constantly.
+Besides, the magnitude of this sensors can be enormous.
+This creates a trade off between efficiency and update difficult to overcome:
+\begin{itemize}
+  \item The more frequently each sensor sends contents to the server, the more inefficient is the solution in terms of network usage.
+  \item The less frequently the communication is, the less updated is the data in the server.
+        This leads to spaces which misrepresent the environments.
+\end{itemize}
+A sensitive solution is to let these sensor manage their own information.
+
+%   ademas no practico:
+%        las fuentes del conocimiento son las que mejor saben como gestionar una informacion (crearla, acualizarla o eliminarla)
+%        la información se transporta en dispositivos
+%        reusar datos en distintas apps
+Furthermore, this strategy can not only be useful for devices which constantly generate new data.
+Delegating responsibilities between the devices present y a for a number of reasons:
+\begin{itemize}
+  \item They will know how to represent these contents better than others.
+  \item They know when to create, update or delete data.
+  \item That data can be reused by other applications or even other spaces.
+  \item Carrying that information can be useful in certain mobility situations.
+        For example, a person which stores her user profile in the smartphone.
+        She can shares it with different spaces or applications as it moves along the city.
+\end{itemize}
 
 
-% condiciones que hemos relajado de TSC (i.e. limitaciones)
-%     1. autonomía espacial (dependes de un nodo)
-%     2. consistencia de datos introducidos en el espacio
-%     3. cómo asegurar un take?
-%     4. subscripciones
-%     + Hemos juntado como 2 mundos: TSC y WoT
-%        La mayoría de las contribuciones son aplicables a WoT
-%        El mecanismo de búsqueda no es Hypertext driven! (no?)
-%        Por que sería muy costoso hacer rollo araña?!
-%     5. Future work:
-%          definir datos como consumibles por otros nodos o no
-%          eliminar la necesidad de espacios?         
-%     por qué creemos que sigue siendo útil?
+% Aún así, que los dispositivos se coordinen a través de una entidad central es conveniente:
+%       Sencillo de implementar: notificaciones, razonamiento, etc.
+%       Incluso si ese espacio luego está distribuído o cambia de máquina, acceso a través de dicha interfaz (HTTP o CoAP el día de mañana)
+%       Modo: caching (para reliability) o modo ver qué hay en el espacio ahora mismo (visión en tiempo real)
+%       -->> INDEPENDENCIA DE LOCALIZACIÓN!!!
 
 
-% presentar en qué consistirá la base de nuestra implementación
+% solución enfoque híbrido:
+%      grafos autogestionados (no takeables por otros) => write en local
+%      cambios en actuadores => directamente a través de HTTP o indirectamente a través de tasks escritas en espacio
+%                               o mejor: podrían esas tasks ser directamente esos servicios???
+%      grafos que sí => write al "servidor HTTP"
+%      query => en todos los dispositivos (capítulo 4) - Porque a veces es necesario a través de todos los nodos
+%      take + read => sobre los grafos takeables (o inferencia con toda la info del espacio, cómo prefieras)
 
+
+% Ventajas de meclar 2 cosas aparentemente separadas?
+%   Para WoT:
+%      comunicación indirecta para cacharros
+%          local+ref
+%              de contenidos relativos a coordinación
+%              podríamos cachear contenidos de otros en el espacio central (reliability+energy)
+%          ref
+%              sacar a colación los problemas aquellos de query sobre muchos recursos
+%
+%   Para TSC (respecto a otras como Smart-M3):
+%      limitamos qué gestiona la entidad central => sólo coordinación, el resto lo coge de los cacharros
+%      se reconoce su autonomía permitiendo gestionarse su propio contenido => REST, escalabilidad
+%      interop => SW y posibilidad de extender a otros servicios REST
+%      multiplataforma => facilidad para portarlo
+%
+%   Para desarrollador:
+%      API integrada y simple
+
+
+
+
+% presentar las 2 partes
 % condiciones relajadas: consistencia, razonamiento distribuído
 
 
-% SECCIÓN: CUÁL ES EL DISEÑO GENERAL QUE SE PODRÍA UTILIZAR DESDE FUERA Y QUE HA MOTIVADO NUESTRA IMPLEMENTACIÓN
-% ALGO QUE DIGA QUE NO DEPENDE DE OTSOPACK
-% TODO: other name? ``defined layers'' o así? cómo decir ``mira, lo importante es que puede haber diferentes grados de
-% implementación aquí gracias al diseño que mostramos en esta sección en 5 palabras???
-
-% Lo que quiero (yo Pablo) decir aquí es que sigue siendo distribuído aunque parezca que es uno a uno.
 
 
-\subsection{Distributed \ac{tsc}}
 
-% ahora vamos a empezar a joder el tema de TSC suponiendo que lo distribuimos a través de HTTP
-% y lo justificamos xD
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 The \acs{http} mapping is done among a \textit{client} and a \textit{server}.
 However, as previously detailed, \ac{tsc} provides reference autonomy, so a consumer will query the space without knowing the particular addresses of the nodes composing that space.
