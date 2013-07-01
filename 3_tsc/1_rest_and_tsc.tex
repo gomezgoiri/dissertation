@@ -207,19 +207,6 @@ In this section, we explain these primitives.
     take(space_URI, template): triples          [5]
   \end{lstlisting}
 
-
-  \item The \textbf{query} primitive aims to see the space as a whole triplestore, returning all the triples matching the given template.
-	
-	The \ac{rest}fulness of this primitive could be argued since it does not operate at resource level,
-	but mixing several resources.
-	
-	However, we believe that it is useful to have an endpoint for the queries which involve many graphs.
-	\citet{kjernsmo_necessity_2012} discusses this topic in depth. % TODO Mirar otras citas???
-	
-  \begin{lstlisting}
-    query(space_URI,template): triples          [6]
-  \end{lstlisting}
-
 %  \item Space management primitives.
 %	A node can join or leave a space using \linebreak \texttt{joinSpace(space\_URI)} or \texttt{leaveSpace(space\_URI)}.
 \end{itemize}
@@ -266,8 +253,6 @@ The rest of the mappings are shown in the Table~\ref{tab:tscAPI}.
       DELETE & \{sp\}/graphs/\{g\} & [4] \\
       DELETE & \{sp\}/graphs/wildcards/\{s\}/\{p\}/\{o-uri\} & [5] \\
       & \{sp\}/graphs/wildcards/\{s\}/\{p\}/\{o-type\}/\{o-val\} & \\
-      GET & \{sp\}/query/wildcards/\{s\}/\{p\}/\{o-uri\} &  [6] \\
-      & \{sp\}/query/wildcards/\{s\}/\{p\}/\{o-type\}/\{o-val\} & \\
   \end{tabular}
   \label{tab:tscAPI}
 \end{table}

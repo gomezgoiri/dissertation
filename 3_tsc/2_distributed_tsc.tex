@@ -90,21 +90,59 @@ To do that, we propose an extension of the already presented \ac{tsc} model by m
 \subsubsection{Self-managed graphs}
 
 These graphs are the ones which are managed by the device which provides them to the rest.
-No device can remove them apart from their creator.
-% write locally
-This creator makes them accessible using an \acs{http} \ac{api}.
-This \ac{api} should be or trend to be a \ac{rest}ful.
-
-These graphs enrich the space and can be accessed through the space, but they cannot be removed.
+In other words, self-managed graphs enrich the space in the ways previously described, but they cannot be removed through it.
 Therefore, they are \emph{second-class graphs} which provide information about the environment but cannot be used for coordination purposes.
 
+% write locally
+% No device can remove them apart from their creator. % TODO o si puede serlo, esta no lo decide el sistema
+The manager makes these graphs accessible to others through \acs{http}.
 % objetivo: que se pueda acceder a estos grafos incluso si no son parte de nuestra app => interop
+The final goal is to potentially allow to reuse the data provided by any existing \ac{rest}ful service. % app level interop
+Therefore, the \ac{api} should be or trend to be \ac{rest}ful.
 % para ello es importante usar un RESTful approach, como sabemos que es complejo ofrecemos otra opción en el siguiente capítulo
+% TODO justificar MUCHO mejor esto
+However, we acknowledge the difficulty to achieve that and because of that we propose an intermediate solution in the next chapter.
 
 
 \subsubsection{New primitives}
 
-% query
+To make the most of the information in a space, we propose a new primitive to query all over the semantic information stored.
+The \ac{rest}fulness of this primitive could be argued since it does not operate at resource level,
+but mixing several resources.
+However, we believe that it is useful to have an endpoint for the queries which involve many graphs.
+\citet{kjernsmo_necessity_2012} discusses this topic in depth. % TODO Mirar otras citas???
+
+This new primitive is defined as follows:
+% TODO definir "triple store", "triplestore"???
+\begin{itemize}
+  \item The \textbf{query} primitive aims to see the space as a whole triplestore, returning all the triples matching the given template.
+  
+  \begin{lstlisting}
+    query(space_URI,template): triples          [6]
+  \end{lstlisting}
+\end{itemize}
+
+
+The Table~\ref{tab:queryAPI} extends Table~\ref{tab:tscAPI} to include this new primitive.
+
+\begin{table} %http://en.wikibooks.org/wiki/LaTeX/Floats,_Figures_and_Captions#Wide_figures_in_two_column_documents
+  \centering
+  \caption {
+    \acs{http} mapping for the primitives detailed in the Section~\ref{sec:primitives}. \textit{sp} is a space \acs{uri},
+    \textit{g} is a graph \acs{uri}, \textit{s}, \textit{p} and \textit{o-uri} are subject, predicate and object \acsp{uri} or wildcards (represented with an as \textit{*}).
+    When the template's object is a literal, it can be expressed specifying its value (\textit{o-val}) and its type (\textit{o-type}).
+    \medskip
+  }
+  \begin{tabular}{c|l|c}
+      \acs{http} request & \acs{url} & Returns \\
+      \hline
+      GET & \{sp\}/query/wildcards/\{s\}/\{p\}/\{o-uri\} &  [6] \\
+      & \{sp\}/query/wildcards/\{s\}/\{p\}/\{o-type\}/\{o-val\} & \\
+  \end{tabular}
+  \label{tab:queryAPI}
+\end{table}
+
+
 
 \subsubsection{New behaviors}
 
@@ -138,8 +176,7 @@ By doing so we retain the desirable properties of both approaches:
 
 
 
-% presentar las 2 partes
-% condiciones relajadas: consistencia, razonamiento distribuído
+% TODO condiciones relajadas: consistencia, razonamiento distribuído
 
 
 
