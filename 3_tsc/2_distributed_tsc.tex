@@ -49,13 +49,14 @@ Therefore, distributing the shared space among unreliable nodes comes with a num
   \item This unreliability makes difficult to maintain the consistency of the space. % TODO CUIDADO, puedo estar metiendome en un fregado, la parte de los dispositivos no será consistente!
         Since this information drives the coordination between the devices, its consistency its important.
   \item Blocking mechanism is important in space-based computing.
-        For example, a task may block until some information is become available in the space.
+        For example, a worker node may block until some task is become available in the space.
         A way to implement it in a distributed space is by means of a notification system.
-        Again, implementing it using unreliable devices is hard to implement.
-  \item Last but not least, if the space cannot be guaranteed to be accessible not matter which devices/client are available, there will not be \emph{location autonomy}.
+        Again, implementing it using unreliable devices is hard to implement. % no sé si esto último no sonará demasiado a mofa...
+  \item And last but not least, if the access to some data in the space cannot be guaranteed no matter if the device which wrote that information is available, there will not be \emph{time uncoupling}.
 \end{itemize}
 Overcoming the previous difficulties, usually implies a high network traffic.
 However, these negatively influences the energy consumption of some nodes that whose energetic autonomy is limited.
+
 
 % solución enfoque híbrido:
 %      grafos autogestionados (no takeables por otros) => write en local
@@ -64,6 +65,8 @@ However, these negatively influences the energy consumption of some nodes that w
 %      grafos que sí => write al "servidor HTTP"
 %      query => en todos los dispositivos (capítulo 4) - Porque a veces es necesario a través de todos los nodos
 %      take + read => sobre los grafos takeables (o inferencia con toda la info del espacio, cómo prefieras)
+
+
 
 
 % Ventajas de meclar 2 cosas aparentemente separadas?
@@ -84,13 +87,12 @@ However, these negatively influences the energy consumption of some nodes that w
 %   Para desarrollador:
 %      API integrada y simple
 
+By doing so we retain the desirable properties of both approaches:
 
 
 
 % presentar las 2 partes
 % condiciones relajadas: consistencia, razonamiento distribuído
-
-
 
 
 
