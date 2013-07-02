@@ -117,30 +117,31 @@ However, we have chosen to work with \ac{http} for the following reasons:
 	                      However, some relevant solutions propose means to fulfill this property \cite{verborgh_functional_2012}. % TODO citar más de este y de otros que han hablado LOD, SPARQL y RESTful
     \end{description}
  \item[L:] encapsulation of functionalities can be achieved through a layered system.
- \item[COD:] Although it may not be as common as scripting in browsing,
-            the know how can be downloaded from the server:
+ \item[COD:] Although it may not be as common as scripting in ordinary human-browsing, % TODO reexplicar esto mejor?
+            the \emph{know how} can be downloaded from the server:
             \begin{enumerate}
 	      \item Modeling it through ontologies.
 	      \item Through semantically expressed rules which are processed with an inference engine (e.g. N3 rules) \citep{verborgh_functional_2012}.
             \end{enumerate}
 \end{description}
 
-
 % CITAR:
-% So far, the compatibility of \ac{tsc} with the \acs{http} RESTful style has been proved from a formal \cite{hernandez_formal_2010} point of view.
-% Papers sobre TSC y su discurso sobre la WWW
-
 % Algunas ideas rescatables de la anterior intro:
 % Both \ac{wot} and \ac{tsc} can be considered resource oriented solutions since they put emphasis in giving access to data resources.
 % While \ac{tsc} enables expressive queries, dynamic discovery and non human-mediated cooperation among objects, the \ac{wot} adopts the scalable properties of the World Wide Web and it is entirely based on web standards.
 
 
+
 \subsection{Aligning \acs{tsc} with \acs{http}}
 
 % TODO Revisar cosas del texto original que no encajaban aquí (están comentadas)
+% TODO citar trabajos de:
+%      TSC es como Web para semántica
+%      RESTful semántico
+%      So far, the compatibility of \ac{tsc} with the \acs{http} RESTful style has been proved from a formal \cite{hernandez_formal_2010} point of view.
+%      Papers sobre TSC y su discurso sobre la WWW
 
 In this section, we present a \ac{tsc} \acs{api} over \ac{http} to give a practical overview of \ac{tsc}'s \acs{rest}fulness.
-
 
 \subsubsection{\acs{tsc} resources}
 
@@ -198,6 +199,7 @@ In this section, we explain these primitives.
 	If more than one graph fulfill one of these conditions, just one of them is returned (nondeterministically).
 	It should be remarked that it has been designed as a non blocking operation.
 % why?
+% TODO READ al ser no-deterministica puede afectar a caching???
   \item The \textbf{take} primitive behaves like a destructive \textbf{read}, deleting the graph returned from the space.
 
   \begin{lstlisting}

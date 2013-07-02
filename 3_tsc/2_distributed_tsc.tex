@@ -60,12 +60,6 @@ However, these negatively influences the energy consumption of some nodes that w
 
 \subsection{A Halfway solution}
 
-% solución enfoque híbrido:
-%      cambios en actuadores => directamente a través de HTTP o indirectamente a través de tasks escritas en espacio
-%                               o mejor: podrían esas tasks ser directamente esos servicios???
-%      grafos que sí => write al "servidor HTTP"
-%      query => en todos los dispositivos (capítulo 4) - Porque a veces es necesario a través de todos los nodos
-%      take + read => sobre los grafos takeables (o inferencia con toda la info del espacio, cómo prefieras)
 In this thesis we propose to conserve the desirable characteristics of both \ac{rest} and \ac{tsc} by mixing them.
 
 On the one hand, we propose a centralized access to the space by the \acs{http} \ac{api} described previously.
@@ -91,6 +85,7 @@ To do that, we propose an extension of the already presented \ac{tsc} model by m
 
 These graphs are the ones which are managed by the device which provides them to the rest.
 In other words, self-managed graphs enrich the space in the ways previously described, but they cannot be removed through it.
+% poner ejemplo de por qué no tiene sentido que eliminen a través del espacio
 Therefore, they are \emph{second-class graphs} which provide information about the environment but cannot be used for coordination purposes.
 
 % write locally
@@ -105,6 +100,7 @@ However, we acknowledge the difficulty to achieve that and because of that we pr
 
 
 \subsubsection{New primitives}
+
 
 To make the most of the information in a space, we propose a new primitive to query all over the semantic information stored.
 The \ac{rest}fulness of this primitive could be argued since it does not operate at resource level,
@@ -124,6 +120,7 @@ This new primitive is defined as follows:
 
 
 The Table~\ref{tab:queryAPI} extends Table~\ref{tab:tscAPI} to include this new primitive.
+% TODO otra clave: debería no tener porqué pasar por el servidor
 
 \begin{table} %http://en.wikibooks.org/wiki/LaTeX/Floats,_Figures_and_Captions#Wide_figures_in_two_column_documents
   \centering
@@ -143,69 +140,46 @@ The Table~\ref{tab:queryAPI} extends Table~\ref{tab:tscAPI} to include this new 
 \end{table}
 
 
+A key point of the \ac{api} is that the devices manage self-managed graphs out of our middleware.
+However, a primitive to ease that management can be a convenient for the developers which do not need a more customized behavior.
+With that in mind, we propose another writing primitive.
+This primitive only has local effects and therefore has not a HTTP equivalent:
+\begin{itemize}
+  \item The \textbf{query} primitive aims to see the space as a whole triplestore, returning all the triples matching the given template.
+  
+  % tiene sentido definir el space_URI???
+  % mejor definir su propio espacio?
+  \begin{lstlisting}
+    write_self(space_URI, triples): URI
+    write_self(graph_URI, triples): URI
+  \end{lstlisting}
+\end{itemize}
+
+
 
 \subsubsection{New behaviors}
 
 % explicar cómo se escribe y lee en el espacio
+% solución enfoque híbrido:
+%      cambios en actuadores => directamente a través de HTTP o indirectamente a través de tasks escritas en espacio
+%                               o mejor: podrían esas tasks ser directamente esos servicios???
+%      grafos que sí => write al "servidor HTTP"
+%      query => en todos los dispositivos (capítulo 4) - Porque a veces es necesario a través de todos los nodos
+%      take + read => sobre los grafos takeables (o inferencia con toda la info del espacio, cómo prefieras)
+In this section we will try to clarify how the different behaviors coexist.
+
+\paragraph{Writing}
+
+The most basic writing primitive allows a client to write a graph into the space hold by the server.
+However, we also presented a primitive to write into a device a untakeable graph (i.e. self-managed graph).
+Finally, in Chapter~\ref{???} we argue that a third \emph{writing} primitive is necessary.
+This primitive should allow to \emph{suggest} physical changes in the space through actuators.
+
+% esquemita/dibujito
 
 
-% presentar queries
+\paragraph{Reading}
 
-
-
-
-% Ventajas de meclar 2 cosas aparentemente separadas?
-%   Para WoT:
-%      comunicación indirecta para cacharros
-%          local+ref
-%              de contenidos relativos a coordinación
-%              podríamos cachear contenidos de otros en el espacio central (reliability+energy)
-%          ref
-%              sacar a colación los problemas aquellos de query sobre muchos recursos
-%
-%   Para TSC (respecto a otras como Smart-M3):
-%      limitamos qué gestiona la entidad central => sólo coordinación, el resto lo coge de los cacharros
-%      se reconoce su autonomía permitiendo gestionarse su propio contenido => REST, escalabilidad
-%      interop => SW y posibilidad de extender a otros servicios REST
-%      multiplataforma => facilidad para portarlo
-%
-%   Para desarrollador:
-%      API integrada y simple
-
-By doing so we retain the desirable properties of both approaches:
-
-
-
-% TODO condiciones relajadas: consistencia, razonamiento distribuído
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-The \acs{http} mapping is done among a \textit{client} and a \textit{server}.
-However, as previously detailed, \ac{tsc} provides reference autonomy, so a consumer will query the space without knowing the particular addresses of the nodes composing that space.
-This autonomy is managed at other upper and optional layers explained in the following section.
-However, this \acs{http} mapping is all a data provider needs to serve information in the space.
-% Quitado porque ni yo mismo lo entendía ahora...
-%, and it is also what a data consumer needs to interrogate a multicast provider (a component provided by Otsopack to contact multiple nodes in a particular space).
-
-
-\footnote{
-  Note that the write primitive is explicitly excluded from the table.
-  This primitive could be directly mapped to a \acs{http} POST,
-  but we defend that each node should manage its own information
-  (see Section~\ref{sec:knowledge_distribution}).
-  Therefore, the \acs{http} \acs{api} does not allow remote writing.
-}
+The query performs a traversal query which aggregated all the graphs of the space.
+\emph{read} and \emph{take} work at resource level.
+However, we may consider the use of the data obtained from \emph{self-managed graphs} to enrich their contents. % esto es puramente NO RESOURCE ORIENTED

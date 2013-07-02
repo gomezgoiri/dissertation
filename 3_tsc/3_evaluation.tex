@@ -1,39 +1,29 @@
-% comparación de TSC y REST
-%     id => XX
+\section{Conclusions}
+
+With the solution presented in the previous section, we aimed to retain the desirable properties of both \ac{rest} and \ac{tsc}.
+% analísis más largo en la siguiente sección
+% 1. cómo sé que esto es mejor que usar REST y TSC por separado? Sinergia?
+% 2. que aporta unirlo bajo un mismo middleware?
+% 3. tiene beneficios?
+However, some questions arise from that integration:
+(1) does in fact retain all the properties of \ac{rest} and \ac{tsc} separately? Otherwise, which properties are affected?
+(2) what other benefits carries comparing with using existing \ac{tsc} and \ac{rest} middleware?
+
+% TODO
 %   features añadidas por TSC (valuable properties aportadas)
 %       utiles para IoT
-%   cómo rompería alguna de las propiedades de REST
 %   qué propiedades deseables para IoT añadiría TSC (per se)
-% Ideas para citar:
-%      TSC es como Web para semántica
-%      RESTful semántico
+%   hablar sobre las propiedades de IoT!!!
 
 
-% condiciones de REST que no cumpliría
-% condiciones de TSC que no cumpliría
-% condiciones que hemos relajado de TSC (i.e. limitaciones)
-%     1. autonomía espacial (dependes de un nodo)
-%     2. consistencia de datos introducidos en el espacio
-%     3. cómo asegurar un take?
-%     4. subscripciones
-%     + Hemos juntado como 2 mundos: TSC y WoT
-%        La mayoría de las contribuciones son aplicables a WoT
-%        El mecanismo de búsqueda no es Hypertext driven! (no?)
-%        Por que sería muy costoso hacer rollo araña?!
-%     5. Future work:
-%          definir datos como consumibles por otros nodos o no
-%          eliminar la necesidad de espacios?         
-%     por qué creemos que sigue siendo útil?
-
-
-% mostrar evaluaciones de CHB para demostrar que "es posible" <= ya ves, "todo" es posible
-
-
-\subsection{Architectural Properties for Network-based Styles}
+\subsection{Network-based Style} % Architectural Properties for Network-based Styles
 \label{sec:network_properties}
-
 % Cómo afecta la app propuesta => ir actualizando al final de otras secciones???
 
+In Section~\ref{sec:tsc_vs_rest} we have described how \ac{tsc} does not contradict any of the \ac{rest} principles.
+However, the adaptation presented in this thesis does not completely adheres to the \ac{rest} style.
+In this section we present how this divergences affect the \ac{rest}'s properties.
+% decir que el objetivo final es que pudiera ser REST
 
 
 In \citeauthor{fielding_architectural_2000}'s words, the relevant properties which describe a network-based system are the following ones \footnote{We refer to the reader to \citet{fielding_architectural_2000} for the complete thorough analysis.}:
@@ -56,6 +46,28 @@ In \citeauthor{fielding_architectural_2000}'s words, the relevant properties whi
   \item[Reliability] is the degree in which an architecture depends on the failures of the system or components, connectors or partially incorrect data.
 \end{description}
 
+% Requisitos de ealy web, propiedades deseables
+%   Low entry-barrier
+%   Extensibilidad
+%   Distributed Hypermedia
+%   Internet-scale
+
+
+% tratamos de mezclar un API REST (TSC) con otras (la facilitada por cada nodo)
+% U es el principal aspecto de rest, y también el más complejo de cumplir
+% U => lo que más se "viola"
+%      REP => query
+%      HATEOAS => se viene haciendo trabajo para solucionar esto
+%                 la solución propuesta en el siguiente capítulo no es HATEOAS
+%      However, we do acknowledge that further work has to be done in certain aspects such as the \emph{HATEOAS} aspect of semantic \acp{api}.
+
+% REPERCUSIONES DE ESO EN PROPIEDADES:
+
+% condiciones de REST que no cumpliría
+% qué aportaría
+
+% Tablita de cómo hereda propiedades de los estilos anteriores?
+% (y si quieren más información, que miren en la tesis de Fielding)
 \begin{center}
 \begin{tabular}{lccccccccccccc}
 Style &
@@ -80,14 +92,71 @@ TSC (own) & × & × & × & × & × & × & × & × & × & × & × & × & ×\\
 \end{tabular}
 \end{center}
 
+
+
+\subsection{Middleware Properties}
+
+% explicar cómo HTTP trataba de evitar complejidades
+% explicar como al crear una capa por encima, complicas todo un poco
+%       sencillez
+%       user-based library vs a lo otro
+
+% Propiedades que jodes de HTTP de cara al usuario: simplicidad...
+% propiedades de cara al usuario:
 % Requisitos de ealy web, propiedades deseables
 %   Low entry-barrier
 %   Extensibilidad
 %   Distributed Hypermedia
 %   Internet-scale
 
-% una tablita de cómo hereda propiedades de los estilos anteriores?
-% y si quieren más información, que miren en la tesis de fielding.
+
+\subsection{Querying Distributedly over the Space}
+% TODO condiciones relajadas: consistencia, razonamiento distribuído
+% out of the scope: cómo implementarlo
+% optaremos por lo más sencillo
+
+
+% condiciones de TSC que no cumpliría
+% condiciones que hemos relajado de TSC (i.e. limitaciones)
+%     1. autonomía espacial (dependes de un nodo)
+%     2. consistencia de datos introducidos en el espacio
+%     3. cómo asegurar un take?
+%     4. subscripciones
+%     + Hemos juntado como 2 mundos: TSC y WoT
+%        La mayoría de las contribuciones son aplicables a WoT
+%        El mecanismo de búsqueda no es Hypertext driven! (no?)
+%        Por que sería muy costoso hacer rollo araña?!
+%     5. Future work:
+%          definir datos como consumibles por otros nodos o no
+%          eliminar la necesidad de espacios?         
+%     por qué creemos que sigue siendo útil?
+
+
+
+\subsection{Summary}
+
+In the previous sections we have get to the bottom of the strengths and weaknesses of our proposal.
+To sum up, the main limitations are X and Y.
+On the other hand, we can XXX.
+Table~\ref{x} shows these and other aspects.
+
+% Ventajas de meclar 2 cosas aparentemente separadas?
+%   Para WoT:
+%      comunicación indirecta para cacharros
+%          local+ref
+%              de contenidos relativos a coordinación
+%              podríamos cachear contenidos de otros en el espacio central (reliability+energy)
+%          ref
+%              sacar a colación los problemas aquellos de query sobre muchos recursos
+%
+%   Para TSC (respecto a otras como Smart-M3):
+%      limitamos qué gestiona la entidad central => sólo coordinación, el resto lo coge de los cacharros
+%      se reconoce su autonomía permitiendo gestionarse su propio contenido => REST, escalabilidad
+%      interop => SW y posibilidad de extender a otros servicios REST
+%      multiplataforma => facilidad para portarlo
+%
+%   Para desarrollador:
+%      API integrada y simple
 
 
 
