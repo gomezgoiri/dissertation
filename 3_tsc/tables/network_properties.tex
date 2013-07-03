@@ -1,0 +1,49 @@
+
+% Tablita de cómo hereda propiedades de los estilos anteriores?
+% (y si quieren más información, que miren en la tesis de Fielding)
+\begin{savenotes} % to use footnotes inside
+  \begin{table}[htbp]
+    \caption[Properties of different architectural styles for network-based applications as defined by \citet{fielding_architectural_2000}.]
+            { Note that apart from including \ac{tsc}, the original table has been slightly adapted.
+              These adaptations are defined inside the table. % using several footnotes.
+            }
+    \begin{center}
+      \begin{tabular}{lccccccccccccc}
+	Style &
+	\rotatebox{90}{Net Perform} &
+	\rotatebox{90}{UP Perform} &
+	\rotatebox{90}{Efficiency} &
+	\rotatebox{90}{Scalability} &
+	\rotatebox{90}{Simplicity} &
+	\rotatebox{90}{Evolvability} &
+	\rotatebox{90}{Extensibility} &
+	\rotatebox{90}{Customiz.} &
+	\rotatebox{90}{Configur.} &
+	\rotatebox{90}{Reusability} &
+	\rotatebox{90}{Visibility} &
+	\rotatebox{90}{Portability} &
+	\rotatebox{90}{Reliability} \\
+	\hline
+	CS & ~ & ~ & ~ & $+$ & $+$ & $+$ & ~ & ~ & ~ & ~ & ~ & ~ & ~ \\
+	S\footnote{\emph{S} represents the difference between \emph{CSS} and \emph{CS} in \citep{fielding_architectural_2000}.}
+	  & $-$ & ~ & ~ & $+$ & ~ & ~ & ~ & ~ & ~ & ~ & $+$ & ~ & $+$ \\ % = CSS - CS
+	\$ & ~ & $+$ & $+$ & $+$ & $+$ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ \\
+	\hline
+	Early web\footnote{Corresponds to the \emph{C\$SS} style in \citep{fielding_architectural_2000}.}
+	 & $-$ & $+$ & $+$ & $++$ & $+$ & $+$ & ~ & ~ & ~ & ~ & $+$ & ~ & $+$ \\ % = C$SS
+	L & ~ & $-$ & ~ & $+$ & ~ & $+$ & ~ & ~ & ~ & $+$ & ~ & $+$ & ~ \\ % = LS
+	COD & ~ & $+$ & $+$ & $+$ & $\pm$ & ~ & $+$ & ~ & $+$ & ~ & $-$ & ~ & ~ \\
+	\hline
+	LCODC\$SS & $-$ & $++$ & $++$ & $++++$ & $+\pm+$ & $++$ & $+$ & ~ & $+$ & $+$ & $\pm$ & $+$ & $+$ \\
+	U\footnote{Although it is not explicitely included in the original table, \emph{U} has been derived from \citeauthor{fielding_architectural_2000}'s description.}
+	 & ~ & ~ & ~ & ~ & $+$ & ~ & ~ & ~ & ~ & $+$ & $+$ & ~ & ~ \\ % Uniform Interface (simple, visible, reusable) && en el texto dice que degrada efficiency
+	\hline
+	REST\footnote{Derived from the addition of \emph{U} to \emph{LCODC\$SS}.} % esto se podría intuír por la línea, pero quién sabe..
+	 & $-$ & $++$ & $++$ & $++++$ & $+\pm++$ & $++$ & $+$ & ~ & $+$ & $++$ & $+\pm$ & $+$ & $+$ \\ % = LCODC$SS + U
+	TSC (own) & × & × & × & × & × & × & × & × & × & × & × & × & ×\\
+	\hline
+      \end{tabular}
+    \end{center}
+    \label{tab:comparisonDistribution}
+  \end{table}
+\end{savenotes}
