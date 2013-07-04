@@ -27,6 +27,11 @@ However, the adaptation presented in this thesis does not completely adheres to 
 In this section we present how this divergences affect the \ac{rest}'s properties.
 % decir que el objetivo final es que pudiera ser REST
 
+% TODO antes de entrar al lio, explicar cómo funciona esto de REST, en qué parte de nuestra solución lo necesitaremos
+% decir que API para TSC mola
+% decir que API para los cacharros deberia de ser independiente a lo que nosotros digamos y por eso estaria bien REST
+%     de todas formas, como es dificil, nos quedamos en un nivel de madurez menor
+
 
 In \citeauthor{fielding_architectural_2000}'s words, the relevant properties which describe a network-based system are the following ones \footnote{We refer to the reader to \citet{fielding_architectural_2000} for the complete thorough analysis.}:
 % verificar que no se parece demasiado a sus definiciones o sino poner cursiva.
@@ -54,7 +59,44 @@ In \citeauthor{fielding_architectural_2000}'s words, the relevant properties whi
 %   Distributed Hypermedia
 %   Internet-scale
 
-The Table 
+The Table~\ref{tab:network_properties} summarizes how different architectural styles achieve these properties.
+Particularly, it shows the styles from which \ac{rest} derives (see Section~\ref{sec:rest}).
+The ultimate goal of the solution explained in the previous section is twofold:
+\begin{enumerate}
+  \item Provide a \ac{rest} access to a semantic space.
+       This would ease its integration with the rest of the web.
+  \item Enrich that space with the knowledge provided by other \ac{rest} \acp{api}.
+\end{enumerate}
+Therefore, ideally, its networking properties would be the sames as the \ac{rest} style.
+
+
+However, defining a 100\% \ac{rest} compliant \ac{api} is not easy.
+Indeed, most of the self-proclaimed \ac{rest}ful \acp{api} are not \citep{house_how_2012}. % la nueva buzz word para eso: hypermedia API
+The main cause is the \emph{HATEOAS} constraint seen in the Section~\ref{sec:rest} \citep{fielding_rest_2008}.
+Using \ac{http} as an application-level protocol forces a developer to comply the rest of the constraints \citet{moore_hypermedia_2010}, but not \emph{HATEOAS}.
+% The Richardson Maturity model habla de eso! Lo mencionan bastante.
+
+
+% semantic-based \ac{api} is not easy. => referencias a los que lo han intentado, a que no hay hipertexto, a que te puede interesar inferir con bastantes
+Regarding the \ac{sw}, some recent efforts have tried to move closer to the \ac{hypermedia} constraint \citep{steiner_fulfilling_2011,kjernsmo_necessity_2012}.
+However, these worlds remain quite isolated.
+In fact, \ac{sw} API  usually present another main divergence with the \ac{rest} style: the use of query endpoints.
+% i.e. no devuelven listas de enlaces, sino todo a lo bruto
+% esto quiere decir que no se devuelve todo y ala, tu procesa esa burrada de datos, más bien se filtran
+These endpoints intend to solve some inefficiency issues which \ac{rest} shows when working with a big amount of data. % TODO mencionar \ac{lod} en algún punto de aquí?
+To that end, they allow expressive query languages and offer results where the boundaries of the different resources often blurs \citep{wilde_restful_2009}.
+The most paradigmatic case may be to decide to which graph does a inferred content belongs. % ejemplo de lo anterior
+
+
+% Aterrizar esto a IoT y a nuestro caso:
+%        La eficiencia es importante => para evitar hacer 500 llamadas a un cliente
+%        La reusabilidad es importante también => para potencialmente adaptarse a cualquier WoT semántico
+%           en el futúro => más trabajo en este área
+%       Solución de compromiso:
+%           nivel de madurez X de Richardson. Suponemos que alguien debe serguir nuestro API mínimo en los objetos WoT
+
+
+
 % tratamos de mezclar un API REST (TSC) con otras (la facilitada por cada nodo)
 % U es el principal aspecto de rest, y también el más complejo de cumplir
 % U => lo que más se "viola"
