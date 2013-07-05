@@ -74,7 +74,7 @@ However, defining a 100\% \ac{rest} compliant \ac{api} is not easy.
 Indeed, most of the self-proclaimed \ac{rest}ful \acp{api} are not \citep{house_how_2012}. % la nueva buzz word para eso: hypermedia API
 The main cause is the \emph{HATEOAS} constraint seen in the Section~\ref{sec:rest} \citep{fielding_rest_2008}.
 Using \ac{http} as an application-level protocol forces a developer to comply the rest of the constraints \citet{moore_hypermedia_2010}, but not \emph{HATEOAS}.
-% The Richardson Maturity model habla de eso! Lo mencionan bastante.
+% TODO hablar del Richardson Maturity model!
 
 
 % semantic-based \ac{api} is not easy. => referencias a los que lo han intentado, a que no hay hipertexto, a que te puede interesar inferir con bastantes
@@ -95,20 +95,20 @@ The most paradigmatic case may be to decide to which graph does a inferred conte
 %       Solución de compromiso:
 %           nivel de madurez X de Richardson. Suponemos que alguien debe serguir nuestro API mínimo en los objetos WoT
 
+In \ac{iot} both the efficiency on the communications and reusability of the \ac{api} are important:
+\begin{definition}
+  \item[Efficiency:] mobile and embedded devices' have restricted energy autonomy.
+                    This autonomy is severely affected by network communications. % TODO cite
+                    Particularly, the access to the data they provide by means of hyperlinks may result in many HTTP requests. % aunque eso se puede adaptar por lo visto
+                    % interpretar código del servidor no es tampoco super-sencillo (xHTML!)
+  \item[Reusability:] due to the heterogeneity of the devices, assuming that they all share a common and unevolvable \ac{api} may not be realistic. % TODO paliar para que no parezca que no tiene sentido
+\end{definition}
+The first solution together with the current difficulties on achieving a fully and standard \emph{HATEOAS} for machines in the \ac{sw}, lead us to opt for the second level on the Richardson Maturity level.
+Besides, our \ac{tsc} \ac{api} will be \emph{HATEOAS} \ac{API} in its humans representation to ease their learning level.% pero aún así el API de TSC seguirá siendo HATEOAS para los usuarios, no para las máquinas
+However, we do not discard to work towards a fully \ac{rest}ful \ac{api} as future work.
 
 
-% tratamos de mezclar un API REST (TSC) con otras (la facilitada por cada nodo)
-% U es el principal aspecto de rest, y también el más complejo de cumplir
-% U => lo que más se "viola"
-%      REP => query
-%      HATEOAS => se viene haciendo trabajo para solucionar esto
-%                 la solución propuesta en el siguiente capítulo no es HATEOAS
-%      However, we do acknowledge that further work has to be done in certain aspects such as the \emph{HATEOAS} aspect of semantic \acp{api}.
-
-% REPERCUSIONES DE ESO EN PROPIEDADES:
-
-% condiciones de REST que no cumpliría
-% qué aportaría
+In conclusion, the properties of the properties for network communication style we adopted corresponds with \emph{LCODC\$SS} plus simplicity and visibility. % hacer una nueva fila con esto
 
 % TODO Comprobar que no se salga por el borde derecho!
 \input{\pathchapthree/tables/network_properties}
