@@ -1,4 +1,4 @@
-\section{Conclusions}
+\section{Conclusions} % TODO llamarlo Evaluation?
 
 With the solution presented in the previous section, we aimed to retain the desirable properties of both \ac{rest} and \ac{tsc}.
 % analísis más largo en la siguiente sección
@@ -9,13 +9,25 @@ However, some questions arise from that integration:
 (1) does in fact retain all the properties of \ac{rest} and \ac{tsc} separately? Otherwise, which properties are affected?
 (2) what other benefits carries comparing with using existing \ac{tsc} and \ac{rest} middleware?
 
-% TODO
-%   features de REST que no aportan mucho:
-%        UP Performance
-%   features añadidas por TSC (valuable properties aportadas)
-%       utiles para IoT
-%   qué propiedades deseables para IoT añadiría TSC (per se)
-%   hablar sobre las propiedades de IoT!!!
+
+% TODO cosas rescatables del paper original de WoT 2011:
+%     Uniform API vs. specific usage of each API !!!
+%     Coupling: lo comido (autonomies), por lo servidor (client-server coupling por tener API común)
+%          In spite of the outlined decoupling nature of both approaches, the data definition can be considered a coupling mode indeed.
+%          While in \ac{wot} each resource defines its own data formats and contents themselves, in \ac{tsc} the ontology in which the semantic
+%          concepts are described must be known by each part of a distributed application to effectively cooperate among them.
+%     Discovery: HATEOAS puede ser complejo para cacharros peques (parseo),
+%                proponemos discovery basada en API uniforme y a nivel de cacharros con algún mecanismo en el que no entramos.
+%          One of the main drawbacks in \ac{wot} is the lack of a discovery mechanism for new objects and the data they provide.
+%          Even when this data can be linked in each object response (using HATEOAS) and microformats are sometimes included to ease the search-ability of these objects by search engines, it is difficult for an object which may change of location and context to be referred.
+%          Thus, \ac{wot} may have a tendency to create isolated islands of data.
+%          Several workarounds have been proposed to overcome this limitation, such as using a central repository\footnote{http://www.pachube.com/}, a framework which uses federated repositories responsible for different administrative domains \citep{stirbu_towards_2008} or making each connected sensor announce itself to let an intermediary know its presence \citep{kamilaris_smart_2010}.
+
+%     Scalability: se ha hablado y ahora no es tan mala como antes ;-) Entre cacharros seguiría dando asco
+%     Semantics: Microformats vs Full (hablar de esto)
+%     Comprensión por parte de usuario: sencillo misma interfaz, no tienes que andar descubriendo nuevas APIs y viendo cómo funcionan, qué formato devuelven, etc.
+%     Comprensión por parte de desarrollador: API sencillica siempre
+
 
 
 \subsection{Network-based Style} % Architectural Properties for Network-based Styles
@@ -38,7 +50,7 @@ In \citeauthor{fielding_architectural_2000}'s words, the relevant properties whi
 \begin{description}
   \item[Performance] is divided into network performance, user-perceived performance and efficiency.
 		    The first is affected by the styles in the number of interactions and the granularity of data elements.
-		    The second property refers to the impact a user in front of an application perceives.
+		    The second property refers to the impact a user in front of an application perceives. % UP Performance es una feature que no aporta mucho a nuestro caso
 		    The third is achieved by minimizing the use of the network.
   \item[Scalability] measures how an architecture supports a big amount of components and interactions between them.
   \item[Simplicity] is achieved through the separation of concerns for the components and the generality of architectural elements.
@@ -100,7 +112,9 @@ In \ac{iot} both the efficiency on the communications and reusability of the \ac
   \item[Efficiency:] mobile and embedded devices' have restricted energy autonomy.
                     This autonomy is severely affected by network communications. % TODO cite
                     Particularly, the access to the data they provide by means of hyperlinks may result in many HTTP requests. % aunque eso se puede adaptar por lo visto
-                    % interpretar código del servidor no es tampoco super-sencillo (xHTML!)
+                    %  Por que sería muy costoso hacer rollo araña?!
+		    %     lo que ganas de reusabilidad, lo aumentas en complejidad en el cliente
+                    %     interpretar código del servidor no es tampoco super-sencillo (xHTML!)
   \item[Reusability:] due to the heterogeneity of the devices, assuming that they all share a common and unevolvable \ac{api} may not be realistic. % TODO paliar para que no parezca que no tiene sentido
 \end{definition}
 The first solution together with the current difficulties on achieving a fully and standard \emph{HATEOAS} for machines in the \ac{sw}, lead us to opt for the second level on the Richardson Maturity level.
@@ -130,26 +144,36 @@ In conclusion, the properties of the properties for network communication style 
 %   Internet-scale
 
 
-\subsection{Querying Distributedly over the Space}
+%   features añadidas por TSC (valuable properties aportadas)
+%   utiles para IoT
+
+
+A middleware is a software layer which provides a higher level of abstraction and masks the underlying heterogeneity.
+\ac{http} is a middleware indeed, but sacrifices masking exceptions in behalf of the simplicity. % TODO checkear con la tesis de Fielding
+% TODO hablar de user-based library vs a lo otro
+The success of libraries and tools for \ac{http} can be found in this simplicity.
+
+Anyhow, we propose another abstraction layer on top of \ac{http}.
+Specifically, we propose a space-based middleware.
+By using some basic primitives, we encourage sharing data in resource constrained devices through several \ac{http} \acp{api}.
+By doing so, we algo promote reusing data from other applications build on top of that middleware.
+Furthermore, encapsulating semantic from third \ac{rest} applicatios is as straightforward as implementing a simple \ac{api} on top of it.
+
+% Future work: eliminar la necesidad de espacios?
+By using semantic data, we try to improve application-level interoperability.
+However, the use of \emph{spaces} goes against this goal.
+As explained in Section~\ref{sec:tsc_soa} their use is justified in terms of scalability.
+
+
+% TODO poner aquí las propiedades de IoT que tratamos de cumplir???
+%   qué propiedades deseables para IoT añadiría TSC (per se)
+%   hablar sobre las propiedades de IoT!!!
+
+% \subsection{Querying Distributedly over the Space} => optamos por no meternos en jardines y up to the middleware implementer to decide each ;-)
 % TODO condiciones relajadas: consistencia, razonamiento distribuído
 % out of the scope: cómo implementarlo
 % optaremos por lo más sencillo
 
-
-% condiciones de TSC que no cumpliría
-% condiciones que hemos relajado de TSC (i.e. limitaciones)
-%     1. autonomía espacial (dependes de un nodo)
-%     2. consistencia de datos introducidos en el espacio
-%     3. cómo asegurar un take?
-%     4. subscripciones
-%     + Hemos juntado como 2 mundos: TSC y WoT
-%        La mayoría de las contribuciones son aplicables a WoT
-%        El mecanismo de búsqueda no es Hypertext driven! (no?)
-%        Por que sería muy costoso hacer rollo araña?!
-%     5. Future work:
-%          definir datos como consumibles por otros nodos o no
-%          eliminar la necesidad de espacios?         
-%     por qué creemos que sigue siendo útil?
 
 
 
@@ -177,160 +201,3 @@ Table~\ref{x} shows these and other aspects.
 %
 %   Para desarrollador:
 %      API integrada y simple
-
-
-
-
-
-\section{\acs{wot} and \acs{tsc} Comparison}
-% 2. Comparativa
-\label{sec:wot_tsc_comparison}
-
-% TODO rehacer taaanto :-)
-
-In this section, the strengths and weaknesses of both \ac{tsc} and REST approaches will be discussed and compared.
-Then, their compatibility is shown by proposing two ways to use \ac{wot} solutions inside a \ac{tsc} environment and \textit{viceversa}.
-
-The similarities and differences between \ac{wot} and \ac{tsc} which are summarized in the Table \ref{tab:comparison} are detailed below.
-
-\begin{table}[ht!]
-\centering
-\caption {Comparison between \ac{wot} and \ac{tsc} (OtsoPack) resource-oriented approaches}
-\begin{tabular}{|l|p{2,4cm}|p{2,6cm}|}
-\hline
-& \ac{wot} & \ac{tsc} (OtsoPack) \\
-\hline
-\textit{Architecture} & ROA \& C/S & ROA \& P2P \\
-\textit{Communication} & HTTP & Jxta \\
-\textit{Operations} & HTTP verbs & \ac{tsc} primitives \\
-\textit{Format} & HTML, JSON \& XML & RDF (NTriples) \\ %content negotiation
-\textit{Developer aid} & Less expressive data \& specific use & Expressiveness \& uniform API \\
-\textit{Coupling} & Low & Very low \\ %data
-\textit{Discovery} & Bad & Very good \\
-\textit{Scalability} & Good & Bad \\
-\textit{Semantics} & Microformats & Full \\
-\hline
-\end{tabular}
-\label{tab:comparison}
-\end{table}
-
-\subsection{Architecture}
-Both approaches are based on resource oriented architectures. \ac{wot} uses the REST architectural style, where the contents are directly addressable by
-URLs to manipulate them, and \ac{tsc} creates, removes and modifies RDF triples or graphs, i.e. sets of interlinked triples, in a space formed by peers
-in a P2P network.
-
-Despite of these similarities, \ac{wot} uses a client-server architecture where each client has to know the URL where to address its operations, while
-\ac{tsc} relies on a distributed shared memory which makes each process within a space completely autonomous. In \ac{tsc}, a node does not need to know where
-information is stored, just the URI of the space it wants to query. Furthermore, the OtsoPack solution is fully distributed and conceived not to depend
-on any centralized, previous known, intermediary server.
-
-\subsection{Communication protocol}
-Our \ac{tsc} solution currently uses Jxta\footnote{http://jxta.kenai.com/}, a language and platform independent \textit{Peer to Peer} protocol, to
-interconnect the nodes and manage the groups (spaces) where they belong. Unfortunately, the mobile version relies in a Jxta gateway called Rendezvous
-to propagate the messages to other nodes of the group, making some previous configuration necessary and potentially creating a bottleneck. Anyway,
-some \ac{tsc} implementations such as TripCom\footnote{TripCom (IST-4-027324-STP, www.tripcom.org)} rely on HTTP, and one of our next steps will be the
-reimplementation of our network communication through HTTP.
-
-Even if it is not mandatory to comply with the RESTful style, \ac{wot} usually employs the HTTP protocol as a communication layer because of its
-simplicity and wide adoption to ensure ample deployment.
-
-\subsection{Operations}
-\ac{wot} uses HTTP verbs to retrieve, create, modify or delete web resources. Retrieval is done using HTTP GET, creation by means of HTTP POST,
-modifications with HTTP PUT and removals with HTTP DELETE. Finally, the HTTP OPTIONS command is used to introspectively find out what operations are
-allowed for any URL.
-
-\ac{tsc} and tuplespace solutions offer different primitives to write, read and delete content. In our solution, the previously explained \textit{write},
-\textit{read} and \textit{take} primitives do that. Apart from these primitives, other ones are provided to manage spaces, to claim the manager role
-for a type of content in a space, event notification or traditional request-reply style service consumption. Anyway, in this thesis we are going to focus in the
-first ones because they are inherent to the \ac{tsc} paradigm. % innecesario mencionarlo?
-
-\subsection{Format}
-\ac{wot} usually returns a human readable HTML representation for a resource and XML or JSON common web representations to be used in mashups. One of the
-key mechanisms that \ac{wot} inherits from HTTP is \textit{content negotiation}, which enables clients and servers to negotiate the requested and
-provided representations for any given resource.
-
-\ac{tsc} does not provide this response format negotiation mechanism. So, OtsoPack interchanges data in N-Triples format, which is the most primitive
-representation of semantic data. In any case, other alternative semantic representations (e.g. RDF/XML, OWL/XML, Turtle or N3) could be
-easily adopted as they basically describe the same RDF triples under different textual wrappers.
-
-\subsection{Developer aid}%Actors}
-In ROA an agreement about the data being exchanged and how it can be accessed is needed to develop applications.
-On the one hand, \ac{wot} can define machine processable data using XML or JSON, but thanks to the Semantic Web \ac{tsc} can go one step
-further formally defining them and making them also ``machine understandable'' (i.e. it is capable of inferring new knowledge and make
-high-level queries over it).
-
-On the other hand, both \ac{wot} and \ac{tsc} offer some operations and interfaces to access them. Whereas in \ac{tsc} this interface is the same in each node
-and it is closely related with \ac{tsc} operations and resources, in \ac{wot} it changes in each application making a previous learning process necessary
-to use them.
-
-%Although applications which do not require human intervention can be built using RESTful services, one of the core concepts of \ac{wot} is the
-%browse-ability of the object by the user using HTML. \ac{tsc} is a solution for the Semantic Web, which aims to provide a machine understandable
-%web using ontologies and defining properties to enable inference.
-
-\subsection{Coupling}
-\label{sec:coupling}
-The REST style describes loosely coupled services due to the platform independent, asynchronous and few self describing messages
-\citep{pautasso_why_2009}. In a very similar manner, \ac{tsc} offers different kind of autonomies \citep{krummenacher_www_2005}:
-\textit{time autonomy} (because of its asynchronous nature), \textit{location autonomy} (information providers and consumers are independent
-from where the data is stored), \textit{reference autonomy} (nodes do not need to know each other) and
-\textit{data schema autonomy} (it follows the RDF specification making it independent of nodes internal data schema).
-% Quitado de la introducción para no repetirme
-%Remarkably, \ac{tsc} guarantees four basic types of autonomies: \textit{space autonomy} (processes can be run in very different computational
-%environments such as Android, Java ME devices or PCs, they just use a common coordination language), \textit{reference autonomy}
-%(nodes do not need to know each other), \textit{time autonomy} (they communicate asynchronously) and \textit{data schema autonomy} (since
-%written and read data is based on RDF triples, \ac{tsc} nodes are independent of their internal data schemas) \citep{fensel_triple-space_2004}.
-
-In spite of the outlined decoupling nature of both approaches, the data definition can be considered a coupling mode indeed.
-While in \ac{wot} each resource defines its own data formats and contents themselves, in \ac{tsc} the ontology in which the semantic
-concepts are described must be known by each part of a distributed application to effectively cooperate among them.
-
-\subsection{Discovery}
-One of the main drawbacks in \ac{wot} is the lack of a discovery mechanism for new objects and the data they provide. Even when this data can be linked
-in each object response (using HATEOAS) and microformats are sometimes included to ease the search-ability of these objects by search engines, it is difficult for an
-object which may change of location and context to be referred. Thus, \ac{wot} may have a tendency to create isolated islands of data. Several workarounds
-have been proposed to overcome this limitation, such as using a central repository\footnote{http://www.pachube.com/}, a framework which uses federated
-repositories responsible for different administrative domains \citep{stirbu_towards_2008} or making each connected sensor announce itself to let an
-intermediary know its presence \citep{kamilaris_smart_2010}.
-
-\ac{tsc} provides a transparent data level discovery mechanism to the user since when a node joins a space (i.e. a group), its data become queriable by any other
-node joint to this space. In OtsoPack the space management and communication relies on Jxta, a protocol which can be used at any level (even if we
-have mainly used it on local environments using Jxta's discovery layer's capabilities).
-
-\subsection{Scalability}
-% TODO reescribir
-The scalability of \ac{wot} is argued to be well proved since the World Wide Web is the most practical scalable system. As many objects as
-necessary could be added to WWW without making it worse. 
-
-Although Jxta scalability has been discussed and addressed in several works \citep{antoniu_performance_2007}, since our solution is fully decentralized
-and uses flooding (each query is spread to the rest of the peers which belong to a space), its scalability is expected to be poor. To overcome this limitation,
-we are working on implementing Semantic Overlay Networks (SON) to let the objects automatically divide the spaces into smaller ones and address queries
-just to the appropriate nodes which conform a semantically related space.
-
-% \begin{figure} [htbp]
-% 	\centering
-% 		\includegraphics[width=\linewidth]{./img/esquemaSON/arquitectura.png}
-% 	\caption{Proposed distributed SON-based solution.}
-% 	\label{fig:changeToSON}
-% \end{figure}
-% 
-% As can be appreciated in Figure \ref{fig:changeToSON}, the proposed solution aims to split the spaces up into smaller subspaces.
-% To do so, semantically similar contents are placed together in the same subspaces. E.g. \textit{subspaceA} contains \textit{graph1}
-% and \textit{graph2} which describe ``light'' related knowledge. In the meantime, the nodes from the original space (\textit{space1}) can organize
-% themselves to create another \textit{subspaceB} containing the relevant data for describing ``mobile phones''.
-
-\subsection{Semantics}
-On the one hand, \ac{wot} uses predefined microformats to embed semantic information into human readable pages. Doing so, the search process performed
-by search engines is enhanced \citep{guinard_internet_2011}. On the other hand, \ac{tsc} allows the usage of full semantics, more expressive than microformats,
-using RDF as a base. This makes \ac{tsc} capable of using standard query languages such as SPARQL and it becomes also independent of third parties' products to search data.
-
-
-
-% 3. Ventajas ppales de cada uno
-\subsection{Conclusion}
-% TODO
-
-In the previous section, the two-way compatibility between the \ac{tsc} and \ac{wot} approaches has been described. As has been shown, \ac{wot} is good due to its
-scalability and usage of web standards, which makes it easy to be understood by potential developers (which encourages its usage). Our \ac{tsc}
-solution, on the other hand, provides good local discovery of new resources and their information and allows more expressive semantic data
-definition which leads to more expressive and sophisticated queries. Taking this into account, a scenario which takes advantage of the potential
-combination of these approaches has been sketched (see Figure \ref{fig:scenario}).
