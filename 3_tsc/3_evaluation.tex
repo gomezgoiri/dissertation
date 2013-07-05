@@ -108,7 +108,7 @@ The most paradigmatic case may be to decide to which graph does a inferred conte
 %           nivel de madurez X de Richardson. Suponemos que alguien debe serguir nuestro API mínimo en los objetos WoT
 
 In \ac{iot} both the efficiency on the communications and reusability of the \ac{api} are important:
-\begin{definition}
+\begin{description}
   \item[Efficiency:] mobile and embedded devices' have restricted energy autonomy.
                     This autonomy is severely affected by network communications. % TODO cite
                     Particularly, the access to the data they provide by means of hyperlinks may result in many HTTP requests. % aunque eso se puede adaptar por lo visto
@@ -116,7 +116,7 @@ In \ac{iot} both the efficiency on the communications and reusability of the \ac
 		    %     lo que ganas de reusabilidad, lo aumentas en complejidad en el cliente
                     %     interpretar código del servidor no es tampoco super-sencillo (xHTML!)
   \item[Reusability:] due to the heterogeneity of the devices, assuming that they all share a common and unevolvable \ac{api} may not be realistic. % TODO paliar para que no parezca que no tiene sentido
-\end{definition}
+\end{description}
 The first solution together with the current difficulties on achieving a fully and standard \emph{HATEOAS} for machines in the \ac{sw}, lead us to opt for the second level on the Richardson Maturity level.
 Besides, our \ac{tsc} \ac{api} will be \emph{HATEOAS} \ac{API} in its humans representation to ease their learning level.% pero aún así el API de TSC seguirá siendo HATEOAS para los usuarios, no para las máquinas
 However, we do not discard to work towards a fully \ac{rest}ful \ac{api} as future work.
