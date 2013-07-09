@@ -1,0 +1,37 @@
+
+% Tablita de cómo hereda propiedades de los estilos anteriores?
+% (y si quieren más información, que miren en la tesis de Fielding)
+\begin{savenotes} % to use footnotes inside
+  \begin{table}[htbp]
+    \caption{Direct relations between network properties and properties for lightweight middleware.}
+    \begin{center}
+      \begin{tabular}{lccccccccccccc}
+	~ &
+	\rotatebox{90}{Net Perform} &
+	\rotatebox{90}{UP Perform} &
+	\rotatebox{90}{Efficiency} &
+	\rotatebox{90}{Scalability} &
+	\rotatebox{90}{Simplicity} &
+	\rotatebox{90}{Evolvability} &
+	\rotatebox{90}{Extensibility} &
+	\rotatebox{90}{Customiz.} &
+	\rotatebox{90}{Configur.} &
+	\rotatebox{90}{Reusability} &
+	\rotatebox{90}{Visibility} &
+	\rotatebox{90}{Portability} &
+	\rotatebox{90}{Reliability} \\
+	\hline
+	Interoperability & ~ & ~ & ~ & ~ & × & × & × & × & × & × & × & × & ~\\
+	Scalability & ~ & ~ & ~ & × & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~\\
+	Manageability & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & × & ~ & × & ~ & ~\\ % repensar
+	Mobility & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~\\
+	Security &  ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~\\
+	Reliability & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ×\\
+	Restricted energy \& comp. & × & ~ & × & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~\\ % también simplicity
+	%XXX & × & × & × & × & × & × & × & × & × & × & × & × & ×\\
+	\hline
+      \end{tabular}
+    \end{center}
+    \label{tab:middleware_netprop}
+  \end{table}
+\end{savenotes}

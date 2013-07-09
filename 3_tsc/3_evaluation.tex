@@ -118,17 +118,52 @@ In \ac{iot} both the efficiency on the communications and reusability of the \ac
   \item[Reusability:] due to the heterogeneity of the devices, assuming that they all share a common and unevolvable \ac{api} may not be realistic. % TODO paliar para que no parezca que no tiene sentido
 \end{description}
 The first solution together with the current difficulties on achieving a fully and standard \emph{HATEOAS} for machines in the \ac{sw}, lead us to opt for the second level on the Richardson Maturity level.
-Besides, our \ac{tsc} \ac{api} will be \emph{HATEOAS} \ac{API} in its humans representation to ease their learning level.% pero aún así el API de TSC seguirá siendo HATEOAS para los usuarios, no para las máquinas
+Besides, our \ac{tsc} \ac{api} will be \emph{HATEOAS} \ac{api} in its humans representation to ease their learning level.% pero aún así el API de TSC seguirá siendo HATEOAS para los usuarios, no para las máquinas
 However, we do not discard to work towards a fully \ac{rest}ful \ac{api} as future work.
 
 
 In conclusion, the properties of the properties for network communication style we adopted corresponds with \emph{LCODC\$SS} plus simplicity and visibility. % hacer una nueva fila con esto
+% TODO comprobar que se explica eso tal cual en la tesis de Fielding: HATEOAS => sólo afecta a reusabilidad
 
 % TODO Comprobar que no se salga por el borde derecho!
 \input{\pathchapthree/tables/network_properties}
 
 
+
 \subsection{Middleware Properties}
+
+A middleware is a software layer which provides a higher level of abstraction and masks the underlying heterogeneity.
+The middleware presented in this thesis is oriented for \ac{ubicomp} environments and the devices which populate them (i.e. mobile and embedded devices).
+Whereas the devices part of the \ac{iot} are a subset of the ones present in \ac{ubicomp}, we consider that the challenges they have to face are the same ones.
+For instance, smartphones are not part of the \ac{iot}, but face similar energy and computational limitations as the embedded devices. % posiblemente no todas las propiedades!
+
+
+%   qué propiedades deseables para IoT añadiría TSC (per se)
+Therefore, we will adhere to the challenges presented by the \emph{Internet-of-Things Architecture} European project \citep{walewski_project_2011} to analyze our solution.
+\citeauthor{walewski_project_2011} state that the \ac{iot} must overcome the following challenges:
+\begin{description}
+  \item[Interoperability:] to face the heterogeneity of technologies in the \ac{iot}.
+  \item[Scalability:] to cope with a greater amount of devices.
+  \item[Manageability] of the devices.
+  \item[Mobility:] ability to face these situations.
+  \item[Security and privacy]
+  % definición de reliability modificada yendo a la fuente de iot-a.eu
+  \item[Reliability:] to handle connectivity losses in various \emph{ad hoc}-like ways.
+\end{description}
+Furthermore, these devices also face energetic and computational constraints.
+
+
+As shown in the Table~\ref{tab:middleware_netprop}, some of these properties closely relate with some of the ones explained in the previous section.
+Some of these properties are repeated (\emph{scalability} and \emph{reliability}).
+Others relate in non-self-explanatory ways (\emph{interoperability}, \emph{manageability} and \emph{energy and computational restrictions}).
+Finally, some properties just relate indirectly.
+
+% explicar por qué
+% simplicidad siempre beneficia a alguno... :-S
+Regarding the \emph{interoperability}, we defend that relates with the 
+
+% TODO Comprobar que no se salga por el borde derecho!
+\input{\pathchapthree/tables/middleware_netprop_map}
 
 % explicar cómo HTTP trataba de evitar complejidades
 % explicar como al crear una capa por encima, complicas todo un poco
@@ -149,15 +184,15 @@ In conclusion, the properties of the properties for network communication style 
 
 
 A middleware is a software layer which provides a higher level of abstraction and masks the underlying heterogeneity.
-\ac{http} is a middleware indeed, but sacrifices masking exceptions in behalf of the simplicity. % TODO checkear con la tesis de Fielding
+\ac{http} is a middleware indeed, but sacrifices masking exceptions on behalf of the simplicity. % TODO checkear con la tesis de Fielding
 % TODO hablar de user-based library vs a lo otro
 The success of libraries and tools for \ac{http} can be found in this simplicity.
 
 Anyhow, we propose another abstraction layer on top of \ac{http}.
 Specifically, we propose a space-based middleware.
-By using some basic primitives, we encourage sharing data in resource constrained devices through several \ac{http} \acp{api}.
-By doing so, we algo promote reusing data from other applications build on top of that middleware.
-Furthermore, encapsulating semantic from third \ac{rest} applicatios is as straightforward as implementing a simple \ac{api} on top of it.
+By using some basic primitives, we encourage sharing data in resource constrained devices through an \ac{http} \ac{api}.
+This \ac{api} also promotes reusing data from other applications build on top of that middleware.
+Furthermore, encapsulating semantic from third \ac{rest} applications is as straightforward as implementing a simple \ac{api} on top of them.
 
 % Future work: eliminar la necesidad de espacios?
 By using semantic data, we try to improve application-level interoperability.
@@ -165,9 +200,6 @@ However, the use of \emph{spaces} goes against this goal.
 As explained in Section~\ref{sec:tsc_soa} their use is justified in terms of scalability.
 
 
-% TODO poner aquí las propiedades de IoT que tratamos de cumplir???
-%   qué propiedades deseables para IoT añadiría TSC (per se)
-%   hablar sobre las propiedades de IoT!!!
 
 % \subsection{Querying Distributedly over the Space} => optamos por no meternos en jardines y up to the middleware implementer to decide each ;-)
 % TODO condiciones relajadas: consistencia, razonamiento distribuído
