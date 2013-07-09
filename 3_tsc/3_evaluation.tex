@@ -7,7 +7,18 @@ With the solution presented in the previous section, we aimed to retain the desi
 % 3. tiene beneficios?
 However, some questions arise from that integration:
 (1) does in fact retain all the properties of \ac{rest} and \ac{tsc} separately? Otherwise, which properties are affected?
-(2) what other benefits carries comparing with using existing \ac{tsc} and \ac{rest} middleware?
+(2) what other benefits carries comparing with using already existing \ac{tsc} and \ac{rest} middleware?
+
+% Fielding distingue entre:
+%      + "distributed-system": hace que el usuario vea el sistema como un todo, sin saber cuando se realizan llamadas en remoto y cuando no
+%      + "networking-system": no necesariamente oculta las particularidades de la red <- el se centra en estos
+
+
+To answer these questions, we analyze the presented solution from different point-of-views:
+(1) its coordination properties (Section~\ref{sec:XXX_properties}),
+(2) its network-level properties (Section~\ref{sec:network_properties}),
+(3) how the latter work together to contribute to the challenges of an \ac{ubicomp} environment (Section~\ref{sec:middleware_properties}).
+Section~\ref{sec:middleware_eval_summary} summarizes these analysis. % cómo dan respuesta a las preguntas del comienzo
 
 
 % TODO cosas rescatables del paper original de WoT 2011:
@@ -29,13 +40,34 @@ However, some questions arise from that integration:
 %     Comprensión por parte de desarrollador: API sencillica siempre
 
 
+\subsection{Coordination properties}
+\label{sec:coordination_properties}
 
-\subsection{Network-based Style} % Architectural Properties for Network-based Styles
+% TODO añadir la autonomía que se refería a la semántica?
+As we have already discussed in Section~\ref{sec:integration}, indirect communication middleware can have two key properties:
+\begin{itemize}
+  \item The sender does not need to know the receiver or receivers and vice versa (i.e. \emph{space uncoupling}).
+  \item Senders and receivers do not need to exists in the same time to communicate with each other (i.e. \emph{time uncoupling}).
+\end{itemize}
+
+
+The primitives used in our space-based computing implementation force it to be \emph{space uncoupled}.
+On the contrary, it is not always \emph{time uncoupled}.
+If two nodes write and read from the coordination space, they are \emph{time uncoupled};
+but if a node accesses to others' content (i.e. \emph{self-managed graphs}), they are not.
+In other words, \emph{time uncoupling} is not achieved by the extension of the model presented in Section~\ref{sec:halfway_solution}.
+As a future work, this could be alleviated by a caching mechanism implemented in the space holder or holders. % TODO hablar con propiedad de esos elementos => nombrarlos antes
+% see \ref{tab:middleware_coordinationprop}
+
+\input{\pathchapthree/tables/coordination_properties}
+
+
+\subsection{Networking properties} % Architectural Properties for Network-based Styles
 \label{sec:network_properties}
 % Cómo afecta la app propuesta => ir actualizando al final de otras secciones???
 
 In Section~\ref{sec:tsc_vs_rest} we have described how \ac{tsc} does not contradict any of the \ac{rest} principles.
-However, the adaptation presented in this thesis does not completely adheres to the \ac{rest} style.
+However, the adaptation presented in this thesis does not completely adhere to the \ac{rest} style.
 In this section we present how this divergences affect the \ac{rest}'s properties.
 % decir que el objetivo final es que pudiera ser REST
 
@@ -49,17 +81,21 @@ In \citeauthor{fielding_architectural_2000}'s words, the relevant properties whi
 % verificar que no se parece demasiado a sus definiciones o sino poner cursiva.
 \begin{description}
   \item[Performance] is divided into network performance, user-perceived performance and efficiency.
-		    The first is affected by the styles in the number of interactions and the granularity of data elements.
-		    The second property refers to the impact a user in front of an application perceives. % UP Performance es una feature que no aporta mucho a nuestro caso
-		    The third is achieved by minimizing the use of the network.
+    \begin{description}
+      \item[Network performance] is affected by the styles in the number of interactions and the granularity of data elements.
+      \item[User-perceived performance] refers to the impact a user in front of an application perceives. % UP Performance es una feature que no aporta mucho a nuestro caso
+      \item[Efficiency] is achieved by minimizing the use of the network.
+    \end{description}
   \item[Scalability] measures how an architecture supports a big amount of components and interactions between them.
   \item[Simplicity] is achieved through the separation of concerns for the components and the generality of architectural elements.
-  \item[Modifiability] encompasses evolvability, extensibility and customization.
-		      The first refers to the degree in which a component can be implemented without negatively impacting on others.
-		      The second measures the ability to add functionality to the system.
-		      The third is the ability to customize the behavior of an architectural element temporarily.
-  \item[Configurability] is related with the extensibility and the reusability.
-  \item[Reusability] is the ability to reuse components, connectors or data elements without modifying other apps.
+  \item[Modifiability] encompasses evolvability, extensibility, customization, configurability and reusability.
+    \begin{description}
+      \item[Evolvability] refers to the degree in which a component can be implemented without negatively impacting on others.
+      \item[Extensibility] measures the ability to add functionality to the system.
+      \item[Customization] is the ability to customize the behavior of an architectural element temporarily.
+      \item[Configurability] is related with the extensibility and the reusability.
+      \item[Reusability] is the ability to reuse components, connectors or data elements without modifying other apps.
+    \end{description}
   \item[Visibility] is the ability of a component of monitoring or mediating in the interaction between other two components.
   \item[Portability] is the ability of working in different environments.
   \item[Reliability] is the degree in which an architecture depends on the failures of the system or components, connectors or partially incorrect data.
@@ -130,7 +166,8 @@ In conclusion, the properties of the properties for network communication style 
 
 
 
-\subsection{Middleware Properties}
+\subsection{Properties for \acs{ubicomp}}
+\label{sec:middleware_properties}
 
 A middleware is a software layer which provides a higher level of abstraction and masks the underlying heterogeneity.
 The middleware presented in this thesis is oriented for \ac{ubicomp} environments and the devices which populate them (i.e. mobile and embedded devices).
@@ -144,7 +181,8 @@ Therefore, we will adhere to the challenges presented by the \emph{Internet-of-T
 \begin{description}
   \item[Interoperability:] to face the heterogeneity of technologies in the \ac{iot}.
   \item[Scalability:] to cope with a greater amount of devices.
-  \item[Manageability] of the devices.
+  \item[Manageability] of the devices through autonomous behaviour. % specially in environments where they cannot be controlled through centrality
+                      % self-management, self-configuration, self-healing, self-optimisation and self-protection
   \item[Mobility:] ability to face these situations.
   \item[Security and privacy]
   % definición de reliability modificada yendo a la fuente de iot-a.eu
@@ -206,10 +244,11 @@ As explained in Section~\ref{sec:tsc_soa} their use is justified in terms of sca
 % out of the scope: cómo implementarlo
 % optaremos por lo más sencillo
 
-
+% Additional remarks???
 
 
 \subsection{Summary}
+\label{sec:middleware_eval_summary}
 
 In the previous sections we have get to the bottom of the strengths and weaknesses of our proposal.
 To sum up, the main limitations are X and Y.
