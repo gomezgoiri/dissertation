@@ -174,60 +174,31 @@ The middleware presented in this thesis is oriented for \ac{ubicomp} environment
 Whereas the devices part of the \ac{iot} are a subset of the ones present in \ac{ubicomp}, we consider that the challenges they have to face are the same ones.
 For instance, smartphones are not part of the \ac{iot}, but face similar energy and computational limitations as the embedded devices. % posiblemente no todas las propiedades!
 
-
-%   qué propiedades deseables para IoT añadiría TSC (per se)
+% ¿Qué propiedades deseables para IoT añadiríamos?
 Therefore, we will adhere to the challenges presented by the \emph{Internet-of-Things Architecture} European project \citep{walewski_project_2011} to analyze our solution.
 \citeauthor{walewski_project_2011} state that the \ac{iot} must overcome the following challenges:
-\begin{description}
-  \item[Interoperability:] to face the heterogeneity of technologies in the \ac{iot}.
-  \item[Scalability:] to cope with a greater amount of devices.
-  \item[Manageability] of the devices through autonomous behaviour. % specially in environments where they cannot be controlled through centrality
-                      % self-management, self-configuration, self-healing, self-optimisation and self-protection
-  \item[Mobility:] ability to face these situations.
-  \item[Security and privacy]
-  % definición de reliability modificada yendo a la fuente de iot-a.eu
-  \item[Reliability:] to handle connectivity losses in various \emph{ad hoc}-like ways.
-\end{description}
-Furthermore, these devices also face energetic and computational constraints.
+interoperability, scalability, manageability, mobility, security and privacy and reliability.
+Furthermore, we also consider energetic and computational constraints which devices in \ac{ubicomp} have to face. % ponerlo de forma que sea menos pegote?
 
 
-As shown in the Table~\ref{tab:middleware_netprop}, some of these properties closely relate with some of the ones explained in the previous section.
-Some of these properties are repeated (\emph{scalability} and \emph{reliability}).
-Others relate in non-self-explanatory ways (\emph{interoperability}, \emph{manageability} and \emph{energy and computational restrictions}).
-Finally, some properties just relate indirectly.
+\subsubsection{Interoperability}
 
-% explicar por qué
-% simplicidad siempre beneficia a alguno... :-S
-Regarding the \emph{interoperability}, we defend that relates with the 
-
-% TODO Comprobar que no se salga por el borde derecho!
-\input{\pathchapthree/tables/middleware_netprop_map}
-
-% explicar cómo HTTP trataba de evitar complejidades
-% explicar como al crear una capa por encima, complicas todo un poco
-%       sencillez
-%       user-based library vs a lo otro
-
-% Propiedades que jodes de HTTP de cara al usuario: simplicidad...
-% propiedades de cara al usuario:
-% Requisitos de ealy web, propiedades deseables
-%   Low entry-barrier
-%   Extensibilidad
-%   Distributed Hypermedia
-%   Internet-scale
+Interoperability is key to deal with a wide range of heterogeneous technologies.
+For the \textbf{communication} between nodes, we rely on the widely supported \ac{http} protocol. % usar la palabra ubiquitous o pervasive???
+Communication with devices using other protocols must be done by means of specialized gateways. % out-of-the-scope
 
 
-%   features añadidas por TSC (valuable properties aportadas)
-%   utiles para IoT
+At another level, we can consider the interoperability between applications built on the analyzed environments.
+Our solution contributes to that goal by
+(1) using semantic data,
+(2) promoting the use of third applications' data and 
+(3) making our data reusable by third applications. % estos 2 últimos son como redefinir interop
 
+By using semantics, we describe data in a more rich and abstract way.
+Two key mechanisms of the Semantic Web in this aspect are the inference of new data and the mapping of equivalent models.
+These abstract way to annotate data allows third applications to reuse it.
 
-A middleware is a software layer which provides a higher level of abstraction and masks the underlying heterogeneity.
-\ac{http} is a middleware indeed, but sacrifices masking exceptions on behalf of the simplicity. % TODO checkear con la tesis de Fielding
-% TODO hablar de user-based library vs a lo otro
-The success of libraries and tools for \ac{http} can be found in this simplicity.
-
-Anyhow, we propose another abstraction layer on top of \ac{http}.
-Specifically, we propose a space-based middleware.
+% contribuimos a los otros 2 de la siguiente manera:
 By using some basic primitives, we encourage sharing data in resource constrained devices through an \ac{http} \ac{api}.
 This \ac{api} also promotes reusing data from other applications build on top of that middleware.
 Furthermore, encapsulating semantic from third \ac{rest} applications is as straightforward as implementing a simple \ac{api} on top of them.
@@ -238,9 +209,69 @@ However, the use of \emph{spaces} goes against this goal.
 As explained in Section~\ref{sec:tsc_soa} their use is justified in terms of scalability.
 
 
+% explicar por qué
+% simplicidad siempre beneficia a alguno... :-S
+Regarding the \emph{interoperability}, we defend that relates with the 
 
-% \subsection{Querying Distributedly over the Space} => optamos por no meternos en jardines y up to the middleware implementer to decide each ;-)
-% TODO condiciones relajadas: consistencia, razonamiento distribuído
+% Portability !!!
+Besides, the Semantic Web is built on top of well-defined and bastly supported tools.
+
+
+
+\subsubsection{Scalability}
+to cope with a greater amount of devices.
+
+
+\subsubsection{Manageability}
+of the devices through autonomous behavior. % specially in environments where they cannot be controlled through centrality
+                      % self-management, self-configuration, self-healing, self-optimisation and self-protection
+
+\subsubsection{Mobility}
+ability to face these situations.
+
+\subsubsection{Security and privacy}
+  % definición de reliability modificada yendo a la fuente de iot-a.eu
+
+\subsubsection{Reliability}
+to handle connectivity losses in various \emph{ad hoc}-like ways.
+
+
+
+% TODO cómo las distintas propiedades vistas antes se combinan para aportar a estas
+%      una valoración de las mismas?
+As shown in the Table~\ref{tab:middleware_netprop}, some of these properties closely relate with some of the ones explained in the previous section.
+Some of these properties are repeated (\emph{scalability} and \emph{reliability}).
+Others relate in unself-explanatory ways (\emph{interoperability}, \emph{manageability} and \emph{energy and computational restrictions}).
+Finally, some properties just relate indirectly.
+
+
+% TODO Comprobar que no se salga por el borde derecho!
+\input{\pathchapthree/tables/middleware_netprop_map}
+
+
+
+% explicar cómo HTTP trataba de evitar complejidades
+% explicar como al crear una capa por encima, complicas todo un poco
+%       sencillez
+%       user-based library vs a lo otro
+
+% Propiedades que jodes de HTTP de cara al usuario: simplicidad...
+% Requisitos de ealy web, propiedades deseables
+%   Low entry-barrier
+%   Extensibilidad
+%   Distributed Hypermedia
+%   Internet-scale
+
+
+% drawbacks frente a HTTP: sencillez, etc.
+A middleware is a software layer which provides a higher level of abstraction and masks the underlying heterogeneity.
+\ac{http} is a middleware indeed, but sacrifices masking exceptions on behalf of the simplicity. % TODO checkear con la tesis de Fielding
+% TODO hablar de user-based library vs a lo otro
+The success of libraries and tools for \ac{http} can be found in this simplicity.
+
+
+% TODO \subsection{Querying Distributedly over the Space} => optamos por no meternos en jardines y up to the middleware implementer to decide each ;-)
+% condiciones relajadas: consistencia, razonamiento distribuído
 % out of the scope: cómo implementarlo
 % optaremos por lo más sencillo
 
