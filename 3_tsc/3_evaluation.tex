@@ -88,7 +88,9 @@ In \citeauthor{fielding_architectural_2000}'s words, the relevant properties whi
     \end{description}
   \item[Scalability] measures how an architecture supports a big amount of components and interactions between them.
   \item[Simplicity] is achieved through the separation of concerns for the components and the generality of architectural elements.
-  \item[Modifiability] encompasses evolvability, extensibility, customization, configurability and reusability.
+  \item[Modifiability] indicates how easily gradual changes can be introduced in the system.
+                       These changes form different implementations which should coexist.
+                       % Dynamic modifiability avoids the whole system to restart.
     \begin{description}
       \item[Evolvability] refers to the degree in which a component can be implemented without negatively impacting on others.
       \item[Extensibility] measures the ability to add functionality to the system.
@@ -181,101 +183,185 @@ interoperability, scalability, manageability, mobility, security and privacy and
 Furthermore, we also consider energetic and computational constraints which devices in \ac{ubicomp} have to face. % ponerlo de forma que sea menos pegote?
 
 
-\subsubsection{Interoperability}
-
-Interoperability is key to deal with a wide range of heterogeneous technologies.
-For the \textbf{communication} between nodes, we rely on the widely supported \ac{http} protocol. % usar la palabra ubiquitous o pervasive???
-Communication with devices using other protocols must be done by means of specialized gateways. % out-of-the-scope
-
-
-At another level, we can consider the interoperability between applications built on the analyzed environments.
-Our solution contributes to that goal by
-(1) using semantic data,
-(2) promoting the use of third applications' data and 
-(3) making our data reusable by third applications. % estos 2 últimos son como redefinir interop
-
-By using semantics, we describe data in a more rich and abstract way.
-Two key mechanisms of the Semantic Web in this aspect are the inference of new data and the mapping of equivalent models.
-These abstract way to annotate data allows third applications to reuse it.
-
-% contribuimos a los otros 2 de la siguiente manera:
-By using some basic primitives, we encourage sharing data in resource constrained devices through an \ac{http} \ac{api}.
-This \ac{api} also promotes reusing data from other applications build on top of that middleware.
-Furthermore, encapsulating semantic from third \ac{rest} applications is as straightforward as implementing a simple \ac{api} on top of them.
-
-% Future work: eliminar la necesidad de espacios?
-By using semantic data, we try to improve application-level interoperability.
-However, the use of \emph{spaces} goes against this goal.
-As explained in Section~\ref{sec:tsc_soa} their use is justified in terms of scalability.
-
-
-% explicar por qué
-% simplicidad siempre beneficia a alguno... :-S
-Regarding the \emph{interoperability}, we defend that relates with the 
-
-% Portability !!!
-Besides, the Semantic Web is built on top of well-defined and bastly supported tools.
-
-
-
-\subsubsection{Scalability}
-to cope with a greater amount of devices.
-
-
-\subsubsection{Manageability}
-of the devices through autonomous behavior. % specially in environments where they cannot be controlled through centrality
-                      % self-management, self-configuration, self-healing, self-optimisation and self-protection
-
-\subsubsection{Mobility}
-ability to face these situations.
-
-\subsubsection{Security and privacy}
-  % definición de reliability modificada yendo a la fuente de iot-a.eu
-
-\subsubsection{Reliability}
-to handle connectivity losses in various \emph{ad hoc}-like ways.
-
-
-
 % TODO cómo las distintas propiedades vistas antes se combinan para aportar a estas
-%      una valoración de las mismas?
-As shown in the Table~\ref{tab:middleware_netprop}, some of these properties closely relate with some of the ones explained in the previous section.
-Some of these properties are repeated (\emph{scalability} and \emph{reliability}).
-Others relate in unself-explanatory ways (\emph{interoperability}, \emph{manageability} and \emph{energy and computational restrictions}).
-Finally, some properties just relate indirectly.
+Table~\ref{tab:middleware_netprop}, shows how the properties explained in the previous sections contribute to achieve these challenges.
 
 
 % TODO Comprobar que no se salga por el borde derecho!
 \input{\pathchapthree/tables/middleware_netprop_map}
 
 
-
+% TODO ver si tiene sentido hablar de estas cosas
 % explicar cómo HTTP trataba de evitar complejidades
+% Propiedades que jodes de HTTP de cara al usuario: simplicidad...
 % explicar como al crear una capa por encima, complicas todo un poco
 %       sencillez
 %       user-based library vs a lo otro
-
-% Propiedades que jodes de HTTP de cara al usuario: simplicidad...
-% Requisitos de ealy web, propiedades deseables
-%   Low entry-barrier
-%   Extensibilidad
-%   Distributed Hypermedia
-%   Internet-scale
-
-
 % drawbacks frente a HTTP: sencillez, etc.
-A middleware is a software layer which provides a higher level of abstraction and masks the underlying heterogeneity.
-\ac{http} is a middleware indeed, but sacrifices masking exceptions on behalf of the simplicity. % TODO checkear con la tesis de Fielding
-% TODO hablar de user-based library vs a lo otro
-The success of libraries and tools for \ac{http} can be found in this simplicity.
+%A middleware is a software layer which provides a higher level of abstraction and masks the underlying heterogeneity.
+%\ac{http} is a middleware indeed, but sacrifices masking exceptions on behalf of the simplicity. % TODO checkear con la tesis de Fielding
+% hablar de user-based library vs a lo otro
+
+
+\subsubsection{Interoperability}
+
+% 2 cosas contribuyen a esta propiedad:
+%     Uso de HTTP
+%     Semántica => ponerlo como una autonomía (encaja bien en la tablita) o no (en realidad se podría usar tanto sobre TSC como sobre HTTP)?
+
+Interoperability is the key to deal with a wide range of heterogeneous technologies.
+The use of both the \textbf{network style} and the \textbf{semantic data} contribute to this challenge.
+
+
+\paragraph{Semantics}
+
+Using semantics we promote the reuse of data describing them in a more rich and abstract way.
+The semantic web is composed by a series of standardized technologies which allow to formally describe the models (i.e. the concepts and how they relate to each other).
+Two key mechanisms of the Semantic Web in this aspect are the inference of new data and the mapping of equivalent models.
+% hablar de cómo contribuye o no a su portabilidad??
+% Besides, the Semantic Web is built on top of well-defined and vastly supported tools.
+
+% Drawbacks
+% TODO referencia al paper de qué impide conseguir challenges semánticos
+
+
+\paragraph{Networking}
+
+For the communication between nodes, we rely on the widely supported \ac{http} protocol. % usar la palabra ubiquitous o pervasive???
+Communication with devices using other protocols must be done by means of specialized gateways. % out-of-the-scope
+Therefore, adhering to a unique protocol does not help dealing with various communication technologies.
+
+% opción muy común hoy en día para definir APIs
+However, a number of current applications use \ac{http} to define their network accessible \ac{api}'s. % through so-called REST APIs
+% posiblemente indirectly due to its simplicity => pervasiveness and massive adoption
+This makes it a \emph{de facto} requirement to interoperate with these applications. % te da acceso a más apps
+% TODO ejemplo de ello: mashups
+% también en resource constrained devices: el éxito de WoT es sólo una prueba de ello
+In fact, this success has also its counterpart on resource constrained platforms.
+The clearer sign for that is the upcoming \ac{wot} initiative.
+
+
+At a finer grained level, there are several properties which help different \ac{http} implementations to interoperate: % (of interoperability)
+\begin{description}
+  % \item[Simplicity] => a nivel de red no, pero un middleware simple contribuye a una mayor portabilidad % PROPIEDAD INDIRECTA
+  \item[Modifiability] is the ease of gradually introducing changes in the system.
+                       Particularly dynamic modifiability avoids restarting the entire system when introducing a change.
+                       This property allows different implementations to coexist,
+                       reducing issues on the communication between two nodes through \ac{http}.
+                       
+		      % mejor no meterme en fregados de justificar cada subpunto:
+		      % is important due to the \emph{evolvability} and the \emph{reusability}.
+		      % Evolvability allows two nodes to have components implemented at different degrees without negatively impacting each other.
+		      % contribuyen a eso (sacado de Fielding):
+		      %   + CS: The separation of concerns also allows the two types of components to evolve independently, provided that the interface doesn’t change.
+		      %   + Layered systems reduce coupling across multiple layers by hiding the inner layers from all except the adjacent outer layer, thus improving evolvability and reusability.
+		      % extensibility no: lo introduce COD, así que echa calculos de si me importa esa característica de HTTP
+		      % visibility => qué tiene que ver lo fácil que es monitorizarlo con esto?
+  
+  \item[Portability:] \ac{http}'s portability is backed by the plethora of \ac{http} libraries and frameworks available for most of the computing platforms.
+                    % Cachis, no he podido usar una palabra tan molona como: pervasiveness
+                    % Justificación: permite interoperar entre distintas plataformas?
+                    Consequently, a huge number of platforms can interoperate through \ac{http}.
+\end{description}
+
+
+% No sé dónde meter esta ventaja independiente
+% TODO Besides, we enable its \emph{evolvability} in different nodes by allowing them to implement at different degrees (see Section~\ref{sec:status_codes}). % TODO esto es un poco jugón, porque no funcionaría bien sin todo!
+
+Besides, in our \ac{api} \ac{http} the following points remain unsolved:
+% estos 2 últimos son como redefinir interop
+\begin{itemize} % posiblemente incluir lo que se explica aquí en otro punto
+  \item \emph{Using third applications' data}:
+  \begin{enumerate}
+    \item In Section~\ref{sec:network_properties} we detailed how a pure \ac{rest} \ac{api} contributes to a higher decoupling between clients and servers.
+	  This could help to make clients able to autonomously adapt to use different \ac{rest} \acp{api} defined in each device or to different versions of these \acp{api}. % i.e. evolvable
+	  Of course, this would come at a cost of more complex clients. % cacharros parseando HTML, interpretandolo, etc.
+	  
+	  Our \ac{api} is not hypermedia-driven.
+	  This requires third applications to implement a uniform \ac{api} on top of them to allow our middleware consume their data.
+	  However, the \ac{api} is resource-oriented and simple to implement. % TODO definir qué es y qué no es resource oriented!
+	  
+    \item Another obstacle for achieving a real application-level interoperability in our middleware is the use of distinct isolated spaces.
+	  In other words, two applications using two different spaces would not share their content.
+	  Although this could be avoided by defining a default space, as explained in Section~\ref{sec:tsc_soa} their use is justified in terms of scalability.
+  \end{enumerate}
+  
+  \item \emph{Making our data reusable by third applications}:
+	
+	As explained, we encourage sharing data in resource constrained devices through an \ac{http} \ac{api}. % TODO hacer la distinción de que lo permitimos a través de ambos: 
+	Therefore, any other application able to use \ac{http} and manage semantics can reuse data from our middleware.
+\end{itemize}
+
+
+\subsubsection{Scalability}
+
+The high scalability of the chosen architectural network style is negatively affected by the combination of several features:
+\begin{itemize}
+  \item Data distribution (i.e. accessing to \emph{self-managed graphs})
+  \item Lack of hypermedia on the Semantic Web which cannot guide data discovery.
+        In other words, a triple location cannot always be discovered following its \ac{uri}. % relacionado con todo aquello de 303 y demás?
+        This means that we need an out-of-band searching mechanism as the one presented in the Chapter~\ref{cha:searching}.
+\end{itemize}
+
+% TODO TODO TODO resulta que si desacoplas la URI de un espacio de quien la proporciona, el searching mechanism también puede ayudar con eso!!!
+
+
+\subsubsection{Manageability}
+
+Manageability helps to cope with so many devices allowing them to have an autonomous behavior. % specially in environments where they cannot be controlled through centrality
+This autonomous behavior encompasses self-management, self-configuration, self-healing, self-optimization and self-protection.
+In this thesis we propose self-managed architecture which eases the searching of self-managed graphs.
+
+
+\subsubsection{Mobility}
+
+The ability to face mobility situations can be improved through the autonomy brought by the coordination paradigm. % TODO hacer constantes con space y time uncoupling!
+First, mobility situations may impede two nodes coexist at the same time.
+Thus, \emph{time uncoupling} enables their communication.
+
+The primitives care about the data and not the provider of that data.
+Thus, if more than a node provide a content, we make consumers independent of which provides it.
+
+
+\subsubsection{Security and privacy}
+% En una versión nueva hablan de Proof
+
+This property can be considered traversal to any solution and therefore it is considered out-of-the-scope of the thesis.
+However, we are currently working on a lightweight security solution \citep{naranjo_lightweight_2012}. % TODO definir mejor esto
+For our future work, we are considering to integrate it with the presented middleware.
+
+
+\subsubsection{Reliability}
+% definición de reliability modificada yendo a la fuente de iot-a.eu
+
+Reliability in \ac{ubicomp} is crucial to handle connectivity losses in various \emph{ad hoc}-like ways.
+% ver cómo se relaciona con REST
+Particularly, \ac{http} handles it through caching.
+% Honestidad: This feature has not been properly addressed in our middleware.
+
+
+\subsubsection{Restricted Energy and Computation}
+
+% TODO dividirlo en 2 distintos??
+The computation restrictions are affected by heavyweight processes.
+Although even parsing is sometimes too consuming in very limited platforms,
+we consider semantic management a requirement.
+% The verboseness of semantic data affects both aspects: computing and networking.
+In that regard, a inference process must be too heavyweight. % autocita?
+% por eso, el mecanismo de búsqueda se hace en los cacharros más potentes
+% por eso no lo imponemos como un requisito ni para los consumidores ni para los proveedores, aunque sea recomendable.
+
+% 2 cosas contribuyen: computación y networking => TODO mostrar diagrama de FoxG20
+Regarding energy consumption, both computing data and networking operations directly affect it.
+As an example, Figure~\ref{XXX} shows the energy consumption on an embedded platform in an inactivity state and networking and computing data. % más detalles en la sección correspondiente
+The verboseness of semantic data may result in excessive networking throughput in some occasions.
+However, regarding \ac{http}, it contributes through \emph{network performance} and \emph{efficiency}.
 
 
 % TODO \subsection{Querying Distributedly over the Space} => optamos por no meternos en jardines y up to the middleware implementer to decide each ;-)
 % condiciones relajadas: consistencia, razonamiento distribuído
 % out of the scope: cómo implementarlo
 % optaremos por lo más sencillo
-
-% Additional remarks???
 
 
 \subsection{Summary}
