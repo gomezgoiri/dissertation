@@ -340,28 +340,73 @@ Particularly, \ac{http} handles it through caching.
 % Honestidad: This feature has not been properly addressed in our middleware.
 
 
-\subsubsection{Restricted Energy and Computation}
+\subsubsection{Limited Computation}
 
-% TODO dividirlo en 2 distintos??
-The computation restrictions are affected by heavyweight processes.
-Although even parsing is sometimes too consuming in very limited platforms,
-we consider semantic management a requirement.
-% The verboseness of semantic data affects both aspects: computing and networking.
-In that regard, a inference process must be too heavyweight. % autocita?
+% depende de lo limitado que sea el cacharro, puede ser tan así como XXX
+Mobile and embedded devices impose computation restrictions.
+This restrictions result in unacceptable response times from the application perspective.
+Due to \ac{http} simplicity, computation complexity is found in semantic processing.
+For example, some really limited platforms may found difficult parsing long files.
+However, we made the following assumptions:
+\begin{itemize}
+  \item Data providers will be able to process wildcard-based templates and generate appropriate responses from their self-managed graphs.
+  \item Data consumers are able to process the responses they receive at least in one semantic format. % por ejemplo :-P
+\end{itemize}
+
+
+Beyond that point, our middleware will not impose anything.
+This means that the middleware owner cannot assume:
+\begin{itemize}
+  \item The inference process on data providers.
+        Reasoning over the content to provide unstated knowledge must be desirable.
+        Still, most of the mobile and embedded device are not able to process big amount of data. % TODO citar WoT2012
+        Besides, reasoners are not available in all platforms.
+  \item The inference process on data consumers.
+        Another alternative or complement for inferring data on the providers is to do it in the consumers after receiving the responses.
+        Again, it is a desirable property, but our middleware does not require it.
+  \item General use of more complex query languages.
+        Their expressibility benefits the network performance since they can restrict the results returned.
+        However, parsing them is not be trivial and parsing libraries are unavailable for some platforms.
+        Therefore, a provider cannot assume that providers know how to process something beyond the wildcard based templates.
+        As an alternative, providers can decompose these queries in simpler wildcard based templates and locally process the results afterwards (filtering them).
+        % This is out of the scope.
+	% TODO \subsection{Querying Distributedly over the Space} => optamos por no meternos en jardines y up to the middleware implementer to decide each ;-)
+	% condiciones relajadas: consistencia, razonamiento distribuído
+	% out of the scope: cómo implementarlo
+	% optaremos por lo más sencillo
+\end{itemize}
+
+
 % por eso, el mecanismo de búsqueda se hace en los cacharros más potentes
-% por eso no lo imponemos como un requisito ni para los consumidores ni para los proveedores, aunque sea recomendable.
+The searching mechanism explained in the Chapter~\ref{cha:searching} takes into account computing limitations.
+
+
+
+\subsubsection{Limited Energy}
 
 % 2 cosas contribuyen: computación y networking => TODO mostrar diagrama de FoxG20
-Regarding energy consumption, both computing data and networking operations directly affect it.
+Both computing data and networking operations directly affect energy consumption.
 As an example, Figure~\ref{XXX} shows the energy consumption on an embedded platform in an inactivity state and networking and computing data. % más detalles en la sección correspondiente
-The verboseness of semantic data may result in excessive networking throughput in some occasions.
-However, regarding \ac{http}, it contributes through \emph{network performance} and \emph{efficiency}.
+There are some crucial characteristics which negatively affect energy autonomy of resource constrained devices:
+\begin{itemize}
+  \item Too complex computation tasks.
+	 % They result in excessive networking throughput in some occasions.
+        As explained in the previous section, semantic processing is the clearest example of that.
+        % como se ha explicado: hemos limitado
+        We have limited its impact on resource constrained platforms through the searching mechanism.
+  \item Regarding \ac{http}, its stateleness contributes to a bad \textbf{network performance}.
+        Besides, the verboseness of most of the semantic formats also contributes negatively to that aspect.
+\end{itemize}
 
 
-% TODO \subsection{Querying Distributedly over the Space} => optamos por no meternos en jardines y up to the middleware implementer to decide each ;-)
-% condiciones relajadas: consistencia, razonamiento distribuído
-% out of the scope: cómo implementarlo
-% optaremos por lo más sencillo
+On the other hand, we contribute to energy saving minimizing network usage (i.e. \emph{network efficiency}) at different levels:
+% efficiency: minimizar el uso de la red
+\begin{itemize}
+  \item \ac{http}'s network \emph{efficiency} can be improved with \emph{code on demand} and \emph{caching}.
+  % por eso, el mecanismo de búsqueda se hace en los cacharros más potentes
+  \item The searching mechanism improves \emph{recall} and \emph{precision} (see Chapter~\ref{cha:searching}).
+\end{itemize}
+
 
 
 \subsection{Summary}
