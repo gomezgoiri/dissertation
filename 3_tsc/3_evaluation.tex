@@ -413,11 +413,6 @@ On the other hand, we contribute to energy saving minimizing network usage (i.e.
 \label{sec:middleware_eval_summary}
 
 In the previous sections we have get to the bottom of the strengths and weaknesses of our proposal.
-The main strength of our solution is the interoperability we pursue.
-The main weakness is the performance problems which may result of handling semantic data.
-This performance problems are particularly important for resource constrained devices.
-
-
 %  Ventajas/inconvenientes frente a WoT:
 %      comunicación indirecta para cacharros
 %          local+ref
@@ -425,21 +420,22 @@ This performance problems are particularly important for resource constrained de
 %              podríamos cachear contenidos de otros en el espacio central (reliability+energy)
 %          ref
 %              sacar a colación los problemas aquellos de query sobre muchos recursos
-
 As regard of other semantic \ac{http}-based solutions, the solution presented provides a better handling of mobility situations. % e.g. wot
 The uncoupling properties which provide it come at the cost of simplicity to implement the middleware.
-
-%
 %   Para TSC (respecto a otras como Smart-M3):
 %      limitamos qué gestiona la entidad central => sólo coordinación, el resto lo coge de los cacharros
 %      se reconoce su autonomía permitiendo gestionarse su propio contenido => REST, escalabilidad
 %      interop => SW y posibilidad de extender a otros servicios REST
 %      multiplataforma => facilidad para portarlo
+The main strengths of our \ac{tsc} middleware is that it enriches the coordination properties with semantic content provided by embedded and mobile devices.
+Also, it pursues interoperability with other \ac{http}-based applications.
 
-
+Within its main weaknesses we found performance problems and a coupling between applications due to a no-hypermedia driven \ac{api}.
+The performance problems may result of handling semantic data and are particularly important for resource constrained devices.
+The coupling between applications is solved through a mandatory \ac{http} \ac{api}, but it complicates reusing third applications' data.
 
 
 % Ventajas de meclar 2 cosas aparentemente separadas?
-A question remains unsolved: what benefit will derive from the integration of both approaches?
-%   Para desarrollador:
-%      API integrada y simple
+% what benefit will derive from the integration of both approaches?
+The benefits of bringing together \ac{tsc} and \ac{http} is an unified and simple \ac{api} for the developer. % lo de simple no está demostrado
+Due to the primitives' simplicity and to the standard and well accepted technologies uses (i.e. \ac{http} and \ac{semantic} standards), this \ac{api} can be ported to a range of platforms.
