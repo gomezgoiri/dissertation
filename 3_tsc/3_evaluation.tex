@@ -413,24 +413,33 @@ On the other hand, we contribute to energy saving minimizing network usage (i.e.
 \label{sec:middleware_eval_summary}
 
 In the previous sections we have get to the bottom of the strengths and weaknesses of our proposal.
-To sum up, the main limitations are X and Y.
-On the other hand, we can XXX.
-Table~\ref{x} shows these and other aspects.
+The main strength of our solution is the interoperability we pursue.
+The main weakness is the performance problems which may result of handling semantic data.
+This performance problems are particularly important for resource constrained devices.
 
-% Ventajas de meclar 2 cosas aparentemente separadas?
-%   Para WoT:
+
+%  Ventajas/inconvenientes frente a WoT:
 %      comunicación indirecta para cacharros
 %          local+ref
 %              de contenidos relativos a coordinación
 %              podríamos cachear contenidos de otros en el espacio central (reliability+energy)
 %          ref
 %              sacar a colación los problemas aquellos de query sobre muchos recursos
+
+As regard of other semantic \ac{http}-based solutions, the solution presented provides a better handling of mobility situations. % e.g. wot
+The uncoupling properties which provide it come at the cost of simplicity to implement the middleware.
+
 %
 %   Para TSC (respecto a otras como Smart-M3):
 %      limitamos qué gestiona la entidad central => sólo coordinación, el resto lo coge de los cacharros
 %      se reconoce su autonomía permitiendo gestionarse su propio contenido => REST, escalabilidad
 %      interop => SW y posibilidad de extender a otros servicios REST
 %      multiplataforma => facilidad para portarlo
-%
+
+
+
+
+% Ventajas de meclar 2 cosas aparentemente separadas?
+A question remains unsolved: what benefit will derive from the integration of both approaches?
 %   Para desarrollador:
 %      API integrada y simple
