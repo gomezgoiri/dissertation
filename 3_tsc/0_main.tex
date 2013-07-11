@@ -34,7 +34,7 @@ The effort required to design something is inversely proportional to the simplic
 % ----------------------------------------------------------------------
 
 
-In recent years, the \acf{iot} has became a reality due to the increasing number of everyday objects with computing and networking capabilities.
+In recent years, the \acf{iot} has became a reality due to the increasing number of everyday objects equipped with computing and networking capabilities.
 The use of these everyday objects together with the rising of mobile computing greatly contributes to the \ac{ubicomp} vision.
 In the beginning the community put more effort on those devices' connectivity issues, materialized in the spread of technologies such as Zigbee\footnote{http://www.zigbee.org}, 6LoWPAN\footnote{http://datatracker.ietf.org/wg/6lowpan/charter/} or Bluetooth\footnote{http://www.bluetooth.com}.
 However, nowadays it is focusing on the architectural solutions used by the applications built around these objects.
@@ -43,19 +43,17 @@ A classification of these solutions has been already presented in the previous c
 
 % defendemos usar TSC
 In this thesis, we defend that \acf{tsc} provides some valuable properties to \ac{ubicomp} environments. % mencionarlas?
-However, some other properties are derived from how \ac{tsc} is implemented.
+However, some other properties are derived from how \ac{tsc} is implemented. % TODO implemented suena muy umpa-lumpa? mejor designed o así? o hablar de model mejor que de middleware?
 In this chapter we focus on selecting the underlying network-based architectural style.
 % TODO problema: y por qué no otros? Habría que redactarlo de tal forma que no haga que un lector tiquismiquis requiera un puto survey de network-based architectural styles!
-In Chapter~\ref{cha:searching}~and~\ref{xx} we refine how to actuate and sense on these environments through spaces.
+%The \ac{rest} architectural style, defended by the \acf{wot} initiative, is probably the most prominent architectural solution used for smart-objects. % probably porque no tengo datos que lo defiendan
+%The benefits that \ac{rest} brings to resource constrained devices have been deeply described in the previous chapter.
 
-
-The \ac{rest} architectural style, defended by the \acf{wot} initiative, is probably the most prominent architectural solution used for smart-objects. % probably porque no tengo datos que lo defiendan
-The benefits that \ac{rest} brings to resource constrained devices have been deeply described in the previous chapter.
-Section~\ref{sec:rest} analyzes the characteristics of the style itself and the similarities it shares with \ac{tsc}.
+To that end, Section~\ref{sec:rest} analyzes the characteristics of the \ac{rest} architectural style and the similarities it shares with \ac{tsc}.
 Later, it describes a \ac{rest} \ac{api} to access a triplespace. % TODO ver cómo escribir triplespace
 Section~\ref{sec:distributed_tsc} presents the need of a distributed architecture for \ac{ubicomp} and the adaptations made on the \ac{tsc} model in that regard.
 The goal pursued is two-fold: (1) inherit most of the properties of \ac{rest} and (2) maintain a high degree of compatibility with the \ac{wot}.
-Finally, Section~\ref{sec:middleware_qualitative_evaluation} evaluates the properties achieved with the model comparing it with \ac{rest} and \ac{tsc}.
+Finally, Section~\ref{sec:middleware_qualitative_evaluation} evaluates the properties achieved with that model.
 
 
 \input{\pathchapthree/1_rest_and_tsc}
