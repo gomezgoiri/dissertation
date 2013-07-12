@@ -36,7 +36,7 @@ To achieve these properties, \ac{rest} establishes the following constraints fro
 	                        the type should be registered,
 	                        the registry should point to a specification and 
 	                        the specification should explain how to process data according to its intent \citep{wahbe_self-descriptive_2010}. % no necesariamente tiene que ser estándar
-	\item[\acf{rest_hateoas}.] This is a controversial constraint because most of the self-proclaimed ``\ac{rest}'' \acp{api} fail to follow it \citep{house_how_2012}.
+	\item[\acf{rest_hateoas}.] This is a controversial constraint because most of the self-proclaimed ``\ac{rest}'' \acp{api} fail to follow it \citep{moore_hypermedia_2010,house_how_2012}.
 	                           It states that no out-of-the-band information should guide the interaction with an \ac{api}.
 	                           Instead, the hypertext should guide it.
 	                           In other words, the client must know just an initial URL and the application's media types.
@@ -51,12 +51,12 @@ To achieve these properties, \ac{rest} establishes the following constraints fro
 
 \subsection{Suitable Protocols for \ac{rest}}
 \label{sec:protocols}
-
-% sólo por el correcto uso de ciertos protocolos se puede conseguir todo menos HATEOAS => citar el vídeo aquel
-
 % hablar un poco de HTTP y CoAP y decir por qué no hablamos más a menudo de CoAP
 
-Historically, \acf{http} has been considered a suitable protocol to follow the \ac{rest} style. % TODO cite
+% sólo por el correcto uso de ciertos protocolos se puede conseguir todo menos HATEOAS => citar el vídeo aquel
+Although an \ac{api} does not adhere to the \ac{rest} style just because it uses certain protocols,
+the correct use of some of them can help to achieve most of them \citep{moore_hypermedia_2010}.
+Historically, \acf{http} has been considered a suitable protocol in that regard.
 \ac{http} is a simple protocol whose adoption by computing platforms is massive.
 
 
@@ -64,26 +64,31 @@ However, in the last few years \acf{coap} has emerged as a specialized web trans
 Some noteworthy features of \ac{coap} are
 (1) the reduced message size,
 (2) the use of UDP as a transport layer (with the possibility of using \emph{multicast} communication),
-(3) similarity with \ac{http} (both to reuse its properties and to ease cross-protocol proxying),
+(3) similarity with \ac{http} (both to reuse its properties and to ease cross-protocol proxying) and
 (4) a resource discovery mechanism. % TODO cita a CORE
 % mencionar seguridad?
 
 
-One could defend that to design a lightweight \ac{tsc} solution \ac{coap} should be used as a baseline.
+One could defend that to implement a lightweight \ac{tsc} solution \ac{coap} should be used as a baseline.
 However, we have chosen to work with \ac{http} for the following reasons:
 \begin{itemize}
+  \item Direct interoperation with other web-solutions.
+        Most of the Internet-based \ac{api} use \ac{http}.
+        Directly using \ac{http} we can avoid proxies.
+        Proxies may introduce latency in the response time degrading network performance. % siempre degradará la eficiencia algo, pero habría que verlo y testearlo, la verdad...
+        % TODO, será cierto? o tardará menos en conjunto?
   \item RDF-based media-formats can be rather verbosed.
 	This contrasts with \ac{coap}'s message size limitations.
 	Dealing with this limitations was not one main goals of the thesis.
 	However, we have considered them at some points of the dissertation to avoid unrealistic assumptions.
   \item \ac{coap} is an ongoing standard.
-        Therefore, its definition slightly changes in each draft version.
-        A practical limitation of this is that at the moment there are few libraries
-        and tools to work with \ac{coap}.
-        This limits the range of platforms which could adopt any solution proposed.
-  \item Due to its similarities with \ac{coap}, the future adoption of the latter should be relatively straightforward.
-        % sin contar con los aspectos destacados anteriormente
+        Therefore, its definition is currently changing in each draft version.
+        A practical limitation of this is that at the moment there are few libraries and tools to work with \ac{coap}.
+        This limits the range of platforms which could adopt any proposed solution.
 \end{itemize}
+
+
+Nevertheless, due to \ac{http}'s similarities with \ac{coap}, the future adoption of the latter should be relatively straightforward.
 
 % Ideas no usadas:
 % REST no dice nada, pero de facto el protocolo es HTTP
