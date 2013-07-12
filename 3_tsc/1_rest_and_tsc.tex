@@ -106,24 +106,26 @@ Nevertheless, due to \ac{http}'s similarities with \ac{coap}, the future adoptio
 \emph{Per se}, \ac{tsc} does not contradict in any sense the \ac{rest} principles:
 
 \begin{description}
- \item[\ac{rest_cs}.] Providing the access to each space is centralized in a machine, clients can access to it using \emph{CS}.
-           This does not prevent to use a distributed semantic repository in the backend.
+ \item[\ac{rest_cs}.] Accessing to a space through a server in a \ac{rest_cs} fashion is completely feasible.
+		      Indeed, this does not prevent to use a distributed solution in the \emph{back end} (e.g. a distributed semantic repository).
  \item[\ac{rest_s}.] The primitives to access the space imply simple read and writes which do not store any state in the server.
  \item[\ac{rest_cache}. ] The semantic content stored in the space can be cached.
-           However, the dynamism of the underlying network makes caching challenging to configure. % quería poner "tune up" pero "configure" me ha sonado más fino
- \item[\ac{rest_u}:]
-    \begin{description}
-	\item[\ac{rest_id}.] There are types of identified resources in \ac{tsc}: spaces, RDF Graphs and certain elements of the RDF Triples.
+                          However, the dynamism of the underlying network can make effective caching challenging to achieve. % quería poner "tune up" pero "configure" me ha sonado más fino
+ %\item[\ac{rest_u}:] % lo quito porque si no, este punto sin texto con otros subpuntos queda feo
+    %\begin{description}
+	\item[\ac{rest_id}.] There are three types of identified resources in \ac{tsc}: spaces, RDF Graphs and certain elements of the RDF Triples.
 	                 All of them are identified by URIs.
-	                 The space can be seen as a coarse-grained view of the underlying graphs. % TODO coarse grained es lo contrario de fine-grained?
+	                 The space can be seen as a coarse-grained view of the underlying graphs.
 	                 The graphs have sets of triples which are usually related and describe a unit of knowledge. % A RDF triple by itself cannot transmit too much information
 	                 Self-identified triple's subjects, predicates or objects are the source of concept linking.
 	\item[\ac{rest_rep}.] The RDF graphs and triples mentioned above can be represented using different standard serializations.
+			      %Nevertheless, 
 	\item[\ac{rest_desc}.] The messages derived from the primitives can be self-describing. % including meta-data
 	\item[\ac{rest_hateoas}.] This is the most challenging property to achieve with RDF-based representations.
 	                      However, some relevant solutions propose means to fulfill this property \cite{verborgh_functional_2012}. % TODO citar más de este y de otros que han hablado LOD, SPARQL y RESTful
-    \end{description}
- \item[\ac{rest_l}.] encapsulation of functionalities can be achieved through a layered system.
+    %\end{description}
+ \item[\ac{rest_l}.] Encapsulation of functionalities can be achieved through a layered system.
+                     For example, to balance the load to a space replicated in two machines.
  \item[\ac{rest_cod}.] Although it may not be as common as scripting in ordinary human-browsing, % TODO reexplicar esto mejor?
             the \emph{know how} can be downloaded from the server:
             \begin{enumerate}
