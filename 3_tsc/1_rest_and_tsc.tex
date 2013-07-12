@@ -6,7 +6,7 @@
 \subsection{\acl{rest}}
 \label{sec:rest}
 
-\acf{rest} is an architectural style proposed by \citet{fielding_architectural_2000}.
+\acf{rest} is a network-based architectural style proposed by \citet{fielding_architectural_2000}.
 % descripción de propiedades de REST: hipermedia distribuído
 % que es hipertexto? http://roy.gbiv.com/untangled/2008/rest-apis-must-be-hypertext-driven#comment-718
 It aims to cover certain properties, explained in Section~\ref{sec:network_properties}.
@@ -14,44 +14,45 @@ It aims to cover certain properties, explained in Section~\ref{sec:network_prope
 To achieve these properties, \ac{rest} establishes the following constraints from other network-based architectural styles:
 % explicarlo o es demasiado obvio?
 \begin{description}
- \item[Client-server (CS)]
- \item[Stateless (S)] the state is fully stored in the client and therefore each request has all the information needed to process it.
- \item[Cache (\$)] when added to the CS constraint, this style replicates content obtained from a server in the client.
- \item[Uniform interface (U)] is the key constraint which distinguishes \ac{rest} from other architectural styles.
-                   This constraint is composed by the following ones:
+ \item[\acf{rest_cs}.] Providing an \ac{api} to the clients, they are isolated from back-end implementation details.
+		       % esto ayuda a: , scalability, evolvability (apps independientes pueden evolucionar mejor)
+ \item[\acf{rest_s}.] The state is fully stored in the client and therefore each request has all the information needed to process it.
+ \item[\acf{rest_cache}.] When added to the \ac{rest_cs} constraint, this style replicates content obtained from a server in the client.
+ \item[\acf{rest_u}.] It is the key constraint which distinguishes \ac{rest} from other architectural styles.
+                      This constraint is composed by the following ones:
     \begin{description}
 	% explicados en sección 5.2 de Fielding, resumir?
-	\item[Identification of resources (ID):]
-		    Resources are the conceptual targets of hypertext references.
-		    Their identification offers a generic interface to access and change the values of a resource.
-	\item[Manipulation of resources through representations (REP):]
-		    Representations are composed by a sequence of bytes and the metadata to describe those bytes.
-	\item[Self-descriptive messages (DESC):] % TODO explicar esto bien
-	% : interaction is stateless between requests,
-	% standard methods and media types are used to indicate semantics and exchange
-	% information, and responses explicitly indicate cacheability.
-	\item[Hypermedia as the engine of application state (HATEOAS):] % TODO explicar esto bien
+	\item[\acf{rest_id}.] Resources are the conceptual targets of hypertext references.
+			      Their identification offers a generic interface to access and change the values of a resource.
+	\item[\acf{rest_rep}.] Representations are composed by a sequence of bytes and the metadata to describe those bytes.
+	\item[\acf{rest_desc}.] The client and server have to agree on standard methods and media types. % linkar al tipo de la Web esa
+				% Explicación Fielding:
+				% interaction is stateless between requests
+				% standard methods and media types are used to indicate semantics and exchange information
+				% responses explicitly indicate cacheability.
+		                %\ac{http}'s content negotiation for instance, allows to reach an agreement on the media types.
+	                        Beyond that point, each request or response should contain all the needed data to process it.
+	                        Therefore, in \citeauthor{fielding_architectural_2000}'s words,
+	                        the type should be registered,
+	                        the registry should point to a specification and 
+	                        the specification should explain how to process data according to its intent \citep{wahbe_self-descriptive_2010}. % no necesariamente tiene que ser estándar
+	\item[\acf{rest_hateoas}.] This is a controversial constraint because most of the self-proclaimed ``\ac{rest}'' \acp{api} fail to follow it \citep{house_how_2012}.
+	                           It states that no out-of-the-band information should guide the interaction with an \ac{api}.
+	                           Instead, the hypertext should guide it.
+	                           In other words, the client must know just an initial URL and the application's media types.
+	                           From that point, it should select the alternatives proposed by the server to change to the next application state \citep{fielding_rest_2008}.
+	                           % propuestas: respresentaciones (links) y la manipulación implicita de las mismas (CRUD)
     \end{description}
- \item[Layered system (L)] each layer provides services to the top layer (e.g. TCP/IP). % TODO usar acrónimo!
- \item[Code-On-Demand (COD)] the client has a set of resources which does not know how to process.
-       That \emph{know-how} is downloaded from the server.
+ \item[\acf{rest_l}.] Each layer provides services to the top layer. % e.g. TCP/IP
+ \item[\acf{rest_cod}.] The client has a set of resources which does not know how to process.
+                        This \emph{know-how} is downloaded from the server.
 \end{description}
-
-
-% Furthermore, \citeauthor{fielding_architectural_2000} remarks the following features as \textbf{musts} a \ac{rest} solution contains\citep{fielding_rest_2008}:
-% descripción de requisitos REST: untangled
-
-% A REST API should not be dependent on any single communication protocol, though its successful mapping to a given protocol may be dependent on the availability of metadata, choice of methods, etc. In general, any protocol element that uses a URI for identification must allow any URI scheme to be used for the sake of that identification. [Failure here implies that identification is not separated from interaction.]
-% A REST API should not contain any changes to the communication protocols aside from filling-out or fixing the details of underspecified bits of standard protocols, such as HTTP’s PATCH method or Link header field. Workarounds for broken implementations (such as those browsers stupid enough to believe that HTML defines HTTP’s method set) should be defined separately, or at least in appendices, with an expectation that the workaround will eventually be obsolete. [Failure here implies that the resource interfaces are object-specific, not generic.]
-% A REST API should spend almost all of its descriptive effort in defining the media type(s) used for representing resources and driving application state, or in defining extended relation names and/or hypertext-enabled mark-up for existing standard media types. Any effort spent describing what methods to use on what URIs of interest should be entirely defined within the scope of the processing rules for a media type (and, in most cases, already defined by existing media types). [Failure here implies that out-of-band information is driving interaction instead of hypertext.]
-% A REST API must not define fixed resource names or hierarchies (an obvious coupling of client and server). Servers must have the freedom to control their own namespace. Instead, allow servers to instruct clients on how to construct appropriate URIs, such as is done in HTML forms and URI templates, by defining those instructions within media types and link relations. [Failure here implies that clients are assuming a resource structure due to out-of band information, such as a domain-specific standard, which is the data-oriented equivalent to RPC's functional coupling].
-% A REST API should never have “typed” resources that are significant to the client. Specification authors may use resource types for describing server implementation behind the interface, but those types must be irrelevant and invisible to the client. The only types that are significant to a client are the current representation’s media type and standardized relation names. [ditto]
-% A REST API should be entered with no prior knowledge beyond the initial URI (bookmark) and set of standardized media types that are appropriate for the intended audience (i.e., expected to be understood by any client that might use the API). From that point on, all application state transitions must be driven by client selection of server-provided choices that are present in the received representations or implied by the user’s manipulation of those representations. The transitions may be determined (or limited by) the client’s knowledge of media types and resource communication mechanisms, both of which may be improved on-the-fly (e.g., code-on-demand). [Failure here implies that out-of-band information is driving interaction instead of hypertext.]
-
 
 
 \subsection{Suitable Protocols for \ac{rest}}
 \label{sec:protocols}
+
+% sólo por el correcto uso de ciertos protocolos se puede conseguir todo menos HATEOAS => citar el vídeo aquel
 
 % hablar un poco de HTTP y CoAP y decir por qué no hablamos más a menudo de CoAP
 
@@ -100,25 +101,25 @@ However, we have chosen to work with \ac{http} for the following reasons:
 \emph{Per se}, \ac{tsc} does not contradict in any sense the \ac{rest} principles:
 
 \begin{description}
- \item[CS:] Providing the access to each space is centralized in a machine, clients can access to it using \emph{CS}.
+ \item[\ac{rest_cs}.] Providing the access to each space is centralized in a machine, clients can access to it using \emph{CS}.
            This does not prevent to use a distributed semantic repository in the backend.
- \item[S:] The primitives to access the space imply simple read and writes which do not store any state in the server.
- \item[\$:] The semantic content stored in the space can be cached.
+ \item[\ac{rest_s}.] The primitives to access the space imply simple read and writes which do not store any state in the server.
+ \item[\ac{rest_cache}. ] The semantic content stored in the space can be cached.
            However, the dynamism of the underlying network makes caching challenging to configure. % quería poner "tune up" pero "configure" me ha sonado más fino
- \item[U:]
+ \item[\ac{rest_u}:]
     \begin{description}
-	\item[ID:] There are types of identified resources in \ac{tsc}: spaces, RDF Graphs and certain elements of the RDF Triples.
+	\item[\ac{rest_id}.] There are types of identified resources in \ac{tsc}: spaces, RDF Graphs and certain elements of the RDF Triples.
 	                 All of them are identified by URIs.
 	                 The space can be seen as a coarse-grained view of the underlying graphs. % TODO coarse grained es lo contrario de fine-grained?
 	                 The graphs have sets of triples which are usually related and describe a unit of knowledge. % A RDF triple by itself cannot transmit too much information
 	                 Self-identified triple's subjects, predicates or objects are the source of concept linking.
-	\item[REP:] The RDF graphs and triples mentioned above can be represented using different standard serializations.
-	\item[DESC:] The messages derived from the primitives can be self-describing. % including meta-data
-	\item[HATEOAS:] This is the most challenging property to achieve with RDF-based representations.
+	\item[\ac{rest_rep}.] The RDF graphs and triples mentioned above can be represented using different standard serializations.
+	\item[\ac{rest_desc}.] The messages derived from the primitives can be self-describing. % including meta-data
+	\item[\ac{rest_hateoas}.] This is the most challenging property to achieve with RDF-based representations.
 	                      However, some relevant solutions propose means to fulfill this property \cite{verborgh_functional_2012}. % TODO citar más de este y de otros que han hablado LOD, SPARQL y RESTful
     \end{description}
- \item[L:] encapsulation of functionalities can be achieved through a layered system.
- \item[COD:] Although it may not be as common as scripting in ordinary human-browsing, % TODO reexplicar esto mejor?
+ \item[\ac{rest_l}.] encapsulation of functionalities can be achieved through a layered system.
+ \item[\ac{rest_cod}.] Although it may not be as common as scripting in ordinary human-browsing, % TODO reexplicar esto mejor?
             the \emph{know how} can be downloaded from the server:
             \begin{enumerate}
 	      \item Modeling it through ontologies.
