@@ -251,7 +251,8 @@ Consequently, the translation between these two worlds is straightforward.
 
 \begin{sloppypar}
 According to the \ac{rest} principles the interaction with an API must be hypertext-driven \citep{fielding_rest_2008}.
-Therefore, the human-oriented representation of the \ac{api} should be completely \emph{browseable} (e.g. using \acs{html}).
+To ease its usage by developers, we provide a human-oriented \acs{html} representation of the \ac{api} which is completely \emph{browseable}.
+% un poco repetido de la parte de HATEOAS
 Regarding the machine-oriented (i.e. semantic) representation of the \ac{api}, several solutions to enable hypermedia driving have been proposed by \citet{verborgh_functional_2012} and \citet{kjernsmo_necessity_2012}. % mencionar que son experimentales?
 Independently of the mechanism adopted, in this section we propose a optional \ac{api} which tries to stress \ac{tsc}'s compliance with \ac{http}.
 \end{sloppypar}
@@ -302,8 +303,8 @@ This mechanism allows to specify the desired representation for a content on the
 For that purpose, the client adds an \textit{Accept} field to the \acs{http} header with a weighted list of media types it understands.
 Then, the server will answer with the best possible format it knows about, specifying the \textit{Content-type} in the response.
 
-The benefits of using this mechanism in a \ac{tsc} middleware are two-fold.
-Firstly, it enhances the browsability of the primitives with human understandable \acs{http} responses.
+The benefits of using this mechanism in the \ac{tsc} middleware presented are two-fold.
+Firstly, it enhances the browsability of the primitives with human understandable \acs{http} responses. % no sé si esto es de Content Negotiation per se
 Secondly, it allows different semantic representations (e.g. RDF/XML\footnote{\url{http://www.w3.org/TR/REC-rdf-syntax/}}, N-Triples\footnote{\url{http://www.w3.org/2001/sw/RDFCore/ntriples/}} or N3\footnote{\url{http://www.w3.org/TeamSubmission/n3/}}).
 The latter characteristic becomes crucial since not all the nodes may understand all the formats (e.g. a mobile phone may not have a RDF/XML parser).
 %This is true even if all the languages use the same basic concepts (i.e. \acs{rdf} Triples).
