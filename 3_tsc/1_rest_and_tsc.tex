@@ -77,7 +77,7 @@ However, we have chosen to work with \ac{http} for the following reasons:
         Directly using \ac{http} we can avoid proxies.
         Proxies may introduce latency in the response time degrading network performance. % siempre degradará la eficiencia algo, pero habría que verlo y testearlo, la verdad...
         % TODO, será cierto? o tardará menos en conjunto?
-  \item RDF-based media-formats can be rather verbosed.
+  \item \ac{rdf}-based media-formats can be rather verbosed.
 	This contrasts with \ac{coap}'s message size limitations.
 	Dealing with this limitations was not one main goals of the thesis.
 	However, we have considered them at some points of the dissertation to avoid unrealistic assumptions.
@@ -113,31 +113,44 @@ Nevertheless, due to \ac{http}'s similarities with \ac{coap}, the future adoptio
                           However, the dynamism of the underlying network can make effective caching challenging to achieve. % quería poner "tune up" pero "configure" me ha sonado más fino
  %\item[\ac{rest_u}:] % lo quito porque si no, este punto sin texto con otros subpuntos queda feo
     %\begin{description}
-	\item[\ac{rest_id}.] There are three types of identified resources in \ac{tsc}: spaces, RDF Graphs and certain elements of the RDF Triples.
+	\item[\ac{rest_id}.] There are three types of identified resources in \ac{tsc}: spaces, \ac{rdf} Graphs and certain elements of the \ac{rdf} Triples.
 	                 All of them are identified by URIs.
 	                 The space can be seen as a coarse-grained view of the underlying graphs.
 	                 The graphs have sets of triples which are usually related and describe a unit of knowledge. % A RDF triple by itself cannot transmit too much information
 	                 Self-identified triple's subjects, predicates or objects are the source of concept linking.
-	\item[\ac{rest_rep}.] The RDF graphs and triples mentioned above can be represented using different standard serializations.
+	\item[\ac{rest_rep}.] The \ac{rdf} graphs and triples mentioned above can be represented using different standard serializations.
 			      %Nevertheless, 
-	\item[\ac{rest_desc}.] The messages derived from the primitives can be self-describing. % including meta-data
-	\item[\ac{rest_hateoas}.] This is the most challenging property to achieve with RDF-based representations.
-	                      However, some relevant solutions propose means to fulfill this property \cite{verborgh_functional_2012}. % TODO citar más de este y de otros que han hablado LOD, SPARQL y RESTful
+			      % citar el paper que habla de cómo alinear LOD y REST
+	\item[\ac{rest_desc}.] The messages derived from the primitives are self-describing since they are expressed on standard \ac{rdf}-based languages. % including meta-data
+				Therefore the server and clients know how to process the content according to its language and certain vocabularies.
+				These vocabularies specifications (i.e. ontologies) are referenced in the content.
+	\item[\ac{rest_hateoas}.] The lack of native hypermedia support in \ac{rdf}-based representations make this the most challenging property to achieve \citep{page_rest_2011}. % compara LOD y REST
+				  However, some recent works propose means to fulfill this property.
+				  \citet{kjernsmo_necessity_2012} proposes a vocabulary for hypermedia \ac{rdf}.
+				  \citet{steiner_fulfilling_2011} and \citet{verborgh_functional_2012} propose to enrigh the \ac{http} header with hypermedia information.
+				  While the first changes representations, the latter is a more general way to provide hypermedia.
     %\end{description}
  \item[\ac{rest_l}.] Encapsulation of functionalities can be achieved through a layered system.
                      For example, to balance the load to a space replicated in two machines.
+ % TODO TODO repensar si ontologías, reglas y demás (personalizar behavior) se puede entender cómo COD:
+ % In the code-on-demand style [50], a client component has access to a set of resources, but
+ %  not the know-how on how to process them. It sends a request to a remote server for the
+ %  code representing that know-how, receives that code, and executes it locally.
  \item[\ac{rest_cod}.] Although it may not be as common as scripting in ordinary human-browsing, % TODO reexplicar esto mejor?
-            the \emph{know how} can be downloaded from the server:
+            the \emph{know how} can be downloaded from the server in several ways:
             \begin{enumerate}
-	      \item Modeling it through ontologies.
-	      \item Through semantically expressed rules which are processed with an inference engine (e.g. N3 rules) \citep{verborgh_functional_2012}.
+	      \item Modeling scripts using appropriate ontologies. % TODO cite
+	      \item A semantic reasoner can be considered an interpreter for the content downloaded from the server.
+	            It is used to extract unstated information from the content received from the server.
+	            Therefore, the client downloads know-how to process the resource in the following situations:
+		    \begin{itemize}
+		      \item Through the taxonomies defined in ontology files. % e.g. para hacer un mapeo; en analogía a JS, da igual que tu tengas previamente el script o no
+		            This taxonomies are modeled using standard semantic languages. % hablar de distintos niveles de expresividad?
+		      \item Through semantically expressed rules \citep{berners-lee_n3logic:_2008}. % (e.g. N3 rules)
+		    \end{itemize}
+	      % con nuevo TBox que te bajas??
             \end{enumerate}
 \end{description}
-
-% CITAR:
-% Algunas ideas rescatables de la anterior intro:
-% Both \ac{wot} and \ac{tsc} can be considered resource oriented solutions since they put emphasis in giving access to data resources.
-% While \ac{tsc} enables expressive queries, dynamic discovery and non human-mediated cooperation among objects, the \ac{wot} adopts the scalable properties of the World Wide Web and it is entirely based on web standards.
 
 
 
@@ -154,19 +167,20 @@ In this section, we present a \ac{tsc} \acs{api} over \ac{http} to give a practi
 
 \subsubsection{\acs{tsc} resources}
 
-Three key concepts are important to understand the resources: agents share information in a common \textbf{space}.
+Three key concepts are important to understand the resources in our proposal: agents share information in a common \textbf{space}.
 A space is identified by an \acs{uri}.
 Therefore, all the operations in \ac{tsc} are performed against a particular space.
 %By default, all applications connect to a common standard space, but they can optionally choose to connect to a particular private space.
 Within a space, the information is stored in sets of \textbf{triples} called \textbf{graphs}.
 Each graph can also be identified by an \acs{uri}.
 The \acs{rdf} \textbf{triples} are the underlying concept of all the \ac{sw} languages.
-Each triple is composed by a subject (which is a \acs{uri}), a predicate (also a \acs{uri}) and a value (which can be a \acs{uri} or a literal), as shown in the Figure~\ref{fig:triples_example}.
+Each triple is composed by a subject (which is a \acs{uri} or a \emph{blank node}), a predicate (a \acs{uri}) and a value (which can be a \acs{uri}, a \emph{blank node} or a literal), as shown in the Figure~\ref{fig:triples_example}.
+% TODO cuidado con los blank nodes!!! Los tenemos en cuenta? De ser así, cómo???
 
-As detailed later, most common operations in \ac{tsc} attempt to add or remove graphs.
+As detailed later, \ac{tsc}'s primitives add or remove graphs.
 % este es un tema "delicado" desde el punto de vista de TSC, así que mejor si lo tratamos a parte:
 % as well as to query for graphs or for sets of triples retrieved from different graphs.
-In order to perform the queries, which enable the selection of a subset of the semantic content hold in a given space, a \textbf{template} is required.
+In order to perform these operations, which enable the selection of a subset of the semantic content hold in a given space, a \textbf{template} is required. % these operations: add or remove
 The wildcard templates used by default
 \footnote{
   % Por qué no SPARQL?
@@ -198,7 +212,7 @@ In this section, we explain these primitives.
  \item The \textbf{write} primitive allows writing a graph into a given space (identified by its \acs{uri}).
 	The set of triples received by this primitive will be stored together in the same graph, returning the \acs{uri} which identifies that graph.
 	The graph \acs{uri} can be used to access directly to that graph later on, or to create new triples and relate contents.
-
+       % Esto no encaja necesariamente con el concepto de "Browsable graph": http://www.w3.org/DesignIssues/LinkedData
   \begin{lstlisting}
     write(space_URI, triples): URI              [1]
   \end{lstlisting}
@@ -207,13 +221,16 @@ In this section, we explain these primitives.
   \item The \textbf{read} returns a graph belonging to a given space which contains at least a triple matching the given template or has the given \acs{uri} as its identifier.
 	If more than one graph fulfill one of these conditions, just one of them is returned (nondeterministically).
 	It should be remarked that it has been designed as a non blocking operation.
-% why?
-% TODO READ al ser no-deterministica puede afectar a caching???
-  \item The \textbf{take} primitive behaves like a destructive \textbf{read}, deleting the graph returned from the space.
-
   \begin{lstlisting}
     read(space_URI, graph_URI): triples         [2]
     read(space_URI, template): triples          [3]
+  \end{lstlisting}
+  
+  
+% why?
+% TODO READ al ser no-deterministica puede afectar a caching???
+  \item The \textbf{take} primitive behaves like a destructive \textbf{read}, deleting the graph returned from the space.
+  \begin{lstlisting}
     take(space_URI, graph_URI): triples         [4]
     take(space_URI, template): triples          [5]
   \end{lstlisting}
