@@ -8,7 +8,7 @@ With the solution presented in the previous section, we aimed to retain the desi
 % 3. tiene beneficios?
 However, some questions arise from that integration:
 (1) does in fact retain all the properties of \ac{rest} and \ac{tsc} separately? Otherwise, which properties are affected?
-(2) what other benefits carries comparing with using already existing \ac{tsc} and \ac{rest} middleware?
+(2) what other benefits carries when comparing with the usage of separate \ac{tsc} and \ac{rest} middleware?
 
 % Fielding distingue entre:
 %      + "distributed-system": hace que el usuario vea el sistema como un todo, sin saber cuando se realizan llamadas en remoto y cuando no
@@ -16,7 +16,7 @@ However, some questions arise from that integration:
 
 
 To answer these questions, we analyze the presented solution from different point-of-views:
-(1) its coordination properties (Section~\ref{sec:XXX_properties}),
+(1) its coordination properties (Section~\ref{sec:coordination_properties}),
 (2) its network-level properties (Section~\ref{sec:network_properties}),
 (3) how the latter work together to contribute to the challenges of an \ac{ubicomp} environment (Section~\ref{sec:middleware_properties}).
 Section~\ref{sec:middleware_eval_summary} summarizes these analysis. % cómo dan respuesta a las preguntas del comienzo
@@ -56,7 +56,7 @@ The primitives used in our space-based computing implementation force it to be \
 On the contrary, it is not always \emph{time uncoupled}.
 If two nodes write and read from the coordination space, they are \emph{time uncoupled};
 but if a node accesses to others' content (i.e. \emph{self-managed graphs}), they are not.
-In other words, \emph{time uncoupling} is not achieved by the extension of the model presented in Section~\ref{sec:halfway_solution}.
+In other words, \emph{time uncoupling} is not achieved by the extension of the model presented in Section~\ref{sec:halfway_solution} (i.e. in the \emph{outer space}).
 As a future work, this could be alleviated by a caching mechanism implemented in the space holder or holders. % TODO hablar con propiedad de esos elementos => nombrarlos antes
 % see \ref{tab:middleware_coordinationprop}
 
@@ -69,7 +69,7 @@ As a future work, this could be alleviated by a caching mechanism implemented in
 
 In Section~\ref{sec:tsc_vs_rest} we have described how \ac{tsc} does not contradict any of the \ac{rest} principles.
 However, the adaptation presented in this thesis does not completely adhere to the \ac{rest} style.
-In this section we present how this divergences affect the \ac{rest}'s properties.
+In this section we present how this divergences affect to \ac{rest}'s properties.
 % decir que el objetivo final es que pudiera ser REST
 
 % TODO antes de entrar al lio, explicar cómo funciona esto de REST, en qué parte de nuestra solución lo necesitaremos
@@ -83,19 +83,19 @@ In \citeauthor{fielding_architectural_2000}'s words, the relevant properties whi
 \begin{description}
   \item[Performance] is divided into network performance, user-perceived performance and efficiency.
     \begin{description}
-      \item[Network performance] is affected by the styles in the number of interactions and the granularity of data elements.
+      \item[Network performance] is affected by the number of interactions and the granularity of data elements.
       \item[User-perceived performance] refers to the impact a user in front of an application perceives. % UP Performance es una feature que no aporta mucho a nuestro caso
       \item[Efficiency] is achieved by minimizing the use of the network.
     \end{description}
   \item[Scalability] measures how an architecture supports a big amount of components and interactions between them.
   \item[Simplicity] is achieved through the separation of concerns for the components and the generality of architectural elements.
   \item[Modifiability] indicates how easily gradual changes can be introduced in the system.
-                       These changes form different implementations which should coexist.
+                       These changes contribute to form different implementations which should coexist.
                        % Dynamic modifiability avoids the whole system to restart.
     \begin{description}
       \item[Evolvability] refers to the degree in which a component can be implemented without negatively impacting on others.
       \item[Extensibility] measures the ability to add functionality to the system.
-      \item[Customization] is the ability to customize the behavior of an architectural element temporarily.
+      \item[Customization] is the ability to adjust the behavior of an architectural element temporarily.
       \item[Configurability] is related with the extensibility and the reusability.
       \item[Reusability] is the ability to reuse components, connectors or data elements without modifying other apps.
     \end{description}
@@ -112,7 +112,7 @@ In \citeauthor{fielding_architectural_2000}'s words, the relevant properties whi
 
 The Table~\ref{tab:network_properties} summarizes how different architectural styles achieve these properties.
 Particularly, it shows the styles from which \ac{rest} derives (see Section~\ref{sec:rest}).
-The ultimate goal of the solution explained in the previous section is twofold:
+The ultimate goal of the solution explained in Section~\ref{sec:halfway_solution} is twofold:
 \begin{enumerate}
   \item Provide a \ac{rest} access to a semantic space.
        This would ease its integration with the rest of the web.
@@ -123,15 +123,15 @@ Therefore, ideally, its networking properties would be the sames as the \ac{rest
 
 However, defining a 100\% \ac{rest} compliant \ac{api} is not easy.
 Indeed, most of the self-proclaimed \ac{rest}ful \acp{api} are not \citep{house_how_2012}. % la nueva buzz word para eso: hypermedia API
-The main cause is the \emph{HATEOAS} constraint seen in the Section~\ref{sec:rest} \citep{fielding_rest_2008}.
-Using \ac{http} as an application-level protocol forces a developer to comply the rest of the constraints \citet{moore_hypermedia_2010}, but not \emph{HATEOAS}.
+The main cause is the \ac{rest_hateoas} constraint seen in the Section~\ref{sec:rest} \citep{fielding_rest_2008}.
+Using \ac{http} as an application-level protocol forces a developer to comply the rest of the constraints \citet{moore_hypermedia_2010}, but not \ac{rest_hateoas}.
 % TODO hablar del Richardson Maturity model!
 
 
 % semantic-based \ac{api} is not easy. => referencias a los que lo han intentado, a que no hay hipertexto, a que te puede interesar inferir con bastantes
-Regarding the \ac{sw}, some recent efforts have tried to move closer to the \ac{hypermedia} constraint \citep{steiner_fulfilling_2011,kjernsmo_necessity_2012}.
+Regarding the \ac{sw}, some recent efforts have tried to move closer to the \emph{hypermedia} constraint \citep{steiner_fulfilling_2011,kjernsmo_necessity_2012}.
 However, these worlds remain quite isolated.
-In fact, \ac{sw} API  usually present another main divergence with the \ac{rest} style: the use of query endpoints.
+In fact, \ac{sw} \acp{api} usually present another main divergence with the \ac{rest} style: the use of query endpoints.
 % i.e. no devuelven listas de enlaces, sino todo a lo bruto
 % esto quiere decir que no se devuelve todo y ala, tu procesa esa burrada de datos, más bien se filtran
 These endpoints intend to solve some inefficiency issues which \ac{rest} shows when working with a big amount of data. % TODO mencionar \ac{lod} en algún punto de aquí?
@@ -146,19 +146,23 @@ The most paradigmatic case may be to decide to which graph does a inferred conte
 %       Solución de compromiso:
 %           nivel de madurez X de Richardson. Suponemos que alguien debe serguir nuestro API mínimo en los objetos WoT
 
-In \ac{iot} both the efficiency on the communications and reusability of the \ac{api} are important:
-\begin{description}
-  \item[Efficiency:] mobile and embedded devices' have restricted energy autonomy.
+In the \ac{iot} both the efficiency on the communications and the reusability of the \ac{api} are important:
+\begin{itemize}
+  \item \emph{Efficiency}: mobile and embedded devices' have restricted energy autonomy.
                     This autonomy is severely affected by network communications. % TODO cite
-                    Particularly, the access to the data they provide by means of hyperlinks may result in many HTTP requests. % aunque eso se puede adaptar por lo visto
+                    Particularly, the access to the data they provide by means of hypertext may result in many \ac{http} requests. % aunque eso se puede adaptar por lo visto
                     %  Por que sería muy costoso hacer rollo araña?!
 		    %     lo que ganas de reusabilidad, lo aumentas en complejidad en el cliente
                     %     interpretar código del servidor no es tampoco super-sencillo (xHTML!)
-  \item[Reusability:] due to the heterogeneity of the devices, assuming that they all share a common and unevolvable \ac{api} may not be realistic. % TODO paliar para que no parezca que no tiene sentido
-\end{description}
-The first solution together with the current difficulties on achieving a fully and standard \emph{HATEOAS} for machines in the \ac{sw}, lead us to opt for the second level on the Richardson Maturity level.
-Besides, our \ac{tsc} \ac{api} will be \emph{HATEOAS} \ac{api} in its humans representation to ease their learning level.% pero aún así el API de TSC seguirá siendo HATEOAS para los usuarios, no para las máquinas
-However, we do not discard to work towards a fully \ac{rest}ful \ac{api} as future work.
+  \item \emph{Reusability}: due to the heterogeneity of the devices, assuming they all share a common and unevolvable \ac{api} may not be realistic.
+			    Normally, an environment will be populated by different \acp{api} from many \ac{wot} solutions.
+			    In that situation, allowing a client to autonomously learn how to use them would be ideal.
+\end{itemize}
+The first solution together with the current difficulties on achieving a fully and standard \ac{rest_hateoas} for machines in the \ac{sw}, lead us to opt for promoting efficiency at expense of reusability.
+In other words, we use two resource-oriented \ac{http} \acp{api} whose use is known out-of-band by the clients (i.e. they are not guided by the \emph{hypermedia}). % presented in Section~\ref{} and the \emph{OSAPI}
+This corresponds with the second level on the Richardson Maturity level \cite{fowler_richardson_2010}. % sale un poco de la nada, pero ya se explica algo más con la frase anterior
+However, we provide a human-oriented version of our \ac{api} to ease its use by developers which does comply with \ac{rest_hateoas}.% pero aún así el API de TSC seguirá siendo HATEOAS para los usuarios, no para las máquinas
+Besides, we do not discard to work towards a fully \ac{rest}ful machine-oriented \ac{api} as future work.
 
 
 In conclusion, the properties of the properties for network communication style we adopted corresponds with \emph{LCODC\$SS} plus simplicity and visibility. % hacer una nueva fila con esto
@@ -185,7 +189,7 @@ Furthermore, we also consider energetic and computational constraints which devi
 
 
 % TODO cómo las distintas propiedades vistas antes se combinan para aportar a estas
-Table~\ref{tab:middleware_netprop}, shows how the properties explained in the previous sections contribute to achieve these challenges.
+Table~\ref{tab:middleware_netprop}, shows how the properties explained in the previous sections which directly affect these challenges.
 
 
 % TODO Comprobar que no se salga por el borde derecho!
@@ -269,7 +273,7 @@ At a finer grained level, there are several properties which help different \ac{
 % No sé dónde meter esta ventaja independiente
 % TODO Besides, we enable its \emph{evolvability} in different nodes by allowing them to implement at different degrees (see Section~\ref{sec:status_codes}). % TODO esto es un poco jugón, porque no funcionaría bien sin todo!
 
-Besides, in our \ac{api} \ac{http} the following points remain unsolved:
+Besides, in our \ac{http} \ac{api} the following points remain unsolved:
 % estos 2 últimos son como redefinir interop
 \begin{itemize} % posiblemente incluir lo que se explica aquí en otro punto
   \item \emph{Using third applications' data}:
@@ -311,7 +315,7 @@ The high scalability of the chosen architectural network style is negatively aff
 
 Manageability helps to cope with so many devices allowing them to have an autonomous behavior. % specially in environments where they cannot be controlled through centrality
 This autonomous behavior encompasses self-management, self-configuration, self-healing, self-optimization and self-protection.
-In this thesis we propose self-managed architecture which eases the searching of self-managed graphs.
+In this thesis we propose self-managed architecture which eases searching self-managed graphs.
 
 
 \subsubsection{Mobility}
@@ -320,14 +324,14 @@ The ability to face mobility situations can be improved through the autonomy bro
 First, mobility situations may impede two nodes coexist at the same time.
 Thus, \emph{time uncoupling} enables their communication.
 
-The primitives care about the data and not the provider of that data.
-Thus, if more than a node provide a content, we make consumers independent of which provides it.
+The primitives care about the data and not about the provider of that data.
+Thus, if more than a node provide a content, we make consumers independent of which one provides it (i.e. \emph{space uncoupling}).
 
 
 \subsubsection{Security and privacy}
 % En una versión nueva hablan de Proof
 
-This property can be considered traversal to any solution and therefore it is considered out-of-the-scope of the thesis.
+This property is considered out-of-the-scope of this dissertation.
 However, we are currently working on a lightweight security solution \citep{naranjo_lightweight_2012}. % TODO definir mejor esto
 For our future work, we are considering to integrate it with the presented middleware.
 
@@ -346,7 +350,7 @@ Particularly, \ac{http} handles it through caching.
 % depende de lo limitado que sea el cacharro, puede ser tan así como XXX
 Mobile and embedded devices impose computation restrictions.
 This restrictions result in unacceptable response times from the application perspective.
-Due to \ac{http} simplicity, computation complexity is found in semantic processing.
+Due to \ac{http}'s simplicity, computation complexity is found in semantic processing.
 For example, some really limited platforms may found difficult parsing long files.
 However, we made the following assumptions:
 \begin{itemize}
@@ -356,7 +360,7 @@ However, we made the following assumptions:
 
 
 Beyond that point, our middleware will not impose anything.
-This means that the middleware owner cannot assume:
+This means that a developer using the middleware cannot assume:
 \begin{itemize}
   \item The inference process on data providers.
         Reasoning over the content to provide unstated knowledge must be desirable.
@@ -367,7 +371,7 @@ This means that the middleware owner cannot assume:
         Again, it is a desirable property, but our middleware does not require it.
   \item General use of more complex query languages.
         Their expressibility benefits the network performance since they can restrict the results returned.
-        However, parsing them is not be trivial and parsing libraries are unavailable for some platforms.
+        However, parsing them is not be trivial and consequently parsing libraries are unavailable for some platforms.
         Therefore, a provider cannot assume that providers know how to process something beyond the wildcard based templates.
         As an alternative, providers can decompose these queries in simpler wildcard based templates and locally process the results afterwards (filtering them).
         % This is out of the scope.
@@ -387,7 +391,7 @@ The searching mechanism explained in the Chapter~\ref{cha:searching} takes into 
 
 % 2 cosas contribuyen: computación y networking => TODO mostrar diagrama de FoxG20
 Both computing data and networking operations directly affect energy consumption.
-As an example, Figure~\ref{XXX} shows the energy consumption on an embedded platform in an inactivity state and networking and computing data. % más detalles en la sección correspondiente
+As an example, Figure~\ref{fig:energy_consumption_tsc_section} shows the energy consumption on an embedded platform in an inactivity period, doing networking operations and computing semantic data. % más detalles en la sección correspondiente
 There are some crucial characteristics which negatively affect energy autonomy of resource constrained devices:
 \begin{itemize}
   \item Too complex computation tasks.
@@ -398,6 +402,12 @@ There are some crucial characteristics which negatively affect energy autonomy o
   \item Regarding \ac{http}, its stateleness contributes to a bad \textbf{network performance}.
         Besides, the verboseness of most of the semantic formats also contributes negatively to that aspect.
 \end{itemize}
+
+
+\InsertFig{4_search/figures/PDF/energy_consumption.pdf}{fig:energy_consumption_tsc_section}{
+  Energy consumption for an embedded platform during different activity periods (miliwatts).
+}{
+}{0.8}{}
 
 
 On the other hand, we contribute to energy saving minimizing network usage (i.e. \emph{network efficiency}) at different levels:

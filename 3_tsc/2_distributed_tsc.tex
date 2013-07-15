@@ -163,7 +163,7 @@ However, a primitive to ease that management can be a convenient for the develop
 With that in mind, we propose another writing primitive.
 This primitive only has local effects and therefore has no HTTP equivalent:
 \begin{itemize}
-  \item The \textbf{write_self} primitive writes a \emph{self-managed graph} and returns an \ac{uri} which identifies it.
+  \item The \textbf{write\_self} primitive writes a \emph{self-managed graph} and returns an \ac{uri} which identifies it.
   
   % tiene sentido definir el space_URI???
   % mejor definir su propio espacio?
@@ -189,8 +189,8 @@ In this section we will try to clarify how the different behaviors coexist.
 \paragraph{Writing}
 
 The most basic writing primitive allows a client to write a graph into the space hold by the server.
-However, we also presented the \emph{write_self} primitive.
-\emph{Write_self} writes into the local device a untakeable graph (i.e. self-managed graph).
+However, we also presented the \emph{write\_self} primitive.
+\emph{Write\_self} writes into the local device a untakeable graph (i.e. self-managed graph).
 % TODO comprobar una vez acabado que es así!
 Finally, in Chapter~\ref{cha:actuate} we argue that a third \emph{writing} primitive is necessary.
 This primitive should allow to \emph{suggest} physical changes in the space through actuators.
