@@ -3,6 +3,19 @@
 
 % presentar las siguientes subsecciones
 
+% intro a que ahora se va a hablar de soluciones IoT que usen semántica
+% Having analyzed non-specific solutions for distributed semantic architectures, the next step is to evaluate the use of semantics from the \ac{iot} perspective.
+
+% \label{sec:sw_providers}
+
+% La acepción de Name resolution cambia depende del contexto!
+% http://en.wikipedia.org/wiki/Name_resolution
+
+% Name resolution vs recognition
+% http://stackoverflow.com/questions/8589005/difference-between-named-entity-recognition-and-resolution
+
+
+
 \subsection{Sharing Semantic Knowledge in Peer-to-peer}
 The problem of sharing semantic knowledge distributedly has gained attention since the first steps of the Semantic Web \citep{berners-lee_semantic_2001}.
 Multiple architectures from the \emph{Peer-to-peer} (P2P) communication model have been used \citep{filali2011survey}.
@@ -69,58 +82,11 @@ Thus, we aim to ease the deployment of our solution and make it flexible and abl
 At the same time, the most powerful (i.e. energetically and in computing power) devices can support those that are resource constrained.
 
 
-\subsection{Semantics in the \acl{iot}}
-% intro a que ahora se va a hablar de soluciones IoT que usen semántica
-Having analyzed non-specific solutions for distributed semantic architectures, the next step is to evaluate the use of semantics from the \ac{iot} perspective.
-
-% Semántica en IoT: SmartM3
-Adding semantics works well for devices with high computational capacity but may add too much overhead for most of the devices in the \ac{iot}.
-To reduce this overhead in such devices, part of this computation is usually delegated to an intermediary.
-Some noteworthy examples are Smart-M3 \citep{honkola_smart-m3_2010} and the one proposed by \citet{broring_semantic_2009}.
-%In Smart-M3 These intermediaries are called knowledge processors.
-
-These intermediaries or \emph{Semantic Gateways} are in charge of managing the semantic annotation.
-The devices send raw data (which can be compressed) to the intermediaries and the gateways annotate the content semantically.
-Thus, the devices do not have to care about any semantic aspect and just collect the data as they did before.
-
-These \emph{Semantic Gateways} reduce the load to embedded devices with limited resources by decreasing the number of requests they have to answer.
-In addition, a centralized intermediary can gather all the information and thus, reduce the complexity of managing a distributed environment.
-
-However, as previously explained, using intermediaries to store the semantic data of resource constrained devices also has some drawbacks.
-On the one hand, centralization does not faithfully represent mobility situations were individuals carry their own semantic information in their personal devices.
-In addition, the data obtained from an intermediary will always be less fresh than the one obtained where it is generated (i.e., sensors).
-On the other hand, the servers are critical in centralized systems and therefore, their availability determines the operation of these solutions.
-They also impose a burden on the maintenance which may be worthless in some simple scenarios.
+% Estas han pasado al estado del arte
+%\subsection{Semantics in the \acl{iot}}
+%\subsection{Semantics in the \acl{wot}}
 
 
-\subsection{Semantics in the \acl{wot}}
-In the \acl{wot}, multiple solutions have considered using semantics to enrich the data definition in a machine processable manner.
-Generally, these solutions embed the metadata in HTML using microdata, microformats or RDFa \citep{mayer_extensible_2011}.
-These contents are returned by the Internet connected objects and are used to enhance the findability of the data by search engines.
-% Ontologías no se pueden definir, tiene que haber consenso en su uso por parte de las máquinas de búsqueda.
-% en vez de eso, queremos mejorar la busqueda por parte de los cacharros, no de los search engines
-This approach does not focus on making the devices able to search and interact with others.
-% end-to-end search
-Instead, it considers them as mere human-oriented information providers which should be indexed by third party search services.
-% aquí se puede enganchar también el discurso de Doulkeridis2007desent: coverage and scalability, freshness y monopoly
-
-A more general way to represent semantic data is using RDF\footnote{\url{http://www.w3.org/RDF/}} based representations (i.e., full semantics).
-SPITFIRE European project\footnote{\url{http://spitfire-project.eu}} represents the most remarkable effort on gathering full semantics and the \ac{wot}.
-It focuses on fully integrating sensor data with the \ac{lod}.
-The \ac{lod} are datasets which follow a series of principles on how to open and publish data.
-The goal of the \ac{lod} is to publish linked terms using full semantics.
-
-SPITFIRE shares with our solution the vision of a world populated by devices acting as semantic data providers no matter how small they are \citep{hasemann_rdf_2012}.
-Therefore, many of their efforts are complimentary to this work.
-%This is done by defining an ontology for mapping other common ontologies and providing semi-automatic generation of semantic annotations from raw data.
-%They also propose an abstraction to represent real-world entities (virtual sensors) using data provided by low-level sensors.
-%Finally, and more specific to this work, they propose a searching model which predicts the current state of things by computing their periodic patterns in past states.
-To search within these providers, \citet{pfisterer_spitfire:_2011} proposes a model which predicts the current state of things by computing their periodic patterns in past states.
-Again, the goal of this method is to adapt search engines to the new fashion of data provided on the \emph{Semantic Web of Things}.
-
-Instead, we propose a model to enhance the search capability of web-connected things in a distributed fashion.
-We aim to promote the interaction and collaboration between any devices in these environments.
-Not only sensors, but also regular computers or mobile devices \citep{balandin_access_2011}.
 
 % ¿Mereceria la pena rescatar el porque DNS no se puede usar sin mas en nuestro caso?
 % Yo lo he quitado creyendo que NO por:
@@ -151,9 +117,3 @@ Not only sensors, but also regular computers or mobile devices \citep{balandin_a
 % Without a DNS-based system, we need to share enough information with the \emph{Consumers} to deduce the relevant \emph{Providers}.
 % At the same time, according to the resource constrained devices needs, we want to avoid sharing too much information between the nodes.
 % This results in a conflict of interests which should be solved with a trade-off. % IG: esta frase es la descripcion de un trade-off en si
-
-
-% ---------------------------------
-% nuestra solución manageable: self-management, self-optimisation;
-% NOT: self-healing (auto-curación), self-protection
-% freshness: real-time semantic view of the context
