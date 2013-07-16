@@ -12,31 +12,29 @@
 % Thus, the washing machine could plan to finish washing the clothes two minutes before the car gets home.
 
 Integrating mobile or embedded devices is not trivial as they usually communicate using different protocols.
-To solve this problem, the \emph{Web of Things (WoT)} initiative proposes to use well-established web standards to ease their communication.
+To solve this problem, the \acl{wot} initiative proposes to use well-established web standards to ease their communication.
 However, the format of the data they exchange is also multifarious and application domain dependent.
 This implies that data will not be meaningful in other domains unless a specialized system converts and reinterprets them.
-A way to solve this problem is annotating the data semantically as proposed by the WWW \citep{ChuaG10,kimKC11}.
+A way to solve this problem is annotating the data semantically as proposed by the \ac{www} \citep{ChuaG10,kimKC11}.
 
-Adding semantics to the IoT works well for devices with high computational capacity but it adds too much overhead for most of the devices composing the IoT.
+Adding semantics to the \ac{iot} works well for devices with high computational capacity but it adds too much overhead for most of the devices composing the \ac{iot}.
 To reduce this overhead in such devices, part of this computation is usually delegated to intermediaries \citep{honkola_smart-m3_2010}.
 This approach reduces the overhead of semantically annotated data but brings other problems.
-(1) When devices rely on others to provide information, it is not guarantee that the information accessed will accurately represent the last information available in the data providers (i.e., the sensors).
-(2) Once we rely on those intermediaries, it is required them to be available at all time.
+(1) When devices rely on others to provide information, it is not guarantee that the information accessed will accurately represent the last information available in the data providers (e.g., the sensors).
+(2) Once we rely on those intermediaries, it is required that they are available at all time.
 Otherwise, the devices would not be able to talk to each other.
 
 We propose a solution where we use intermediaries to release some workload from the less powerful devices, but at the same time, we promote the direct communication between the devices.
-In particular, our system uses intermediaries to search for data in the Space and queries the final devices directly.
+In particular, our system uses intermediaries to search where the data is located in the \Space{} and queries the final devices directly.
 
 In our solution, the devices can become or stop being intermediaries dynamically.
 To decide which device will be an intermediary, we evaluate the state of a device (i.e., energy and computation capacity).
 Using this dynamic architecture, the absence of a particular intermediary does not collapse the system.
 In addition, our system is flexible enough to support a wide range of scenarios.
 
-% hablar de las multiples clues
-% IG: he reescrito un poco el tema, a ver que tal. Lo de payload a que se refiere?
-% TODO AG: a la cantidad de informacion enviada
-To enable the search for information in this system, intermediaries need to semantically aggregate the information in the Space.
-We propose alternatives to aggregate this information taking into account the payload of the shared information and accuracy of the search.
+To enable the search for information in this system, intermediaries need to know the information available in the \Space{}.
+To do that, they aggregate summaries sent by each device.
+We propose alternatives to summarize and to aggregate this information taking into account the payload of the shared information and the accuracy of the search.
 
 We compare our approach against other common approaches.
 In particular, we focus on the energy aspect, demonstrating that our approach helps energy constrained devices to face fewer unnecessary requests.
@@ -45,15 +43,14 @@ We perform this evaluation under different scenarios to prove the flexibility of
 
 In summary, we make the following contributions:
 \begin{itemize}
-\item We present a new architecture for managing semantics on the WoT which reduces the load for resource-constrained devices.
-% IG: he anadido esto basandome en el cambio anterior, hace falta verificar.
-% TODO AG: Te refieres a distintos tipos de clues, no? Me parece correcto.
-\item We propose and evaluate different approaches to aggregate semantic information and enable semantic search in this architecture.
+\item We present a new architecture for managing semantics on the \ac{wot} which reduces the load for resource-constrained devices.
+\item We propose and evaluate different approaches to aggregate and summarize the semantic information available in the \Space{} and enable semantic search in this architecture.
 \item We demonstrate the advantages of our approach compared to other typical searching approaches under different scenarios.
 \end{itemize}
 
 The remainder of this chapter is organized as follows:
 Section~\ref{background} discusses the related work.
-Section~\ref{proposal} and \ref{sec:clues} describe in detail our solution.
-Section~\ref{environment} presents our environment and Section~\ref{results} evaluates our solution.
+Section~\ref{proposal} presents in detail our energy-aware architecture.
+Section~\ref{sec:clues} describes the information that devices exchange to maintain this architecture.
+Section~\ref{environment} presents our experimental environment and Section~\ref{results} evaluates our solution.
 Finally, Section~\ref{conclusion} states the conclusions of our work.
