@@ -1,20 +1,10 @@
 \section{Background}
 \label{background}
-% enumerar características de IoT para que se vea el criterio en base al cual evaluamos las soluciones posibles
-% Para enfatizar que sí es algo IoT lo que presentamos.
-As stated by the \emph{Internet-of-Things Architecture} European project \citep{walewski_project_2011}, the IoT requires the following features:
-\emph{interoperability}, to face the heterogeneity of technologies in the IoT;
-\emph{scalability}, to cope with a greater amount of devices;
-\emph{manageability} of the devices;
-ability to face \emph{mobility} situations;
-\emph{security} and privacy; and
-% definición de reliability modificada yendo a la fuente de iot-a.eu
-\emph{reliability}, to handle connectivity losses in various ad-hoc-like ways.
-We will use these terms to compare our solution with others
-\footnote{Security and privacy are out of the scope of this thesis. They can be considered transversal.}.
+
+% presentar las siguientes subsecciones
 
 \subsection{Sharing Semantic Knowledge in Peer-to-peer}
-The problem of sharing semantic knowledge distributedly has gained attention since the first steps of the Semantic Web.
+The problem of sharing semantic knowledge distributedly has gained attention since the first steps of the Semantic Web \citep{berners-lee_semantic_2001}.
 Multiple architectures from the \emph{Peer-to-peer} (P2P) communication model have been used \citep{filali2011survey}.
 The P2P architectures are commonly categorized as \emph{unstructured}, \emph{structured}, and \emph{hybrid}.
 
@@ -44,7 +34,7 @@ Using this hash, one can know who is the peer in charge of managing this particu
 % link con lo de arriba
 Consequently, the queries can be directed to the appropriate peers generating fewer messages.
 Unfortunately, peers joining or leaving these systems result in expensive restructuraction operations.
-This maintenance cost makes this solution impractical for networks with high peer mobility (e.g., the IoT).
+This maintenance cost makes this solution impractical for networks with high peer mobility (e.g., the \ac{iot}).
 In addition, the hash function does not consider the different capabilities for the peers.
 For example, we have to control the storage and the battery of small devices.
 % What if a limited device exhausts its storage or faces much more requests than a powerful server?
@@ -59,7 +49,7 @@ RDFPeers \citep{cai_rdfpeers:_2004},
 GridVine \citep{cudre-mauroux_gridvine:_2007},
 TripCom\footnote{TripCom (IST-4-027324-STP, www.tripcom.org)}
 % ellos lo consideran semi-descentralizado y los kernels funcionan por DHT
-or the two architectural solutions proposed by SQPeers \citep{kokkinidis_query_2006}.
+or one of the two architectural solutions proposed by SQPeers \citep{kokkinidis_query_2006}.
 % otras aproximaciones como en uso de Semantic Overlay Networks, swarm-based (ignorar para aclarar el hilo)
 % AG: estas son las más susceptibles de cambiar!
 
@@ -73,18 +63,18 @@ Edutella \citep{nejdl_super-peer-based_2003} and the second solution proposed by
 % porque nosotros nos hemos decantado por esto? comparar con otras categorias y con soluciones de su categoría.
 Following this categorization, our solution is a hybrid architecture since some of the nodes in our architecture have special responsibilities.
 In particular, we use intermediaries which store what Edutella and SQPeers call indices.
-The main difference with these solutions is that the intermediary role is not fix. % as with other super-peers.
+The main difference with these solutions is that the intermediary role is not fixed. % as with other super-peers.
 Instead, the nodes dynamically decide which one should intermediate according to their energy autonomy and capacities.
 Thus, we aim to ease the deployment of our solution and make it flexible and able to adapt to multiple scenarios.
-At the same time, the most powerful devices can support those that are resource constrained.
+At the same time, the most powerful (i.e. energetically and in computing power) devices can support those that are resource constrained.
 
 
-\subsection{Semantics in the Internet of Things}
+\subsection{Semantics in the \acl{iot}}
 % intro a que ahora se va a hablar de soluciones IoT que usen semántica
-Having analyzed non-specific solutions for distributed semantic architectures, the next step is to evaluate the use of semantics from the IoT perspective.
+Having analyzed non-specific solutions for distributed semantic architectures, the next step is to evaluate the use of semantics from the \ac{iot} perspective.
 
 % Semántica en IoT: SmartM3
-Adding semantics works well for devices with high computational capacity but may add too much overhead for most of the devices in the IoT.
+Adding semantics works well for devices with high computational capacity but may add too much overhead for most of the devices in the \ac{iot}.
 To reduce this overhead in such devices, part of this computation is usually delegated to an intermediary.
 Some noteworthy examples are Smart-M3 \citep{honkola_smart-m3_2010} and the one proposed by \citet{broring_semantic_2009}.
 %In Smart-M3 These intermediaries are called knowledge processors.
@@ -93,7 +83,7 @@ These intermediaries or \emph{Semantic Gateways} are in charge of managing the s
 The devices send raw data (which can be compressed) to the intermediaries and the gateways annotate the content semantically.
 Thus, the devices do not have to care about any semantic aspect and just collect the data as they did before.
 
-These \emph{Semantic Gateways} reduce the load to embedded devices with limited resources by decreasing the number of requests they have to provide.
+These \emph{Semantic Gateways} reduce the load to embedded devices with limited resources by decreasing the number of requests they have to answer.
 In addition, a centralized intermediary can gather all the information and thus, reduce the complexity of managing a distributed environment.
 
 However, as previously explained, using intermediaries to store the semantic data of resource constrained devices also has some drawbacks.
@@ -103,8 +93,8 @@ On the other hand, the servers are critical in centralized systems and therefore
 They also impose a burden on the maintenance which may be worthless in some simple scenarios.
 
 
-\subsection{Semantics in the Web of Things}
-In the Web of Things, multiple solutions have considered using semantics to enrich the data definition in a machine processable manner.
+\subsection{Semantics in the \acl{wot}}
+In the \acl{wot}, multiple solutions have considered using semantics to enrich the data definition in a machine processable manner.
 Generally, these solutions embed the metadata in HTML using microdata, microformats or RDFa \citep{mayer_extensible_2011}.
 These contents are returned by the Internet connected objects and are used to enhance the findability of the data by search engines.
 % Ontologías no se pueden definir, tiene que haber consenso en su uso por parte de las máquinas de búsqueda.
@@ -114,11 +104,11 @@ This approach does not focus on making the devices able to search and interact w
 Instead, it considers them as mere human-oriented information providers which should be indexed by third party search services.
 % aquí se puede enganchar también el discurso de Doulkeridis2007desent: coverage and scalability, freshness y monopoly
 
-A more general way to represent semantic data is using RDF based representations (i.e., full semantics).
-SPITFIRE European project\footnote{\url{http://spitfire-project.eu}} represents the most remarkable effort on gathering full semantics and the WoT.
-It focuses on fully integrating sensor data with the Linked Open Data (LOD). 
-The LOD are datasets which follow a series of principles on how to open and publish data.
-The goal of the LOD is to publish linked terms using full semantics.
+A more general way to represent semantic data is using RDF\footnote{\url{http://www.w3.org/RDF/}} based representations (i.e., full semantics).
+SPITFIRE European project\footnote{\url{http://spitfire-project.eu}} represents the most remarkable effort on gathering full semantics and the \ac{wot}.
+It focuses on fully integrating sensor data with the \ac{lod}.
+The \ac{lod} are datasets which follow a series of principles on how to open and publish data.
+The goal of the \ac{lod} is to publish linked terms using full semantics.
 
 SPITFIRE shares with our solution the vision of a world populated by devices acting as semantic data providers no matter how small they are \citep{hasemann_rdf_2012}.
 Therefore, many of their efforts are complimentary to this work.
@@ -137,8 +127,8 @@ Not only sensors, but also regular computers or mobile devices \citep{balandin_a
 %      - Simplificar y no enmarañar mas el discurso.
 %      - Es una cosa que me parece basica si se comprende el problema.
 
-% Most WoT solutions, use DNS-based discovery to locate the REST services \emph{Providers} \cite{ishaq_facilitating_2012}.
-% In semantic WoT, the use of DNS-based discovery arises as a solution to locate the device holding the response for a specific request.
+% Most \ac{wot} solutions, use DNS-based discovery to locate the REST services \emph{Providers} \cite{ishaq_facilitating_2012}.
+% In semantic \ac{wot}, the use of DNS-based discovery arises as a solution to locate the device holding the response for a specific request.
 % Providing that the query already includes the URL of the host that contains the requested information (see Figure \ref{fig:triple}),
 % we could easily locate such device using standard network protocols.
 % Unfortunately, this does not always apply to Semantic Web for two reasons:
