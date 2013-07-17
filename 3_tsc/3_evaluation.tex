@@ -123,8 +123,8 @@ Therefore, ideally, its networking properties would be the sames as the \ac{rest
 
 However, defining a 100\% \ac{rest} compliant \ac{api} is not easy.
 Indeed, most of the self-proclaimed \ac{rest}ful \acp{api} are not \citep{house_how_2012}. % la nueva buzz word para eso: hypermedia API
-The main cause is the \ac{rest_hateoas} constraint seen in the Section~\ref{sec:rest} \citep{fielding_rest_2008}.
-Using \ac{http} as an application-level protocol forces a developer to comply the rest of the constraints \citet{moore_hypermedia_2010}, but not \ac{rest_hateoas}.
+The main cause is the \ac{resthateoas} constraint seen in the Section~\ref{sec:rest} \citep{fielding_rest_2008}.
+Using \ac{http} as an application-level protocol forces a developer to comply the rest of the constraints \citet{moore_hypermedia_2010}, but not \ac{resthateoas}.
 % TODO hablar del Richardson Maturity model!
 
 
@@ -158,10 +158,10 @@ In the \ac{iot} both the efficiency on the communications and the reusability of
 			    Normally, an environment will be populated by different \acp{api} from many \ac{wot} solutions.
 			    In that situation, allowing a client to autonomously learn how to use them would be ideal.
 \end{itemize}
-The first solution together with the current difficulties on achieving a fully and standard \ac{rest_hateoas} for machines in the \ac{sw}, lead us to opt for promoting efficiency at expense of reusability.
+The first solution together with the current difficulties on achieving a fully and standard \ac{resthateoas} for machines in the \ac{sw}, lead us to opt for promoting efficiency at expense of reusability.
 In other words, we use two resource-oriented \ac{http} \acp{api} whose use is known out-of-band by the clients (i.e. they are not guided by the \emph{hypermedia}). % presented in Section~\ref{} and the \emph{OSAPI}
 This corresponds with the second level on the Richardson Maturity level \cite{fowler_richardson_2010}. % sale un poco de la nada, pero ya se explica algo más con la frase anterior
-However, we provide a human-oriented version of our \ac{api} to ease its use by developers which does comply with \ac{rest_hateoas}.% pero aún así el API de TSC seguirá siendo HATEOAS para los usuarios, no para las máquinas
+However, we provide a human-oriented version of our \ac{api} to ease its use by developers which does comply with \ac{resthateoas}.% pero aún así el API de TSC seguirá siendo HATEOAS para los usuarios, no para las máquinas
 Besides, we do not discard to work towards a fully \ac{rest}ful machine-oriented \ac{api} as future work.
 
 

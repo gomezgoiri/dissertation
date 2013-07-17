@@ -14,18 +14,18 @@ It aims to cover certain properties, explained in Section~\ref{sec:network_prope
 To achieve these properties, \ac{rest} establishes the following constraints from other network-based architectural styles:
 % explicarlo o es demasiado obvio?
 \begin{description}
- \item[\acf{rest_cs}.] Providing an \ac{api} to the clients, they are isolated from back-end implementation details.
+ \item[\acf{restcs}.] Providing an \ac{api} to the clients, they are isolated from back-end implementation details.
 		       % esto ayuda a: , scalability, evolvability (apps independientes pueden evolucionar mejor)
- \item[\acf{rest_s}.] The state is fully stored in the client and therefore each request has all the information needed to process it.
- \item[\acf{rest_cache}.] When added to the \ac{rest_cs} constraint, this style replicates content obtained from a server in the client.
- \item[\acf{rest_u}.] It is the key constraint which distinguishes \ac{rest} from other architectural styles.
+ \item[\acf{rests}.] The state is fully stored in the client and therefore each request has all the information needed to process it.
+ \item[\acf{restcache}.] When added to the \ac{restcs} constraint, this style replicates content obtained from a server in the client.
+ \item[\acf{restu}.] It is the key constraint which distinguishes \ac{rest} from other architectural styles.
                       This constraint is composed by the following ones:
     \begin{description}
 	% explicados en sección 5.2 de Fielding, resumir?
-	\item[\acf{rest_id}.] Resources are the conceptual targets of hypertext references.
+	\item[\acf{restid}.] Resources are the conceptual targets of hypertext references.
 			      Their identification offers a generic interface to access and change the values of a resource.
-	\item[\acf{rest_rep}.] Representations are composed by a sequence of bytes and the metadata to describe those bytes.
-	\item[\acf{rest_desc}.] The client and server have to agree on standard methods and media types. % linkar al tipo de la Web esa
+	\item[\acf{restrep}.] Representations are composed by a sequence of bytes and the metadata to describe those bytes.
+	\item[\acf{restdesc}.] The client and server have to agree on standard methods and media types. % linkar al tipo de la Web esa
 				% Explicación Fielding:
 				% interaction is stateless between requests
 				% standard methods and media types are used to indicate semantics and exchange information
@@ -36,15 +36,15 @@ To achieve these properties, \ac{rest} establishes the following constraints fro
 	                        the type should be registered,
 	                        the registry should point to a specification and 
 	                        the specification should explain how to process data according to its intent \citep{wahbe_self-descriptive_2010}. % no necesariamente tiene que ser estándar
-	\item[\acf{rest_hateoas}.] This is a controversial constraint because most of the self-proclaimed ``\ac{rest}'' \acp{api} fail to follow it \citep{moore_hypermedia_2010,house_how_2012}.
+	\item[\acf{resthateoas}.] This is a controversial constraint because most of the self-proclaimed ``\ac{rest}'' \acp{api} fail to follow it \citep{moore_hypermedia_2010,house_how_2012}.
 	                           It states that no out-of-the-band information should guide the interaction with an \ac{api}.
 	                           Instead, the hypertext should guide it.
 	                           In other words, the client must know just an initial URL and the application's media types.
 	                           From that point, it should select the alternatives proposed by the server to change to the next application state \citep{fielding_rest_2008}.
 	                           % propuestas: respresentaciones (links) y la manipulación implicita de las mismas (CRUD)
     \end{description}
- \item[\acf{rest_l}.] Each layer provides services to the top layer. % e.g. TCP/IP
- \item[\acf{rest_cod}.] The client has a set of resources which does not know how to process.
+ \item[\acf{restl}.] Each layer provides services to the top layer. % e.g. TCP/IP
+ \item[\acf{restcod}.] The client has a set of resources which does not know how to process.
                         This \emph{know-how} is downloaded from the server.
 \end{description}
 
@@ -64,16 +64,16 @@ However, in the last few years \acf{coap} has emerged as a specialized web trans
 Some noteworthy features of \ac{coap} are
 (1) the reduced message size,
 (2) the use of UDP as a transport layer (with the possibility of using \emph{multicast} communication),
-(3) similarity with \ac{http} (both to reuse its properties and to ease cross-protocol proxying) and
+(3) similarity with \ac{http} (both to reuse its properties and to ease cross-protocol proxying), and
 (4) a resource discovery mechanism. % TODO cita a CORE
 % mencionar seguridad?
 
 
-One could defend that to implement a lightweight \ac{tsc} solution \ac{coap} should be used as a baseline.
+One could argue that to implement a lightweight \ac{tsc} solution, \ac{coap} should be used as a baseline.
 However, we have chosen to work with \ac{http} for the following reasons:
 \begin{itemize}
   \item Direct interoperation with other web-solutions.
-        Most of the Internet-based \ac{api} use \ac{http}.
+        Most of the Internet-based \ac{api}s use \ac{http}.
         Directly using \ac{http} we can avoid proxies.
         Proxies may introduce latency in the response time degrading network performance. % siempre degradará la eficiencia algo, pero habría que verlo y testearlo, la verdad...
         % TODO, será cierto? o tardará menos en conjunto?
@@ -106,37 +106,37 @@ Nevertheless, due to \ac{http}'s similarities with \ac{coap}, the future adoptio
 \emph{Per se}, \ac{tsc} does not contradict in any sense the \ac{rest} principles:
 
 \begin{description}
- \item[\ac{rest_cs}.] Accessing to a space through a server in a \ac{rest_cs} fashion is completely feasible.
+ \item[\ac{restcs}.] Accessing to a space through a server in a \ac{restcs} fashion is completely feasible.
 		      Indeed, this does not prevent to use a distributed solution in the \emph{back end} (e.g. a distributed semantic repository).
- \item[\ac{rest_s}.] The primitives to access the space imply simple read and writes which do not store any state in the server.
- \item[\ac{rest_cache}. ] The semantic content stored in the space can be cached.
+ \item[\ac{rests}.] The primitives to access the space imply simple read and writes which do not store any state in the server.
+ \item[\ac{restcache}. ] The semantic content stored in the space can be cached.
                           However, the dynamism of the underlying network can make effective caching challenging to achieve. % quería poner "tune up" pero "configure" me ha sonado más fino
  %\item[\ac{rest_u}:] % lo quito porque si no, este punto sin texto con otros subpuntos queda feo
     %\begin{description}
-	\item[\ac{rest_id}.] There are three types of identified resources in \ac{tsc}: spaces, \ac{rdf} Graphs and certain elements of the \ac{rdf} Triples.
+	\item[\ac{restid}.] There are three types of identified resources in \ac{tsc}: spaces, \ac{rdf} Graphs and certain elements of the \ac{rdf} Triples.
 	                 All of them are identified by URIs.
 	                 The space can be seen as a coarse-grained view of the underlying graphs.
 	                 The graphs have sets of triples which are usually related and describe a unit of knowledge. % A RDF triple by itself cannot transmit too much information
 	                 Self-identified triple's subjects, predicates or objects are the source of concept linking.
-	\item[\ac{rest_rep}.] The \ac{rdf} graphs and triples mentioned above can be represented using different standard serializations.
+	\item[\ac{restrep}.] The \ac{rdf} graphs and triples mentioned above can be represented using different standard serializations.
 			      %Nevertheless, 
 			      % citar el paper que habla de cómo alinear LOD y REST
-	\item[\ac{rest_desc}.] The messages derived from the primitives are self-describing since they are expressed on standard \ac{rdf}-based languages. % including meta-data
+	\item[\ac{restdesc}.] The messages derived from the primitives are self-describing since they are expressed on standard \ac{rdf}-based languages. % including meta-data
 				Therefore the server and clients know how to process the content according to its language and certain vocabularies.
 				These vocabularies specifications (i.e. ontologies) are referenced in the content.
-	\item[\ac{rest_hateoas}.] The lack of native hypermedia support in \ac{rdf}-based representations make this the most challenging property to achieve \citep{page_rest_2011}. % compara LOD y REST
+	\item[\ac{resthateoas}.] The lack of native hypermedia support in \ac{rdf}-based representations make this the most challenging property to achieve \citep{page_rest_2011}. % compara LOD y REST
 				  However, some recent works propose means to fulfill this property.
 				  \citet{kjernsmo_necessity_2012} proposes a vocabulary for hypermedia \ac{rdf}.
 				  \citet{steiner_fulfilling_2011} and \citet{verborgh_functional_2012} propose to enrigh the \ac{http} header with hypermedia information.
 				  While the first changes representations, the latter is a more general way to provide hypermedia.
     %\end{description}
- \item[\ac{rest_l}.] Encapsulation of functionalities can be achieved through a layered system.
+ \item[\ac{restl}.] Encapsulation of functionalities can be achieved through a layered system.
                      For example, to balance the load to a space replicated in two machines.
  % TODO TODO repensar si ontologías, reglas y demás (personalizar behavior) se puede entender cómo COD:
  % In the code-on-demand style [50], a client component has access to a set of resources, but
  %  not the know-how on how to process them. It sends a request to a remote server for the
  %  code representing that know-how, receives that code, and executes it locally.
- \item[\ac{rest_cod}.] Although it may not be as common as scripting in ordinary human-browsing, % TODO reexplicar esto mejor?
+ \item[\ac{restcod}.] Although it may not be as common as scripting in ordinary human-browsing, % TODO reexplicar esto mejor?
             the \emph{know how} can be downloaded from the server in several ways:
             \begin{enumerate}
 	      \item Modeling scripts using appropriate ontologies. % TODO cite
