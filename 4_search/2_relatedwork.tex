@@ -1,11 +1,11 @@
 \section{Background}
 \label{background}
 
-Querying over semantic content provided by independent sources is a problem addressed in the \acl{lod} field.
-\citet{gorlitz_federated_2011} classifies the possible \ac{lod} infrastructures according to three characteristics:
+Querying over the semantic content provided by independent sources transparently is a problem which often appears in the \acl{lod}.
+\citet{gorlitz_federated_2011} classify the possible \ac{lod} infrastructures according to three characteristics:
 1) how they store data,
-2) whether the index is distributed and
-3) whether the data sources cooperate.
+2) whether the index used to search is distributed and
+3) whether data sources cooperate.
 Table~\ref{tab:infrastructure_lod} summarizes the resulting infrastructure types: central repository, federation and \ac{p2p} data management.
 
 
@@ -14,18 +14,22 @@ Table~\ref{tab:infrastructure_lod} summarizes the resulting infrastructure types
 
 % Lo nuestro se parece más a LOD de dispositivos que a distributed triple store:
 %     grafos semánticos de fuentes de datos independientes
-Within the solutions which distribute the semantic content are federation and \ac{p2p} data management.
+The solutions which distribute the semantic content are federation and \ac{p2p} data management.
 The difference between them resides in whether the index to look for content in the different machines is distributed or not.
-In other words, a federated \ac{lod} infrastructure maintains the meta information about data sources in an element called \emph{federator} \citep{gorlitz_federated_2011}.
-This meta information is used to delegate queries to data sources.
+In other words, a federated \ac{lod} infrastructure maintains the meta information about data sources in the machine in charge of searching \citep{gorlitz_federated_2011} (called \emph{federator}).
+This meta information is used to delegate queries to appropriate data sources.
 
 Therefore, according to this classification, our solution is a query federation solution.
-However, the solution presented in this chapter presents some particularities:
+However, it presents some particularities:
 \begin{itemize}
-  \item This node which manages the \emph{indexes} is dynamically chosen between all the participants and can change over the time.
+  % Esto es, los índices están replicados, pero quien los usa siempre los coge de la misma máquina.
+  % No se necesita coordinación entre quienes guardan los índices para balancear o obtener algunos índices que no tienen...
   \item The \emph{indexes} are replicated in each data consumer.
-	This replication allows consumers not to critically depend on the availability of a this manager. % no depender => MUCHO
-	This implies that some components of a \emph{federator} are implemented by more than a node at a time.
+	In other words, in our solution there are as many \emph{federators} as data consumers.
+	This replication allows consumers not to critically depend on the availability of any other node to search. % no depender => MUCHO
+  \item There is a node in charge of managing the main version of the \emph{indexes}.
+	However, it is dynamically chosen between all the participants and can change over the time.
+	The \emph{indexes} hold by the consumers are copies of the manager's ones.
 \end{itemize}
 
 
@@ -33,31 +37,72 @@ However, the solution presented in this chapter presents some particularities:
 
 
 % presentamos 3 soluciones: FedX, ARQ y XXX.
-Querying over federated databases is a well-addressed problem which provides relevant searching mechanisms.
+Querying over federated databases is a well-addressed problem which provides relevant techniques to the problem analyzed.
 However, there are significant differences when it comes to search over semantic content \citep{gorlitz_federated_2011}. % estoy citando estados del arte de otros, un poco gitaner :-P Ya puestos, citar el de FedX Optimization
-Although it is a more unexplored field, federated distributed query over independent semantic data sources has some remarkable proposals are: FedX, DARQ and SemWIG.
+FedX \citep{schwarte_fedx_federation2011,schwarte_fedx_optimization_2011}, DARQ \citep{quilitz_querying_2008} and SemWIQ \citep{langegger_semantic_2008} are the most relevant solutions to perform federated queries over independent semantic data sources.
 % (usually justified by \ac{lod} solution)
 
 
+In these three solutions relevant sources are know beforehand (i.e. they use a \emph{top-down} strategy).
+\emph{Bottom-up} strategies discover data sources by following the links on the content provided by other sources during the query process \citep{schwarte_fedx_optimization_2011}.
+Although our solution also uses a \emph{top-down} strategy, we explicitly avoid human intervention to discover new data sources or providers. % a diferencia de FedX, por lo que ví en la demo % o si, en realidad no nos metemos mucho con eso
+Instead, we rely on automatic discovery mechanisms which additionally must provide some additional information about the data providers. % BTW, esto es un problema para interoperabilidad!
+
+
+% esto está sacado sobre todo del estado del arte de schwarte_fedx_optimization_2011
+DARQ and SemWIQ differ from FedX in the requirement of local preprocessed metadata about data sources.
+Instead, FedX uses on-demand queries together with a caching mechanism. % SPARQL ASK
+In that aspect, our solution resembles to DARQ and SemWIQ since it also requires this metadata (called \clues{} in our solution).
+In fact, two types of \clues{} proposed in our solution are equivalent to the metadata used by DARQ and SemWIQ.
+DARQ maintains predicate indexes to find relevant data sources.
+SemWIQ maintains a local catalog with the type information of RDF entities provided by data sources. % el tipo de cada sujeto se debe conocer de alguna forma
+In contrast with our solution, DARQ and SemWIQ also use statistics about data sources to optimize their queries.
+
+
 % pros y contras:
-% No asumimos SPARQL, pero al final todos estos mecanismos descomponen SPARQL en triple patterns como los nuestros
+The main weakness of our solution compared to FedX, DARQ and SemWIQ is the use of a less sophisticated querying mechanism.
+This is because all these solution assume that all data sources can process SPARQL and offer optimization techniques on top of it. % todo cita a SPARQL
+Our solution acknowledges that some data sources will not be able to process SPARQL because of their constrained platforms.
+Consequently, we require the lowest common denominator just accepting basic triple patterns.
+In any case, SPARQL can be always decomposed into triple patterns.
+For our future work, we may consider using SPARQL just with the endpoints able to manage it as a halfway solution.
+
+
 %    por lo tanto se podría implementar sobre lo nuestro lo suyo
 %            (y permitir optimizaciones si introducimos SPARQL en algunos nodos)
+% no hay ninguna solución global con una arquitectura que tenga en cuenta le energía
+% cómo el problema difiere: más fuentes de datos, menos info en cada una y dinamicas
+Another key difference with the presented systems is the context where we have applied our solution.
+It is intended to serve in \ac{ubicomp} environments.
+This means that there will be more data sources, with less information to process in each of them and with a distinct nature.
+Regarding their nature, the mobile and embedded devices which may provide data are less reliable, more dynamic and more restricted in computation and energy that usual \ac{lod} endpoints.
+Therefore, our solution is designed to adapt to \ac{ubicomp}'s nature and evaluated considering these restrictions.
+To the best of our knowledge, this is the first approximation to the problem considering this constraints.
+% además, abarcamos más parte del proceso?? => discovery, la replica, etc.
+
+
+\bigskip
+
+
+% mencionar que se ha hablado de soluciones IoT que usen semántica anteriormente y que to the best of our knowledge no existe nada parecido
+% como se ha visto en TAL y TAL sección no existen soluciones de busqueda de contenidos semánticos distribuido para WoT. (o al menos no para funcionar en cacharrillos)
+In Section~\ref{sec:sw_intermediaries} and \ref{sec:sw_providers} we have analyzed other solutions for \ac{ubicomp} which use semantics.
+However, none of them have addressed federated distributed search in resource constrained devices.
+% meter alguna referencia a Cabilmonte y demás?
+% Es más de cómo consultar datos semánticos en streaming a una base de datos relacional...
+
+
+% Mencionar SPARQL SERVICES y demás ??
+% No es transparente, pero permiten hacer queries a distintas fuentes.
+
+
+% mencionar fokoue con lo de los resumenes ?
+% meter enlace con lo de summaries de ABox en la parte correspondiente?
 
 
 
 
-% TODO meter enlace con lo de summaries de ABox en la parte correspondiente
 
-
-% mencionar fokoue con lo de los resumenes?
-
-% presentar las siguientes subsecciones
-
-% intro a que ahora se va a hablar de soluciones IoT que usen semántica
-% Having analyzed non-specific solutions for distributed semantic architectures, the next step is to evaluate the use of semantics from the \ac{iot} perspective.
-
-% \label{sec:sw_providers}
 
 % La acepción de Name resolution cambia depende del contexto!
 % http://en.wikipedia.org/wiki/Name_resolution
@@ -67,10 +112,3 @@ Although it is a more unexplored field, federated distributed query over indepen
 
 % Mirar en el punto 6.3 para ver unos pasos de consulta en la LOD que parece que pueden ser interesantes para esto
 % http://www.unifr.ch/webnews/content/20/attach/4765.pdf
-
-
-% no hay ninguna solución global con una arquitectura que tenga en cuenta le energía
-
-
-% como se ha visto en TAL y TAL sección, to the best of our knowledge, no existen soluciones de busqueda de contenidos semánticos distribuido para WoT. (o al menos no para funcionar en cacharrillos)
-% meter alguna referencia a Cabilmonte y demás?
