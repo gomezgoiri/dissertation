@@ -13,26 +13,26 @@ Similarly, sending more information over the network implies more processing tim
 
 \noindent\textbf{Precision and recall.}
 We evaluate the \emph{precision} and the \emph{recall} of the proposed algorithm in a network of 470 nodes issuing the query templates shown in Table~\ref{tab:evaluationTemplates}.
-In average, the nodes manage instances belonging to 6.34 different classes ($SD=1.31$) among a total of 17 distinct classes in the space.
+In average, the nodes manage instances belonging to 6.34 different classes ($SD=1.31$) among a total of 17 distinct classes in the \Space{}.
 %When these classes are expanded with a reasoning process, the nodes store 20 different concepts among a total of 113 classes in the space ($SD=4$). % TODO actualizar
-The distinct predicates managed by each node in average are 16.01 ($SD=1.53$) out of 68 different predicates in the space.
+The distinct predicates managed by each node in average are 16.01 ($SD=1.53$) out of 68 different predicates in the \Space{}.
 
 \begin{table}[h!tbp]
-\centering
-\begin{tabular}{| c | c |}
-\hline
-Name & Template \\
-\hline
-t1 & ?s~~~rdf:type~~~ssn-weather:RainfallObservation \\
-t2 & ?s~~~wsg84:long~~~?p \\
-t3 & ?s~~~ssn:observedProperty~~~?o \\
-t4 & bizkaisense:ABANTO~~~?p~~~?o \\
-t5 & ?s~~~dc:identifier~~~?o \\
-%t9 & ?s~~~foaf:family_name~~~?o \\ % TODO futura version del paper con perfiles de usuarios, para meter mas variabilidad en contenidos
-\hline
-\end{tabular}
-\caption{Templates used in the evaluation.}
-\label{tab:evaluationTemplates}
+  \centering
+  \begin{tabular}{ l c }
+    \hline
+    Name & Template \\
+    \hline
+    t1 & ~~?s~~~rdf:type~~~ssn-weather:RainfallObservation~~ \\
+    t2 & ~~?s~~~wsg84:long~~~?o~~ \\
+    t3 & ~~?s~~~ssn:observedProperty~~~?o~~ \\
+    t4 & ~~bizkaisense:ABANTO~~~?p~~~?o~~ \\
+    t5 & ~~?s~~~dc:identifier~~~?o~~ \\
+    %t9 & ?s~~~foaf:family_name~~~?o \\ % Quizá en futura version del paper con perfiles de usuarios, para meter mas variabilidad en contenidos ;-)
+    \hline
+  \end{tabular}
+  \caption{Templates used in the evaluation.}
+  \label{tab:evaluationTemplates}
 \end{table}
 % Las consultas se podrían sacar también de bizkaisense o alguna app que hayamos hecho para darle mayor verosimilitud
 
@@ -40,7 +40,8 @@ t5 & ?s~~~dc:identifier~~~?o \\
 In Figures~\ref{fig:recall_measures}~and~\ref{fig:precision_measures}, class-based clue shows a good \emph{precision} and \emph{recall} for \emph{t1} and \emph{t2}.
 \emph{T1} asks exactly for the information this type of clues define (i.e. nodes having instances of a certain class).
 \emph{T2} evaluates which nodes have instances in the domain of the \emph{long} predicate (\emph{SpatialThing}).
-Note that this works thanks to the RDFS inference because some nodes in the space only write \emph{Point} instances (a subclass of \emph{SpatialThing}).
+Note that this works thanks to the RDFS inference because some nodes in the \Space{} only write \emph{Point} instances (a subclass of \emph{SpatialThing}).
+% TODO esto no se entiende muy bien sin explicación extra!
 The domain of \emph{t3} and \emph{t5}'s predicates could not be inferred just using RDFS inference. % (some properties of OWL are used => inverseof).
 Even solving this limitation, we would expect a bad \emph{precision} since both predicates relate very general concepts.
 In addition, when a class-based clue has no enough information to predict the nodes, it simply floods the query.
@@ -61,23 +62,24 @@ This is why the \emph{recall} of \emph{t4} is high.
 
 % Explicar predicate-based
 We can see a bad prediction for \emph{t1} and \emph{t4} for predicate-based clues.
-\emph{T1} defines a very common predicate and therefore, it cannot discriminate any possible node.
+\emph{T1} defines a very common predicate and therefore, it cannot discriminate any node.
 \emph{T4} suffers the same problem explained for the class-based clues.
 We proposed a possible solution for this problem in Section~\ref{sec:aboxinclues}.
 
-% Explicar schema-based
-Finally, schema-based clue shows a slightly better \emph{precision} for \emph{t4}, since it can discriminate some nodes not using the \emph{bizkaisense} prefix.
+% Explicar prefix-based
+Finally, prefix-based clue shows a slightly better \emph{precision} for \emph{t4}, since it can discriminate some nodes not using the \emph{bizkaisense} prefix.
 On the other hand, it obtains marginally worse \emph{precision} than predicate-based clues for \emph{t3} and \emph{t5}.
-This worsening could be greater if few nodes using the schemas \emph{ssn} and \emph{dc} will use the predicates defined in both templates.
+% TODO reexplicar esto, no se entiende!
+This worsening could be greater if few nodes using the prefixes \emph{ssn} and \emph{dc} used the predicates defined in both templates.
 
 \medskip
 
 \noindent\textbf{Verbosity.}
 % Una frase para retomar lo anterior, y al grano.
 The clues verbosity is also a critical aspect for resource constrained devices.
-Figure~\ref{fig:clueSize} shows a higher variance for schema based clues' length and lower verbosity of class based clues.
+Figure~\ref{fig:clueSize} shows a higher variance for prefix-based clues' length and lower verbosity of class based clues.
 This is because the nodes virtually have a different number of sensors.
-In addition, the links to concepts of other ontologies varies within the two datasets used in the parametrization.
+In addition, the links to concepts of other ontologies vary within the datasets used in the parametrization.
 In any case, the diagram shows a similar verbosity for all the clues for the semantic content considered in this evaluation. % TODO analizar si la media varía significativamente
 % No es adecuado para cacharros pequeños: poner evaluación de WoT de inferencia
 
@@ -99,7 +101,7 @@ In any case, the diagram shows a similar verbosity for all the clues for the sem
 \noindent\textbf{Summary.}
 Class-based clues are useful for templates asking for a specific type of content.
 However, they still require inference to obtain a good \emph{precision}.
-In \citet{gomez-goiri_restful_2012}, we tested the inference process on the devices and data used in this simulation. % ref a WoT2012 para más detalles
+In \citet{gomez-goiri_restful_2012}, we tested the inference process on the devices and data used in this simulation.
 We could not run any reasoner in the ConnectPort X2 Gateway.
 Actually, we could only run RDFS reasoners in more powerful embedded and mobile devices such as the FoxG20 and the Samsung Galaxy Tab.
 In the FoxG20, it took 48.9 seconds the first load of all the ontologies used and 1.4 seconds to reason over each measurement written.
@@ -107,8 +109,8 @@ In a Samsung Galaxy Tab, it took 17.3 seconds and 0.2 the following measurement 
 Considering these results, we can conclude that there is a clear need for efficient embedded reasoners.
 Therefore, the class-based approach is promising but it is impossible to adopt in current embedded and mobile devices.
 
-Between the predicate-based and schema-based clue, we propose to use the predicate-based clue since it subsumes much of the information provided by the schema-based clue.
-The rest of the schemas, are referred in the subjects or the objects. % más que schemas son prefixes :-S
+Between the predicate-based and prefix-based clues, we propose to use the predicate-based clues since they subsume much of the information provided by the prefix-based clues.
+The rest of the prefixes are referred in the subjects or the objects.
 They could be easily added to predicate-based clues on the prefixes field.
 In addition to the use of predicate-based clues, we could implement the solution for the specific individual search proposed in Section~\ref{sec:aboxinclues}.
 
@@ -139,39 +141,42 @@ In addition to the use of predicate-based clues, we could implement the solution
 % Explicar porque no se pone centralizado en la comparación
 %    No es directamente comparable dado que depende directamente de otro factor distinto: frecuencia de escritura.
 
-We have conducted a simulation to evaluate the benefits of our solution against a flooding-based approach (i.e., \emph{negative broadcasting}).
-The simulated environment has nodes that join to the same space.
-All the nodes are \emph{Providers} and write new information periodically in the space.
-During one hour, 1, 10 and 100 \emph{Consumers} perform 1000 queries in total using the templates described in Table~\ref{tab:evaluationTemplates}.
+We have conducted a simulation to evaluate the benefits of our solution against a flooding-based approach (i.e., \ac{nb}).
+In addition, to give a more exhaustive comparison, we have implemented and tested query caching on top of \ac{nb}.
+We simulate multiple nodes that join the same \Space{} as \providers{} and periodically write new information to the \Space{}.
+During one hour, 1 or 100 \consumers{} perform 1000 queries in total using the templates described in Table~\ref{tab:evaluationTemplates}.
 
-As expected, our solution scales much better than the \emph{negative broadcasting} (see Figure~\ref{fig:requestsByStrategies}).
-In particular, the increase on requests per consumer in the space is not appreciable.
+As expected, our solution scales much better than the one with \ac{nb} (Figure~\ref{fig:requestsByStrategies}).
+However, adding caching to \ac{nb} works slightly better than our solution with just one node querying the \Space{}.
+This is due to the limited amount of different query templates used in the simulation.
+When we increase the number of \consumers{} in the \Space{}, the caching strategy behaves closer to the \ac{nb}.
+In the same situation, our solution handles better an increase on the number of \consumers{} in the \Space{}.
 
 
 \InsertFig{requests_by_strategies}{fig:requestsByStrategies}{
-  Required requests for negative broadcasting (\emph{nb}) and our solution with 1, 10 and 100 consumers
+  Required requests for \acf{nb}, \ac{nb} with caching with 1 and 100 \consumers{} and our solution with 1 and 100 \consumers{}
 }{
 }{0.7}{}
 
 
-In Figure~\ref{fig:requestsByRoles}, we take a closer look to the origin of the traffic of our approach in a space with 100 consumers.
-The communication between the \emph{Providers} and the \emph{WP} is much more infrequent than the other communication types.
+In Figure~\ref{fig:requestsByRoles}, we take a closer look to the origin of the traffic of our approach in a \Space{} with 100 \consumers{}.
+The communication between the \providers{} and the \ac{wp} is much more infrequent than the other communication types.
 The reason is that writing to a node only results in a clue update when the structure of the managed information changes.
 The first time the metadata about the node (sensor) is written, the second time the first measure and following writings, just add or replace a measure.
 Therefore, the clue does not change after the second step.
 This matches with the assumption made to share \emph{TBox} information in our clues.
 
-The communication between \emph{Consumers} and \emph{WP} is in between the other two communication patterns.
-It is greater than the one from \emph{Providers} to \emph{WP} because \emph{Consumers} need to maintain an updated view of the space.
-Recall that the update time depends on the query frequency of each \emph{Consumer}.
+The communication between \consumers{} and \ac{wp} is in between the other two communication patterns.
+It is greater than the one from \providers{} to \ac{wp} because \consumers{} need to maintain an updated view of the \Space{}.
+Recall that the update time depends on the query frequency of each \consumer{}.
 The maximum and minimum updating frequency were set to 10 and 1 minute(s) respectively.
 
-The communications between \emph{Consumers} and \emph{Providers} is most of the total communications.
-This shows that the overhead added by the use of \emph{WP} on our solution is not significant and it is justified by the reduction of the total number of communications shown in Figure~\ref{fig:requestsByStrategies}.
+The communications between \consumers{} and \providers{} assumes most of the total communications.
+This shows that the overhead added by the use of \ac{wp} on our solution is not significant and it is justified by the reduction of the total number of communications shown in Figure~\ref{fig:requestsByStrategies}.
 
 
 \InsertFig{requests_by_roles}{fig:requestsByRoles}{
-  Requests between roles in our solution in a space with 100 consumers
+  Requests between roles in our solution in a \Space{} with 100 \consumers{}
 }{
 }{0.7}{}
 
@@ -180,38 +185,39 @@ This shows that the overhead added by the use of \emph{WP} on our solution is no
 \subsection{Energy consumption}
 \label{sec:energyConsumption}
 % Idea: Lo de arriba está muy bien, pero específicamente, cómo afecta a los cacharros?
-Our solution tries to save energy by making \emph{Providers} handle fewer requests from \emph{Consumers}.
-These savings contrast to the overhead added by the communication with the \emph{WP}.
+Our solution tries to save energy by making \providers{} handle fewer requests from \consumers{}.
+These savings contrast to the overhead added by the communication with the \ac{wp}.
 However, our results have demonstrated that this overhead is small in comparison to the total number of communications.
 
 The energy consumption in mobile and embedded devices increases each time a device needs to process something or communicate with another node (see Figure~\ref{fig:energy_consumption}).
 To analyse how communications impact their energy autonomy, we have to consider not only the number of communications but also their time length (see Table~\ref{tab:measures_embedded}).
-For example, a mobile phone will consume less energy asking clues to a server than asking them to an embedded device as it has to wait longer for the response.
+For example, a mobile phone will consume less energy asking clues to a server than asking them to an embedded device as it has to wait less for the response.
 
 
 \InsertFig{energy_consumption}{fig:energy_consumption}{
-  Energy consumption for FoxG20 during different activity periods (miliwatts)
+  Average power consumption for FoxG20 during different activity periods
 }{
 }{0.8}{}
 
 
-The experiment consists of 300 nodes joined to a space running on 1 server, 30 galaxy tabs, 75 FoxG20 and 194 Xbees. % TODO marca del xbee!
+The experiment consists of 300 nodes joined to a \Space{} running on 1 server, 30 galaxy tabs, 75 FoxG20 and 194 XBees.
 We increase the number of devices as their price and capacity decrease.
-Using this approach, we mimic a typical space where cheap devices are more common.
+Using this approach, we mimic a typical \Space{} where cheap devices are more common.
 
-As shown in Figure~\ref{fig:activity_measures}, our solution reduces the activity of each device by more than 5 times compared to \emph{negative broadcasting}.
+As shown in Figure~\ref{fig:activity_measures}, our solution reduces the activity of each device by more than 5 times compared to \acl{nb}.
 The diagram on the right details the average activity for each type of device.
 
-In our solution, we can check how the load moves from the embedded devices (XBee and FoxG20) to the server (which is indeed chosen as a \emph{WP}).
+In our solution, we can check how the load moves from the embedded devices (XBee and FoxG20) to the server (which is indeed chosen as a \ac{wp}).
 The exceptional activity registered by the Galaxy Tabs is caused by their extremely high response time.
 % This implies that handling a request in the Galaxy Tab takes much longer than the average.
-However, future work will cover the change of the HTTP library used in our Android implementation to reduce this response time.
+However, future work will cover the change of the \acs{http} library used in our Android implementation to reduce this response time.
 
 
 \InsertFig{activity_measures}{fig:activity_measures}{
   Activity time for each strategy
 }{
-  In the first diagram we appreciate the average active time a node spends in each strategy. In the second one, the active time is classified by the type of device each node is running on.
+  The first part shows the average active time a node spends on each strategy.
+  The second one shows the active time classified by the type of device each node has run on.
 }{0.8}{}
 % TODO añadir a la derecha los valores en NB?
 
@@ -235,7 +241,7 @@ However, future work will cover the change of the HTTP library used in our Andro
 \subsection{Performance in Dynamic Environments}
 \label{sec:dynamic}
 We have evaluated the network usage of our solution in ordinary situations in Sections~\ref{sec:NetworkUsage} and \ref{sec:energyConsumption}.
-Nevertheless, we have not conducted simulations where the nodes frequently join and leave the space.
+Nevertheless, we have not conducted simulations where the nodes frequently join and leave the \Space{}.
 In such situation, the communication needed to manage the clues might be a burden.
 
 
@@ -247,47 +253,45 @@ In such situation, the communication needed to manage the clues might be a burde
 
 
 To assess the effect of  dynamic networks on the performance of our solution, we used the scenario presented in Section~\ref{sec:energyConsumption},
-Then, we simulate nodes joining and leaving the space at different intervals: 30 seconds, 1 minute, 5 minutes, 10 minutes, 20 minutes, 30 minutes, 45 minutes.
-Particularly, for our solution, we tested the most harmful situation: the node leaving the space abruptly is always the \emph{WP}.
+Then, we simulate nodes joining and leaving the \Space{} at different intervals: 30 seconds, 1 minute, 5 minutes, 10 minutes, 20 minutes, 30 minutes, 45 minutes.
+Particularly, for our solution, we tested the most harmful situation: the node leaving the \Space{} abruptly is always the \ac{wp}.
 We also added an scenario with no drops as a baseline.
 Note that we represent this scenario by configuring the drop-interval with a greater value than the simulation time.
 
 In Figure~\ref{fig:dynamic_situations}, we see the results of these simulations.
-These results show that even in such dynamic situations, our solution requires fewer communications than negative broadcasting.
-In our solution, most of the communications are between \emph{Consumers} and \emph{Providers}.
-To evaluate the overhead added by our solution, the right graphic shows the communications involving \emph{WPs}.
+These results show that even in such dynamic situations, our solution requires fewer communications than \acl{nb}.
+In our solution, most of the communications are between \consumers{} and \providers{}.
+To evaluate the overhead added by our solution, the right graphic shows the communications involving \acp{wp}.
 
-We can appreciate that the updates on \emph{Consumers} are independent of the number of times the \emph{WP} changes.
-We can also see a minimal change between the scenario where the \emph{WP} is always available and the one with 5 minutes drop-interval.
-In this case, when the \emph{WP} drops, many \emph{Consumers} have the latest version of the aggregated clue.
+We can appreciate that the updates on \consumers{} are independent of the number of times the \ac{wp} changes.
+We can also see a minimal change between the scenario where the \ac{wp} is always available and the one with 5 minutes drop-interval.
+In this case, when the \ac{wp} drops, many \consumers{} have the latest version of the aggregated clue.
 % Dado que se parte del que tenia el WP o del que le ha dado el consumer que le ha elegido. Ambos tienen más opciones de tener una versión actualizada.
-This situation increases the chances of getting an updated version for the initialization of the new \emph{WP}.
-Thus, it reduces the number of messages from the \emph{Providers} to the new \emph{WP}.
+This situation increases the chances of getting an updated version for the initialization of the new \ac{wp} (see Section~\ref{sec:selection}).
+Thus, it reduces the number of messages from the \providers{} to the new \ac{wp}.
 
 
 \subsection{Effects on Discovery Mechanisms}
 \label{sec:mdns}
 We want to prove the feasibility of our solution using a common discovery mechanism.
-To that end, we simulate the behavior of the \emph{Multicast DNS} (mDNS)\footnote{http://tools.ietf.org/html/draft-cheshire-dnsext-multicastdns-15}
-and \emph{DNS service discovery} (DNS-SD)\footnote{http://tools.ietf.org/html/draft-cheshire-dnsext-dns-sd-11} protocols.
-Both protocols are based on the well known and widely accepted Domain Name System protocol (DNS).
+To that end, we simulate the behavior of the \ac{mdns} and \ac{dns-sd}\footnote{\url{http://tools.ietf.org/html/rfc6763}} protocols.
+Both protocols are based on the well known and widely accepted \ac{dns}.
 
-On the one hand, DNS-SD proposes the use of the data field of TXT records to share key/values.
+On the one hand, \ac{dns-sd} proposes the use of the data field of TXT records to share key/values.
 We use these records to share the information needed by the selection algorithm among the nodes.
 
-On the other hand, mDNS defines how this and other records are shared through UDP multicast (or unicast in certain situations).
-We ignore the cost of browsing the nodes to discover new nodes because is equal for both strategies.
-% TODO ENERO IG este frase del however no enlaza demasiado bien con la anterior
-However, as explained above, our strategy does differ from \emph{Negative Broadcasting} in the use of TXT records.
+On the other hand, \ac{mdns} defines how this and other records are shared through UDP multicast (or unicast in certain situations).
+We ignore the cost of browsing the nodes to discover new nodes because is the same for both strategies.
+However, note that as explained above, our strategy does differ from \acl{nb} in the use of TXT records.
 
 The nodes announce records during the start up or whenever they have a resource record with new data.
 Therefore, each time a record is updated, we send a multicast message that increases the network traffic.
 In our solution the TXT record may change 
-(1) when a new \emph{WP} is selected or
-(2) when we update the time elapsed since it joined the space and its battery charge level.
-The last two parameters need to be updated to select an appropriate \emph{WP} but they do not need to change too frequently.
+(1) when a new \ac{wp} is selected or
+(2) when we update the time elapsed since it joined the \Space{} and its battery charge level.
+The last two parameters need to be updated to select an appropriate \ac{wp} but they do not need to change too frequently.
 
 % Regarding the first case,  % no pillo la introduccion del first case
-In the most static scenario the TXT record is only written once.
-The more dynamic scenario from the previous section, one on the contrary, updates that record 126 times after writing it for the first time.
+In the most static scenario the TXT record is written only once.
+The more dynamic scenario from the previous section, on the contrary, updates that record 126 times after writing it for the first time.
 This demonstrates that the overhead generated on the discovery system by our solution is minimal even in the worst-case scenario.

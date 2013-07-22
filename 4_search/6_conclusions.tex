@@ -1,19 +1,24 @@
 \section{Conclusion}
 \label{conclusion}
 
-In this chapter, we have presented a dynamic architecture to enhance the search of semantic contents in the Web of Things.
+In this chapter, we have presented a dynamic architecture to enhance the search of semantic contents in the \acl{wot}.
 %  by any node part of the Web of Things.
 In particular, this architecture chooses an intermediary according to its capabilities to support resource constrained devices.
-Intermediaries can use different types of clues to summarize the information in the semantic space.
+Intermediaries can use different types of clues to summarize the information in the semantic \Space{}.
 % managed by the nodes belonging to a space.
 Thanks to this support, the devices can directly interrogate others to obtain fresh information while reducing their semantic overhead.
 
-Our evaluations show that our solution requires less communication messages between devices than a flooding-based strategy.
+% Esto lo he cambiado porque Ipiña decía que habría que volver a aclarar porqué lo he comparado con flooding en la conclusión (por si alguien no se ha leído el paper ;-))
+The main characteristic of our solution is the ability of the devices to share semantic data directly, no matter how simple they are. % o algo como guides our design
+Under this assumption, a flooding-based strategy would obtain a high recall. % or a high fraction of relevant answers (por si no se entiende aún que es recall)
+However, our evaluation shows that our solution requires less messages between devices than a flooding-based strategy (i.e. is far more precise).
+% he puesto more para que no tenga la acepción peyorativa de "many" (no se requieren muchísimos más para que sea mejor)
+Even if we use caching strategies to alleviate these effects, our solution performs better for scenarios with more data consumers and query types.
 In addition, our approach reduces the workload of mobile and embedded devices which indirectly results into energy savings.
 
 % Para trabajo futuro, se podría considerar: 
 % query optimization y citar a alguna solución de distributed triple stores
-For our future work, we intent to further assess the proposed solution in a real deployment.
-In addition, we will consider using query optimization techniques and reconciliation of query results in the \emph{Providers}.
+% TODO poner algo más acorde con el related work actual!
+For our future work, we will consider using query optimization techniques in the \providers{}.
 Using these techniques, we could a) transform the queries before sending them to obtain more results
 and b) refine the results.
