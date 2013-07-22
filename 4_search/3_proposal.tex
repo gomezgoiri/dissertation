@@ -482,16 +482,15 @@ We show an example in Listing \ref{list:oneClue}.
 It first defines the prefixes used and gives them a name and then, it specifies the URI endings for each prefix.
 
 \begin{listing}
-  \begin{minted}[frame=single, framesep=3mm, linenos=true, xleftmargin=21pt, tabsize=4]{js}
-  {
-    "s": [[
-      "so",
-      "http://knoesis.wright.edu/ssw/ont/sensor-observation.owl#"
-    ]],
-    "p": {
-      "so": ["result", "procedure",
-		  "observedProperty", "samplingTime"]
-  }  }
+  \begin{minted}[fontsize=\scriptsize, frame=single, framesep=3mm, linenos=true, xleftmargin=21pt, tabsize=4]{js}
+{
+  "s": [
+    [ "so", "http://knoesis.wright.edu/ssw/ont/sensor-observation.owl#" ]
+  ],
+  "p": {
+    "so": ["result", "procedure", "observedProperty", "samplingTime"]
+  }
+}
   \end{minted}
   \caption{
     Representation of a predicate-based \clue{} in JSON.
@@ -513,23 +512,26 @@ Finally, for each node, each prefix is related with the URI endings.
 
 % TODO sacar un ejemplo real? poner esquematicamente?
 \begin{listing}
-  \begin{minted}[frame=single, framesep=3mm, linenos=true, xleftmargin=21pt, tabsize=4]{js}
-  {
-    "i": 1,
-    "g": 2435467,
-    "v": 556,
-    "s": [
-	  ["dc", "http://purl.org/dc/elements/1.1/"],
-	  ["dul", "http://www.loa.istc.cnr.it/ontologies/DUL.owl#"],
-	  ["ssn", "http://purl.oclc.org/NET/ssnx/ssn#"] ],
-    "p": {
-      "node1": {
-	"ssn": ["observedBy", "observationResult"],
-	"dul": ["isClassifiedBy"] },
-      "node0": {
-	"ssn": ["observes"],
-	"dc": ["description"]
-  } } }
+  \begin{minted}[fontsize=\footnotesize, frame=single, framesep=3mm, linenos=true, xleftmargin=21pt, tabsize=4]{js}
+{
+  "i": 1,
+  "g": 2435467,
+  "v": 556,
+  "s": [
+    ["dc", "http://purl.org/dc/elements/1.1/"],
+    ["dul","http://www.loa.istc.cnr.it/ontologies/DUL.owl#"],
+    ["ssn", "http://purl.oclc.org/NET/ssnx/ssn#"] ],
+  "p": {
+    "node1": {
+      "ssn": ["observedBy", "observationResult"],
+      "dul": ["isClassifiedBy"]
+    },
+    "node0": {
+      "ssn": ["observes"],
+      "dc": ["description"]
+    }
+  }
+}
   \end{minted}
   \caption{
     Representation of an aggregated clue in JSON.
