@@ -369,16 +369,15 @@ This means that a developer using the middleware cannot assume:
   \item The inference process on data consumers.
         Another alternative or complement for inferring data on the providers is to do it in the consumers after receiving the responses.
         Again, it is a desirable property, but our middleware does not require it.
+        % también out of the scope: razonamiento distribuído
   \item General use of more complex query languages.
         Their expressibility benefits the network performance since they can restrict the results returned.
         However, parsing them is not be trivial and consequently parsing libraries are unavailable for some platforms.
         Therefore, a provider cannot assume that providers know how to process something beyond the wildcard based templates.
         As an alternative, providers can decompose these queries in simpler wildcard based templates and locally process the results afterwards (filtering them).
         % This is out of the scope.
-	% TODO \subsection{Querying Distributedly over the Space} => optamos por no meternos en jardines y up to the middleware implementer to decide each ;-)
-	% condiciones relajadas: consistencia, razonamiento distribuído
-	% out of the scope: cómo implementarlo
-	% optaremos por lo más sencillo
+	% Querying Distributedly over the Space => optamos por no meternos en jardines y up to the middleware implementer to decide each ;-)
+	% más en el capítulo 4
 \end{itemize}
 
 
@@ -418,6 +417,10 @@ On the other hand, we contribute to energy saving minimizing network usage (i.e.
   \item The searching mechanism improves \emph{recall} and \emph{precision} (see Chapter~\ref{cha:searching}).
 \end{itemize}
 
+
+
+% TODO TODO TODO valorar meter algo del teorema CAP (Consistencia, Availability, Partition Tolerance) de Brewer
+% relajas consistencia por PT
 
 
 \subsection{Summary}
