@@ -331,11 +331,12 @@ A \consumer{} directly queries the information to the selected \providers{}.
 This selection is done using the \clues{} described in the rest of the Section.
 However, in this section we explain how \consumers{} directly query for information to the selected \providers{}.
 
-We assume that \providers{} offer a HTTP endpoint which accepts queries.
-Whether this endpoint redirects the requests to the RDF graph which describes a specific resource,
-it creates a response with RDF triples belonging to different resources or
+We assume that \providers{} offer a \ac{http} \ac{api} which accepts queries. % API o endpoint?
+Whether this \ac{api} redirects the requests to the \ac{rdf} graph which describes a specific resource,
+it creates a response with \ac{rdf} triples belonging to different resources or
 it offers hyperlinks to the relevant graphs is transversal to our solution.
-The design of this endpoint is also out of the scope of this paper, but it should be the same in all the providers.
+There is only one requirement regarding this \ac{api}: all the \consumers{} and \providers{} must agree on it.
+In the context of this thesis, this \ac{api} corresponds with the one defined in Chapter~\ref{cha:tsc}.
 
 % explicar query templates
 To perform the queries, which enable the selection of a subset of the semantic content hold in a given \Space{}, we require a \textbf{template}.
