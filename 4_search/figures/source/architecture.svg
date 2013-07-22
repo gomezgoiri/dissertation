@@ -13,7 +13,7 @@
    height="300.01022"
    id="svg2"
    version="1.1"
-   inkscape:version="0.48.3.1 r9886"
+   inkscape:version="0.48.4 r9939"
    sodipodi:docname="architecture.svg"
    inkscape:export-filename="architecture.png"
    inkscape:export-xdpi="90"
@@ -106,7 +106,7 @@
      showgrid="false"
      inkscape:window-width="1680"
      inkscape:window-height="995"
-     inkscape:window-x="-3"
+     inkscape:window-x="-2"
      inkscape:window-y="-3"
      inkscape:window-maximized="1"
      fit-margin-top="0"
@@ -121,7 +121,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -159,7 +159,7 @@
        sodipodi:cy="63.927917"
        sodipodi:rx="92.934036"
        sodipodi:ry="34.850262"
-       d="m 430.325,63.927917 a 92.934036,34.850262 0 1 1 -185.86808,0 92.934036,34.850262 0 1 1 185.86808,0 z" />
+       d="m 430.325,63.927917 c 0,19.247269 -41.60799,34.850262 -92.93404,34.850262 -51.32605,0 -92.93404,-15.602993 -92.93404,-34.850262 0,-19.247268 41.60799,-34.850261 92.93404,-34.850261 51.32605,0 92.93404,15.602993 92.93404,34.850261 z" />
     <text
        xml:space="preserve"
        style="font-size:27.24637604px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:DejaVu Serif;-inkscape-font-specification:Sans Bold"
@@ -171,7 +171,7 @@
          id="tspan3761-5"
          x="882.64044"
          y="113.49813"
-         style="font-size:18px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Frutiger;-inkscape-font-specification:Frutiger Bold">White page</tspan></text>
+         style="font-size:18px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Frutiger;-inkscape-font-specification:Frutiger">White page</tspan></text>
     <path
        sodipodi:type="star"
        style="fill:#635fd8;fill-opacity:1;stroke:none"
@@ -200,7 +200,7 @@
          id="tspan3761-5-1"
          x="886.96417"
          y="237.08035"
-         style="font-size:18px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Frutiger;-inkscape-font-specification:Frutiger Bold">Clues</tspan></text>
+         style="font-size:18px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Frutiger;-inkscape-font-specification:Frutiger">Clues</tspan></text>
     <path
        sodipodi:type="star"
        style="fill:#635fd8;fill-opacity:1;stroke:none"
@@ -311,7 +311,7 @@
          id="tspan3761-5-1-8"
          x="885.90094"
          y="155.46637"
-         style="font-size:18px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Frutiger;-inkscape-font-specification:Frutiger Bold">Consumer</tspan></text>
+         style="font-size:18px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Frutiger;-inkscape-font-specification:Frutiger">Consumer</tspan></text>
     <path
        sodipodi:type="star"
        style="fill:#635fd8;fill-opacity:1;stroke:none"
@@ -413,8 +413,8 @@
          sodipodi:role="line"
          x="141.16191"
          y="100.32903"
-         style="font-size:18px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Frutiger;-inkscape-font-specification:Frutiger Bold"
-         id="tspan4816">gets clues</tspan></text>
+         style="font-size:18px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Frutiger;-inkscape-font-specification:Frutiger"
+         id="tspan4816">get clues</tspan></text>
     <path
        sodipodi:type="star"
        style="fill:#67b42b;fill-opacity:1;stroke:none"
@@ -462,7 +462,7 @@
          id="tspan3761-5-1-8-2"
          x="885.62183"
          y="198.48157"
-         style="font-size:18px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Frutiger;-inkscape-font-specification:Frutiger Bold">Provider</tspan></text>
+         style="font-size:18px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Frutiger;-inkscape-font-specification:Frutiger">Provider</tspan></text>
     <path
        sodipodi:type="star"
        style="fill:#67b42b;fill-opacity:1;stroke:none"
@@ -515,7 +515,7 @@
          sodipodi:role="line"
          x="443.75967"
          y="139.72498"
-         style="font-size:18px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Frutiger;-inkscape-font-specification:Frutiger Bold"
+         style="font-size:18px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Frutiger;-inkscape-font-specification:Frutiger"
          id="tspan4816-4">send clues</tspan></text>
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-mid:none;marker-end:url(#Arrow2Lend)"
@@ -609,7 +609,7 @@
          sodipodi:role="line"
          x="597.32812"
          y="105.06024"
-         style="font-size:18px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Frutiger;-inkscape-font-specification:Frutiger Bold"
+         style="font-size:18px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Frutiger;-inkscape-font-specification:Frutiger"
          id="tspan4816-4-4">make clues</tspan></text>
     <path
        sodipodi:type="arc"
@@ -619,7 +619,7 @@
        sodipodi:cy="224.03709"
        sodipodi:rx="10.101525"
        sodipodi:ry="10.101525"
-       d="m 682.86312,224.03709 a 10.101525,10.101525 0 1 1 -20.20305,0 10.101525,10.101525 0 1 1 20.20305,0 z"
+       d="m 682.86312,224.03709 c 0,5.57892 -4.5226,10.10153 -10.10152,10.10153 -5.57892,0 -10.10153,-4.52261 -10.10153,-10.10153 0,-5.57891 4.52261,-10.10152 10.10153,-10.10152 5.57892,0 10.10152,4.52261 10.10152,10.10152 z"
        transform="matrix(1.3334929,0,0,1.3334929,-69.079483,-23.382297)" />
     <text
        xml:space="preserve"
@@ -632,7 +632,7 @@
          id="tspan3761-5-1-8-2-7"
          x="885.06622"
          y="278.25827"
-         style="font-size:18px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Frutiger;-inkscape-font-specification:Frutiger Bold">Semantic data</tspan></text>
+         style="font-size:18px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Frutiger;-inkscape-font-specification:Frutiger">Semantic data</tspan></text>
     <path
        style="fill:none;stroke:#828282;stroke-width:4;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
        d="m 762.60426,85.463451 0,208.091429"
@@ -654,7 +654,7 @@
          sodipodi:role="line"
          x="291.14542"
          y="273.06509"
-         style="font-size:18px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Frutiger;-inkscape-font-specification:Frutiger Bold"
-         id="tspan4816-9">directly access to data</tspan></text>
+         style="font-size:18px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Frutiger;-inkscape-font-specification:Frutiger"
+         id="tspan4816-9">direct access to data</tspan></text>
   </g>
 </svg>

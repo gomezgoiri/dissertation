@@ -1,7 +1,7 @@
 \section{Energy-aware super-peer architecture} % pensar titulo más sexy
 \label{proposal}
 
-% In this section, we discuss the content the clues should contain to make them suitable to the WoT;
+% In this section, we discuss the content the clues should contain to make them suitable to the \ac{wot};
 % we explain in detail the roles the nodes of our solution can have;
 % we overview the deployment issues related to these roles, such as discovery or role transition;
 % and we discuss how our solution can adapt multiple scenarios.
@@ -18,27 +18,26 @@
 % AG: En su mayor parte no, pero habría algunas cosas que se simplificarían (e.g. comunicación con un grupo de nodos)
 
 %   + Vinculo rapido con la intro (1 o 2 frases) % igual también con el related work
-In a semantic WoT, nodes are part of a network where they share semantically described information.
+In a semantic \ac{wot}, nodes are part of a network where they share semantically described information.
 %   + Mencionar el uso de espacios
-These nodes gather their information in spaces which are useful to create AmI environments.
+These nodes gather their information in \Spaces{} which are useful to create \ac{ami} environments.
 
 %   + Introducir ejemplo de hotel
-For example, a hotel can create its own semantic space with the semantically described information of its services and the data provided by devices (e.g., sensors) spread around the hotel.
+For example, a hotel can create its own semantic \Space{} with the semantically described information of its services and the data provided by devices (e.g., sensors) spread around the hotel.
 Thus, clients can use their own personal devices (e.g., smartphones) to interact with the devices of the hotel and search useful information.
-Using this approach, a client can check the current swimming pool occupancy rate using his personal mobile phone.
-% TODO este ejemplo anterior, como lo harias mas molon con semantica? search?
+Using this approach, a client, for example, can check the current swimming pool occupancy rate using his personal mobile phone.
 
 However, not all devices can afford the costs of fully managing the additional overhead of semantics.
 In this section, we present our architecture to manage such environments and deal with the limitations of resource-constrained devices.
 
 \subsection{Basic roles}
-As we introduced before, devices can be part of one or multiple spaces.
-A device can provide data (\emph{Providers}) consume data (\emph{Consumers}) or both at the same time.
+As we introduced before, devices can be part of one or multiple \Spaces{}.
+A device can provide data (\providers{}), consume data (\consumers{}) or both at the same time.
 
 \begin{description}
 \item[Providers:]
 This is the simplest role which any device in our system can carry out, even the smallest sensor.
-Providers must manage their own semantic information.
+\providers{} must manage their own semantic information.
 In particular, they must organize triples in RDF graphs.
 \item[Consumers:]
 This is the role a device must take to get information from the system.
@@ -46,13 +45,13 @@ These devices need to be able to use semantics to find the data they require.
 \end{description}
 
 Note that a device could hold just one or both roles at the same time or switch between them.
-For example, a \emph{Provider} could become a \emph{Consumer} to get data from the system or a \emph{Consumer} could stop asking for data.
+For example, a \provider{} could become a \consumer{} to get data from the system or a \consumer{} could stop asking for data.
 % Cambios de roles:
 % To Consumer: try to read something from the network. => evidente
 % To not-consumer: "t" without querying anything (it does not worth to update the clues if we won't query).
 
 
-\subsection{Use of Intermediaries: White Pages}
+\subsection{Use of Intermediaries: \acl{wp}}
 %   + Intermediaries
 %   + Necesidad de tener white pages, mención de roles. => subsección N
 Tasks involving the use of semantics can be expensive for some devices.
@@ -60,7 +59,7 @@ To reduce the load on such resource-constrained devices, we need to use intermed
 % No hacen tareas por ellos, más bien les evitan hacerlas.
 %   + Por que queremos que ellos administren su info?
 However, we do not want devices to completely rely on intermediaries for three reasons:
-(1) data consumers need to get fresh data and we can only get this by direct access to the actual \emph{Provider},
+(1) data consumers need to get fresh data and we can only get this by direct access to the actual \provider{},
 % We aim to promote the direct communication between devices to ensure that freshness of the information shared.
 (2) we must support mobile scenarios where personal devices carry their own data,
 %   + Explicar un poco la naturaleza dinámica de los escenarios (sensores que entran y salen del sistema)
@@ -68,36 +67,36 @@ However, we do not want devices to completely rely on intermediaries for three r
 and (3) we need to reduce the maintenance complexity (nodes may join or leave at any time).
 
 For these reasons, we cannot rely on intermediaries to host and provide \emph{all} the semantic information.
-However, we use intermediaries as searching enablers in the semantic space.
-This kind of intermediary is what we call \emph{White Pages (WPs)}.
+However, we use intermediaries as searching enablers in the semantic \Space{}.
+This kind of intermediary is what we call \acl{wp}.
 
-\emph{WPs} manage indices or \emph{clues} about the information shared by others.
-The \emph{Consumers} rely on \emph{WPs} to enhance the search process and reduce the number of requests generated.
-Consequently, the \emph{Providers} process less semantic data and reduce their overall overhead.
+\acp{wp} manage metadata or \clues{} about the information shared by others.
+The \consumers{} rely on \acp{wp} to enhance the search process and reduce the number of requests generated.
+Consequently, the \providers{} process less semantic data and reduce their overall overhead.
 Thus, our architecture enables an intermediary-aided energy-aware information search.
 
 
-\InsertFig{architecture}{fig:networkTraffic}{
+\InsertFig{architecture}{fig:solutionArchitecture}{
   Role of White Pages in our proposal
 }{}{0.8}{}
 
 
-Figure~\ref{fig:networkTraffic} shows the role of \emph{WPs} in our proposal.
-In particular, \emph{WPs} manage clues which summarize the semantic information shared by the \emph{Providers}.
-These \emph{clues} are pieces of information useful to determine which nodes can answer to a certain query.
-\emph{Consumers} use these \emph{clues} to directly access the semantic information on the \emph{Providers}.
-Summarizing, the main tasks of a \emph{WP} are:
+Figure~\ref{fig:solutionArchitecture} shows the role of \acp{wp} in our proposal.
+In particular, \acp{wp} manage \clues{} which summarize the semantic information shared by the \providers{}.
+These \clues{}, which are described in detail in Section~\ref{sec:clues}, are pieces of information useful to determine which nodes can answer to a certain query.
+\consumers{} use these \clues{} to directly access the semantic information on the \providers{}.
+Summarizing, the main tasks of a \ac{wp} are:
 \begin{itemize}
- \item Manage the clues sent by all the nodes in the system.
- \item Aggregate clues sent by \emph{Providers} in a unique response.
- \item Reply to requests from \emph{Consumers} with aggregated clues or a list of nodes (details in Section~\ref{sec:interacting}).
+ \item Manage the \clues{} sent by all the nodes in the system.
+ \item Aggregate clues sent by \providers{} in a unique response.
+ \item Reply to requests from \consumers{} with aggregated clues or a list of nodes (details in Section~\ref{sec:interacting}).
 \end{itemize}
  % debería haber un único \emph{WP} o varios? AG: Optaría por 1 para simplificar.
  % Dependiendo de eso, puede ser más complejo mantener una visión común de los clues de todos
  % (con algún algoritmo de gossiping?)
  % Para simplificar el merging de los differentes gossipings agregados se podría hacer: 1 master, N slaves.
 
-\emph{WPs} only store clues for a period and they expire afterwards.
+\acp{wp} only store \clues{} for a period and they expire afterwards.
 Using this approach, we avoid storing information from no longer available nodes.
 
 % Si hubiese que dar detalles de implementación, había pensado en Redis para el \emph{WP} a poner en un server o cluster
@@ -110,43 +109,40 @@ Using this approach, we avoid storing information from no longer available nodes
 %  hacer.
 
 
-% TODO ENERO nueva version
-% TODO lo he movido para que no rompa el flujo
 \subsection{Versioning Clues}
-As previously explained, the \emph{WP} aggregates clues sent by \emph{Providers}.
+As previously explained, the \ac{wp} aggregates clues sent by \providers{}.
 This aggregation is versioned using a \emph{version number} and a \emph{generation number}.
-The \emph{version number} increases each time the \emph{WP} receives a new clue.
-The \emph{generation number} ($g_{id}$) is a timestamp that represents the moment a new \emph{WP} was chosen.
+The \emph{version number} increases each time the \ac{wp} receives a new clue.
+The \emph{generation number} ($g_{id}$) is a timestamp that represents the moment a new \ac{wp} was chosen.
 This requires the clocks to be synchronized in all the nodes to avoid problems.
-In any case, the \emph{WP} must guarantee that the $g_{id}$ is higher than the one used by a previous \emph{WP}.
+In any case, the \ac{wp} must guarantee that the $g_{id}$ is higher than the one used by a previous \ac{wp}.
 
-The \emph{WP} maintains two version numbers:
+The \ac{wp} maintains two version numbers:
 (1) the one used during the setup to do the first load (\emph{setup version}) and
 (2) the version of the last aggregated clue.
 The first one is shared through the discovery mechanism.
-The second one is shared with both \emph{Providers} and \emph{Consumers} in HTTP responses.
-The versioning is used to improve the \emph{WP} selection process explained in Section~\ref{sec:selection}.
+The second one is shared with both \providers{} and \consumers{} in \acs{http} responses.
+The versioning is used to improve the \ac{wp} selection process explained in Section~\ref{sec:selection}.
 
 
-\subsection{Discovering a White Page}
+\subsection{Discovering a \acl{wp}}
 % He matizado la frase para que no se entienda que los Consumer SIEMPRE dependen de los WP. Sólo para actualizar clues.
 % AG: te has empeñado en quitar el matiz de que "sólo" al principio está vendido a la existencia de un WP :-)
-In our architecture, when a \emph{Consumer} joins the space it relies on a \emph{WP} to find information.
-Hence, the first thing a node needs to do afterwards is discovering who is the \emph{WP} in that space.
+In our architecture, when a \consumer{} joins the \Space{} it relies on a \ac{wp} to find information.
+Hence, the first thing a node needs to do afterwards is discovering who is the \ac{wp} in that \Space{}.
 
 To run our proposal, we require a discovery system able to
-(1) get the spaces which a particular node belongs,
-(2) identify the \emph{WP} in the system and its \emph{setup version}, and
-(3) provide additional information about nodes to decide which one can be the next \emph{WP}.
+(1) get the \Spaces{} that a particular node belongs to,
+(2) identify the \ac{wp} in the system and its \emph{setup version}, and
+(3) provide additional information about nodes to decide which one can be the next \ac{wp}.
 To implement our architecture, the information about the nodes must include:
-battery level, available memory, storage space, connection time, and if they have been active in the last period.
+% Estos parámetros se vuelven a explicar en la sección de "Selección de WP"!
+battery level, available memory, storage space and the approximate time passed since the node joined the \Space{} for the last time (to estimate its reliability).
 
-How to discover the nodes in the space is transversal to the architecture presented.
-We could either extend approaches like UPnP, mDNS or lmDNS \citep{jara_light-weight_2012} or use HTTP, CoAP and DNS together as proposed by \citet{ishaq_facilitating_2012}.
-In particular, in Section~\ref{sec:mdns} we use mDNS to evaluate our solution.
-% IG no entiendo lo del discovery strategy, que se intenta decir
-% to demonstrate its feasibility with a particular discovery strategy.
-% TODO ENERO habia un revisor que dijo:
+How to discover the nodes in the \Space{} is transversal to this paper.
+We could either extend approaches like \ac{upnp}, \ac{mdns}\footnote{\url{http://tools.ietf.org/html/rfc6762}} or lmDNS \citep{jara_light-weight_2012} or use \acs{http}, \ac{coap}\footnote{\url{https://datatracker.ietf.org/doc/draft-ietf-core-coap/}} and \ac{dns} together as proposed by \citet{ishaq_facilitating_2012}.
+In particular, in Section~\ref{sec:mdns} we use \ac{mdns} to evaluate our solution.
+% En la primera ronda de revisiones hubo un revisor que dijo:
 %  "How does the system receive the information about the battery level, available memory?
 %   The authors justify that this is out the scope of this paper, but it is important to know
 %   the potential overhead introduced in these processes."
@@ -158,13 +154,13 @@ In particular, in Section~\ref{sec:mdns} we use mDNS to evaluate our solution.
 % - Which is the topology of the network?
 % It is hard to evaluate the proposed solution in terms of overhead and energy consumption for performing necessary tasks (WP discovery, WP selection, clues updates,...)
 % without any knowledge of the network. Are there wired/fixed nodes? Are WP infrastructural nodes? Are the wireless nodes connected through multihop paths?
-Note that we assume that any node in the space can reach the other nodes.
+Note that we assume that any node in the \Space{} can reach the other nodes.
 In particular, we assume IP addressability (no matter whether the node is wired or wireless).
-As a consequence, to use devices from Wireless Sensor Networks (e.g., Zigbee or 6LoWPAN) as \emph{Providers}, one should rely on gateways.
+As a consequence, to use devices from Wireless Sensor Networks (e.g., Zigbee or 6LoWPAN) as \providers{}, one should rely on gateways.
 
 % IG el CoAP multicast no tiene una utilidad diferente a lo q se habla?
 % Se podría usar UPnP, mDNS o  incluso lo propuesto por Jara (lmDNS).
-% También se podría usar multicast CoAP (e.g. los que respondan a /\emph{WP} o /consumers)
+% También se podría usar multicast CoAP (e.g. los que respondan a /\ac{wp} o /consumers)
 
 
 % Partimos de la base de que el sistema de descubrimiento nos ha descubierto a otros nodos y los siguientes datos acerca de ellos:
@@ -183,42 +179,42 @@ As a consequence, to use devices from Wireless Sensor Networks (e.g., Zigbee or 
 % Jara habla de 80 bytes en 6LoWPAN, probablemente tampoco nos orientemos a cacharros tan peques, pero oye, por comentarlo...
 
 
-\subsection{Interacting with a White Page}
+\subsection{Interacting with a \acl{wp}}
 \label{sec:interacting}
-When a node needs to access a piece of information, it asks the \emph{WP} for the information about the other devices in the space.
+When a node needs to access a piece of information, it asks the \ac{wp} for the information about the other devices in the \Space{}.
 Using this information, the node can find the owner of the required data and ask it for this information.
 
-In our architecture, \emph{Providers} and \emph{Consumers} have additional duties.
+In our architecture, \providers{} and \consumers{} have additional duties.
 
 \noindent\textbf{Providers.}
-They manage their own semantic information and generate \emph{clues} about the information they host.
-Then, they send these \emph{clues} to the space \emph{WP}.
+They manage their own semantic information and generate \clues{} about the information they host.
+Then, they send these \clues{} to the \Space{} \ac{wp}.
 As a response, they receive the last version of the aggregated clue they have contributed to.
-\emph{Providers} will send their \emph{clues} to the \emph{WP}
+\providers{} will send their \clues{} to the \ac{wp}
 (1) every time a \emph{clue} is updated,
 (2) before the lifetime of a \emph{clue} expires, or
-(3) whenever there is a new \emph{WP} in the space with a lower \emph{setup version} than the one in the \emph{Provider}.
-Note that \emph{clues} do not change frequently since they represent the type of the information the nodes host rather than the specific data which is constantly generated.
+(3) whenever there is a new \ac{wp} in the \Space{} with a lower \emph{setup version} than the one in the \provider{}.
+Note that \clues{} do not change frequently since they represent the type of information the nodes host rather than the specific data which is constantly generated.
 
 \noindent\textbf{Consumers.}
-When a \emph{Consumer} needs to get information from the system, it first needs to find the \emph{WP} in the space and use this \emph{WP} to obtain an aggregated clue of all the nodes.
-Then, they process this aggregated clue to decide which are the nodes to query.
-They use a RESTful approach to send this query.
+When a \consumer{} needs to get information from the system, it first needs to find the \ac{wp} in the \Space{} and use this \ac{wp} to obtain an aggregated clue of all the nodes.
+Then, it processes this aggregated clue to decide which are the nodes to query.
+Finally, it sends the query through \acs{http} requests.
 
 They perform this process synchronously for the first query and periodically in an asynchronous manner for the following ones.
 % cada cuanto? arbitrario? que lo decida en base a parámetros de funcionamiento? => Mi propuesta abajo
-This period should have an upper limit to ensure a fresh view of the space and a lower limit to guarantee that the \emph{WPs} are not flood.
+This period should have an upper limit to ensure a fresh view of the \Space{} and a lower limit to guarantee that the \ac{wp} is not flooded.
 To adjust the update frequency within these two limits, we evaluate the frequency of the last 10 requests to that node.
-Thus, the view of the space will be fairly up to date when the \emph{Consumer} processes the next query.
+Thus, the view of the \Space{} will be fairly up to date when the \consumer{} processes the next query.
 % TODO Añadir mejora: cuando se detecta un nuevo nodo por el mecanismo de descubrimiento, esperas un poco y actualizas clue para ver si ya ha enviado su info al WP.
 % Mejora de la mejora: exclusivamente preguntas por la clue de el/los nuevo/s nodo/s detectado/s. Asi envias un JSON más peque.
 
 \noindent\textbf{Optimizations for resource constrained devices.}
-Note that \emph{Providers} will update the \emph{WPs} with new information and \emph{Consumers} will periodically check the \emph{WPs}.
-Using this approach, the \emph{WPs} reduce the network load and in particular, they decrease the load for resource constrained devices.
+Note that \providers{} will update the \ac{wp} with new information and \consumers{} will periodically check the \ac{wp}.
+Using this approach, the \ac{wp} reduces the network load and in particular, it decreases the load for resource constrained devices.
 
 In addition, \emph{aggregated clues} can be too long for some really limited devices.
-As an optimization for such devices, the \emph{WP} is able to answer specifically the node to address a query.
+As an optimization for such devices, the \ac{wp} is able to answer specifically the node to address a query.
 Thus, these nodes will only maintain a list of the nodes they should ask for several predefined queries.
 
 % Limitar la información enviada también a otros nodos?
@@ -226,43 +222,44 @@ Thus, these nodes will only maintain a list of the nodes they should ask for sev
 % Aunque esto es justo lo que hay que discutir en el apartado de evaluación de clues...
 
 
-\subsection{Selecting a White Page}
+\subsection{Selecting a \acl{wp}}
 \label{sec:selection}
 %   + Que queremos solucionar => subsección K (tipos de sistemas)
-Depending on the setup, having a dedicated \emph{WP} (e.g., a high-end server) can be too expensive.
-For example, in a domestic environment, it is not worth dedicating a full server to be a \emph{WP}.
+Depending on the setup, having a dedicated \ac{wp} (e.g., a high-end server) can be too expensive.
+For example, in a domestic environment, it is not worth dedicating a full server to be a \ac{wp}.
 However, when we have a large setup (e.g., a hotel), it is convenient to dedicate a few servers to decrease the load in small devices.
 %   + Necesidad de que esos roles sean algo dinámico y el problema que ello presenta
 %      (descubrimiento, pero sobre todo selección) => subsección M
 
-We must be able to manage the complexity of a system composed by heterogeneous devices.
-For example, making a small device a \emph{WP} may be inappropriate in highly populated environments.
+We have to be able to manage the complexity of a system composed by heterogeneous devices.
+For example, making a small device a \ac{wp} may be inappropriate in highly populated environments.
 On the contrary, having multiple dedicated servers implies a high management overhead which is unnecessary in simple environments.
-Our architecture is flexible and any node can be a \emph{Provider}, a \emph{Consumer}, a \emph{WP} or any of there at the same time.
+Our architecture is flexible and any node can be a \provider{}, a \consumer{}, a \ac{wp} or any of them at the same time.
 
-\noindent\textbf{When does the \emph{WP} selection start?}
-The selection process can start (1) when no \emph{WP} is available or (2) when the current \emph{WP} gets a worse score than other nodes.
-In the first case, the first node to realize there is no \emph{WP} starts the selection process.
-In the second case, the current \emph{WP} periodically checks if there is another node with a better score.
+\noindent\textbf{When does the \ac{wp} selection start?}
+The selection process can start (1) when no \ac{wp} is available or (2) when the current \ac{wp} gets a worse score than other nodes.
+In the first case, the first node to realize there is no \ac{wp} starts the selection process.
+In the second case, the current \ac{wp} periodically checks if there is another node with a better score.
 If this actually happens, it starts the process.
 We limit the frequency for this checking to avoid the overhead associated with this change.
 
-\noindent\textbf{How to select a WP?}
-The node in charge of selecting a \emph{WP} retrieves information of available nodes using the discovery mechanism.
-It ranks them, selects the top one, and informs it that it should become a \emph{WP}.
+\noindent\textbf{How to select a \acs{wp}?}
+The node in charge of selecting a \ac{wp} retrieves information of available nodes using the discovery mechanism.
+It ranks them, selects the top one, and informs it that it should become a \ac{wp}.
 If a selected node rejects the new role, the selector chooses the next one on the ranking.
 
-The node in charge of the selection sends its aggregated clue to the new \emph{WP}.
-If this aggregated clue is fresher than the one in the \emph{WP}, the \emph{WP} will use this one.
-Otherwise, the \emph{WP} will use its own.
-In case there is no previous aggregated clue, the new \emph{WP} will start from scratch (version to -1).
-Once the node becomes the new \emph{WP}, it notifies the version used to initialize to the discovery system.
-Doing so, \emph{Providers} will realize if they must send their clue again because it is not included in the aggregation provided by the \emph{WP}.
+The node in charge of the selection sends its aggregated clue to the new \ac{wp}.
+If this aggregated clue is fresher than the one in the \ac{wp}, the \ac{wp} will use this one.
+Otherwise, the \ac{wp} will use its own.
+In case there is no previous aggregated clue, the new \ac{wp} will start from scratch (version to -1).
+Once the node becomes the new \ac{wp}, it notifies the version used to initialize the discovery system.
+Doing so, \providers{} will realize if they must send their \clue{} again because it is not included in the aggregation provided by the \ac{wp}.
 
-Note that the discovery mechanism must provide the following information to the selection algorithm:
+% aclarado que facilitará esa información de cada nodo activo en el espacio
+Note that the discovery mechanism must provide the following information about each node in the \Space{} to the selection algorithm:
 (1) memory of the device,
 (2) storage capacity of the device,
-(3) time since it joined the space, and % esto no debería cambiar a menudo para no generar mucho trafico
+(3) time since it joined the \Space{}, and % esto no debería cambiar a menudo para no generar mucho trafico
 (4) its battery charge.
 We use the algorithm detailed in Listing~\ref{list:selectionAlgorithm} to rank the nodes.
 
@@ -282,15 +279,15 @@ We use the algorithm detailed in Listing~\ref{list:selectionAlgorithm} to rank t
   \EndIf
   \State \Return $nodes$
   \end{algorithmic}
-  \caption{White Page selection algorithm.}
+  \caption{\acl{wp} selection algorithm.}
   \label{list:selectionAlgorithm}
 \end{listing}
 
 Lines 1 and 2 of the algorithm apply filters based on thresholds.
-In particular, the second threshold is variable and depends on the number of nodes (more nodes will generate more clues to store).
+In particular, the second threshold is variable and depends on the number of nodes (more nodes will generate more \clues{} to store).
 After that, we check the power availability of the devices.
 We first select the nodes connected to the power grid (represented by $Battery_{infinite}$).
-If there are devices connected to the grid, we select devices which are steady enough to apply a filter by $joined\_since$ field.
+If there are devices connected to the electrical grid, we select devices which are steady enough to apply a filter by $joined\_since$ field.
 Filters in lines 8 and 10 choose nodes with z-scores higher than one for the specified fields.
 If no node fits that filter, it returns the nodes with values higher or equal to the mean.
 
@@ -299,54 +296,70 @@ Summarizing, the algorithm prioritizes energy autonomous nodes and within the no
 % IG pues si quieres aclararlo, remata xD
 In both cases, it finally selects a node with enough storage and memory (including mobile devices).
 
-% AG: Problema a mencionar: y si no hay ningún \emph{WP} candidato? Broadcasting entre cacharros?
+% AG: Problema a mencionar: y si no hay ningún \ac{wp} candidato? Broadcasting entre cacharros?
 
-% \noindent\textbf{\emph{WP} conflict resolution}
-Due to information out-of-date, two nodes may become \emph{WPs} at the same time.
+% \noindent\textbf{\ac{wp} conflict resolution}
+Due to out-of-dated information, two nodes may become \acp{wp} at the same time.
 Our solution would eventually correct this situation thanks to a conflict resolution algorithm.
-When a \emph{WP A} detects another \emph{WP B} in the space, it has to check which one has a better score according to Listing~\ref{list:selectionAlgorithm}.
-If \emph{B} has a better rank, \emph{A} simply resigns as \emph{WP} and notifies it to the discovery system.
-Otherwise, it forces \emph{B} to resignate through a REST invocation.
+When a \emph{\acs{wp} A} detects another \emph{\acs{wp} B} in the \Space{}, it has to check which one has a better score according to Listing~\ref{list:selectionAlgorithm}.
+If \emph{B} has a better rank, \emph{A} simply resigns as \ac{wp} and notifies it to the discovery system.
+Otherwise, it forces \emph{B} to resign through a \acs{http} invocation.
 Other nodes will be aware of these changes through the discovery mechanism.
-
-% TODO revisar todas estas ideas felices que puse en su día sobre clues...
-%   4. El nodo elegido como whitepage, comprueba que no hay otro ejerciendo de WP.
-%        a) De ser así, comprueba si tiene un ranking mejor.
-%            1) Si lo tiene se quita de WP.
-%            2) Si no lo tiene
-%               a) le coge clue agregado (porque es la más actualizada) % porq?
-%               b) le avisa de que será el nuevo \emph{WP} haciendole un /whitepage/claim
-%       b) Si no, comprueba que exista algún nodo con SAC=true en el espacio.
-%	     1) De ser así, escoge uno de ellos al azar, y le pide la Clue agregada
-%            2) Tan pronto como otros nodos con SAC=true detecten que hay un nuevo WP, le enviarán sus clues agregados para lograr que este tenga el más actualizado
-%       c) Si no existen, irá recogiendo clues que le lleguen.
-%       NOTA: Los providers envian sus clues si detectan que se ha pasado de una situación de no existir nadie con SAC=true en el espacio a tener WP.
-%       IG: esto ultimo deja claro que podemos gestionar lo de multiples nodos sin problemas... eso va un poco en contra del assumption inicial, hay q unificar criterio
-%       AG: No, de hecho evitamos que multiples nodos sean providers obligando a que se arreglen entre ellos.
-%	IG: bueno, lo puedes enfocar, como que puede pasar que haya mas de un WP, pero que se corrige eventualmente.
-%		digo por integrar lo del principio un poco mejor sin excepciones
-%       AG: Compro.
-
-
 
 
 
 
 \section{Shared Clues}
 \label{sec:clues}
-As we introduced before, \emph{WPs} host \emph{clues} about the information in the space.
-Using a \emph{clue}, a \emph{Consumer} can find which node (or nodes) is the \emph{Provider} of a piece of information.
-\emph{Providers} generate these clues by digesting the semantic information they store.
+As we introduced before, \acp{wp} host \clues{} about the information in the \Space{}.
+Using a \emph{clue}, a \consumer{} can find which node (or nodes) is the \provider{} of a piece of information.
+\providers{} generate these \clues{} by digesting the semantic information they store.
 
-Thanks to these \emph{clues}, resource constrained devices do not have to process unnecessary requests.
-We also limit the length of the \emph{clues} to reduce the bandwidth, the memory, and the storage overhead on these devices.
+Thanks to these \clues{}, resource constrained devices do not have to process unnecessary requests.
+We also limit the length of the \clues{} to reduce the bandwidth, the memory, and the storage overhead on these devices.
 
-In this section, we describe in detail these \emph{clues}, the information they contain and their format.
+In this section, we describe in detail these \clues{}, the information they contain and their format.
 
-% TODO IG habria que comprobar la consistencia de los titulos, todos los subs con mayuscula al inicio o no, etc.
+
+\subsection{Querying Basics} % Querying assumptions
+
+% Por qué una nueva sección?
+% Porque estaba quedando muy abstracto todo y cosas básicas como cómo un consumidor consulta a un proveedor podía no quedar claro.
+% O qué es un template y para qué se usa.
+
+A \consumer{} directly queries the information to the selected \providers{}.
+This selection is done using the \clues{} described in the rest of the Section.
+However, in this section we explain how \consumers{} directly query for information to the selected \providers{}.
+
+We assume that \providers{} offer a HTTP endpoint which accepts queries.
+Whether this endpoint redirects the requests to the RDF graph which describes a specific resource,
+it creates a response with RDF triples belonging to different resources or
+it offers hyperlinks to the relevant graphs is transversal to our solution.
+The design of this endpoint is also out of the scope of this paper, but it should be the same in all the providers.
+
+% explicar query templates
+To perform the queries, which enable the selection of a subset of the semantic content hold in a given \Space{}, we require a \textbf{template}.
+We assume the use of wildcard templates, which are special triples with optional wildcard subject, predicate and/or object (see Figure~\ref{fig:semanticExample}). % TODO referencia al ejemplo o a figura de ejemplo
+We could use more sophisticated query languages (e.g. SPARQL) % TODO footnote?
+but processing them may be too demanding for devices with constrained capabilities.
+On the other hand, simple wildcard templates can be managed by any node able to manage RDF triples.
+In any case, complex queries can be decomposed into wildcard templates and our solution would still apply.
+
+
+\InsertFig{semantic_example}{fig:semanticExample}{
+  Sample triples and query templates
+}{
+  The top of the figure shows some sample triples.
+  It highlights the different parts used for each type of \clue{}:
+  the information used in class-based \clues{} in orange, the prefix-based \clues{} in blue, and the predicate-based \clues{} in brown.
+  The bottom shows query template examples for these triples.
+}{0.8}{}
+
+
+
 \subsection{Content of a Clue}
-To find out which is the most appropriate solution for AmI scenarios, we have to consider scenarios populated by mobile devices and sensors. % for IoT scenarios?
-Mobile devices usually share data which rarely change described using a few ontologies (e.g., the user profile and his preferences).
+To find out which is the most appropriate solution for \ac{ami} scenarios, we have to consider scenarios populated by mobile devices and sensors. % for \ac{iot} scenarios?
+Mobile devices usually share data which rarely changes and is described using a few ontologies (e.g., the user profile and his preferences).
 On the other hand, sensors are constantly generating new instances of the same ontology (also called individuals).
 In both cases, the data shared by each node is described according to one or few vocabularies or taxonomies.
 
@@ -358,25 +371,31 @@ while \emph{ABox} can describe the mobile phone brand or the temperature sensed 
 
 Each mobile device or sensor usually generates \emph{ABox} according to the same \emph{TBox}.
 Using this information, we propose avoiding the use of URIs which represent \emph{ABox} information in general terms.
-Specifically, we propose and evaluate three possible type of clues to share.
+Specifically, we propose and evaluate three possible type of \clues{} to share.
 %The first two are inspired by early works on peer-to-peer semantic web $[CITAEDUTELLA,devadithya2007index]$.
 
 \medskip
 
-\noindent\textbf{Schema-based clue.}
-The individuals (\emph{ABox}) are described according to different schemas or ontologies (\emph{TBox}).
-Therefore, a coarse-grained step to find relevant nodes for a query is to ignore those which do not have \emph{ABox} for a specific \emph{TBox}.
-To create schema-based clues, the \emph{Providers} have to extract the prefixes used in their graphs.
-Although not all the prefixes used in a RDF graph can be related to specific schemas,
-they can be used to know when the URIs of a template start by a prefix.
-% Entiendo que puede no quedar claro, poner ejemplos ayudaría?
-% IG: in the same what?
+\noindent\textbf{Prefix-based clue.}
+%A coarse-grained step to find relevant nodes for a query is to ignore those which do not have \emph{ABox} for a specific \emph{TBox}. % no sólo aplicable al caso de la ontologias
+The individuals (\emph{ABox}) are described according to different ontologies (\emph{TBox}).
+Each ontology usually employs a common \emph{namespace}.
+This means that the URIs of the concepts in these ontologies share a unique \emph{prefix}.
+Besides, each \provider{} also uses few \emph{prefixes} to generate the URIs of its individuals.
+In this type of clue, we propose a coarse-grained method to filter nodes which do not have individuals with the prefixes used by the query template.
+To create prefix-based clues, the \providers{} have to extract the prefixes used in their graphs. % obvio?
+
+Following the example in Figure~\ref{fig:semanticExample}, a \provider{} \emph{P} may have that graph.
+Thanks to the \clues{}, the \consumer{} knows that \emph{P} has URIs starting with \emph{sweet}, \emph{ssn}, \emph{ex} and \emph{weather}.
+Consequently, it will send to \emph{P} a query which uses any of the templates shown in Figure~\ref{fig:semanticExample}.
+On the contrary, if the template is \emph{?s pref2:sth ?o}, it will avoid sending the template to \emph{P}.
+
 
 \medskip
 
 \noindent\textbf{Predicate-based clue.}
 The predicates relate subjects with other subjects or literals.
-The predicates are defined in the \emph{TBox} (e.g., to state they relate concept A with concept B) and used in each triple of the \emph{ABox}.
+These predicates are defined in the \emph{TBox} (e.g., to state they relate concept \emph{A} with concept B) and used in each triple of the \emph{ABox}.
 In this approach, we propose extracting the set of predicates used in the graphs stored by each node.
 Using this information, they can be simply matched with the predicate defined in the query template.
 % AG: Posible pega, se ha explicado antes lo que es un "template"?
@@ -385,27 +404,30 @@ Using this information, they can be simply matched with the predicate defined in
 \medskip
 
 \noindent\textbf{Class-based clue.}
-In the third approach, we propose sharing the classes of concepts (\textit{rdf:type}) shared by the nodes.
-Using this information and the \emph{TBox}, each node can check if the information matching certain templates is susceptible to be stored in other nodes.
-For this kind of clues, we assume that each node should have (or be able to obtain) the \emph{TBox} related to the queried template.
+In the third approach, we propose sharing the classes of concepts (\textit{rdf:type}) provided by the nodes.
+Using this information and the \emph{TBox}, each node can check if the information matching certain query template is susceptible to be stored in other nodes.
+For this kind of clues, we assume that each node should have (or be able to obtain) the \emph{TBox} related to the template used for querying.
 This is a reasonable assumption since ontologies describing \emph{TBox} are usually accessible on the URL described by its prefix.
 
-Assume a template that defines a predicate \emph{p} and this predicate relates the concept \emph{A} with another concept according to the \emph{TBox}.
-We will send this template to nodes storing instances of the class A assuming that these nodes are more likely to use this predicate in their graphs.
+To understand how it works, consider that, according to the \emph{TBox}, a predicate \emph{p} relates the concept \emph{A} with another concept.
+We assume that the nodes storing instances of the class \emph{A} are more likely to use this predicate in their graphs.
+Therefore, if a query template uses that predicate, we will send it to all nodes storing instances of the class \emph{A}.
 
-% IG: TODO esto de referirte a una ontologia del futuro... no me parece muy asines
+
+% IG: esto de referirte a una ontologia del futuro... no me parece muy asines
 % AG: Exactamente mismo caso que arriba, pero con ejemplos concretos.
 %     La idea era que no quedase muy abstracto. Lo comento porque ahora puede quedar redundante.
-%For instance, consider that the following template is queried: \textit{?s~ssn:observes~dbpedia:CO2}.
-%According to the SSN ontology, which will be presented later on, only an instance of the class \textit{ssn:Sensor} \textit{observes} something.
-%Therefore, the querying node will send the template to the nodes which have instances of the class \textit{ssn:Sensor}.
+% For instance, consider that the following template is queried: \textit{?s~ssn:observes~dbpedia:CO2}.
+% According to the SSN ontology, which will be presented later on, only an instance of the class \textit{ssn:Sensor} \textit{observes} something.
+% Therefore, the querying node will send the template to the nodes which have instances of the class \textit{ssn:Sensor}.
 
 
 \subsection{Reasoning to expand clues} % Esto se relaciona principalmente con class-based, pero igual también puede comentarse para Predicate-based.
 Through a reasoning process one can know unstated knowledge.
 Using this knowledge, we can detect more relevant nodes.
-For example, a node which has many instances of the class C, may also use the predicate \emph{p} if C is a subclass of A.
-Thanks to the reasoning, we can discover that the node has knowledge of the type A and therefore, it may be relevant.
+For example, let us consider the previous example where the class \emph{A} defines the predicate \emph{p}.
+Providing that \emph{C} is a subclass of \emph{A}, a node which has many instances of the class \emph{C}, may also use the predicate \emph{p}.
+Thanks to the reasoning, we can discover that the node has knowledge of the type \emph{A} and therefore, it may be relevant.
 % AG: Comentado por lo mismo que arriba
 %(in the example, instances of \textit{ssn:Sensor} class' subclasses such as \textit{Accelerometer}).
 The drawback, is that reasoning consumes a lot of resources.
@@ -419,23 +441,24 @@ This limitation will be further analysed in Section~\ref{sec:clues_eval}.
 % location, individual en base al cual se generan todos los elementos.
 As stated before, in general terms, we want to avoid the use of \emph{ABox} URIs (individuals) in our clues.
 Thus, we fulfil two goals:
-(1) we generate smaller clues and
-(2) the clues will not change too frequently and therefore, we will require less communication to update clues.
-However, in some cases, the use of \emph{ABox} content in the \emph{clues} may be beneficial.
+(1) we generate smaller \clues{} and
+(2) the \clues{} will not change too frequently and therefore, we will require less communication to update clues.
+However, in some cases, the use of \emph{ABox} content in the \clues{} may be beneficial.
 For instance, assume a URI that refers to the specific location \emph{L}.
-If we want to search for devices in location \emph{L}, we cannot deduce anything about it using the proposed \emph{clues}.
+If we want to search for devices in location \emph{L}, we cannot deduce anything about it using the proposed \clues{}.
 
 % AG: Atencion, a partir de aqui viene una propuesta que me acabo de sacar de la manga que habra que discutir.
 %     El problema de esto es que no está en la evaluación y para el 15 de Octubre, lo veo ajustado de incluir.
 For this reason, we need to consider sharing the \emph{N} most queried individuals in our clues.
-To do that, the \emph{WP} needs to store a list with the statistics about the information collected by each \emph{Consumer}.
-\emph{Consumers} can send this information together with the request to update a clue.
-\emph{Providers} can obtain a list of the current most popular URIs before sending their updated clues to the \emph{WP}.
-Using this list, \emph{Providers} can know if they have these URIs and include them in the clue to be sent to the \emph{WP}.
-Note that this process would imply an extra request per provider before each update.
+To do that, the \ac{wp} needs to store a list with the statistics about the information collected by each \consumer{}.
+\consumers{} can send this information together with the request to update a clue.
+\providers{} can obtain a list of the current most popular URIs before sending their updated \clues{} to the \ac{wp}.
+Using this list, \providers{} can know if they have these URIs and include them in the \clue{} to be sent to the \ac{wp}.
+% TODO el proceso no me acaba de convencer, y cuando hay una nueva URI? Como saben los proveedores que deben actualizarla?
+Note that this process would imply an extra request per \provider{} before each update.
 
 This simple approach implies sending not only \emph{TBox} but also \emph{ABox}.
-The amount of extra information added to each clue will depend on the size of this list (\emph{N}).
+The amount of extra information added to each \clue{} will depend on the size of this list (\emph{N}).
 The effectiveness of this method will depend on the number of queries using one of the \emph{N} URIs in their subjects or objects.
 % Propuesta: uso de un porcentaje de las queries realizadas
 % Problema: no vas a raspar a cada providers con 1000 comprobaciones tampoco!
@@ -451,60 +474,70 @@ EXI is designed to efficiently interchange XML data and therefore, we could obta
 However, we have chosen JSON for its simplicity and its wide adoption in the WWW.
 
 % TODO no lo he acabado de pillar...
-The schema-based clue is the easiest one to represent in JSON since it is formed by a set of URIs.
-We can also represent the predicate-based and the class-based clues using a set of URIs.
+The prefix-based \clue{} is the easiest one to represent in JSON since it is formed by a set of URIs.
+We can also represent the predicate-based and the class-based \clues{} using a set of URIs.
 However, the prefixes of those URIs are usually repeated and for this reason, we do not use plain URI transmission for these clues.
 We show an example in Listing \ref{list:oneClue}.
 It first defines the prefixes used and gives them a name and then, it specifies the URI endings for each prefix.
 
 \begin{listing}
-\begin{minted}[frame=single, framesep=3mm, linenos=true, xleftmargin=21pt, tabsize=4]{js}
-{
-  "s": [[
-      "om-owl",
+  \begin{minted}[frame=single, framesep=3mm, linenos=true, xleftmargin=21pt, tabsize=4]{js}
+  {
+    "s": [[
+      "so",
       "http://knoesis.wright.edu/ssw/ont/sensor-observation.owl#"
-  ]],
-  "p": {
-    "om-owl": ["result", "procedure",
-		"observedProperty", "samplingTime"]
-}  }
-\end{minted}
-\caption{Representation of a predicate-based clue in JSON.}
-\label{list:oneClue}
+    ]],
+    "p": {
+      "so": ["result", "procedure",
+		  "observedProperty", "samplingTime"]
+  }  }
+  \end{minted}
+  \caption{
+    Representation of a predicate-based \clue{} in JSON.
+    The node sending the \clue{} has RDF triples which use the predicates
+    \emph{so:result}, \emph{so:procedure}, \emph{so:observedProperty} and \emph{so:samplingTime}.
+  }
+  \label{list:oneClue}
 \end{listing}
 
 \medskip
 
-These are isolated clues sent from a \emph{Provider} to the \emph{WP}.
-However, the \emph{WP} gathers all these clues in an aggregated clue which is sent to the \emph{Consumer}.
+These are isolated \clues{} sent from a \provider{} to the \ac{wp}.
+However, the \ac{wp} gathers all these \clues{} in an aggregated clue which is sent to the \consumer{}.
 We show an example of an aggregated clue in Listing \ref{list:aggregatedClue}.
-As one can see, the aggregated clue follows the format of an individual clue.
-This is described by the numeric field \emph{i} which contains a common area that describes all the prefixes.
-\emph{g} and \emph{v} form the version of this aggregated clue.
+As one can see, the aggregated clue defines the type of \clues{} wrapped through the numeric field \emph{i}.
+\emph{G} and \emph{v} form the version of this aggregated clue.
+The field \emph{s} defines the prefixes.
 Finally, for each node, each prefix is related with the URI endings.
 
 % TODO sacar un ejemplo real? poner esquematicamente?
 \begin{listing}
-\begin{minted}[frame=single, framesep=3mm, linenos=true, xleftmargin=21pt, tabsize=4]{js}
-{
-  "i": 1,
-  "g": 2435467,
-  "v": 556,
-  "s": [
-	["dc", "http://purl.org/dc/elements/1.1/"],
-	["dul", "http://www.loa.istc.cnr.it/ontologies/DUL.owl#"],
-	["ssn", "http://purl.oclc.org/NET/ssnx/ssn#"] ],
-  "p": {
-    "node1": {
-      "ssn": ["observedBy", "observationResult"],
-      "dul": ["isClassifiedBy"] },
-    "node0": {
-      "ssn": ["observes"],
-      "dc": ["description"]
-} } }
-\end{minted}
-\caption{Representation of an aggregated clue in JSON.}
-\label{list:aggregatedClue}
+  \begin{minted}[frame=single, framesep=3mm, linenos=true, xleftmargin=21pt, tabsize=4]{js}
+  {
+    "i": 1,
+    "g": 2435467,
+    "v": 556,
+    "s": [
+	  ["dc", "http://purl.org/dc/elements/1.1/"],
+	  ["dul", "http://www.loa.istc.cnr.it/ontologies/DUL.owl#"],
+	  ["ssn", "http://purl.oclc.org/NET/ssnx/ssn#"] ],
+    "p": {
+      "node1": {
+	"ssn": ["observedBy", "observationResult"],
+	"dul": ["isClassifiedBy"] },
+      "node0": {
+	"ssn": ["observes"],
+	"dc": ["description"]
+  } } }
+  \end{minted}
+  \caption{
+    Representation of an aggregated clue in JSON.
+    Line 2 defines that it embeds predicate \clues{} (i.e. type 1).
+    Lines 3 and 4, contain the version of the aggregated clue.
+    The remaining lines express the predicates used by two nodes.
+    For example, \emph{Node1} has at least a RDF triple which uses the predicate \emph{ssn:observedBy}.
+  }
+  \label{list:aggregatedClue}
 \end{listing}
 
 % Mencionar: Note that we can gossip sleeps periods to know when to query them...
