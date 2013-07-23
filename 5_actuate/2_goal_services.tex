@@ -1,6 +1,38 @@
 
 \section{REST services consumption}
 
+% por qué? motivación: permitir a otras app integrarse seamlessly en nuestro espacio
+
+% explicar cómo encajaría esto con RESTdesc
+
+% Objetivo => que cuando se escriba una tarea en el espacio, se pueda traducir en cambio de estado de actuadores sin requerir su colaboración específica
+%    ventajas:
+%       + interop (el middleware trabaja más por tí)
+%       + flexibilidad
+%       + autonomía ref y temporal
+
+% Cómo?
+%    lanzando proceso de razonamiento deductivo
+%        cuando?
+%            siempre que se escribe algo? (mucho cristo, depende del tiempo que lleve)
+%            cuando se escribe una tarea
+%            periodicamente: para tareas no cumplidas en el pasado
+%            periodicamente siempre que se hayan escrito nuevas cosas
+
+%    proveyendole inputs
+%         RESTdesc => por el mecanismo que sea
+%               los clientes lo escriben en el espacio
+%               mejor: un agente en el espacio descubre nuevos RESTdescs
+%         info de base: la info del espacio
+%                             + clues falseadas? => puede requerir tiempo y habría que explicar de nuevo el proceso!
+%         goal: ir probando con cada
+
+% Problemas:
+%     datos contradictorios (e.g. intereses contradictorios)
+%     en operación compuesta (rollo mashup), ¿cómo hacerlo bien? (e.g. rollback y commit)
+%     eficiencia y consumo por razonamiento
+
+
 Nueva primitiva denominada suggest.
 
 Explicar RESTdesc.

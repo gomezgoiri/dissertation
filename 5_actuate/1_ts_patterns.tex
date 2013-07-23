@@ -1,82 +1,88 @@
 
-\section{Acting using \ac{ts} patterns}
-
-The first mechanism to change the environment is based on \acp{ts} application patterns.
-They enable the applications built upon the \ac{ts} coordinate in a decoupled way.
-% The use of semantics here helps to 
-These patterns are briefly described in the Section~\ref{sec:ts_patterns}.
-This patterns require a notification mechanism which is described in the Section~\ref{sec:notification}.
-Finally, the Section~\ref{sec:envisaged_scenarios} shows an example of how they could be used in a \ac{ubicomp} scenario.
+\section{Coordination through the Space}
 
 
-\subsection{\ac{ts} patterns}
+
+% explicar brevemente patrones
+% requirements: sistema de suscripciones (out of the scope)
+% escenario de ejemplo en Ubicomp
+
+
+In space-based computing participants coordinate by reading and writing in a shared Space. % TODO usar define a nivel general para Space!
+This encourages an uncoupled communication between applications using the same Space.
+
+In this section we analyze how to achieve this uncoupled communication following a top-down approach.
+First, we briefly explain \acl{ts}'s most common application patterns. % according to the classification of \citet{freeman_javaspaces_1999}.
+Using some of these patterns, Section~\ref{sec:envisaged_scenarios} shows how to build an \ac{ubicomp} scenario.
+The scenario evidences some requirements, analyzed in Section~\ref{sec:notification}, the middleware must comply with.
+
+
+
+\subsection{\acl{ts}'s patterns}
 \label{sec:ts_patterns}
 
-According to Freeman et al. \citep{freeman_javaspaces_1999} there are four main application patterns which can be used with \ac{ts}:
-replicated-worker pattern, marketplace pattern, command pattern and specialist patterns.
+According to \citet{freeman_javaspaces_1999} there are four main application patterns which can be used with \ac{ts}:
+
+\begin{description}
+  \item[Replicated-worker pattern.] In this pattern there is a master process and many worker processes which are able to compute the same task.
+				    %% REDUCIENDO esto: %%
+%				    The master takes a problem and divides it in tasks which are solved by any of the workers.
+%				    More concretely the pattern is composed by the following steps:
+% 				    \begin{enumerate}
+% 				      \item The master divides a problem up into smaller tasks.
+% 				      \item It writes them in the space.
+% 				      \item Any of the many workers takes a task.
+% 				      \item That worker computes the task.
+% 				      \item It writes the result of that computation.
+% 				      \item The master collects the results for the tasks it wrote.
+% 				      \item Once the master has all the results, it combines them into a meaningful overall solution.
+% 				    \end{enumerate}  
+				    The master takes a problem, divides it in smaller tasks and writes these tasks in the space.
+				    Any available worker takes a task, processes it and writes the result back on the space.
+				    When all the workers have written their results, the master takes the results and combines them into a meaningful overall solution.
+				    %Note that the workers accept new tasks whenever they are available and able to work.
+				    %Therefore, while a worker is busy computing a big task, another one can solve many small tasks.
+				    %In other words, this pattern naturally \emph{balances the load} on the space.
+				    %Besides, it is \emph{scalable} since we can add more workers running in more machines without rewriting our code.
+				    This pattern is scalable and naturally balances the load on the space.
+  \item[Command pattern.] It encapsulates behavior in the tasks shared in the space.
+			  Therefore, it requires (1) to share behavior through the space, and (2) any generic worker to be able to compute the behavior.
+			  For instance, a graph in \ac{tsc} could include code in an interpreted programming language.
+			  % nosotros pasamos de este jaleo
+			  % hacer referencia a on-demand-code
+			  %In that way, a generic worker application can compute whatever code other processes define and share through the space.
+			  %This pattern is only possible in \aclp{ts} where the behavior can be described generically (e.g. in object-oriented \acp{ts}).
+			  %Furthermore, the tasks to be performed over \ac{ubicomp} environments are not generically processable by any node.
+			  %In contrast, each device is responsible of managing its own actuators on behalf of the rest.
+			  %Therefore, this pattern will not be considered.
+   \item[Marketplace pattern.] In this pattern producers (or sellers) and consumers (or buyers) of resources interact to find the best deal.
+			  %It should be noted that the resources are products or services which can be bought and sold.
+			  %Therefore, it is not applicable to the environments considered. % o use cases
+			  %esto está relacionado con el paper aquel de TripCom y con el de Simon de hace un año en WoT
+  \item[Specialist patterns.] In opposition to the replicated-worker pattern, in the specialist pattern each worker is specialized.
+                              Therefore each worker performs a particular task.
+                              \citeauthor{freeman_javaspaces_1999} enumerates three subtypes:
+			      \begin{description}
+				  \item[Blackboard pattern.]
+					This pattern associates the concept of the space with a \emph{blackboard}.
+					Following the analogy, the master is associated with a teacher, the tasks with \emph{problems} and the specialized workers with \emph{students}.
+					The blackboard pattern starts when the \emph{teacher} writes a \emph{problem} in the \emph{blackboard}.
+					The \emph{students} observe the space and write their intention to contribute to solve the problem (i.e. \emph{raise their hands}).
+					The \emph{teacher} selects to the expert which will make a modification.
+					After the modification, the \emph{teacher} decides if they found the solution another \emph{student} should contribute.
+				  \item [Trellis pattern.]
+					In this pattern, the master arranges the problem into low-level, mid-level and high-level pieces.
+					The workers of each level benefit from the refined data provided by the immediate level below.
+				  \item [Collaborative patterns.]
+					It encompasses all the patterns which allow nodes to collaborate to complete a greater task (i.e. by creating a workflow).
+					%They are specific to the domain so they cannot be generalized, but it includes all the patterns where the nodes collaborate to complete a greater task
+					%(e.g. by creating a workflow).
+			      \end{description}
+\end{description}
 
 
-\subsubsection{Replicated-worker pattern}
+% un esquema en el que aparecen todos los patrones explicados
 
-In the replicated-worker pattern there is a master process and many workers processes.
-The master takes a problem and divides it in tasks which are solved by any of the workers.
-More concretely the pattern is composed by the following steps:
-
-\begin{enumerate}
-  \item The master divides a problem up into smaller tasks.
-  \item It writes them in the space.
-  \item Any of the many workers takes a task.
-  \item That worker computes the task.
-  \item It writes the result of that computation.
-  \item The master collects the results for the tasks it wrote.
-  \item Once the master has all the results, it combines them into a meaningful overall solution.
-\end{enumerate}
-
-Note that the workers accept new tasks whenever they are available and able to work.
-Therefore, while a worker is busy computing a big task, another one can solve many small tasks.
-In other words, this pattern naturally \emph{balances the load} on the space.
-Besides, is is \emph{scalable} since we can add more workers running in more machines without rewriting our code.
-
-% poner un sexy diagrama sacado de Senami
-
-
-\subsubsection{Command pattern}
-
-The Command pattern encapsulates behavior in the tasks shared in the space.
-In that way, a generic worker application can compute whatever code other processes define and share through the space.
-This pattern is only possible in \aclp{ts} where the behavior can be described generically (e.g. in object-oriented \acp{ts}).
-
-Furthermore, the tasks to be performed over \ac{ubicomp} environments are not generically processable by any node.
-In contrast, each device is responsible of managing its own actuators on behalf of the rest.
-Therefore, this pattern will not be considered.
-
-
-\subsubsection{Marketplace pattern}
-
-In the marketplace pattern producers (or sellers) and consumers (or buyers) of resources interact to find the \emph{best deal}.
-It should be noted that the resources are products or services which can be bought and sold.
-Therefore, it is not applicable to the environments considered. % o use cases
-% citar al paper aquel de TripCom???
-
-
-\subsubsection{Specialist patterns}
-
-In opposition to the replicated-worker pattern, in the specialist pattern each worker is specialized.
-Therefore each worker performs a particular task.
-There are three subtypes of specialist patterns:
-\begin{itemize}
-  \item Blackboard pattern.
-	The \emph{teacher} writes \emph{problems} (tasks) in the \emph{blackboard} (space).
-	The \emph{students} observe the space and \emph{raise their hands} when they want to contribute to solve the problem.
-	The \emph{teacher} selects the expert which will make a modification.
-	After the modification, the \emph{teacher} decides is the solution has been found or another \emph{student} should contribute.
-  \item Trellis pattern.
-	The master arranges the problem into low-level, mid-level and high-level pieces.
-	The workers of each level benefit from the refined data provided by the immediate level below.
-  \item Collaborative patterns.
-	They are specific to the domain so they cannot be generalized, but it includes all the patterns where the nodes collaborate to complete a greater task
-	(e.g. by creating a workflow).
-\end{itemize}
 
 
 
@@ -152,6 +158,8 @@ The Figure~\ref{} describes a simple subscription use case.
 
 \subsection{Envisaged Scenarios}
 \label{sec:envisaged_scenarios}
+
+% A pesar de que X e Y, han usado el patrón tal y cual en TSC, nosotros creemos que el más util para Ubicomp es X e Y.
 
 Two stereotypical scenarios for home automation had been devised to assess our collaborative middleware proposition for heterogeneous resource-constrained devices.
 In both scenarios the emphasis has been put in how those devices can coordinate in a decoupled mode thanks to it following the specialist pattern.
