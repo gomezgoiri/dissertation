@@ -18,7 +18,8 @@ In addition, our approach reduces the workload of mobile and embedded devices wh
 
 % Para trabajo futuro, se podría considerar: 
 % query optimization y citar a alguna solución de distributed triple stores
-% TODO poner algo más acorde con el related work actual!
-For our future work, we will consider using query optimization techniques in the \providers{}.
-Using these techniques, we could a) transform the queries before sending them to obtain more results
-and b) refine the results.
+For our future work, we will consider allowing more expressive query languages such as SPARQL. % use acronym
+This would force \consumers{} to discriminate between the \providers{} able to process it and the rest.
+%The latters, could implement a trade off solution to send multiple triple pattern templates at once. % optimizando la red
+On top of these queries, we could use query optimization techniques in the \consumers{} \citep{schwarte_fedx_optimization_2011}.
+Using these techniques, we could transform the queries before sending them to a) obtain more results or b) use the network more efficiently.
