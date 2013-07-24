@@ -95,6 +95,7 @@ Finally, specialist patterns allow nodes with distinct capacities to cooperate t
 
 \subsection{Envisaged Scenarios}
 \label{sec:envisaged_scenarios}
+% 1era iteración en reescritura, se puede mejorar mucho
 
 This section devises two stereotypical scenarios for home automation.
 Both scenarios emphasize how devices can coordinate in a decoupled mode using some of patterns seen in the previous section. % más de uno?
@@ -128,30 +129,40 @@ When the second one is below the first one, it generates a ``\emph{decrease temp
 In this case, the FoxG20 periodically checks for orders it can fulfill extracting them from the space. % consumes them with a \textit{take primitive}.
 % zasca, acabamos de poner en bandeja que nos rechine lo de comprobar periodicamente
 
+
 \medskip
 
-%%%%% ME HE QUEDADO AQUI!!!!!
 
 The second scenario presents an application which helps the user to avoid the sedentary lifestyle by giving him different warnings.
 We considered the recommendation that states that an adult should daily walk at least 10.000 steps \citep{tudor2002taking}.
 Taking into account the expected steps which should have been completed in each moment of the day, the application generates different priority level messages.
 
 There are several nodes involved in this task.
+Each node runs on a device. % which belongs to a user.
 First, an Android phone periodically writes the number of steps covered by a user in that day\footnote{http://code.google.com/p/pedometer/}.
-%Besides, it writes her profile, more important to this problem: her age.
-Second, there are an undefined number of devices which know how to warn the user about her unhealthy behavior.
-Each device belongs to a user.
+%Besides, it writes her profile, more important to this problem: her age. % simplificado un poquillo
+Second, there is an undefined number of devices which know how to warn the user about her unhealthy behavior.
+Third, there is a node in charge of generating warnings.
 
 
-The application does not directly decides how to show these messages.
-Instead, it follows the \emph{blackboard pattern} and it writes its intention to complete that \emph{problem}.
+The application follows the \emph{blackboard pattern}.
+The node which generates the warnings is the \emph{teacher}.
+The \emph{problem} is the warning for the user.
+The \emph{students} are the devices which can warn the user.
 
-The particularity if the application is that 
-These messages are shown to the user by different means to warn him about unhealthy behavior.
 
-To achieve it, the semantic information is used to find the accelerometers embedded in a user mobile and his age.
-Depending on the priority of the messages, different devices which belong to that user, defined in the ontology, look for those messages.
-If the priority level is low, the user can be warned in a less intrusive way than if the priority is high. Hence, room's light brightness can be increased for low priority notifications, a chumby for normal priority ones or the message can be shown directly in his mobile phone when the user should have covered many more steps than he has walked (high priority).
+When the \emph{teacher} writes a warning for a user, the devices able to warn her write their characteristics into the space.
+In this example, these characteristics are the device ownership and the intrusiveness of the warning method.
+The \emph{teacher} reads these characteristics, chooses the most appropriate \emph{student} to solve the \emph{problem} and updates the \emph{problem} to indicate the selection.
+%If no device writes their characteristics, the \emph{teacher} can wait longer.
+Finally, the selected device takes any warning for him and warns the user. % no tiene respuesta
+If the device does not take message, the \emph{teacher} can update the \emph{problem} with a new selection.
+
+
+With this application, if the priority level is low, the user can be warned in a less intrusive way.
+For example, room's light brightness can be increased for low priority notifications, a chumby for normal priority ones or the message can be shown directly in the user's mobile phone when it is a high priority warning.
+The remarkable thing is that the devices present in the environment at each moment can vary and the application will still fulfill its goal.
+
 
 
 
@@ -159,9 +170,13 @@ If the priority level is low, the user can be warned in a less intrusive way tha
 \subsection{Notification mechanism}
 \label{sec:notification}
 
-All the patterns explained in the previous section are triggered when another process writes information in the space (e.g. a task or a result).
+
+In the scenario shown in the previous section, the writings in the space trigger other node's action.
+For example, a device must show a message whenever a new warning is written in the space. % e.g. a task or a result
 To be aware of these writings the node can either poll the space or rely on a notification mechanism.
-The later is more optimal and more scalable approach.
+Obviously, the later encourages a more efficient use of the network. % is more optimal and more scalable approach.
+
+% hasta AQUI!
 Therefore, although it is not the main focus of this thesis, in this section we present a subscription mechanism which can be used on top of the \ac{tsc} middleware proposed.
 
 The requirements that this mechanism needs to fulfill are the following ones:
