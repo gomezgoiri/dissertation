@@ -173,68 +173,99 @@ The remarkable thing is that the devices present in the environment at each mome
 
 In the scenario shown in the previous section, the writings in the space trigger other node's action.
 For example, a device must show a message whenever a new warning is written in the space. % e.g. a task or a result
-To be aware of these writings the node can either poll the space or rely on a notification mechanism.
+To be aware of these writings the node can either poll the space or rely on a notification mechanism. % async or blocking
 Obviously, the later encourages a more efficient use of the network. % is more optimal and more scalable approach.
 
-% hasta AQUI!
-Therefore, although it is not the main focus of this thesis, in this section we present a subscription mechanism which can be used on top of the \ac{tsc} middleware proposed.
 
-The requirements that this mechanism needs to fulfill are the following ones:
+The implementation of this notification mechanism is out of the scope of this thesis.
+% Hablar de requisitos, describir nuevas primitivas de suscripciones o alternativas de implementación
+However, its design should consider the following suggestions to comply with \ac{ubicomp} characteristics:
 \begin{itemize}
-  \item It should be independent of \ac{tsc}'s writing and reading primitives.
-	This requirement ensures that frequent writings do not lead to excessive processing in resource constrained nodes.
-	The main drawback of this requirement is that a node does not now when relevant data is written in the space \emph{per se}.
-	A developer needs to advertise when it writes relevant data.
-  \item Any node running our solution must be able to implement this mechanism.
-	In other words, it no new dependencies should be added.
-  \item The new primitives should use elements the current developer is used to (i.e. templates or RDF triples).
+  %  Debe permitir polling (sync), por ello proponemos nuevas primitivas: read_async y take_async.
+  \item To allow synchronous polling mechanism.
+        To do that, the middleware must provide additional \emph{read} and \emph{take} primitives.
+  % Se evalúan sobre el espacio, no sobre el outer-space. 
+  \item Since the notification mechanism intends to allow coordination patterns,
+        it must consider the knowledge from the coordination space.
+        In other words, knowledge from the outer-space will not trigger notifications.
+  % Evaluarse cada X, no siempre que se escriba algo o se vuelve loco.
+  \item The evaluation of the subscriptions against the knowledge must not interfere with writing process.
+        Therefore, it must run asynchronously.
+  % Debe ser sencillo de implementar por cualquier nodo. Para ello proponemos un mínimo contrato: callback URL.
+  \item Ensure its simplicity to allow any node implement it.
+        A callback URL passed on the subscription can represent a minimal contract between the client and the server.
+  % Deben caducar para no mantener suscripciones de dispositivos que ya no existen.
+  \item The subscriptions must expire.
+        This expiration will allow to delete subscriptions from no longer present devices.
+        Therefore, the devices must update their subscriptions.
+  \item To provide additional mechanisms to remove subscriptions.
+        Not only proactive mechanisms such as unsubscription primitives, but also more sophisticated reactive mechanisms.
+        For instance, a \emph{garbage collection} agent can check the availability of callback URLs.
+        For unavailable callback URLs, the subscriptions can be removed.
 \end{itemize}
 
 
+The main drawback of a subscription mechanism is that it breaks the \ac{rests} property of the \ac{rest} style.
+Therefore, network performance will improve at the cost of scalability, simplicity and reliability. % TODO poner un see Section~\ref{X} ???
+
+
+% hasta AQUI!
+% Therefore, although it is not the main focus of this thesis, in this section we present a subscription mechanism which can be used on top of the \ac{tsc} middleware proposed.
+% The requirements that this mechanism needs to fulfill are the following ones:
+% \begin{itemize}
+%   \item It should be independent of \ac{tsc}'s writing and reading primitives.
+% 	This requirement ensures that frequent writings do not lead to excessive processing in resource constrained nodes.
+% 	The main drawback of this requirement is that a node does not now when relevant data is written in the space \emph{per se}.
+% 	A developer needs to advertise when it writes relevant data.
+%   \item Any node running our solution must be able to implement this mechanism.
+% 	In other words, no new dependencies should be added.
+%   \item The new primitives should use elements the current developer is used to (i.e. templates or RDF triples).
+% \end{itemize}
+% 
 % explicar cómo funciona
 % https://otsopack.readthedocs.org/en/latest/subscriptions.html
-\subsubsection{Subscription primitives}
-
-The subscription primitives the developer should use are the following ones:
-\begin{itemize}
-  \item \emph{Subscribe}. The node subscribes to the given template returning an URI which identifies the subscription.
-    \begin{minted}{java}
-URI subscribe(space_uri, template, listener)
-    \end{minted}
-  \item \emph{Unsubscribe}. Unsubscribes to a subscription given its subscription URI.
-    \begin{minted}{java}
-void unsubscribe(space_uri, String subscriptionURI)
-    \end{minted}
-  \item \emph{Notify}.
-    \begin{minted}{java}
-void notify(space_uri, template)
-    \end{minted}
-\end{itemize}
-
-
-\subsubsection{Deployment}
-
-The nodes responsible of handling subscriptions and notifications are called \emph{bulletin boards}.
-Other nodes belonging to the same space, discover them using a out of scope method and publish their subscriptions and notifications using their HTTP API.
-
-Each \emph{bulletin board}:
-\begin{itemize}
-  \item Belongs to a space.
-  \item Exposes a subscription API.
-  \item Shares its subscriptions with other bulletin boards which belong to the same space.
-  \item Propagates the notifications to the relevant nodes using the \emph{callback url} provided by them.
-\end{itemize}
-
-
-The Figure~\ref{} describes a simple subscription use case.
-\begin{enumerate}
-  \item N1 subscribes to BB1 with a template t1.
-  \item BB1 propagates the subscription provided by N1 to BB2 and BB3
-  \item N3 notifies to BB3 about t2.
-  \item Since t1 matches t2, BB3 tries to notify to N1 using the callback URI provided during the subscription process.
-  \item Unfortunately, the BB3 cannot notify to N1 due to unexpected network problems.
-  \item BB3 propagates the notification of t2 to BB2.
-  \item BB2 reaches N1, so it notifies it about t2 using the callback URI.
-\end{enumerate}
-
+% \subsubsection{Subscription primitives}
+% 
+% The subscription primitives the developer should use are the following ones:
+% \begin{itemize}
+%   \item \emph{Subscribe}. The node subscribes to the given template returning an URI which identifies the subscription.
+%     \begin{minted}{java}
+% URI subscribe(space_uri, template, listener)
+%     \end{minted}
+%   \item \emph{Unsubscribe}. Unsubscribes to a subscription given its subscription URI.
+%     \begin{minted}{java}
+% void unsubscribe(space_uri, String subscriptionURI)
+%     \end{minted}
+%   \item \emph{Notify}.
+%     \begin{minted}{java}
+% void notify(space_uri, template)
+%     \end{minted}
+% \end{itemize}
+% 
+% 
+% \subsubsection{Deployment}
+% 
+% The nodes responsible of handling subscriptions and notifications are called \emph{bulletin boards}.
+% Other nodes belonging to the same space, discover them using a out of scope method and publish their subscriptions and notifications using their HTTP API.
+% 
+% Each \emph{bulletin board}:
+% \begin{itemize}
+%   \item Belongs to a space.
+%   \item Exposes a subscription API.
+%   \item Shares its subscriptions with other bulletin boards which belong to the same space.
+%   \item Propagates the notifications to the relevant nodes using the \emph{callback url} provided by them.
+% \end{itemize}
+% 
+% 
+% The Figure~\ref{} describes a simple subscription use case.
+% \begin{enumerate}
+%   \item N1 subscribes to BB1 with a template t1.
+%   \item BB1 propagates the subscription provided by N1 to BB2 and BB3
+%   \item N3 notifies to BB3 about t2.
+%   \item Since t1 matches t2, BB3 tries to notify to N1 using the callback URI provided during the subscription process.
+%   \item Unfortunately, the BB3 cannot notify to N1 due to unexpected network problems.
+%   \item BB3 propagates the notification of t2 to BB2.
+%   \item BB2 reaches N1, so it notifies it about t2 using the callback URI.
+% \end{enumerate}
+% 
 % TODO poner la foto esquemática de https://otsopack.readthedocs.org/en/latest/subscriptions.html
