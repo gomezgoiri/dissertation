@@ -188,7 +188,7 @@ The remarkable thing is that the devices present in the environment at each mome
 \label{sec:notification}
 
 
-In the scenario shown in the previous section, some writings in the space trigger other node's action.
+In the scenarios described in the previous section, some writings in the space trigger other node's action.
 For example, a device must show a message whenever a new warning is written in the space. % e.g. a task or a result
 To be aware of these writings the node can either poll the space or rely on a notification mechanism. % async or blocking
 Obviously, the later encourages a more efficient use of the network. % is more optimal and more scalable approach.
@@ -200,25 +200,26 @@ Although the implementation of this notification mechanism is out of the scope o
 it should comply with the following aspects:
 \begin{itemize}
   %  Debe permitir polling (sync), por ello proponemos nuevas primitivas: read_async y take_async.
-  \item Allow polling mechanism.
+  \item Do not substitute the polling mechanism. % porque todavía puede ser interesante en otros casos
         To do that, the middleware must provide additional \emph{read} and \emph{take} primitives.
   % Se evalúan sobre el espacio, no sobre el outer-space. 
   \item Since the notification mechanism intends to allow coordination patterns,
         it must consider the knowledge from the coordination space. % TODO comprobar que lo llamé así en el anterior capítulo
         In other words, knowledge from the \emph{outer-space} will not trigger notifications. % TODO usar constante para esto
   % Evaluarse cada X, no siempre que se escriba algo o se vuelve loco.
-  \item The evaluation of the subscriptions must not interfere with writing process (e.g. introducing a delay).
+  \item The evaluation of the subscriptions must not interfere with the writing process (e.g. introducing a delay).
         Therefore, it must run asynchronously.
   % Debe ser sencillo de implementar por cualquier nodo. Para ello proponemos un mínimo contrato: callback URL.
   \item Ease its adoption by any type of computing platform.
 	This can be achieved by reducing the requirements on the \emph{clients}.
-        For instance, a callback \ac{url} passed during the subscription can represent a minimal contract of the client with the server. % no viceversa
+        For instance, a callback \ac{url} passed during the subscription can represent a minimal client's contract with the server. % no viceversa
   % Deben caducar para no mantener suscripciones de dispositivos que ya no existen.
-  \item Subscriptions from absent devices are useless and worsen efficiency.
+  \item Provide additional subscription removal mechanisms.
 	\ac{ubicomp} are composed by unreliable devices which may frequently join and leave the space.
-	Therefore the space cannot rely only on reactive unsubscription primitives.
-	Instead, more proactive mechanisms can be adopted by the device managing the space. % TODO buscar su nombre correcto
-	For example, by letting subscriptions expire after a lifetime or removing them when it discovers the unavailability of a callback \ac{url}. % algo así como garbage collection
+	In this situation, the correct use of unsubscription primitives cannot be guaranteed.
+	This may worsen the performance of the system with useless subscriptions from abstent devices.
+	Therefore, the device managing the subscriptions should adopt more proactive mechanisms.
+	For example, it may let the subscriptions expire after a lifetime or remove them when it discovers the unavailability of a callback \ac{url}. % algo así como garbage collection
 	% A) The subscriptions must expire.
         % The expiration will allow to delete subscriptions from absent devices. % no longer present devices
         % This also implies that clients are responsible for periodically updating their subscriptions.
