@@ -1,49 +1,184 @@
 
-\section{REST services consumption}
+\section{Consumption of \acs{rest} services}
 
-% por qué? motivación: permitir a otras app integrarse seamlessly en nuestro espacio
+% por qué? motivación: permitir a otras app integrarse en nuestro espacio
 
-% explicar cómo encajaría esto con RESTdesc
-
-% Objetivo => que cuando se escriba una tarea en el espacio, se pueda traducir en cambio de estado de actuadores sin requerir su colaboración específica
-%    ventajas:
-%       + interop (el middleware trabaja más por tí)
-%       + flexibilidad
-%       + autonomía ref y temporal
-
-% Cómo?
-%    lanzando proceso de razonamiento deductivo
-%        cuando?
-%            siempre que se escribe algo? (mucho cristo, depende del tiempo que lleve)
-%            cuando se escribe una tarea
-%            periodicamente: para tareas no cumplidas en el pasado
-%            periodicamente siempre que se hayan escrito nuevas cosas
-
-%    proveyendole inputs
-%         RESTdesc => por el mecanismo que sea
-%               los clientes lo escriben en el espacio
-%               mejor: un agente en el espacio descubre nuevos RESTdescs
-%         info de base: la info del espacio
-%                             + clues falseadas? => puede requerir tiempo y habría que explicar de nuevo el proceso!
-%         goal: ir probando con cada
-
-% Problemas:
-%     datos contradictorios (e.g. intereses contradictorios)
-%     en operación compuesta (rollo mashup), ¿cómo hacerlo bien? (e.g. rollback y commit)
-%     eficiencia y consumo por razonamiento
+The actuation mechanism of the previous section requires participants to be aware of the content of the space.
+For instance, a heater should check the space to find if a new desired temperature was written.
+This presents a limitation: what if an actuator was not designed to work with the space?
+Following the coordination patterns presented, the middleware will not be able to directly reuse other \ac{wot} solutions' actuation capacities. % interoperate
+% lo podrá reusar a través de un intermediario
+% interop era una de las cosas que queriamos cuidar
+% y qué pasa con las soluciones REST que quieren usar lo nuestro?
 
 
-Nueva primitiva denominada suggest.
+In this section we propose to integrate a rule-based mechanism in the middleware.
+To do that, we first explain this mechanism (Section~\ref{sec:background_restdesc}) and then we answer two key questions to enable that integration:
+(1) Which node is responsible for this mechanism? (Section~\ref{}), and
+(2) Where are the inputs for this mechanism read from? (Section~\ref{})
 
-Explicar RESTdesc.
 
-Entrada => goal
+\subsection{Background}
+\label{sec:background_restdesc}
 
-Proceso de suggest:
+In \ac{wot} physical changes in the environment are performed by manipulating \ac{http} resources.
+According to the \ac{rest} principles, a client should navigate through these resources with no prior knowledge of the \ac{api}.
+% Copiar esta explicación mejor de algún lado:
+The client should (1) interpret the representations provided by the server and then (2) choose the appropriate state transition from the hypertext according to its intention. % y su conocimiento básico del protocolo: CRUD
 
+
+% es HATEOAS?
+As explained in Section~\ref{}, semantic representations do not include a native way to express the hypertext.
+To solve this, three solutions can be adopted:
+% Unos proponen extender con ontologías
+(1) to use an ontology to represent the hypertext,
+(2) to embed the hypertext independently to the representations on the \ac{http} headers, and % TODO citar lo de HTTP header de Wilde
+(3) to provide a description of the resources using the \ac{http} OPTIONS verb.
+The latter two enable to discover resources and state transitions without adding metadata to the representations.
+This allows not only to describe semantic representations, but any type of formats.
+Furthermore, the third option represents the most flexible one.
+
+
+Different ways exist to describe \ac{rest} services. % o mejor resources? % mencionar WADL, etc.?
+% citar a donde se hable de RESTdesc y así ya se empieza a explicar la solución de forma discreta.
+\emph{RESTdesc} \cite{verborgh_wsrest_2012} proposes a fully semantic description.
+These descriptions are rules expressed in the Notation 3 (N3)\footnote{\url{http://www.w3.org/TeamSubmission/n3/}} language with a premise and a conclusion.
+The premise expresses the requirements to invoke a REST service.
+The conclusion expresses both the REST call that needs to be made and the description of that invocation result.
+
+
+Verborgh et al. \cite{verborgh_ijcs_2014} propose a proof-based composition mechanism for Web \acp{api} using \emph{RESTdesc}.
+This mechanism uses as inputs:
+(1) an initial state,
+(2) a goal state,
+(3) Web \ac{api} descriptions using RESTdesc, and
+(4) optional background knowledge.
+Each of these inputs are semantically expressed and therefore, they can be processed by standard N3 reasoners.
+The reasoners generate proofs about how to achieve the goal starting from the initial state using the rest of the inputs.
+These proofs can be seen as steps that need to be made to reach a desired state.
+
+
+In \cite{verborgh_ijcs_2014}, they distinguish between pre-proof and post-proof.
+The first, are those which assume that the execution of all \acs{api} calls will behave as expected.
+The latter, can be seen as a \emph{revision} of the pre-proof.
+It executes the Web \acs{api} of the pre-proofs and uses actual execution results to generate a new proof.
+
+
+
+\subsection{Inputs for the Proof-based Actuation Mechanism}
+
+As has been seen, the reasoning process uses as input:
+(1) an initial state,
+(2) a goal state,
+(3) Web \ac{api} descriptions using RESTdesc, and
+(4) optional background knowledge.
+% inputs: clues
+% goal: task
+
+
+\paragraph{The descriptions} must be read previously by an agent and integrate them in the \clues{} presented in Chapter~\ref{XXX} or write in the coordination space.
+The latter option requires the node triggering the process read from the space.
+The first option ensures that they will be available in each \consumer{}.
+The static nature of these descriptions does not break the stability assumption of the \clues{}.
+
+
+\paragraph{The initial state and background knowledge} can be acquired both from the coordination space and the outer space.
+To represent the knowledge in the outer space instead of reading it, the \clues{} can be used.
+We propose to create \emph{actuation rules} from \clues{}.
+
+
+A node which wants to actuate over the space needs to obtain the \emph{clues} from the \ac{wp}.
+These clues, as explained before, tell the node what other nodes provide.
+In this work, we have assumed that these \emph{clues} are composed by the predicates used by the nodes which provide content.
+
+
+The existence of a predicate used in a premise does not necessarily imply that this rule can be used.
+Nevertheless, its absence does imply that it will not be used (see Figure~\ref{fig:bad_rule}).
+Therefore, at this stage, we create \emph{activation rules} which activate those potential rules. % latter rules las que se han mencionado primero
+
+
+% Un tanto mierden a la hora de intentar poner dos imagenes en el mismo marginpar
+% La última la pone cortada
+% Por eso he optado por ahorrar espacio poniendo la más grande en el margen y la otra en el texto
+% \begin{figure}
+%   \begin{center}
+%   \includegraphics[width=\marginparwidth]{img/activation_rules/activatable_rule.pdf}
+%   \caption{ A rule which, according to the clues shown, may be invoked.
+% 	  The third point shows an example of activation rule for the previous rule. }
+%   \label{fig:activatable_rule}
+%   \end{center}  
+% \end{figure}
+% 
+% \begin{figure}
+%   \begin{center}
+%   \includegraphics[width=\marginparwidth]{img/activation_rules/bad_rule.pdf}
+%   \caption{ A rule which, according to the clues shown in Figure~\ref{fig:activatable_rule}, will never be invoked.}
+%   \label{fig:bad_rule}
+%   \end{center}  
+% \end{figure}
+
+
+An \emph{activation rule} for a rule R contains a \emph{true} in the premise.
+The conclusion is made by R's premise substituting the variables with fictitious \acsp{uri} with a common prefix (see Figure~\ref{fig:activatable_rule}).
+These fictitious \acsp{uri} are used in the third stage to distinguish when a triple should be replaced by actual knowledge from the space. % o obtained from the space?
+Note that the nature of the \emph{activation rules} is temporary since they are only used during the second stage.
+
+
+
+Finally, \paragraph{the goal state} may be created from the task.
+For instance, from a task of \emph{regulate temperature to 6ºC} we can deduce the goal state of \emph{temperature of 6ºC}.
+This translation is out of the scope of the dissertation.
+Note that this alignment will allow not to introduce new primitives for the proof-based mechanism.
+
+
+
+\subsection{Node Responsible for Proof-based Actuation Mechanism}
+
+In the Section~\ref{sec:background_restdesc}, two coarse-grained steps were described:
 \begin{itemize}
- \item obtener todo el conocimiento necesario para el proceso?
- \item razonamiento sobre conocimiento
- \item parsear el resultado para invocar servicios HTTP
- \item monitorizar que se ha complido el cambio?
+  \item Reasoning over the descriptions, background knowledge, an initial state and a goal state.
+        The result of the reasoning process if a pre-proof, which can be seen as a tentative \emph{execution plan} to achieve the goal.
+  \item Check the execution plan by following it.
 \end{itemize}
+
+
+This mechanism can be performed by any node.
+% no obligamos a implementar una u otra, pero recomendamos esto: XXX
+In this thesis, we present three different alternatives and their trade offs.
+However, we do not adhere to any of them.
+We leave as a future work to implement and empirically compare them.
+
+
+First, it can be triggered by an agent which resides in the same machine as the \emph{coordination space}.
+Doing so, it can locally consume the knowledge available in the \emph{coordination space}.
+
+
+Second, each \Consumer{} interested on changing the environment can trigger it.
+If these \Consumers{} use the search mechanism present in Chapter~\ref{XXX}, they will background knowledge about other nodes.
+This reduces the dependency on the node providing the \emph{coordination space} as the search mechanism from the Chapter~\ref{XXX} does.
+However, it requires them to carry tasks such as reasoning and checking the pre-proof.
+While the latter increases the network usage, the first increases the computation.
+As we already mentioned in previous chapters, these tasks severely affect to the energy consumption.
+Furthermore, some resource platforms will not be even able to reason.
+
+
+% proponer otra solución: workers que lleven a cabo este proceso.
+Third, we could delegate on any node able to perform such tasks.
+In fact, these nodes could follow the \emph{replicated-worker pattern}.
+Any node able to perform the process will read from the space goals to trigger the process (i.e. \emph{reasoning tasks}).
+Apart from balancing the load between all the worker nodes, any node can stop being worker at any time by not taking more \emph{tasks} (e.g. if it has low energy).
+Preferably, these nodes must be \Consumers{} to use the \clues{} from the search mechanism as background knowledge.
+
+
+
+% Poner ejemplo adaptado del paper de WoT2013?
+
+
+%Proceso de suggest:
+
+%\begin{itemize}
+% \item obtener todo el conocimiento necesario para el proceso?
+% \item razonamiento sobre conocimiento
+% \item parsear el resultado para invocar servicios HTTP
+% \item monitorizar que se ha complido el cambio?
+%\end{itemize}
