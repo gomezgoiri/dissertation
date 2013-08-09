@@ -90,7 +90,10 @@ Marketplace pattern allows negotiation of two entities through the space.
 Finally, specialist patterns allow nodes with distinct capacities to cooperate towards a common goal.
 
 
-% TODO un esquema dividido en 4 en el que aparecen todos los patrones explicados!!!
+% Posible TODO Un esquema dividido en 4 en el que aparecen todos los patrones explicados.
+% No es fácil mostrar el 2do y el 3ero.
+% Una intentona de estos y otros patrones inventados en Lancaster:
+%     https://docs.google.com/a/deusto.es/document/d/1QXGsQ4-wAByc_ByQ-Tts-TSphSQAzfO_c3mcgoZdloc/edit
 
 
 
@@ -118,11 +121,20 @@ In this problem computation or a negotiation aspects are secondary. % se entende
 
 \subsubsection{Scenario 1: Temperature Regulation}
 
-The first scenario presents a room populated with several kind of sensors such as Oracle's SunSPOTs\footnote{http://www.sunspotworld.com},
-% TODO referenciado en el capítulo 4!!!!
-Digi's XBee sensors with a IP gateway,
-the sensors on a KNX20 domotic bus and a fan connected to a FoxG20 embedded platform to act as an actuator (see Figure \ref{fig:sensorsphoto}).
+The first scenario presents a room populated with several kind of sensors such as Oracle's SunSPOTs\footnote{\url{http://www.sunspotworld.com}},
+% TODO TODO TODO referenciar a la parte donde se hayan referenciado bien los dispositivos! (e.g. see ~\ref{environment})
+% Para el resto proveer al menos una URL!
+Digi's XBee sensors with an IP gateway,
+the sensors on a KNX20 domotic bus\footnote{\url{http://www.knx.org/knx/what-is-knx/}} and a fan connected to a FoxG20 embedded platform to act as an actuator (see Figure \ref{fig:devices_scenario}).
 Besides, an Android application semantically stores the user's temperature preferences.
+
+
+\InsertFig{devices_scenario}{fig:devices_scenario}{
+  The devices used in the devised scenarios.
+}{
+}{0.7}{}
+
+
 An independent node (i.e. the master node) continuously reads from the space % using \emph{read primitive}
 (1) the room's temperature, and
 (2) the user's desired temperature.
@@ -131,7 +143,6 @@ It just takes the first available graph from the space.
 When the second one is below the first one, it generates a ``\emph{decrease temperature during a certain period}'' task which can be consumed by different independent worker nodes.
 In this case, the FoxG20 periodically checks for orders it can fulfill extracting them from the space. % consumes them with a \textit{take primitive}.
 % zasca, acabamos de poner en bandeja que nos rechine lo de comprobar periodicamente
-
 
 
 \subsubsection{Scenario 2: Sedentary Lifestyle Checker}
