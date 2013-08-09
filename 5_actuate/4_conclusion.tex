@@ -1,2 +1,33 @@
-
 \section{Conclusion}
+
+In this chapter we presented two ways to actuate on the physical environment.
+The first is the usual way to operate through spaces and provides a higher degree of decoupling.
+However, it requires participants to use our middleware's primitives.
+In other words, our middleware is not able to reuse third applications \ac{rest} services.
+
+
+
+Since the interoperability is one of the guiding principles of our middleware, we presented an additional actuation mechanism.
+This mechanism relies in the semantic description of the services, additional knowlege and in a reasoning process. % additional knowledge: background + initial
+With that information, it is able to generate executions plans towards a goal.
+Following these plans implies different calls to the different services.
+
+
+We sketched an allignment of our middleware with this actuation mechanism.
+The tasks written in the space can be translated into goals.
+The knowledge from the space can be used as an input for the reasoning process.
+Different nodes are able to trigger the reasoning and check the plan.
+Remarkably, we suggest the use of \ac{ts} patterns to promote load balancing between the devices able to perform that process.
+
+
+% Future work o conclusion?
+The second actuation alternative requires further work to check some of the assumptions made.
+For example, will always be possible to translate a task into a goal.
+Additionally, it opens the door to solve interesting questions: when there are two or more paths to a goal, how to discern which one to follow.
+
+
+Furthermore, the middleware must deal with the coexistence of both mechanisms.
+Will both methods be triggered indistinctly or will the first prevail over the second?
+% uso de nuestra actuación por parte de apps WoT
+Finally, the question of how to reuse actuation mechanisms of nodes using \ac{ts} patterns from \ac{wot} has not been even addressed.
+However, this chapter has exposed, described and compared the key points towards the actuation through a \ac{tsc} middleware for \ac{ubicomp}.
