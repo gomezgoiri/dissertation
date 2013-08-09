@@ -153,8 +153,8 @@ First, it can be triggered by an agent which resides in the same machine as the 
 Doing so, it can locally consume the knowledge available in the \emph{coordination space}.
 
 
-Second, each \Consumer{} interested on changing the environment can trigger it.
-If these \Consumers{} use the search mechanism present in Chapter~\ref{XXX}, they will background knowledge about other nodes.
+Second, each \consumer{} interested on changing the environment can trigger it.
+If these \consumers{} use the search mechanism present in Chapter~\ref{XXX}, they will background knowledge about other nodes.
 This reduces the dependency on the node providing the \emph{coordination space} as the search mechanism from the Chapter~\ref{XXX} does.
 However, it requires them to carry tasks such as reasoning and checking the pre-proof.
 While the latter increases the network usage, the first increases the computation.
@@ -167,7 +167,7 @@ Third, we could delegate on any node able to perform such tasks.
 In fact, these nodes could follow the \emph{replicated-worker pattern}.
 Any node able to perform the process will read from the space goals to trigger the process (i.e. \emph{reasoning tasks}).
 Apart from balancing the load between all the worker nodes, any node can stop being worker at any time by not taking more \emph{tasks} (e.g. if it has low energy).
-Preferably, these nodes must be \Consumers{} to use the \clues{} from the search mechanism as background knowledge.
+Preferably, these nodes must be \consumers{} to use the \clues{} from the search mechanism as background knowledge.
 
 
 
