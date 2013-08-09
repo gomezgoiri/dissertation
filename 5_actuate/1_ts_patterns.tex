@@ -148,16 +148,19 @@ In this case, the FoxG20 periodically checks for orders it can fulfill extractin
 
 \subsubsection{Scenario 2: Sedentary Lifestyle Checker}
 
-The second scenario presents an application which helps the user to avoid the sedentary lifestyle by giving him different warnings.
-We considered the recommendation that states that an adult should walk at least 10.000 steps in an ordinary day \citep{tudor2002taking}.
-Taking into account the expected steps which should have been completed in each moment of the day, the application generates different priority level messages.
+The second scenario presents an application which helps the user to avoid a sedentary lifestyle by giving him different warnings.
+We consider the recommendation that states that an adult should walk at least 10.000 steps in an ordinary day \citep{tudor2002taking}.
+Taking into account the expected steps which should have been completed at each moment of the day, the application generates different priority level messages.
 
 There are several nodes involved in this task.
 Each node runs on a device. % which belongs to a user.
-First, an Android phone periodically writes the number of steps covered by a user in that day\footnote{http://code.google.com/p/pedometer/}.
+First, an Android phone periodically updates the number of steps covered by a user that day\footnote{\url{http://code.google.com/p/pedometer/}}.
 %Besides, it writes her profile, more important to this problem: her age. % simplificado un poquillo
 Second, there is an undefined number of devices which know how to warn the user about her unhealthy behavior.
-Third, there is a node in charge of generating warnings.
+Third, there is a node in charge of generating the warnings.
+
+
+\medskip
 
 
 The application follows the \emph{blackboard pattern}.
@@ -171,13 +174,12 @@ In this example, these characteristics are the device ownership and the intrusiv
 The \emph{teacher} reads these characteristics, chooses the most appropriate \emph{student} to solve the \emph{problem} and updates the \emph{problem} to indicate the selection.
 %If no device writes their characteristics, the \emph{teacher} can wait longer.
 Finally, the selected device takes any warning for him and warns the user. % no tiene respuesta
-If the device does not take message, the \emph{teacher} can update the \emph{problem} with a new selection.
+If the chosen device does not take message, the \emph{teacher} can update the \emph{problem} with a new selection.
 
 
-With this application, if the priority level is low, the user can be warned in a less intrusive way.
-For example, room's light brightness can be increased for low priority notifications, a chumby for normal priority ones or the message can be shown directly in the user's mobile phone when it is a high priority warning.
+With this application, if the priority level is low, the user receives the warning in a less intrusive way.
+For example, room's light brightness can be increased for low priority notifications, a Chumby\footnote{\url{http://www.chumby.com/}} can show an icon for normal priority ones and the user's mobile phone show directly the message when it is a high priority warning.
 The remarkable thing is that the devices present in the environment at each moment can vary and the application will still fulfill its goal.
-
 
 
 
