@@ -3,12 +3,12 @@
 
 % por qué? motivación: permitir a otras app integrarse en nuestro espacio
 \ac{rest}-like services constitute an emerging mechanism to actuate in the physical environment. % REST-like, no compliant with Fielding
-Therefore, its seamless integration would open the door to reusing the capacities of many existing devices. % interoperate
-However, this require nodes to directly use the actuator's node \ac{http} \ac{api}.
+Therefore, their seamless integration would open the door to reuse the capacities of many existing devices. % interoperate
+However, this requires applications to directly use the actuator's node \ac{http} \ac{api}.
 
 
 In contrast, the actuation mechanism presented in the previous section uses the \Space{} (i.e. it is indirect).
-From the actuator node perspective, the mechanism implies that it must be aware of the content of the space.
+The mechanism implies that the actuator must be aware of the content of the space.
 For instance, a heater must check the space to find if a new desired temperature was written.
 % lo podrá reusar a través de un intermediario
 % interop era una de las cosas que queriamos cuidar
@@ -21,7 +21,7 @@ From her perspective, she will still use the space-based patterns presented in t
 However, the middleware will be enriched with the actuation capacities of third \ac{http} \acp{api}.
 
 
-To define that integration, we first explain the mechanism to describe and select the appropriate \ac{rest} services (Section~\ref{sec:background_restdesc}).
+To define that integration, we first explain the mechanism used to describe and select the appropriate \ac{rest} services (Section~\ref{sec:background_restdesc}).
 Then we answer two key questions:
 \begin{itemize}
   \item Which node is responsible for triggering this mechanism? (Section~\ref{sec:inputs_proof})
@@ -40,37 +40,37 @@ The client should (1) interpret the representations provided by the server and t
 
 
 % es HATEOAS?
-As explained in Section~\ref{}, semantic representations do not include a native way to express the hypertext.
+As explained in Section~\ref{sec:network_properties}, semantic representations do not include a native way to express the hypertext. % TODO realmente se explica?
 To solve this, three solutions can be adopted:
 % Unos proponen extender con ontologías
-(1) to use an ontology to represent the hypertext,
-(2) to embed the hypertext independently to the representations on the \ac{http} headers, and % TODO citar lo de HTTP header de Wilde
-(3) to provide a description of the resources using the \ac{http} OPTIONS verb.
+(1) to use an ontology to represent the hypertext \citep{kjernsmo_necessity_2012},
+(2) to embed the hypertext independently to the representations on the \ac{http} headers \citep{erik_profile_2013}, and
+(3) to provide a description of the resources using the \ac{http} OPTIONS verb \citep{verborgh_functional_2012,verborgh_ijcs_2014}.
 The latter two enable to discover resources and state transitions without adding metadata to the representations.
 This allows not only to describe semantic representations, but any type of formats.
-Furthermore, the third option represents the most flexible one.
+Furthermore, the third option represents the most expressive one. % TODO explicar por que?
 
 
-Different ways exist to describe \ac{rest} services. % o mejor resources? % mencionar WADL, etc.?
+Different ways exist to describe \ac{rest} services. % mencionar WADL, etc.?
 % citar a donde se hable de RESTdesc y así ya se empieza a explicar la solución de forma discreta.
-\emph{RESTdesc} \cite{verborgh_wsrest_2012} proposes a fully semantic description.
-These descriptions are rules expressed in the Notation 3 (N3)\footnote{\url{http://www.w3.org/TeamSubmission/n3/}} language with a premise and a conclusion.
-The premise expresses the requirements to invoke a REST service.
-The conclusion expresses both the REST call that needs to be made and the description of that invocation result.
+\emph{RESTdesc} \citep{verborgh_functional_2012} proposes a fully semantic description.
+These descriptions are rules expressed in the \ac{n3}\footnote{\url{http://www.w3.org/TeamSubmission/n3/}} language with a premise and a conclusion.
+The premise expresses the requirements to invoke a \ac{rest} service.
+The conclusion expresses both the \ac{rest} call that needs to be made and the description of that invocation result.
 
 
-Verborgh et al. \cite{verborgh_ijcs_2014} propose a proof-based composition mechanism for Web \acp{api} using \emph{RESTdesc}.
+\citet{verborgh_ijcs_2014} propose a proof-based composition mechanism for Web \acp{api} using \emph{RESTdesc}.
 This mechanism uses as inputs:
 (1) an initial state,
 (2) a goal state,
 (3) Web \ac{api} descriptions using RESTdesc, and
 (4) optional background knowledge.
-Each of these inputs are semantically expressed and therefore, they can be processed by standard N3 reasoners.
+Each of these inputs are semantically expressed and therefore, they can be processed by standard \ac{n3} reasoners.
 The reasoners generate proofs about how to achieve the goal starting from the initial state using the rest of the inputs.
 These proofs can be seen as steps that need to be made to reach a desired state.
 
 
-In \cite{verborgh_ijcs_2014}, they distinguish between pre-proof and post-proof.
+\citeauthor{verborgh_ijcs_2014} distinguish between pre-proof and post-proof.
 The first, are those which assume that the execution of all \acs{api} calls will behave as expected.
 The latter, can be seen as a \emph{revision} of the pre-proof.
 It executes the Web \acs{api} of the pre-proofs and uses actual execution results to generate a new proof.
