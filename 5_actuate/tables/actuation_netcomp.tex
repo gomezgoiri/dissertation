@@ -1,0 +1,24 @@
+
+% Tabla: XXX
+% autonomía: poner o simplemente indirect vs direct?
+% requirements in consumers: estar pendiente del espacio vs razonar
+% requirements in providers: estar pendiente del espacio vs (describir semánticamente servicio => equivalente a tasks)
+\begin{table}[htbp]
+  \caption{Foreseeable networking and computing impact on the nodes involved in the actuation mechanism.}
+  \begin{center}
+    \footnotesize
+    \begin{tabular}{llp{4cm}p{4cm}}
+      Actuation &
+      Perspective &
+      Networking &
+      Computation \\
+      \hline
+      \multirow{2}{*}{\ac{ts} patterns} & Provider & Proactive, limited activity & Limited: Pattern matching \\
+				    ~ & Consumer & Proactive, limited activity & Limited: Pattern matching \\
+      \multirow{2}{*}{Proof-based} & Provider & Reactive, limited activity & Limited: Handling requests \\
+                                  ~ & Consumer & Proactive, high activity &  Demanding: Reasoning \\ % Y comprobar planes...
+      \hline
+    \end{tabular}
+  \end{center}
+  \label{tab:network_properties}
+\end{table}

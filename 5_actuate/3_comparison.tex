@@ -2,25 +2,35 @@
 \section{Comparison}
 
 The first actuation mechanism requires a subscription mechanism and provides space and time autonomy.
-However, it does that by creating a dependency on the \space{}.
-Two nodes will not be able to communicate with each other without the \space{}.
+However, it does that by creating a dependency on the \Space{}.
+Two nodes will not be able to communicate with each other without the \Space{}.
 
 
-The second approach offers this independence of the \space{}: any node can directly invoke a service to act over the environment.
-Remarkably, it would allow to integrate third \ac{wot} applications in our middleware.
-However, it also implies that a node needs to have prior knowledge about the environment to reason over it.
-Since this knowledge must be acquired from remote nodes somehow, this approach demands more network usage than the first one.
+The second approach offers this independence of the \Space{}: any node can directly invoke a service to act over the environment.
+Remarkably, it allows the integration of third \ac{wot} applications in our middleware. % apps, APIs o services?
+To do that, it requires a rule-based reasoning engine which is not available in many computing platforms. % reasoning engine ya queda bien?
+
+
+\input{\pathchapfive/tables/actuation_general_comparison}
+
+
+\bigskip
+
+The impact of both mechanisms in resource constrained devices will be affected by computing and networking activities.
+\ac{ts}-based patterns require all the participants to be aware of what is written in the space to react (i.e. be proactive).
+Both consumers and providers read and write from the space, subscribe to specific changes and receive notifications.
+They are only affected by the contents they are interested in.
+Finally, they only perform trivial computing task: interpreting results and pattern matching. % pattern matching sólo en el caso del coordination space!
+
+
+The proof-based actuation mechanism requires the consumer to have prior knowledge about the environment to reason over it. % frase susceptible de simplificar
+Since this knowledge must be acquired from remote nodes somehow, this approach might demand more network usage than the first one.
 % de pre-proof a post-proof se generará más networking activity seguro? por qué? por invocar servicios REST? Es equivalente a andar leyendo tareas y escribiendo resultados...
 Besides, the proof-based actuation itself also generates more computation activity on the node responsible of reasoning.
 Both aspects have a negative impact in the energy consumption.
 Consequently, it will most likely not be an adequate mechanism for resource constrained devices.
-In a more practical aspect, reasoning demands a reasoner which may not be available in many computing platforms. % aspecto práctico, pragmático o qué? % afectando negativamente su implantación
+As a contrast, this mechanism requires few things from the provider perspective: to serve \ac{rest}-like services and provide their descriptions. % aclarar quien es el provider/actuator?
 
 
 
-% Tabla: XXX
-% autonomía: las de space-based vs. 
-% dependencia en spacio
-% requirements: subscription, reasoning
-% interoperability: con otros servicios, no alreves
-
+\input{\pathchapfive/tables/actuation_netcomp}

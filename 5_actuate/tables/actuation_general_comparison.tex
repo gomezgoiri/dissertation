@@ -1,0 +1,28 @@
+
+% Tabla: XXX
+% autonomía: poner o simplemente indirect vs direct?
+% requirements in consumers: estar pendiente del espacio vs razonar
+% requirements in providers: estar pendiente del espacio vs (describir semánticamente servicio => equivalente a tasks)
+\begin{table}[htbp]
+  \caption{Characteristics of the discussed actuation mechanisms.}
+  \begin{center}
+    \footnotesize
+    \begin{tabular}{lccc}
+      \hline
+      Actuation &
+      Communication & % o poner autonomias y demás para enfatizar?
+      \multirow{2}{*}{Benefits} &
+      Required \\
+      mechanism &
+      style &
+      ~ &
+      features \\
+      \hline
+      \ac{ts} patterns & Indirect & Decoupled communication & Subscriptions \\
+      Proof-based & Direct & Reuse of third \ac{wot} & Rule-based \\ % mencionar interop? % TODO ampliar la noción de WoT a REST-like?
+      & & apps' actuation capacities & reasoning \\
+      \hline
+    \end{tabular}
+  \end{center}
+  \label{tab:network_properties}
+\end{table}
