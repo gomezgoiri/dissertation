@@ -6,13 +6,16 @@ However, it does that by creating a dependency on the \space{}.
 Two nodes will not be able to communicate with each other without the \space{}.
 
 
-The second approach offers that independence of the \space{}.
-Any node can directly invoke a service to act over the environment.
+The second approach offers this independence of the \space{}: any node can directly invoke a service to act over the environment.
+Remarkably, it would allow to integrate third \ac{wot} applications in our middleware.
 However, it also implies that a node needs to have prior knowledge about the environment to reason over it.
-This knowledge must be adquired from the other nodes somehow (i.e. demands more network usage).
-In the technical aspect, it requires a reasoner, which is not necessarily available in all computing platforms.
-Besides, it generates more computation and networking activity on the node responsible of the process.
-Remarkably, this second approach would allow to integrate third \ac{wot} applications in our middleware.
+Since this knowledge must be acquired from remote nodes somehow, this approach demands more network usage than the first one.
+% de pre-proof a post-proof se generará más networking activity seguro? por qué? por invocar servicios REST? Es equivalente a andar leyendo tareas y escribiendo resultados...
+Besides, the proof-based actuation itself also generates more computation activity on the node responsible of reasoning.
+Both aspects have a negative impact in the energy consumption.
+Consequently, it will most likely not be an adequate mechanism for resource constrained devices.
+In a more practical aspect, reasoning demands a reasoner which may not be available in many computing platforms. % aspecto práctico, pragmático o qué? % afectando negativamente su implantación
+
 
 
 % Tabla: XXX
