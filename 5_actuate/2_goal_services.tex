@@ -135,10 +135,10 @@ optional background knowledge.
 \end{description}
 
 
-\subsection{Node Responsible for Proof-based Actuation Mechanism}
+\subsection{Responsibility for Triggering the Proof-based Actuation Mechanism}
 \label{sec:responsible_proof}
 
-In the Section~\ref{sec:background_restdesc}, two coarse-grained steps were described:
+Section~\ref{sec:background_restdesc} described two coarse-grained steps:
 \begin{itemize}
   \item Reasoning over the descriptions, background knowledge, an initial state and a goal state.
         The result of the reasoning process if a pre-proof, which can be seen as a tentative \emph{execution plan} to achieve the goal.
@@ -148,31 +148,26 @@ In the Section~\ref{sec:background_restdesc}, two coarse-grained steps were desc
 
 This mechanism can be performed by any node.
 % no obligamos a implementar una u otra, pero recomendamos esto: XXX
-In this thesis, we present three different alternatives and their trade offs.
+In this thesis, we briefly analyze three different alternatives and their trade offs.
 However, we do not adhere to any of them.
-We leave as a future work to implement and empirically compare them.
+We leave as a future work to implement and quantitatively compare them.
 
-
-First, it can be triggered by an agent which resides in the same machine as the \emph{coordination space}.
-Doing so, it can locally consume the knowledge available in the \emph{coordination space}.
-
-
-Second, each \consumer{} interested on changing the environment can trigger it.
-If these \consumers{} use the search mechanism present in Chapter~\ref{XXX}, they will background knowledge about other nodes.
-This reduces the dependency on the node providing the \emph{coordination space} as the search mechanism from the Chapter~\ref{XXX} does.
-However, it requires them to carry tasks such as reasoning and checking the pre-proof.
-While the latter increases the network usage, the first increases the computation.
-As we already mentioned in previous chapters, these tasks severely affect to the energy consumption.
-Furthermore, some resource platforms will not be even able to reason.
-
-
-% proponer otra solución: workers que lleven a cabo este proceso.
-Third, we could delegate on any node able to perform such tasks.
-In fact, these nodes could follow the \emph{replicated-worker pattern}.
-Any node able to perform the process will read from the space goals to trigger the process (i.e. \emph{reasoning tasks}).
-Apart from balancing the load between all the worker nodes, any node can stop being worker at any time by not taking more \emph{tasks} (e.g. if it has low energy).
-Preferably, these nodes must be \consumers{} to use the \clues{} from the search mechanism as background knowledge.
-
+\begin{enumerate}
+  \item An agent which resides in the same machine as the \emph{coordination space} can be trigger the process. % TODO buscar su nombre bueno
+	Doing so, it can locally consume the knowledge available in the \emph{coordination space}.
+  \item A more flexible approach would consist of letting any \consumer{} interested on changing the environment to trigger it.
+	If these \consumers{} use the search mechanism presented in the Chapter~\ref{cha:searching}, they will have background knowledge about other nodes.
+	This reduces the dependency on the node providing the \emph{coordination space}. % TODO buscar su nombre bueno
+	However, it requires them to perform tasks such as reasoning and checking the pre-proofs.
+	While the latter increases the network usage, the first increases the computation.
+	As we already mentioned in previous chapters, these tasks severely affect to the energy consumption.
+	Furthermore, some resource platforms will not be even able to reason.
+  \item To mitigate that problem, we could delegate that task only on the nodes able to perform such tasks.
+	In fact, these nodes could follow the \emph{replicated-worker pattern}.
+	They could read from the space goals to trigger the process (i.e. \emph{reasoning tasks}).
+	Apart from balancing the load between all the worker nodes, any node can stop being worker at any time by not taking more \emph{tasks} (e.g. if it has low energy).
+	Preferably, these nodes must be \consumers{} to use the \clues{} from the search mechanism as background knowledge.
+\end{enumerate}
 
 
 % Poner ejemplo adaptado del paper de WoT2013?
