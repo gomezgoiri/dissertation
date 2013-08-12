@@ -22,10 +22,10 @@ However, the middleware will be enriched with the actuation capacities of third 
 
 
 To define that integration, we first explain the mechanism used to describe and select the appropriate \ac{rest} services (Section~\ref{sec:background_restdesc}).
-Then we answer two key questions:
+Then we sketch this integration by answering two key elements:
 \begin{itemize}
-  \item Which node is responsible for triggering this mechanism? (Section~\ref{sec:inputs_proof})
-  \item Where are the inputs for this mechanism read from? (Section~\ref{sec:responsible_proof})
+  \item How do the inputs for this mechanism relate to the ones used in the \ac{ts} patterns? (Section~\ref{sec:inputs_proof})
+  \item Which node is responsible for triggering this mechanism? (Section~\ref{sec:responsible_proof})
 \end{itemize}
 
 
@@ -80,69 +80,59 @@ It executes the Web \acs{api} of the pre-proofs and uses actual execution result
 \subsection{Inputs for the Proof-based Actuation Mechanism}
 \label{sec:inputs_proof}
 
-As has been seen, the reasoning process uses as input:
-(1) an initial state,
-(2) a goal state,
-(3) Web \ac{api} descriptions using RESTdesc, and
-(4) optional background knowledge.
+In \citet{verborgh_ijcs_2014}'s proposal the reasoning process uses as inputs:
+an initial state,
+a goal state,
+Web \ac{api} descriptions using RESTdesc, and
+optional background knowledge.
 % inputs: clues
 % goal: task
 
 
-\paragraph{The descriptions} must be read previously by an agent and integrate them in the \clues{} presented in Chapter~\ref{XXX} or write in the coordination space.
-The latter option requires the node triggering the process read from the space.
-The first option ensures that they will be available in each \consumer{}.
-The static nature of these descriptions does not break the stability assumption of the \clues{}.
+\begin{description}
+  \item[The descriptions] must be read from the actuation nodes prior to reasoning. % obvio
+        They can be read with a \emph{ad hoc} discovery mechanisms.
+        However, in order to simplify the design of the middleware, it is sensible to use one of the already existing mechanisms:
+        
+        \begin{itemize}
+	  \item An agent could discover the descriptions and simply write them in the coordination \Space{}. % y ahora habrá que definir que es un agente?
+		Then, any node willing to reason will read them from the \Space{}.
+	  \item The descriptions could be part of the \clues{} presented in Chapter~\ref{cha:searching}.
+		This option ensures that they will be available in any \consumer{}.
+		Besides, the static nature of these descriptions does not break the stability assumption of the \clues{}. % explicar más?
+        \end{itemize}
 
 
-\paragraph{The initial state and background knowledge} can be acquired both from the coordination space and the outer space.
-To represent the knowledge in the outer space instead of reading it, the \clues{} can be used.
-We propose to create \emph{actuation rules} from \clues{}.
+  \item[The initial state and background knowledge] can be acquired both from the coordination space and the outer space.
+	However, reading all the space would be highly inefficient.
+	To reduce readings on the space (i.e. network usage), we propose a procedure composed by two reasoning steps.
+	In the first one we only use local incomplete knowledge derived from the \clues{}.
+	Then, we read from the \Space{} just the knowledge needed to confirm the pre-proofs obtained in the first reasoning.
+	The second reasoning uses this knowledge to get real pre-proofs. % real o actual pre-proofs
+	
+	% Y ahora explicado en mayor detalle:
+	Therefore, a node which wants to actuate over the space will need to obtain the \emph{clues} from the \ac{wp}.
+	%These clues, as explained before, tell what kind of content other nodes provide. % un poco redundante
+	Let us assume that these \emph{clues} are composed by the predicates used by the nodes which provide content. % es una de las alternativas que se planteaban
+	The existence of a predicate used in a premise does not necessarily imply that this rule can be used.
+	Nevertheless, its absence does imply that it will not be used (see Figure~\ref{fig:activation_rules}).
+	Therefore, we can create temporary \emph{activation rules} from \clues{} which activate those potential rules. % latter rules las que se han mencionado primero
+
+	\InsertFig{activation_rules}{fig:activation_rules}{
+	  Sample clues, two rules and the activation rule created from the first rule.
+	}{
+	  According to the clues shown, the second rule will never be invoked.
+	}{0.8}{}
+
+	An \emph{activation rule} for a rule R contains a \emph{true} in the premise.
+	The conclusion is made by R's premise substituting the variables with fictitious \acsp{uri} with a common prefix (see Figure~\ref{fig:activation_rules}).
+	These fictitious \acsp{uri} are used to distinguish when a triple should be replaced by actual knowledge from the space. % explicar mejor?
 
 
-A node which wants to actuate over the space needs to obtain the \emph{clues} from the \ac{wp}.
-These clues, as explained before, tell the node what other nodes provide.
-In this work, we have assumed that these \emph{clues} are composed by the predicates used by the nodes which provide content.
-
-
-The existence of a predicate used in a premise does not necessarily imply that this rule can be used.
-Nevertheless, its absence does imply that it will not be used (see Figure~\ref{fig:bad_rule}).
-Therefore, at this stage, we create \emph{activation rules} which activate those potential rules. % latter rules las que se han mencionado primero
-
-
-% Un tanto mierden a la hora de intentar poner dos imagenes en el mismo marginpar
-% La última la pone cortada
-% Por eso he optado por ahorrar espacio poniendo la más grande en el margen y la otra en el texto
-% \begin{figure}
-%   \begin{center}
-%   \includegraphics[width=\marginparwidth]{img/activation_rules/activatable_rule.pdf}
-%   \caption{ A rule which, according to the clues shown, may be invoked.
-% 	  The third point shows an example of activation rule for the previous rule. }
-%   \label{fig:activatable_rule}
-%   \end{center}  
-% \end{figure}
-% 
-% \begin{figure}
-%   \begin{center}
-%   \includegraphics[width=\marginparwidth]{img/activation_rules/bad_rule.pdf}
-%   \caption{ A rule which, according to the clues shown in Figure~\ref{fig:activatable_rule}, will never be invoked.}
-%   \label{fig:bad_rule}
-%   \end{center}  
-% \end{figure}
-
-
-An \emph{activation rule} for a rule R contains a \emph{true} in the premise.
-The conclusion is made by R's premise substituting the variables with fictitious \acsp{uri} with a common prefix (see Figure~\ref{fig:activatable_rule}).
-These fictitious \acsp{uri} are used in the third stage to distinguish when a triple should be replaced by actual knowledge from the space. % o obtained from the space?
-Note that the nature of the \emph{activation rules} is temporary since they are only used during the second stage.
-
-
-
-Finally, \paragraph{the goal state} may be created from the task.
-For instance, from a task of \emph{regulate temperature to 6ºC} we can deduce the goal state of \emph{temperature of 6ºC}.
-This translation is out of the scope of the dissertation.
-Note that this alignment will allow not to introduce new primitives for the proof-based mechanism.
-
+  \item[The goal state] should be created from the task to reuse the primitives and the data from the \ac{ts}-based actuation mechanism.
+	For instance, from a task of \emph{regulate temperature to 6ºC} we can deduce the goal state of \emph{temperature of 6ºC}.
+	This translation is out of the scope of the dissertation.
+\end{description}
 
 
 \subsection{Node Responsible for Proof-based Actuation Mechanism}
