@@ -24,37 +24,50 @@ I tell you what, I speak slow so those of you with a Phd can understand.
 
 %------------------------------------------------------------------------- 
 
-% Presentar de qué ha ido la tesis
+% Presentar de qué ha ido la tesis (TODO añadir capítulos en los que se ha ido tratando?)
 % 3 ptos con los que quiero que el lector se quede: searching, acting y compatibility with WoT
 
-This dissertation explores the design of a completely distributed \ac{tsc} middleware.
-In this middleware, each node is responsible of its own information, but together with other nodes they create a virtual space. % virtual, concept
-Writing and reading from this space, the nodes communicate in a much more decoupled indirect style.
+This dissertation explores the design of a distributed \ac{tsc} middleware suitable for \ac{ubicomp} environments.
+The middleware's most remarkable characteristic is its alignment with \ac{rest}-like services and the \ac{wot} world.
+This alignment pursues the interoperability of the middleware with other semantic \ac{wot} solutions.
+This way, it encourages the reuse of their data and eases the access to its own.
+% Otra forma de vender explicitamente la importancia de integrarlo con WoT:
+% Besides, after an analysis we acknowledged the importance and benefits that the upcoming \ac{wot} has brought to the \acl{ubicomp}.
+% This has lead us to have make our final solution compatible with the \ac{wot} and other REST services.
+
+
+To preserve as many beneficial properties as possible from \ac{wot} and \ac{ts} worlds, the middleware is divided in two \Spaces{}: the coordination space and the outer space. % TODO usar constantes
+The first one enables a completely indirect communication, time and space decoupled, between the nodes by writing and reading semantic content in it.
+The latter acknowledges the distributed nature of \ac{ubicomp} environments by letting the nodes manage their own semantic content.
+However, this content is shared with the rest of nodes forming a \emph{virtual} space.
+Developers access to the content of the space in a associative manner keeping the space decoupling property.
+The access to both spaces is perform by a resource-oriented \ac{http} \ac{api} to ease reusing contents by third applications. % o REST-like
+
 
 The distribution of the information avoids the dependency of the participants on other devices, but arises other challenges.
-We have tackled two main challenges: how to search in a decentralized way and how to act on the environment through the space.
-Besides, after an analysis we acknowledged the importance and benefits that the upcoming \ac{wot} has brought to the \acl{ubicomp}.
-This has lead us to have make our final solution compatible with the \ac{wot} and other REST services.
+This dissertation tackles two main challenges: how to search in a decentralized way and how to act on the environment through the space.
+
 
 To enhance the search process between devices limiting their dependencies in others we designed an architecture.
 This architecture dynamically chooses an intermediary according to its capabilities to support the most limited devices.
 The final result is that less requests are required in overall, specifically reducing the load on resource constrained devices.
+This results in the reduction of their energy consumption.
+% es independiente de nuestra solucion: se puede aplicar a otras cosas
 
-% TODO refinar cuando esté hecha esa parte
-We also presented two different acting mechanisms: X and Y.
-Comparing them we reach to the conclusion that X proposes a less decoupled design, which in turn depends on a subscription mechanism.
-This subscription mechanism is particularly challenging on dynamic environments.
-The Y solution is more straightforward and more based in REST services consumption.
-In contrast, it depends on reasoners and on some additional information about the services offered by the rest of the nodes.
 
-Besides, we have guided our design to build the middleware over a REST interface.
-Using that interface, each node exposes the semantic resources, i.e. RDF triples grouped in RDF graphs, it manages.
-This enables the consumption of these contents by other semantic \ac{wot} solutions or REST services, even if they are not part of our middleware.
+To actuate on the physical environment we first presented how to apply \ac{ts} application patterns to the \ac{ubicomp} vision.
+%Specifically, tasks and results for these tasks are read and written into the space.
+% Necesidad de suscripciones
+Although these actuation mechanisms promote indirect communication between the nodes, they require them to use the coordination space.
+This impedes to seamlessly integrate actuators from the \ac{wot} world. % without a gateway.
+To avoid that, i.e. to promote the reuse of third \ac{wot} applications' actuation capacities, we presented how to integrate a proof-based mechanism with the regular \ac{tsc} usage.
+%Finally, the advantages and drawbacks of both approaches are presented.
 
-\input{\pathchapfive/2_contributions}
-\input{\pathchapfive/3_publications} % o si queda muy corto, incluirlo directamente en conclusions
-\input{\pathchapfive/4_futurework}
-\input{\pathchapfive/5_finalremarks}
+
+\input{\pathchapfive/1_contributions}
+\input{\pathchapfive/2_publications} % o si queda muy corto, incluirlo directamente en conclusions
+\input{\pathchapfive/3_futurework}
+\input{\pathchapfive/4_finalremarks}
 
 
 % ----------------------------------------------------------------------
