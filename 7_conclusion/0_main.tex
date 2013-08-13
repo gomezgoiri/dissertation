@@ -25,7 +25,6 @@ I tell you what, I speak slow so those of you with a Phd can understand.
 %------------------------------------------------------------------------- 
 
 % 3 ptos con los que quiero que el lector se quede: searching, acting y compatibility with WoT
-% findings
 
 This dissertations has explored the design of a completely distributed \ac{tsc} middleware.
 In this middleware, each node is responsible of its own information, but together with other nodes they create a virtual space. % virtual, concept
@@ -52,34 +51,11 @@ Using that interface, each node exposes the semantic resources, i.e. RDF triples
 This enables the consumption of these contents by other semantic \ac{wot} solutions or REST services, even if they are not part of our middleware.
 
 
-% Contributions (por si necesito ideas)
-% \item Analysis of strengths and weaknesses of both \ac{wot} and \ac{tsc} and comparison of both approaches.
-% \item Design and implementation of a RESTful interface which makes possible to build a \ac{tsc} on top of it. % TODO revisar y poner todos los peros que haga falta para no traicionar la idea de Fielding
-%       This resource-oriented interface enables the access to the the semantic knowledge provided by each device.
-%       By doing so, we keep our middleware compliant with the \ac{wot} idea. % o integrable con otros servicios, o...
-%       % es como explicar una dualidad: puedes usar nuestro middleware usando las primitivas de TSC, pero también puedes usarlo simplemente porque te viene bien para WoT semántico
-% \item A search-aware architecture which promotes the end-to-end communication between devices. % and balances their load by administrative tasks according to their capacities.
-%       This architecture tries to minimize the requests devices have to handle by enhancing their search mechanism.
-%       The extra-tasks introduced by this enhancement are performed by nodes chosen according to their capacities.
-% \item Design and comparison of two approaches which enable to act on the environment by writing in the fully distributed space.
-% \item Exploration of the use of semantic content in several current embedded platforms.
-%       We have tested several platforms, semantic frameworks and reasoners to verify the feasibility of the ideas presented in the dissertation.
-% \item Design and implementation of most of the ideas presented in a middleware publicly available called \emph{Otsopack}. % al primo no le gustará, pero insisto
-%       This middleware has been used in several projects for a range of scenarios.
-
-
-% (possitive) leasons learnt:
-% 1. middleware fácilmente implementable en distintas plataformas
-% 2. la semántica al principio es complicada, pero muestra sus beneficios en el largo plazo facilitando la integración de apps
-
-
-\section{Limitations and future work}
-
-% On the interoperability and the Semantic web
-% hablar del paper de SW en IoT de que la anotando cosas semánticamente sólo no se logra automáticamente Interop
-% pero decir que lo nuestro es un primer paso en paralelo a otros que puedan solucionar los otros problemas
-
-% semantica y cacharros pequeños, sigue siendo algo difícil. Necesidad de razonadores ligeros.
+\input{\pathchapfive/1_discussion}
+\input{\pathchapfive/2_contributions}
+\input{\pathchapfive/3_publications} % o si queda muy corto, incluirlo directamente en conclusions
+\input{\pathchapfive/4_futurework}
+\input{\pathchapfive/5_finalremarks}
 
 
 % ----------------------------------------------------------------------
