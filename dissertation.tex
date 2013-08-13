@@ -16,6 +16,10 @@
 \usepackage[printonlyused]{acronym}
 \usepackage{enumerate}
 \usepackage{footnote} % footnotes inside tables using savenotes
+% For inline cites (section 6.2
+\usepackage{bibentry} % http://gking.harvard.edu/files/bibentry2.pdf
+%\nobibliography* throws an error
+\nobibliography{9_backmatter/ref_self} % http://stefaanlippens.net/bibentry
 
 
 %: Macro file for Latex
@@ -281,6 +285,9 @@
 
 % --------------------------------------------------------------
 
+
+% HOWTO Citar páginas concretas o comentarios (blogs):
+% http://tex.stackexchange.com/questions/89143/citation-with-some-text-inside-square-brackets
 
 %: Declaration of originality
 \include{9_backmatter/declaration}
