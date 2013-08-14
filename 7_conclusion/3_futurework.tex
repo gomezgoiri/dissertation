@@ -1,10 +1,121 @@
 \section{Future Work}
 
 % Limitations => Future Work
-% Posiblemente pasar algo de esto a final remarks
+% ¿Poner lista de la compra o sólo las cosas que se destilen de las limitaciones del trabajo?
 
-% On the interoperability and the Semantic web
-% hablar del paper de SW en IoT de que la anotando cosas semánticamente sólo no se logra automáticamente Interop
-% pero decir que lo nuestro es un primer paso en paralelo a otros que puedan solucionar los otros problemas
+Through this dissertation, we have described several limitations and open issues.
+They open the door to interesting future work which is detailed below.
 
-% semantica y cacharros pequeños, sigue siendo algo difícil. Necesidad de razonadores ligeros.
+
+\subsection{Close the Gap between our Middleware and third Applications}
+
+One of the goals of the middleware is to achieve interoperability with third applications.
+In other words, to reuse their data transparently to the user and enabling them to reuse our middleware's data.
+This goal can be seen as a two-fold strategy: ease the access to the data and make them reusable.
+
+\begin{description}
+  \item[Access to the data.] It must be done by means of an \ac{api}.
+			    In this thesis we have defended the need of using \ac{http} for that purpose.
+			    An adaptation for the upcoming \ac{coap} would increase the potential device base. % "base de usuarios"
+			    
+			    However, the most challenging aspect is not to replicate it in other appropriate protocols.
+			    The most challenging aspect is to automatize the consumption of heterogeneous third \acp{api}.
+			    In this thesis we have ignored it on behalf of a common \ac{api} that needs to be implemented in any device willing to share content. % TODO data api vs domain api => mirar el capitulo 3 y explicar esto
+			    According to the \ac{rest} principles, the \ac{rest_hateoas} constraint can help automated the clients to use any \ac{api} independently of its specific shape. % shape or implementation
+			    
+			    Nevertheless, an agent needs knowledge about the domain explored to reuse any \ac{api}.
+			    And to reuse many \acp{api} without reimplementing the agent, the data types and states of a domain should be standardized. % poner cita del blog de fielding sobre la discussion esa
+			    Therefore, any step in that direction would requires some degree standardization of at least for the \ac{wot} domain.
+			    
+			    The counter-pad of that would be to ensure that our \ac{tsc} \ac{api} complies with the \ac{rest_hateoas} constraint.
+			    Some steps have been done to make the \ac{api} human discoverable with its \ac{html} representation.
+			    However, more effort needs to be done to ease its automatic consumption regardless of its specific implementation. % which would depend on the version
+			    % se pueden usar varias estrategias en paralelo
+			    
+			    Finally, \ac{rest_hateoas} can result in more network usage, which may not be desirable for devices with energy limitations.
+			    Therefore, this trade-off between the interoperability and the network efficiency should be also assessed.
+			    
+  \item[Reusing the data.] The semantic knowledge contributes to that goal.
+			  However, the use of semantic descriptions alone does not ensure interoperability.
+			  \citeauthor{barnaghi_semantics_2012} points out two problems:
+			  (1) the need of standardizing ontologies, or at least when using own ontologies, reference an upper ontology; and
+			  (2) effectively interpreting the annotations.
+			  While the first one requires the consensus of the community, the second demands for efficient reasoners for mobile and embedded platforms.
+			  This efficiency is particularly important since it directly influences their energy consumption.
+			  % TODO Mencionar que estamos trabajando en ello?
+			  % further assessment of existing ones, creating news for platforms
+			  % pero decir que lo nuestro es un primer paso en paralelo a otros que puedan solucionar los otros problemas
+			  % semantica y cacharros pequeños, sigue siendo algo difícil. Necesidad de razonadores ligeros.
+			  
+\end{description}
+
+
+\subsection{Increase Searching Expressibility and Efficiency}
+% Searching: SPARQL y demás
+% 1ero: mayor eficiencia
+% reescritura puede mejorar interop
+
+
+\subsection{Migration of the Coordination Space} % To avoid central point of failure
+% cloud?
+% balanceo de carga
+% distribuído en distintos lados...
+
+
+\subsection{Actuation: implement and test the coexistence of both mechanisms}
+
+\subsection{Actuation on different plans}
+
+
+\subsection{Security Mechanisms}
+% ya hemos hecho algo para dispositivos limitados y móviles
+% ahora falta integrarlo en el middleware, si no, es un poco fiesta y cualquiera podría poner datos falsos
+
+
+
+%%% A partir de aquí, no son aspectos técnicos concretos
+
+
+\subsection{Medir de forma objetiva aspectos del ser humano como la sencillez de uso o de implementación}
+
+% a subtle goal of any middleware
+% unmesured
+
+
+% facilitar modelado?? => el hecho de que sea difícil anotar, puede echar para atrás a desarrolladores
+
+
+
+% Al final, a modo de colofón
+\subsection{Further Evaluation on Real Deployments}
+
+% muchas de nuestras decisiones en la implementación del middleware fueron guiadas por la realidad
+Rather than designing the best theoretical solution, in this dissertation we have tried to present a realizable solution.
+For that, we have implemented most of the ideas in the \emph{Otsopack} middleware and we have promote its use in different research projects.
+This has helped us to identify the key problems to solve.
+
+
+Sometimes, to efficiently evaluate our solution under very different and extreme circumstances, we have simulated some scenarios. % con muchos cacharros
+In this simulations we have tried to present always realistic assumptions.
+% de simulaciones => a la realidad
+However, there is always a gap between what is perceived as realistic and the reality.
+
+
+To bridge both worlds, the next natural step is assessing some aspects of our middleware in a real world environment: % real world es académico???
+\begin{itemize}
+	% Big ecosystem of interconnected objects and devices
+  \item The search architecture.
+        For that, we should deploy an scenario with a number of heterogeneous devices running a task in a long term.
+        % viendo cuales son las necesidades reales de quienes lo usan
+	%    para justificar los parametros que se usaron
+        Then, we could measure their network usage and energy consumption to either tune up some parameters of the architecture or redesign some aspects.
+        % unbiased: alguien que no sea yo
+        The difficulty of this deployment would be not to biased it design and enable it to really solve a problem.
+  % relacionado con el punto anterior (interoperabilidad): reusar distintas applicaciones existentes y ver que realmente se cumple
+  %    una forma de asegurarse, es haciendo que distintos usuarios las creen
+  \item The interoperability.
+        Trying to reuse data from already working \ac{wot} applications, trying to minimize manual development.
+\end{itemize}
+
+
+% Meter aquí la cita de Feynman???
