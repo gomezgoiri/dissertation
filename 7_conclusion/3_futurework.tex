@@ -70,51 +70,46 @@ The performance could be enhanced by introducing optimization techniques from th
 The current design demands the coordination space to be accessible through a \ac{http} \ac{api}.
 For the sake of clarity, at some points of the dissertation we have assumed that this space is centralized in a unique machine.
 However, the access through a \ac{http} \ac{api} does not restrict that.
-Some alternatives that could worth to explore are: % mencionar cloud para algo?
+Some alternatives that can be worth to explore are: % mencionar cloud para algo?
 \begin{itemize}
   \item Replication of the space to increase the system performance (e.g. load balancing).
   \item Distribution of the content over different machines to enhance its scalability. % TODO decir que ya ha sido tratado por más soluciones? (e.g. TripCom)
   \item Migration from a machine to another to avoid a single point of failure.
 	%No node is essential so the system will still work.
-        This will allow, for example, to select the space holder dynamically easing the manageability and deployment.
+        This strategy will allow, for example, to select the space holder dynamically easing the middleware manageability and deployment.
         This would be similar to the \ac{wp} role of our searching architecture. % mencionar Chapter~\ref{cha:searching}?
 \end{itemize}
 
 % aquella idea que tenían los de Lancaster de que el middleware cambia de forma dependiendo del entorno
-Besides, monitoring the middleware usage, one alternative or another can be dynamically chosen depending on the specific needs of each situation.
+Besides, monitoring the middleware usage, one alternative or another could be dynamically chosen depending on the specific needs of each situation.
 
 
-\subsection{Further work on the integration of the Proof-based Actuation Mechanism in the \Space{}}
+\subsection{Integration of the Proof-based Actuation Mechanism in the Space}
 
 Chapter~\ref{cha:actuate} presented an alignment between a proof-based mechanism and actuation through the space.
-However, its implementation and evaluation is left as future work.
+However, its implementation and evaluation was left as future work.
 To enable the usage of the proof-based mechanism, tasks from the latter must be translated into goals.
 This translation must be generalizable to automatize it.
 However, it is not clear whether it will always be possible this direct translation for complex goals and tasks.
 
-
-Another interesting issue is to discern which path to follow to achieve a goal when two or more paths are available.
-We believe that additional high-level rules or policies can be defined (e.g. the path which consumed less energy).
-Storing them into the space can enable reusing this \emph{behaviors} by third applications' developers.
-
-
-Finally, instead of reusing third \ac{wot} applications' actuation capacities in \ac{tsc}, the opposite question could be explored:
-How to reuse actuation mechanisms of nodes using \ac{ts} patterns from \ac{wot} solutions?
-
-
-\subsection{Actuation on different plans}
-
-Let us imagine that at the end of the previous section more than a path is found for the same desired goal.
-For instance, the light of a room can be increased to a certain level by turning on a lamp or by raising the blinds.
-In that case, different behaviors could be applied to select the preferred path.
-For example, one will want to save energy in the long term by raising the blinds.
-On the other hand, another application will decide to reach the light level no matter of the outside conditions.
-
-Furthermore, these behaviors might be reused among the applications. % además, seguimos con la idea de reutilizar
-For that, we envision to share the behaviors in the space itself. % se infiere que semánticamente anotados
-The behaviors could be defined by the facility administrators or the developers.
-After that, the developers will be able to consume the behaviors through another middleware abstraction.
+% Idea del fallido WoT2013:
+% Let us imagine that at the end of the previous section more than a path is found for the same desired goal.
+% For instance, the light of a room can be increased to a certain level by turning on a lamp or by raising the blinds.
+% In that case, different behaviors could be applied to select the preferred path.
+% For example, one will want to save energy in the long term by raising the blinds.
+% On the other hand, another application will decide to reach the light level no matter of the outside conditions.
+% 
+% Furthermore, these behaviors might be reused among the applications. % además, seguimos con la idea de reutilizar
+% For that, we envision to share the behaviors in the space itself. % se infiere que semánticamente anotados
+% The behaviors could be defined by the facility administrators or the developers.
+% After that, the developers will be able to consume the behaviors through another middleware abstraction.
 % Besides, it will monitor the state to check if the state of the space is effectively changed or other actions need to be taken.
+Another interesting issue is to discern which path to follow to achieve a goal when two or more paths are available.
+We believe that additional high-level rules or policies can be defined (e.g. to select the path which consumed less energy).
+Storing them into the space may enable reusing this \emph{behaviors} by third applications' developers.
+
+Finally, apart from reusing third \ac{wot} applications' actuation capacities in \ac{tsc}, the opposite question could also be explored:
+How to reuse actuation mechanisms of nodes using \ac{ts} patterns from \ac{wot} solutions?
 
 
 \subsection{Security for the Middleware}
