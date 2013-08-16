@@ -3,36 +3,36 @@
 % Limitations => Future Work
 % ¿Poner lista de la compra o sólo las cosas que se destilen de las limitaciones del trabajo?
 
-Through this dissertation, we have described several limitations and open issues.
-They open the door to interesting future work which is detailed below.
+Previous chapters of this dissertation have pointed out several limitations and open issues.
+These limitations and issues open the door to interesting future work which is detailed below.
 
 
-\subsection{Close the Gap between our Middleware and third Applications}
+\subsection{Closing the Gap with Third \acs{wot} Applications}
 
-One of the goals of the middleware is to achieve interoperability with third applications.
-In other words, to reuse their data transparently to the user and enabling them to reuse our middleware's data.
+One of the middleware's goals is to achieve interoperability with third applications.
+In other words, to reuse their data transparently to the user from our middleware and vice-versa.
 This goal can be seen as a two-fold strategy: ease the access to the data and make them reusable.
 
 \begin{description}
   \item[Access to the data.] It must be done by means of an \ac{api}.
 			    In this thesis we have defended the need of using \ac{http} for that purpose.
-			    An adaptation for the upcoming \ac{coap} would increase the potential device base. % "base de usuarios"
+			    An adaptation to the upcoming \ac{coap} would ease its adoption by new limited platforms. % "base de usuarios"
+			    However, the most challenging aspect is not to replicate it in other suitable protocols.
 			    
-			    However, the most challenging aspect is not to replicate it in other appropriate protocols.
 			    The most challenging aspect is to automatize the consumption of heterogeneous third \acp{api}.
-			    In this thesis we have ignored it on behalf of a common \ac{api} that needs to be implemented in any device willing to share content. % TODO data api vs domain api => mirar el capitulo 3 y explicar esto
 			    According to the \ac{rest} principles, the \ac{resthateoas} constraint can help automated the clients to use any \ac{api} independently of its specific shape. % shape or implementation
+			    Instead, this dissertation proposes a common \ac{api} that needs to be implemented in any device willing to share content. % TODO data api vs domain api => mirar el capitulo 3 y explicar esto
 			    
-			    Nevertheless, an agent needs knowledge about the domain explored to reuse any \ac{api}.
-			    And to reuse many \acp{api} without reimplementing the agent, the data types and states of a domain should be standardized. % poner cita del blog de fielding sobre la discussion esa
-			    Therefore, any step in that direction would requires some degree standardization of at least for the \ac{wot} domain.
+			    In any case, an agent would need knowledge about the domain explored to reuse any \ac{api}.
+			    And to reuse many \acp{api} without reimplementing the agent, the data types and states of a domain should be standardized. % TODO poner cita del blog de fielding sobre la discussion esa
+			    Therefore, any step in that direction would require the agreement of the community around the domain (e.g. the \ac{wot} community).
 			    
-			    The counter-pad of that would be to ensure that our \ac{tsc} \ac{api} complies with the \ac{resthateoas} constraint.
-			    Some steps have been done to make the \ac{api} human discoverable with its \ac{html} representation.
-			    However, more effort needs to be done to ease its automatic consumption regardless of its specific implementation. % which would depend on the version
+			    The counter-pad of third \acp{api} automatic consumption would be to ensure that our \ac{tsc} \ac{api} complies with the \ac{resthateoas} constraint.
+			    Some steps have been done to make the \ac{api} human discoverable through \ac{html} representations.
+			    However, more effort needs to be done to ease its automatic consumption regardless of its specific shape. % shape or implementation? % which would depend on the version
 			    % se pueden usar varias estrategias en paralelo
 			    
-			    Finally, \ac{resthateoas} can result in more network usage, which may not be desirable for devices with energy limitations.
+			    Finally, the \ac{resthateoas} constraint may lead to more network usage, which is particularly harmful for devices with energy autonomy limitations.
 			    Therefore, this trade-off between the interoperability and the network efficiency should be also assessed.
 			    
   \item[Reusing the data.] The semantic knowledge contributes to that goal.
@@ -50,15 +50,15 @@ This goal can be seen as a two-fold strategy: ease the access to the data and ma
 \end{description}
 
 
-\subsection{Increase Searching Expressibility and Efficiency}
+\subsection{Increasing Search Expressibility and Efficiency}
 
 % Searching: SPARQL y demás
 % 1ero: mayor eficiencia
 % reescritura puede mejorar interop
-We did not consider using query languages such as SPARQL because of the difficulties constrained platforms may find in parsing them.
+We did not consider using query languages such as SPARQL because of the difficulties most constrained platforms may find in parsing them.
 With this decision, we design a uniform \ac{api} for all the types of devices.
-However, for the future work, one can adopt SPARQL in an optional \ac{api}.
-To do that, all the nodes should be aware that some of them are only able to interpret triple pattern templates.
+However, for the future work, one can adopt SPARQL thanks to an optional \ac{api}.
+In that case, all the nodes should be aware that some of them are only able to interpret triple pattern templates.
 
 The use of SPARQL in some nodes would benefit the developers and improve the middleware performance. % searching
 The users of the middleware would be able to made more expressive queries.
