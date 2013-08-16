@@ -30,7 +30,7 @@ I tell you what, I speak slow so those of you with a Phd can understand.
 This dissertation explores the design of a distributed \ac{tsc} middleware suitable for \ac{ubicomp} environments.
 The middleware's most remarkable characteristic is its alignment with \ac{rest}-like services and the \ac{wot} world.
 This alignment pursues the interoperability of the middleware with other semantic \ac{wot} solutions.
-This way, it encourages the reuse of their data and eases the access to its own.
+This way, it encourages the reuse of their data and eases the access to its own data.
 % Otra forma de vender explicitamente la importancia de integrarlo con WoT:
 % Besides, after an analysis we acknowledged the importance and benefits that the upcoming \ac{wot} has brought to the \acl{ubicomp}.
 % This has lead us to have make our final solution compatible with the \ac{wot} and other REST services.
@@ -41,14 +41,14 @@ The first one enables a completely indirect communication, time and space decoup
 The latter acknowledges the distributed nature of \ac{ubicomp} environments by letting the nodes manage their own semantic content.
 However, this content is shared with the rest of nodes forming a \emph{virtual} space.
 Developers access to the content of the space in a associative manner keeping the space decoupling property.
-The access to both spaces is perform by a resource-oriented \ac{http} \ac{api} to ease reusing contents by third applications. % o REST-like
+Both spaces are accessed through a resource-oriented \ac{http} \ac{api} to ease reusing contents by third \ac{rest}-like applications. % TODO se entiende REST-like?? habrá que explicarlo
 
 
-The distribution of the information avoids the dependency of the participants on other devices, but arises other challenges.
+The distribution of the information avoids participants' dependency on other devices, but arises other challenges.
 This dissertation tackles two main challenges: how to search in a decentralized way and how to act on the environment through the space.
 
 
-To enhance the search process between devices limiting their dependencies in others we designed an architecture.
+To enhance the search process between devices limiting their dependencies in others we propose an architecture.
 This architecture dynamically chooses an intermediary according to its capabilities to support the most limited devices.
 The final result is that less requests are required in overall, specifically reducing the load on resource constrained devices.
 This results in the reduction of their energy consumption.
