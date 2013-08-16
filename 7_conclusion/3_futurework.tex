@@ -123,8 +123,8 @@ Although both problems have been deeply discussed in the literature,
 the nodes in an \ac{ubicomp} environment face severe computing and energy restrictions.
 To solve that, we have already propose a solution appropriate for sensor networks and mobile devices.
 
-The next step is to evaluate it in more demanding scenarios.
-The final goal is to integrate it in our \ac{tsc} middleware.
+The next step is to evaluate it in more demanding scenarios and the final goal is to integrate it in our \ac{tsc} middleware.
+
 
 
 %%% A partir de aquí, no son aspectos técnicos concretos
@@ -135,10 +135,10 @@ The final goal is to integrate it in our \ac{tsc} middleware.
 A subtle goal of any middleware is to ease the development of applications by encapsulating complex tasks (i.e. searching on a distributed space).
 % Medir de forma objetiva aspectos del ser humano como la sencillez de uso o de implementación
 Some objective indicators can be extracted from the code by implementing the same application with and without the middleware (i.e. number of lines).
-However, from the human perspective this indicators do not necessarily express how easy, comfortable or pleasant was to use the middleware.
+However, from the human perspective these indicators do not necessarily express how easy, comfortable or pleasant was to use the middleware.
 % facilitar modelado?? => el hecho de que sea difícil anotar, puede echar para atrás a desarrolladores: eso es problema de mi app o de quien?
 Although the primitives are rather simple, the configuration or just the semantic annotation can complicate the learning process of any developer.
-Future work could measure this impact on them.
+Future work could measure the impact the middleware has on them.
 As a result, some improvements could be proposed (e.g. to create a version for a specific domain which masks all the semantic issues).
 
 
@@ -150,14 +150,12 @@ Rather than designing the best theoretical solution, in this dissertation we hav
 For that, we have implemented most of the ideas in the \emph{Otsopack} middleware and we have promote its use in different research projects.
 This has helped us to identify the key problems to solve.
 
-
-Sometimes, to efficiently evaluate our solution under very different and extreme circumstances, we have simulated some scenarios. % con muchos cacharros
+Besides, to efficiently evaluate our solution under very different and extreme circumstances, in some occasions we have simulated the scenarios. % con muchos cacharros
 In this simulations we have tried to present always realistic assumptions.
 % de simulaciones => a la realidad
 However, there is always a gap between what is perceived as realistic and the reality.
 
-
-To bridge both worlds, the next natural step is assessing some aspects of our middleware in a real world environment: % real world es académico???
+To bridge both worlds, the next natural step would be assessing some aspects of our middleware in a real world environment: % real world es académico???
 \begin{itemize}
 	% Big ecosystem of interconnected objects and devices
   \item The search architecture.
@@ -165,13 +163,9 @@ To bridge both worlds, the next natural step is assessing some aspects of our mi
         % viendo cuales son las necesidades reales de quienes lo usan
 	%    para justificar los parametros que se usaron
         Then, we could measure their network usage and energy consumption to either tune up some parameters of the architecture or redesign some aspects.
-        % unbiased: alguien que no sea yo
-        The difficulty of this deployment would be not to biased it design and enable it to really solve a problem.
-  % relacionado con el punto anterior (interoperabilidad): reusar distintas applicaciones existentes y ver que realmente se cumple
+  % relacionado con el punto de interoperabilidad: reusar distintas applicaciones existentes y ver que realmente se cumple
   %    una forma de asegurarse, es haciendo que distintos usuarios las creen
   \item The interoperability.
-        Trying to reuse data from already working \ac{wot} applications, trying to minimize manual development.
+	New unconsidered problems could arise trying to reuse data from existing \ac{wot} applications.
+	Each manual intervention needed to make our middleware work together with these applications would be a sign of an interoperability problem.
 \end{itemize}
-
-
-% Meter aquí la cita de Feynman???
