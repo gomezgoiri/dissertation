@@ -1,28 +1,39 @@
 \section{Introduction}
 \label{sec:soa_intro}
 
+% Otra forma de ver la interop:
+%  La European Telecommunication Standards Institute (ETSI) define cuatro capas:
+%      technical interop: a nivel de comunicación (p.e. de acuerdo en las 7 capas de OSI)
+%      syntactic interop
+%      semantic interop
+%      organizational interop
+
+
 % no habría que definir de nuevo y de manera formal ubicomp o vale con la intro?
-Due to the heterogeneity of technologies present in \ac{ubicomp} environments, % computing platforms, protocols, etc.
-our solution should carefully consider the \emph{interoperability}.
-The IEEE defines interoperability as \emph{the ability of two or more systems or components to exchange information and to use the information that has been exchanged}.
+The IEEE \citep{_ieee_1990} defines \emph{interoperability} as ``\emph{the ability of two or more systems or components to exchange information and to use the information that has been exchanged}''.
+The heterogeneity of technologies present in \ac{ubicomp} environments makes this a key property to consider.
 The definition clearly distinguishes between two requirements: % o goals o incremental requirements
-(1) to exchange information (i.e. \emph{integration}); and
+(1) to exchange information; and
 (2) to use that information. % to understand others data (i.e. \emph{interoperation}).
 
 
 % Buscar una referencia mejor: http://en.wikipedia.org/wiki/Interoperability
-For the lower-levels of the exchange, we opt for interoperability \emph{ab-initio} relying in standard and widely accepted communication protocols. % e.g. HTTP
-For a higher-level (i.e. application layer), Section~\ref{} categorizes integration approaches and describes the ones explored in this dissertation.
+Exchanging information in distributed systems comprehends the communication between two systems.
+% lo de ab-initio practicamente sólo lo he visto en la wikipedia
+For the lower communication levels, we opt for interoperability \emph{ab-initio} relying on standard and widely accepted communication protocols. % e.g. HTTP
+For a higher-level (i.e. application layer), Section~\ref{sec:soa_integration} categorizes different integration approaches.
+This dissertation aims to delve into the \emph{space-based computing} approach. % whose benefits etc. are described
+However, \ac{rest} architectures' properties have made them massively accepted mechanisms to integrate applications.
+Consequently, we also take into consideration the latter mechanism in our solution design.
+
 
 % Sintáctica vs semántica
-Regarding the second goal, 
-Section~\ref{} stresses the need of the \acl{sw} for these environments.
+Regarding the second goal, it is usually divided in \emph{syntactic interoperability} and \emph{semantic interoperability}.
+On the one hand, syntactic interoperability is associated with the format of the data (i.e. its syntax and encoding) \citep{van_der_veer_achieving_2006}. % e.g. high level: HTML, XML, etc.
+On the other hand, semantic interoperability is concerned with ensuring that the exchanged information has a precise meaning.
+Its ultimate goal is to make the information ``\emph{understandable by any other application that was not initially developed for this purpose}'' \citep{_european_2004}.
+Section~\ref{sec:soa_sw} explains a well-accepted mechanisms to achieve the latter goal: the \acl{sw}. % TODO qué es la SW??? un mecanismo, conjunto de estándares, ¿?
 
-% interoperability. The ability of two or more systems or components to exchange information and to use the information that has been exchanged
-
-% Poner primero el ejemplo motivacional
-% \input{\pathchaptwo/1_2_1_closer_look} % <- no vale mucho
-\input{\pathchaptwo/1_1_motivational_case_study}
 \input{\pathchaptwo/1_2_integration}
 \input{\pathchaptwo/1_3_semantic}
 \input{\pathchaptwo/1_4_conclusions}
