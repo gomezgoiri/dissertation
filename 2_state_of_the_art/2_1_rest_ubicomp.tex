@@ -1,0 +1,29 @@
+\subsection{The \acl{wot} and other \ac{rest} Solutions for \acs{ubicomp}}
+% nueva sección para hablar de WoT (DPWS ya se ha presentado)
+
+\InsertFig{venn-sec1_1}{fig:venn_ubicomp}{
+  Non-semantic integration approaches for \ac{ubicomp} apart from \aclp{ts}.
+}{
+  Scope of this subsection.
+}{0.6}{}
+
+
+The \acl{wot} initiative encourages the use of \acs{rest}-based solutions embedding web servers in daily objects \citep{guinard_internet_2011}.
+In this way, the objects can integrate with the \ac{www} as first-class citizens. % decir ``f-c cit of the Web" es reiterativo ya que WWW==web
+This integration brings the following benefits:
+\begin{itemize}
+  \item The smart-things can be linked to enable its discovery by browsing. This involves using the tool most users are familiar with: the browser.
+  \item They can be bookmarked or shared through social networks \citep{guinard_sharing_2010}.
+  % explicar qué es un mashup?
+  \item They can be integrated with other web applications through mash-ups \citep{guinard_towards_2009,ostermaier_webplug:_2010,pintus_anatomy_2011}.
+  % TODO citar al canadiense tb? pintus, stirbu y a todo el mundo
+  \item Mechanisms such as searching, caching, load-balancing and indexing can be used over the objects to achieve the scalability of the web. % cita al indio
+\end{itemize}
+
+
+% lo he comentado antes, no sé si no me estoy repitiendo más que el ajo...
+But besides the functional differences, one of the major advantages of REST compared with the WS-* is that is perceived as simpler.
+\citet{guinard_search_2011} proved that developers consider it easier to learn and find it more suitable for programming smart things.
+This makes \ac{wot} solutions more popular for resource constrained devices than the WS-* based ones.
+
+% Mencionar un par de trabajos sobre móviles con servidores web embebidos, para que se vea que no es sólo \ac{wot}
