@@ -39,41 +39,49 @@
 % is used in conjunction with HTTP.
 
 
-As stated before, the RESTful style and the set of WS-* standards are probably the most common remote invocation substyles currently used in the Internet.
-Their advantages and disadvantages were extensively discussed by \citet{pautasso_restful_2008}.
+As stated before, the \acs{rest}ful style and the set of WS-* standards are probably the most common remote invocation substyles currently used in the Internet.
+This section only aims to introduce them, for an extensive analysis on their advantages and disadvantages please refer to \citet{pautasso_restful_2008}.
 
-WS-* standards syntactically describe the services' functionality and interfaces using \ac{wsdl}.
+On the one hand, \ac{rest} architectures are those which follow the design principles described in Section~\ref{sec:rest}.
+Each of these principles contribute to different networking properties (see Section~\ref{sec:network_properties}).
+The \emph{scalability} and the \emph{simplicity} stand out from these properties in \ac{rest}.
+% cita de fielding sobre simplicidad y sobre good at long term-design
+% already have many libraries and tools available, which eases the adoption of this style by developers.
+The web implements \ac{rest}'s principles.
+Therefore, a \ac{rest} solution can rely on well-accepted standards used in the web (e.g. \ac{http}, \ac{uri} or \ac{mime}).
+This acceptance also results in a massive availability of libraries in most of the computing platforms.
+
+
+On the other hand, WS-* standards syntactically describe the services' functionality and interfaces using \ac{wsdl}.
 The communication between providers and consumers is usually transmitted over the \ac{http} in messages encapsulated using \ac{soap}.
 WS-* web services, also called ``Big Web services'', offer more features such as transactions, reliability or message-level security.
 However, they also require further architectural decisions on different layers of the WS-* stack.
 These decisions make the people perceive it as more complex than the RESTful style \citep{guinard_search_2011}.
-
-
+% pensar bien cómo introducir el tema de la simplicidad: por diseño de REST, por las decisiones que hay que tomar en WS-*???
 Probably thanks to that perception, \ac{rest} has gained momentum during the last decade. %  simpler alternative for services
-% la explicación de los principios los he sacado sobre todo de pautasso_restful_2008, pero he intentado no plagiar las frases.
-The \acl{rest} is defined by four principles \citep{fielding_architectural_2000}:
-\begin{enumerate}
-  \item The resources are identified with \acp{uri}.
-  \item They are manipulated through a uniform interface.
-	  This interface offers creation, reading, updating and deletion operations.
-  \item The resources are decoupled from their representation so the content can be accessed in different formats.
-  \item The interactions are stateful and hypertext-driven.
-	This means that the state transitions are guided by the actions identified in the hypermedia by the server.
-	% De Wikipedia: This means that clients make state transitions only through actions that are dynamically identified within hypermedia by the server.
-\end{enumerate}
 
-These principles are implemented by the Web,
-so \ac{rest}  is often used in conjunction with well-known web standards such as \ac{http}, \ac{uri} or \ac{mime}.
-This standards already have many libraries and tools available, which eases the adoption of this style by developers.
-Besides, REST naturally integrates with the \ac{www} because it uses the Web as an application architecture instead of as a transport layer as WS-* services do.
-% ojo a la frase: "se integra con la web porque usa la web como app architecture"
+
+Besides the simplicity, another key difference between both approaches is how they use web standards. % (e.g. \ac{http}, \ac{uri} or \ac{mime})
+The correct use of the web standards can benefit a \ac{rest}ful design.
+On the contrary, WS-* uses some of these standards in ways they were not designed for.
+For instance, it uses \ac{http} as a transport layer instead of as an application layer protocol.
+This prevents from achieving some of \ac{http}'s desirable properties (e.g. scalability or visibility).
+
+
+\ac{rest} has gained momentum during the last decade as a way to expose functionality and data because:
+% ptos a destacar:
+%   simplicidad - menos cosas a implementar = mayor disponibilidad en plataformas
+%                 no vuelves locos a los usuarios: menos cosas a decidir
+%   mayor funcionalidad a costa de dañar propiedades de los protocolos: e.g. usando HTTP como transporte
+
+
+% This standards already have many libraries and tools available, which eases the adoption of this style by developers.
 
 \bigskip
 
-The use of both substyles in resource-constrained devices is represented by
-\ac{dpws} \citep{moritz_devices_2010}, based on WS-*,
-and the \ac{wot} \citep{guinard_internet_2011} \footnote{Due to its importance for this disseration, \ac{wot} is analyzed in Section~\ref{sec:soa_ubicomp}.}. % o mejor poner su tesis?
-
+The use of both styles in resource-constrained devices is represented by
+\ac{dpws} \citep{moritz_devices_2010}, based on WS-*, and the \ac{wot} \citep{guinard_internet_2011}.
+However, due to its importance for this dissertation, we only delve into the latter in Section~\ref{sec:soa_ubicomp}. % o mejor poner su tesis?
 
 % TODO reescribir esto para que no suene tan positivo y sobrado
 \ac{dpws} defines a subset of WS-* to make it suitable for resource-constrained devices.
@@ -82,3 +90,6 @@ Its most remarkable features are: decentralized multicast-based discovery, secur
 \citet{moritz_devices_2010} compared \ac{dpws} with the \ac{rest} approach coming to the conclusion that \ac{dpws} can be restricted to be fully compatible with the RESTful style.
 Even in that case, \ac{dpws} will still cover some missing features of the RESTful approach such as eventing and discovery \citep{moritz_devices_2010}.
 % no menciono que sean más pesados para cacharros porque no he encontrado un sitio en el que defiendan que \ac{dpws} lo es (si que hay alguno que comparan REST y SOA, pero no DPWS)
+
+
+
