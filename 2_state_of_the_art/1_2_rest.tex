@@ -1,10 +1,10 @@
-\section{\acl{rest}}
+\subsection{\acl{rest}}
 \label{sec:rest}
 
 \acf{rest} is a network-based architectural style proposed by \citet{fielding_architectural_2000}.
 % descripción de propiedades de REST: hipermedia distribuído
 % que es hipertexto? http://roy.gbiv.com/untangled/2008/rest-apis-must-be-hypertext-driven#comment-718
-It aims to cover certain properties, explained in Section~\ref{sec:network_properties}.
+It aims to cover certain properties, explained in Section~\ref{sec:network_properties}. % Mencionar que scalability y simplicity destacan sobre el resto?
 % Estilos de los que se deriva: ¿?
 To achieve these properties, \ac{rest} establishes the following constraints from other network-based architectural styles:
 % explicarlo o es demasiado obvio?
@@ -44,58 +44,73 @@ To achieve these properties, \ac{rest} establishes the following constraints fro
 \end{description}
 
 
+% Explicar aquí cosas de nomenclatura:
+%     REST o hypermedia API,
+%     REST-like (sin HATEOAS)
+%     Resource Oriented Architecture o ROA como termino que engloba a ambos
 
-\subsection{\ac{rest} vs WS-* services}
+
+\subsubsection{\ac{rest} vs WS-* services}
 \label{sec:protocols}
 
-WS-* web services, also called ``Big Web services'', together with \acs{rest}ful architectures are probably the most common remote invocation substyles currently used in the Internet.
-WS-* standards offer more features such as transactions, reliability or message-level security.
+% TODO mirar a Guinard como se refiere a WS-*.
+%   ¿Sólo como WS-*? ¿Siempre como WS-* standards? ¿Alguna vez como WS-* web services?
+% TODO citar esto mejor!
+WS-*, also called ``Big Web services'', together with \acs{rest}ful architectures are probably the most common remote invocation substyles currently used in the Internet.
+They syntactically describe the services' functionality and interfaces using \ac{wsdl}.
+The communication is carried out on top of \ac{http} in messages encapsulated using \ac{soap}.
+WS-* standards offer more features than the \ac{rest} such as transactions, reliability or message-level security.
 % TODO describir los estándares mejor
-They syntactically describe the services' functionality and interfaces using \ac{wsdl} and the communication is carried out on top of \ac{http} in messages encapsulated using \ac{soap}.
 % decir o poner algo de UDDI aquí?
-However, they also require further architectural decisions on different layers of the WS-* stack.
-These decisions make the people perceive it as more complex than the \ac{rest}ful style \citep{guinard_search_2011}.
-% pensar bien cómo introducir el tema de la simplicidad: por diseño de REST, por las decisiones que hay que tomar en WS-*???
-
-%The \emph{scalability} and the \emph{simplicity} stand out from these properties.
 
 
-Besides the simplicity, another key difference between both approaches is how they use web standards. % (e.g. \ac{http}, \ac{uri} or \ac{mime})
-The web implements \ac{rest}'s principles.
-Therefore, a \ac{rest} solution can rely only on well-accepted standards used in the web (e.g. \acs{http}, \acs{uri} or \acs{mime}).
-This acceptance also results in a massive availability of libraries in most of the computing platforms.
-% This standards already have many libraries and tools available, which eases the adoption of this style by developers.
+WS-* has been adapted to the needs of resource-constrained devices in the \ac{dpws} specification\footnote{\url{http://docs.oasis-open.org/ws-dd/ns/dpws/2009/01}}. % TODO poner como cita mejor?
+The specification defines a minimal set of implementation constraints.
+\ac{dpws}'s most remarkable features are: decentralized multicast-based discovery, secure message transmission, subscription and event notifications \citep{moritz_devices_2010}.
 
 
-On the contrary, WS-* also uses some of these standards, but in ways they were not designed for.
-For instance, it uses \ac{http} as a transport layer instead of as an application layer protocol.
+% la web implementa los principios de REST y WS-* no
+Note that although the web implements \ac{rest}'s principles and WS-* can contradict them
+\footnote{Interestingly, \citet{moritz_devices_2010} came to the conclusion that \ac{dpws} can be restricted to be fully compatible with the \ac{rest}ful style and still cover some missing features (e.g. eventing and discovery).},
+WS-* stands for \emph{web services}. % citas a What's wrong with the web y demás papers que explicaban esto
+% a WS-* se le llama web  porque usa estándares de esta
+The reason for this is that it uses web standards. % (e.g. \ac{http}, \ac{uri} or \ac{mime}) <-- o los que fuesen
+% esto es porque WS-* usa protocolos con propositos distintos a los que fueron diseñados
+However, it uses some of them in  ways they were not designed for.
+% ejemplo de HTTP
+The most paradoxical case is how it uses \ac{http} as a transport layer instead of as an application layer protocol.
+% por eso no consigue las propiedades de REST: simplicidad y escalabilidad
 This prevents the resulting architectures from achieving some of \ac{http}'s desirable properties such as scalability or visibility.
+% se podría decir que las sacrifica en pro de features adicionales
+In other words, it sacrifices some of the web's properties on behalf of the additional features it provides.
 
 
-\bigskip
+% posiblemente esa simplicidad se ve afectada negativamente porque los usuarios necesitan decidir
+One of the sacrificed properties is the simplicity.
+The complexity negatively affects to
+(1) the ability of limited computing platforms to adopt the WS-* stack; and % explicar esto más? => cuanto menos requieras, más fácil que alguien haya implementado HTTP y eso
+(2) the developers.
+% y por eso o no, WS-* está perdiendo peso respecto a REST
+Specifically, developers need to take further architectural decisions on different layers of the WS-* stack.
+These decisions make the people perceive it as more complex than the \ac{rest}ful style \citep{guinard_search_2011}.
+% This acceptance also results in a massive availability of libraries in most of the computing platforms.
 
 
-The use of both styles in resource-constrained devices is represented by
-\ac{dpws} \citep{moritz_devices_2010}, based on WS-*, and the \ac{wot} \citep{guinard_internet_2011}. % o mejor poner su tesis?
-% TODO reescribir esto para que no suene tan positivo y sobrado
-\ac{dpws} defines a subset of WS-* to make it suitable for resource-constrained devices.
-%\ac{dpws} is claimed to be used in industrial environments.
-Its most remarkable features are: decentralized multicast-based discovery, secure message transmission, subscription and event notifications.
-\citeauthor{moritz_devices_2010} came to the conclusion that \ac{dpws} can be restricted to be fully compatible with the \ac{rest}ful style while it still covers some missing features (e.g. eventing and discovery).
-% no menciono que sean más pesados para cacharros porque no he encontrado un sitio en el que defiendan que \ac{dpws} lo es (si que hay alguno que comparan REST y SOA, pero no DPWS)
-
-
-In this dissertation we focused on \ac{rest} because of its massive acceptance as a way to integrate resource-constrained devices. % TODO poner algún dato?!
-We delve into the \ac{wot} in Section~\ref{sec:soa_ubicomp}. % explicación de porqué no aquí
-
-
-
-
-This section introduces them both, but for an extensive analysis on their advantages and disadvantages please refer to \citet{pautasso_restful_2008}.
+% Nosotros elegimos el segundo por sus propiedades, pero también por su relevancia actual.
+However, independently of further considerations
+\footnote{For an extensive analysis on the advantages and disadvantages of \ac{rest} and WS-*, we refer the reader to \citep{pautasso_restful_2008} and \citep{guinard_search_2011}.}
+, there is a practical motivation behind the rationale of focusing this dissertation on the first one: its massive acceptance. % TODO TODO TODO mirar en tesis de Guinard a ver si puedo sacar una molona sobre eso
+% Al final, si queremos facilitar que lo nuestro se integre con otros elementos, que mejor que usar su mecanismo de integración.
+In the end, if the middleware presented in the dissertation aims to reuse other applications' data, what is better than seamlessly integrating with most of them?
+% Es difícil predecir cual ganará o cual será más popular, pero la web lleva ahí desde hace 20 años.
+Obviously, this acceptance is subject to changes in the future, but the life of the web backs \ac{rest} as a long-term choice.
+% Cita de Fielding:
+Or in \citeauthor{fielding_architectural_2000}'s words,
+\quote{REST is intended for long-lived network-based applications that span multiple organizations} \cite[comment 21]{fielding_rest_2008}.
 
 
 
-\subsection{Suitable Protocols for \ac{rest}}
+\subsubsection{Suitable Protocols for \ac{rest}}
 \label{sec:protocols}
 % hablar un poco de HTTP y CoAP y decir por qué no hablamos más a menudo de CoAP
 
