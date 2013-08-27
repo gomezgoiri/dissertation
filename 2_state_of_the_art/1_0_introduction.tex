@@ -13,18 +13,17 @@
 The IEEE \citep{_ieee_1990} defines \emph{interoperability} as ``\emph{the ability of two or more systems or components to exchange information and to use the information that has been exchanged}''.
 The heterogeneity of technologies present in \ac{ubicomp} environments makes this a key property to consider.
 The definition clearly distinguishes between two requirements: % o goals o incremental requirements
-(1) to exchange information; and
-(2) to use that information. % to understand others data (i.e. \emph{interoperation}).
+\textbf{(1) to exchange} information; and
+\textbf{(2) to use} that information. % to understand others data (i.e. \emph{interoperation}).
 
 
 % Buscar una referencia mejor: http://en.wikipedia.org/wiki/Interoperability
 Exchanging information in distributed systems comprehends the communication between two systems.
 % lo de ab-initio practicamente sólo lo he visto en la wikipedia
-For the lower communication levels, we opt for interoperability \emph{ab-initio} relying on standard and widely accepted communication protocols. % e.g. HTTP
-For a higher-level (i.e. application layer), Section~\ref{sec:soa_integration} categorizes different integration approaches.
-This dissertation aims to delve into the \emph{space-based computing} approach. % whose benefits etc. are described
-However, \ac{rest} architectures' properties have made them massively accepted mechanisms to integrate applications.
-Consequently, we also take into consideration the latter mechanism in our solution design.
+For the lower communication levels, we rely on standard and widely accepted communication protocols (i.e. interoperability \emph{ab-initio}). % e.g. HTTP
+For higher-levels (i.e. application layer), this dissertation delves into the \emph{space-based computing} and \ac{rest} architectures.
+Section~\ref{sec:soa_integration} categorizes both approaches together with other integration approaches.
+Then, we individually present both integration styles in sections \ref{sec:rest} and \ref{sec:tuplespaces_eoa}.
 
 
 % Sintáctica vs semántica
@@ -35,5 +34,6 @@ Its ultimate goal is to make the information ``\emph{understandable by any other
 Section~\ref{sec:soa_sw} explains well-accepted mechanisms to achieve the latter goal: the \acl{sw}. % TODO qué es la SW??? un mecanismo, conjunto de estándares, ¿?
 
 \input{\pathchaptwo/1_1_integration}
-\input{\pathchaptwo/1_2_semantic_web}
-\input{\pathchaptwo/1_3_conclusions}
+\input{\pathchaptwo/1_2_rest}
+\input{\pathchaptwo/1_3_tuplespaces}
+\input{\pathchaptwo/1_4_semantic_web}

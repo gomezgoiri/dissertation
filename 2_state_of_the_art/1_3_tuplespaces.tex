@@ -1,11 +1,18 @@
-\subsubsection{\acl{ts}}
+\subsection{\acl{ts}}
 \label{sec:tuplespaces_eoa}
 
 % Ojo cuidado porque según esto mi middleware va a dejar de ser time uncoupled! (mirar Figure 6.1 para mayor concrección)
 % En esa misma sección aclara que algunas implementaciones no son time-uncoupled.
 % por otro lado, asíncronismo != time uncoupling
 
-\acf{ts} has its roots in the Linda parallel programming language \citep{gelernter_generative_1985}.
+\acf{ts} computing, also called space-based computing, offers an improvement over traditional distributed shared memory approaches.
+% Colouris se refiere a ellos como distributed shared memory antes de presentar TS
+Whereas they work at byte-level and accessing to memory addresses,
+the \acl{ts} works with semi-structured data which is accessed in an associative manner.
+In other words, in \ac{ts} the participants read data specifying patterns of interest.
+
+
+\ac{ts} has its roots in the Linda parallel programming language \citep{gelernter_generative_1985}.
 In this communication model different processes read and write pieces of information so-called tuples in a common space.
 Tuples are composed by one or more typed data fields (e.g. $<"aitor",1984>$ or $<3,7,21.0>$).
 The tuples are accessed associatively using a template.

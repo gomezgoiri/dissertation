@@ -27,7 +27,6 @@ the remote invocation and the indirect communication (see Figure~\ref{fig:middle
 
 The \emph{remote invocation} involves the most common two-way exchange between senders and receivers in distributed systems.
 Within the \emph{remote invocation} style, RESTful style \citep{fielding_architectural_2000} and the well known set of WS-* \citep{alonso_web_2010} standards probably represent the most popular substyles.
-In Section~\ref{sec:remote_invocation}, we analyze their application to the \ac{ubicomp} field, particularly focusing on the \ac{iot}.
 
 
 \medskip
@@ -70,12 +69,8 @@ These paradigms are characterized by two key properties \citep{gelernter_generat
  
 \end{itemize}
 
-\acl{ts} computing, also called space-based computing, offers an improvement of the shared memory approach.
-Whereas the shared memory works at byte-level and accessing to memory addresses,
-the \acl{ts} works with semi-structured data which is accessed in an associative manner.
-In other words, in \ac{ts} the participants read data specifying patterns of interest.
-In Section~\ref{sec:tuplespaces_eoa}, we study the most relevant \acl{ts} solutions proposed for the \acl{ubicomp}.
 
 
-\input{\pathchaptwo/1_1_1_remote_invocation}
-\input{\pathchaptwo/1_1_2_indirect_communication}
+This dissertation delves into a particular shared memory approach: \acl{ts} computing. % whose benefits etc. are described
+However, \ac{rest} architectures' properties have made them massively accepted mechanisms to integrate applications.
+Consequently, we also take into consideration the latter mechanism in our solution conception.

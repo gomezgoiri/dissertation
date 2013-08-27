@@ -1,0 +1,144 @@
+\section{\acl{rest}}
+\label{sec:rest}
+
+\acf{rest} is a network-based architectural style proposed by \citet{fielding_architectural_2000}.
+% descripción de propiedades de REST: hipermedia distribuído
+% que es hipertexto? http://roy.gbiv.com/untangled/2008/rest-apis-must-be-hypertext-driven#comment-718
+It aims to cover certain properties, explained in Section~\ref{sec:network_properties}.
+% Estilos de los que se deriva: ¿?
+To achieve these properties, \ac{rest} establishes the following constraints from other network-based architectural styles:
+% explicarlo o es demasiado obvio?
+\begin{description}
+ \item[\acf{restcs}.] Providing an \ac{api} to the clients, they are isolated from back-end implementation details.
+		       % esto ayuda a: , scalability, evolvability (apps independientes pueden evolucionar mejor)
+ \item[\acf{rests}.] The state is fully stored in the client and therefore each request has all the information needed to process it.
+ \item[\acf{restcache}.] When added to the \ac{restcs} constraint, this style replicates content obtained from a server in the client.
+ \item[\acf{restu}.] It is the key constraint which distinguishes \ac{rest} from other architectural styles.
+                      This constraint is composed by the following ones:
+    \begin{description}
+	% explicados en sección 5.2 de Fielding, resumir?
+	\item[\acf{restid}.] Resources are the conceptual targets of hypertext references.
+			      Their identification offers a generic interface to access and change the values of a resource.
+	\item[\acf{restrep}.] Representations are composed by a sequence of bytes and the metadata to describe those bytes.
+	\item[\acf{restdesc}.] The client and server have to agree on standard methods and media types. % linkar al tipo de la Web esa
+				% Explicación Fielding:
+				% interaction is stateless between requests
+				% standard methods and media types are used to indicate semantics and exchange information
+				% responses explicitly indicate cacheability.
+		                %\ac{http}'s content negotiation for instance, allows to reach an agreement on the media types.
+	                        Beyond that point, each request or response should contain all the needed data to process it.
+	                        Therefore, in \citeauthor{fielding_architectural_2000}'s words,
+	                        the type should be registered,
+	                        the registry should point to a specification and 
+	                        the specification should explain how to process data according to its intent \citep{wahbe_self-descriptive_2010}. % no necesariamente tiene que ser estándar
+	\item[\acf{resthateoas}.] This is a controversial constraint because most of the self-proclaimed ``\ac{rest}'' \acp{api} fail to follow it \citep{moore_hypermedia_2010,house_how_2012}.
+	                           It states that no out-of-the-band information should guide the interaction with an \ac{api}.
+	                           Instead, the hypertext should guide it.
+	                           In other words, the client must know just an initial URL and the application's media types.
+	                           From that point, it should select the alternatives proposed by the server to change to the next application state \citep{fielding_rest_2008}.
+	                           % propuestas: respresentaciones (links) y la manipulación implicita de las mismas (CRUD)
+    \end{description}
+ \item[\acf{restl}.] Each layer provides services to the top layer. % e.g. TCP/IP
+ \item[\acf{restcod}.] The client has a set of resources which does not know how to process.
+                        This \emph{know-how} is downloaded from the server.
+\end{description}
+
+
+
+\subsection{\ac{rest} vs WS-* services}
+\label{sec:protocols}
+
+WS-* web services, also called ``Big Web services'', together with \acs{rest}ful architectures are probably the most common remote invocation substyles currently used in the Internet.
+WS-* standards offer more features such as transactions, reliability or message-level security.
+% TODO describir los estándares mejor
+They syntactically describe the services' functionality and interfaces using \ac{wsdl} and the communication is carried out on top of \ac{http} in messages encapsulated using \ac{soap}.
+% decir o poner algo de UDDI aquí?
+However, they also require further architectural decisions on different layers of the WS-* stack.
+These decisions make the people perceive it as more complex than the \ac{rest}ful style \citep{guinard_search_2011}.
+% pensar bien cómo introducir el tema de la simplicidad: por diseño de REST, por las decisiones que hay que tomar en WS-*???
+
+%The \emph{scalability} and the \emph{simplicity} stand out from these properties.
+
+
+Besides the simplicity, another key difference between both approaches is how they use web standards. % (e.g. \ac{http}, \ac{uri} or \ac{mime})
+The web implements \ac{rest}'s principles.
+Therefore, a \ac{rest} solution can rely only on well-accepted standards used in the web (e.g. \acs{http}, \acs{uri} or \acs{mime}).
+This acceptance also results in a massive availability of libraries in most of the computing platforms.
+% This standards already have many libraries and tools available, which eases the adoption of this style by developers.
+
+
+On the contrary, WS-* also uses some of these standards, but in ways they were not designed for.
+For instance, it uses \ac{http} as a transport layer instead of as an application layer protocol.
+This prevents the resulting architectures from achieving some of \ac{http}'s desirable properties such as scalability or visibility.
+
+
+\bigskip
+
+
+The use of both styles in resource-constrained devices is represented by
+\ac{dpws} \citep{moritz_devices_2010}, based on WS-*, and the \ac{wot} \citep{guinard_internet_2011}. % o mejor poner su tesis?
+% TODO reescribir esto para que no suene tan positivo y sobrado
+\ac{dpws} defines a subset of WS-* to make it suitable for resource-constrained devices.
+%\ac{dpws} is claimed to be used in industrial environments.
+Its most remarkable features are: decentralized multicast-based discovery, secure message transmission, subscription and event notifications.
+\citeauthor{moritz_devices_2010} came to the conclusion that \ac{dpws} can be restricted to be fully compatible with the \ac{rest}ful style while it still covers some missing features (e.g. eventing and discovery).
+% no menciono que sean más pesados para cacharros porque no he encontrado un sitio en el que defiendan que \ac{dpws} lo es (si que hay alguno que comparan REST y SOA, pero no DPWS)
+
+
+In this dissertation we focused on \ac{rest} because of its massive acceptance as a way to integrate resource-constrained devices. % TODO poner algún dato?!
+We delve into the \ac{wot} in Section~\ref{sec:soa_ubicomp}. % explicación de porqué no aquí
+
+
+
+
+This section introduces them both, but for an extensive analysis on their advantages and disadvantages please refer to \citet{pautasso_restful_2008}.
+
+
+
+\subsection{Suitable Protocols for \ac{rest}}
+\label{sec:protocols}
+% hablar un poco de HTTP y CoAP y decir por qué no hablamos más a menudo de CoAP
+
+% sólo por el correcto uso de ciertos protocolos se puede conseguir todo menos HATEOAS => citar el vídeo aquel
+Although an \ac{api} does not adhere to the \ac{rest} style just because it uses certain protocols,
+the correct use of some of them can help to achieve most of them \citep{moore_hypermedia_2010}.
+Historically, \acf{http} has been considered a suitable protocol in that regard.
+\ac{http} is a simple protocol whose adoption by computing platforms is massive.
+
+
+However, in the last few years \acf{coap} has emerged as a specialized web transfer protocol for resource constrained devices. % has emerged, has arisen?
+Some noteworthy features of \ac{coap} are
+(1) the reduced message size,
+(2) the use of UDP as a transport layer (with the possibility of using \emph{multicast} communication),
+(3) similarity with \ac{http} (both to reuse its properties and to ease cross-protocol proxying), and
+(4) a resource discovery mechanism. % TODO cita a CORE
+% mencionar seguridad?
+
+
+One could argue that to implement a lightweight \ac{tsc} solution, \ac{coap} should be used as a baseline.
+However, we have chosen to work with \ac{http} for the following reasons:
+\begin{itemize}
+  \item Direct interoperation with other web-solutions.
+        Most of the Internet-based \ac{api}s use \ac{http}.
+        Directly using \ac{http} we can avoid proxies.
+        Proxies may introduce latency in the response time degrading network performance. % siempre degradará la eficiencia algo, pero habría que verlo y testearlo, la verdad...
+        % TODO, será cierto? o tardará menos en conjunto?
+  \item \ac{rdf}-based media-formats can be rather verbosed.
+	This contrasts with \ac{coap}'s message size limitations.
+	Dealing with this limitations was not one main goals of the thesis.
+	However, we have considered them at some points of the dissertation to avoid unrealistic assumptions.
+  \item \ac{coap} is an ongoing standard.
+        Therefore, its definition is currently changing in each draft version.
+        A practical limitation of this is that at the moment there are few libraries and tools to work with \ac{coap}.
+        This limits the range of platforms which could adopt any proposed solution.
+\end{itemize}
+
+
+Nevertheless, due to \ac{http}'s similarities with \ac{coap}, the future adoption of the latter should be relatively straightforward.
+
+% Ideas no usadas:
+% REST no dice nada, pero de facto el protocolo es HTTP
+% durante el desarrollo de esta tesis en resource constrained ha surgido CoAP
+%   muchas de las cosas aquí comentadas son iguales o mejor sobre CoAP
+%   de todas formas, ha habido algo que ha guiado nuestro diseño: librerias existentes => afecta a plataformas
+%         si, pero para eso está lo de layered approach! => motivos prácticos
