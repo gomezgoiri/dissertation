@@ -2,9 +2,9 @@
 % nueva sección para hablar de WoT (DPWS ya se ha presentado)
 
 \InsertFig{venn-sec1_1}{fig:venn_ubicomp}{
-  Non-semantic integration approaches for \ac{ubicomp} apart from \aclp{ts}.
+  Non-semantic works for \ac{ubicomp} apart from \aclp{ts}.
 }{
-  Scope of this subsection.
+  This subsection focuses on the solutions using \ac{rest}.
 }{0.6}{}
 
 
@@ -24,109 +24,9 @@ This integration brings the following benefits:
 % Mencionar un par de trabajos sobre móviles con servidores web embebidos, para que se vea que no es sólo \ac{wot}
 
 
-\subsubsection{\acs{sw} by using Intermediaries}
-\label{sec:sw_intermediaries}
-
-% como los smart environments describen contexto usando web semántica
-
-% uso concreto por parte de soluciones significativas: siempre centralizando el uso de semántica en cacharros grandes
-
-% intro a que ahora se va a hablar de soluciones IoT que usen semántica
-
-Adding semantics works well for devices with high computational capacity but may add too much overhead for most of the devices in the \ac{iot}.
-To reduce this overhead in such devices, part of this computation is usually delegated to an intermediary.
-Some noteworthy example is the one proposed by \citet{broring_semantic_2009}.
-% buscar otros ejemplos de enjundia
-% The Context Broker Architecture (CoBrA)[Che04] 
-% Gu et al. (2007)
-% AlarmNet (2008)
-
-
-\InsertFig{venn-sec2}{fig:venn_semantics_ubicomp}{
-  The \acl{sw} for \acl{ubicomp}.
-}{
-  Scope of this section.
-}{0.6}{}
-
-
-These intermediaries or \emph{Semantic Gateways} are in charge of managing the semantic annotation.
-The devices send raw data (which can be compressed) to the intermediaries and the gateways annotate the content semantically.
-Thus, the devices do not have to care about any semantic aspect and just collect the data as they did before.
-
-These \emph{Semantic Gateways} reduce the load to embedded devices with limited resources by decreasing the number of requests they have to provide.
-In addition, a centralized intermediary can gather all the information and thus, reduce the complexity of managing a distributed environment.
-
-However, using intermediaries to store the semantic data of resource constrained devices also has some drawbacks.
-On the one hand, centralization does not faithfully represent mobility situations were individuals carry their own semantic information in their personal devices.
-In addition, the data obtained from an intermediary will always be less fresh than the one obtained where it is generated (i.e., sensors).
-On the other hand, the servers are critical in centralized systems and therefore, their availability determines the operation of these solutions.
-They also impose a burden on the maintenance which may be worthless in some simple scenarios.
-
-
-% TODO meter alguna referencia a Cabilmonte sobre SPARQL en streaming
-% Trata de consultar datos semánticos en streaming a una base de datos relacional.
-% Por lo que entiendo, la comunicación sensor-DB se no es semántica.
-
-
-
-% diferenciar de una forma menos descarada?
-
-\subsubsection{\acs{sw} in Providers}
-\label{sec:sw_providers}
-% enumerar aquellas características de IoT???
-% sacar algo del paper que habla de los retos de usar semántica en IoT
-
-% pero ahora los cacharros cada vez son más potentes y no es difícil imaginar un mundo poblado por ellos blablah
-
-% WoT y aquel que hacía cosas de móviles
-
-% TODO generalizar a resource-constrained devices
-Lately some solutions have arisen to semantically annotate data where it is generated. % in the provider
-In the \acl{wot}, multiple solutions have considered using semantics to enrich the data definition in a machine processable manner.
-Generally, these solutions embed the metadata in HTML using microdata, microformats or RDFa \citep{mayer_extensible_2011}.
-These contents are returned by the Internet connected objects and are used to enhance the findability of the data by search engines.
-% Ontologías no se pueden definir, tiene que haber consenso en su uso por parte de las máquinas de búsqueda.
-% en vez de eso, queremos mejorar la busqueda por parte de los cacharros, no de los search engines
-This approach does not focus on making the devices able to search and interact with others.
-% end-to-end search
-Instead, it considers them as mere human-oriented information providers which should be indexed by third party search services.
-% aquí se puede enganchar también el discurso de Doulkeridis2007desent: coverage and scalability, freshness y monopoly
-
-A more general way to represent semantic data is using RDF\footnote{\url{http://www.w3.org/RDF/}} based representations (i.e., full semantics).
-SPITFIRE European project\footnote{\url{http://spitfire-project.eu}} represents the most remarkable effort on gathering full semantics and the \ac{wot}.
-It focuses on fully integrating sensor data with the \ac{lod}. 
-The \ac{lod} are datasets which follow a series of principles on how to open and publish data.
-The goal of the \ac{lod} is to publish linked terms using full semantics.
-
-SPITFIRE shares with our solution the vision of a world populated by devices acting as semantic data providers no matter how small they are \citep{hasemann_rdf_2012}.
-Therefore, many of their efforts are complimentary to this work.
-%This is done by defining an ontology for mapping other common ontologies and providing semi-automatic generation of semantic annotations from raw data.
-%They also propose an abstraction to represent real-world entities (virtual sensors) using data provided by low-level sensors.
-%Finally, and more specific to this work, they propose a searching model which predicts the current state of things by computing their periodic patterns in past states.
-To search within these providers, \citet{pfisterer_spitfire:_2011} proposes a model which predicts the current state of things by computing their periodic patterns in past states.
-Again, the goal of this method is to adapt search engines to the new fashion of data provided on the \emph{\acl{sw} of Things}.
-
-Instead, we propose a model to enhance the search capability of web-connected things in a distributed fashion.
-We aim to promote the interaction and collaboration between any devices in these environments.
-Not only sensors, but also regular computers or mobile devices \citep{balandin_access_2011}.
-
-
-
 \subsubsection{Discussion}
 
 % TODO reescribir esto para hablar sólo de REST vs mi propuesta!
-
-Section~\ref{sec:sw_intermediaries} presents the most common approaches to use \ac{sw} in \ac{ubicomp}: delegate on intermediaries the semantization of the raw data.
-However, we do not intend to follow this path.
-Instead, we propose to share semantic content directly from the embedded and mobile platforms as the solutions in Section~\ref{sec:sw_providers} do.
-This completely distributed approach tries to simplify the maintenance burden and promote the access to the most updated data.
-
-
-Regarding searching, the solutions on Section~\ref{sec:sw_providers} promote a less distributed search.
-Instead, our model tries to enhance searching capability of web-connected things.
-This improvement leads to environments where any devices directly interact and collaborate with each other.
-
-
 
 In Section~\ref{sec:remote_invocation} we have analyzed the current trends towards the remote invocation style.
 Within them, we can see how \ac{wot} has gained much more attention both for its perceived simplicity and for its seamless integration with the web.
