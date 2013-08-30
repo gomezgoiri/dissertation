@@ -1,5 +1,10 @@
 \subsection{The \acl{wot} and other \ac{rest} Solutions for \acs{ubicomp}}
-% nueva sección para hablar de WoT (DPWS ya se ha presentado)
+
+The \ac{ubicomp} idea is characterized by the presence and collaboration of a number of heterogeneous and often limited computing platforms.
+% REST está en todos los lados, pero...
+Dealing with this heterogeneity is probably the biggest benefit which \ac{rest} has brought to this field.
+A representative example of how \ac{rest} has influences \ac{ubicomp} is the \acf{wot}.
+
 
 \InsertFig{venn-sec1_1}{fig:venn_ubicomp}{
   Non-semantic works for \ac{ubicomp} apart from \aclp{ts}.
@@ -8,37 +13,37 @@
 }{0.6}{}
 
 
-The \acl{wot} initiative encourages the use of \acs{rest}-based solutions embedding web servers in daily objects \citep{guinard_internet_2011}.
-In this way, the objects can integrate with the \ac{www} as first-class citizens. % decir ``f-c cit of the Web" es reiterativo ya que WWW==web
+The \acl{wot} initiative encourages the use of \acs{rest}-based solutions embedding web servers in daily objects \citep{guinard_internet_2011,guinard_thesis_2011}.
+In this way, the things can seamlessly integrate with the \ac{www} as first-class citizens \citep{gupta_network_2011}. % decir ``f-c cit of the Web" es reiterativo ya que WWW==web
 This integration brings the following benefits:
 \begin{itemize}
-  \item The smart-things can be linked to enable its discovery by browsing. This involves using the tool most users are familiar with: the browser.
+  \item The smart-things can be linked to enable its discovery by browsing.
+	This involves using the tool most users are familiar with: the browser.
+	% TODO The pervasive presence of web tools and libraries!!!
   \item They can be bookmarked or shared through social networks \citep{guinard_sharing_2010}.
   % explicar qué es un mashup?
   \item They can be integrated with other web applications through mash-ups \citep{guinard_towards_2009,ostermaier_webplug:_2010,pintus_anatomy_2011}.
   % TODO citar al canadiense tb? pintus, stirbu y a todo el mundo
-  \item Mechanisms such as searching, caching, load-balancing and indexing can be used over the objects to achieve the scalability of the web. % cita al indio
+  \item Existing mechanisms such as searching, caching, load-balancing and indexing can be used over the objects to achieve the scalability of the web. % cita al indio
 \end{itemize}
 
 
-% Mencionar un par de trabajos sobre móviles con servidores web embebidos, para que se vea que no es sólo \ac{wot}
+% TODO TODO TODO Vestir un poco más esta sección con trabajos relevantes para mi tesis.
+% TODO TODO TODO citar los trabajos de WoT que en su momento me molasen, porque si, bien por ellos :-P
 
 
 \subsubsection{Discussion}
 
-% TODO reescribir esto para hablar sólo de REST vs mi propuesta!
 
-In Section~\ref{sec:remote_invocation} we have analyzed the current trends towards the remote invocation style.
-Within them, we can see how \ac{wot} has gained much more attention both for its perceived simplicity and for its seamless integration with the web.
-% o decir REST based solutions para no centrar mucho en IoT
-Besides, the availability of tools and libraries for many mobile and embedded platforms ease its adoption.
+In the last decade, probably because of its perceived simplicity \citep{guinard_search_2011}, \ac{rest} has gained adopters in the \ac{iot}.
+Particularly, the \ac{wot} has emerged as a simple mechanism to integrate smart objects with each other, but also with existing web applications.
 
-
-However, as any remote invocation style it introduces coupling between senders and receivers.
+However, as any remote invocation style \ac{rest} introduces coupling between senders and receivers.
 % de johanson_extending_2004 he sacado esas características, no la particularización a WoT
 These complicates the application changes both in the short-term and in the long-term \citep{johanson_extending_2004}.
 In the short-term because nodes constantly join and leave the environment due to mobility or to failures.
 In the long-term because the space is used to solve new problems and the obsolete devices are replaced with new technology.
-Furthermore, the human interaction is eased by minimizing the configurations.
-% quizá lo de johanson_extending_2004 se podría retomar en el capítulo cha:tsc
-In Chapter~\ref{cha:tsc}, we deeply compare both \ac{rest} and \ac{ts} to see how they can benefit each other.
+
+In this dissertation, we propose a middleware to reduce this coupling.
+This middleware ensures that, from the developer perspective, the communication is always driven by the data.
+In other words, in our middleware the devices are unaware of others' presence (i.e. they are \ac{space decoupled}).
