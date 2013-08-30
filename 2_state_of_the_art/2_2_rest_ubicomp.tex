@@ -1,8 +1,30 @@
-% TODO
-%  + reescribirlo como una misma cosa?
-%  + añadirle una 
+\subsection{The \acl{wot} and other \ac{rest} Solutions for \acs{ubicomp}}
+% nueva sección para hablar de WoT (DPWS ya se ha presentado)
 
-\subsection{\acs{sw} by using Intermediaries}
+\InsertFig{venn-sec1_1}{fig:venn_ubicomp}{
+  Non-semantic integration approaches for \ac{ubicomp} apart from \aclp{ts}.
+}{
+  Scope of this subsection.
+}{0.6}{}
+
+
+The \acl{wot} initiative encourages the use of \acs{rest}-based solutions embedding web servers in daily objects \citep{guinard_internet_2011}.
+In this way, the objects can integrate with the \ac{www} as first-class citizens. % decir ``f-c cit of the Web" es reiterativo ya que WWW==web
+This integration brings the following benefits:
+\begin{itemize}
+  \item The smart-things can be linked to enable its discovery by browsing. This involves using the tool most users are familiar with: the browser.
+  \item They can be bookmarked or shared through social networks \citep{guinard_sharing_2010}.
+  % explicar qué es un mashup?
+  \item They can be integrated with other web applications through mash-ups \citep{guinard_towards_2009,ostermaier_webplug:_2010,pintus_anatomy_2011}.
+  % TODO citar al canadiense tb? pintus, stirbu y a todo el mundo
+  \item Mechanisms such as searching, caching, load-balancing and indexing can be used over the objects to achieve the scalability of the web. % cita al indio
+\end{itemize}
+
+
+% Mencionar un par de trabajos sobre móviles con servidores web embebidos, para que se vea que no es sólo \ac{wot}
+
+
+\subsubsection{\acs{sw} by using Intermediaries}
 \label{sec:sw_intermediaries}
 
 % como los smart environments describen contexto usando web semántica
@@ -49,7 +71,7 @@ They also impose a burden on the maintenance which may be worthless in some simp
 
 % diferenciar de una forma menos descarada?
 
-\subsection{\acs{sw} in Providers}
+\subsubsection{\acs{sw} in Providers}
 \label{sec:sw_providers}
 % enumerar aquellas características de IoT???
 % sacar algo del paper que habla de los retos de usar semántica en IoT
@@ -87,3 +109,36 @@ Again, the goal of this method is to adapt search engines to the new fashion of 
 Instead, we propose a model to enhance the search capability of web-connected things in a distributed fashion.
 We aim to promote the interaction and collaboration between any devices in these environments.
 Not only sensors, but also regular computers or mobile devices \citep{balandin_access_2011}.
+
+
+
+\subsubsection{Discussion}
+
+% TODO reescribir esto para hablar sólo de REST vs mi propuesta!
+
+Section~\ref{sec:sw_intermediaries} presents the most common approaches to use \ac{sw} in \ac{ubicomp}: delegate on intermediaries the semantization of the raw data.
+However, we do not intend to follow this path.
+Instead, we propose to share semantic content directly from the embedded and mobile platforms as the solutions in Section~\ref{sec:sw_providers} do.
+This completely distributed approach tries to simplify the maintenance burden and promote the access to the most updated data.
+
+
+Regarding searching, the solutions on Section~\ref{sec:sw_providers} promote a less distributed search.
+Instead, our model tries to enhance searching capability of web-connected things.
+This improvement leads to environments where any devices directly interact and collaborate with each other.
+
+
+
+In Section~\ref{sec:remote_invocation} we have analyzed the current trends towards the remote invocation style.
+Within them, we can see how \ac{wot} has gained much more attention both for its perceived simplicity and for its seamless integration with the web.
+% o decir REST based solutions para no centrar mucho en IoT
+Besides, the availability of tools and libraries for many mobile and embedded platforms ease its adoption.
+
+
+However, as any remote invocation style it introduces coupling between senders and receivers.
+% de johanson_extending_2004 he sacado esas características, no la particularización a WoT
+These complicates the application changes both in the short-term and in the long-term \citep{johanson_extending_2004}.
+In the short-term because nodes constantly join and leave the environment due to mobility or to failures.
+In the long-term because the space is used to solve new problems and the obsolete devices are replaced with new technology.
+Furthermore, the human interaction is eased by minimizing the configurations.
+% quizá lo de johanson_extending_2004 se podría retomar en el capítulo cha:tsc
+In Chapter~\ref{cha:tsc}, we deeply compare both \ac{rest} and \ac{ts} to see how they can benefit each other.
