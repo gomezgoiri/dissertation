@@ -88,16 +88,15 @@ This content follows the DAML+OIL language (the \ac{owl} precursor).
 
 On the other hand, the most common tuple model is the three-field tuple which corresponds with a \ac{rdf} triple.
 That is, a tuple with a field for the \emph{subject}, another for the \emph{predicate} and the third one for the \emph{object}.
-However, a triple by itself cannot express much information.
+% Sacado de la descripción de TSC que tenía antes:
+% In a later work, \citet{krummenacher2006specification} proposed to use identifiers just for a set of triples (i.e. \ac{rdf} graphs).
+% bundler cita el de "WWW: or what's wrong with the web" para explicar eso último
+However, a triple by itself cannot express much information \citep{krummenacher2006specification}.
 % también para reducir la complejidad del storage (TSC dixit)
 % decir que al primero que se le ocurrió fue a TSC?
 To solve this limitation, semantic \ac{ts} have usually adopted the concept of \ac{rdf} graphs too.
 A \ac{rdf} graph is a set of \ac{rdf} triples identified by an \ac{uri}. % TSC distinguen entre NamedGraph (grafo con URI) y Graph (conjunto de grafos)
-
-Usually, the result of a \ac{ts} primitive are all the triples belonging to the same graph.
-In other words, the basic information resource in these middlewares is the \ac{rdf} graph and the \ac{rdf} triple is used to ensure the associative access. % URI al final no deja de ser por dirección
-TSC presents an exception
-Therefore, \ac{rdf} graph adds a higher lever to access to the knowledge.
+Although they can be accessed by their \ac{uri}, more interestingly, these middlewares also guarantee the associative access. % see the next section
 
 
 \subsection{Query model}
@@ -119,10 +118,45 @@ STuples\citep{khushraj_stuples:_2004} extends JavaSpace's template by adding ass
 \subsection{Space model}
 
 The \emph{flat} model is the simplest manner of disjoining spaces.
-Identifying this spaces with URIs, one can link them in the knowledge similarly to what other tuple models do (e.g. Nardini et al or CSpaces). % TODO comprobar
+Each space is identified by an \ac{uri}.
+TSC, tsc++ and Smart-M3 use this model.
+
+% TODO Nosotros proponemos flat spaces enriquecidos con federated spaces
+
+
+% decir que quiere decir: Tuple Centres Spread over the Network ?
+\citet{nardini_semantic_2013} extends TuCSoN \cite{omicini_tucson:_1998}.
+TuCSoN also follows a flat model where different independent tuple centres can coexist at the same time. % o created?
+However, it presents an evolution of the \ac{ts} called \emph{tuple centre}.
+A \emph{tuple centre} can be adapted to the application needs through reactions to communication operations.
+These reactions allow to trigger behaviors in response to any primitives or to define new ones.
+% The agents can access to remote \emph{tuple centres} and migrate to them, but these interactions need to be programmed.
+
+% Nested
 More sophisticated models propose virtual view of spaces (i.e. scopes) or hierarchies between spaces.
-Nevertheless, we argue that this models are not easy to implement in a distributed way. % extenderlo despues?
-% TODO y qué?
+% TODO describe
+
+% CSpaces
+% On the contrary of C04 where modifications need to be approved by all
+% subscribers, the updates proposed by the members of a Shared CSpace are
+% automatically included, and versioning mechanisms are in charge to track
+% changes and provide rollback features if one of the members disagrees with
+% the included updates.
+% To join a Shared CSpaces and publish and retrieve data on it the new
+% members should first complete a registration procedure in which one of the
+% main tasks is to provide a semantic and alignment specification between the
+% data that each new candidate want to share and the data that previous
+% members have published beforehand.
+Finally, CSpaces \citep{martinrecuerda_towards_2005} proposes the more original space model.
+The spaces in CSpaces can be individual or shared.
+An individual space belongs to a single process.
+Two participants can agree on how to represent the knowledge to share their individual spaces forming a shared space.
+Shared spaces can join to others forming a tree structure.
+In a shared space the updates are versioned and can be revoked by any member.
+However, neither the registration process needed for the agreement or the revocation process are detailed.
+Furthermore, to the best of our knowledge, this conceptual exercise never went beyond a rather limited prototype.
+
+
 
 
 \input{2_state_of_the_art/tables/ts_model}
@@ -145,6 +179,10 @@ TSC uses flooding to replicate the knowledge in all the nodes.
 Tsc++ propagates the queries in flooding-based approaches.
 TripCom is built on top of a structured-network which imposes where the content is stored.
 The suitability of these models is subject of analysis in the Chapter~XX.
+
+% In TuCSoN each \emph{tuple centre} is deployed in a device's port and is identified by a name.
+%    https://code.google.com/p/tucson/source/browse/TuCSoN/trunk/src/alice/tucson/examples/helloWorld/HelloWorld.java
+The communication with each centre is direct, not based in any underlying network. % no les mola P2P decian en algun lado
 
 % TODO reescribir desde aquí
 
