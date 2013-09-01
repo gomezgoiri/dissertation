@@ -36,10 +36,45 @@ the review is divided in sections which describe the main components of a Semant
 
 \subsection{Use of semantics}
 
+The works analyzed present two strategies to semantically annotation of data: the use of \ac{sw} standards or the definition of its own language.
+The \ac{sw} rely on the \ac{rdf} metadata data model. % también lo llaman language
+As the majority of the semantic \ac{ts}s, we opt for using the widely accepted \ac{rdf} to ensure interoperability \emph{ab-initio}.
+On the contrary, CSpaces \citep{martinrecuerda_towards_2005} and \citet{nardini_semantic_2013} define their own language-independent up to \ac{fol} notation.
+However, these works have to face an inconvenience: most of the libraries and tools available are based on the \ac{sw} standards. % concretamente cuando quieren usar reasoners!
+Therefore, they have to internally translate between both worlds in a not-straightforward way. % son cosas distintas!
+% theoretical counterpart of OWL DL [7]. Since OWL is the W3C standard ontology description language for the Semantic Web,
+% and the standard de-facto for semantic applications in general, we adopt OWL as the ontology language for the domain
+% ontologies associated to ReSpecT semantic tuple centres in TuCSoN. While for the details of OWL we forward interested
+
+% TODO explicar diferencias, citar o evitar verengenales que no comprendo y que sólo me complican la vida?
+% http://www.cs.ox.ac.uk/ian.horrocks/Seminars/download/Horrocks_Ian_pt1.pdf
+%     DL == Decidable fragments of First Order Logic
+% http://en.wikipedia.org/wiki/Description_logic#First_order_logic
+%     Many Description Logic models (DLs) are decidable fragments of first order logic (FOL).
+%     Some DLs now include operations (for example, transitive closure of roles) that allow efficient inference but cannot be expressed in FOL.
 
 
-% optamos por estándares
-%    a nivel de interop tiene sentido
+On top of \ac{rdf}, the \ac{sw} defines new layers to increase the data expressivity.
+First, \ac{rdfs}\footnote{\url{http://www.w3.org/TR/rdf-schema/}} describes a series of classes and properties to define vocabularies in \ac{rdf}.
+On top of \ac{rdfs}, \ac{owl}\footnote{\url{http://www.w3.org/TR/owl-features/}} offers additional vocabulary for describing properties and classes.
+% 3 niveles: Lite, DL (que se corresponde con DL) y Full
+These properties and classes allow to reason over the knowledge both to validate the data inserted or to infer implicit (unstated) knowledge. % implicit y unstated son redundantes, pero para que se entienda mejor
+
+
+Although reasoning may be desirable, its use is tangential to the model proposed in this thesis.
+In any case, it is by not means not mandatory in our solution because:
+\begin{itemize}
+  \item The devices which may provide information to our \emph{federated space} are autonomous.
+	They share a minimal contract with our middleware where we cannot define how they manage/provide their information.
+  \item It is limited by the availability of reasoners, and nowadays there is no reasoner light enough to run in a reasonable time span in small devices.
+        % TODO citar algo? quizá nuestro propio trabajo?
+\end{itemize}
+
+% TODO ver si añadir tabla aunque sea simplificada!
+%For our solution, describing the data semantically is a first step towards semantically interpreting it.
+%The Table~\ref{tab:comparisonSemantics} shows different features regarding the semantic model proposed by each solution.
+%\input{2_state_of_the_art/tables/semantics}
+
 
 \subsection{Space model}
 
@@ -51,6 +86,37 @@ the review is divided in sections which describe the main components of a Semant
 
 
 \subsection{Distribution} % o después de space model o integrado!
+%	2. centralizado / distribuído
+%	4. basado en clientes tontos
+
+Centralized \aclp{ts} are much simpler and easier to implement.
+Therefore, they usually offer more features than the distributed ones.
+However, they also impose a single-point-of-failure.
+
+This thesis aims to solve that by proposing a distributed model.
+Within the distributed \aclp{ts}, a wide range of distribution strategies have been detected.
+The Table~\ref{tab:comparisonDistribution} summarizes the space distribution strategy adopted by each solution.
+
+TSC uses flooding to replicate the knowledge in all the nodes.
+Tsc++ propagates the queries in flooding-based approaches.
+TripCom is built on top of a structured-network which imposes where the content is stored.
+The suitability of these models is subject of analysis in the Chapter~XX.
+
+% TODO reescribir desde aquí
+
+%In this thesis, we aim to implement a completely distributed Semantic \acl{ts}.
+%In that space all the nodes should be able to participate trying to avoid any distinction between clients and servers.
+%Ubicomp is be characterized for being populated by very dynamic nodes.
+%This nodes usually face severe computation and energy autonomy restrictions.
+
+
+
+% TODO y así te evitas engorrosas explicaciones aquí
+%We argue that the replication is not suitable for devices with severe storage, memory and computation restrictions.
+%Flooding-based queries does not scalable for spaces with many nodes, .
+%Finally structured networks does not comply on
+
+\input{2_state_of_the_art/tables/distribution}
 
 
 \subsection{Discussion}
@@ -396,71 +462,8 @@ Other solutions offer , but we have discarded its usage due to the hard implemen
 
 
 
-\subsubsection{Use of semantics}
-% TODO evitar verengenales que no comprendo y que sólo me complican la vida
 
-The Table~\ref{tab:comparisonSemantics} shows different features regarding the semantic model proposed by each solution.
-First we can see how most of the solutions use the standard Semantic Web language \ac{rdf} to express knowledge.
-The use of \ac{rdf} does not impose or limits the use of more advanced languages such as \ac{rdfs} or \ac{owl}.
-
-CSpaces and Nardini et al. propose the use of a language-independent \ac{fol}.
-However, since most advanced reasoners only implement a subset of \ac{fol}, any implementation is limited by them. % también estas
-% theoretical counterpart of OWL DL [7]. Since OWL is the W3C standard ontology description language for the Semantic Web,
-% and the standard de-facto for semantic applications in general, we adopt OWL as the ontology language for the domain
-% ontologies associated to ReSpecT semantic tuple centres in TuCSoN. While for the details of OWL we forward interested
-
-Reasoning is used both to validate the data inserted into the space or to query over inferred triples.
-We do not validate the data inserted on the space to reduce the insertion time.
-The possibility of querying over the inferred knowledge is limited by the availability of reasoners.
-As will be shown in the next sections, nowadays there is no reasoner light enough to run in a reasonable time span in small devices.
-Therefore, reasoning is not mandatory in our solution.
-In any case, the use of reasoners over local content is tangential to the model proposed in this thesis.
-
-Semantic matching is usually derived from the reasoning process.
-Although it is a desirable characteristic, it is not imposed by any mean.
-For our solution, describing the data semantically is a first step towards semantically interpreting it.
-
-
-\input{2_state_of_the_art/tables/semantics}
-
-
-
-\subsubsection{Distribution}
-%	2. centralizado / distribuído
-%	4. basado en clientes tontos
-
-Centralized \aclp{ts} are much simpler and easier to implement.
-Therefore, they usually offer more features than the distributed ones.
-However, they also impose a single-point-of-failure.
-
-This thesis aims to solve that by proposing a distributed model.
-Within the distributed \aclp{ts}, a wide range of distribution strategies have been detected.
-The Table~\ref{tab:comparisonDistribution} summarizes the space distribution strategy adopted by each solution.
-
-TSC uses flooding to replicate the knowledge in all the nodes.
-Tsc++ propagates the queries in flooding-based approaches.
-TripCom is built on top of a structured-network which imposes where the content is stored.
-The suitability of these models is subject of analysis in the Chapter~XX.
-
-% TODO reescribir desde aquí
-
-%In this thesis, we aim to implement a completely distributed Semantic \acl{ts}.
-%In that space all the nodes should be able to participate trying to avoid any distinction between clients and servers.
-%Ubicomp is be characterized for being populated by very dynamic nodes.
-%This nodes usually face severe computation and energy autonomy restrictions.
-
-
-
-% TODO y así te evitas engorrosas explicaciones aquí
-%We argue that the replication is not suitable for devices with severe storage, memory and computation restrictions.
-%Flooding-based queries does not scalable for spaces with many nodes, .
-%Finally structured networks does not comply on
-
-\input{2_state_of_the_art/tables/distribution}
-
-
-
-\subsubsection{Implementations}
+%\subsubsection{Implementations}
 %	5. Implementado?
 %	6. Implementación disponible
 %	Interoperability
