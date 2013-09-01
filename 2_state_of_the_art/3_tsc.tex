@@ -76,13 +76,57 @@ In any case, it is by not means not mandatory in our solution because:
 %\input{2_state_of_the_art/tables/semantics}
 
 
-\subsection{Space model}
-
-
 \subsection{Tuple model}
+
+% presentamos distintos modelos
+On the one hand, several works embed semantic content in one of the fields of the tuple.
+CSpaces \citep{martinrecuerda_towards_2005} defines seven-field tuple.
+STuples\citep{khushraj_stuples:_2004} extends the \emph{JavaSpace} \citep{freeman_javaspaces_1999} middleware adding a field with semantic content to the tuple object.
+This content follows the DAML+OIL language (the \ac{owl} precursor).
+\citet{nardini_semantic_2013} use the concept of \emph{semantic tuples} which are expressed in logic terms.
+
+
+On the other hand, the most common tuple model is the three-field tuple which corresponds with a \ac{rdf} triple.
+That is, a tuple with a field for the \emph{subject}, another for the \emph{predicate} and the third one for the \emph{object}.
+However, a triple by itself cannot express much information.
+% también para reducir la complejidad del storage (TSC dixit)
+% decir que al primero que se le ocurrió fue a TSC?
+To solve this limitation, semantic \ac{ts} have usually adopted the concept of \ac{rdf} graphs too.
+A \ac{rdf} graph is a set of \ac{rdf} triples identified by an \ac{uri}. % TSC distinguen entre NamedGraph (grafo con URI) y Graph (conjunto de grafos)
+
+Usually, the result of a \ac{ts} primitive are all the triples belonging to the same graph.
+In other words, the basic information resource in these middlewares is the \ac{rdf} graph and the \ac{rdf} triple is used to ensure the associative access. % URI al final no deja de ser por dirección
+TSC presents an exception
+Therefore, \ac{rdf} graph adds a higher lever to access to the knowledge.
 
 
 \subsection{Query model}
+
+Originally, in common \ac{ts}s tuples were selected using special tuples where wildcard values were allowed in the fields.
+All of the \ac{ts} middleware which use \ac{rdf} triple as a tuple use this approach.
+Beside, they provide access to the \ac{rdf} graphs by their \ac{uri}'s.
+
+Most of these works also offer advanced query languages (e.g. SPARQL\footnote{\url{http://www.w3.org/TR/rdf-sparql-query/}}) as a more expressive way to match graphs.
+This languages can be decomposed by simple triple patterns.
+However, this requires a parser which may not be available for resource constrained platforms.
+In this thesis we focus on queries based on graph patterns and left the adoption of more complex querying languages as a future work.
+
+CSpaces, sTuples and \citeauthor{nardini_semantic_2013} use less standard querying approaches.
+CSpaces \citep{martinrecuerda_towards_2005} and \citet{nardini_semantic_2013} offer a formal language to select appropriate tuples.
+STuples\citep{khushraj_stuples:_2004} extends JavaSpace's template by adding assertional axioms that can be used to match semantic tuples.
+
+
+\subsection{Space model}
+
+The \emph{flat} model is the simplest manner of disjoining spaces.
+Identifying this spaces with URIs, one can link them in the knowledge similarly to what other tuple models do (e.g. Nardini et al or CSpaces). % TODO comprobar
+More sophisticated models propose virtual view of spaces (i.e. scopes) or hierarchies between spaces.
+Nevertheless, we argue that this models are not easy to implement in a distributed way. % extenderlo despues?
+% TODO y qué?
+
+
+\input{2_state_of_the_art/tables/ts_model}
+
 
 
 \subsection{Distribution} % o después de space model o integrado!
@@ -418,34 +462,6 @@ They extend TuCSoN providing semantic tuples, templates, primitives, reactions a
 %	Porque es muy bonito poner ideas felices, pero no ha sido implementado nunca!
 
 
-\subsubsection{\acl{ts} model}
-
-A \acl{ts} model is mainly characterized by the information hold (i.e. \emph{tuple}),
-how it is hold (i.e. the \emph{space} model)
-and how a node can query the space (i.e. the type of \emph{query}).
-The Table~\ref{tab:comparisonTS} summarizes the model used in each of the semantic \aclp{ts}.
-
-The \emph{flat} model is the simplest manner of disjoining spaces.
-Identifying this spaces with URIs, one can link them in the knowledge similarly to what other tuple models do (e.g. Nardini et al or CSpaces). % TODO comprobar
-More sophisticated models propose virtual view of spaces (i.e. scopes) or hierarchies between spaces.
-Nevertheless, we argue that this models are not easy to implement in a distributed way. % extenderlo despues?
-% TODO y qué?
-
-The most common tuple model is the three-field tuple with \emph{subject}, \emph{predicate} and \emph{object}.
-Other solutions propose their own tuple format.
-We believe that for a developer used to work with the Semantic Web the use of \ac{rdf} triples is straightforward.
-Grouping these triples in \ac{rdf} graphs also provides a useful abstraction for resources.
-% TODO aclarar bien porqu TSC se centra en grafos y tsc++ no!
-
-Regarding the queries, all the solutions offer graph patterns-based queries.
-These queries can be easily processed by any device, whereas complex queries need parsers.
-% TODO decir que se puede simplificar en consultas tipo patrones y no al revés!
-Query parsers are not always available for resource constrained platforms.
-Therefore, in this thesis we focus on queries based on graph patterns.
-The adoption of more complex querying languages such as SPARQL can be done as a future work. % TODO cita SPARQL?
-
-
-\input{2_state_of_the_art/tables/ts_model}
 
 
 
@@ -472,7 +488,7 @@ Other solutions offer , but we have discarded its usage due to the hard implemen
 
 
 
-\subsection{Conclusion}
+\subsection{Discussion}
 
 % extraer algunas conclusiones de lo que falta
 % tono general: están muy bien de características, pero a la hora de hacerlo distribuido falla
@@ -495,3 +511,12 @@ Doing so, a user can carry out his profile in the smart-phone or a sensor can pr
 
 % TODO CONCLUSION
 Although both semantic space-based and Triple Spaces implementations exist, none of them has been specifically designed to be run in devices with constrained capabilities apart from our solution.
+
+
+
+% Lo que sería un puntazo:
+%     el concepto de TSC nacio de REST
+%     el interés por añadir features, hizo que la gente olvidase los ppios que guiaban la simplicidad de REST
+%     creemos que recuperar esa simplicidad por encima de las features es importante => la clave para facilitar y en algunos casos posibilidar que los dispositivos constrained lo implementen
+%     poner características de REST y quién las cumplía!
+%     no queremos ser los más ortodoxos, pero si :-P
