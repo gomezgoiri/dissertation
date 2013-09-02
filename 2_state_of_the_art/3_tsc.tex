@@ -40,7 +40,7 @@ the review is divided in sections which describe the main components of a Semant
 \newcommand{\midstuples}{\acs{stuples} \citep{khushraj_stuples:_2004}}
 \newcommand{\midcspaces}{\acs{cspaces} \citep{martinrecuerda_towards_2005}}
 \newcommand{\midtscpp}{\acs{tscpp} \citep{krummenacher_open_2009,blunder_distributed_2009}}
-\newcommand{\midtripcom}{\acs{tripcom} \citep{XXX}}
+\newcommand{\midtripcom}{\acs{tripcom} \citep{simperl_coordination_2007}}
 \newcommand{\midsmartmt}{\acs{smartm3} \citep{honkola_smart-m3_2010}}
 \newcommand{\midnardini}{\citet{nardini_semantic_2013}}
 
@@ -151,7 +151,7 @@ These reactions allow to trigger behaviors in response to any primitives or to d
 % TODO Nosotros proponemos flat spaces enriquecidos con federated spaces
 % Nested
 More sophisticated models allow to create hierarchies of spaces.
-Three examples are \ac{sws}, \ac{tripcom} and \ac{cspaces}.
+Three examples are \ac{sws}, \ac{tripcom} \citep{simperl_coordination_2007} and \ac{cspaces}.
 % SWS -> Disjoinnt nested
 % cosas relativas al despliegue
 \ac{sws} \citep{tolksdorf_coordination_2006} propose two ways to partition the spaces: sub-spaces and contexts.
@@ -231,274 +231,7 @@ However, instead of using a \ac{p2p} framework to access to the contents,
 we individually access to them using several \ac{http} requests. % añadir que son "parallel" o sólo liará?
 In other words, each client may access to various server to obtain a result for a given primitive.
 
-
-\input{2_state_of_the_art/tables/distribution}
-
-
-\subsection{Discussion}
-
-% Model: Triple Space
-% Originalmente REST
-% Luego ha ido derivando e implementando funcionalidades más complejas alejandose del diseño inicial
-% Nosotros proponemos una vuelta a los origenes para recuperar una simplicidad de la que limited devices pueden beneficiarse
-
-
-% Ver cómo TSC puede cumplir con todos los principios de diseño
-% tabla de comparativa con REST
-% no hay muchos que cumplan, nosotros: esto
-
-
-
-
-\subsection{TSC}
-% modelo propuesto
-TSC \citep{fensel_tsc_2007} is the middleware which first implemented the ideas of Fensel et al. \citep{fensel_triple-space_2004}.
-TSC explores a \acl{tsc} infrastructure based on the \ac{rest} architectural style.
-Equivalently to \ac{rest}, TSC proposes a stateless infrastructure where the resources are identified by \acp{uri}.
-In the first approximation, each tuple was considered a resource.
-These tuples correspond with \ac{rdf} triples.
-In a later work,  Krummenacher et al. \citep{krummenacher2006specification} proposed to use identifiers just for a set of triples (i.e. \ac{rdf} graphs).
-% bundler cita el de "WWW: or what's wrong with the web" para explicar eso último
-They argue that resources usually need to be modeled using more than just a triple.
-Besides, the use of graphs reduces the complexity on storage.
-To cope with the heterogeneity of data and scalability issues, they propose the use of independent spaces identified by their own \ac{uri}.
-Using these disjoint spaces, they can restrict the number of participant in each one.
-
-
-% cosas relativas al despliegue
-TSC combines client/server and \ac{p2p} architectures using a hybrid super-peer one.
-The super-peers of this architecture communicate with each other using a middleware which offers a virtual shared memory space of Java objects.
-They present 3 different types of nodes:
-\begin{itemize}
-  \item The \emph{servers} are the responsible for storing and replicating the spaces.
-  \item The \emph{heavy clients} are not always connected to the system, but they have the same responsibilities as the \emph{servers}.
-	They can work off-line with their replicas.
-  \item The \emph{light clients} can access to the spaces using proxies or an \ac{http} \acs{api}.
-\end{itemize}
-
-
-% arquitectura
-TSC consist of three main components: a mediation engine, a data access layer and a coordination layer.
-The mediation engine manages data heterogeneity by intermediating between nodes using different data schemas.
-The data access layer ensures persistence of data, supports template matching and provides some reasoning over the knowledge stored.
-The coordination layer replicates named graphs to all involved TS kernels and therefore has to be synchronized with the data access.
-% http://tsc.deri.at/deliverables/D21.html
-% http://tsc.deri.at/deliverables/D31/D31.html
-To do that, they use a \ac{p2p} implementation of a virtual shared data space. % cita a CORSO?
-% decir que ofrece transaccionalidad gracias a CORSO? transactionality
-% It also offers a transactional context and a simple form to publish and subscribe to certain patterns.
-
-
-
-\subsection{Semantic Web Spaces}
-
-% modelo propuesto
-Semantic Web Spaces (SWS) \citep{tolksdorf_coordination_2006} defines two different data coordination views: data view and information view.
-In both views the tuples are represented with three fields which correspond with \ac{rdf} triples' subject, predicate and object.
-The data view stores syntactically valid \ac{rdf} and it is accessed using Linda primitives.
-The information view stores consistent and satisfiable data which are managed using new primitives.
-This view takes into account the knowledge defined by ontologies to perform semantic matching over inferred triples.
-
-% cosas relativas al despliegue
-SWS are virtually partitioned using contexts, which provide a simple form of access control.
-Clients can allocate contexts to control their view privately or share it with other clients. % This allow clustering ¿WTF?
-The different active spaces and the tuples they contain are represented in a meta-space using a meta-model ontology.
-This ontology also allows to express the hierarchical relation between the spaces and security policies.
-% por lo que entiendo, está centralizadísimo
-
-% arquitectura
-The prototype contains three main components: publication, retrieval and security.
-The publication component describes how the platform communicates with the clients or storage managers.
-The retrieval component process queries and can reason to enhance results. % no se razona cada vez que se inserta una tupla
-The security component restrict the access of client to spaces according to the policies defined.  % hablan de agentes
-% dicen que experimentaron problemas de escalabilidad
-
-
-
-\subsection{sTuples}
-
-% modelo propuesto
-STuples \citep{khushraj_stuples:_2004} was conceived by Nokia Research Center as a pervasive computing work.
-It extends the JavaSpace middleware, a object-oriented \acl{ts}, using a semantic match over the semantic tuples.
-To do that, a semantic tuple is an object with a field with the semantic description in the DAML+OIL format. % definir DAML+OIL o citarlo?
-
-
-% cosas relativas al despliegue
-The space is centralized and uses a framework called Vigil to create clients and services. % cita Vigil?
-Vigil acts as a communication gateway with several protocols and it is directly integrated with sTuples.
-
-
-% arquitectura
-The JavaSpace extension is done in sTuples through two components: the Tuple Manager and the Tuple Matcher.
-The manager adds, removes or states changes of tuples.
-Every insertion requires the semantic data to be asserted.
-The matcher implements the algorithm to match templates.
-Besides, specialized agents reside on the space to offer added functionality to the users.
-For instance, they implemented recommendations, subscriptions and task-executions in their prototype.
-
-
-
-\subsection{Conceptual Spaces}
-
-% modelo propuesto
-Conceptual Spaces, or CSpaces, were born to study the applicability of semantic \aclp{ts} to different scenarios including \acl{ubicomp}.
-Tuples in CSpaces contain seven different fields.
-Some fields enable to express logic theories using different formal languages.
-Other remarkable fields are used to define the version, specify the creator or to define to which subspaces the tuple belongs. % explicar los 7 campos?
-
-% cosas relativas al despliegue
-The spaces in CSpaces can be individual or shared.
-An individual space belongs to a single process.
-A shared one allows access to all the processes who have agreed on.
-
-% arquitectura
-%Es una IDEA y NO la habían IMPLEMENTADO (posteriormente hicieron un prototipo limitado para un paper de 2006).
-CSpaces differentiates between the same three types of nodes as TSC.
-They intended to implement individual spaces in heavy-clients and shared spaces in servers.
-They first considered a centralized implementation for the shared-spaces, % lo dicen en la comparativa
-and later on a P2P network of the nodes managing a shared-space. % paper de después
-In any case, to the best of our knowledge, this conceptual exercise never went beyond a rather limited prototype.
-% TODO confirmar 100%
-
-
-
-\subsection{tsc++}
-
-% modelo propuesto
-Tsc++ \citep{krummenacher_open_2009,blunder_distributed_2009} is a new version of the TSC project.
-Although the conceptual model is equivalent to TSC, its implementation completely changes.
-
-
-% cosas relativas al despliegue
-% Páginas 54 y 55
-Tsc++ proposes to divide the spaces among the participants instead of replicating each space in the different kernels as TSC does.
-Therefore, a space corresponds with a group a nodes on the \emph{Jxta} \ac{p2p} framework \footnote{https://jxta.dev.java.net/}. % jxta de otra forma?
-These nodes write their information locally and discover information in other nodes using some special nodes.
-This special nodes in Jxta are called \emph{rendezvous} (RDV).
-Tsc++ proposes and evaluates two discovery algorithms: flooding and random walk (RDW).
-\begin{itemize}
-  \item The flooding algorithm sends the request to a RDV, which propagates it to all the known nodes.
-	If this nodes are RDV, they may also propagate the request until a number of maximum hops is reached.
-  \item The RDW algorithm chooses a new peer to send the message to after the request has been processed in the previous one.
-	In Tsc++ the request is sent to a RDV which creates a list of peers and sends it to the first one in the list.
-	Afterwards, the first node sends the request to a new node from that list.
-	This step is repeated until a maximum number of hops is reached or a result is returned.
-\end{itemize}
-% De dónde leches saqué esto de NB?
-%These nodes follow a simple flooding-based strategy to distribute their information called \emph{negative broadcasting}.
-%In negative broadcasting each node writes the information locally and read querying to the rest of the nodes of the space.
-
-
-% arquitectura
-Tsc++ has two main components: the communication and the data access.
-The data access layer relies on a semantic repository to perform queries and store the triples.
-% mencionar que son Sesame \citep{broekstra_sesame:_2002} y Owlim \citep{kiryakov_owlimpragmatic_2005} ???
-The communication layer maps the reading coordination primitives to group communication.
-% No evaluan el mecanismo de subscripción porque dicen que se basa en DHT y que como es escalable no necesita más evaluación
-% No me queda claro de qué forma usan DHT sobre los nodos RDV que son los que miran las subscripciones cómo están.
-Besides, it offers a subscription mechanism independent to the content stored in the space which uses triples and templates as a basis.
-
-
-% it does not make inference
-% it does not allow expressive querying
-% it has not been designed for devices with reduced computing capabilities, because tsc++ middleware focused on architecture and implementation in large scale and we focus in the short scale (local area networks with an intelligent environment).
-
-
-
-\subsection{Triple Space Communication}
-
-% modelo propuesto
-Triple Space Communication\footnote{TripCom (IST-4-027324-STP, www.tripcom.org)} (TripCom) is a Triple Space solution which works with \ac{rdf} triples as resources.
-The most remarkable aspects of the model proposed by TripCom are:
-\begin{itemize}
-  \item The use of subspaces to form nested multiple spaces.
-	Using them it restricts the communication to a part of the whole space.
-	This restriction leads to local scalability and completeness.
-  \item A mechanism to overlap spaces called \emph{scopes}.
-	Using \emph{scopes} a client can create a temporary copy of some tuples.
-	However, any insertion and deletion would not apply to the whole Triple Space.
-  \item A meta-space to describe the relations between spaces or to which graph a tuple belongs to.
-  \item Different types of templates can be used to query the space, from simple wildcard-based templates to more expressive SPARQL queries.
-  \item New primitives to read at triple or at graph level and to write multiple triples at once.
-  \item A subscription mechanism.
-\end{itemize}
-% TODO No poner las antiguas??
-
-
-% cosas relativas al despliegue
-To access to a space a client needs to contact a TripCom instance, i.e. kernel.
-% TODO Duda inglés, está bien hecho eso de "sujeto verbo objeto and verbo" o debería ser "sujeto verbo objeto and sujeto verbo objeto"???
-% TODO Uniformizarlo a lo largo del texto
-Each kernel stores one or more subspaces and can contact other kernels responsible for different spaces.
-To do that, if the space \ac{url} is provided, it simply resolves this \ac{url} using \ac{dns} and contacts the other kernel.
-Otherwise, the kernel uses 4 different strategies:
-\begin{itemize}
-  \item Triple Provider. It uses shortcuts to know who answered a query in the past.
-  \item Recommender. It uses shortcuts to know which kernel successfully routed a query in the past.
-  \item Indexing - \ac{dht}.
-	It creates indexes using a hash function over the subject, predicate, object and space \ac{url}.
-	Then, it stores these indexes in a distributed database which relies in a structured \ac{p2p} system. % mencionar PGrid???
-\end{itemize}
-
-
-% arquitectura
-A TripCom kernel has several components which communicate with each other using a \acl{ts} solution.
-The most important components regarding how the triples are distributed are:
-\begin{itemize}
-  \item Triple Store Adapter.
-	It acts as a gateway with the selected repository.
-  \item Query Processor. It descomposes query into subqueries.
-	Then, to answer each subquery the kernel: a) queries the local data store or b) forwards it to other kernel.
-  \item Distribution Manager.
-	Forwards queries or write requests to the appropiate kernels.
-\end{itemize}
-Apart from these, there are also security, mediation, metadata and transaction managers.
-On top of these components, TripCom offers three different \acp{api}:
-Triple Space \acs{api} to map the primitives,
-web service \acs{api}, which offers higher level service consumption \acs{api}
-and management \acs{api} to configure the each kernel.
-
-
-
-\subsection{Smart-M3}
-
-% modelo propuesto
-Smart-M3 \citep{honkola_smart-m3_2010} focuses on solving interoperability issues of different devices and protocols.
-This open-source middleware supports three types of primitives: \acl{ts}-based primitives, subscriptions and a query over a whole space.
-To that end, it  distinguish between two types of nodes: Semantic Information Brokers (SIB) and Knowledge Processors (KP).
-The SIBs store the knowledge and perform reasoning process on behalf of the KPs.
-A KP accesses to a SIB using two different types of interfaces (called KPI):
-\begin{itemize}
-  \item The low-level API uses triples as a base.
-  \item The high-level API allows the developer to use ontological entities such as classes, relations and individuals.
-\end{itemize}
-
-
-% cosas relativas al despliegue
-The space can be distributed over more than a SIB using a \emph{distributed deductive closure}.
- % TODO asegurarse 100% de esto que voy a decir!
-However, to the best of our knowledge no evaluation with more than a SIB has been presented yet, making it de facto an centralized space.
-For the communication between SIBs and KPs, Smart-M3 defines a protocol called \emph{Smart Access Protocol (SSAP)}. % decir que está basado en XML?
-SSAP can be implemented on top of different communication mechanisms (e.g. SOA, XMPP, Bluetooth or TCP/IP) making the solution communication agnostic. % TODO acrónimos?
-
-
-% arquitectura
-% DUDA enfatizar que una capa usa a la de abajo?
-A SIB is divided in five layers: transport, request handling, graph operations, triple operation and persistent store (see Figure~\ref{fig:smartm3_archi}).
-The \emph{transport layer} has different processes for each communication mechanism supported.
-Once the SSAP operations have been extracted, the \emph{request handling} creates a thread for each primitive.
-The \emph{graph operations} layer works with primitives which use \acs{rdf} graphs.
-In the \emph{triple operation}, expressive queries may need to be translated to query the store.
-% decir que también soporta subscripción?
-
-% Esto es para que el parrafo de arriba se entienda mejor
-\InsertFig{smartm3_architecture}{fig:smartm3_archi}{
-  Architecture of an Smart-M3 SIB.
-}{
-  Image extracted from \citep{honkola_smart-m3_2010}.
-  % More info
-}{0.6}{}
-
+% TODO Smart-M3
 % De: http://www.diem.fi/files/KP_reference%20implementation.pdf
 %  The Semantic Information Broker is the information repository of the Smart 
 %  Environment. In theory, the Smart-M3 Smart Space can consist of one or more SIB 
@@ -507,68 +240,30 @@ In the \emph{triple operation}, expressive queries may need to be translated to 
 %  Smart Space. On the IOP, the SIB is implemented as a NoTA SN.
 
 
-
-\subsection{\citeauthor{nardini_semantic_2013}}
-
-% modelo propuesto
-\citet{nardini_semantic_2013} explore the use of Description Logics on top of an existing \emph{tuple centre} implementation called TuCSoN \cite{omicini_tucson:_1998}.
-A tuple centre is a \ac{ts} where the behavior can be programmed as a result of the basic coordination primitives.
-TuCSoN aims to provide \emph{tuple centres} that agents can use through Linda-type primitives.
-This interaction can cause reactions which trigger behavior previously implemented in the \emph{tuple centre}.
-
-% cosas relativas al despliegue
-In TuCSoN each \emph{tuple centre} is deployed in a device's port and is identified by a name.
-The communication with each centre is direct, not based in any underlying network. % no les mola P2P decian en algun lado
-The agents can access to remote \emph{tuple centres} and migrate to them, but these interactions need to be programmed.
-
-% arquitectura
-According to \citeauthor{nardini_semantic_2013} each centre has a domain ontology attached.
-These ontologies provide a semantic interpretation to the tuples stored in each centre.
-They extend TuCSoN providing semantic tuples, templates, primitives, reactions and matching mechanism.
-\begin{itemize}
-  \item The semantic tuples express the logic terms.
-  \item The semantic template defines a language based on logic.
-  \item To discriminate common syntactic primitives from semantic ones they use a keyword.
-  \item The semantic reactions redefine TuCSoN's events, guards and reactions enabling the use of first-order-logic.
-	The events define when a reaction should be triggered.
-	The reaction guard represent a set of conditions which need to be satisfied to execute a reaction.
-  \item For the semantic matching mechanism they integrate TuCSoN with a reasoner (Pellet). % TODO citar pellet?
-\end{itemize}
-
-
-
-\subsection{Comparison}
-% TODO CSpaces no hace más que liar el analisis, me planteo no incluirlo
-%	Porque es muy bonito poner ideas felices, pero no ha sido implementado nunca!
-
-
-
-
-
-\subsubsection{Additional features}
-
-The Table~\ref{tab:compAdds} summarizes the additional mechanisms provided by the solutions analyzed.
-Most of them offer subscription mechanisms which are particularly useful for distributed environments.
-% TODO modificar esto que ahora no hay implementacion!
-Although this dissertation focuses more in the querying mechanism, in the Chapter~\ref{cha:implementation} we will propose a subscription mechanism.
-Other solutions offer , but we have discarded its usage due to the hard implementation for distributed systems running on dynamic environments.
-
-
-\input{2_state_of_the_art/tables/additional}
-
-
-
-
-%\subsubsection{Implementations}
-%	5. Implementado?
-%	6. Implementación disponible
-%	Interoperability
-%	Multiplatform
-%	8. dependencias: librerias, etc. (para decir que lo nuestro se puede implementar en casi cualquier plataforma de forma fácil)
-
+\input{2_state_of_the_art/tables/distribution}
 
 
 \subsection{Discussion}
+
+% Model: Triple Space
+% Originalmente TSC estaba basado en REST
+% Luego ha ido derivando e implementando funcionalidades más complejas alejandose del diseño inicial
+%    => el interés por añadir features, hizo que la gente olvidase los ppios que guiaban la simplicidad de REST
+% Nosotros proponemos una vuelta a los origenes para recuperar una simplicidad de la que limited devices pueden beneficiarse
+%    => la clave para facilitar y en algunos casos posibilidar que los dispositivos constrained lo implementen
+
+
+% Ver cómo TSC puede cumplir con todos los principios de diseño
+% tabla de comparativa con REST
+% no hay muchos que cumplan, nosotros: esto
+
+
+
+%\subsubsection{Additional features}
+%\input{2_state_of_the_art/tables/additional}
+
+
+% Antigua DISCUSSION!!!
 
 % extraer algunas conclusiones de lo que falta
 % tono general: están muy bien de características, pero a la hora de hacerlo distribuido falla
@@ -591,12 +286,3 @@ Doing so, a user can carry out his profile in the smart-phone or a sensor can pr
 
 % TODO CONCLUSION
 Although both semantic space-based and Triple Spaces implementations exist, none of them has been specifically designed to be run in devices with constrained capabilities apart from our solution.
-
-
-
-% Lo que sería un puntazo:
-%     el concepto de TSC nacio de REST
-%     el interés por añadir features, hizo que la gente olvidase los ppios que guiaban la simplicidad de REST
-%     creemos que recuperar esa simplicidad por encima de las features es importante => la clave para facilitar y en algunos casos posibilidar que los dispositivos constrained lo implementen
-%     poner características de REST y quién las cumplía!
-%     no queremos ser los más ortodoxos, pero si :-P
