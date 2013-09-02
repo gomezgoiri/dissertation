@@ -34,12 +34,23 @@ the review is divided in sections which describe the main components of a Semant
 }{0.6}{}
 
 
+% Definir constantes para referirnos a los distintos middlewares analizados
+\newcommand{\midtsc}{\acs{tscm} \citep{fensel_tsc_2007}}
+\newcommand{\midsws}{\acs{sws} \citep{tolksdorf_coordination_2006}}
+\newcommand{\midstuples}{\acs{stuples} \citep{khushraj_stuples:_2004}}
+\newcommand{\midcspaces}{\acs{cspaces} \citep{martinrecuerda_towards_2005}}
+\newcommand{\midtscpp}{\acs{tscpp} \citep{krummenacher_open_2009,blunder_distributed_2009}}
+\newcommand{\midtripcom}{\acs{tripcom} \citep{XXX}}
+\newcommand{\midsmartmt}{\acs{smartm3} \citep{honkola_smart-m3_2010}}
+\newcommand{\midnardini}{\citet{nardini_semantic_2013}}
+
+
 \subsection{Use of semantics}
 
 The works analyzed present two strategies to semantically annotation of data: the use of \ac{sw} standards or the definition of its own language.
 The \ac{sw} rely on the \ac{rdf} metadata data model. % también lo llaman language
 As the majority of the semantic \ac{ts}s, we opt for using the widely accepted \ac{rdf} to ensure interoperability \emph{ab-initio}.
-On the contrary, CSpaces \citep{martinrecuerda_towards_2005} and \citet{nardini_semantic_2013} define their own language-independent up to \ac{fol} notation.
+On the contrary, \ac{cspaces} \citep{martinrecuerda_towards_2005} and \citet{nardini_semantic_2013} define their own language-independent up to \ac{fol} notation.
 However, these works have to face an inconvenience: most of the libraries and tools available are based on the \ac{sw} standards. % concretamente cuando quieren usar reasoners!
 Therefore, they have to internally translate between both worlds in a not-straightforward way. % son cosas distintas!
 % theoretical counterpart of OWL DL [7]. Since OWL is the W3C standard ontology description language for the Semantic Web,
@@ -73,15 +84,15 @@ In any case, it is by not means not mandatory in our solution because:
 % TODO ver si añadir tabla aunque sea simplificada!
 %For our solution, describing the data semantically is a first step towards semantically interpreting it.
 %The Table~\ref{tab:comparisonSemantics} shows different features regarding the semantic model proposed by each solution.
-%\input{2_state_of_the_art/tables/semantics}
+\input{2_state_of_the_art/tables/semantics}
 
 
 \subsection{Tuple model}
 
 % presentamos distintos modelos
 On the one hand, several works embed semantic content in one of the fields of the tuple.
-CSpaces \citep{martinrecuerda_towards_2005} defines seven-field tuple.
-STuples\citep{khushraj_stuples:_2004} extends the \emph{JavaSpace} \citep{freeman_javaspaces_1999} middleware adding a field with semantic content to the tuple object.
+\ac{cspaces} \citep{martinrecuerda_towards_2005} defines seven-field tuple.
+\ac{stuples}\citep{khushraj_stuples:_2004} extends the \emph{JavaSpace} \citep{freeman_javaspaces_1999} middleware adding a field with semantic content to the tuple object.
 This content follows the DAML+OIL language (the \ac{owl} precursor).
 \citet{nardini_semantic_2013} use the concept of \emph{semantic tuples} which are expressed in logic terms.
 
@@ -95,6 +106,7 @@ However, a triple by itself cannot express much information \citep{krummenacher2
 % también para reducir la complejidad del storage (TSC dixit)
 % decir que al primero que se le ocurrió fue a TSC?
 To solve this limitation, semantic \ac{ts} have usually adopted the concept of \ac{rdf} graphs too.
+% En SWS usan algo muy parecido pero a lo que llaman subspace.
 A \ac{rdf} graph is a set of \ac{rdf} triples identified by an \ac{uri}. % TSC distinguen entre NamedGraph (grafo con URI) y Graph (conjunto de grafos)
 Although they can be accessed by their \ac{uri}, more interestingly, these middlewares also guarantee the associative access. % see the next section
 
@@ -110,30 +122,47 @@ This languages can be decomposed by simple triple patterns.
 However, this requires a parser which may not be available for resource constrained platforms.
 In this thesis we focus on queries based on graph patterns and left the adoption of more complex querying languages as a future work.
 
-CSpaces, sTuples and \citeauthor{nardini_semantic_2013} use less standard querying approaches.
-CSpaces \citep{martinrecuerda_towards_2005} and \citet{nardini_semantic_2013} offer a formal language to select appropriate tuples.
-STuples\citep{khushraj_stuples:_2004} extends JavaSpace's template by adding assertional axioms that can be used to match semantic tuples.
+\ac{cspaces}, \ac{stuples} and \citeauthor{nardini_semantic_2013} use less standard querying approaches.
+\ac{cspaces} \citep{martinrecuerda_towards_2005} and \citet{nardini_semantic_2013} offer a formal language to select appropriate tuples.
+\ac{stuples}\citep{khushraj_stuples:_2004} extends JavaSpace's template by adding assertional axioms that can be used to match semantic tuples.
 
 
 \subsection{Space model}
 
-The \emph{flat} model is the simplest manner of disjoining spaces.
-Each space is identified by an \ac{uri}.
-TSC, tsc++ and Smart-M3 use this model.
-
-% TODO Nosotros proponemos flat spaces enriquecidos con federated spaces
-
-
+The \emph{flat} model offers independent disjoint spaces.
+\ac{stuples}, \citet{nardini_semantic_2013}, TSC, tsc++ and Smart-M3 use this model.
+% sTuples:
+%    Bundler dice que es "Centralized nested", pero no sé de dónde lo saca
+%    Está basado en Javaspaces, que por lo que puedo ver es flat
+%    En nixon2008 sólo dicen que es centralized
 % decir que quiere decir: Tuple Centres Spread over the Network ?
-\citet{nardini_semantic_2013} extends TuCSoN \cite{omicini_tucson:_1998}, which presents an evolution of the \ac{ts} called \emph{tuple centre}.
+Within them, \citet{nardini_semantic_2013} presents the most singular model.
+It extends TuCSoN \cite{omicini_tucson:_1998}, which presents an evolution of the \ac{ts} called \emph{tuple centre}.
 A \emph{tuple centre} can be adapted to the application needs through reactions to communication operations.
 These reactions allow to trigger behaviors in response to any primitives or to define new ones.
-TuCSoN follows a flat model where different independent tuple centres can coexist at the same time. % o created?
+% TuCSoN follows a flat model where different independent tuple centres can coexist at the same time. % o created?
 % The agents can access to remote \emph{tuple centres} and migrate to them, but these interactions need to be programmed.
+% Besides, the latter three works identify each space with an \ac{uri}.
 
+
+% TODO Nosotros proponemos flat spaces enriquecidos con federated spaces
 % Nested
-More sophisticated models propose virtual view of spaces (i.e. scopes) or hierarchies between spaces.
-% TODO describe
+More sophisticated models allow to create hierarchies of spaces.
+Three examples are \ac{sws}, \ac{tripcom} and \ac{cspaces}.
+% SWS -> Disjoinnt nested
+% cosas relativas al despliegue
+\ac{sws} \citep{tolksdorf_coordination_2006} propose two ways to partition the spaces: sub-spaces and contexts.
+Sub-spaces are disjoint partitions of the main space.
+Contexts enable to virtually divide the space into overlapping partitions.
+These partitions are used to enable particular clients' views of the space.
+
+% TripCom
+\ac{tripcom} shares some similarities with \ac{sws}'s model.
+It uses subspaces to form nested multiple spaces.
+Doing so it restricts the communication to a part of the whole space leading to scalability and completeness. % según ellos
+Besides, it offers a mechanism to overlap spaces called \emph{scopes}.
+Using \emph{scopes} a client can create a temporary copy of some tuples.
+However, any insertion and deletion would not apply to the whole Triple Space.
 
 % CSpaces
 % On the contrary of C04 where modifications need to be approved by all
@@ -146,8 +175,7 @@ More sophisticated models propose virtual view of spaces (i.e. scopes) or hierar
 % main tasks is to provide a semantic and alignment specification between the
 % data that each new candidate want to share and the data that previous
 % members have published beforehand.
-Finally, CSpaces \citep{martinrecuerda_towards_2005} proposes the more original space model.
-The spaces in CSpaces can be individual or shared.
+\ac{cspaces} \citep{martinrecuerda_towards_2005} proposes two types of spaces: individual or shared.
 An individual space belongs to a single process.
 Two participants can agree on how to represent the knowledge to share their individual spaces forming a shared space.
 Shared spaces can join to others forming a tree structure.
@@ -164,43 +192,58 @@ Furthermore, to the best of our knowledge, this conceptual exercise never went b
 %	2. centralizado / distribuído
 %	4. basado en clientes tontos
 
+Participant nodes usually access to semantic spaces through client/server basis.
+Tsc++ proposes an exception to the client/server access to the space.
+It relies on Jxta P2P framework to propagates the queries using different strategies.
+In tsc++ the spaces correspond to groups of nodes which locally manage their data.
+
+
+In client/server spaces, the back-end of the server can be centralized in a single machine or distributed.
 Centralized \aclp{ts} are much simpler and easier to implement.
 Therefore, they usually offer more features than the distributed ones.
 However, they also impose a single-point-of-failure.
 
-This thesis aims to solve that by proposing a distributed model.
-Within the distributed \aclp{ts}, a wide range of distribution strategies have been detected.
-The Table~\ref{tab:comparisonDistribution} summarizes the space distribution strategy adopted by each solution.
 
-TSC uses flooding to replicate the knowledge in all the nodes.
-Tsc++ propagates the queries in flooding-based approaches.
-TripCom is built on top of a structured-network which imposes where the content is stored.
-The suitability of these models is subject of analysis in the Chapter~XX.
-
-% In TuCSoN each \emph{tuple centre} is deployed in a device's port and is identified by a name.
-%    https://code.google.com/p/tucson/source/browse/TuCSoN/trunk/src/alice/tucson/examples/helloWorld/HelloWorld.java
-The communication with each centre is direct, not based in any underlying network. % no les mola P2P decian en algun lado
-
-% TODO reescribir desde aquí
-
-%In this thesis, we aim to implement a completely distributed Semantic \acl{ts}.
-%In that space all the nodes should be able to participate trying to avoid any distinction between clients and servers.
-%Ubicomp is be characterized for being populated by very dynamic nodes.
-%This nodes usually face severe computation and energy autonomy restrictions.
+Within the distributed approaches we can distinguish those works which replicate data and those which do not.
+TSC belongs to the first group, and replicates all the triples in each deployed kernel.
+In \ac{tripcom} each kernel stores one or more subspaces and can contact other kernels responsible for different spaces.
+To do that, if the space \ac{url} is provided, it simply resolves this \ac{url} using \ac{dns} and contacts the other kernel.
+Otherwise, the kernel uses three additional strategies:
+\begin{itemize}
+  \item Triple Provider.
+	It uses shortcuts to know who answered a query in the past.
+  \item Recommender.
+	It uses shortcuts to know which kernel successfully routed a query in the past.
+  \item Indexing - \ac{dht}.
+	It creates indexes using a hash function over the subject, predicate, object and space \ac{url}.
+	Then, it stores these indexes in a distributed database which relies in a structured \ac{p2p} system. % mencionar PGrid???
+\end{itemize}
+\ac{cspaces} uses a similar but vaguely described super-peer network \citep{martinrecuerda_application_2006}.
 
 
-
-% TODO y así te evitas engorrosas explicaciones aquí
-%We argue that the replication is not suitable for devices with severe storage, memory and computation restrictions.
-%Flooding-based queries does not scalable for spaces with many nodes, .
-%Finally structured networks does not comply on
+As discussed in Section~\ref{sec:soa_ts_ubicomp}, we also deal with distribution in one of the spaces of our hybrid model.
+Specifically, we locally manage the content and we distribute the queries.
+This resembles to the \emph{tsc++}'s strategy.
+However, instead of using a \ac{p2p} framework to access to the contents,
+we individually access to them using several \ac{http} requests. % añadir que son "parallel" o sólo liará?
+In other words, each client may access to various server to obtain a result for a given primitive.
 
 \input{2_state_of_the_art/tables/distribution}
 
 
+
+
 \subsection{Discussion}
 
+% Model: Triple Space
+% Originalmente REST
+% Luego ha ido derivando e implementando funcionalidades más complejas alejandose del diseño inicial
+% Nosotros proponemos una vuelta a los origenes para recuperar una simplicidad de la que limited devices pueden beneficiarse
 
+
+% Ver cómo TSC puede cumplir con todos los principios de diseño
+% tabla de comparativa con REST
+% no hay muchos que cumplan, nosotros: esto
 
 
 
