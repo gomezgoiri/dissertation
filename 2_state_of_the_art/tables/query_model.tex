@@ -1,0 +1,24 @@
+\begin{savenotes}
+  \begin{table}[htbp]
+    \caption{Querying units for semantic \ac{ts}s.}
+    \centering
+    \begin{tabular}{l c c c}
+      \hline 
+	& Graph  & Advanced query  & \multirow{2}{*}{Other} \\
+	& patterns  & languages  & ~ \\
+      \hline
+      \midtsc{} & $\checkmark$ & & \\ % en una adición posterior!
+      \midsws{} & $\checkmark$ & & \\
+      \midstuples{} & & & $\checkmark$ \\
+      \midcspaces{} & & & $\checkmark$ \\ %7-field tuple
+      \midtscpp{} & $\checkmark$ & $\checkmark$\footnote{It completely depends on the underlying data store selected.} & \\ % but it can be SeRQL, SPARQL and N3QL
+      \midtripcom{} & $\checkmark$ & $\checkmark$ & \\
+      \midsmartmt{} & $\checkmark$ & $\checkmark$ & \\
+      \midnardini{} & & & $\checkmark$ \\
+      \hline
+    \end{tabular}
+    \label{tab:query_comparison}
+  \end{table}
+\end{savenotes}
+
+% TODO añadir los lenguajes específicos en queries
