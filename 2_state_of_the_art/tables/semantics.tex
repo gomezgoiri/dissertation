@@ -1,28 +1,29 @@
 
+\begin{savenotes}
+  \begin{table}[htbp]
+    \caption{Use of semantics in the analyzed solutions.}
+    \centering
+    \begin{tabular}{ l c }
+      \hline 
+      & Use of \ac{sw} standards \\
+      \hline 
+      \midtsc{} & $\checkmark$ \\
+      \midsws{} & $\checkmark$ \\
+      \midstuples{} & $\checkmark$ \footnote{It uses DAML+OIL, a \ac{owl} precursor.} \\
+      \midcspaces{} & × \\
+      \midtscpp{} & $\checkmark$ \\
+      \midtripcom{} & $\checkmark$ \\
+      \midsmartmt{} & $\checkmark$ \\
+      \midnardini{} & × \\
+      \hline 
+    \end{tabular}
+    \label{tab:comparisonSemantics}
+  \end{table}
+\end{savenotes}
 
-\begin{table}[htbp]
-\caption{Use of semantics in the analyzed solutions.}
-
-% TODO En Languages decir si se basa en RDF o FOL, el hecho de que luego se use OWL para definir conocimiento, se sobreentiende
-% TODO añadir reglas?
-% TODO añadir Validity and consistency?
-% TODO añadir semantic clustering
-
-\begin{tabular}{ l p{3cm} p{3cm} p{3cm} }
-\hline 
-  & Languages  & Reasoning  & Semantic matching \tabularnewline
-\hline 
- TSC & RDF  & -  & Graph pattern templates and N3QL resolution \tabularnewline
- SWS & RDF(s) extendable to OWL, SWRL  & Yes (to match and validate)  & Subsumption-based \tabularnewline
- sTuples & DAML+OIL  & Tuples with DAML+OIL field  & Subsumption-based \tabularnewline
- CSpaces & Language-independent, up to FOL  & Yes (used for query answering, rewriting and consistency checking)  & Based on query engines \tabularnewline
- tsc++ & RDF & No  & No \tabularnewline % comprobar %  lo de para query answering lo hice yo en su día
- TripCom & RDF  & Yes (query rewriting) & Yes \tabularnewline % TODO rehacer esta columna comprobandolo
- Smart-M3 & RDF  & ?  & G. patterns and complex \tabularnewline
- Nardini et al. & Language-independent, up to FOL & ?  & ? \tabularnewline
-\hline 
-\end{tabular}
-\label{tab:comparisonSemantics}
-\end{table}
-
-% TODO añadir tabla con análisis de las autonomías?
+% Si quisiera volver a complicar el asunto, podría incluir:
+%    Qué reasoning hacen
+%    Qué tipo de matching hacen
+%    Uso de reglas
+%    Comprobación de Validity and consistency?
+%    Semantic clustering?
