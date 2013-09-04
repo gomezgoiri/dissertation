@@ -3,66 +3,12 @@
 \section{On the \acs{rest}fulness of \acs{tsc}}
 \label{sec:tsc_restfulness}
 
-\subsection{\acl{tsc}}
-\label{sec:tsc_vs_rest}
-
-\ac{tsc} consist of a shared space which is accessed using some known primitives.
-\emph{Per se}, \ac{tsc} does not contradict in any sense the \ac{rest} principles:
-
-\begin{description}
- \item[\ac{restcs}.] Accessing to a space through a server in a \ac{restcs} fashion is completely feasible.
-		      Indeed, this does not prevent to use a distributed solution in the \emph{back end} (e.g. a distributed semantic repository).
- \item[\ac{rests}.] The primitives to access the space imply simple read and writes which do not store any state in the server.
- \item[\ac{restcache}. ] The semantic content stored in the space can be cached.
-                          However, the dynamism of the underlying network can make effective caching challenging to achieve. % quería poner "tune up" pero "configure" me ha sonado más fino
- %\item[\ac{rest_u}:] % lo quito porque si no, este punto sin texto con otros subpuntos queda feo
-    %\begin{description}
-	\item[\ac{restid}.] There are three types of identified resources in \ac{tsc}: spaces, \ac{rdf} Graphs and certain elements of the \ac{rdf} Triples.
-	                 All of them are identified by URIs.
-	                 The space can be seen as a coarse-grained view of the underlying graphs.
-	                 The graphs have sets of triples which are usually related and describe a unit of knowledge. % A RDF triple by itself cannot transmit too much information
-	                 Self-identified triple's subjects, predicates or objects are the source of concept linking.
-	\item[\ac{restrep}.] The \ac{rdf} graphs and triples mentioned above can be represented using different standard serializations.
-			      %Nevertheless, 
-			      % citar el paper que habla de cómo alinear LOD y REST
-	\item[\ac{restdesc}.] The messages derived from the primitives are self-describing since they are expressed on standard \ac{rdf}-based languages. % including meta-data
-				Therefore the server and clients know how to process the content according to its language and certain vocabularies.
-				These vocabularies specifications (i.e. ontologies) are referenced in the content.
-	\item[\ac{resthateoas}.] The lack of native hypermedia support in \ac{rdf}-based representations make this the most challenging property to achieve \citep{page_rest_2011}. % compara LOD y REST
-				  However, some recent works propose means to fulfill this property.
-				  \citet{kjernsmo_necessity_2012} proposes a vocabulary for hypermedia \ac{rdf}.
-				  \citet{steiner_fulfilling_2011} and \citet{verborgh_functional_2012} propose to enrigh the \ac{http} header with hypermedia information.
-				  While the first changes representations, the latter is a more general way to provide hypermedia.
-    %\end{description}
- \item[\ac{restl}.] Encapsulation of functionalities can be achieved through a layered system.
-                     For example, to balance the load to a space replicated in two machines.
- % TODO TODO repensar si ontologías, reglas y demás (personalizar behavior) se puede entender cómo COD:
- % In the code-on-demand style [50], a client component has access to a set of resources, but
- %  not the know-how on how to process them. It sends a request to a remote server for the
- %  code representing that know-how, receives that code, and executes it locally.
- \item[\ac{restcod}.] Although it may not be as common as scripting in ordinary human-browsing, % TODO reexplicar esto mejor?
-            the \emph{know how} can be downloaded from the server in several ways:
-            \begin{enumerate}
-	      \item Modeling scripts using appropriate ontologies. % TODO cite
-	      \item A semantic reasoner can be considered an interpreter for the content downloaded from the server.
-	            It is used to extract unstated information from the content received from the server.
-	            Therefore, the client downloads know-how to process the resource in the following situations:
-		    \begin{itemize}
-		      \item Through the taxonomies defined in ontology files. % e.g. para hacer un mapeo; en analogía a JS, da igual que tu tengas previamente el script o no
-		            This taxonomies are modeled using standard semantic languages. % hablar de distintos niveles de expresividad?
-		      \item Through semantically expressed rules \citep{berners-lee_n3logic:_2008}. % (e.g. N3 rules)
-		    \end{itemize}
-	      % con nuevo TBox que te bajas??
-            \end{enumerate}
-\end{description}
-
-
 
 \subsection{Aligning \acs{tsc} with \acs{http}}
 \label{sec:align_tsc_http}
 
-% TODO Revisar cosas del texto original que no encajaban aquí (están comentadas)
 % TODO citar trabajos de:
+%      posiblemente el primero que expuso explicitamente semejanzas entre HTTP y primitivas de TSC: Riemer 2006 (comprobar y citar!)
 %      TSC es como Web para semántica
 %      RESTful semántico
 %      So far, the compatibility of \ac{tsc} with the \acs{http} RESTful style has been proved from a formal \cite{hernandez_formal_2010} point of view.

@@ -158,6 +158,7 @@ Three examples are \ac{sws}, \ac{tripcom} \citep{simperl_coordination_2007} and 
 Sub-spaces are disjoint partitions of the main space.
 Contexts enable to virtually divide the space into overlapping partitions.
 These partitions are used to enable particular clients' views of the space.
+% TODO TODO TODO explicar el modelo de vista de info y vista de knowledge!
 
 % TripCom
 \ac{tripcom} shares some similarities with \ac{sws}'s model.
@@ -231,7 +232,7 @@ However, instead of using a \ac{p2p} framework to access to the contents,
 we individually access to them using several \ac{http} requests. % añadir que son "parallel" o sólo liará?
 In other words, each client may access to various server to obtain a result for a given primitive.
 
-% TODO Smart-M3
+% TODO TODO TODO Smart-M3
 % De: http://www.diem.fi/files/KP_reference%20implementation.pdf
 %  The Semantic Information Broker is the information repository of the Smart 
 %  Environment. In theory, the Smart-M3 Smart Space can consist of one or more SIB 
@@ -246,43 +247,91 @@ In other words, each client may access to various server to obtain a result for 
 \subsection{Discussion}
 
 % Model: Triple Space
+The use of standard semantic protocols and \ac{rdf} triple-like turtles characterizes \acl{tsc}. % restringido a subconjunto de los trabajos analizados
 % Originalmente TSC estaba basado en REST
+\ac{tsc} was born to realign web services (WS-*) with the web.
+To ensure this alignment, it was based on \ac{rest} architectural style's principles \citep{fensel_triple-space_2004}.
+However, \ac{tsc} has never been true to all these principles. % porque según ellos había algunas cosas que ni de palo, de otras como HATEOAS simplemente se olvidaron
+%no deliveradamente!
+%fensel_tsc_2007
 % Luego ha ido derivando e implementando funcionalidades más complejas alejandose del diseño inicial
 %    => el interés por añadir features, hizo que la gente olvidase los ppios que guiaban la simplicidad de REST
-% Nosotros proponemos una vuelta a los origenes para recuperar una simplicidad de la que limited devices pueden beneficiarse
-%    => la clave para facilitar y en algunos casos posibilidar que los dispositivos constrained lo implementen
-
-
-% Ver cómo TSC puede cumplir con todos los principios de diseño
-% tabla de comparativa con REST
-% no hay muchos que cumplan, nosotros: esto
-
-
+Furthermore, the more features are added to the \ac{tsc} design (e.g. subscriptions or transactions), the more difficult it is to reconciliate both worlds.
 
 %\subsubsection{Additional features}
 %\input{2_state_of_the_art/tables/additional}
 
 
-% Antigua DISCUSSION!!!
+Regardless of their incompatibility with other features or practical technical difficulties, % e.g. conseguir HATEOAS o effective caching
+we defend that, \emph{per se}, \ac{tsc} does not contradict in any sense the \ac{rest} principles:
+% Ver cómo TSC puede cumplir con todos los principios de diseño
+\begin{description}
+ \item[\ac{restcs}.] Accessing to a space through a server in a \ac{restcs} fashion is completely feasible.
+		      Indeed, this does not prevent to use a distributed solution in the \emph{back end} (e.g. a distributed semantic repository).
+ \item[\ac{rests}.] The primitives to access the space imply simple read and writes which do not store any state in the server.
+ \item[\ac{restcache}. ] Despite of the difficulties detected by \citet{fensel_tsc_2007}, nothing prevents the semantic content stored in the space to be cached.
+                          However, the dynamism of the knowledge can make effective caching challenging to achieve.
+ %\item[\ac{rest_u}:] % lo quito porque si no, este punto sin texto con otros subpuntos queda feo
+    %\begin{description}
+	\item[\ac{restid}.]
+			 In \ac{tsc}, there can be up to three type of resources which can be identified by an URI : spaces, \ac{rdf} Graphs and certain elements of the \ac{rdf} Triples.
+	                 The space can be seen as a coarse-grained view of the underlying graphs.
+	                 The graphs have sets of triples which are usually related and describe a unit of knowledge. % A RDF triple by itself cannot transmit too much information
+	                 Self-identified triple's subjects, predicates or objects are the source of concept linking in the \ac{sw}.
+	\item[\ac{restrep}.] The \ac{rdf} graphs and triples mentioned above can be represented using different standard serializations.
+			      % TODO TODO TODO citar el paper que habla de cómo alinear LOD y REST
+	\item[\ac{restdesc}.] The messages derived from the primitives are self-describing since they are expressed on standard \ac{rdf}-based languages. % including meta-data
+				Therefore the server and clients know how to process the content according to its language and certain vocabularies.
+				These vocabularies specifications (i.e. ontologies) are referenced in the content.
+	\item[\ac{resthateoas}.] The lack of native hypermedia support in \ac{rdf}-based representations make this the most challenging property to achieve \citep{page_rest_2011}. % compara LOD y REST
+				  However, some recent works propose means to fulfill this property.
+				  \citet{kjernsmo_necessity_2012} proposes a vocabulary for hypermedia \ac{rdf}.
+				  \citet{steiner_fulfilling_2011} and \citet{verborgh_functional_2012} propose to enrich the \ac{http} header with hypermedia information.
+				  While the first changes representations, the latter is a more general way to provide hypermedia.
+    %\end{description}
+ \item[\ac{restl}.] Encapsulation of functionalities can be achieved through a layered system.
+                     For example, to balance the load to a space replicated in two machines.
+ % TODO TODO repensar si ontologías, reglas y demás (personalizar behavior) se puede entender cómo COD:
+ % In the code-on-demand style [50], a client component has access to a set of resources, but
+ %  not the know-how on how to process them. It sends a request to a remote server for the
+ %  code representing that know-how, receives that code, and executes it locally.
+ \item[\ac{restcod}.] There are several cases where the \emph{know how} can be downloaded from the server in \ac{tsc}: % ok, no tan común como scripting
+            \begin{enumerate}
+	      \item Modeling scripts using appropriate ontologies. % TODO cite
+	      \item A semantic reasoner can be considered an interpreter for the content downloaded from the server.
+	            It is used to extract unstated information from the content received from the server.
+	            Therefore, the client downloads know-how to process the resource in the following situations:
+		    \begin{itemize}
+		      \item Through the taxonomies defined in ontology files. % e.g. para hacer un mapeo; en analogía a JS, da igual que tu tengas previamente el script o no
+		            This taxonomies are modeled using standard semantic languages. % hablar de distintos niveles de expresividad?
+		      \item Through semantically expressed rules \citep{berners-lee_n3logic:_2008}. % (e.g. N3 rules)
+		    \end{itemize}
+	      % con nuevo TBox que te bajas??
+            \end{enumerate}
+\end{description}
 
-% extraer algunas conclusiones de lo que falta
-% tono general: están muy bien de características, pero a la hora de hacerlo distribuido falla
-% hacen aguas en proponer un modelo que pueda ser usado más allá del client-servidor
-% Suitability for Ubicomp
 
-So far, semantic \aclp{ts} solutions have offered a sophisticated models with interesting additional features.
-However, in most of the cases this is possible by delegating such tasks on a subset of more powerful and static nodes.
-Therefore, the distribution of the space is restricted to some nodes when in the best case, or centralized in a unique node in the worst case.
-In these cases, the rest of the nodes are head toward the use of the space as simple clients.
-
-
-In this thesis we will explore the most decentralized case: the one in which each node manages its own information.
-Doing so, a user can carry out his profile in the smart-phone or a sensor can provide the last measures on-demand.
-% sólo tsc++ seguía esa premisa
-
-% qué es necesario para cumplir esa visión y porque las alternativas vistas no se ajustan:
-% dependencias mínimas, protocolos estándares, etc.
+Table~\ref{tab:rest_principles} shows the conflicts that the analyzed works present with these principles.
+None of them achieves the \ac{resthateoas} principle.
+In fact, its use in the \ac{sw} is subject of current research.
+Most of them guarantee the access to the space in the \ac{restcs} basis.
+The only exception is \midtscpp{}, where each participant of the space is a peer in a \ac{p2p} network.
+Finally, the statefullness of these middlewares conflicts with additional features such as transactionality or subscriptions/notification systems.
+While the transactionality need in \ac{tsc} can be argued,
+the subscriptions are useful to ensure certain level of asynchrony in the system (see Section~\ref{sec:notification}).
+% explicar que lo nuestro al dividir en dos espacio en uno nos libramos de esto y en el otro es opcional para mejorar la eficiencia
 
 
-% TODO CONCLUSION
-Although both semantic space-based and Triple Spaces implementations exist, none of them has been specifically designed to be run in devices with constrained capabilities apart from our solution.
+% tabla de potenciales problemas con REST de los trabajos presentados:
+\input{2_state_of_the_art/tables/rest_principles}
+
+
+% Nosotros proponemos una vuelta a los origenes para recuperar una simplicidad de la que limited devices pueden beneficiarse
+%    => la clave para facilitar y en algunos casos posibilidar que los dispositivos constrained lo implementen
+This dissertation proposes a return to the origins to recover the simplicity loss in the successive works.
+The rationale behind this decision is that resource constrained devices will benefit from this simplicity.
+In the proposed middleware they will be able not only to write and read knowledge in an external space, but also to enrich it providing their own managed data.
+% In the rest of the cases, the nodes are head toward the use of the space as simple clients.
+% none of them has been specifically designed to be run in devices with constrained capabilities apart from our solution.
+%      => la prueba de eso podría ser un apéndice con cómo lo nuestro se ha implementado en distintos cacharros... ¿?
+% TODO TODO TODO explicar en qué consiste esto de simplicidad y por qué no es stateful?!
