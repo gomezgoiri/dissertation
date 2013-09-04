@@ -1,10 +1,4 @@
-%    propiedades aportadas por REST a IoT
-
-\section{On the \acs{rest}fulness of \acs{tsc}}
-\label{sec:tsc_restfulness}
-
-
-\subsection{Aligning \acs{tsc} with \acs{http}}
+\section{Aligning \acs{tsc} with \acs{http}}
 \label{sec:align_tsc_http}
 
 % TODO citar trabajos de:
@@ -16,7 +10,7 @@
 
 In this section, we present a \ac{tsc} \acs{api} over \ac{http} to give a practical overview of \ac{tsc}'s \acs{rest}fulness.
 
-\subsubsection{\acs{tsc} resources}
+\subsection{\acs{tsc} resources}
 
 Three key concepts are important to understand the resources in our proposal: agents share information in a common \textbf{space}.
 A space is identified by an \acs{uri}.
@@ -53,7 +47,7 @@ For example, the template \texttt{?s foaf:knows gomezgoiri:aitor} could be emplo
 }{1}{}
 
 
-\subsubsection{Adopted \acs{tsc} primitives}
+\subsection{Adopted \acs{tsc} primitives}
 \label{sec:primitives}
 
 \acs{tsc} derives some primitives originally defined in the Linda language \citep{gelernter_generative_1985} to access to the semantic information hold in each graph.
@@ -92,7 +86,7 @@ In this section, we explain these primitives.
 
 
 
-\subsubsection{\acs{http} \acs{api} for \acs{tsc}}
+\subsection{\acs{http} \acs{api} for \acs{tsc}}
 \label{sec:httpapi}
 
 As both \ac{tsc} and \ac{http} are \ac{rest} compliant, their similarities are evident.
@@ -138,7 +132,7 @@ The rest of the mappings are shown in the Table~\ref{tab:tscAPI}.
 \end{table}
 
 
-\paragraph{Status Codes}
+\subsubsection{Status Codes}
 \label{sec:status_codes}
 The \acs{api} should be compliant with the standardized \acs{http} status codes.
 These codes are sent back in the response as part of the header.
@@ -148,7 +142,7 @@ For example, if a node does not offer a wildcard based \textit{query}, it will n
 Instead, they will interpret these cases as empty responses.
 This modularity becomes crucial to ease the partial adoption on new platforms.
 
-\paragraph{Content Negotiation}
+\subsubsection{Content Negotiation}
 Another key aspect of the \acs{http} protocol the \acs{api} should take advantage of is the \textit{content negotiation}.
 This mechanism allows to specify the desired representation for a content on the client side and to express what representation is sent as a response from the data provider side.
 For that purpose, the client adds an \textit{Accept} field to the \acs{http} header with a weighted list of media types it understands.
