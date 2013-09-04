@@ -1,0 +1,34 @@
+\section{An Hybrid Solution} % o "A Halfway Solution"
+\label{sec:hybrid_solution}
+
+In this thesis, we propose to conserve the desirable characteristics of both \ac{rest} and \ac{tsc} by mixing them.
+
+On the one hand, we propose a uniform access to the space by the \acs{http} \ac{api} described previously.
+The space can then be distributed using any existing approaches. % TODO cite
+However, for the sake of clarity, we will assume that each space is managed by a unique server.
+
+On the other hand, each space will be enriched by the data provided by various autonomous providers.
+These providers might be any kind of mobile or embedded device, no matter how limited they are.
+This \emph{enrichment} can be materialized:
+\begin{enumerate}[(a)]
+  \item Considering additional data in a reasoning process triggered when a primitive is called.
+  \item Including additional data as a response.
+        For example, a graph read from an embedded device could be returned as a response to a primitive.
+\end{enumerate}
+In this thesis, we have focused on the latter alternative.
+
+
+To do that, we propose an extension of the already presented \ac{tsc} model by means of new concepts, new primitives and new behavior.
+Figure~\ref{fig:new_model} presents the key elements of this new model.
+
+
+\InsertFig{new_model}{fig:new_model}{
+  Key concepts of the new \ac{tsc} model presented.
+}{
+  The coordination space, is where the graphs can be written, read and taken by any participant.
+  The coordination space is hold by a device called \emph{coordinator}.
+  The current view of all the \emph{self-managed graphs} in the space forms the \emph{outer space}.
+  Therefore, the \emph{outer space} is hold by many devices (also called \emph{asteroids}).
+  The \ac{tsc} \ac{http} \ac{api} corresponds with the generic \ac{tsc} to access to the primitives presented in Section~\ref{sec:align_tsc_http}.
+  The \emph{OSAPI} is the \ac{api} which must be implemented by any node willing to share \emph{self-managed graphs}.
+}{1}{}
