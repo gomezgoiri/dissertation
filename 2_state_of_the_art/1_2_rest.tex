@@ -4,7 +4,7 @@
 \acf{rest} is a network-based architectural style proposed by \citet{fielding_architectural_2000}.
 % descripción de propiedades de REST: hipermedia distribuído
 % que es hipertexto? http://roy.gbiv.com/untangled/2008/rest-apis-must-be-hypertext-driven#comment-718
-It aims to cover certain properties, explained in Section~\ref{sec:network_properties}. % Mencionar que scalability y simplicity destacan sobre el resto?
+It aims to cover certain properties explained in Section~\ref{sec:network_properties}. % Mencionar que scalability y simplicity destacan sobre el resto?
 % Estilos de los que se deriva: ¿?
 To achieve these properties, \ac{rest} establishes the following constraints from other network-based architectural styles:
 % explicarlo o es demasiado obvio?
@@ -26,11 +26,11 @@ To achieve these properties, \ac{rest} establishes the following constraints fro
 				% standard methods and media types are used to indicate semantics and exchange information
 				% responses explicitly indicate cacheability.
 		                %\ac{http}'s content negotiation for instance, allows to reach an agreement on the media types.
-	                        Beyond that point, each request or response should contain all the needed data to process it.
-	                        Therefore, in \citeauthor{fielding_architectural_2000}'s words,
+	                        Beyond that point, each request or response should contain all the needed data to process it \citep{wahbe_self-descriptive_2010}.
+	                        Therefore, in \citeauthor{fielding_seeking_2006}'s words,
 	                        the type should be registered,
 	                        the registry should point to a specification and 
-	                        the specification should explain how to process data according to its intent \citep{wahbe_self-descriptive_2010}. % no necesariamente tiene que ser estándar
+	                        the specification should explain how to process data according to its intent \citep{fielding_seeking_2006}. % no necesariamente tiene que ser estándar
 	\item[\acf{resthateoas}.] This is a controversial constraint because most of the self-proclaimed ``\ac{rest}'' \acp{api} fail to follow it \citep{moore_hypermedia_2010,house_how_2012}.
 	                           It states that no out-of-the-band information should guide the interaction with an \ac{api}.
 	                           Instead, the hypertext should guide it.
@@ -39,7 +39,7 @@ To achieve these properties, \ac{rest} establishes the following constraints fro
 	                           % propuestas: respresentaciones (links) y la manipulación implicita de las mismas (CRUD)
     \end{description}
  \item[\acf{restl}.] Each layer provides services to the top layer. % e.g. TCP/IP
- \item[\acf{restcod}.] It is the only optional \emph{constraint} of \ac{rest}.
+ \item[\acf{restcod}.] It is the only optional \emph{constraint} in \ac{rest}.
 		       It occurs when the client downloads from the server the \emph{know-how} needed to process the set of resources it already has.
 \end{description}
 
