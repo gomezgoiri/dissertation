@@ -1,34 +1,47 @@
 \section{An Hybrid Solution} % o "A Halfway Solution"
 \label{sec:hybrid_solution}
 
-In this thesis, we propose to conserve the desirable characteristics of both \ac{rest} and \ac{tsc} by mixing them.
-
-On the one hand, we propose a uniform access to the space by the \acs{http} \ac{api} described previously.
-The space can then be distributed using any existing approaches. % TODO cite
-However, for the sake of clarity, we will assume that each space is managed by a unique server.
-
-On the other hand, each space will be enriched by the data provided by various autonomous providers.
-These providers might be any kind of mobile or embedded device, no matter how limited they are.
-This \emph{enrichment} can be materialized:
-\begin{enumerate}[(a)]
-  \item Considering additional data in a reasoning process triggered when a primitive is called.
-  \item Including additional data as a response.
-        For example, a graph read from an embedded device could be returned as a response to a primitive.
-\end{enumerate}
-In this thesis, we have focused on the latter alternative.
+We can distinguish two different usage patterns of an space:
+%  escribir y extraer para coordinarse con otros
+(1) coordinating with other devices by writing and extracting content ; and % MISMA EXPLICACIÓN QUE EN 2_1
+%  consultar que pasa en un entorno
+(2) checking what happens in the environment by reading.
+So far, other semantic space-based works have always tried to integrate both strategies within the same space.
+However, the needs of both usages are different.
+The first one demands availability and consistency on the data.
+The second does not. % se ha visto en el anterior
+Therefore, we propose a novel approach: to treat them independently.
+% To conserve the desirable uncoupling properties of a space
 
 
-To do that, we propose an extension of the already presented \ac{tsc} model by means of new concepts, new primitives and new behavior.
+Limited devices are not reliable enough to manage data for the first usage.
+Nevertheless, they can contribute to an enriched view of the space.
+According to this limitations, we propose the following dual model:
+(1) the content needed to coordinate devices will be managed by independent machines; and
+(2) reading in the space will consider not only the previous content, but also and the knowledge provided by autonomous providers.
+Summarizing, we propose to enrich the \ac{ts} view with autonomous federated subspaces.
+
+
 Figure~\ref{fig:new_model} presents the key elements of this new model.
+The coordination space, is where the graphs can be written, read and taken by any participant.
+The coordination space is hold by a device called \emph{coordinator}.
+The current view of all the \emph{self-managed graphs} in the space forms the \emph{outer space}.
+Therefore, the \emph{outer space} is hold by many devices (also called \emph{asteroids}).
+The \ac{tsc} \ac{http} \ac{api} corresponds with the generic \ac{tsc} to access to the primitives presented in Section~\ref{sec:align_tsc_http}.
+The \emph{OSAPI} is the \ac{api} which must be implemented by any node willing to share \emph{self-managed graphs}.
 
 
 \InsertFig{new_model}{fig:new_model}{
   Key concepts of the new \ac{tsc} model presented.
-}{
-  The coordination space, is where the graphs can be written, read and taken by any participant.
-  The coordination space is hold by a device called \emph{coordinator}.
-  The current view of all the \emph{self-managed graphs} in the space forms the \emph{outer space}.
-  Therefore, the \emph{outer space} is hold by many devices (also called \emph{asteroids}).
-  The \ac{tsc} \ac{http} \ac{api} corresponds with the generic \ac{tsc} to access to the primitives presented in Section~\ref{sec:align_tsc_http}.
-  The \emph{OSAPI} is the \ac{api} which must be implemented by any node willing to share \emph{self-managed graphs}.
-}{1}{}
+}{}{1}{}
+
+
+For the coordination space, we propose a uniform access to the space through an \acs{http} \ac{api} described in Section~\ref{sec:align_tsc_http}.
+This \ac{api} can provide data from a distributed space like some approaches in Section~\ref{sec:soa_tsc_distribution} do.
+However, this dissertation does not cope with this problem. % TODO cite
+Hence, the reader can assume that each space is managed by a unique server for the sake of clarity.
+
+
+The \emph{coordination space} will be enriched with data from the \emph{outer space}. % enrichment or extension?
+This demands an extension of the classical \ac{tsc} model presented in Section~\ref{sec:align_tsc_http}.
+Section~\ref{halfway_solution} presents this extension's new concepts, primitives and behavior.

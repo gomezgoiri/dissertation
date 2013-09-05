@@ -2,7 +2,7 @@
 \label{sec:guiding_principles}
 
 % cómo y porqué hacer un TSC distribuído
-In Section~\ref{sec:tsc_vs_rest} section we showed how \ac{tsc} can comply with all the constraints of the \ac{rest} style.
+In Section~\ref{sec:soa_tsc_discussion} we showed how \ac{tsc} can comply with all the constraints of the \ac{rest} style.
 One of these constraints is that the access to a space is done in client-server basis.
 The easiest way to achieve this constraint is by centralizing all the content of each space in the server itself.
 
@@ -60,3 +60,7 @@ Therefore, distributing the shared space among unreliable nodes comes with a num
 \end{itemize}
 Overcoming the previous difficulties, usually implies a high network traffic.
 However, this negatively influences the energy consumption of nodes whose energetic autonomy might be limited.
+
+
+In conclusion, we believe that \ac{ubicomp} environments require to consider independent data providers in any middleware.
+In the next section, we present a model which fits to this need.
