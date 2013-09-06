@@ -61,19 +61,20 @@ We indistinguishably refer to them as \ac{rest}ful \ac{api}s or as \emph{hyperme
 \subsubsection{\ac{rest} vs WS-* services}
 \label{sec:protocols}
 
-% TODO mirar a Guinard como se refiere a WS-*.
-%   ¿Sólo como WS-*? ¿Siempre como WS-* standards? ¿Alguna vez como WS-* web services?
-% TODO citar esto mejor!
-WS-*, also called ``Big Web services'', together with \acs{rest}ful architectures are probably the most common remote invocation substyles currently used in the Internet.
-They syntactically describe the services' functionality and interfaces using \ac{wsdl}.
-The communication is carried out on top of \ac{http} in messages encapsulated using \ac{soap}.
+% Guinard se refiere apostilla al concepto WS-*:
+%    (nada), services (lo que más), Web services, approach, standards, galaxy of standards, implementation, applications
+WS-* \citep{newcomer_understanding_2002,alonso_web_2010}, also called ``Big Web services'', together with \acs{rest}ful architectures are probably the most common remote invocation substyles currently used in the Internet.
+% Usando descripción de newcomer_understanding_2002 que me ha dejado ver Google :-P
+\ac{uddi} defines how to discover these \emph{big web services} using registries.
+A registry returns information to point to the web services' interfaces.
+These interfaces are syntactically described using the \ac{wsdl}.
+Additionally, \ac{wsdl} describe data and message types, interaction patterns and protocol mappings.
+Using this information, the service consumer and provider communicate through messages encapsulated using \ac{soap}.
+
+
 WS-* standards offer more features than the \ac{rest} such as transactions, reliability or message-level security.
-% TODO describir los estándares mejor
-% decir o poner algo de UDDI aquí?
-
-
-WS-* has been adapted to the needs of resource-constrained devices in the \ac{dpws} specification\footnote{\url{http://docs.oasis-open.org/ws-dd/ns/dpws/2009/01}}. % TODO poner como cita mejor?
-The specification defines a minimal set of implementation constraints.
+Besides, they have been adapted to the needs of resource-constrained devices in the \ac{dpws} specification\footnote{\url{http://docs.oasis-open.org/ws-dd/ns/dpws/2009/01}}.
+This specification defines a minimal set of implementation constraints.
 \ac{dpws}'s most remarkable features are: decentralized multicast-based discovery, secure message transmission, subscription and event notifications \citep{moritz_devices_2010}.
 
 
@@ -82,15 +83,15 @@ Note that although the web implements \ac{rest}'s principles and WS-* can contra
 \footnote{Interestingly, \citet{moritz_devices_2010} came to the conclusion that \ac{dpws} can be restricted to be fully compatible with the \ac{rest}ful style and still cover some missing features (e.g. eventing and discovery).},
 WS-* stands for \emph{web services}. % citas a What's wrong with the web y demás papers que explicaban esto
 % a WS-* se le llama web  porque usa estándares de esta
-The reason for this is that it uses web standards. % (e.g. \ac{http}, \ac{uri} or \ac{mime}) <-- o los que fuesen
+The reason for this is that it employs web standards. % (e.g. \ac{http}, \ac{uri} or \ac{mime}) <-- o los que fuesen
 % esto es porque WS-* usa protocolos con propositos distintos a los que fueron diseñados
-However, it uses some of them in  ways they were not designed for.
+However, WS-* uses some of them in ways they were not designed for \citep{krummenacher_www_2005}.
 % ejemplo de HTTP
 The most paradoxical case is how it uses \ac{http} as a transport layer instead of as an application layer protocol.
 % por eso no consigue las propiedades de REST: simplicidad y escalabilidad
 This prevents the resulting architectures from achieving some of \ac{http}'s desirable properties such as scalability or visibility.
 % se podría decir que las sacrifica en pro de features adicionales
-In other words, it sacrifices some of the web's properties on behalf of the additional features it provides.
+In other words, it sacrifices some of the web's properties on behalf of additional features.
 
 
 % posiblemente esa simplicidad se ve afectada negativamente porque los usuarios necesitan decidir
@@ -105,16 +106,16 @@ These decisions make the people perceive it as more complex than the \ac{rest}fu
 
 
 % Nosotros elegimos el segundo por sus propiedades, pero también por su relevancia actual.
-However, independently of further considerations
-\footnote{For an extensive analysis on the advantages and disadvantages of \ac{rest} and WS-*, we refer the reader to \citep{pautasso_restful_2008} and \citep{guinard_search_2011}.}
-, there is a practical motivation behind the rationale of focusing this dissertation on the first one: its massive acceptance. % TODO TODO TODO mirar en tesis de Guinard a ver si puedo sacar una molona sobre eso
+Besides these considerations
+\footnote{For an extensive analysis on the advantages and disadvantages of \ac{rest} and WS-*, we refer the reader to \citep{pautasso_restful_2008} and \citep{guinard_search_2011}.},
+there is also a practical motivation behind the rationale of focusing this dissertation on the first one: \ac{rest}'s massive acceptance. % TODO TODO TODO mirar en tesis de Guinard a ver si puedo sacar una molona sobre eso
 % Al final, si queremos facilitar que lo nuestro se integre con otros elementos, que mejor que usar su mecanismo de integración.
-In the end, if the middleware presented in the dissertation aims to reuse other applications' data, what is better than seamlessly integrating with most of them?
+In the end, seamlessly integrating with a higher number of applications seems to be a logical choice if one of the middleware's goals is to reuse other applications' data.
 % Es difícil predecir cual ganará o cual será más popular, pero la web lleva ahí desde hace 20 años.
 Obviously, this acceptance is subject to changes in the future, but the life of the web backs \ac{rest} as a long-term choice.
 % Cita de Fielding:
-Or in \citeauthor{fielding_architectural_2000}'s words,
-\quote{REST is intended for long-lived network-based applications that span multiple organizations} \cite[comment 21]{fielding_rest_2008}.
+Or in \citeauthor{fielding_architectural_2000}'s words \cite[comment 21]{fielding_rest_2008},
+``\emph{REST is intended for long-lived network-based applications that span multiple organizations}''.
 
 
 
