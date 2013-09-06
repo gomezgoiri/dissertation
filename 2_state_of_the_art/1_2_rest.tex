@@ -102,17 +102,19 @@ The complexity negatively affects to
 % y por eso o no, WS-* está perdiendo peso respecto a REST
 Specifically, developers need to take further architectural decisions on different layers of the WS-* stack.
 These decisions make the people perceive it as more complex than the \ac{rest}ful style \citep{guinard_search_2011}.
+This perception influences the adoption of \ac{rest} on behalf of WS-* \citep{davis_perceived_1989,legris_why_2003}.
 % This acceptance also results in a massive availability of libraries in most of the computing platforms.
 
 
 % Nosotros elegimos el segundo por sus propiedades, pero también por su relevancia actual.
-Besides these considerations
+% Guinard en la página 91 de su tesis pone citas que dicen que la aceptación de algo depende de su facilidad de uso.
+In fact, besides technical considerations
 \footnote{For an extensive analysis on the advantages and disadvantages of \ac{rest} and WS-*, we refer the reader to \citep{pautasso_restful_2008} and \citep{guinard_search_2011}.},
-there is also a practical motivation behind the rationale of focusing this dissertation on the first one: \ac{rest}'s massive acceptance. % TODO TODO TODO mirar en tesis de Guinard a ver si puedo sacar una molona sobre eso
+\ac{rest}'s acceptance is a powerful practical motivation for focusing on it.
 % Al final, si queremos facilitar que lo nuestro se integre con otros elementos, que mejor que usar su mecanismo de integración.
-In the end, seamlessly integrating with a higher number of applications seems to be a logical choice if one of the middleware's goals is to reuse other applications' data.
+In the end, seamlessly integrating with a higher number of applications seems to be a logical choice if one of the middleware's goals is to reuse other applications' data. % TODO no tengo datos para decir que esto sea así!
 % Es difícil predecir cual ganará o cual será más popular, pero la web lleva ahí desde hace 20 años.
-Obviously, this acceptance is subject to changes in the future, but the life of the web backs \ac{rest} as a long-term choice.
+Although this acceptance level is subject to changes in the future, the life of the web backs \ac{rest} as a long-term choice.
 % Cita de Fielding:
 Or in \citeauthor{fielding_architectural_2000}'s words \cite[comment 21]{fielding_rest_2008},
 ``\emph{REST is intended for long-lived network-based applications that span multiple organizations}''.
@@ -126,16 +128,20 @@ Or in \citeauthor{fielding_architectural_2000}'s words \cite[comment 21]{fieldin
 % sólo por el correcto uso de ciertos protocolos se puede conseguir todo menos HATEOAS => citar el vídeo aquel
 Although an \ac{api} does not adhere to the \ac{rest} style just because it uses certain protocols,
 the correct use of some of them can help to achieve most of its principles \citep{moore_hypermedia_2010}.
-Historically, \acf{http} has been considered a suitable protocol in that regard.
-\ac{http} is a simple protocol whose adoption by computing platforms is massive.
+Historically, \ac{http} has been considered a suitable protocol in that regard.
+% Trampa: no cito estadísticas, cito trabajos que lo han ejecutado en plataformas pequeñas
+% No sé si citar trabajos como TinyREST o alguno de los que hacen un gateway a HTTP o modifican el protocolo.
+%    Ver aquí: http://en.wikipedia.org/wiki/Comparison_of_lightweight_web_servers
+%    Podría referirme a algún servidor web más, siempre que se haga enfasis en que se usa en plataformas limitadas/raras
+\ac{http} is a simple protocol which has be adopted by a wide range of computing platforms \citep{yazar2009efficient,hammel_mongoose:_2010}\footnote{\url{https://github.com/sirleech/Webduino}}. % TODO arreglar esto
 
 
-However, in the last few years \acf{coap} has emerged as a specialized web transfer protocol for resource constrained devices. % has emerged, has arisen?
+However, in the last few years \acf{coap}\footnote{\url{https://datatracker.ietf.org/doc/draft-ietf-core-coap/}} has emerged as a specialized web transfer protocol for resource constrained devices. % has emerged, has arisen?
 Some noteworthy features of \ac{coap} are
 (1) the reduced message size,
 (2) the use of UDP as a transport layer (with the possibility of using \emph{multicast} communication),
 (3) similarity with \ac{http} (both to reuse its properties and to ease cross-protocol proxying), and
-(4) a resource discovery mechanism. % TODO cita a CORE
+(4) a resource discovery mechanism. % TODO comprobar a ver de dónde cojones saque esto último => no estoy seguro
 % mencionar seguridad?
 
 
@@ -143,18 +149,17 @@ One could argue that to implement a lightweight \ac{tsc} solution, \ac{coap} sho
 However, we have chosen to work with \ac{http} for the following reasons:
 \begin{itemize}
   \item Direct interoperation with other web-solutions.
-        Most of the Internet-based \ac{api}s use \ac{http}.
+        %Most of the Internet-based \ac{api}s use \ac{http}.
         Directly using \ac{http} we can avoid proxies.
         Proxies may introduce latency in the response time degrading network performance. % siempre degradará la eficiencia algo, pero habría que verlo y testearlo, la verdad...
-        % TODO, será cierto? o tardará menos en conjunto?
+        % será cierto? o tardará menos en conjunto?
   \item \ac{rdf}-based media-formats can be rather verbosed.
 	This contrasts with \ac{coap}'s message size limitations.
 	Dealing with this limitations was not one main goals of the thesis.
 	However, we have considered them at some points of the dissertation to avoid unrealistic assumptions.
-  \item \ac{coap} is an ongoing standard.
-        Therefore, its definition is currently changing in each draft version.
-        A practical limitation of this is that at the moment there are few libraries and tools to work with \ac{coap}.
-        This limits the range of platforms which could adopt any proposed solution.
+  \item \ac{coap} is an ongoing standard (i.e. its definition is currently subject to change).
+        As a result of this immaturity, there are few libraries and tools to work with \ac{coap} at the moment \citep{villaverde_constrained_2012}. % y encima cada una en una versión...    
+        This limits the range of platforms which could adopt any proposed solution. % practical limitation
 \end{itemize}
 
 
