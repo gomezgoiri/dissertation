@@ -3,6 +3,7 @@
 \label{sec:soa_ts_ubicomp}
 
 So far, \acl{ts} has been adapted to \acl{ubicomp} by different authors.
+This section presents the most relevant ones. % que sean más relevantes o no, es algo subjetivo...
 
 
 \InsertFig{venn-sec1_2}{fig:venn_tuplespaces_ubicomp}{
@@ -15,46 +16,46 @@ So far, \acl{ts} has been adapted to \acl{ubicomp} by different authors.
 % TODO leer artículos que me faltan y corregir
 The \emph{event heap} \citep{johanson_extending_2004} is a system used for a specific \ac{ubicomp} sub-domain: interactive workspaces.
 In this scenario there are rooms with different devices deployed and where mobile devices can enter.
-Each room has its own space where the devices exchanging tuples to cooperate.
-%For example, a video can be presented in a display and through a remote controller, the user can place the tuple for pausing it.
-%The display consumes these kind of tuples, so it pauses the video whenever somebody places that tuple on the space.
+Each room has its own space where the devices exchange tuples to cooperate.
+% For example, a video can be presented in a display and through a remote controller, the user can place the tuple for pausing it.
+% The display consumes these kind of tuples, so it pauses the video whenever somebody places that tuple on the space.
 % This system is simple to implement but is limited since it centralizes the space in a single machine per room.
-This work merely identifies the requirements of these environments and the properties which solve them.
+This work merely identifies these environments' requirements and the properties to cover them. % to cover the reqs
 Then, it discusses how these properties can be satisfied using \ac{ts} or some extensions.
-Finally they compare its implementation both with other \acp{ts} implementations or other coordination infrastructures. % e.g. RMI, MOM, Pub/sub
+Finally they compare their implementation both with other \acp{ts} and other coordination infrastructures. % e.g. RMI, MOM, Pub/sub
 
 
 \emph{L$^2$imbo} \citep{davies_l2imbo:_1998,friday_experiences_1999} replicates the tuples to avoid a single point of failure.
 Each node joined to a space uses an IP multicast address to exchange messages with other nodes in that space.
 Writing into a space involves sending a multicast message to inform to the rest of the nodes of the tuple written.
-Reading operation usually requires local reading.
-Destructive reading of the tuple is more complex as it requires a global withdrawal.
+Reading operation can usually be satisfied locally.
+Destructive reading of a tuple is more complex as it requires a global withdrawal.
 In \emph{L$^2$imbo} only the owner of a tuple can remove it from the space.
 The ownership of a tuple initially belongs to its creator, but can be transferred. % TODO ver qué añadió Friday
 
 
-% TODO meter mas citas de LIME que estas 2?
 \emph{LIME} (Linda in a Mobile Environment) \citep{picco_lime:_1999} is a \ac{ts} solution for mobile systems.
 In LIME each mobile device has its own space where it generally writes its tuples.
 This space is shared with other devices creating federated spaces, i.e. the aggregation of different shared spaces.
 In this way, each mobile can access to tuples in other mobiles whenever they become available.
 They also proposed a new writing primitive to insert tuples in remote spaces.
 % ejemplo de service discovery?
+\emph{LIME} has subsequently been adapted to limited platforms \citep{murphy_transiently_2006} with TinyLIME \citep{curino_tinylime:_2005} and TeenyLIME \citep{costa_programming_2007}.
 
-This is difficult to implement and \citet{coulouris_distributed_2012} complain about the unrealistic assumptions they make to simplify the problem. % cita al libro
+However, \citet{coulouris_distributed_2012} complain about the unrealistic assumptions LIME's authors make to simplify the problem. % cita al libro
 These assumptions are the uniform multicast connectivity between devices whose tuple spaces are aggregated and the serialized and ordered connections and disconnections.
-In any case, LIME was adapted to several platforms to run both in embedded and mobile devices \citep{murphy_transiently_2006}.
 
 
 In the \emph{TOTA} (Tuples On The Air) Project \citep{mamei_programming_2009} tuples are disseminated to different devices.
 To that end, each tuple has 3 fields:
-1) the content of the tuple,
-2) a rule which defines how it should be propagated,
+1) the content of the tuple;
+2) a rule which defines how it should be propagated; and
 3) a rule to define its maintenance.
+
 For instance, they consider a museum where a visitor writes a query tuple describing a piece of art he wants to see.
 The propagation rule defines that it should be propagated to all nodes in the vicinity, increasing the distance by one each time.
 The tuple is configured to be deleted after a time-to-live period using its maintenance rule.
-When the it reaches the room where the piece of art is located, the piece of art will write a response tuple.
+When the it reaches the room where the piece of art is located, this art work will write a response tuple.
 This response tuple jumps from a device to another until it reaches the device which queried for it.
 
 
@@ -77,7 +78,7 @@ This response tuple jumps from a device to another until it reaches the device w
 % TODO Analizar otras como TOTAM o CRIME?
 
 
-\subsubsection{Discussion} % TODO el índice quedará raro
+\subsubsection{Discussion}
 
 % vemos el espacio necesario para:
 The space can be used to
@@ -101,17 +102,17 @@ Whether the space itself is distributed and how, is out of the scope of this dis
 
 % 2do problema:
 %    queriamos hacer a los dispositivos todo lo dependientes que fuese posible del espacio
-For the second usage type, we pursued to integrate as many data sources as possible.
-This integration demands to acknowledge their independence and limit the degree of collaboration between them.
+For the second usage type, we pursued to integrate as many external data sources as possible.
+This integration demands to acknowledge their independence, and therefore limit the collaboration requirements imposed to them.
 %The rationale behind this decision is that we believe that some content may be better managed by the device which creates them.
 % ejemplo
 %For instance, measures of a sensor or a user profile in a smartphone.
-Therefore, for the second space we propose a distributed space which resembles more to \emph{LIME}'s \emph{federated spaces} than to \emph{TOTA} or \emph{L$^2$imbo}.
+Consequently, for the second space we propose a distributed space which resembles more to \emph{LIME}'s \emph{federated spaces} than to \emph{TOTA} or \emph{L$^2$imbo}.
 
 
 In other words, each device locally manages its own part of the space and only collaborates with others to share content.
 This means that writing does not imply replication or migration of the \emph{tuples}.
 The main drawback of this decision is that the availability or the data depends only on its manager's availability.
-In other words, we loose \emph{time autonomy} in this second space.
+In other words, this second space sacrifices the \emph{time uncoupling}.
 However, this space reflects the current state of the environment and reduces the dependency of two devices in third ones.
-Besides, for those cases where \emph{time autonomy} or \emph{data availability} are important, the first space can be used.
+Besides, for those cases where \emph{time uncoupling} or \emph{data availability} are important, the first space can still be used.
