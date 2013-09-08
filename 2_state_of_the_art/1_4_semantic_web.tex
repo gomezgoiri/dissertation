@@ -4,47 +4,55 @@
 A problem of the initial view of the Web was that it was human-centered.
 Regardless of whether the contents were machine processable, a human needed to interpret them to give them a meaning.
 % mirar a ver cuando se empezó a usar \ac{sw} de verdad, porque en el artículo de 2001 dan a enterder que se llevaba un tiempo usando
-In the early 2000s, \citet{berners-lee_semantic_2001} proposed the use of what they called the \acf{sw} to solve that problem.
-The \ac{sw} was conceived as an extension of the ordinary web which would bring structure to its content.
-As the ordinary web, the \ac{sw} benefits from the universality the hypertext provides by linking \emph{anything with anything}.
-Besides, like the Internet, the \ac{sw} is intended to be as decentralized as possible.
-
-The \acl{sw} and its key features are defined by the \emph{World Wide Web Consortium} \citep{semanticWeb-FAQ} as:
+In the early 2000s, \citet{berners-lee_semantic_2001} proposed a solution to this problem: the \acf{sw}.
+%The \ac{sw} was conceived as an extension of the ordinary web which would bring structure to its content.
+%As the ordinary web, the \ac{sw} benefits from the universality the hypertext provides by linking \emph{anything with anything}.
+%Besides, like the Internet, the \ac{sw} is intended to be as decentralized as possible.
+The \emph{World Wide Web Consortium} defines the \ac{sw} and its key features as follows \citep{semanticWeb-FAQ}:
 \begin{quote}
 The vision of the \acl{sw} is to extend principles of the Web from documents to data.
-Data should be accessed using the general Web architecture using, e.g., URI-s;
+Data should be accessed using the general Web architecture using, e.g., \acs{uri}-s;
 data should be \emph{related to one another} just as documents (or portions of documents) are already.
 This also means creation of a common framework that allows data to be \emph{shared and reused} across application, enterprise, and community boundaries,
 to be \emph{processed automatically} by tools as well as manually, including revealing possible \emph{new relationships} among pieces of data.
 \end{quote}
 
-Meaning is expressed in the \acl{sw} as sets of triples.
-Each triple is composed by a subject, a predicate and an object like in a normal sentence (see Figure~\ref{fig:triples_example}).
-Therefore, in  \citeauthor{berners-lee_semantic_2001} words, \emph{a document can assert that things (people, web pages or whatever) have properties (such as "is a sister of," "is the author of") with certain values (another person, another Web page)}.
-A key difference with a normal sentence is that each concept is unambiguously defined by an URI.
-These URIs form links between different triples as shown by the example of the Figure~\ref{fig:triples_example}.
+
+In the \ac{sw} triples are the most basic information units.
+A triple is composed by a subject, a predicate and an object like in a normal sentence (see Figure~\ref{fig:triples_example}).
+As \citeauthor{berners-lee_semantic_2001} explained, using triples ``\emph{a document can assert that things (people, web pages or whatever) have properties (such as 'is a sister of', 'is the author of') with certain values (another person, another Web page)}''.
+A key difference with a normal sentence is that each concept is unambiguously defined by an \acs{uri}.
+These URIs form links between different triples as shown in Figure~\ref{fig:triples_example}.
 % This set of triples can be expressed in multiple formats such as RDF, Turtle, Notation3 or NTriples. % TODO citas
 
 
+\begin{savenotes}
 \InsertFig{triples_example}{fig:triples_example}{
   Sample triples using different ontologies.
 }{
   All the triples are represented graphically and some of them also textually.
   They describe academic and personal details about the author of this thesis.
-  The knowledge is expressed using four different ontologies: FOAF, DC, SWRC and CiTE. % citar?
-  Note that we use aliases, known as prefixes in most Semantic formats, to shorten some URIs and enhance the clarity of the Figure.
+  The knowledge is expressed using four different ontologies: FOAF\footnote{\url{http://www.foaf-project.org/}}, DC\footnote{\url{http://dublincore.org/}}, SWRC\footnote{\url{http://ontoware.org/swrc/}} and CiTO\footnote{\url{http://purl.org/spar/cito}}.
+  For the sake of clarity, some of the \acs{uri}s in the figure are shortened using aliases or prefixes. % una o la otra
 }{1}{}
+\end{savenotes}
 
 
-A problem with the information described so far is that two different databases may use different URIs to express the same concept.
+A problem with the information described so far is that two different databases may use different \acs{uri}s to express the same concept.
 To overcome this the \ac{sw} offers collections of information called ontologies.
 An ontology is a document which expresses the relations between terms commonly using a taxonomy and a set of rules to infer content.
 The taxonomy defines the classes of a given domain and how they relate with each other.
 
-Of course, different content providers could provide similar data described according to different ontologies.
-Fortunately, ontologies can be easily mapped by providing equivalence relations within them.
-In the same way, an ontology can be extended to adapt it to different application domains.
-In any case, the reuse of the same models is beneficial and is therefore promoted through standardization.
+% W3C on Ontology vs Vocabulary: http://www.w3.org/standards/semanticweb/ontology
+% There is no clear division between what is referred to as “vocabularies” and “ontologies”.
+% The trend is to use the word “ontology” for more complex, and possibly quite formal collection of terms,
+% whereas “vocabulary” is used when such strict formalism is not necessarily used or only in a very loose sense.
+
+Of course, different content providers may provide similar data described according to different ontologies.
+To overcome this problem, ontologies can be easily mapped by providing equivalence relations within them.
+Similarly, an ontology can be extended to adapt it to different application domains.
+In any case, the reuse of the same models is beneficial to ease the interoperability.
+This reuse is promoted by the community through the standardization of vocabularies.
 
 % Remarkably, the use of the \ac{sw} has been promoted in the last years with the Linked Open Data (LOD) initiative.
 % The LOD are datasets which follow a series of principles on how to open and publish data.

@@ -13,7 +13,7 @@
    height="322.10767"
    id="svg2"
    version="1.1"
-   inkscape:version="0.48.3.1 r9886"
+   inkscape:version="0.48.4 r9939"
    sodipodi:docname="triples_example.svg"
    inkscape:export-filename="semanticExample.png"
    inkscape:export-xdpi="90"
@@ -90,11 +90,11 @@
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="1916"
-     inkscape:window-height="751"
-     inkscape:window-x="0"
-     inkscape:window-y="387"
-     inkscape:window-maximized="0"
+     inkscape:window-width="1400"
+     inkscape:window-height="995"
+     inkscape:window-x="1364"
+     inkscape:window-y="-3"
+     inkscape:window-maximized="1"
      fit-margin-top="0"
      fit-margin-left="0"
      fit-margin-right="0"
@@ -328,7 +328,7 @@
          x="8.7020836"
          y="989.44977"
          style="font-size:16px;font-style:italic;font-weight:normal;-inkscape-font-specification:DejaVu Serif Italic"
-         id="tspan2998">http://gomezgoiri.net/aitor                  cite:likes                         eudbpedia:Esne_Beltza</tspan><tspan
+         id="tspan2998">http://gomezgoiri.net/aitor                  cito:likes                         eudbpedia:Esne_Beltza</tspan><tspan
          sodipodi:role="line"
          x="8.7020836"
          y="1009.4498"
@@ -375,6 +375,6 @@
          id="tspan3776-9-4-6-7"
          x="419.20935"
          y="843.90601"
-         style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Arial;-inkscape-font-specification:Arial">cite:likes</tspan></text>
+         style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Arial;-inkscape-font-specification:Arial">cito:likes</tspan></text>
   </g>
 </svg>
