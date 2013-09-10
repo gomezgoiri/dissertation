@@ -40,23 +40,17 @@ The use of these objects together with the rising of mobile computing greatly co
 %In the beginning the community put more effort on those devices' connectivity issues, materialized in the spread of technologies such as Zigbee\footnote{http://www.zigbee.org}, 6LoWPAN\footnote{http://datatracker.ietf.org/wg/6lowpan/charter/} or Bluetooth\footnote{http://www.bluetooth.com}.
 %However, nowadays it is focusing on the architectural solutions used by the applications built around these objects.
 %A classification of these solutions has been already presented in the previous chapter. % Coulouris et al.
-In this thesis, we defend that \acf{tsc} provides some valuable properties to \ac{ubicomp} environments. % mencionarlas?
-However, some other properties are derived from how \ac{tsc} is implemented. % TODO implemented suena muy umpa-lumpa? mejor designed o así? o hablar de model mejor que de middleware?
+This vision can benefit from \acf{tsc} paradigm's decoupling properties. % mencionarlas? citar a alguien que diga que TSC puede molar para eso?
+However, other properties are derived from how \ac{tsc} is materialized. % materialized puede sonar mal, pero implemented suena muy umpa-lumpa
 
 
-% TODO problema: y por qué no otros? Habría que redactarlo de tal forma que no haga que un lector tiquismiquis requiera un puto survey de network-based architectural styles!
-In this chapter, we focus on the design of the space model for our solution.
-%selecting the underlying network-based architectural style.
-Its application to resource constrained devices brought the successful \ac{wot} initiative.
-\ac{wot} is probably the most prominent architectural solution used for smart-objects. % probably porque no tengo datos que lo defiendan
-%The benefits that \ac{rest} brings to resource constrained devices have been deeply described in the previous chapter.
-
-
-To that end, Section~\ref{sec:align_tsc_http} analyzes the characteristics of the \ac{rest} architectural style and the similarities it shares with \ac{tsc}.
-Later, it describes a \ac{rest}-like \ac{api} to access a triplespace. % TODO ver cómo escribir triplespace
-The goal pursued is two-fold: (1) inherit valuable the properties from \ac{rest} and (2) maintain a high degree of compatibility with the \ac{wot}.
-Section~\ref{sec:distributed_tsc} presents the need and requirements of a distributed architecture for \ac{ubicomp}.
-These requirements lead us to adapt the \ac{tsc} model.
+This chapter focuses on this materialization, i.e. the design of our own space model.
+To that end, Section~\ref{sec:guiding_principles} discusses the principles which guide our proposal.
+Section~\ref{sec:hybrid_solution} proposes a mix model which encompases
+(a) an independent space which can be used by the devices for coordination purposes, and
+(b) an enriched view of this space which also shows the information provided by autonomous devices.
+Section~\ref{sec:align_tsc_http} describes a \ac{rest}-like \ac{api} to access the first space.
+Section~\ref{sec:federated_space} details the additional extensions needed to support the enriched view.
 Finally, Section~\ref{sec:middleware_qualitative_evaluation} evaluates the properties achieved with this model.
 
 
