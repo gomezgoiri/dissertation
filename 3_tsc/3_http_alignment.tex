@@ -1,12 +1,9 @@
 \section{Aligning \acs{tsc} with \acs{http}}
 \label{sec:align_tsc_http}
 
-% TODO citar trabajos de:
+% Otros trabajos citables parecidos a esto:
 %      posiblemente el primero que expuso explicitamente semejanzas entre HTTP y primitivas de TSC: Riemer 2006 (comprobar y citar!)
-%      TSC es como Web para semántica
-%      RESTful semántico
-%      So far, the compatibility of \ac{tsc} with the \acs{http} RESTful style has been proved from a formal \cite{hernandez_formal_2010} point of view.
-%      Papers sobre TSC y su discurso sobre la WWW
+%      Otros papers de TSC y la WWW, que ya han sido citados en la sección 3_tsc
 
 In this section, we present our materialization of \ac{tsc} \acs{api} over \ac{http}.
 This materialization gives a practical overview of \ac{tsc}'s \acs{rest}fulness.
@@ -20,7 +17,7 @@ Therefore, all the operations in \ac{tsc} are performed against a particular spa
 %By default, all applications connect to a common standard space, but they can optionally choose to connect to a particular private space.
 Within a space, the information is stored in sets of \textbf{triples} called \textbf{graphs}.
 Each graph can also be identified by an \acs{uri}.
-The \acs{rdf} \textbf{triples} are the underlying concept of all the \ac{sw} languages.
+% The \acs{rdf} \textbf{triples} are the underlying concept of all the \ac{sw} languages. % a estas alturas esto está explicadísimo
 Each triple is composed by a subject (which is a \acs{uri} or a \emph{blank node}), a predicate (a \acs{uri}) and a value (which can be a \acs{uri}, a \emph{blank node} or a literal), as shown in the Figure~\ref{fig:triples_example}.
 % TODO cuidado con los blank nodes!!! Los tenemos en cuenta? De ser así, cómo???
 
@@ -28,16 +25,7 @@ As detailed later, \ac{tsc}'s primitives add or remove graphs.
 % este es un tema "delicado" desde el punto de vista de TSC, así que mejor si lo tratamos a parte:
 % as well as to query for graphs or for sets of triples retrieved from different graphs.
 In order to perform these operations, which enable the selection of a subset of the semantic content hold in a given space, a \textbf{template} is required. % these operations: add or remove
-The wildcard templates used by default
-\footnote{
-  % Por qué no SPARQL?
-  More sophisticated query languages like SPARQL (\url{http://www.w3.org/TR/rdf-sparql-query/}) could be used. % sophisticated o expressive?
-  However, not many embedded platforms have parsers for these languages available.
-  This could be an obstacle for the adoption of the middleware.
-  Therefore, we have opted for using wildcard templates, which are in turn much more simple to process.
-  In any case, the nodes able to parse these query languages can easily decompose a query on wildcard templates.
-}
-are special triples with optional wildcard subject, predicate and/or object.
+The wildcard templates used are special triples with optional wildcard subject, predicate and/or object.
 For example, the template \texttt{?s foaf:knows gomezgoiri:aitor} could be employed to select instances which represent people who know Aitor (see Figure~\ref{fig:tsc_resources}).
 
 % TODO Discussión profunda de SPARQL y REST???
@@ -45,8 +33,18 @@ For example, the template \texttt{?s foaf:knows gomezgoiri:aitor} could be emplo
 \InsertFig{tsc_resources}{fig:tsc_resources}{
   Schematic view of a space with four graphs and sample triples for one of these graphs.
 }{
-  Aliases for the beginning of most URIs, known as prefixes in most Semantic languages, are used for the lack of clarity.
+  The figure uses prefixes, i.e. aliases for the beginning of the \acp{uri}, for the sake of clarity.
 }{1}{}
+
+
+Note that this thesis does not consider using more sophisticated query languages like SPARQL \footnote{\url{http://www.w3.org/TR/rdf-sparql-query/}}. % sophisticated o expressive?
+The rationale behind this decision is that we wanted to avoid the complexity introduced by these languages in our \ac{api}.
+While the advanced query languages need to be interpreted with parsers not available in many embedded platforms,
+wildcard templates are straightforward to implement and to process.
+This simplicity eases the adoption of the \ac{api} by as many platforms as possible.
+However, since the wildcard templates are the base for the advanced query languages, our \ac{api} could be extended to allow their use.
+In any case, this extension is left as a future work.
+
 
 
 \subsection{Adopted \acs{tsc} primitives}
@@ -106,7 +104,8 @@ Independently of the mechanism adopted, in this section we propose a optional \a
 
 The list of spaces a node is joined to are available under \textit{/spaces}.
 Each space is identified by an \acs{uri} (e.g. \url{http://space1}).
-All the resources of that space, both real (i.e. graphs) or virtual (i.e. query) are listed under $/spaces/\{space\_uri\}$ (summarized by \emph{sp} from now on).
+If this \acs{uri} is also a \acs{url}, $/spaces/\{space\_uri\}$ (summarized by \emph{sp} from now on) can simply redirect to it.
+All the resources of that space, both real (i.e. graphs) or virtual (i.e. query) are listed under $\{sp\}/$.
 Each graph is available on ${\{sp\}/graph/\{graph\_uri\}}$.
 If we make an \acs{http} DELETE to that resource, under \ac{tsc}'s perspective, we take that graph from the space.
 The rest of the mappings are shown in the Table~\ref{tab:tscAPI}.
@@ -136,13 +135,16 @@ The rest of the mappings are shown in the Table~\ref{tab:tscAPI}.
 
 \subsubsection{Status Codes}
 \label{sec:status_codes}
-The \acs{api} should be compliant with the standardized \acs{http} status codes.
+The \acs{api} should be compliant with the standardized \acs{http} status codes \footnote{\url{http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html}}.
 These codes are sent back in the response as part of the header.
-For instance, the \ac{tsc} middleware returns the 404 error when no significant result can be found for a primitive.
-This adoption, apart from enhancing the compatibility with other web applications, could enable the modular adoption of the API.
-For example, if a node does not offer a wildcard based \textit{query}, it will not affect the behavior of the rest of the nodes of an space.
-Instead, they will interpret these cases as empty responses.
+For instance, the \ac{tsc} middleware returns the \emph{404 error} when no significant result can be found for a primitive.
+This adoption, apart from enhancing the compatibility with other web applications, can enable the modular adoption of the \ac{api}.
+% Esto tiene más sentido para el outer space que para este API
+For example, if a space does not offer a wildcard based \textit{read}, it can simply return a \emph{501 Not Implemented}.
+The participants would then be aware of the problem and use an alternative primitive to obtain the data needed.
+%Instead, they will interpret these cases as empty responses.
 This modularity becomes crucial to ease the partial adoption on new platforms.
+
 
 \subsubsection{Content Negotiation}
 Another key aspect of the \acs{http} protocol the \acs{api} should take advantage of is the \textit{content negotiation}.
