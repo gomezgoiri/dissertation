@@ -1,31 +1,33 @@
 \section{Federated Space}
 \label{sec:federated_space}
 
+The \osapi{} extends the \ac{api} previously presented with the primitives and concepts explained in this section.
+
+
 % grafos autogestionados (no takeables por otros) => write en local
 \subsection{Self-managed graphs}
 
-These graphs are the ones which are managed by the device, called \emph{asteroid}, which provides them to the rest.
-In other words, self-managed graphs enrich the space in the ways previously described, but they cannot be removed.
+These graphs are shared with other participants, but can only be managed by the devices called \asteroids{}. % write and taken locally
+In other words, \selfgraphs{} enrich the space but cannot be externally written or removed. % No device can remove them apart from their creator.
 % poner ejemplo de por qué no tiene sentido que eliminen a través del espacio
 Therefore, they are \emph{second-class graphs} which provide information about the environment but cannot be used for coordination purposes.
 
-% write locally
-% No device can remove them apart from their creator. % TODO o si puede serlo, esta no lo decide el sistema
-The \emph{asteroid} makes these graphs accessible to others through \ac{http}.
+
+Each \asteroid{} makes these graphs accessible to others through \ac{http}.
 % objetivo: que se pueda acceder a estos grafos incluso si no son parte de nuestra app => interop
 The final goal is to potentially allow to reuse the data provided by any existing \ac{rest}ful service. % app level interop
 Therefore, the \ac{api} should be or trend to be \ac{rest}ful.
 % para ello es importante usar un RESTful approach, como sabemos que es complejo ofrecemos otra opción en el siguiente capítulo
 However, we leave the \emph{hypermedia} \ac{api} as a future work.
-Instead, we require a mandatory \emph{OSAPI} to be implemented in each \emph{asteroid} to guarantee access to the \emph{self-managed graphs}.
+Instead, we require a mandatory \osapi{} to be implemented in each \asteroid{} to guarantee access to the \selfgraphs{}.
 % lo sé, no está justificado 0:-)
-
 
 
 \subsection{New primitives}
 
 To make the most of the information in a space, we propose a new primitive to query all over the semantic information stored.
-The \ac{rest}fulness of this primitive could be argued since it does not operate at resource level, but mixing several resources.
+% esto puede ser relativo, al final devolver una lista completa de recursos (o parte de sus atributos) no deja de ser REST según los libros de hypermedia design...
+The \ac{rest}fulness of this primitive could be argued since it does not operate at resource level (i.e. returning graphs), but mixing several resources (i.e. triples from different graphs).
 However, we believe that it is useful to have an endpoint for the queries which involve many graphs.
 \citet{kjernsmo_necessity_2012} discusses this topic in depth. % TODO Mirar otras citas???
 
@@ -45,8 +47,8 @@ The Table~\ref{tab:queryAPI} extends Table~\ref{tab:tscAPI} to include this new 
 \begin{table} %http://en.wikibooks.org/wiki/LaTeX/Floats,_Figures_and_Captions#Wide_figures_in_two_column_documents
   \centering
   \caption {
-    \acs{http} mapping for the primitives detailed in the Section~\ref{sec:primitives}. \textit{sp} is a space \acs{uri},
-    \textit{g} is a graph \acs{uri}, \textit{s}, \textit{p} and \textit{o-uri} are subject, predicate and object \acsp{uri} or wildcards (represented with an as \textit{*}).
+    \acs{http} mapping for the \emph{query} primitive.
+    \textit{sp} is a space \acs{uri}, \textit{s}, \textit{p} and \textit{o-uri} are subject, predicate and object \acsp{uri} or wildcards (represented with an as \textit{*}).
     When the template's object is a literal, it can be expressed specifying its value (\textit{o-val}) and its type (\textit{o-type}).
     \medskip
   }
@@ -60,8 +62,8 @@ The Table~\ref{tab:queryAPI} extends Table~\ref{tab:tscAPI} to include this new 
 \end{table}
 
 
-A key point of the \ac{api} is that the \emph{asteroids} might not even follow the \ac{tsc} paradigm.
-For instance, the \emph{OSAPI} can encapsulate data provided by a third middleware.
+A key point of the \ac{api} is that the \asteroids{} might not even follow the \ac{tsc} paradigm.
+For instance, the \osapi{} can encapsulate data provided by a third middleware.
 However, a primitive to ease that management can be a convenient for the developers which do not need a more customized behavior.
 With that in mind, we propose another writing primitive.
 This primitive only has local effects and therefore has no HTTP equivalent:
@@ -74,6 +76,16 @@ This primitive only has local effects and therefore has no HTTP equivalent:
   \begin{lstlisting}
     write_self(space_URI, triples): URI
   \end{lstlisting}
+  
+  \item The \textbf{read\_self} and \textbf{take\_self} primitives only affect to \selfgraphs{}.
+  
+  \begin{lstlisting}
+    read_self(space_URI, graph_URI): triples
+    read_self(space_URI, template): triples
+    take_self(space_URI, graph_URI): triples
+    take_self(space_URI, template): triples
+  \end{lstlisting}
+  
 \end{itemize}
 
 
@@ -90,12 +102,13 @@ This primitive only has local effects and therefore has no HTTP equivalent:
 In this section we will try to clarify how the different behaviors coexist:
 
 \begin{description}
- \item[Writing]
+ \item[Writing.]
       The most basic writing primitive allows a client to write a graph into the space hold by the server.
       However, we also presented the \emph{write\_self} primitive.
-      \emph{Write\_self} writes into the local device a untakeable graph (i.e. self-managed graph).
- \item[Reading]
+      \emph{Write\_self} writes into the local device an externally untakeable graph (i.e. \selfgraphs{}).
+ \item[Reading.]
       \emph{Query} performs a traversal query which aggregates all the graphs of the space.
-      \emph{read} and \emph{take} work at resource level.
-      However, we will also consider \emph{self-managed graphs} to enrich the \emph{read} primitive. % mediante redirect o lo que sea
+      \emph{Read} and \emph{take} work at resource level.
+      \emph{Read\_self} and \emph{take\_self} are their equivalents for \selfgraphs{}.
+      Finally, \emph{read} primitive's results will be enriched with \selfgraphs{} from the \outerspace{}. % mediante redirect o lo que sea
 \end{description}
