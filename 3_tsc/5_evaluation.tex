@@ -1,14 +1,14 @@
 \section{Evaluation}
 \label{sec:middleware_qualitative_evaluation}
 
-With the solution presented in the previous section, we aimed to retain the desirable properties of both \ac{rest} and \ac{tsc}.
+With the model presented in this chapter, we aimed to retain the desirable properties of both \ac{rest} and \ac{tsc}. % model, architecture, solution, ¿?
 % analísis más largo en la siguiente sección
 % 1. cómo sé que esto es mejor que usar REST y TSC por separado? Sinergia?
 % 2. que aporta unirlo bajo un mismo middleware?
 % 3. tiene beneficios?
-However, some questions arise from that integration:
+However, some questions arise from this integration:
 (1) does in fact retain all the properties of \ac{rest} and \ac{tsc} separately? Otherwise, which properties are affected?
-(2) what other benefits carries when comparing with the usage of separate \ac{tsc} and \ac{rest} middleware?
+(2) which other benefits offers compared with the usage of separate \ac{tsc} and \ac{rest} middleware?
 
 % Fielding distingue entre:
 %      + "distributed-system": hace que el usuario vea el sistema como un todo, sin saber cuando se realizan llamadas en remoto y cuando no
@@ -22,21 +22,11 @@ To answer these questions, we analyze the presented solution from different poin
 Section~\ref{sec:middleware_eval_summary} summarizes these analysis. % cómo dan respuesta a las preguntas del comienzo
 
 
-% TODO cosas rescatables del paper original de WoT 2011:
+% Cosas rescatables del paper original de WoT 2011 que no son tocadas en este capítulo:
 %     Uniform API vs. specific usage of each API !!!
-%     Coupling: lo comido (autonomies), por lo servidor (client-server coupling por tener API común)
-%          In spite of the outlined decoupling nature of both approaches, the data definition can be considered a coupling mode indeed.
-%          While in \ac{wot} each resource defines its own data formats and contents themselves, in \ac{tsc} the ontology in which the semantic
-%          concepts are described must be known by each part of a distributed application to effectively cooperate among them.
-%     Discovery: HATEOAS puede ser complejo para cacharros peques (parseo),
-%                proponemos discovery basada en API uniforme y a nivel de cacharros con algún mecanismo en el que no entramos.
-%          One of the main drawbacks in \ac{wot} is the lack of a discovery mechanism for new objects and the data they provide.
-%          Even when this data can be linked in each object response (using HATEOAS) and microformats are sometimes included to ease the search-ability of these objects by search engines, it is difficult for an object which may change of location and context to be referred.
-%          Thus, \ac{wot} may have a tendency to create isolated islands of data.
-%          Several workarounds have been proposed to overcome this limitation, such as using a central repository\footnote{http://www.pachube.com/}, a framework which uses federated repositories responsible for different administrative domains \citep{stirbu_towards_2008} or making each connected sensor announce itself to let an intermediary know its presence \citep{kamilaris_smart_2010}.
-
+%         esto sería como domain model vs data model
 %     Scalability: se ha hablado y ahora no es tan mala como antes ;-) Entre cacharros seguiría dando asco
-%     Semantics: Microformats vs Full (hablar de esto)
+%     Semantics: Microformats vs Full
 %     Comprensión por parte de usuario: sencillo misma interfaz, no tienes que andar descubriendo nuevas APIs y viendo cómo funcionan, qué formato devuelven, etc.
 %     Comprensión por parte de desarrollador: API sencillica siempre
 
@@ -54,10 +44,10 @@ As we have already discussed in Section~\ref{sec:soa_integration}, indirect comm
 
 The primitives used in our space-based computing implementation force it to be \emph{space uncoupled}.
 On the contrary, it is not always \emph{time uncoupled}.
-If two nodes write and read from the coordination space, they are \emph{time uncoupled};
-but if a node accesses to others' content (i.e. \emph{self-managed graphs}), they are not.
-In other words, \emph{time uncoupling} is not achieved by the extension of the model presented in Section~\ref{sec:halfway_solution} (i.e. in the \emph{outer space}).
-As a future work, this could be alleviated by a caching mechanism implemented in the space holder or holders. % TODO hablar con propiedad de esos elementos => nombrarlos antes
+If two nodes write and read from the \coordspace{}, they are \emph{time uncoupled};
+but if a node accesses to others' content (i.e. \selfgraphs{}), they are not.
+In other words, \emph{time uncoupling} is not achieved by the extension of the model presented in Section~\ref{sec:federated_space} (i.e. in the \emph{outer space}).
+As a future work, this could be alleviated by a caching mechanism implemented in the \coordinator{} or \coordinators{}. % TODO hablar con propiedad de esos elementos => nombrarlos antes
 % see \ref{tab:middleware_coordinationprop}
 
 \input{\pathchapthree/tables/coordination_properties}
@@ -67,15 +57,10 @@ As a future work, this could be alleviated by a caching mechanism implemented in
 \label{sec:network_properties}
 % Cómo afecta la app propuesta => ir actualizando al final de otras secciones???
 
-In Section~\ref{sec:tsc_vs_rest} we have described how \ac{tsc} does not contradict any of the \ac{rest} principles.
+Section~\ref{sec:soa_tsc_discussion} described how \ac{tsc} does not intrinsically contradict any of the \ac{rest} principles.
 However, the adaptation presented in this thesis does not completely adhere to the \ac{rest} style.
 In this section we present how this divergences affect to \ac{rest}'s properties.
 % decir que el objetivo final es que pudiera ser REST
-
-% TODO antes de entrar al lio, explicar cómo funciona esto de REST, en qué parte de nuestra solución lo necesitaremos
-% decir que API para TSC mola
-% decir que API para los cacharros deberia de ser independiente a lo que nosotros digamos y por eso estaria bien REST
-%     de todas formas, como es dificil, nos quedamos en un nivel de madurez menor
 
 
 In \citeauthor{fielding_architectural_2000}'s words, the relevant properties which describe a network-based system are the following ones \footnote{We refer to the reader to \citet{fielding_architectural_2000} for the complete thorough analysis.}:
@@ -97,7 +82,7 @@ In \citeauthor{fielding_architectural_2000}'s words, the relevant properties whi
       \item[Extensibility] measures the ability to add functionality to the system.
       \item[Customization] is the ability to adjust the behavior of an architectural element temporarily.
       \item[Configurability] is related with the extensibility and the reusability.
-      \item[Reusability] is the ability to reuse components, connectors or data elements without modifying other apps.
+      \item[Reusability] is the ability to reuse components, connectors or data elements without modifying other applications.
     \end{description}
   \item[Visibility] is the ability of a component of monitoring or mediating in the interaction between other two components.
   \item[Portability] is the ability of working in different environments.
@@ -112,7 +97,7 @@ In \citeauthor{fielding_architectural_2000}'s words, the relevant properties whi
 
 The Table~\ref{tab:network_properties} summarizes how different architectural styles achieve these properties.
 Particularly, it shows the styles from which \ac{rest} derives (see Section~\ref{sec:rest}).
-The ultimate goal of the solution explained in Section~\ref{sec:halfway_solution} is twofold:
+The ultimate goal of the solution explained in Section~\ref{sec:hybrid_solution} is twofold:
 \begin{enumerate}
   \item Provide a \ac{rest} access to a semantic space.
        This would ease its integration with the rest of the web.
@@ -121,10 +106,16 @@ The ultimate goal of the solution explained in Section~\ref{sec:halfway_solution
 Therefore, ideally, its networking properties would be the sames as the \ac{rest} style.
 
 
+% TODO antes de entrar al lio, explicar cómo funciona esto de REST, en qué parte de nuestra solución lo necesitaremos
+% decir que API para TSC mola
+% decir que API para los cacharros deberia de ser independiente a lo que nosotros digamos y por eso estaria bien REST
+%     de todas formas, como es dificil, nos quedamos en un nivel de madurez menor
+
+
 However, defining a 100\% \ac{rest} compliant \ac{api} is not easy.
 Indeed, most of the self-proclaimed \ac{rest}ful \acp{api} are not \citep{house_how_2012}. % la nueva buzz word para eso: hypermedia API
 The main cause is the \ac{resthateoas} constraint seen in the Section~\ref{sec:rest} \citep{fielding_rest_2008}.
-Using \ac{http} as an application-level protocol forces a developer to comply the rest of the constraints \citet{moore_hypermedia_2010}, but not \ac{resthateoas}.
+Using \ac{http} as it was originally designed for forces a developer to comply the rest of the constraints \citet{moore_hypermedia_2010}, but not \ac{resthateoas}.
 % TODO hablar del Richardson Maturity model!
 
 
@@ -167,8 +158,17 @@ Besides, we do not discard to work towards a fully \ac{rest}ful machine-oriented
 
 In conclusion, the properties of the properties for network communication style we adopted corresponds with \emph{LCODC\$SS} plus simplicity and visibility. % hacer una nueva fila con esto
 % TODO comprobar que se explica eso tal cual en la tesis de Fielding: HATEOAS => sólo afecta a reusabilidad
-
 % TODO Comprobar que no se salga por el borde derecho!
+
+% Reusar algo de esto?:
+%     Discovery: HATEOAS puede ser complejo para cacharros peques (parseo),
+%                proponemos discovery basada en API uniforme y a nivel de cacharros con algún mecanismo en el que no entramos.
+%          One of the main drawbacks in \ac{wot} is the lack of a discovery mechanism for new objects and the data they provide.
+%          Even when this data can be linked in each object response (using HATEOAS) and microformats are sometimes included to ease the search-ability of these objects by search engines, it is difficult for an object which may change of location and context to be referred.
+%          Thus, \ac{wot} may have a tendency to create isolated islands of data.
+%          Several workarounds have been proposed to overcome this limitation, such as using a central repository\footnote{http://www.pachube.com/}, a framework which uses federated repositories responsible for different administrative domains \citep{stirbu_towards_2008} or making each connected sensor announce itself to let an intermediary know its presence \citep{kamilaris_smart_2010}.
+
+
 \input{\pathchapthree/tables/network_properties}
 
 
