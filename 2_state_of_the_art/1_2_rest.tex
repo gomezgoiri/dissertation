@@ -44,18 +44,36 @@ To achieve these properties, \ac{rest} establishes the following constraints fro
 \end{description}
 
 
+
+\citet{richardson_introducing_2008} came up with a maturity model to help people understand the \ac{rest} principles in a less abstract manner.
+Instead of focusing on the presented constraints, the model identifies whether an \ac{api} properly uses the web's three most important protocols: \ac{uri}, \ac{http} and \ac{html}.
+Level zero encompasses those \acp{api} which use a unique \ac{uri} and \ac{http} method (i.e. use \ac{http} as a tunneling mechanism).
+Level one is formed by the \acp{api} which clearly identify several resources by providing an \acp{uri} to each of them.
+Level two uses \ac{http} properly, i.e. using its verbs, status codes, etc. as they were originally designed for.
+Level three comprises the \acp{api} which return resources which describe their own capabilities and are interconnected using preferably standard representations (i.e. those which also address the \acf{resthateoas} constraint).
+
+
+According to \citet{fielding_architectural_2000} only those in the third level can be considered \ac{rest} architectures.
+However, there is a generalized misconception of the \ac{rest} term.
+Architectures and \ac{api}s at the first or second level of the \emph{\citeauthor{richardson_introducing_2008} Maturity Model} are often informally (and incorrectly) considered \ac{rest} \citep{fielding_rest_2008,moore_hypermedia_2010,klabnik_nobody_2011}.
+
+
 % Explicar aquí cosas de nomenclatura:
 %     REST o hypermedia API,
 %     REST-like (sin HATEOAS)
 %     Resource Oriented Architecture o ROA como termino que engloba a ambos
-To avoid the generalized misconception of the \ac{rest} term, we want to clarify the terminology used in this dissertation.
-Architectures and \ac{api}s which follow most of \ac{rest}'s principles are often informally (and incorrectly) considered \ac{rest} \citep{fielding_rest_2008,moore_hypermedia_2010,klabnik_nobody_2011}.
+To avoid confusions, we want to clarify the terminology used in this dissertation.
 % Si, esto de ortodoxo o heterodoxo 
 To adhere to the precise meaning of \ac{rest}, we consider orthodox architectures concrete instantiations of \ac{rest} and heterodox ones \ac{rest}-like architectures.
+In other words, in the scope of this dissertation, \ac{rest}-like architectures are those described by second level of the \emph{\citeauthor{richardson_introducing_2008} Maturity Model}.
 % Resource-oriented architecture (ROA) es una instanciación de RESTful sobre HTTP definida por Richardson y Ruby en su libro "RESTful Web Services"
 %    defienden que como tal el estilo RESTful, se puede aplicar a cualquier cosa que no sea HTTP
-Recently, the \emph{Hypermedia \ac{api}} term has emerged to refer to \acs{http} \ac{api}s which fully complain with all the \ac{rest} principles \citep{klabnik_rest_2012,moore_hypermedia_2010,amundsen_building_2011}.  % (particularly, with \ac{resthateoas}).
-We indistinguishably refer to them as \ac{rest}ful \ac{api}s or as \emph{hypermedia \ac{api}}s.
+%    Al hacer la presentación del "Richardson Maturity Model", el tipo reconoció que en su libro sólo había comprendido 2 de los 3 requisitos (no HATEOAS o usar bien HTML).
+%     Así que técnicamente, podríamos decir que ROA si que es el nivel 2
+%     En cualquier caso, por evitar complicaciones no lo menciono.
+Recently, the \emph{Hypermedia \ac{api}} term has emerged to refer to \acs{http} \ac{api}s which fully comply with all the \ac{rest} principles \citep{klabnik_rest_2012,moore_hypermedia_2010,amundsen_building_2011}.  % (particularly, with \ac{resthateoas}).
+We will indistinguishably refer to them as \ac{rest}ful \ac{api}s or as \emph{hypermedia \ac{api}}s.
+
 
 
 \subsubsection{\ac{rest} vs WS-* services}
