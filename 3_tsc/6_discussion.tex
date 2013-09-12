@@ -1,0 +1,30 @@
+\section{Discussion}
+
+In the previous sections we have get to the bottom of the strengths and weaknesses of the proposed model.
+%  Ventajas/inconvenientes frente a WoT:
+%      comunicación indirecta para cacharros
+%          local+ref
+%              de contenidos relativos a coordinación
+%              podríamos cachear contenidos de otros en el espacio central (reliability+energy)
+%          ref
+%              sacar a colación los problemas aquellos de query sobre muchos recursos
+As regard of other semantic \ac{http}-based solutions, the solution presented provides a better handling of mobility situations. % e.g. wot
+The uncoupling properties which provide it come at the cost of simplicity to implement the middleware.
+%   Para TSC (respecto a otras como Smart-M3):
+%      limitamos qué gestiona la entidad central => sólo coordinación, el resto lo coge de los cacharros
+%      se reconoce su autonomía permitiendo gestionarse su propio contenido => REST, escalabilidad
+%      interop => SW y posibilidad de extender a otros servicios REST
+%      multiplataforma => facilidad para portarlo
+The main strength of our \ac{tsc} model is that it enriches the knowledge shared in a classical space model with content provided by autonomous embedded and mobile devices.
+This opens de door to interoperate with other \ac{http}-based applications.
+
+
+Within its weaknesses we found performance problems and a coupling between applications due to a no-hypermedia driven \ac{api}.
+The performance problems may result of handling semantic data and are particularly important for resource constrained devices.
+The coupling due to a mandatory \ac{http} \ac{api} complicates reusing third applications' data.
+
+
+% Ventajas de meclar 2 cosas aparentemente separadas?
+% what benefit will derive from the integration of both approaches?
+The benefits of bringing together \ac{tsc} and \ac{http} is an unified and simple \ac{api} for the developer. % lo de simple no está demostrado
+Due to the primitives' simplicity and to the standard and well accepted technologies used (i.e. \ac{http} and \ac{sw} standards), this \ac{api} can be ported to a range of platforms.

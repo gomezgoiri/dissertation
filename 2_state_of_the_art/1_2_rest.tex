@@ -49,7 +49,8 @@ To achieve these properties, \ac{rest} establishes the following constraints fro
 Instead of focusing on the presented constraints, the model identifies whether an \ac{api} properly uses the web's three most important protocols: \ac{uri}, \ac{http} and \ac{html}.
 Level zero encompasses those \acp{api} which use a unique \ac{uri} and \ac{http} method (i.e. use \ac{http} as a tunneling mechanism).
 Level one is formed by the \acp{api} which clearly identify several resources by providing an \acp{uri} to each of them.
-Level two uses \ac{http} properly, i.e. using its verbs, status codes, etc. as they were originally designed for.
+Level two uses \ac{http} as it was originally designed for, i.e. using its verbs, status codes, etc. appropriately. 
+The correct use of \ac{http} forces a developer to comply with all the \ac{rest}'s constraints except for \ac{resthateoas} \citet{moore_hypermedia_2010}.
 Level three comprises the \acp{api} which return resources which describe their own capabilities and are interconnected using preferably standard representations (i.e. those which also address the \acf{resthateoas} constraint).
 
 

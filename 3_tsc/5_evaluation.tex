@@ -19,7 +19,6 @@ To answer these questions, we analyze the presented solution from different poin
 (1) its coordination properties (Section~\ref{sec:coordination_properties}),
 (2) its network-level properties (Section~\ref{sec:network_properties}),
 (3) how the latter work together to contribute to the challenges of an \ac{ubicomp} environment (Section~\ref{sec:middleware_properties}).
-Section~\ref{sec:middleware_eval_summary} summarizes these analysis. % cómo dan respuesta a las preguntas del comienzo
 
 
 % Cosas rescatables del paper original de WoT 2011 que no son tocadas en este capítulo:
@@ -106,17 +105,16 @@ The ultimate goal of the solution explained in Section~\ref{sec:hybrid_solution}
 Therefore, ideally, its networking properties would be the sames as the \ac{rest} style.
 
 
-% TODO antes de entrar al lio, explicar cómo funciona esto de REST, en qué parte de nuestra solución lo necesitaremos
-% decir que API para TSC mola
-% decir que API para los cacharros deberia de ser independiente a lo que nosotros digamos y por eso estaria bien REST
-%     de todas formas, como es dificil, nos quedamos en un nivel de madurez menor
+% TODO Comprobar que no se salga por el borde derecho!
+\input{\pathchapthree/tables/network_properties}
 
 
-However, defining a 100\% \ac{rest} compliant \ac{api} is not easy.
-Indeed, most of the self-proclaimed \ac{rest}ful \acp{api} are not \citep{house_how_2012}. % la nueva buzz word para eso: hypermedia API
-The main cause is the \ac{resthateoas} constraint seen in the Section~\ref{sec:rest} \citep{fielding_rest_2008}.
-Using \ac{http} as it was originally designed for forces a developer to comply the rest of the constraints \citet{moore_hypermedia_2010}, but not \ac{resthateoas}.
-% TODO hablar del Richardson Maturity model!
+
+\subsubsection{\acs{rest} or \acs{rest}-like \ac{api}?}
+
+Defining a 100\% \ac{rest} compliant \ac{api} may be challenging.
+Indeed, as explained in Section~\ref{sec:rest}, most of the self-proclaimed \ac{rest}ful \acp{api} are not \citep{house_how_2012}.
+Most of them fail to achieve the \ac{resthateoas} constraint.
 
 
 % semantic-based \ac{api} is not easy. => referencias a los que lo han intentado, a que no hay hipertexto, a que te puede interesar inferir con bastantes
@@ -127,7 +125,9 @@ In fact, \ac{sw} \acp{api} usually present another main divergence with the \ac{
 % esto quiere decir que no se devuelve todo y ala, tu procesa esa burrada de datos, más bien se filtran
 These endpoints intend to solve some inefficiency issues which \ac{rest} shows when working with a big amount of data. % TODO mencionar \ac{lod} en algún punto de aquí?
 To that end, they allow expressive query languages and offer results where the boundaries of the different resources often blurs \citep{wilde_restful_2009}.
-The most paradigmatic case may be to decide to which graph does a inferred content belongs. % ejemplo de lo anterior
+%The most paradigmatic case may be to decide to which graph does a inferred content belongs. % ejemplo de lo anterior
+
+% TODO TODO TODO poner algo de data model vs domain model??
 
 
 % Aterrizar esto a IoT y a nuestro caso:
@@ -137,9 +137,9 @@ The most paradigmatic case may be to decide to which graph does a inferred conte
 %       Solución de compromiso:
 %           nivel de madurez X de Richardson. Suponemos que alguien debe serguir nuestro API mínimo en los objetos WoT
 
-In the \ac{iot} both the efficiency on the communications and the reusability of the \ac{api} are important:
+In the \ac{ubicomp} both the efficiency on the communications and the reusability of the \ac{api} are important:
 \begin{itemize}
-  \item \emph{Efficiency}: mobile and embedded devices' have restricted energy autonomy.
+  \item \emph{Efficiency}: mobile and embedded devices have restricted energy autonomy.
                     This autonomy is severely affected by network communications. % TODO cite
                     Particularly, the access to the data they provide by means of hypertext may result in many \ac{http} requests. % aunque eso se puede adaptar por lo visto
                     %  Por que sería muy costoso hacer rollo araña?!
@@ -149,16 +149,17 @@ In the \ac{iot} both the efficiency on the communications and the reusability of
 			    Normally, an environment will be populated by different \acp{api} from many \ac{wot} solutions.
 			    In that situation, allowing a client to autonomously learn how to use them would be ideal.
 \end{itemize}
-The first solution together with the current difficulties on achieving a fully and standard \ac{resthateoas} for machines in the \ac{sw}, lead us to opt for promoting efficiency at expense of reusability.
-In other words, we use two resource-oriented \ac{http} \acp{api} whose use is known out-of-band by the clients (i.e. they are not guided by the \emph{hypermedia}). % presented in Section~\ref{} and the \emph{OSAPI}
-This corresponds with the second level on the Richardson Maturity level \cite{fowler_richardson_2010}. % sale un poco de la nada, pero ya se explica algo más con la frase anterior
+
+
+We opt for promoting efficiency at expense of reusability.
+In other words, we use two \ac{rest}-like \acp{api} whose use is known out-of-band by the clients (i.e. they are not guided by the \emph{hypermedia}). % presented in Section~\ref{} and the \emph{OSAPI}
 However, we provide a human-oriented version of our \ac{api} to ease its use by developers which does comply with \ac{resthateoas}.% pero aún así el API de TSC seguirá siendo HATEOAS para los usuarios, no para las máquinas
-Besides, we do not discard to work towards a fully \ac{rest}ful machine-oriented \ac{api} as future work.
+The evolution of the \acp{api} to fully \ac{rest}ful machine-oriented ones is left as future work. % as the \ac{sw} and \ac{hateoas} evolve
 
+\bigskip
 
-In conclusion, the properties of the properties for network communication style we adopted corresponds with \emph{LCODC\$SS} plus simplicity and visibility. % hacer una nueva fila con esto
+In conclusion, the properties achieved by the network communication style selected corresponds with \emph{LCODC\$SS} plus simplicity and visibility (see Table~\ref{tab:network_properties}). % hacer una nueva fila con esto
 % TODO comprobar que se explica eso tal cual en la tesis de Fielding: HATEOAS => sólo afecta a reusabilidad
-% TODO Comprobar que no se salga por el borde derecho!
 
 % Reusar algo de esto?:
 %     Discovery: HATEOAS puede ser complejo para cacharros peques (parseo),
@@ -169,27 +170,24 @@ In conclusion, the properties of the properties for network communication style 
 %          Several workarounds have been proposed to overcome this limitation, such as using a central repository\footnote{http://www.pachube.com/}, a framework which uses federated repositories responsible for different administrative domains \citep{stirbu_towards_2008} or making each connected sensor announce itself to let an intermediary know its presence \citep{kamilaris_smart_2010}.
 
 
-\input{\pathchapthree/tables/network_properties}
-
-
 
 \subsection{Properties for \acs{ubicomp}}
 \label{sec:middleware_properties}
 
 A middleware is a software layer which provides a higher level of abstraction and masks the underlying heterogeneity.
-The middleware presented in this thesis is oriented for \ac{ubicomp} environments and the devices which populate them (i.e. mobile and embedded devices).
-Whereas the devices part of the \ac{iot} are a subset of the ones present in \ac{ubicomp}, we consider that the challenges they have to face are the same ones.
+The middleware presented in this thesis is oriented for \ac{ubicomp} environments and the devices which populate them (particularly mobile and embedded devices).
+Whereas the devices part of the \ac{iot} are a subset of the ones present in \ac{ubicomp}, we observed that the challenges they have to face are the same ones.
 For instance, smartphones are not part of the \ac{iot}, but face similar energy and computational limitations as the embedded devices. % posiblemente no todas las propiedades!
 
 % ¿Qué propiedades deseables para IoT añadiríamos?
-Therefore, we will adhere to the challenges presented by the \emph{Internet-of-Things Architecture} European project \citep{walewski_project_2011} to analyze our solution.
+Therefore, we will consider the challenges identified by the \emph{Internet-of-Things Architecture} European project \citep{walewski_project_2011} to analyze our solution.
 \citeauthor{walewski_project_2011} state that the \ac{iot} must overcome the following challenges:
 interoperability, scalability, manageability, mobility, security and privacy and reliability.
 Furthermore, we also consider energetic and computational constraints which devices in \ac{ubicomp} have to face. % ponerlo de forma que sea menos pegote?
 
 
 % TODO cómo las distintas propiedades vistas antes se combinan para aportar a estas
-Table~\ref{tab:middleware_netprop}, shows how the properties explained in the previous sections which directly affect these challenges.
+Table~\ref{tab:middleware_netprop}, shows how the properties explained in the previous sections directly affect these challenges.
 
 
 % TODO Comprobar que no se salga por el borde derecho!
@@ -237,22 +235,22 @@ Communication with devices using other protocols must be done by means of specia
 Therefore, adhering to a unique protocol does not help dealing with various communication technologies.
 
 % opción muy común hoy en día para definir APIs
-However, a number of current applications use \ac{http} to define their network accessible \ac{api}'s. % through so-called REST APIs
+However, a wide range of current applications use \ac{http} to define their network accessible \ac{api}'s. % through so-called REST APIs
 % posiblemente indirectly due to its simplicity => pervasiveness and massive adoption
-This makes it a \emph{de facto} requirement to interoperate with these applications. % te da acceso a más apps
-% TODO ejemplo de ello: mashups
+This makes it a \emph{de facto} requirement to interoperate with these applications. % te da acceso a más apps % interop ab-initio
+% ejemplo de ello: mashups
 % también en resource constrained devices: el éxito de WoT es sólo una prueba de ello
 In fact, this success has also its counterpart on resource constrained platforms.
-The clearer sign for that is the upcoming \ac{wot} initiative.
+The clearer sign for this tendency is the upcoming \ac{wot} initiative.
 
 
 At a finer grained level, there are several properties which help different \ac{http} implementations to interoperate: % (of interoperability)
 \begin{description}
   % \item[Simplicity] => a nivel de red no, pero un middleware simple contribuye a una mayor portabilidad % PROPIEDAD INDIRECTA
-  \item[Modifiability] is the ease of gradually introducing changes in the system.
+  \item[Modifiability] is the ease for introducing gradual changes in the system.
                        Particularly dynamic modifiability avoids restarting the entire system when introducing a change.
-                       This property allows different implementations to coexist,
-                       reducing issues on the communication between two nodes through \ac{http}.
+                       This property allows different implementations to coexist
+                       reducing issues on the communication between two nodes.
                        
 		      % mejor no meterme en fregados de justificar cada subpunto:
 		      % is important due to the \emph{evolvability} and the \emph{reusability}.
@@ -270,10 +268,7 @@ At a finer grained level, there are several properties which help different \ac{
 \end{description}
 
 
-% No sé dónde meter esta ventaja independiente
-% TODO Besides, we enable its \emph{evolvability} in different nodes by allowing them to implement at different degrees (see Section~\ref{sec:status_codes}). % TODO esto es un poco jugón, porque no funcionaría bien sin todo!
-
-Besides, in our \ac{http} \ac{api} the following points remain unsolved:
+Besides, in our \ac{http} \ac{api} the following issues remain unsolved:
 % estos 2 últimos son como redefinir interop
 \begin{itemize} % posiblemente incluir lo que se explica aquí en otro punto
   \item \emph{Using third applications' data}:
@@ -282,19 +277,21 @@ Besides, in our \ac{http} \ac{api} the following points remain unsolved:
 	  This could help to make clients able to autonomously adapt to use different \ac{rest} \acp{api} defined in each device or to different versions of these \acp{api}. % i.e. evolvable
 	  Of course, this would come at a cost of more complex clients. % cacharros parseando HTML, interpretandolo, etc.
 	  
-	  Our \ac{api} is not hypermedia-driven.
-	  This requires third applications to implement a uniform \ac{api} on top of them to allow our middleware consume their data.
-	  However, the \ac{api} is resource-oriented and simple to implement. % TODO definir qué es y qué no es resource oriented!
+	  Our middleware is not hypermedia-driven.
+	  As a consequence, it requires third applications to implement a uniform \ac{api} (i.e. \osapi{}) on top of them to allow our middleware consume their data.
+	  However, the \ac{api} is resource-oriented and simple to implement.
 	  
     \item Another obstacle for achieving a real application-level interoperability in our middleware is the use of distinct isolated spaces.
 	  In other words, two applications using two different spaces would not share their content.
-	  Although this could be avoided by defining a default space, as explained in Section~\ref{sec:soa_tsc} their use is justified in terms of scalability.
+	  Although this could be avoided by defining a default space, as explained in Section~\ref{sec:soa_tsc_space}, their use is justified in terms of scalability.
   \end{enumerate}
   
   \item \emph{Making our data reusable by third applications}:
 	
-	As explained, we encourage sharing data in resource constrained devices through an \ac{http} \ac{api}. % TODO hacer la distinción de que lo permitimos a través de ambos: 
-	Therefore, any other application able to use \ac{http} and manage semantics can reuse data from our middleware.
+	We encourage sharing data in resource constrained devices through an \ac{http} \ac{api}.
+	Although, any other application able to use \ac{http} and manage semantics can reuse data from our middleware,
+	it is not hypertext-driven either. % con todo lo que ello conlleva, no quiero volver a aburrir al lector contandolo otra vez
+	
 \end{itemize}
 
 
@@ -313,14 +310,14 @@ The high scalability of the chosen architectural network style is negatively aff
 
 \subsubsection{Manageability}
 
-Manageability helps to cope with so many devices allowing them to have an autonomous behavior. % specially in environments where they cannot be controlled through centrality
-This autonomous behavior encompasses self-management, self-configuration, self-healing, self-optimization and self-protection.
+Manageability helps to cope with a big number of devices allowing them to have an autonomous behavior. % specially in environments where they cannot be controlled through centrality
+It encompasses self-management, self-configuration, self-healing, self-optimization and self-protection.
 In this thesis we propose self-managed architecture which eases searching self-managed graphs.
 
 
 \subsubsection{Mobility}
 
-The ability to face mobility situations can be improved through the autonomy brought by the coordination paradigm. % TODO hacer constantes con space y time uncoupling!
+The ability to face mobility situations can be improved through the autonomies brought by space-based computing.
 First, mobility situations may impede two nodes coexist at the same time.
 Thus, \emph{time uncoupling} enables their communication.
 
@@ -365,14 +362,14 @@ This means that a developer using the middleware cannot assume:
   \item The inference process on data providers.
         Reasoning over the content to provide unstated knowledge must be desirable.
         Still, most of the mobile and embedded device are not able to process big amount of data. % TODO citar WoT2012
-        Besides, reasoners are not available in all platforms.
+        Besides, reasoners are not available or optimized for many limited platforms.
   \item The inference process on data consumers.
         Another alternative or complement for inferring data on the providers is to do it in the consumers after receiving the responses.
         Again, it is a desirable property, but our middleware does not require it.
         % también out of the scope: razonamiento distribuído
   \item General use of more complex query languages.
         Their expressibility benefits the network performance since they can restrict the results returned.
-        However, parsing them is not be trivial and consequently parsing libraries are unavailable for some platforms.
+        However, parsing them is not trivial and consequently parsing libraries are unavailable for most limited platforms.
         Therefore, a provider cannot assume that providers know how to process something beyond the wildcard based templates.
         As an alternative, providers can decompose these queries in simpler wildcard based templates and locally process the results afterwards (filtering them).
         % This is out of the scope.
@@ -406,7 +403,7 @@ There are some crucial characteristics which negatively affect energy autonomy o
 \InsertFig{4_search/figures/PDF/energy_consumption.pdf}{fig:energy_consumption_tsc_section}{
   Energy consumption for an embedded platform during different activity periods (miliwatts).
 }{
-}{0.8}{}
+}{0.6}{}
 
 
 On the other hand, we contribute to energy saving minimizing network usage (i.e. \emph{network efficiency}) at different levels:
@@ -419,41 +416,9 @@ On the other hand, we contribute to energy saving minimizing network usage (i.e.
 
 
 
-% TODO TODO TODO valorar meter algo del teorema CAP (Consistencia, Availability, Partition Tolerance) de Brewer
-% relajas consistencia por PT
+% También se podría intentar meter algo del teorema CAP (Consistencia, Availability, Partition Tolerance) de Brewer
+%    No lo he visto claro y además esto ya es suficientemente extenso.
 
 
-% TODO TODO TODO aquí o antes, meter lo de WoT 2012 para demostrar que se provó en distintas plataformas
+% TODO TODO TODO aquí o como anexo, meter lo de WoT 2012 para demostrar que se probó en distintas plataformas
 %\subsection{Feasibility in platforms}
-
-
-\subsection{Summary}
-\label{sec:middleware_eval_summary}
-
-In the previous sections we have get to the bottom of the strengths and weaknesses of our proposal.
-%  Ventajas/inconvenientes frente a WoT:
-%      comunicación indirecta para cacharros
-%          local+ref
-%              de contenidos relativos a coordinación
-%              podríamos cachear contenidos de otros en el espacio central (reliability+energy)
-%          ref
-%              sacar a colación los problemas aquellos de query sobre muchos recursos
-As regard of other semantic \ac{http}-based solutions, the solution presented provides a better handling of mobility situations. % e.g. wot
-The uncoupling properties which provide it come at the cost of simplicity to implement the middleware.
-%   Para TSC (respecto a otras como Smart-M3):
-%      limitamos qué gestiona la entidad central => sólo coordinación, el resto lo coge de los cacharros
-%      se reconoce su autonomía permitiendo gestionarse su propio contenido => REST, escalabilidad
-%      interop => SW y posibilidad de extender a otros servicios REST
-%      multiplataforma => facilidad para portarlo
-The main strengths of our \ac{tsc} middleware is that it enriches the coordination properties with semantic content provided by embedded and mobile devices.
-Also, it pursues interoperability with other \ac{http}-based applications.
-
-Within its main weaknesses we found performance problems and a coupling between applications due to a no-hypermedia driven \ac{api}.
-The performance problems may result of handling semantic data and are particularly important for resource constrained devices.
-The coupling between applications is solved through a mandatory \ac{http} \ac{api}, but it complicates reusing third applications' data.
-
-
-% Ventajas de meclar 2 cosas aparentemente separadas?
-% what benefit will derive from the integration of both approaches?
-The benefits of bringing together \ac{tsc} and \ac{http} is an unified and simple \ac{api} for the developer. % lo de simple no está demostrado
-Due to the primitives' simplicity and to the standard and well accepted technologies uses (i.e. \ac{http} and \ac{sw} standards), this \ac{api} can be ported to a range of platforms.
