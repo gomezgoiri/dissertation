@@ -4,34 +4,31 @@
 % TODO hacer un esquemita chulo con las distintas partes en colores e irlo poniendolo parcialmente en cada sección
 
 The remainder of this dissertation is structured as follows:
-Chapter~\ref{cha:stateoftheart} first presents some relevant works in the field of \acl{ubicomp} regarding application integration and the \ac{sw}. % se entiende que en ambos casos es sobre ubicomp?
-Then, it analyses the state of the art of the \acl{tsc} comparing the existing solutions and studying their advantages and limitations.
+Chapter~\ref{cha:stateoftheart} first presents some relevant works in the field of \acl{ubicomp} regarding application integration and the \acl{sw}. % se entiende que en ambos casos es sobre ubicomp?
+Then, it analyses the state of the art of existing semantic space-based solutions and scrutinizes their advantages and limitations.
 
-Chapter~\ref{cha:tsc} discusses the best strategies to adapt \ac{tsc} to the \ac{ubicomp} in a fully distributed way.
-Besides, we explore the compatibility of \ac{tsc} with the \ac{wot} vision.
+Chapter~\ref{cha:tsc} proposes and analyzes a model to adapt \ac{tsc} to the \ac{ubicomp}.
+This model involves autonomous nodes with resource constraints by enabling them to enrich the space.
+Simultaneously, it conserves most of the space-based benefits through a classical space model.
 
 Chapter~\ref{cha:searching} describes the core of this thesis.
-There we present an energy-aware search architecture.
+It presents an energy-aware search architecture.
 This architecture dynamically adapts to the needs of resource constrained devices.
 The goal of this architecture is two-fold:
-1) to promote the direct and fully distributed communication between devices,
-and at the same time,
-2) to reduce the network communications between them, particularly the ones directed to the less powerful ones.
+\begin{enumerate*}[label=\itshape\alph*\upshape)]
+\item to promote the direct and fully distributed communication between devices;
+and, at the same time,
+\item to reduce network communications between them, particularly the ones directed to the less powerful ones.
+\end{enumerate*}
 
-Chapter~\ref{cha:actuate} explores the different manners in which one can use \ac{tsc} to change the environment.
-Ideally, this changes should be done by writing into the space new semantic information.
-But due to the information dissemination strategy proposed in Chapter~\ref{cha:searching},
-some new communication primitives are needed to inform the appropriate devices.
-Particularly, we study two different ways of making these changes:
-a tasks-based approach and a straightforward REST services consumption approach.
+Chapter~\ref{cha:actuate} explores different manners to can use \ac{tsc} to change the physical environment.
+Ideally, these changes should be done by writing into the space new semantic information. % a tasks-based approach
+However, there are a range of actuators which already use \ac{rest} services whose actuation capacities could be reused.
+To do that, we propose an alignment between both approaches. % a seamless alignment?
 
-% Me sigue dando cosica no comentar nada de Otsopack.
-% Chapter~\ref{cha:implementation} demonstrates the feasibility of some of the ideas expressed in the previous chapters.
-% To that end, we have developed a middleware called \emph{Otsopack} which implements the \ac{tsc} for resource constrained devices.
-% This middleware is assessed both in a quantitative and in a qualitative way. % measurements and scenarios
 
-Each chapter evaluates our proposals, discusses the related work, and states our intermediate conclusions.
+Each chapter evaluates our proposals, discusses the related work, and states our intermediate conclusions. % TODO comprobar que eso sea así al final
 
 Finally, Chapter~\ref{cha:conclusions} concludes this thesis.
-We discuss the achieved goals and remark the advantages and limitations of solution.
-Besides, we explain the lessons learn and the future lines of research on this topic.
+It remarks its advantages and limitations and discusses the achieved goals.
+Besides, we explain the lessons learn and the future lines of research on this topic. % TODO comprobar que hay algo que se pueda interpretar como "lessons"
