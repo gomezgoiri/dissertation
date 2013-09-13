@@ -4,22 +4,24 @@
 % analysis of WoT and TSC => TSC over RESTful services
 The main goal of this dissertation is to design and implement a middleware based on the \ac{tsc} paradigm which can be easily adopted by any kind of device.
 To that end, we specially consider resource constrained devices' (e.g. mobile or an embedded devices) computation and energy autonomy limitations.
-Particularly, we propose a completely distributed space where the nodes are responsible for their own information.
+Particularly, we propose a dual space model where the nodes can contribute with information they manage. % and are responsible for
 In this way, we promote end-to-end communications and independence of the participating nodes.
 
 
 That goal has been crystallized in the following contributions:
 
 \begin{itemize} % por orden de importancia o por hilo de redacción? (ahora mismo por lo segundo)
-  \item Analysis of strengths and weaknesses of both \ac{wot} and \ac{tsc} and comparison of both approaches.
-  \item Design and implementation of a RESTful interface which makes possible to build a \ac{tsc} on top of it. % TODO revisar y poner todos los peros que haga falta para no traicionar la idea de Fielding
-	This resource-oriented interface enables the access to the the semantic knowledge provided by each device.
+  \item A dual space model where participants can coordinate through the space in an uncoupling manner and enrich it with their own managed knowledge.
+  \item Design and implementation of a \ac{tsc} interface for \ac{http} which is compatible with most of the \ac{rest} principles.
+	This resource-oriented interface defines a minimal contract to access to the the semantic knowledge provided by each device.
 	By doing so, we keep our middleware compliant with the \ac{wot} idea. % o integrable con otros servicios, o...
 	% es como explicar una dualidad: puedes usar nuestro middleware usando las primitivas de TSC, pero también puedes usarlo simplemente porque te viene bien para WoT semántico
   \item A search-aware architecture which promotes the end-to-end communication between devices. % and balances their load by administrative tasks according to their capacities.
 	This architecture tries to minimize the requests devices have to handle by enhancing their search mechanism.
 	The extra-tasks introduced by this enhancement are performed by nodes chosen according to their capacities.
   \item Design and comparison of two approaches which enable to act on the environment by writing in the fully distributed space.
+	Although both approaches are quite different in nature, we propose an alignment to enable reusing third \ac{rest} services' data.
+  % TODO ¡¡¡ Quitar si al final no incluimos esto !!!
   \item Exploration of the use of semantic content in several current embedded platforms.
 	We have tested several platforms, semantic frameworks and reasoners to verify the feasibility of the ideas presented in the dissertation.
   \item Design and implementation of most of the ideas presented in a middleware publicly available called \emph{Otsopack}. % al primo no le gustará, pero insisto
