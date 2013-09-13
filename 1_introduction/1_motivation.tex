@@ -8,8 +8,8 @@ Thanks to wireless technologies, devices can connect to the Internet without hav
 % Terminos aclarados: IoT, ubicomp o pervasive y AmI. (otros posibles: Context Awareness?)
 Nowadays, everyday objects like cars or washing machines start to be connected to the Internet to exchange information.
 This is what is currently known as the \ac{iot} \citep{atzori_internet_2010}.
-The objects of the IoT, together with end-user devices such as smartphones or tablets, constitutes the clearest sign of the \ac{ubicomp} prominence in our current lives \citep{caceres_ubicomp_2012}.
-But the real power of \ac{ubicomp}, as envisioned by Weiser in the early nineties \citep{weiser1991computer}, \emph{comes not from any one of these devices, it emerges from the interaction of all of them}.
+The objects of the IoT, together with end-user devices such as smartphones or tablets, constitutes the clearest sign of the \acf{ubicomp} prominence in our current lives \citep{caceres_ubicomp_2012}.
+But the real power of \ac{ubicomp}, as envisioned by \citeauthor{weiser1991computer} in the early nineties \citep{weiser1991computer}, ``\emph{comes not from any one of these devices, it emerges from the interaction of all of them}''.
 
 Furthermore, Weiser defended that all these devices should imperceptibly work on our behalf.
 This idea is particularly stressed by the concept of \ac{ami} \citep{ramos_ambient_2008}.
@@ -19,7 +19,7 @@ For instance, the washing machine could plan to finish washing the clothes two m
 
 However, integrating devices to accomplish such task is not trivial as they usually communicate using different protocols.
 To solve this problem, the \ac{wot} initiative proposes to use well-established web standards to ease their communication \citep{guinard_thesis_2011}.
-This, together with the already existing tools and libraries from the web world, simplifies its adoption to developers \citep{guinard_search_2011}.
+This, together with the already existing tools and libraries from the web world, simplifies its adoption by developers \citep{guinard_search_2011}.
 Besides, the WoT naturally integrates with the currently widely used RESTful web applications.
 
 Parallel to this initiative, \aclp{ts} (or \emph{space-based computing}) \citep{gelernter_generative_1985} proposes a different integration style based on the \emph{blackboard model}.
@@ -30,22 +30,23 @@ The main benefit of this paradigm is the higher-level of decoupling its indirect
 
 One common problem of both the \ac{wot} and \aclp{ts} is that the format of the data they exchange is multifarious and application domain dependent.
 This implies that data will not be meaningful in other domains unless a specialized system converts and reinterprets them.
-A way to solve this problem is annotating the data semantically as proposed by the WWW \citep{berners-lee_semantic_2001}.
+A way to solve this problem is annotating the data semantically as proposed by the \ac{www} \citep{berners-lee_semantic_2001}.
 
-Specifically, the \ac{tsc} paradigm \citep{fensel_triple-space_2004} proposes sharing this semantic knowledge on shared spaces following the \aclp{ts} approach.
-Besides, we argue that \ac{tsc} is also compatible with the \ac{wot}.
+Specifically, the \ac{tsc} paradigm \citep{fensel_triple-space_2004} employs this semantic knowledge on shared spaces following the \aclp{ts} approach.
+Besides, we explore \ac{tsc}'s compatibility with the \ac{wot}.
 % distributed
 
 However, adding semantics to the \ac{iot}, or more generally to \ac{ubicomp} environments, may suppose a burden for resource constrained devices.
 To reduce this overhead in such devices, part of this computation is usually delegated to intermediaries \citep{honkola_smart-m3_2010}. % todavía no poner esta cita
 This approach reduces the overhead of semantically annotated data but brings other problems:
 \begin{enumerate}
- \item When devices rely on others to provide information, it is not guarantee that the information accessed will accurately represent the last information available in the data providers (i.e., the sensors).
- \item Once we rely on those intermediaries, it is required them to be available at all time. Otherwise, the devices would not be able to talk to each other.
+ \item When devices rely on others to provide information, it is not guaranteed that the information accessed will accurately represent the last information available in the data providers (i.e., the sensors).
+ \item Once we rely on those intermediaries, it is required them to be available at all time.
+	Otherwise, the devices would not be able to talk to each other.
 \end{enumerate}
 
 % definir más claramente si IoT o AmI
-In this thesis, we propose to adapt \ac{tsc} to the \ac{ubicomp} environments in a fully distributed way.
+In this thesis, we propose to adapt \ac{tsc} to the \ac{ubicomp} environments, particularly involving limited devices in such task.
 To fulfill such an ambitious goal, we need to carefully consider the restrictions imposed by such environments.
 Two key aspects to take into account are the limited energy autonomy or computational capacity of many devices.
 Similarly, our solution should be flexible enough to support a wide range of scenarios.
@@ -53,15 +54,15 @@ Similarly, our solution should be flexible enough to support a wide range of sce
 % hacer guiño a WoT por algún lado o va a quedar un poco cojo
 This thesis addresses different key aspects of this adaptation:
 \begin{itemize}
-  \item Its compatibility with the \ac{wot} vision.
-	Aligning the \ac{tsc} design with the \ac{wot} model one can many of the benefits provided by it.
-	At the same time, the use of \ac{tsc} can help developers focusing on higher-level problems.
+  \item Its compatibility with the \acs{rest} style and the \ac{wot} vision.
+	Aligning the \ac{tsc} design with the \ac{rest} one can inherit many of the benefits provided by this style and interoperate with other \ac{rest}-based solutions.
+	At the same time, the use of \ac{tsc} can help developers to focus on higher-level problems.
 	% problema: habría que probar o se da por sentado que es lo que hace un middleware?
   \item The search process carried out by any participant of the space.
 	The singularity of this search is that we want to enable the direct communication between any participant.
-  \item How to change the environment in an indirect way through the space.
-	The information provided by the entity willing to change the environment should have a high-level of abstraction. % i.e. descrita semánticamente
-	The devices in the space which are able to make these changes interpret that information to use their actuators.
+	Furthermore, it aims to reduce the energy consumption of the resource-constrained devices.
+  \item How to change the environment in an indirect way through the space and an alignment of the latter approach with a direct one.
+	The goal of this alignment is to reuse existing semantically described \ac{rest} services.
 \end{itemize}
 %Finally, we also present the incarnation of some of this ideas in a middleware,
 %and some scenarios where it has been used.
