@@ -125,7 +125,12 @@
 %: ----------------------- contents ------------------------
 
 \setcounter{secnumdepth}{5} % organisational level that receives a numbers
-\setcounter{tocdepth}{5}    % print table of contents for level 3
+\setcounter{tocdepth}{2}    % print table of contents for level 3
+% "Note that if you have a list of figures/tables, the tocdepth must be at least 2 for them to show up"
+
+\hypersetup{ % requires hyperref package
+  bookmarksdepth = 3, % for the PDF's table of contents!
+}
 
 
 %%You can also add extra lines to the ToC or to force extra unnumbered section headings to be included. For example, if you wanted to add an entry called Preface, and you didn't want the Preface to be numbered, you'd use these commands:
@@ -133,7 +138,7 @@
 %\addcontentsline{toc}{subsection}{Preface} 
 
 \tableofcontents            % print the table of contents
-% levels are: 0 - chapter, 1 - section, 2 - subsection, 3 - subsection
+% levels are: 0 - chapter, 1 - section, 2 - subsection, 3 - subsubsection
 
 %: ----------------------- list of figures/tables ------------------------
 
