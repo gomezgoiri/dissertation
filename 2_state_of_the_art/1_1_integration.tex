@@ -37,22 +37,18 @@ The \emph{indirect communication} style comprehends all the techniques with no d
 % In contrast, the \emph{indirect communication} comprehends decoupled communications between senders and receivers.
 The group communication, publish-subscribe systems, message queues or shared memory approaches are examples of indirect communication.
 These paradigms are characterized by two key properties \citep{gelernter_generative_1985,coulouris_distributed_2012}
-% TODO IG pedazo de nota al pie no? Hace falta meter esta bestialidad a pelo aqui?
 \footnote{
-  We use the terminology of the  \aclp{ts}' seminal paper \citep{gelernter_generative_1985}.
-  However, note that:
-  % nomenclature, naming or terminology?
-  \begin{itemize}
-    %\item Gelernter et al. stated that \emph{distributed sharing} was just a consequence of the these properties.
-    \item The \emph{space uncoupling} property is referred as \emph{reference autonomy} by some authors \citep{fensel_triple-space_2004}.
-	  % El primero fue un tal Angerer en el 2002, pero en un artículo en alemán.
-	  % En el 2003 hay un artículo suyo en Internet, pero no sé si mencionarlo.
-    \item These authors mention a third property confusingly called \emph{space autonomy} (or \emph{location autonomy}).
-	  According to \citet{fensel_triple-space_2004} this autonomy is achieved because:
-	  \begin{quote}
-	    The processes can run in completely different computational environments as long as both can access the same space.
-	  \end{quote}
-  \end{itemize}
+  We use the terminology of the  \aclp{ts}' seminal paper \citep{gelernter_generative_1985}. % alternatives to terminology: nomenclature or naming
+  However, note that
+  % Gelernter et al. stated that \emph{distributed sharing} was just a consequence of the these properties.
+  the \emph{space uncoupling} property is referred as \emph{reference autonomy} by some authors \citep{fensel_triple-space_2004}. % no sólo Fensel, también los del STI Innsbruck
+  % El primero fue un tal Angerer en el 2002, pero en un artículo en alemán.
+  % En el 2003 hay un artículo suyo en Internet, pero no sé si mencionarlo.
+  These same authors mention a third property confusingly called \emph{space autonomy} (or \emph{location autonomy}).
+  According to \citet{fensel_triple-space_2004} this autonomy is achieved because:
+  \begin{emph} % quote lo indexa
+  "The processes can run in completely different computational environments as long as both can access the same space".
+  \end{emph}
 }
 :
 
