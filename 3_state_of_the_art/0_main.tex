@@ -1,0 +1,69 @@
+% ----------------------------------------------------------------------
+
+\begin{savequote}[50mm]
+I was born not knowing and have had only a little time to change that here and there.
+\qauthor{Richard P. Feynman}
+\end{savequote}
+
+
+\chapter{State of the Art}
+\label{cha:stateoftheart}
+
+% the code below specifies where the figures are stored
+\ifpdf
+    \graphicspath{{\pathchapthree/figures/PNG/}{\pathchapthree/figures/PDF/}{\pathchapthree/figures/}}
+\else
+    \graphicspath{{\pathchapthree/figures/EPS/}{\pathchapthree/figures/}}
+\fi
+
+
+%------------------------------------------------------------------------- 
+
+% TODO IG yo creo que deberias orientarlo a un state of the art, ahora suena a related work. Tambien creo que se deberia introducir un poco mas, del estilo de: este capitulo presenta el related work para dar X y Y.
+% TODO uniformizar labels!
+After having presented the general research topics in which this works fits, we analyze the specific works closely related to ours.
+This thesis focuses on the intersection of the three topics represented in the Figure~\ref{fig:venn_ubicomp_tuple_semantic}. % puede liar que REST no aparezca y UbiComp si? (diff con Chapter 2)
+It also stresses in which areas the following sections focus on.
+
+
+% TODO definir en algún puto lado a qué nos referimos con Ubicomp
+%      para mostrar porque no incluimos otros trabajos
+Firstly, Section~\ref{sec:soa_ubicomp} explores relevant works on the \ac{ubicomp} field.
+Rather than presenting an exhaustive (and exhausting) survey on middlewares for \ac{ubicomp},
+we analyze those which follow the \ac{rest} architectural style.
+Then, we remark how we can solve the main limitations of these works by using a \ac{ts} middleware.
+
+
+Secondly, Section~\ref{sec:soa_ts_ubicomp} scrutinizes relevant \ac{ts} proposals for the \ac{ubicomp} field.
+Specifically, we study their space model and, for the distributed proposals, how they distribute the tuples.
+Then, we present and justify our model's similarities and divergences with theirs.
+
+
+Thirdly, Section~\ref{sec:soa_sw_ubicomp} presents some semantic works for \ac{ubicomp}.
+From these works we derive two main approaches to semantically annotate content provided by limited devices:
+\begin{enumerate*}[label=\itshape\alph*\upshape)]
+  \item do it in more powerful intermediaries; and
+  \item directly involve all the devices in the management of their content.
+\end{enumerate*}
+This work is interested in the second approach.
+Regarding works following this approach, we inspect their complementary proposals but we distinguish the unaddressed need covered by Chapter~\ref{cha:searching}. %: direct search between devices.
+
+
+Finally, Section~\ref{sec:soa_tsc} analyzes and compares in detail other semantic \ac{ts} middlewares independently of their application domain.
+
+
+
+\InsertFig{venn-summary}{fig:venn_ubicomp_tuple_semantic}{
+  Background areas of the thesis, which focuses on their intersection.
+}{}{0.6}{}
+
+
+\input{\pathchapthree/1_rest_ubicomp} % REST + ubicomp (particularmente WoT)
+\input{\pathchapthree/2_ts_ubicomp} % TS para ubicomp
+\input{\pathchapthree/3_sw_ubicomp}
+\input{\pathchapthree/4_tsc}
+
+
+
+% ----------------------------------------------------------------------
+

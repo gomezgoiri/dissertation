@@ -1,5 +1,29 @@
-\section{Introduction}
-\label{sec:soa_intro}
+% ----------------------------------------------------------------------
+
+\begin{savequote}[50mm]
+The beginning of wisdom is to desire it.
+\qauthor{Solomon Ibn Gabirol}
+\end{savequote}
+
+
+\chapter{Background}
+\label{cha:stateoftheart}
+
+% the code below specifies where the figures are stored
+\ifpdf
+    \graphicspath{{\pathchaptwo/figures/PNG/}{\pathchaptwo/figures/PDF/}{\pathchaptwo/figures/}}
+\else
+    \graphicspath{{\pathchaptwo/figures/EPS/}{\pathchaptwo/figures/}}
+\fi
+
+
+%------------------------------------------------------------------------- 
+
+% Megafrase de las que no gustan al primo, pero me gusta su pomposidad ;-)
+In order to clarify the foundations in which our work relies and provide a starting point for understanding the rest of the thesis,
+this chapter introduces, categorizes, and describes the related research topics. % o llamarle research areas, important concepts?
+This topics are classified attending to their relation with a critical aspect for \ac{ubicomp}: interoperability.
+% TODO valorar meter en otra sección descripción de IoT y UbiComp y sus características?
 
 % Otra forma de ver la interop:
 %  La European Telecommunication Standards Institute (ETSI) define cuatro capas:
@@ -36,7 +60,11 @@ Its ultimate goal is to make the information ``\emph{understandable by any other
 Section~\ref{sec:soa_sw} describes a prominent movement which is focused on this goal: the \acl{sw}. % TODO qué es la SW??? un mecanismo, conjunto de estándares, ¿?
 
 
-\input{\pathchaptwo/1_1_integration}
-\input{\pathchaptwo/1_2_rest}
-\input{\pathchaptwo/1_3_tuplespaces}
-\input{\pathchaptwo/1_4_semantic_web}
+\input{\pathchaptwo/1_integration}
+\input{\pathchaptwo/2_rest}
+\input{\pathchaptwo/3_tuplespaces}
+\input{\pathchaptwo/4_semantic_web}
+
+
+% ----------------------------------------------------------------------
+

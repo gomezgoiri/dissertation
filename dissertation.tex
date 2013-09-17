@@ -189,22 +189,32 @@
 % But take care that the paths match. You can also change the order of appearance by moving the include commands.
 
 %: ----------------------- introduction ------------------------
-\include{1_introduction/0_main}
+\newcommand{\pathchapone}{1_introduction}
+\include{\pathchapone/0_main}
 
 %: ----------------------- related work ------------------------
-\include{2_state_of_the_art/0_main}
+\newcommand{\pathchaptwo}{2_background}
+\include{\pathchaptwo/0_main}
+
+%: ----------------------- related work ------------------------
+\newcommand{\pathchapthree}{3_state_of_the_art}
+\include{\pathchapthree/0_main}
 
 %: ----------------------- TSC for resource constrained devices ------------------------
-\include{3_tsc/0_main}
+\newcommand{\pathchapfour}{4_tsc}
+\include{\pathchapfour/0_main}
 
 %: ----------------------- On how to Search in TSC ------------------------
-\include{4_search/0_main}
+\newcommand{\pathchapfive}{5_search}
+\include{\pathchapfive/0_main}
 
 %: ----------------------- On how to actuate through TSC ------------------------
-\include{5_actuate/0_main}
+\newcommand{\pathchapsix}{6_actuate}
+\include{\pathchapsix/0_main}
 
 %: ----------------------- conclusion ------------------------
-\include{6_conclusion/0_main}	
+\newcommand{\pathchapseven}{7_conclusion}
+\include{\pathchapseven/0_main}
 
 
 % --------------------------------------------------------------
