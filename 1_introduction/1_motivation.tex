@@ -1,42 +1,58 @@
 \section{Motivation}
 \label{sec:Motivation}
+% Terminos aclarados: IoT, ubicomp o pervasive y AmI. (otros posibles: Context Awareness?)
 
+
+% internet ahora lo es todo
+% Se podría hasta poner una cita de Vinton Cerf :-P
 Originally, the Internet was basically composed of a small number of computers that were physically connected to a wired network.
 Over the years, the popularity of the Internet grew and connecting computers became easier and cheaper.
 Thanks to wireless technologies, devices can connect to the Internet without having to be connected to a network.
 
-% Terminos aclarados: IoT, ubicomp o pervasive y AmI. (otros posibles: Context Awareness?)
-Nowadays, everyday objects like cars or washing machines start to be connected to the Internet to exchange information.
+% IoT + mobile => UbiComp
+These technologies have contributed to the emergence of end-user devices such as smartphones or tablets.
+Furthermore, nowadays, everyday objects like cars or washing machines start to be connected to the Internet to exchange information.
 This is what is currently known as the \ac{iot} \citep{atzori_internet_2010}.
-The objects of the IoT, together with end-user devices such as smartphones or tablets, constitutes the clearest sign of the \acf{ubicomp} prominence in our current lives \citep{caceres_ubicomp_2012}.
-But the real power of \ac{ubicomp}, as envisioned by \citeauthor{weiser1991computer} in the early nineties \citep{weiser1991computer}, ``\emph{comes not from any one of these devices, it emerges from the interaction of all of them}''.
+The objects of the \ac{iot}, together with mobile devices, constitute the clearest sign of the \acf{ubicomp} prominence in our current lives \citep{caceres_ubicomp_2012}.
 
-Furthermore, Weiser defended that all these devices should imperceptibly work on our behalf.
+% UbiComp & AmI
+The \ac{ubicomp} concept was envisioned by \citeauthor{weiser1991computer} in the early nineties \citep{weiser1991computer}. % y el term was coined
+\citeauthor{weiser1991computer} defended that devices should imperceptibly work on our behalf. % qué es Ubicomp
 This idea is particularly stressed by the concept of \ac{ami} \citep{ramos_ambient_2008}.
 For instance, the washing machine could plan to finish washing the clothes two minutes before the car gets home.
 
-\medskip
 
+\bigskip
+
+
+% Cómo se pueden comunicar los cacharros?
+\citeauthor{weiser1991computer} remarked that the real power of \ac{ubicomp} ``\emph{comes not from any one of these devices, it emerges from the interaction of all of them}''.
+% WoT
 However, integrating devices to accomplish such task is not trivial as they usually communicate using different protocols.
 To solve this problem, the \ac{wot} initiative proposes to use well-established web standards to ease their communication \citep{guinard_thesis_2011}.
 This, together with the already existing tools and libraries from the web world, simplifies its adoption by developers \citep{guinard_search_2011}.
-Besides, the WoT naturally integrates with the currently widely used RESTful web applications.
+Besides, the \ac{wot} naturally integrates with the currently widely used \acs{rest}ful web applications.
 
+% Debería hacer el salto de:
+% WoT problem coupling => TS ???
+
+% TS
 Parallel to this initiative, \aclp{ts} (or \emph{space-based computing}) \citep{gelernter_generative_1985} proposes a different integration style based on the \emph{blackboard model}.
 In \ac{ts} participants cooperate with each other by writing and reading information on a shared \emph{space}.
 The main benefit of this paradigm is the higher-level of decoupling its indirect communication provides. % y dejo el explicar cuales son para el estado del arte
 
-\medskip
 
+\bigskip
+
+% Necesidad de semántica
 One common problem of both the \ac{wot} and \aclp{ts} is that the format of the data they exchange is multifarious and application domain dependent.
 This implies that data will not be meaningful in other domains unless a specialized system converts and reinterprets them.
 A way to solve this problem is annotating the data semantically as proposed by the \ac{www} \citep{berners-lee_semantic_2001}.
-
 Specifically, the \ac{tsc} paradigm \citep{fensel_triple-space_2004} employs this semantic knowledge on shared spaces following the \aclp{ts} approach.
-Besides, we explore \ac{tsc}'s compatibility with the \ac{wot}.
-% distributed
+Besides, we argue that \ac{tsc} can be designed to fulfill \ac{rest}'s principles.
 
-However, adding semantics to the \ac{iot}, or more generally to \ac{ubicomp} environments, may suppose a burden for resource constrained devices.
+
+However, adding semantics may suppose a burden for resource constrained devices.
 To reduce this overhead in such devices, part of this computation is usually delegated to intermediaries \citep{honkola_smart-m3_2010}. % todavía no poner esta cita
 This approach reduces the overhead of semantically annotated data but brings other problems:
 \begin{enumerate}
@@ -45,16 +61,21 @@ This approach reduces the overhead of semantically annotated data but brings oth
 	Otherwise, the devices would not be able to talk to each other.
 \end{enumerate}
 
+
+\bigskip
+
+
 % definir más claramente si IoT o AmI
 In this thesis, we propose to adapt \ac{tsc} to the \ac{ubicomp} environments, particularly involving limited devices in such task.
 To fulfill such an ambitious goal, we need to carefully consider the restrictions imposed by such environments.
 Two key aspects to take into account are the limited energy autonomy or computational capacity of many devices.
-Similarly, our solution should be flexible enough to support a wide range of scenarios.
+Similarly, our solution should be flexible enough to support a wide range of scenarios and to reuse third applications' data.
+
 
 % hacer guiño a WoT por algún lado o va a quedar un poco cojo
 This thesis addresses different key aspects of this adaptation:
 \begin{itemize}
-  \item Its compatibility with the \acs{rest} style and the \ac{wot} vision.
+  \item \ac{tsc}'s compatibility with the \acs{rest} style and the \ac{wot} vision.
 	Aligning the \ac{tsc} design with the \ac{rest} one can inherit many of the benefits provided by this style and interoperate with other \ac{rest}-based solutions.
 	At the same time, the use of \ac{tsc} can help developers to focus on higher-level problems.
 	% problema: habría que probar o se da por sentado que es lo que hace un middleware?
