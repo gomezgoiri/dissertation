@@ -15,7 +15,7 @@ For instance, a heater must check the space to find if a new desired temperature
 % y qué pasa con las soluciones REST que quieren usar lo nuestro?
 
 
-In this section we propose to close the gap between both approaches. % TODO 
+In this section we propose to close the gap between both approaches.
 To do that, we propose to transparently invoke \ac{rest}-like services on behalf of the developer.
 From her perspective, she will still use the space-based patterns presented in the previous section.
 However, the middleware will be enriched with the actuation capacities of third \ac{http} \acp{api}.
@@ -36,41 +36,61 @@ Then we sketch this integration by answering two key elements:
 In \ac{wot} physical changes in the environment are performed by manipulating \ac{http} resources.
 According to the \ac{rest} principles, a client should navigate through these resources with no prior knowledge of the \ac{api}.
 % Copiar esta explicación mejor de algún lado:
-The client should (1) interpret the representations provided by the server and then (2) choose the appropriate state transition from the hypertext according to its intention. % y su conocimiento básico del protocolo: CRUD
+The client should 
+\begin{enumerate*}[label=\itshape(\arabic*\upshape)]
+  \item interpret the representations provided by the server and then
+  \item choose the appropriate state transition from the hypertext according to its intention. % y su conocimiento básico del protocolo: CRUD
+\end{enumerate*}
 
 
 % es HATEOAS?
 As explained in Section~\ref{sec:network_properties}, semantic representations do not include a native way to express the hypertext. % TODO realmente se explica?
 To solve this, three solutions can be adopted:
 % Unos proponen extender con ontologías
-(1) to use an ontology to represent the hypertext \citep{kjernsmo_necessity_2012},
-(2) to embed the hypertext independently to the representations on the \ac{http} headers \citep{erik_profile_2013}, and
-(3) to provide a description of the resources using the \ac{http} OPTIONS verb \citep{verborgh_functional_2012,verborgh_ijcs_2014}.
+\begin{enumerate}
+  \item To use an ontology to represent the hypertext \citep{kjernsmo_necessity_2012},
+  \item To embed the hypertext independently to the representations on the \ac{http} headers \citep{mark_web_2010}, and
+  \item To provide a description of the resources using the \ac{http} OPTIONS verb \citep{verborgh_functional_2012,verborgh_ijcs_2014}.
+\end{enumerate}
+
 The latter two enable to discover resources and state transitions without adding metadata to the representations.
 This allows not only to describe semantic representations, but any type of formats.
-Furthermore, the third option represents the most expressive one. % TODO explicar por que?
+
+\citeauthor{mark_web_2010}'s \citep{mark_web_2010} approach is extended by \citet{erik_profile_2013} to define how to embed additional semantics to process a resource representation.
+These additional semantics are called profiles and are identified by an \acs{uri}.
 
 
-Different ways exist to describe \ac{rest} services. % mencionar WADL, etc.?
-% citar a donde se hable de RESTdesc y así ya se empieza a explicar la solución de forma discreta.
-\emph{RESTdesc} \citep{verborgh_functional_2012} proposes a fully semantic description.
-These descriptions are rules expressed in the \ac{n3}\footnote{\url{http://www.w3.org/TeamSubmission/n3/}} language with a premise and a conclusion.
-The premise expresses the requirements to invoke a \ac{rest} service.
-The conclusion expresses both the \ac{rest} call that needs to be made and the description of that invocation result.
+\bigskip
 
 
-\citet{verborgh_ijcs_2014} propose a proof-based composition mechanism for Web \acp{api} using \emph{RESTdesc}.
+\citet{verborgh_ijcs_2014} present a more expressive solution which goes beyond simply describing the resource's type.
+It also allows to semantically describe the knowledge needed to use a concrete \acs{http} verb on a resource, and the content this call returns. % o precondition
+The materialization of this proposal is called \restdesc{} \citep{verborgh_functional_2012}.
+
+
+% TODO mirar si tiene cabida la mención de otros enfoques para describir recursos que no son muy RESTful
+%Different ways exist to describe \ac{rest} services. % mencionar WADL, etc.?
+% citar a donde se hable de \restdesc{} y así ya se empieza a explicar la solución de forma discreta.
+\restdesc{} describes \acs{http} methods using rules expressed in the \ac{n3}\footnote{\url{http://www.w3.org/TeamSubmission/n3/}} language.
+% he evitado explicar que las reglas tienen premisa y conclusión, porque me parece demasiado obvio
+A rule's \emph{premise} expresses the requirements to invoke a \ac{rest} service.
+A rule's \emph{conclusion} expresses both the \ac{rest} call that needs to be made and the description of that invocation result.
+
+
+\citet{verborgh_ijcs_2014} propose a proof-based composition mechanism for Web \acp{api} using \restdesc{}.
 This mechanism uses as inputs:
-(1) an initial state,
-(2) a goal state,
-(3) Web \ac{api} descriptions using RESTdesc, and
-(4) optional background knowledge.
+\begin{enumerate*}[label=\itshape(\arabic*\upshape)]
+  \item an initial state,
+  \item a goal state,
+  \item Web \ac{api} descriptions using \restdesc{}, and
+  \item optional background knowledge.
+\end{enumerate*}
 Each of these inputs are semantically expressed and therefore, they can be processed by standard \ac{n3} reasoners.
 The reasoners generate proofs about how to achieve the goal starting from the initial state using the rest of the inputs.
 These proofs can be seen as steps that need to be made to reach a desired state.
 
 
-\citeauthor{verborgh_ijcs_2014} distinguish between pre-proof and post-proof.
+Additionally, \citet{verborgh_ijcs_2014} distinguish between pre-proof and post-proof.
 The first, are those which assume that the execution of all \acs{api} calls will behave as expected.
 The latter, can be seen as a \emph{revision} of the pre-proof.
 It executes the Web \acs{api} of the pre-proofs and uses actual execution results to generate a new proof.
@@ -80,10 +100,10 @@ It executes the Web \acs{api} of the pre-proofs and uses actual execution result
 \subsection{Inputs for the Proof-based Actuation Mechanism}
 \label{sec:inputs_proof}
 
-In \citet{verborgh_ijcs_2014}'s proposal the reasoning process uses as inputs:
+The reasoning process presented by \citet{verborgh_ijcs_2014} uses as inputs: % presented by en vez de posesivo, porque "X et al.'s" queda como el culo
 an initial state,
 a goal state,
-Web \ac{api} descriptions using RESTdesc, and
+Web \ac{api} descriptions using \restdesc{}, and
 optional background knowledge.
 % inputs: clues
 % goal: task
@@ -102,7 +122,7 @@ optional background knowledge.
 		Besides, the static nature of these descriptions does not break the stability assumption of the \clues{}. % explicar más?
         \end{itemize}
 
-
+  % TODO TODO TODO especificar que este mecanismo adicional de usar clues es optional y no el usado en nuestro escenario simple
   \item[The initial state and background knowledge] can be acquired both from the coordination space and the outer space.
 	However, reading all the space would be highly inefficient.
 	To reduce readings on the space (i.e. network usage), we propose a procedure composed by two reasoning steps.
@@ -153,7 +173,7 @@ However, we do not adhere to any of them.
 We leave as a future work to implement and quantitatively compare them.
 
 \begin{enumerate}
-  \item An agent which resides in the same machine as the \emph{coordination space} can be trigger the process. % TODO buscar su nombre bueno
+  \item An agent which resides in the same machine as the \emph{coordination space} can trigger the process. % TODO buscar su nombre bueno
 	Doing so, it can locally consume the knowledge available in the \emph{coordination space}.
   \item A more flexible approach would consist of letting any \consumer{} interested on changing the environment to trigger it.
 	If these \consumers{} use the search mechanism presented in the Chapter~\ref{cha:searching}, they will have background knowledge about other nodes.
@@ -162,7 +182,7 @@ We leave as a future work to implement and quantitatively compare them.
 	While the latter increases the network usage, the first increases the computation.
 	As we already mentioned in previous chapters, these tasks severely affect to the energy consumption.
 	Furthermore, some resource platforms will not be even able to reason.
-  \item To mitigate that problem, we could delegate that task only on the nodes able to perform such tasks.
+  \item To mitigate that problem, we could delegate this task only on the nodes able to perform such tasks.
 	In fact, these nodes could follow the \emph{replicated-worker pattern}.
 	They could read from the space goals to trigger the process (i.e. \emph{reasoning tasks}).
 	Apart from balancing the load between all the worker nodes, any node can stop being worker at any time by not taking more \emph{tasks} (e.g. if it has low energy).

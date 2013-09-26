@@ -113,7 +113,7 @@ Specifically, we believe that the \emph{specialist patterns} fit the best to the
         They do not require huge computation resources, but to achieve a concrete and simple goal.
 \end{itemize}
 Therefore, \ac{ubicomp} generally faces a problem of collaboration between nodes with different capacities.
-In this problem computation or a negotiation aspects are secondary. % se entenderá a qué me refiero con computation??
+In this problem computation or negotiation aspects are secondary. % se entenderá a qué me refiero con computation??
 
 
 %In this pattern a master writes a task into the space and waits for its result, which is performed by some of the workers specialized in this particular task (e.g. show a message or regulate the temperature).
@@ -173,13 +173,13 @@ When the \emph{teacher} writes a warning for a user, the devices able to warn he
 In this example, these characteristics are the device ownership and the intrusiveness of the warning method.
 The \emph{teacher} reads these characteristics, chooses the most appropriate \emph{student} to solve the \emph{problem} and updates the \emph{problem} to indicate the selection.
 %If no device writes their characteristics, the \emph{teacher} can wait longer.
-Finally, the selected device takes any warning for him and warns the user. % no tiene respuesta
+Finally, the selected device takes any warning for it and warns the user. % no tiene respuesta
 If the chosen device does not take message, the \emph{teacher} can update the \emph{problem} with a new selection.
 
 
 With this application, if the priority level is low, the user receives the warning in a less intrusive way.
 For example, room's light brightness can be increased for low priority notifications, a Chumby\footnote{\url{http://www.chumby.com/}} can show an icon for normal priority ones and the user's mobile phone show directly the message when it is a high priority warning.
-The remarkable thing is that the devices present in the environment at each moment can vary and the application will still fulfill its goal.
+The remarkable characteristic of this mechanism is that the devices present in the environment at each moment can vary and the application will still fulfill its goal.
 
 
 
@@ -201,23 +201,23 @@ it should comply with the following aspects:
 \begin{itemize}
   %  Debe permitir polling (sync), por ello proponemos nuevas primitivas: read_async y take_async.
   \item Do not substitute the polling mechanism. % porque todavía puede ser interesante en otros casos
-        To do that, the middleware must provide additional \emph{read} and \emph{take} primitives.
+        The middleware must provide additional \emph{read} and \emph{take} primitives.
   % Se evalúan sobre el espacio, no sobre el outer-space. 
   \item Since the notification mechanism intends to allow coordination patterns,
         it must consider the knowledge from the coordination space. % TODO comprobar que lo llamé así en el anterior capítulo
         In other words, knowledge from the \emph{outer-space} will not trigger notifications. % TODO usar constante para esto
   % Evaluarse cada X, no siempre que se escriba algo o se vuelve loco.
   \item The evaluation of the subscriptions must not interfere with the writing process (e.g. introducing a delay).
-        Therefore, it must run asynchronously.
+        Therefore, it must be run asynchronously.
   % Debe ser sencillo de implementar por cualquier nodo. Para ello proponemos un mínimo contrato: callback URL.
   \item Ease its adoption by any type of computing platform.
 	This can be achieved by reducing the requirements on the \emph{clients}.
-        For instance, a callback \ac{url} passed during the subscription can represent a minimal client's contract with the server. % no viceversa
+        For instance, a callback \ac{url} passed during the subscription can represent a minimal contract between the client and the server. % no viceversa
   % Deben caducar para no mantener suscripciones de dispositivos que ya no existen.
   \item Provide additional subscription removal mechanisms.
-	\ac{ubicomp} are composed by unreliable devices which may frequently join and leave the space.
+	\ac{ubicomp} scenarios are composed by unreliable devices which may frequently join and leave the space.
 	In this situation, the correct use of unsubscription primitives cannot be guaranteed.
-	This may worsen the performance of the system with useless subscriptions from abstent devices.
+	This may worsen the performance of the system with useless subscriptions from absent devices.
 	Therefore, the device managing the subscriptions should adopt more proactive mechanisms.
 	For example, it may let the subscriptions expire after a lifetime or remove them when it discovers the unavailability of a callback \ac{url}. % algo así como garbage collection
 	% A) The subscriptions must expire.
