@@ -1,0 +1,61 @@
+\section{Interoperation Example Between both Approaches}
+
+This section aims to experimentally proof the validity of the assumptions made in the allignment of the proof-based actuation mechanism with space-based computing one.
+To this end, we have designed a simple scenario to act on the light of a lamp.
+Then, we have implemented the nodes which participate in this scenario in different manners.
+
+
+On the one hand, the lamp node implements two different mechanisms to change this light's value:
+\begin{enumerate}[label=\itshape(\alph*\upshape)]
+  \item It provides a \ac{rest} \ac{api} and describe it using \restdesc{}. % REST API seguro 100%? por si acaso decir HTTP API?
+        When a client invokes changes the value of the resource which describes the light's value, the node will physically change it.
+  \item It is aware of the tasks written into the space and change the light's value accordingly. % esto es, se suscribe a ellas
+\end{enumerate}
+
+
+On the other hand, we have implemented the node which wants to change the light's value in the following ways:
+\begin{enumerate}[resume,label=\itshape(\alph*\upshape)]
+  \item It reasons over the knowledge and descriptions to get a plan to fulfill a goal.
+	With this plan, it invokes the needed \ac{rest} services.
+  \item It writes a task into the space describing its desire to change the light's value.
+\end{enumerate}
+
+
+Using these nodes, we implemented three scenarios.
+In the first one is fully based on the proof-based mechanism and is composed by a \emph{(a)} provider and a \emph{(c)} consumer.
+The second scenario presents two nodes using the space-based computing actuation patterns and therefore it is composed by a \emph{(b)} provider and a \emph{(d)} consumer.
+The third scenario presents a mixed scenario where we have an \emph{(a)} provider and a \emph{(d)} consumer.
+Sections \ref{sec:actuation_scn1}, \ref{sec:actuation_scn2} and \ref{sec:actuation_scn3} describe these scenarios respectively.
+% TODO The implementation is publicly available in URL.
+
+
+\subsection{Scenario 1}
+\label{sec:actuation_scn1}
+
+% poner un diagrama que presente el escenario
+% dar detalles de cómo se ha implementado
+%   Añadir descripciones y demás o ponerlas como anexo?
+%   Pasos a seguir por parte del consumidor
+
+
+\subsection{Scenario 2}
+\label{sec:actuation_scn2}
+
+% poner un diagrama que presente el escenario
+% dar detalles de cómo se ha implementado
+%   poner tarea de ejemplo
+
+
+\subsection{Scenario 3}
+\label{sec:actuation_scn3}
+
+% poner un diagrama que presente el escenario
+% dar detalles de cómo se ha implementado
+%    comentar que asunciones de las del anterior capítulo se han tomado
+%    por simplificar: agente que reside en el coordination space
+% Pasos a seguir por el agente
+
+
+% TODO añadir apartado de discussion?
+% luego posiblemente se podrían medir algunos indicadores de los mismos
+%   e.g. cuando código extra ha hecho falta añadir en el tercero para que se hablen entre sí
