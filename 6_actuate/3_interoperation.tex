@@ -9,15 +9,20 @@ On the one hand, the lamp node implements two different mechanisms to change thi
 \begin{enumerate}[label=\itshape(\alph*\upshape)]
   \item It provides a \ac{rest} \ac{api} and describes it using \restdesc{}. % REST API seguro 100%? por si acaso decir HTTP API?
         When a client invokes changes the value of the resource which describes the light's value, the node will physically change it.
-  \item It is aware of the tasks written into the space and changes the light's value accordingly (see Figure~\ref{fig:flow_type_b}). % esto es, se suscribe a ellas
+  \item It is aware of the tasks written into the space and changes the light's value accordingly. % esto es, se suscribe a ellas
+	Figure~\ref{fig:flow_type_b} shows the initialization of this type node and the process performed when a graph is detected.
 \end{enumerate}
 
 
 On the other hand, we have implemented the node which wants to change the light's value in the following ways:
 \begin{enumerate}[resume,label=\itshape(\alph*\upshape)]
   \item It reasons over the knowledge and descriptions to get a plan to fulfill a goal.
-	With this plan, it invokes the needed \ac{rest} services (see Figure~\ref{fig:flow_type_c}).
-  \item It writes a task into the space describing its desire to change the light's value (see Figure~\ref{fig:flow_type_d}).
+	With this plan, it invokes the needed \ac{rest} services.
+	Figure~\ref{fig:flow_type_c} shows the actions performed by this type of node in detail.
+  \item It writes a task into the space describing its desire to change the light's value.
+	Figure~\ref{fig:flow_type_d} shows what the actions taken by this type of node has to change the physical environment.
+	As it can be seen, the process is divided in two temporarily independent processes.
+	The first writes the task and the second processes the result whenever it is written in the space.
 \end{enumerate}
 
 
@@ -37,22 +42,22 @@ Sections \ref{sec:actuation_scn1}, \ref{sec:actuation_scn2} and \ref{sec:actuati
 
 \begin{figure}
         \centering % proporción chachi: 40%, 20% y 20%
+	\subfigure[\typeb] {
+                \includegraphics[width=0.22\linewidth]{flowSpaceProvider}
+                \label{fig:flow_type_b}
+        }
+	~ %add desired spacing between images, e. g. ~, \quad, \qquad etc.
+          %(or a blank line to force the subfigure onto a new line)
+	\subfigure[\typed] {
+                \includegraphics[width=0.22\linewidth]{flowSpaceConsumer}
+                \label{fig:flow_type_d}
+        }
+        ~ %add desired spacing between images, e. g. ~, \quad, \qquad etc.
+          %(or a blank line to force the subfigure onto a new line)
         \subfigure[\typec] {
                 \includegraphics[width=0.44\linewidth]{flowRESTConsumer}
                 \label{fig:flow_type_c}
-        }%
-        ~ %add desired spacing between images, e. g. ~, \quad, \qquad etc.
-          %(or a blank line to force the subfigure onto a new line)
-        \subfigure[\typeb] {
-                \includegraphics[width=0.22\linewidth]{flowSpaceConsumer}
-                \label{fig:flow_type_b}
-        }
-        ~ %add desired spacing between images, e. g. ~, \quad, \qquad etc.
-          %(or a blank line to force the subfigure onto a new line)
-        \subfigure[\typed] {
-                \includegraphics[width=0.22\linewidth]{flowSpaceProvider}
-                \label{fig:flow_type_d}
-        }
+        }%        
         \caption{Flow charts for the different types of nodes.}
         {Please note that \typea{} is ommited because its operation is the usual for a \acs{http} server.} % actions, behavior, operation???
         \label{fig:flow_nodes}
