@@ -26,18 +26,22 @@ On the other hand, we have implemented the node which wants to change the light'
 \end{enumerate}
 
 
-Using these nodes, we implemented three scenarios.
-In the first one is fully based on the proof-based mechanism and is composed by a \emph{(a)} provider and a \emph{(c)} consumer.
-The second scenario presents two nodes using the space-based computing actuation patterns and therefore it is composed by a \emph{(b)} provider and a \emph{(d)} consumer.
-The third scenario presents a mixed scenario where we have an \emph{(a)} provider and a \emph{(d)} consumer.
-Sections \ref{sec:actuation_scn1}, \ref{sec:actuation_scn2} and \ref{sec:actuation_scn3} describe these scenarios respectively.
-% TODO The implementation is publicly available in URL.
-
-
+\newcommand{\prova}{\emph{(a)} provider}
+\newcommand{\provb}{\emph{(b)} provider}
+\newcommand{\consc}{\emph{(c)} consumer}
+\newcommand{\consd}{\emph{(d)} consumer}
 \newcommand{\typea}{\emph{Type (a)} node}
 \newcommand{\typeb}{\emph{Type (b)} node}
 \newcommand{\typec}{\emph{Type (c)} node}
 \newcommand{\typed}{\emph{Type (d)} node}
+
+
+Using these nodes, we implemented three scenarios.
+In the first one is fully based on the proof-based mechanism and is composed by a \prova{} and a \consc{}.
+The second scenario presents two nodes using the space-based computing actuation patterns and therefore it is composed by a \provb{} and a \consd{}.
+The third scenario presents a mixed scenario where we have a \prova{} and a \consd{}.
+Sections \ref{sec:actuation_scn1}, \ref{sec:actuation_scn2} and \ref{sec:actuation_scn3} describe these scenarios respectively.
+% TODO The implementation is publicly available in URL.
 
 
 \begin{figure}
@@ -66,6 +70,21 @@ Sections \ref{sec:actuation_scn1}, \ref{sec:actuation_scn2} and \ref{sec:actuati
 
 \subsection{Scenario 1}
 \label{sec:actuation_scn1}
+
+The first scenario uses a \prova{} and a \consc{}.
+The \prova{} is modeled using the following resources:
+\begin{itemize}
+  \item \emph{/lamp}: It provides basic information of the lamp.
+  \item \emph{/lamp/actuators}: It enumerates the actuators which compose the \emph{smart lamp}.
+  \item \emph{/lamp/actuators/light}: It represents the unique actuator which composes the lamp in our simple example: a light.
+  \item \emph{/lamp/actuators/light/01}: It represents a concrete preference to change the light.
+\end{itemize}
+
+
+In order to instruct consumers to use the services provided, they are annotated using \restdesc{}.
+In \emph{lamp service}, \acs{http} OPTIONS returns listings~\ref{} and~\ref{} for \emph{/lamp/actuators/light}.
+So, starting from \emph{/lamp}, based on the dereferenceable \acsp{uri} and the descriptions, a crawler could autonomously learn how to use the \acs{api}.
+
 
 % poner un diagrama que presente el escenario
 % dar detalles de cómo se ha implementado
