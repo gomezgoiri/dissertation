@@ -80,16 +80,23 @@ The \prova{} is modeled using the following resources:
   \item \emph{/lamp/actuators/light/01}: It represents a concrete preference to change the light.
 \end{itemize}
 
+% Aquí estoy explicando un poco el diagrama de flujo de la figura,
+% dando detalles de cómo se ha implementado y a qué me refiero con cada pieza de información
+% ¿Añadir descripciones y demás aquí o ponerlas como anexo?
 
-In order to instruct consumers to use the services provided, they are annotated using \restdesc{}.
-In \emph{lamp service}, \acs{http} OPTIONS returns listings~\ref{} and~\ref{} for \emph{/lamp/actuators/light}.
-So, starting from \emph{/lamp}, based on the dereferenceable \acsp{uri} and the descriptions, a crawler could autonomously learn how to use the \acs{api}.
+In order to instruct consumers on how to use the services provided, they are annotated using \restdesc{}.
+The \acs{http} OPTIONS returns listings~\ref{} and~\ref{} for \emph{/lamp/actuators/light}.
+So, starting from \emph{/lamp}, based on the dereferenceable \acsp{uri} \citep{sauermann_cool_2008} and the descriptions, a crawler could autonomously learn how to use the \acs{api}. % TODO citar http://en.wikipedia.org/wiki/Dereferenceable_Uniform_Resource_Identifier
 
+In addition to the crawled content, the \consc{} provides two extra pieces of information to the reasoner: a preference and a goal (see listings~\ref{} and~\ref{}).
+The preference allows the consumer express the interest on change a service, which may not always be feasible.
+The goal drives the reasoning, which tries to extract a plan to achieve it.
+
+With that plan, the consumer just needs to complete it calling to different \acs{http} resources.
+If more than a resource needs to be called, the plan may also indicate how to use the information obtained from one to use it in the next call.
 
 % poner un diagrama que presente el escenario
-% dar detalles de cómo se ha implementado
-%   Añadir descripciones y demás o ponerlas como anexo?
-%   Pasos a seguir por parte del consumidor
+
 
 
 \subsection{Scenario 2}
