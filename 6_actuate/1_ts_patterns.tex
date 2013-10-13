@@ -8,24 +8,25 @@
 % escenario de ejemplo en Ubicomp
 
 
-In space-based computing participants coordinate by reading and writing in a shared Space. % TODO usar define a nivel general para Space!
+In space-based computing, participants coordinate by reading and writing in a shared Space. % TODO usar define a nivel general para Space!
 This encourages an uncoupled communication between applications using the same Space.
 
-In this section we analyze how to achieve this uncoupled communication following a top-down approach.
-First, we briefly explain \acl{ts}'s most common application patterns (see Section~\ref{sec:ts_patterns}). % according to the classification of \citet{freeman_javaspaces_1999}.
-Using some of these patterns, Section~\ref{sec:envisaged_scenarios} shows how to build an \ac{ubicomp} scenario.
-The scenario evidences some requirements the middleware must comply with.
-These requisites are analyzed in Section~\ref{sec:notification}.
+% IG: esto lo he homogeneizado porque tenia 3 estilos distintos :)
+This section analyzes how to achieve this uncoupled communication following a top-down approach.
+First, Section~\ref{sec:ts_patterns} briefly explains \acl{ts}'s most common application patterns. % according to the classification of \citet{freeman_javaspaces_1999}.
+Second, Section~\ref{sec:envisaged_scenarios} uses some of these patterns to show how to build an \ac{ubicomp} scenario.
+The scenario shows some requirements the middleware must fulfill.
+Finally, Section~\ref{sec:notification} analyzes these requisites.
 
 
 
 \subsection{\aclp{ts}' patterns}
 \label{sec:ts_patterns}
 
-According to \citet{freeman_javaspaces_1999} there are four main application patterns which can be used with \ac{ts}:
+According to \citet{freeman_javaspaces_1999}, there are four main application patterns which can be used with \ac{ts}: % IG: with o in?
 
 \begin{description}
-  \item[Replicated-worker pattern.] In this pattern there is a master process and many worker processes which are able to compute the same task.
+  \item[Replicated-worker pattern.] In this pattern, there is a master process and many worker processes able to compute the same task.
 				    %% REDUCIENDO esto: %%
 %				    The master takes a problem and divides it in tasks which are solved by any of the workers.
 %				    More concretely the pattern is composed by the following steps:
@@ -38,15 +39,15 @@ According to \citet{freeman_javaspaces_1999} there are four main application pat
 % 				      \item The master collects the results for the tasks it wrote.
 % 				      \item Once the master has all the results, it combines them into a meaningful overall solution.
 % 				    \end{enumerate}  
-				    The master takes a problem, divides it in smaller tasks and writes these tasks in the space.
-				    Any available worker takes a task, processes it and writes the result back on the space.
+				    The master takes a problem, divides it into smaller tasks, and writes them tasks into the space.
+				    Any available worker takes a task, processes it, and writes the result back into the space.
 				    When all the workers have written their results, the master takes the results and combines them into a meaningful overall solution.
 				    %Note that the workers accept new tasks whenever they are available and able to work.
 				    %Therefore, while a worker is busy computing a big task, another one can solve many small tasks.
 				    %In other words, this pattern naturally \emph{balances the load} on the space.
 				    %Besides, it is \emph{scalable} since we can add more workers running in more machines without rewriting our code.
 				    This pattern is scalable and naturally balances the load on the space.
-  \item[Command pattern.] It encapsulates behavior in the tasks shared in the space.
+  \item[Command pattern.] This pattern encapsulates the behavior into the tasks shared in the space.
 			  Therefore, it requires (1) to share behavior through the space, and (2) any generic worker to be able to compute the behavior.
 			  For instance, a graph in \ac{tsc} could include code in an interpreted programming language.
 			  % nosotros pasamos de este jaleo
@@ -56,23 +57,23 @@ According to \citet{freeman_javaspaces_1999} there are four main application pat
 			  %Furthermore, the tasks to be performed over \ac{ubicomp} environments are not generically processable by any node.
 			  %In contrast, each device is responsible of managing its own actuators on behalf of the rest.
 			  %Therefore, this pattern will not be considered.
-  \item[Marketplace pattern.] In this pattern producers (or sellers) and consumers (or buyers) of resources interact to find the best deal. % TODO cita TripCom?
+  \item[Marketplace pattern.] In this pattern, producers (or sellers) and consumers (or buyers) of resources interact to find the best deal. % TODO cita TripCom?
 			  %It should be noted that the resources are products or services which can be bought and sold.
 			  %Therefore, it is not applicable to the environments considered. % o use cases
 			  %esto está relacionado con el paper aquel de TripCom y con el de Simon de hace un año en WoT
-  \item[Specialist patterns.] In opposition to the replicated-worker pattern, in the specialist pattern each worker is specialized.
-                              Therefore each worker performs a particular task.
+  \item[Specialist patterns.] In contrast to the replicated-worker pattern, in this pattern, each worker is specialized.
+                              Therefore, each worker performs a particular task.
                               \citeauthor{freeman_javaspaces_1999} enumerate three subtypes:
 			      \begin{description}
 				  \item[Blackboard pattern.]
-					It associates the concept of the space with a \emph{blackboard}.
-					Following the analogy, the master is associated with a teacher, tasks with \emph{problems} and the specialized workers with \emph{students}.
+					It associates the concept of the space to a \emph{blackboard}.
+					Following this analogy, the master is associated with a teacher, tasks with \emph{problems} and the specialized workers with \emph{students}.
 					The blackboard pattern starts when the \emph{teacher} writes a \emph{problem} in the \emph{blackboard}.
 					The \emph{students} observe the space and write their intention to contribute to solve the problem (i.e. \emph{raise their hands}).
 					The \emph{teacher} selects to the expert which will make a modification.
 					After the modification, the \emph{teacher} decides if it found the solution or another \emph{student} should contribute.
 				  \item [Trellis pattern.]
-					In this pattern, the master arranges the problem into low-level, mid-level and high-level pieces.
+					In this pattern, the master arranges the problem into low-level, mid-level, and high-level pieces.
 					The workers of each level benefit from the refined data provided by the immediate level below.
 				  \item [Collaborative patterns.]
 					It encompasses all the patterns which allow nodes to collaborate to complete a greater task (i.e. by creating a workflow).
@@ -83,11 +84,11 @@ According to \citet{freeman_javaspaces_1999} there are four main application pat
 
 
 % Voy preparando el terreno para que se vea que los primeros son más de computación y el otro de negociación
-To summarize, the replicated-worker is centered in optimizing the computation by parallelizing task.
-Command pattern can be seen as an abstraction of the latter where the behavior is shipped in the tuples.
-Marketplace pattern allows negotiation of two entities through the space.
+To summarize, the \emph{replicated-worker pattern} is centered in optimizing the computation by parallelizing tasks.
+The the \emph{command pattern} can be seen as an abstraction of the latter where the behavior is shipped in the tuples.
+The \emph{marketplace pattern} allows negotiation of two entities through the space.
 % Coño! pero si el especialista te permite colaborar...
-Finally, specialist patterns allow nodes with distinct capacities to cooperate towards a common goal.
+Finally, the \emph{specialist pattern} allows nodes with distinct capacities to cooperate towards a common goal.
 
 
 % Posible TODO Un esquema dividido en 4 en el que aparecen todos los patrones explicados.
@@ -96,37 +97,37 @@ Finally, specialist patterns allow nodes with distinct capacities to cooperate t
 %     https://docs.google.com/a/deusto.es/document/d/1QXGsQ4-wAByc_ByQ-Tts-TSphSQAzfO_c3mcgoZdloc/edit
 
 
-
-\subsection{Envisaged Scenarios}
+% IG: ves... esta seccion parece q sale de la nada y creo que es el objetivo principal del capitulo, no? a ver si puedes orientar la intro del capitulo para mostrar esto mas... basicament que se vea que esto es de implementar movidas.
+\subsection{Envisaged Scenarios} % IG: he aprendido palabro nuevo...
 \label{sec:envisaged_scenarios}
 % 1era iteración en reescritura, se puede mejorar mucho
 
 This section devises two stereotypical scenarios for home automation.
-Both scenarios emphasize how devices can coordinate in a decoupled mode using some of patterns seen in the previous section. % más de uno?
+Both scenarios emphasize how devices can coordinate in a decoupled mode using the patterns seen in the previous section. % más de uno?
 %The scenarios are formed by mobile phones, and embedded platforms with sensors and/or actuators.
 Specifically, we believe that the \emph{specialist patterns} fit the best to the needs of \ac{ubicomp} environments:
 \begin{itemize}
-  \item The devices in \ac{ubicomp}, often serve to very specific needs.
-        For example, let us imagine a mobile phone showing a message or an embedded device turning on the lights of a room.
+  \item The devices in \ac{ubicomp} often serve to very specific needs. % IG: comentario general de esto de las comas, que me las pones todo al reves... el sujeto y el predicado sin coma entre medio (a noser que tenga de esas cosas descriptivas, en plan "jose, que es negro, se ha quemado"). Y la coma se pone cuando es algo complementario del tipo de: "en este capitulo, ..."
+        For example, let us imagine a mobile phone showing a message or an embedded device turning on the lights of a room. % IG: lo de mobile es el estandard de la tesis? lo de cell no, no?
         %Although there may exist some redundancy in the tasks which different nodes can be accomplish, the task are not nodes are not as interchangeable as in... son tareas simples, no necesitan optimizar ni lanzar muchas
   \item These tasks are usually lightweight. % TODO primera vez que se habla de "task", comentar que para TripCom eran servicios web y que crearon un sistema (WXSW?)
-        They do not require huge computation resources, but to achieve a concrete and simple goal.
+        They do not require large computation resources, but to achieve a concrete and simple goal. % IG: comor? frase rara
 \end{itemize}
 Therefore, \ac{ubicomp} generally faces a problem of collaboration between nodes with different capacities.
-In this problem computation or negotiation aspects are secondary. % se entenderá a qué me refiero con computation??
+In this problem, computation or negotiation aspects are secondary. % se entenderá a qué me refiero con computation??
 
 
-%In this pattern a master writes a task into the space and waits for its result, which is performed by some of the workers specialized in this particular task (e.g. show a message or regulate the temperature).
+%In this pattern, a master writes a task into the space and waits for its result, which is performed by some of the workers specialized in this particular task (e.g. show a message or regulate the temperature).
 
-
+% IG: hala! y esto de sopeton... lo que decia, preparame el terreno un poco
 \subsubsection{Scenario 1: Temperature Regulation}
 
 The first scenario presents a room populated with several kind of sensors such as Oracle's SunSPOTs\footnote{\url{http://www.sunspotworld.com}},
 % TODO TODO TODO referenciar a la parte donde se hayan referenciado bien los dispositivos! (e.g. see ~\ref{environment})
 % Para el resto proveer al menos una URL!
 Digi's XBee sensors with an IP gateway,
-the sensors on a KNX20 domotic bus\footnote{\url{http://www.knx.org/knx/what-is-knx/}} and a fan connected to a FoxG20 embedded platform to act as an actuator (see Figure \ref{fig:devices_scenario}).
-Besides, an Android application semantically stores the user's temperature preferences.
+the sensors on a KNX20 domotic bus\footnote{\url{http://www.knx.org/knx/what-is-knx/}}, and a fan connected to a FoxG20 embedded platform as an actuator (see Figure \ref{fig:devices_scenario}).
+In addition, an Android application semantically stores the temperature preferences of the user.
 
 
 \InsertFig{devices_scenario}{fig:devices_scenario}{
@@ -166,19 +167,19 @@ Third, there is a node in charge of generating the warnings.
 The application follows the \emph{blackboard pattern}.
 The node which generates the warnings is the \emph{teacher}.
 The \emph{problem} is the warning for the user.
-The \emph{students} are the devices which can warn the user.
+The \emph{students} are the devices which can warn the user. % IG: no es nada intuitivo. Leyendo despues lo entiendo, pero... es raro
 
 
-When the \emph{teacher} writes a warning for a user, the devices able to warn her write their characteristics into the space.
+When the \emph{teacher} writes a warning for a user, the devices able to warn the user write their characteristics into the space. % IG: alguna cosa mejor que characteristics?
 In this example, these characteristics are the device ownership and the intrusiveness of the warning method.
 The \emph{teacher} reads these characteristics, chooses the most appropriate \emph{student} to solve the \emph{problem} and updates the \emph{problem} to indicate the selection.
 %If no device writes their characteristics, the \emph{teacher} can wait longer.
 Finally, the selected device takes any warning for it and warns the user. % no tiene respuesta
-If the chosen device does not take message, the \emph{teacher} can update the \emph{problem} with a new selection.
+If the chosen device does not take messages, the \emph{teacher} can update the \emph{problem} with a new selection.
 
 
 With this application, if the priority level is low, the user receives the warning in a less intrusive way.
-For example, room's light brightness can be increased for low priority notifications, a Chumby\footnote{\url{http://www.chumby.com/}} can show an icon for normal priority ones and the user's mobile phone show directly the message when it is a high priority warning.
+For example, room's light brightness can be increased for low priority notifications, a Chumby\footnote{\url{http://www.chumby.com/}} can show an icon for normal priority ones and the user's mobile phone show directly the message when it is a high priority warning. % IG: yo anyadiria una tablita para los dos scenarios mostrando los actuadores y los niveles. Aqui esto me salta un poco de repente.
 The remarkable characteristic of this mechanism is that the devices present in the environment at each moment can vary and the application will still fulfill its goal.
 
 
@@ -190,9 +191,9 @@ The remarkable characteristic of this mechanism is that the devices present in t
 
 In the scenarios described in the previous section, some writings in the space trigger other node's action.
 For example, a device must show a message whenever a new warning is written in the space. % e.g. a task or a result
-To be aware of these writings the node can either poll the space or rely on a notification mechanism. % async or blocking
+To be aware of these writings, the node can either poll the space or rely on a notification mechanism. % async or blocking
 Obviously, the later encourages a more efficient use of the network. % is more optimal and more scalable approach.
-
+% IG: encourage no creo que sea la palabra...
 
 As a consequence, a notification mechanism is highly advisable to fulfill \ac{ts}'s patterns in a distributed environment.
 Although the implementation of this notification mechanism is out of the scope of this thesis,
@@ -208,7 +209,7 @@ it should comply with the following aspects:
         In other words, knowledge from the \emph{outer-space} will not trigger notifications. % TODO usar constante para esto
   % Evaluarse cada X, no siempre que se escriba algo o se vuelve loco.
   \item The evaluation of the subscriptions must not interfere with the writing process (e.g. introducing a delay).
-        Therefore, it must be run asynchronously.
+        Therefore, it must run asynchronously.
   % Debe ser sencillo de implementar por cualquier nodo. Para ello proponemos un mínimo contrato: callback URL.
   \item Ease its adoption by any type of computing platform.
 	This can be achieved by reducing the requirements on the \emph{clients}.
