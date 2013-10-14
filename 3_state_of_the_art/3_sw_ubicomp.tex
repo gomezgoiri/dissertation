@@ -73,16 +73,23 @@ This dissertation shares this view of independent data sources sharing their own
 
 
 In the \acl{wot}, multiple solutions have considered using semantics to enrich the data definition in a machine processable manner.
-Generally, these solutions embed the metadata in \acs{html} using microdata, microformats or RDFa \citep{mayer_extensible_2011}. % TODO mirar tesis de Guinard 2.2.1 y posiblemente citar!!!
-These contents are returned by the Internet connected objects and are used to enhance the findability of the data by search engines.
-% Ontologías no se pueden definir, tiene que haber consenso en su uso por parte de las máquinas de búsqueda.
+Some solutions embed the metadata in \acs{html} using microdata, microformats or RDFa.
+% \citep{mayer_extensible_2011} propone mapear estrategias de descubrimiento de recursos a un meta-formato interno basado en microformatos
+These contents are returned by the Internet connected objects and are used to enhance the findability of the data by existing third party search engines.
+% Ontologías no se pueden definir, tiene que haber consenso en su uso por parte de las máquinas de búsqueda. => eso en RDFa no es así!
 % en vez de eso, queremos mejorar la busqueda por parte de los cacharros, no de los search engines
 % This approach does not focus on making the devices able to search and interact with others.
 % end-to-end search
 % Instead, it considers them as mere human-oriented information providers which should be indexed by third party search services.
 % aquí se puede enganchar también el discurso de Doulkeridis2007desent: coverage and scalability, freshness y monopoly
+\citet{trifa_leveraging_2011} address the inherent problems of relying on general purpose search engines to search in mobile web providers.
+They propose a hierarchical discovery and lookup infrastructure.
+This infrastructure extracts semantic information from different representations and converts it to an internal data model.
+This model is based on existing microformats, but limited to certain concepts.
+Besides, the particularities of the semantic annotations are hidden to searchers in their custom search \acs{api}. % custom and non-standard
 
-A more general way to represent semantic data is using RDF\footnote{\url{http://www.w3.org/RDF/}} based representations (i.e., full semantics).
+
+A more general way to represent semantic data is using RDF\footnote{\url{http://www.w3.org/RDF/}} based representations (i.e., full semantics). % más general que los microformatos que usan Guinard y compañía
 SPITFIRE European project\footnote{\url{http://spitfire-project.eu}} represents the most remarkable effort on gathering full semantics and the \ac{wot}.
 It focuses on fully integrating sensor data with the \ac{lod}. 
 The \ac{lod} are datasets which follow a series of principles on how to open and publish data.
