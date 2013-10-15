@@ -73,18 +73,19 @@ This dissertation shares this view of independent data sources sharing their own
 
 
 In the \acl{wot}, multiple solutions have considered using semantics to enrich the data definition in a machine processable manner.
-Some solutions embed the metadata in \acs{html} using microdata, microformats or RDFa.
-% \citep{mayer_extensible_2011} propone mapear estrategias de descubrimiento de recursos a un meta-formato interno basado en microformatos
-These contents are returned by the Internet connected objects and are used to enhance the findability of the data by existing third party search engines.
+Some solutions embed the metadata in HTML using microdata\footnote{\url{http://www.w3.org/TR/microdata/}}, microformats\footnote{\url{http://microformats.org}} or RDFa\footnote{\url{http://www.w3.org/TR/rdfa-primer/}}.
+% \citep{mayer_extensible_2011} propone mapear estrategias de descubrimiento de recursos (RDFa, JSON, etc.) a un meta-formato interno basado en microformatos
+These contents are returned by the Internet connected objects and are used to enhance the search-ability of the data by existing third party search engines.
 % Ontologías no se pueden definir, tiene que haber consenso en su uso por parte de las máquinas de búsqueda. => eso en RDFa no es así!
+% ojo que RDFa y microdata en realidad es rollo RDF-based, podría llevar a confusión el inicio del siguiente parrafo
 % en vez de eso, queremos mejorar la busqueda por parte de los cacharros, no de los search engines
 % This approach does not focus on making the devices able to search and interact with others.
 % end-to-end search
 % Instead, it considers them as mere human-oriented information providers which should be indexed by third party search services.
 % aquí se puede enganchar también el discurso de Doulkeridis2007desent: coverage and scalability, freshness y monopoly
-\citet{trifa_leveraging_2011} address the inherent problems of relying on general purpose search engines to search in mobile web providers.
-They propose a hierarchical discovery and lookup infrastructure.
-This infrastructure extracts semantic information from different representations and converts it to an internal data model.
+However, these search engines do not consider the mobile nature of the data providers in the \ac{wot}. % They can move from one context to another frequently.
+To solve this problem \citet{trifa_leveraging_2011} propose a hierarchical discovery and lookup infrastructure.
+This infrastructure extracts the semantic annotations from different representations and converts them to an internal data model.
 This model is based on existing microformats, but limited to certain concepts.
 Besides, the particularities of the semantic annotations are hidden to searchers in their custom search \acs{api}. % custom and non-standard
 
