@@ -22,7 +22,8 @@
 \usepackage{bibentry} % http://gking.harvard.edu/files/bibentry2.pdf
 %\nobibliography* throws an error
 \nobibliography{9_backmatter/ref_self} % http://stefaanlippens.net/bibentry
-
+\usepackage{multibib} % split bibliography in two
+\newcites{web}{Secondary Web Resources} % for web resources
 
 %: Macro file for Latex
 % Macros help you summarise frequently repeated Latex commands.
@@ -299,6 +300,9 @@
 \bibliographystyle{plainnat} % calls style file plainnat.bst
 % in-text refs: author (year) without brackets
 % (this works with package natbib)
+
+\bibliographystyleweb{plainurl}
+\bibliographyweb{9_backmatter/ref_webresources}
 
 
 % --------------------------------------------------------------

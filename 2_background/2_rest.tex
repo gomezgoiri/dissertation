@@ -78,7 +78,7 @@ We will indistinguishably refer to them as \ac{rest}ful \ac{api}s or as \emph{hy
 
 
 \subsection{\acs{rest} vs WS-* services}
-\label{sec:protocols}
+\label{sec:rest_ws}
 
 % Guinard se refiere apostilla al concepto WS-*:
 %    (nada), services (lo que más), Web services, approach, standards, galaxy of standards, implementation, applications
@@ -92,7 +92,7 @@ Using this information, the service consumer and provider communicate through me
 
 
 WS-* standards offer more features than the \ac{rest} such as transactions, reliability or message-level security.
-Besides, they have been adapted to the needs of resource-constrained devices in the \ac{dpws} specification\footnote{\url{http://docs.oasis-open.org/ws-dd/ns/dpws/2009/01}}.
+Besides, they have been adapted to the needs of resource-constrained devices in the \ac{dpws} specification \citeweb{dpws2009}.
 This specification defines a minimal set of implementation constraints.
 \ac{dpws}'s most remarkable features are: decentralized multicast-based discovery, secure message transmission, subscription and event notifications \citep{moritz_devices_2010}.
 
@@ -152,10 +152,10 @@ Historically, \ac{http} has been considered a suitable protocol in that regard.
 % No sé si citar trabajos como TinyREST o alguno de los que hacen un gateway a HTTP o modifican el protocolo.
 %    Ver aquí: http://en.wikipedia.org/wiki/Comparison_of_lightweight_web_servers
 %    Podría referirme a algún servidor web más, siempre que se haga enfasis en que se usa en plataformas limitadas/raras
-\ac{http} is a simple protocol which has be adopted by a wide range of computing platforms \citep{yazar_efficient_2009,hammel_mongoose:_2010}\footnote{\url{https://github.com/sirleech/Webduino}}. % TODO arreglar esto
+\ac{http} is a simple protocol which has be adopted by a wide range of computing platforms \citep{yazar_efficient_2009,hammel_mongoose:_2010}\citeweb{webduino}.
 
 
-However, in the last few years \acf{coap}\footnote{\url{https://datatracker.ietf.org/doc/draft-ietf-core-coap/}} has emerged as a specialized web transfer protocol for resource constrained devices. % has emerged, has arisen?
+However, in the last few years \acf{coap} \citeweb{coap2013} has emerged as a specialized web transfer protocol for resource constrained devices. % has emerged, has arisen?
 Some noteworthy features of \ac{coap} are
 (1) the reduced message size,
 (2) the use of UDP as a transport layer (with the possibility of using \emph{multicast} communication),
