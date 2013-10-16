@@ -2,7 +2,6 @@
 \section{Actuating through the Space}
 
 
-
 % explicar brevemente patrones
 % requirements: sistema de suscripciones (out of the scope)
 % escenario de ejemplo en Ubicomp
@@ -122,12 +121,12 @@ In this problem, computation or negotiation aspects are secondary. % se entender
 % IG: hala! y esto de sopeton... lo que decia, preparame el terreno un poco
 \subsubsection{Scenario 1: Temperature Regulation}
 
-The first scenario presents a room populated with several kind of sensors such as Oracle's SunSPOTs\footnote{\url{http://www.sunspotworld.com}},
+The first scenario presents a room populated with several kind of sensors such as Oracle's SunSPOTs \citeweb{sunspot},
 % TODO TODO TODO referenciar a la parte donde se hayan referenciado bien los dispositivos! (e.g. see ~\ref{environment})
 % Para el resto proveer al menos una URL!
 Digi's XBee sensors with an IP gateway,
-the sensors on a KNX20 domotic bus\footnote{\url{http://www.knx.org/knx/what-is-knx/}}, and a fan connected to a FoxG20 embedded platform as an actuator (see Figure \ref{fig:devices_scenario}).
-In addition, an Android application semantically stores the temperature preferences of the user.
+the sensors on a KNX domotic bus \citeweb{knx}, and a fan connected to a FoxG20 \citeweb{foxg20} embedded platform as an actuator (see Figure \ref{fig:devices_scenario}).
+In addition, an Android application \citeweb{android} semantically stores the temperature preferences of the user.
 
 
 \InsertFig{devices_scenario}{fig:devices_scenario}{
@@ -155,7 +154,7 @@ Taking into account the expected steps which should have been completed at each 
 
 There are several nodes involved in this task.
 Each node runs on a device. % which belongs to a user.
-First, an Android phone periodically updates the number of steps covered by a user that day\footnote{\url{http://code.google.com/p/pedometer/}}.
+First, an Android phone periodically updates the number of steps covered by a user that day \citeweb{pedometer}.
 %Besides, it writes her profile, more important to this problem: her age. % simplificado un poquillo
 Second, there is an undefined number of devices which know how to warn the user about her unhealthy behavior.
 Third, there is a node in charge of generating the warnings.
@@ -179,7 +178,7 @@ If the chosen device does not take messages, the \emph{teacher} can update the \
 
 
 With this application, if the priority level is low, the user receives the warning in a less intrusive way.
-For example, room's light brightness can be increased for low priority notifications, a Chumby\footnote{\url{http://www.chumby.com/}} can show an icon for normal priority ones and the user's mobile phone show directly the message when it is a high priority warning. % IG: yo anyadiria una tablita para los dos scenarios mostrando los actuadores y los niveles. Aqui esto me salta un poco de repente.
+For example, room's light brightness can be increased for low priority notifications, a Chumby \citeweb{chumby} can show an icon for normal priority ones and the user's mobile phone show directly the message when it is a high priority warning. % IG: yo anyadiria una tablita para los dos scenarios mostrando los actuadores y los niveles. Aqui esto me salta un poco de repente.
 The remarkable characteristic of this mechanism is that the devices present in the environment at each moment can vary and the application will still fulfill its goal.
 
 

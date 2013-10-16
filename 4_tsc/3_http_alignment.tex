@@ -37,7 +37,7 @@ For example, the template \texttt{?s foaf:knows gomezgoiri:aitor} could be emplo
 }{1}{}
 
 
-Note that this thesis does not consider using more sophisticated query languages like SPARQL \footnote{\url{http://www.w3.org/TR/rdf-sparql-query/}}. % sophisticated o expressive?
+Note that this thesis does not consider using more sophisticated query languages like SPARQL \citeweb{sparql2008}. % sophisticated o expressive?
 The rationale behind this decision is that we wanted to avoid the complexity introduced by these languages in our \ac{api}.
 While the advanced query languages need to be interpreted with parsers not available in many embedded platforms,
 wildcard templates are straightforward to implement and to process.
@@ -135,7 +135,7 @@ The rest of the mappings are shown in the Table~\ref{tab:tscAPI}.
 
 \subsubsection{Status Codes}
 \label{sec:status_codes}
-The \acs{api} should be compliant with the standardized \acs{http} status codes \footnote{\url{http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html}}.
+The \acs{api} should be compliant with the standardized \acs{http} status codes \citeweb{http2008status}.
 These codes are sent back in the response as part of the header.
 For instance, the \ac{tsc} middleware returns the \emph{404 error} when no significant result can be found for a primitive.
 This adoption, apart from enhancing the compatibility with other web applications, can enable the modular adoption of the \ac{api}.
@@ -154,7 +154,7 @@ Then, the server will answer with the best possible format it knows about, speci
 
 The benefits of using this mechanism in the \ac{tsc} middleware presented are two-fold.
 Firstly, it enhances the browsability of the primitives with human understandable \acs{http} responses. % no sé si esto es de Content Negotiation per se
-Secondly, it allows different semantic representations (e.g. RDF/XML\footnote{\url{http://www.w3.org/TR/REC-rdf-syntax/}}, N-Triples\footnote{\url{http://www.w3.org/2001/sw/RDFCore/ntriples/}} or N3\footnote{\url{http://www.w3.org/TeamSubmission/n3/}}).
+Secondly, it allows different semantic representations (e.g. RDF/XML \citeweb{rdfxml2004}, N-Triples \citeweb{ntriples2004} or \acs{n3} \citeweb{n32011}).
 The latter characteristic becomes crucial since not all the nodes may understand all the formats (e.g. a mobile phone may not have a RDF/XML parser).
 %This is true even if all the languages use the same basic concepts (i.e. \acs{rdf} Triples).
 In these cases, the compatibility of both sides can be ensured through a conversion carried out in the server side.

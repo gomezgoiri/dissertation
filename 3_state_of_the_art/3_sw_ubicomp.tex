@@ -65,15 +65,14 @@ As a consequence, some solutions have arisen to semantically annotate data where
 
 
 % Móviles y semántica como paso previo a WoT
-% TODO TODO TODO poner este footnote sólo dónde nos hayamos referido a Android por primera vez
-\citet{daquin_enabling_2011} presents an architecture to deploy an \acs{sparql} endpoint in Android\footnote{\url{http://www.android.com}} devices.
+\citet{daquin_enabling_2011} presents an architecture to deploy an \acs{sparql} endpoint in Android \citeweb{android} devices.
 In their solution the mobile devices store and manage their own semantic knowledge by means of an embedded semantic repository.
 On top of these endpoints, \citeauthor{daquin_enabling_2011} envision a query federation mechanism.
 This dissertation shares this view of independent data sources sharing their own managed semantic content. % evitando entrar otra vez en el rollo de que también hay TS y blablablah
 
 
 In the \acl{wot}, multiple solutions have considered using semantics to enrich the data definition in a machine processable manner.
-Some solutions embed the metadata in HTML using microdata\footnote{\url{http://www.w3.org/TR/microdata/}}, microformats\footnote{\url{http://microformats.org}} or RDFa\footnote{\url{http://www.w3.org/TR/rdfa-primer/}}.
+Some solutions embed the metadata in HTML using microdata \citeweb{microdata2012}, microformats \citeweb{microformats} or RDFa \citeweb{rdfa2013}.
 % \citep{mayer_extensible_2011} propone mapear estrategias de descubrimiento de recursos (RDFa, JSON, etc.) a un meta-formato interno basado en microformatos
 These contents are returned by the Internet connected objects and are used to enhance the search-ability of the data by existing third party search engines.
 % Ontologías no se pueden definir, tiene que haber consenso en su uso por parte de las máquinas de búsqueda. => eso en RDFa no es así!
@@ -90,8 +89,8 @@ This model is based on existing microformats, but limited to certain concepts.
 Besides, the particularities of the semantic annotations are hidden to searchers in their custom search \acs{api}. % custom and non-standard
 
 
-A more general way to represent semantic data is using RDF\footnote{\url{http://www.w3.org/RDF/}} based representations (i.e., full semantics). % más general que los microformatos que usan Guinard y compañía
-SPITFIRE European project\footnote{\url{http://spitfire-project.eu}} represents the most remarkable effort on gathering full semantics and the \ac{wot}.
+A more general way to represent semantic data is using RDF \citeweb{rdf2004} based representations (i.e., full semantics). % más general que los microformatos que usan Guinard y compañía
+SPITFIRE European project \citeweb{spitfire} represents the most remarkable effort on gathering full semantics and the \ac{wot}.
 It focuses on fully integrating sensor data with the \ac{lod}. 
 The \ac{lod} are datasets which follow a series of principles on how to open and publish data.
 The goal of the \ac{lod} is to publish linked terms using full semantics.

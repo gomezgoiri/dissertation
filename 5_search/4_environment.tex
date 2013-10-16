@@ -50,28 +50,28 @@ In the rest of the sections we omit the node discovery process as it represents 
 
 %In our second attempt, we found a dataset which could represent this heterogeneity.
 To represent the data managed by each node, we used data from diverse sensor network environments.
-These data follow the \textit{Semantic Sensor Network Ontology} (SSN)\footnote{\url{http://www.w3.org/2005/Incubator/ssn/XGR-ssn-20110628/}}.
+These data follow the \textit{Semantic Sensor Network Ontology} (SSN) \citeweb{ssn}.
 % created by the W3C Semantic Sensor Network Incubator Group. to represent diverse sensor network environments.
 SSN has been used in many projects and scenarios to describe semantically the data provided by heterogeneous sensors.
 % TODO IG hasta aqui hemos llegado
 Specifically, we used data from the following datasets:
-AEMET metereological dataset\footnote{\url{http://datahub.io/dataset/aemet}},
-University of Luebeck Wisebed Sensor Readings\footnote{\url{http://thedatahub.org/dataset/university-of-luebeck-wisebed-sensor-readings}},
-\emph{Kno.e.sis} Linked Sensor Data\footnote{\url{http://wiki.knoesis.org/index.php/LinkedSensorData}}
-and Bizkaisense\footnote{\url{http://helheim.deusto.es/bizkaisense/}}.%http://dev.morelab.deusto.es/bizkaisense
+AEMET metereological dataset \citeweb{aemet},
+University of Luebeck Wisebed Sensor Readings \citeweb{luebeck},
+\emph{Kno.e.sis} Linked Sensor Data \citeweb{knoesis}
+and Bizkaisense \citeweb{bizkaisense}.
 These datasets contain descriptions about the sensing stations and the data sensed by them during certain periods.
 The analogy between stations which have different sensors and the \ac{iot} devices is reasonable.
 The datasets have been adapted to provide just one measure of each sensor at each moment (to emulate the storage restrictions from embedded devices) and to use as many stations as nodes has the network (depending on the network size).
 
 However, not only sensors but also personal devices (e.g. mobile phones) usually populate AmI environments.
-To represent such circumstance, we added semantic data of people to represent their profiles\footnote{\url{http://www.morelab.deusto.es/joseki/articles}}. % TODO TODO TODO actualizar con la nueva plataforma que pongan!
+To represent such circumstance, we added semantic data of people to represent their profiles \citeweb{morelab_people}.
 
 % poner disponible el código
-We use SimPy\footnote{\url{http://simpy.sourceforge.net}} to simulate each scenario.
+We use SimPy \citeweb{simpy} to simulate each scenario.
 SimPy is a process-based discrete-event simulation language for Python.
 To accurately simulate the time needed by each node to provide a response, we considered measures taken from
-real embedded web servers running on a \textit{ConnectPort X2} IP gateway\footnote{\url{http://tinyurl.com/connectportx2}} for \textit{Digi}'s \textit{XBee sensors}\footnote{\url{http://tinyurl.com/xbee-sensors}} (\textit{XBee} from now on),
-on a FoxG20\footnote{\url{http://www.acmesystems.it}} and on a Samsung Galaxy Tab.
+real embedded web servers running on a \textit{ConnectPort X2} IP gateway \citeweb{connectportx2} for \textit{Digi}'s \textit{XBee sensors} \citeweb{digixbeesensors} (\textit{XBee} from now on),
+on a FoxG20 \citeweb{foxg20} and on a Samsung Galaxy Tab \citeweb{samsunggalaxytab}.
 Besides, we also provide measures taken from a regular computer.
 Table~\ref{tab:measures_embedded} shows the measures used for the parametrization.
 

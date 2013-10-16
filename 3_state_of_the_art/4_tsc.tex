@@ -67,8 +67,8 @@ Therefore, they have to internally translate between both worlds in a not-straig
 On the contrary, the majority of the semantic \acp{ts} use the metadata data model in which the \ac{sw} relies: \ac{rdf}. % también lo llaman language
 We also opt for using the widely accepted \ac{rdf} to ensure interoperability \emph{ab-initio}.
 On top of \ac{rdf}, the \ac{sw} defines new layers to increase the data expressiveness.
-First, \ac{rdfs}\footnote{\url{http://www.w3.org/TR/rdf-schema/}} describes a series of classes and properties to define vocabularies in \ac{rdf}.
-On top of \ac{rdfs}, \ac{owl}\footnote{\url{http://www.w3.org/TR/owl-features/}} offers additional vocabulary for describing properties and classes.
+First, \ac{rdfs} \citeweb{rdfs2004} describes a series of classes and properties to define vocabularies in \ac{rdf}.
+On top of \ac{rdfs}, \ac{owl}\citeweb{owl2004} offers additional vocabulary for describing properties and classes.
 % 3 niveles: Lite, DL (que se corresponde con DL) y Full
 These properties and classes allow to reason over the knowledge both to validate the data inserted or to infer implicit (unstated) knowledge. % implicit y unstated son redundantes, pero para que se entienda mejor
 
@@ -119,7 +119,7 @@ Originally, in \ac{ts} tuples were selected using special tuples where wildcard 
 All the studied works which use a \ac{rdf} triple as a tuple follow this approach.
 Beside, they provide access to the \ac{rdf} graphs by their \acp{uri}.
 
-Most of these works also offer advanced query languages (e.g. SPARQL\footnote{\url{http://www.w3.org/TR/rdf-sparql-query/}}) as a more expressive way to match graphs.
+Most of these works also offer advanced query languages (e.g. SPARQL \citeweb{sparql2008}) as a more expressive way to match graphs.
 This languages can be decomposed in plain triple patterns.
 However, this requires a parser which may not be available for resource constrained platforms.
 In this thesis we focus on queries based on graph patterns and left the adoption of more complex querying languages as a future enhancement.
@@ -208,7 +208,7 @@ Furthermore, to the best of our knowledge, this conceptual exercise never went b
 Participant nodes usually access to semantic spaces through client/server basis.
 % no puedo usar \ac{} por la mayúscula
 Tsc++\citep{krummenacher_open_2009,blunder_distributed_2009} proposes an exception to the client/server access to the space.
-It relies on the Jxta P2P framework\footnote{\url{https://jxta.kenai.com}} to propagate queries using different strategies.
+It relies on the Jxta P2P framework \citeweb{jxta} to propagate queries using different strategies.
 In \acs{tscpp} spaces correspond to groups of nodes which locally manage their data.
 
 
@@ -254,7 +254,7 @@ In other words, each client may access to various server to obtain a result for 
 However, to the best of our knowledge this idea has never been implemented or evaluated, making \acs{smartm3}'s space de facto centralized.
 For the communication between the clients and the space, \acs{smartm3} defines a stateful protocol called \emph{Smart Access Protocol (SSAP)}. % decir que está basado en XML?
 The authors defend that this protocol is communication agnostic because it can be implemented on top of different communication mechanisms
-(e.g. WS-* web services, XMPP\footnote{\url{http://xmpp.org}}, Bluetooth\footnote{\url{http://www.bluetooth.com}} or TCP/IP).
+(e.g. WS-* web services, XMPP \citeweb{xmpp}, Bluetooth \citeweb{bluetooth} or TCP/IP).
 \citet{kiljander_knowledge_2012} propose an enhanced stateless access protocol designed to fit the needs of low capacity devices.
 
 

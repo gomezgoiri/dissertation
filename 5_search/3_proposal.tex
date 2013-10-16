@@ -140,7 +140,7 @@ To implement our architecture, the information about the nodes must include:
 battery level, available memory, storage space and the approximate time passed since the node joined the \Space{} for the last time (to estimate its reliability).
 
 How to discover the nodes in the \Space{} is transversal to this paper.
-We could either extend approaches like \ac{upnp}, \ac{mdns}\footnote{\url{http://tools.ietf.org/html/rfc6762}} or lmDNS \citep{jara_light-weight_2012} or use \acs{http}, \ac{coap}\footnote{\url{https://datatracker.ietf.org/doc/draft-ietf-core-coap/}} and \ac{dns} together as proposed by \citet{ishaq_facilitating_2012}.
+We could either extend approaches like \ac{upnp} \citeweb{upnp}, \ac{mdns} \citeweb{mdns2013} or lmDNS \citep{jara_light-weight_2012} or use \acs{http}, \ac{coap} \citeweb{coap2013} and \ac{dns} together as proposed by \citet{ishaq_facilitating_2012}.
 In particular, in Section~\ref{sec:mdns} we use \ac{mdns} to evaluate our solution.
 % En la primera ronda de revisiones hubo un revisor que dijo:
 %  "How does the system receive the information about the battery level, available memory?
@@ -341,9 +341,9 @@ In the context of this thesis, this \ac{api} corresponds with the one defined in
 % explicar query templates
 To perform the queries, which enable the selection of a subset of the semantic content hold in a given \Space{}, we require a \textbf{template}.
 We assume the use of wildcard templates, which are special triples with optional wildcard subject, predicate and/or object (see Figure~\ref{fig:semanticExample}). % TODO referencia al ejemplo o a figura de ejemplo
-We could use more sophisticated query languages (e.g. SPARQL) % TODO footnote?
+We could use more sophisticated query languages (e.g. \ac{sparql} \citeweb{sparql2008}),
 but processing them may be too demanding for devices with constrained capabilities.
-On the other hand, simple wildcard templates can be managed by any node able to manage RDF triples.
+On the other hand, simple wildcard templates can be managed by any node able to manage \ac{rdf} triples.
 In any case, complex queries can be decomposed into wildcard templates and our solution would still apply.
 
 
@@ -440,12 +440,12 @@ This limitation will be further analysed in Section~\ref{sec:clues_eval}.
 \label{sec:aboxinclues}
 % se podrían usar individuals que no cambian mucho
 % location, individual en base al cual se generan todos los elementos.
-As stated before, in general terms, we want to avoid the use of \emph{ABox} URIs (individuals) in our clues.
+As stated before, in general terms, we want to avoid the use of \emph{ABox} \acp{uri} (individuals) in our clues.
 Thus, we fulfil two goals:
 (1) we generate smaller \clues{} and
 (2) the \clues{} will not change too frequently and therefore, we will require less communication to update clues.
 However, in some cases, the use of \emph{ABox} content in the \clues{} may be beneficial.
-For instance, assume a URI that refers to the specific location \emph{L}.
+For instance, assume a \ac{uri} that refers to the specific location \emph{L}.
 If we want to search for devices in location \emph{L}, we cannot deduce anything about it using the proposed \clues{}.
 
 % AG: Atencion, a partir de aqui viene una propuesta que me acabo de sacar de la manga que habra que discutir.
@@ -453,14 +453,14 @@ If we want to search for devices in location \emph{L}, we cannot deduce anything
 For this reason, we need to consider sharing the \emph{N} most queried individuals in our clues.
 To do that, the \ac{wp} needs to store a list with the statistics about the information collected by each \consumer{}.
 \consumers{} can send this information together with the request to update a clue.
-\providers{} can obtain a list of the current most popular URIs before sending their updated \clues{} to the \ac{wp}.
-Using this list, \providers{} can know if they have these URIs and include them in the \clue{} to be sent to the \ac{wp}.
+\providers{} can obtain a list of the current most popular \acp{uri} before sending their updated \clues{} to the \ac{wp}.
+Using this list, \providers{} can know if they have these \acp{uri} and include them in the \clue{} to be sent to the \ac{wp}.
 % TODO el proceso no me acaba de convencer, y cuando hay una nueva URI? Como saben los proveedores que deben actualizarla?
 Note that this process would imply an extra request per \provider{} before each update.
 
 This simple approach implies sending not only \emph{TBox} but also \emph{ABox}.
 The amount of extra information added to each \clue{} will depend on the size of this list (\emph{N}).
-The effectiveness of this method will depend on the number of queries using one of the \emph{N} URIs in their subjects or objects.
+The effectiveness of this method will depend on the number of queries using one of the \emph{N} \acp{uri} in their subjects or objects.
 % Propuesta: uso de un porcentaje de las queries realizadas
 % Problema: no vas a raspar a cada providers con 1000 comprobaciones tampoco!
 % Solución: ¿merece la pena evaluar eso? ¿como?
@@ -470,16 +470,16 @@ The effectiveness of this method will depend on the number of queries using one 
 % Tras explicarlas, poner algunos fragmentos con las clues (JSON) para que se vea de que hablamos
 We can use many formats to represent the content of a clue.
 % pongo esto de EXI porque se que a la gente del mundillo de IoT se le hace el culo chupicola con sus estandares
-One option is the ongoing Efficient XML Interchange (EXI) \footnote{\url{http://www.w3.org/XML/EXI}}. % o cite?
-EXI is designed to efficiently interchange XML data and therefore, we could obtain better compression rates than with JSON. % aseveracion cierta o solo para XML?
-However, we have chosen JSON for its simplicity and its wide adoption in the WWW.
+One option is the ongoing \acf{exi} \citeweb{exi2011}. % o cite?
+\ac{exi} is designed to efficiently interchange XML data and therefore, we could obtain better compression rates than with \ac{json}. % aseveracion cierta o solo para XML?
+However, we have chosen \ac{json} for its simplicity and its wide adoption in the \ac{www}.
 
 % TODO no lo he acabado de pillar...
-The prefix-based \clue{} is the easiest one to represent in JSON since it is formed by a set of URIs.
-We can also represent the predicate-based and the class-based \clues{} using a set of URIs.
-However, the prefixes of those URIs are usually repeated and for this reason, we do not use plain URI transmission for these clues.
+The prefix-based \clue{} is the easiest one to represent in \ac{json} since it is formed by a set of \acp{uri}.
+We can also represent the predicate-based and the class-based \clues{} using a set of \acp{uri}.
+However, the prefixes of those \acp{uri} are usually repeated and for this reason, we do not use plain \acp{uri} transmission for these clues.
 We show an example in Listing \ref{list:oneClue}.
-It first defines the prefixes used and gives them a name and then, it specifies the URI endings for each prefix.
+It first defines the prefixes used and gives them a name and then, it specifies the \ac{uri} endings for each prefix.
 
 \begin{listing}
   \begin{minted}[fontsize=\scriptsize, frame=single, framesep=3mm, linenos=true, xleftmargin=21pt, tabsize=4]{js}
@@ -534,7 +534,7 @@ Finally, for each node, each prefix is related with the URI endings.
 }
   \end{minted}
   \caption{
-    Representation of an aggregated clue in JSON.
+    Representation of an aggregated clue in \ac{json}.
     Line 2 defines that it embeds predicate \clues{} (i.e. type 1).
     Lines 3 and 4, contain the version of the aggregated clue.
     The remaining lines express the predicates used by two nodes.
