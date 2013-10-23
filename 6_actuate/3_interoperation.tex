@@ -74,7 +74,12 @@ Sections \ref{sec:actuation_scn1}, \ref{sec:actuation_scn2} and \ref{sec:actuati
 % explicar por qué hemos modelado así los escenarios?
 % por qué con medidas?
 % por qué con preferencias?
+
 % TODO explain why like this? why not directly sensors/light?
+
+% por qué no se tienen en cuenta otras características como la localización o lo que sea => por simplificar
+%   en el goal se podrían describir
+
 
 \subsection{Scenario 1}
 \label{sec:actuation_scn1}
@@ -138,18 +143,75 @@ If more than a resource needs to be called, the plan may also indicate how to us
 \label{sec:actuation_scn2}
 
 % poner un diagrama que presente el escenario
+
+The second scenario uses a \provb{} and a \consd{}.
+\provb{} first subscribes to changes in the space (see Listing~\ref{lst:task_subscription}).
+Then, \consd{} writes a task to be performed (see Listing~\ref{lst:task}) and subscribes to its result.
+As a consequence of the writing, \provb{} reacts by taking the task, interpreting it, changing the environment through its actuator and writing the result.
+Finally, \consd{} gets a notification of the written result, takes it and processes it.
+
+
+\begin{listing}
+  \input{\pathchapsix/code/scn2/task_subscription.tex}
+  \caption{Subscription to preferences written in the space.}
+  \label{lst:task_subscription}
+\end{listing}
+
+
 % dar detalles de cómo se ha implementado
-%   poner tarea de ejemplo
+To simplify the implementation of the scenario, we considered a centralized space.
+% subscripciones SPARQL
+The subscription mechanism used by the space uses SPARQL \citeweb{sparql2008}.
+We offered two primitives to trigger the notifications considering knowledge from the whole space or just from the last graph written.
+
+
+\begin{listing}
+  \input{\pathchapsix/code/scn2/task.tex}
+  \caption{The preference is conceptually equivalent to a task.}
+  \label{lst:task}
+\end{listing}
+
 
 
 \subsection{Scenario 3}
 \label{sec:actuation_scn3}
 
-% poner un diagrama que presente el escenario
-% dar detalles de cómo se ha implementado
-%    comentar que asunciones de las del anterior capítulo se han tomado
-%    por simplificar: agente que reside en el coordination space
-% Pasos a seguir por el agente
+This scenario aims to proof that our space-based middleware can easily reuse third applications' providers capacities. % easily? transparently?
+The scenario presents the space and the consumer (\consd{}) from the second scenario, but it replaces the provider with the first scenario's one (\prova{}).
+
+
+Assuming that both applications use the same vocabularies to describe the knowledge they share,
+the space implementation only requires some few adjustments.
+This adjustments are performed by means of an agent which resides in the same machine as the space.
+
+
+This agent takes care of the tasks that \consc{} does in the scenario 1.
+The agent
+\begin{enumerate*}[label=\itshape(\arabic*\upshape)]
+  \item crawls the discovered \acsp{api}\footnote{The discovery process is out of the scope of this implementation.},
+  \item reasons about their data to get a plan, and
+  \item follows the plan performing \acs{http} requests.
+\end{enumerate*}
+Besides, to trigger the reasoning, the agent awaits for new tasks written in the space (see Listing~\ref{lst:generic_task_subscription}).
+Providing that after reasoning the agent does not find a plan to achieve a task, it will write it in the space again. % in case somebody knows how to process it
+
+\begin{listing}
+  \input{\pathchapsix/code/scn3/generic_task_subscription.tex}
+  \caption{Subscription to any task written into the space.}
+  \label{lst:generic_task_subscription}
+\end{listing}
+
+
+Note that the \emph{glue} between both scenarios is the data used.
+The third scenario reuses data from the first and second scenario in the following way:
+\begin{enumerate}
+  \item The agent uses the \consd{} subscription for a result as a goal for the reasoning.
+	In the implementation made, these correspondences will need a minimal mapping between N3QL and SPARQL.
+	The reason why we use both languages is the underlying frameworks (Euler and RDFLib). % TODO citar!
+  \item The agent uses all the content written into the space as \emph{additional knowledge} for the reasoning process.
+	This is reasonable because it resides in the same machine.
+	Consequently, it does not require a lot of bandwidth each time.
+\end{enumerate}
 
 
 % TODO añadir apartado de discussion?

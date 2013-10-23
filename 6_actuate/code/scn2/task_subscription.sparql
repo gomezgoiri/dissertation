@@ -1,0 +1,6 @@
+select ?value where {
+  ?observation a frap:Preference ;
+	a ssn:ObservationValue ;
+	dul:isClassifiedBy  ucum:lux ;
+	dul:hasDataValue ?value .
+}

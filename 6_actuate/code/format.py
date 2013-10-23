@@ -6,8 +6,8 @@ import os
 from optparse import OptionParser
 from pygments import highlight
 from pygments.formatters import LatexFormatter
-from notation3_lexer import Notation3Lexer
-
+#from notation3_lexer import Notation3Lexer
+from pygments.lexers import (get_lexer_by_name,get_lexer_for_filename)
 
 
 # pygmentize -f latex -O full -l python options.input > "%s.tex"%output 
@@ -24,10 +24,15 @@ def generate_pygments_tex_file( input_file_path, output_file_path ):
 	# linenos = True to show line numbers
 	
 	linenos = not inputf_no_ext.endswith("nolinenos")
-	highlighted_code = highlight(	code,
-					Notation3Lexer(),
-					LatexFormatter( linenos = linenos )
-					)
+	
+	ext = input_file_path.split(".")[1]
+	lexer = None
+	if ext=="n3":
+	  lexer = get_lexer_by_name("n3")
+	elif ext=="sparql":
+	  lexer = get_lexer_by_name("sparql")
+	
+	highlighted_code = highlight( code, lexer, LatexFormatter( linenos = linenos ) )
 	
 	# super-ugly fix to hidde syntax errors.
 	# It would be better to simply fix the lesser

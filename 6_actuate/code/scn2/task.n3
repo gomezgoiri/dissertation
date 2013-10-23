@@ -1,0 +1,3 @@
+:obsv a ssn:ObservationValue, frap:Preference ;
+      dul:isClassifiedBy  ucum:lux ;
+      dul:hasDataValue 21 .
