@@ -1,0 +1,26 @@
+{
+  # it is not 'just a measure'
+  ?obsv a ssn:ObservationValue ;
+      # it is also a preference
+      a frap:Preference ;
+      dul:isClassifiedBy  ucum:lux ;
+      dul:hasDataValue ?desired_value .
+} => {
+  _:request http:methodName "POST";
+            http:requestURI actuators:light ;
+            http:body ?desired_value ;
+            http:resp [ http:body ?lightObs ].
+  
+  actuators:light ssn:madeObservation ?lightObs .
+  
+  ?lightObs a ssn:Observation ;
+         ssn:observedProperty sweet:Light ;
+         ssn:observedBy actuators:light ;
+         ssn:observationResult ?so .
+     
+  ?so ssn:hasValue ?ov .
+
+  ?ov a ssn:ObservationValue ;
+      dul:isClassifiedBy ucum:lux ;
+      dul:hasDataValue ?desired_value .
+}.

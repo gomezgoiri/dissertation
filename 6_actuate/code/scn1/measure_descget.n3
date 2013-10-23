@@ -1,0 +1,19 @@
+{
+  actuators:light ssn:madeObservation ?light_obs .
+} => {
+  _:request http:methodName "GET" ;
+            http:requestURI ?light_obs ;
+            #http:body actuators:light ;
+            http:resp [ http:body ?light_obs ].
+  
+  ?light_obs a  ssn:Observation ;
+         ssn:observedProperty  sweet:Light ;
+         ssn:observedBy actuators:light ;
+         ssn:observationResult ?so .
+     
+  ?so ssn:hasValue ?ov .
+
+  ?ov a ssn:ObservationValue ;
+      dul:isClassifiedBy  ucum:lux ;
+      dul:hasDataValue _:val .
+}.

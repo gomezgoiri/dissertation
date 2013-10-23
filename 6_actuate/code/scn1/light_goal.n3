@@ -1,0 +1,17 @@
+{
+  # More things could be specified.
+  # E.g. location.
+  
+  actuators:light ssn:madeObservation ?light .
+  
+  ?light ssn:observedProperty  sweet:Light ;
+         ssn:observationResult ?so .
+  
+  ?so ssn:hasValue ?ov .
+  
+  ?ov a ssn:ObservationValue ;
+      dul:isClassifiedBy  ucum:lux ;
+      dul:hasDataValue 19 .
+} => {
+  ?ov  dul:hasDataValue  ?val .
+}.

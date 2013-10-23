@@ -12,13 +12,18 @@
 %\usepackage{pdflscape}
 %\usepackage{longtable}
 \usepackage{algpseudocode}
-\usepackage{minted}
 \usepackage[printonlyused]{acronym}
 \usepackage{enumerate}
 \usepackage{graphicx,subfigure}
+\usepackage{minted}
+% It is required by N3 lexer for minted. This plugin is not included in the default minted distribution.
+\input{9_backmatter/colores.tex}
+
 \usepackage{footnote} % footnotes inside tables using savenotes
+
 \usepackage[inline]{enumitem} % inline lists
 % For inline cites (section 6.2
+
 \usepackage{bibentry} % http://gking.harvard.edu/files/bibentry2.pdf
 %\nobibliography* throws an error
 \nobibliography{9_backmatter/ref_self} % http://stefaanlippens.net/bibentry
