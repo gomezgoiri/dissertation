@@ -1,6 +1,6 @@
 \section{Experimental Environment}
 \label{environment}
-We have used simulation to study the performance of our solution and compare it against a flooding-based one.
+We use simulation to study the performance of our solution and compare it against a flooding-based one.
 Using a simulation, we can evaluate multiple scenarios and repeat experiments for different approaches under the same conditions.
 The source code for the evaluation is publicly available\footnote{\url{http://gomezgoiri.net/files/code/gomezgoiri201Xenergy.html}}.
 
@@ -41,7 +41,6 @@ We vary these parameters to simulate a wide range of scenarios.
 %     justificado per se.
 As we simulate \ac{http}, we assume a point to point communication between devices which exchange \ac{rdf} Triples.
 We discuss how the discovery process affects the solution in Section~\ref{sec:dynamic}.
-% TODO ENERO
 In the rest of the sections we omit the node discovery process as it represents the same overhead for all strategies.
 
 %To represent the data managed by each node, we first considered using LUBM\footnote{\url{http://swat.cse.lehigh.edu/projects/lubm/}}, a synthetic benchmark.
@@ -49,33 +48,31 @@ In the rest of the sections we omit the node discovery process as it represents 
 %In our opinion, this does not faithfully represent Internet of Things scenarios with heterogeneous devices sharing disparate information.
 
 %In our second attempt, we found a dataset which could represent this heterogeneity.
-To represent the data managed by each node, we used data from diverse sensor network environments.
+To represent the data managed by each node, we use data from diverse sensor network environments.
 These data follow the \textit{Semantic Sensor Network Ontology} (SSN) \citeweb{ssn}.
 % created by the W3C Semantic Sensor Network Incubator Group. to represent diverse sensor network environments.
 SSN has been used in many projects and scenarios to describe semantically the data provided by heterogeneous sensors.
-% TODO IG hasta aqui hemos llegado
-Specifically, we used data from the following datasets:
+Specifically, we use data from the following datasets:
 AEMET metereological dataset \citeweb{aemet},
 University of Luebeck Wisebed Sensor Readings \citeweb{luebeck},
 \emph{Kno.e.sis} Linked Sensor Data \citeweb{knoesis}
 and Bizkaisense \citeweb{bizkaisense}.
 These datasets contain descriptions about the sensing stations and the data sensed by them during certain periods.
 The analogy between stations which have different sensors and the \ac{iot} devices is reasonable.
-The datasets have been adapted to provide just one measure of each sensor at each moment (to emulate the storage restrictions from embedded devices) and to use as many stations as nodes has the network (depending on the network size).
+The datasets are adapted to provide just one measure of each sensor at each moment (to emulate the storage restrictions from embedded devices) and to use as many stations as nodes has the network (depending on the network size).
 
 However, not only sensors but also personal devices (e.g. mobile phones) usually populate AmI environments.
-To represent such circumstance, we added semantic data of people to represent their profiles \citeweb{morelab_people}.
+To represent such circumstance, we add semantic data of people to represent their profiles \citeweb{morelab_people}.
 
 % poner disponible el código
 We use SimPy \citeweb{simpy} to simulate each scenario.
 SimPy is a process-based discrete-event simulation language for Python.
-To accurately simulate the time needed by each node to provide a response, we considered measures taken from
-real embedded web servers running on a \textit{ConnectPort X2} IP gateway \citeweb{connectportx2} for \textit{Digi}'s \textit{XBee sensors} \citeweb{digixbeesensors} (\textit{XBee} from now on),
+To accurately simulate the time needed by each node to provide a response, measures taken from real embedded web servers \citep{gomez-goiri_restful_2012}.
+These servers run on a \textit{ConnectPort X2} IP gateway \citeweb{connectportx2} for \textit{Digi}'s \textit{XBee sensors} \citeweb{digixbeesensors} (\textit{XBee} from now on),
 on a FoxG20 \citeweb{foxg20} and on a Samsung Galaxy Tab \citeweb{samsunggalaxytab}.
 Besides, we also provide measures taken from a regular computer.
 Table~\ref{tab:measures_embedded} shows the measures used for the parametrization.
 
-% TODO TODO TODO poner o referenciar las características de los dispositivos cogidas de WoT 2012
 
 \begin{table}
   \begin{center}

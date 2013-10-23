@@ -141,8 +141,8 @@ In addition to the use of predicate-based clues, we could implement the solution
 % Explicar porque no se pone centralizado en la comparación
 %    No es directamente comparable dado que depende directamente de otro factor distinto: frecuencia de escritura.
 
-We have conducted a simulation to evaluate the benefits of our solution against a flooding-based approach (i.e., \ac{nb}).
-In addition, to give a more exhaustive comparison, we have implemented and tested query caching on top of \ac{nb}.
+We conduct a simulation study to evaluate the benefits of our solution against a flooding-based approach (i.e., \ac{nb}).
+In addition, to give a more exhaustive comparison, we implement and test query caching on top of \ac{nb}.
 We simulate multiple nodes that join the same \Space{} as \providers{} and periodically write new information to the \Space{}.
 During one hour, 1 or 100 \consumers{} perform 1000 queries in total using the templates described in Table~\ref{tab:evaluationTemplates}.
 
@@ -187,7 +187,7 @@ This shows that the overhead added by the use of \ac{wp} on our solution is not 
 % Idea: Lo de arriba está muy bien, pero específicamente, cómo afecta a los cacharros?
 Our solution tries to save energy by making \providers{} handle fewer requests from \consumers{}.
 These savings contrast to the overhead added by the communication with the \ac{wp}.
-However, our results have demonstrated that this overhead is small in comparison to the total number of communications.
+However, our results demonstrate that this overhead is small in comparison to the total number of communications.
 
 The energy consumption in mobile and embedded devices increases each time a device needs to process something or communicate with another node (see Figure~\ref{fig:energy_consumption}).
 To analyse how communications impact their energy autonomy, we have to consider not only the number of communications but also their time length (see Table~\ref{tab:measures_embedded}).
@@ -240,8 +240,8 @@ However, future work will cover the change of the \acs{http} library used in our
 
 \subsection{Performance in Dynamic Environments}
 \label{sec:dynamic}
-We have evaluated the network usage of our solution in ordinary situations in sections~\ref{sec:NetworkUsage} and \ref{sec:energyConsumption}.
-Nevertheless, we have not conducted simulations where the nodes frequently join and leave the \Space{}.
+We evaluate the network usage of our solution in ordinary situations in sections~\ref{sec:NetworkUsage} and \ref{sec:energyConsumption}.
+Nevertheless, we do not evaluate scenarios where the nodes frequently join and leave the \Space{}.
 In such situation, the communication needed to manage the clues might be a burden.
 
 
@@ -252,7 +252,7 @@ In such situation, the communication needed to manage the clues might be a burde
 }{0.8}{}
 
 
-To assess the effect of  dynamic networks on the performance of our solution, we used the scenario presented in Section~\ref{sec:energyConsumption},
+To assess the effect of dynamic networks on the performance of our solution, we used the scenario presented in Section~\ref{sec:energyConsumption},
 Then, we simulate nodes joining and leaving the \Space{} at different intervals: 30 seconds, 1 minute, 5 minutes, 10 minutes, 20 minutes, 30 minutes, 45 minutes.
 Particularly, for our solution, we tested the most harmful situation: the node leaving the \Space{} abruptly is always the \ac{wp}.
 We also added an scenario with no drops as a baseline.
