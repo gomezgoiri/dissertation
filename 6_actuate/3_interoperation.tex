@@ -1,74 +1,26 @@
 \section{Interoperation Example Between both Approaches}
 
-This section aims to experimentally proof the validity of the assumptions made in the alignment of the proof-based actuation mechanism with space-based computing one.
-To this end, we have designed a simple scenario to act on the light of a lamp.
-Then, we have implemented the nodes which participate in this scenario in different manners.
+This section aims to experimentally proof the validity of the alignment presented in the previous section.
+To this end, we present two implementations of the same simple scenario.
+The goal of the scenario is to remotely change the light of a lamp.
 
-
-On the one hand, the lamp node implements two different mechanisms to change this light's value:
-\begin{enumerate}[label=\itshape(\alph*\upshape)]
-  \item It provides a \ac{rest} \ac{api} and describes it using \restdesc{}. % REST API seguro 100%? por si acaso decir HTTP API?
-        When a client invokes changes the value of the resource which describes the light's value, the node will physically change it.
-  \item It is aware of the tasks written into the space and changes the light's value accordingly. % esto es, se suscribe a ellas
-	Figure~\ref{fig:flow_type_b} shows the initialization of this type node and the process performed when a graph is detected.
-\end{enumerate}
-
-
-On the other hand, we have implemented the node which wants to change the light's value in the following ways:
-\begin{enumerate}[resume,label=\itshape(\alph*\upshape)]
-  \item It reasons over the knowledge and descriptions to get a plan to fulfil a goal.
-	With this plan, it invokes the needed \ac{rest} services.
-	Figure~\ref{fig:flow_type_c} shows the actions performed by this type of node in detail.
-  \item It writes a task into the space describing its desire to change the light's value.
-	Figure~\ref{fig:flow_type_d} shows what the actions taken by this type of node has to change the physical environment.
-	As it can be seen, the process is divided in two temporarily independent processes.
-	The first writes the task and the second processes the result whenever it is written in the space.
-\end{enumerate}
-
-
-\newcommand{\prova}{\emph{(a)} provider}
-\newcommand{\provb}{\emph{(b)} provider}
-\newcommand{\consc}{\emph{(c)} consumer}
-\newcommand{\consd}{\emph{(d)} consumer}
-\newcommand{\typea}{\emph{Type (a)} node}
-\newcommand{\typeb}{\emph{Type (b)} node}
-\newcommand{\typec}{\emph{Type (c)} node}
-\newcommand{\typed}{\emph{Type (d)} node}
-
-
-Using these nodes, we implemented three scenarios.
-The first one is fully based on the proof-based mechanism and is composed by a \prova{} and a \consc{}.
-The second scenario presents two nodes using the space-based computing actuation patterns and therefore it is composed by a \provb{} and a \consd{}.
-The third scenario presents a mixed scenario where we have a \prova{} and a \consd{}.
+The first implementation uses the proof-based actuation mechanism presented in Section~\ref{}.
+The second implementation uses a space-based one.
+Then, we mix nodes from the previous implementations and analyse the adjustments required to enable their interoperation.
 Sections \ref{sec:actuation_scn1}, \ref{sec:actuation_scn2} and \ref{sec:actuation_scn3} describe these scenarios respectively.
-% TODO The implementation is publicly available in URL.
+% TODO TODO TODO The implementation is publicly available in URL.
 
 
-\begin{figure}
-        \centering % proporción chachi: 40%, 20% y 20%
-	\subfigure[\typeb] {
-                \includegraphics[width=0.22\linewidth]{flowSpaceProvider}
-                \label{fig:flow_type_b}
-        }
-	~ %add desired spacing between images, e. g. ~, \quad, \qquad etc.
-          %(or a blank line to force the subfigure onto a new line)
-	\subfigure[\typed] {
-                \includegraphics[width=0.22\linewidth]{flowSpaceConsumer}
-                \label{fig:flow_type_d}
-        }
-        ~ %add desired spacing between images, e. g. ~, \quad, \qquad etc.
-          %(or a blank line to force the subfigure onto a new line)
-        \subfigure[\typec] {
-                \includegraphics[width=0.44\linewidth]{flowRESTConsumer}
-                \label{fig:flow_type_c}
-        }%        
-        \caption{Flow charts for the different types of nodes.}
-        {Please note that \typea{} is omitted because its operation is the usual for a \acs{http} server.} % actions, behavior, operation???
-        \label{fig:flow_nodes}
-\end{figure}
+
+\newcommand{\nodea}{\emph{A} node}
+\newcommand{\nodeb}{\emph{B} node}
+\newcommand{\nodec}{\emph{C} node}
+\newcommand{\noded}{\emph{D} node}
 
 
 \subsection{Design decisions}
+
+% mejor igual ponerlo después?
 
 % Ontologies used
 % explicar por qué hemos modelado así los escenarios?
@@ -87,10 +39,48 @@ Sections \ref{sec:actuation_scn1}, \ref{sec:actuation_scn2} and \ref{sec:actuati
 % poner un diagrama que presente el escenario?
 % En ppio no, porque sería muy sencillote, y el flujo del consumidor que es el complejo ya ha sido explicado.
 
-The first scenario uses a \prova{} and a \consc{}.
-The \prova{} is modeled using the following resources:
+The first scenario presents the following nodes:
+\begin{enumerate}[label=\itshape(\alph*\upshape)]
+  \item A node which exposes the lamp and its actuators through a \ac{rest} \ac{api}.
+	This \ac{api} is described using \restdesc{}. % REST API seguro 100%? por si acaso decir HTTP API?
+	To physically change the light value, any client must send an \acs{http} request to the resource which represents the light actuator.
+	
+  \item A node which directly communicates with the desired provider.
+	To discern which provider's resources has to call and how to do it, this implementation reasons to obtain a plan.
+	This plan determines how to fulfil the node's initial goal invoking the needed \ac{http} \acsp{api}.
+	Figure~\ref{fig:flow_type_c} shows the actions performed by this type of node in detail.
+\end{enumerate}
+
+
+
+\begin{figure}
+        \centering % proporción chachi: 40%, 20% y 20%
+	\subfigure[\nodec] {
+                \includegraphics[width=0.22\linewidth]{flowSpaceProvider}
+                \label{fig:flow_type_b}
+        }
+	~ %add desired spacing between images, e. g. ~, \quad, \qquad etc.
+          %(or a blank line to force the subfigure onto a new line)
+	\subfigure[\noded] {
+                \includegraphics[width=0.22\linewidth]{flowSpaceConsumer}
+                \label{fig:flow_type_d}
+        }
+        ~ %add desired spacing between images, e. g. ~, \quad, \qquad etc.
+          %(or a blank line to force the subfigure onto a new line)
+        \subfigure[\nodeb] {
+                \includegraphics[width=0.44\linewidth]{flowRESTConsumer}
+                \label{fig:flow_type_c}
+        }%        
+        \caption{Flow charts for the different types of nodes.}
+        {Please note that \nodea{} is omitted because its operation is the usual for an \acs{http} server.} % actions, behavior, operation???
+        \label{fig:flow_nodes}
+\end{figure}
+
+
+
+The \acs{http} \acs{api} provided by the \nodea{} is modelled using the following resources:
 \begin{itemize}
-  \item \emph{/lamp}: It provides basic information of the lamp.
+  \item \emph{/lamp}: It provides basic information about the lamp.
   \item \emph{/lamp/actuators}: It enumerates the actuators which compose the \emph{smart lamp}.
   \item \emph{/lamp/actuators/light}: It represents the unique actuator which composes the lamp in our simple example: a light.
   \item \emph{/lamp/actuators/light/01}: It represents a concrete preference to change the light.
@@ -102,13 +92,14 @@ The \prova{} is modeled using the following resources:
 % ¿Añadir descripciones y demás aquí o ponerlas como anexo?
 
 In order to instruct consumers on how to use the services provided, they are annotated using \restdesc{}.
-The \acs{http} OPTIONS returns listings~\ref{lst:light_descpost} and~\ref{lst:measure_descget} for \emph{/lamp/actuators/light}.
-So, starting from \emph{/lamp}, based on the dereferenceable \acsp{uri} \citep{sauermann_cool_2008} and the descriptions, a crawler can autonomously learn how to use the \acs{api}. % TODO citar http://en.wikipedia.org/wiki/Dereferenceable_Uniform_Resource_Identifier
+The \acs{http} OPTIONS returns listings~\ref{lst:light_descpost}~and~\ref{lst:measure_descget} for \emph{/lamp/actuators/light}.
+Thanks to these descriptions and to the dereferenceable \acsp{uri} \citep{sauermann_cool_2008}, starting from \emph{/lamp} a crawler can autonomously learn how to use the \acs{api}. % TODO citar http://en.wikipedia.org/wiki/Dereferenceable_Uniform_Resource_Identifier
+% TODO TODO TODO citar a SIMON!
 
 
 \begin{listing}
   \input{\pathchapsix/code/scn1/measure_descget.tex}
-  \caption{Rule which expresses that having a light sensor observation, one can obtain details about the observation through a \acs{http} GET.}
+  \caption{Rule which expresses that having a light sensor observation, one can obtain details about the observation through an \acs{http} GET.}
   \label{lst:measure_descget}
 \end{listing}
 
@@ -119,7 +110,7 @@ So, starting from \emph{/lamp}, based on the dereferenceable \acsp{uri} \citep{s
 \end{listing}
 
 
-In addition to the crawled content, the \consc{} provides two extra pieces of information to the reasoner: a preference and a goal (see listings~\ref{lst:additional_information} and~\ref{lst:light_goal}).
+In addition to the crawled content, the \nodeb{} provides two extra pieces of information to the reasoner: a preference and a goal (see listings~\ref{lst:additional_information} and~\ref{lst:light_goal}).
 The preference allows the consumer express the interest on change a service, which may not always be feasible.
 The goal drives the reasoning, which tries to extract a plan to achieve it.
 
@@ -144,11 +135,23 @@ If more than a resource needs to be called, the plan may also indicate how to us
 
 % poner un diagrama que presente el escenario
 
-The second scenario uses a \provb{} and a \consd{}.
-\provb{} first subscribes to changes in the space (see Listing~\ref{lst:task_subscription}).
-Then, \consd{} writes a task to be performed (see Listing~\ref{lst:task}) and subscribes to its result.
-As a consequence of the writing, \provb{} reacts by taking the task, interpreting it, changing the environment through its actuator and writing the result.
-Finally, \consd{} gets a notification of the written result, takes it and processes it.
+The second scenario presents the following nodes:
+\begin{enumerate}[resume,label=\itshape(\alph*\upshape)]
+  \item A node which reacts to the tasks written into a shared semantic space.
+	The node running this implementation is aware of the tasks written into the space and changes the light's value accordingly. % esto es, se suscribe a ellas
+	Figure~\ref{fig:flow_type_b} shows the initialization of this type node and the process performed when a graph is detected.
+	
+  \item A node which writes tasks into a shared semantic space describing its desire to change the light's value.
+	Figure~\ref{fig:flow_type_d} shows the actions taken by this type of node.
+	As it can be seen, the process is divided in two temporarily independent processes.
+	The first writes the task and the second processes the result whenever it is written in the space.
+\end{enumerate}
+
+
+\nodec{} first subscribes to changes in the space (see Listing~\ref{lst:task_subscription}).
+Then, \noded{} writes a task to be performed (see Listing~\ref{lst:task}) and subscribes to its result.
+As a consequence of the writing, \nodec{} reacts by taking the task, interpreting it, changing the environment through its actuator and writing the result.
+Finally, \noded{} gets a notification of the written result, takes it and processes it.
 
 
 \begin{listing}
@@ -177,7 +180,7 @@ We offered two primitives to trigger the notifications considering knowledge fro
 \label{sec:actuation_scn3}
 
 This scenario aims to proof that our space-based middleware can easily reuse third applications' providers capacities. % easily? transparently?
-The scenario presents the space and the consumer (\consd{}) from the second scenario, but it replaces the provider with the first scenario's one (\prova{}).
+The scenario presents the space and the consumer (\noded{}) from the second scenario, but it replaces the provider with the first scenario's one (\nodea{}).
 
 
 Assuming that both applications use the same vocabularies to describe the knowledge they share,
@@ -185,8 +188,7 @@ the space implementation only requires some few adjustments.
 This adjustments are performed by means of an agent which resides in the same machine as the space.
 
 
-This agent takes care of the tasks that \consc{} does in the scenario 1.
-The agent
+This agent takes care of the tasks that \nodeb{} does in the scenario 1.
 \begin{enumerate*}[label=\itshape(\arabic*\upshape)]
   \item crawls the discovered \acsp{api}\footnote{The discovery process is out of the scope of this implementation.},
   \item reasons about their data to get a plan, and
@@ -205,7 +207,7 @@ Providing that after reasoning the agent does not find a plan to achieve a task,
 Note that the \emph{glue} between both scenarios is the data used.
 The third scenario reuses data from the first and second scenario in the following way:
 \begin{enumerate}
-  \item The agent uses the \consd{} subscription for a result as a goal for the reasoning.
+  \item The agent uses the \noded{}'s subscription for a result as a goal for the reasoning.
 	In the implementation made, these correspondences will need a minimal mapping between N3QL and SPARQL.
 	The reason why we use both languages is the underlying frameworks (Euler and RDFLib). % TODO citar!
   \item The agent uses all the content written into the space as \emph{additional knowledge} for the reasoning process.
