@@ -40,9 +40,9 @@ The distinct predicates managed by each node in average are 16.01 ($SD=1.53$) ou
 In Figures~\ref{fig:recall_measures}~and~\ref{fig:precision_measures}, class-based clue shows a good \emph{precision} and \emph{recall} for \emph{t1} and \emph{t2}.
 \emph{T1} asks exactly for the information this type of clues define (i.e. nodes having instances of a certain class).
 \emph{T2} evaluates which nodes have instances in the domain of the \emph{long} predicate (\emph{SpatialThing}).
-Note that this works thanks to the RDFS inference because some nodes in the \Space{} only write \emph{Point} instances (a subclass of \emph{SpatialThing}).
+Note that this works thanks to the \acs{rdfs} inference because some nodes in the \Space{} only write \emph{Point} instances (a subclass of \emph{SpatialThing}).
 % TODO esto no se entiende muy bien sin explicación extra!
-The domain of \emph{t3} and \emph{t5}'s predicates could not be inferred just using RDFS inference. % (some properties of OWL are used => inverseof).
+The domain of \emph{t3} and \emph{t5}'s predicates could not be inferred just using \acs{rdfs} inference. % (some properties of OWL are used => inverseof).
 Even solving this limitation, we would expect a bad \emph{precision} since both predicates relate very general concepts.
 In addition, when a class-based clue has no enough information to predict the nodes, it simply floods the query.
 This is why the \emph{recall} of \emph{t4} is high.
@@ -103,7 +103,7 @@ Class-based clues are useful for templates asking for a specific type of content
 However, they still require inference to obtain a good \emph{precision}.
 In \citet{gomez-goiri_restful_2012}, we tested the inference process on the devices and data used in this simulation.
 We could not run any reasoner in the ConnectPort X2 Gateway.
-Actually, we could only run RDFS reasoners in more powerful embedded and mobile devices such as the FoxG20 and the Samsung Galaxy Tab.
+Actually, we could only run \acs{rdfs} reasoners in more powerful embedded and mobile devices such as the FoxG20 and the Samsung Galaxy Tab.
 In the FoxG20, it took 48.9 seconds the first load of all the ontologies used and 1.4 seconds to reason over each measurement written.
 In a Samsung Galaxy Tab, it took 17.3 seconds and 0.2 the following measurement writings.
 Considering these results, we can conclude that there is a clear need for efficient embedded reasoners.
@@ -274,7 +274,7 @@ Thus, it reduces the number of messages from the \providers{} to the new \ac{wp}
 \subsection{Effects on Discovery Mechanisms}
 \label{sec:mdns}
 We want to prove the feasibility of our solution using a common discovery mechanism.
-To that end, we simulate the behavior of the \ac{mdns} and \ac{dns-sd} \citeweb{dnssd2013} protocols.
+To that end, we simulate the behaviour of the \ac{mdns} and \ac{dns-sd} \citeweb{dnssd2013} protocols.
 Both protocols are based on the well known and widely accepted \ac{dns}.
 
 On the one hand, \ac{dns-sd} proposes the use of the data field of TXT records to share key/values.

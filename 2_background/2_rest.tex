@@ -47,10 +47,10 @@ To achieve these properties, \ac{rest} establishes the following constraints fro
 
 \citet{richardson_introducing_2008} came up with a maturity model to help people understand the \ac{rest} principles in a less abstract manner.
 Instead of focusing on the presented constraints, the model identifies whether an \ac{api} properly uses the web's three most important protocols: \ac{uri}, \ac{http} and \ac{html}.
-Level zero encompasses those \acp{api} which use a unique \ac{uri} and \ac{http} method (i.e. use \ac{http} as a tunneling mechanism).
+Level zero encompasses those \acp{api} which use a unique \ac{uri} and \ac{http} method (i.e. use \ac{http} as a tunnelling mechanism).
 Level one is formed by the \acp{api} which clearly identify several resources by providing an \acp{uri} to each of them.
 Level two uses \ac{http} as it was originally designed for, i.e. using its verbs, status codes, etc. appropriately. 
-The correct use of \ac{http} forces a developer to comply with all the \ac{rest}'s constraints except for \ac{resthateoas} \citet{moore_hypermedia_2010}.
+The correct use of \ac{http} forces a developer to comply with all the \ac{rest}'s constraints except for \ac{resthateoas} \citep{moore_hypermedia_2010}.
 Level three comprises the \acp{api} which return resources which describe their own capabilities and are interconnected using preferably standard representations (i.e. those which also address the \acf{resthateoas} constraint).
 
 
@@ -87,7 +87,7 @@ WS-* \citep{newcomer_understanding_2002,alonso_web_2010}, also called ``Big Web 
 \ac{uddi} defines how to discover these \emph{big web services} using registries.
 A registry returns information to point to the web services' interfaces.
 These interfaces are syntactically described using the \ac{wsdl}.
-Additionally, \ac{wsdl} describe data and message types, interaction patterns and protocol mappings.
+Additionally, \ac{wsdl} describes data and message types, interaction patterns and protocol mappings.
 Using this information, the service consumer and provider communicate through messages encapsulated using \ac{soap}.
 
 
@@ -104,7 +104,7 @@ WS-* stands for \emph{web services}. % citas a What's wrong with the web y demá
 % a WS-* se le llama web  porque usa estándares de esta
 The reason for this is that it employs web standards. % (e.g. \ac{http}, \ac{uri} or \ac{mime}) <-- o los que fuesen
 % esto es porque WS-* usa protocolos con propositos distintos a los que fueron diseñados
-However, WS-* uses some of them in ways they were not designed for \citep{krummenacher_www_2005}.
+However, WS-* uses some of them in ways that they were not designed for \citep{krummenacher_www_2005}.
 % ejemplo de HTTP
 The most paradoxical case is how it uses \ac{http} as a transport layer instead of as an application layer protocol.
 % por eso no consigue las propiedades de REST: simplicidad y escalabilidad
@@ -155,7 +155,7 @@ Historically, \ac{http} has been considered a suitable protocol in that regard.
 \ac{http} is a simple protocol which has be adopted by a wide range of computing platforms \citep{yazar_efficient_2009,hammel_mongoose:_2010}\citeweb{webduino}.
 
 
-However, in the last few years \acf{coap} \citeweb{coap2013} has emerged as a specialized web transfer protocol for resource constrained devices. % has emerged, has arisen?
+However, in the last few years the \acf{coap} \citeweb{coap2013} has emerged as a specialized web transfer protocol for resource constrained devices. % has emerged, has arisen?
 Some noteworthy features of \ac{coap} are
 (1) the reduced message size,
 (2) the use of UDP as a transport layer (with the possibility of using \emph{multicast} communication),
@@ -174,7 +174,7 @@ However, we have chosen to work with \ac{http} for the following reasons:
         % será cierto? o tardará menos en conjunto?
   \item \ac{rdf}-based media-formats can be rather verbosed.
 	This contrasts with \ac{coap}'s message size limitations.
-	Dealing with this limitations was not one main goals of the thesis.
+	Dealing with these limitations was not one of the main goals of the dissertation.
 	However, we have considered them at some points of the dissertation to avoid unrealistic assumptions.
   \item \ac{coap} is an ongoing standard (i.e. its definition is currently subject to change).
         As a result of this immaturity, there are few libraries and tools to work with \ac{coap} at the moment \citep{villaverde_constrained_2012}. % y encima cada una en una versión...    
