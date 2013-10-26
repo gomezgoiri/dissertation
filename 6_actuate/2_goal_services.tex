@@ -8,21 +8,22 @@ However, this requires applications to directly use the actuator's node \ac{http
 
 
 In contrast, the actuation mechanism presented in the previous section uses the \Space{} (i.e. it is indirect).
-The mechanism implies that the actuator must be aware of the content of the space.
+This mechanism implies that the actuator must be aware of the content of the space.
 For instance, a heater must check the space to find if a new desired temperature was written.
 % lo podrá reusar a través de un intermediario
 % interop era una de las cosas que queriamos cuidar
 % y qué pasa con las soluciones REST que quieren usar lo nuestro?
 
 
-In this section we propose to close the gap between both approaches.
+In this section, we propose to close the gap between both approaches.
 To do that, we propose to transparently invoke \ac{rest}-like services on behalf of the developer.
 From her perspective, she will still use the space-based patterns presented in the previous section.
 However, the middleware will be enriched with the actuation capacities of third \ac{http} \acp{api}.
+% IG: comor?
 
 
-To define that integration, we first explain the mechanism used to describe and select the appropriate \ac{rest} services (Section~\ref{sec:background_restdesc}).
-Then we sketch this integration by answering two key elements:
+To define this integration, we first explain the mechanism used to describe and select the appropriate \ac{rest} services (Section~\ref{sec:background_restdesc}).
+Then, we sketch this integration by answering two key elements:
 \begin{itemize}
   \item How do the inputs for this mechanism relate to the ones used in the \ac{ts} patterns? (Section~\ref{sec:inputs_proof})
   \item Which node is responsible for triggering this mechanism? (Section~\ref{sec:responsible_proof})
@@ -33,7 +34,7 @@ Then we sketch this integration by answering two key elements:
 \subsection{Background}
 \label{sec:background_restdesc}
 
-In \ac{wot} physical changes in the environment are performed by manipulating \ac{http} resources.
+In \ac{wot}, physical changes in the environment are performed by manipulating \ac{http} resources.
 According to the \ac{rest} principles, a client should navigate through these resources with no prior knowledge of the \ac{api}.
 % Copiar esta explicación mejor de algún lado:
 The client should 
@@ -41,6 +42,7 @@ The client should
   \item interpret the representations provided by the server and then
   \item choose the appropriate state transition from the hypertext according to its intention. % y su conocimiento básico del protocolo: CRUD
 \end{enumerate*}
+% IG: y este nuevo formato tan molon?
 
 
 % es HATEOAS?
