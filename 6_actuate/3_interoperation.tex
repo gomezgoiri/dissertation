@@ -4,7 +4,7 @@ This section aims to experimentally proof the validity of the alignment presente
 To this end, we present two implementations of the same simple scenario.
 The goal of the scenario is to remotely change the light of a lamp.
 
-The first implementation uses the proof-based actuation mechanism presented in Section~\ref{}.
+The first implementation uses the proof-based actuation mechanism presented in Section~\ref{sec:background_restdesc}.
 The second implementation uses a space-based one.
 Then, we mix nodes from the previous implementations and analyse the adjustments required to enable their interoperation.
 Sections \ref{sec:actuation_scn1}, \ref{sec:actuation_scn2} and \ref{sec:actuation_scn3} describe these scenarios respectively.
@@ -17,20 +17,6 @@ Sections \ref{sec:actuation_scn1}, \ref{sec:actuation_scn2} and \ref{sec:actuati
 \newcommand{\nodec}{\emph{C} node}
 \newcommand{\noded}{\emph{D} node}
 
-
-\subsection{Design decisions}
-
-% mejor igual ponerlo después?
-
-% Ontologies used
-% explicar por qué hemos modelado así los escenarios?
-% por qué con medidas?
-% por qué con preferencias?
-
-% TODO explain why like this? why not directly sensors/light?
-
-% por qué no se tienen en cuenta otras características como la localización o lo que sea => por simplificar
-%   en el goal se podrían describir
 
 
 \subsection{Scenario 1}
@@ -48,7 +34,7 @@ The first scenario presents the following nodes:
   \item A node which directly communicates with the desired provider.
 	To discern which provider's resources has to call and how to do it, this implementation reasons to obtain a plan.
 	This plan determines how to fulfil the node's initial goal invoking the needed \ac{http} \acsp{api}.
-	Figure~\ref{fig:flow_type_c} shows the actions performed by this type of node in detail.
+	Figure~\ref{fig:flow_type_b} shows the actions performed by this type of node in detail.
 \end{enumerate}
 
 
@@ -57,7 +43,7 @@ The first scenario presents the following nodes:
         \centering % proporción chachi: 40%, 20% y 20%
 	\subfigure[\nodec] {
                 \includegraphics[width=0.22\linewidth]{flowSpaceProvider}
-                \label{fig:flow_type_b}
+                \label{fig:flow_type_c}
         }
 	~ %add desired spacing between images, e. g. ~, \quad, \qquad etc.
           %(or a blank line to force the subfigure onto a new line)
@@ -69,7 +55,7 @@ The first scenario presents the following nodes:
           %(or a blank line to force the subfigure onto a new line)
         \subfigure[\nodeb] {
                 \includegraphics[width=0.44\linewidth]{flowRESTConsumer}
-                \label{fig:flow_type_c}
+                \label{fig:flow_type_b}
         }%        
         \caption{Flow charts for the different types of nodes.}
         {Please note that \nodea{} is omitted because its operation is the usual for an \acs{http} server.} % actions, behavior, operation???
@@ -82,7 +68,7 @@ The \acs{http} \acs{api} provided by the \nodea{} is modelled using the followin
 \begin{itemize}
   \item \emph{/lamp}: It provides basic information about the lamp.
   \item \emph{/lamp/actuators}: It enumerates the actuators which compose the \emph{smart lamp}.
-  \item \emph{/lamp/actuators/light}: It represents the unique actuator which composes the lamp in our simple example: a light.
+  \item \emph{/lamp/actuators/light}: It represents the unique actuator which composes the lamp in our simple example (i.e. the lamp's light).
   \item \emph{/lamp/actuators/light/01}: It represents a concrete preference to change the light.
 \end{itemize}
 
@@ -93,7 +79,7 @@ The \acs{http} \acs{api} provided by the \nodea{} is modelled using the followin
 
 In order to instruct consumers on how to use the services provided, they are annotated using \restdesc{}.
 The \acs{http} OPTIONS returns listings~\ref{lst:light_descpost}~and~\ref{lst:measure_descget} for \emph{/lamp/actuators/light}.
-Thanks to these descriptions and to the dereferenceable \acsp{uri} \citep{sauermann_cool_2008}, starting from \emph{/lamp} a crawler can autonomously learn how to use the \acs{api}. % TODO citar http://en.wikipedia.org/wiki/Dereferenceable_Uniform_Resource_Identifier
+Thanks to these descriptions and to the dereferenceable \acsp{uri} \citep{sauermann_cool_2008}, starting from \emph{/lamp} any client can crawl the \acs{api} to autonomously learn how to use it. % TODO citar http://en.wikipedia.org/wiki/Dereferenceable_Uniform_Resource_Identifier
 % TODO TODO TODO citar a SIMON!
 
 
@@ -111,7 +97,7 @@ Thanks to these descriptions and to the dereferenceable \acsp{uri} \citep{sauerm
 
 
 In addition to the crawled content, the \nodeb{} provides two extra pieces of information to the reasoner: a preference and a goal (see listings~\ref{lst:additional_information} and~\ref{lst:light_goal}).
-The preference allows the consumer express the interest on change a service, which may not always be feasible.
+The preference allows the consumer to express the interest on change a service, which may not always be feasible.
 The goal drives the reasoning, which tries to extract a plan to achieve it.
 
 \begin{listing}
@@ -139,7 +125,7 @@ The second scenario presents the following nodes:
 \begin{enumerate}[resume,label=\itshape(\alph*\upshape)]
   \item A node which reacts to the tasks written into a shared semantic space.
 	The node running this implementation is aware of the tasks written into the space and changes the light's value accordingly. % esto es, se suscribe a ellas
-	Figure~\ref{fig:flow_type_b} shows the initialization of this type node and the process performed when a graph is detected.
+	Figure~\ref{fig:flow_type_c} shows the initialization of this type node and the process performed when a graph is detected.
 	
   \item A node which writes tasks into a shared semantic space describing its desire to change the light's value.
 	Figure~\ref{fig:flow_type_d} shows the actions taken by this type of node.
@@ -162,11 +148,13 @@ Finally, \noded{} gets a notification of the written result, takes it and proces
 
 
 % dar detalles de cómo se ha implementado
-To simplify the implementation of the scenario, we considered a centralized space.
+To simplify the implementation of the scenario, we considered a purely centralized space.
 % subscripciones SPARQL
 The subscription mechanism used by the space uses SPARQL \citeweb{sparql2008}.
-We offered two primitives to trigger the notifications considering knowledge from the whole space or just from the last graph written.
-
+We offered two primitives to trigger the notifications.
+The first one takes into account the knowledge from the last graph written.
+% http://english.stackexchange.com/questions/2981/alternatives-to-computationally-expensive
+The second primitive considers the knowledge from the whole space and hence is more computationally costly.
 
 \begin{listing}
   \input{\pathchapsix/code/scn2/task.tex}
@@ -181,10 +169,12 @@ We offered two primitives to trigger the notifications considering knowledge fro
 
 This scenario aims to proof that our space-based middleware can easily reuse third applications' providers capacities. % easily? transparently?
 The scenario presents the space and the consumer (\noded{}) from the second scenario, but it replaces the provider with the first scenario's one (\nodea{}).
+Both nodes have a good foundation for the interoperation since they use the same vocabularies. % to describe the knowledge they manage.
+However, the \nodea{} and the \noded{} rely on different communication mechanisms: direct communication and indirect communication.
 
 
-Assuming that both applications use the same vocabularies to describe the knowledge they share,
-the space implementation only requires some few adjustments.
+To close the gap between both worlds, we avoid changing the participant node's implementations.
+Instead, we make some few adjustments in the space implementation.
 This adjustments are performed by means of an agent which resides in the same machine as the space.
 
 
@@ -192,10 +182,12 @@ This agent takes care of the tasks that \nodeb{} does in the scenario 1.
 \begin{enumerate*}[label=\itshape(\arabic*\upshape)]
   \item crawls the discovered \acsp{api}\footnote{The discovery process is out of the scope of this implementation.},
   \item reasons about their data to get a plan, and
-  \item follows the plan performing \acs{http} requests.
+  \item follows the resulting plan performing \acs{http} requests.
 \end{enumerate*}
-Besides, to trigger the reasoning, the agent awaits for new tasks written in the space (see Listing~\ref{lst:generic_task_subscription}).
-Providing that after reasoning the agent does not find a plan to achieve a task, it will write it in the space again. % in case somebody knows how to process it
+To trigger the reasoning, the agent awaits for new tasks written in the space (see Listing~\ref{lst:generic_task_subscription} for the used subscription template).
+Providing that after reasoning the agent does not find a plan to achieve a task, it will write it in the space again.
+This way, another node which may know how to process it may take the task. % TODO discutir porque reasoning va a tener preferencia sobre actuación indirecta!
+
 
 \begin{listing}
   \input{\pathchapsix/code/scn3/generic_task_subscription.tex}
@@ -204,18 +196,36 @@ Providing that after reasoning the agent does not find a plan to achieve a task,
 \end{listing}
 
 
-Note that the \emph{glue} between both scenarios is the data used.
-The third scenario reuses data from the first and second scenario in the following way:
+Requiring new data from the developer, would impede the transparent reuse of the nodes from the first and second scenario.
+Therefore, the agent reuses all the information pieces it needs:
 \begin{enumerate}
-  \item The agent uses the \noded{}'s subscription for a result as a goal for the reasoning.
-	In the implementation made, these correspondences will need a minimal mapping between N3QL and SPARQL.
-	The reason why we use both languages is the underlying frameworks (Euler and RDFLib). % TODO citar!
+  \item It uses the \noded{}'s subscription to the task result as a goal for the reasoning.
+	In our implementation, these correspondences need a minimal mapping between N3QL \citeweb{n3ql2004} and SPARQL \citeweb{sparql2008}.
+	The reason why we use both languages are the underlying frameworks: Euler \citeweb{euler} and RDFLib \citeweb{rdflib}. % TODO citar!
   \item The agent uses all the content written into the space as \emph{additional knowledge} for the reasoning process.
-	This is reasonable because it resides in the same machine.
-	Consequently, it does not require a lot of bandwidth each time.
+	This is feasible because it can locally obtain it because the agent resides in the same machine as the space.
+	Otherwise, obtaining this knowledge through the network would be too consuming both in bandwidth and in time.
 \end{enumerate}
 
 
-% TODO añadir apartado de discussion?
+
+\subsection{Discussion}
+
+%The \emph{glue} between both scenarios is the data used.
+
+
+% mejor igual ponerlo después?
+
+% Ontologies used
+% explicar por qué hemos modelado así los escenarios?
+% por qué con medidas?
+% por qué uso preferencias?
+
+% TODO explain why like this? why not directly sensors/light?
+
+% por qué no se tienen en cuenta otras características como la localización o lo que sea => por simplificar
+%   en el goal se podrían describir
+
+
 % luego posiblemente se podrían medir algunos indicadores de los mismos
 %   e.g. cuando código extra ha hecho falta añadir en el tercero para que se hablen entre sí
