@@ -1,14 +1,14 @@
-
 \section{Comparison}
+\label{sec:actuation_comparison}
 
-The first actuation procedures require a subscription mechanism and provide space and time autonomy.
-However, it does that by creating a dependency on the \Space{}.
+The actuation procedure explained in Section~\ref{sec:actuation_space} requires a subscription mechanism, but in exchange it provides space and time autonomy.
+Obviously, it does that by creating a dependency on the \Space{}.
 Two nodes will not be able to communicate with each other without the \Space{}.
 
 
-The second approach offers this independence of the \Space{}: any node can directly invoke a service to act over the environment.
-Remarkably, it allows reusing third \ac{wot} applications' actuation capacities. % apps, APIs o services? % no digo integration/interop porque es sólo one-way
-To do that, it requires a rule-based reasoning engine. % reasoning engine ya queda bien?
+The second approach offers independence of the \Space{}: any node can directly invoke a service to act over the environment.
+This approach allows reusing \ac{wot} applications' actuation capacities, providing they are properly described. % apps, APIs o services? % no digo integration/interop porque es sólo one-way
+To enable this reuse, it demands a rule-based reasoning engine. % reasoning engine ya queda bien?
 The unavailability of these engines in many computing platforms may impede its massive adoption. % como apunte de su practicalidad
 
 
@@ -17,11 +17,11 @@ The unavailability of these engines in many computing platforms may impede its m
 
 \bigskip
 
-The impact of both mechanisms in resource constrained devices will be affected by computing and networking activities.
+The impact of both mechanisms in resource constrained devices will be affected by their computing and networking activities.
 \ac{ts}-based patterns require all the participants to be aware of what is written in the space to react (i.e. be proactive).
 Both consumers and providers read and write from the space, subscribe to specific changes and receive notifications.
 Thanks to this specificity, they are only affected by the contents they are interested in. % reduciendo la actividad
-Finally, they only perform trivial computing task: interpreting results and pattern matching. % pattern matching sólo en el caso del coordination space!
+Besides, they only perform trivial computing task: interpreting results and pattern matching. % pattern matching sólo en el caso del coordination space!
 
 
 The proof-based actuation mechanism requires the consumer to have prior knowledge about the environment to reason over it. % frase susceptible de simplificar
@@ -30,8 +30,16 @@ Since this knowledge must be acquired from remote nodes somehow, this approach m
 Besides, the proof-based actuation itself also generates more computation activity on the node responsible of reasoning.
 Both aspects have a negative impact in the energy consumption.
 Consequently, from its consumer perspective, it will most likely not be an adequate mechanism for resource constrained devices.
-As a contrast, this mechanism requires few things from the provider perspective: to serve \ac{rest}-like services and provide their descriptions. % aclarar quien es el provider/actuator?
-
+As a contrast, this mechanism demands few things to the provider: to serve \ac{rest}-like services and provide their descriptions. % aclarar quien es el provider/actuator?
 
 
 \input{\pathchapsix/tables/actuation_netcomp}
+
+
+
+% TODO podríamos decir que el proof-based es más genérico?
+%  + Space-based es muy dependiente del tipo de datos escritos en el espacio.
+%    Proof-based también lo es a decir verdad.
+%  + El proveedor del Space-based no tiene forma de saber cómo activar un mecanismo concreto.
+%    Salvo que tenga posibilidad de saber a qué se han suscrito otros...
+%    No sé como expresar esa diferencia.

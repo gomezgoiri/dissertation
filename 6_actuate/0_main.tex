@@ -26,20 +26,27 @@ If you live among wolves you have to act like a wolf.
 
 In the previous chapter, we presented an energy-aware technique to search on the completely distributed semantic space.
 %This search mechanism promotes the end-to-end interaction between the objects.
-% However, as important as observing what happens in an \ac{ubicomp} environment, is to act over it.
-However, acting over an \ac{ubicomp} environment is as important as observing what happens on it. % IG: cambia un poco la semantica, pero lo anterior me sonaba my raro
+However, acting over an \ac{ubicomp} environment is as important as observing what happens on it.
 Although this dissertation describes this problem less thoroughly, we consider interesting to discuss it to provide the complete story. %not leave loose ends. % transmit a broader vision. % the big picture
 
-%Therefore,
+
 This chapter presents and compares two techniques to change the environment by \emph{writing} into the space. % no se si se entiende que la segunda también emula "escribir en el espacio"
 The first one is based on \ac{ts} patterns and uses tasks and a subscription mechanism.
-The second one has a goal and knowledge about the environment.
-% IG: el nivel de detalle de la segunda es un poco alto para una introduccion y ademas desbalanceado con la primera.
-Then, it reasons to create a plan to fulfil the goal.
-This plan comprises calls to \ac{rest} services.
-%These services are semantically annotated and are read from the space.
+The second one relies on semantically described \ac{rest} services to create a plan to fulfil a given goal.
+The first approach is described in Section~\ref{sec:actuation_space} and the second in Section~\ref{sec:direct_actuation}.
+Section~\ref{sec:actuation_comparison} offers a comparison between them.
 
-% IG: no entiendo mucho el giro entre la intro y lo siguiente
+
+Section~\ref{sec:actuation_interoperation} presents a simple scenario implemented using the mentioned techniques.
+The second actuation technique is not space-based, but we believe that our space model can be benefited from its adoption.
+We pursue the transparent reuse of the capacities of already existing semantically described providers' \acsp{api}.
+Therefore, we present a third mixed scenario where we can analyse the requirements for this transparent reuse.
+
+
+Section~\ref{sec:actuation_discussion} deepens into the implementation alternatives of the mixed scenario
+and Section~\ref{sec:actuation_summary} concludes the chapter.
+
+
 
 % ----------------------------------------------------------------------
 
