@@ -116,8 +116,10 @@ In other words, it sacrifices some of the web's properties on behalf of addition
 % posiblemente esa simplicidad se ve afectada negativamente porque los usuarios necesitan decidir
 One of the sacrificed properties is the simplicity.
 The complexity negatively affects to
-(1) the ability of limited computing platforms to adopt the WS-* stack; and % explicar esto más? => cuanto menos requieras, más fácil que alguien haya implementado HTTP y eso
-(2) the developers.
+\begin{enumerate*}[label=\itshape(\arabic*\upshape)]
+  \item the ability of limited computing platforms to adopt the WS-* stack; and % explicar esto más? => cuanto menos requieras, más fácil que alguien haya implementado HTTP y eso
+  \item the developers.
+\end{enumerate*}
 % y por eso o no, WS-* está perdiendo peso respecto a REST
 Specifically, developers need to take further architectural decisions on different layers of the WS-* stack.
 These decisions make the people perceive it as more complex than the \ac{rest}ful style \citep{guinard_search_2011}.
@@ -157,11 +159,13 @@ Historically, \ac{http} has been considered a suitable protocol in that regard.
 
 However, in the last few years the \acf{coap} \citeweb{coap2013} has emerged as a specialized web transfer protocol for resource constrained devices. % has emerged, has arisen?
 Some noteworthy features of \ac{coap} are
-(1) the reduced message size,
-(2) the use of UDP as a transport layer (with the possibility of using \emph{multicast} communication),
-(3) similarity with \ac{http} (both to reuse its properties and to ease cross-protocol proxying), and
-(4) a resource discovery mechanism. % TODO comprobar a ver de dónde cojones saque esto último => no estoy seguro
-% mencionar seguridad?
+\begin{enumerate*}[label=\itshape(\arabic*\upshape)]
+  \item the reduced message size,
+  \item the use of UDP as a transport layer (with the possibility of using \emph{multicast} communication),
+  \item similarity with \ac{http} (both to reuse its properties and to ease cross-protocol proxying), and
+  \item a resource discovery mechanism. % TODO comprobar a ver de dónde cojones saque esto último => no estoy seguro
+  % mencionar seguridad?
+\end{enumerate*}
 
 
 One could argue that to implement a lightweight \ac{tsc} solution, \ac{coap} should be used as a baseline.

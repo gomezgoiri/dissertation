@@ -4,8 +4,10 @@
 \subsection{Types of Clues Shared}
 \label{sec:clues_eval}
 As presented in Section~\ref{sec:clues}, the type of clue used will affect
-(1) the \emph{precision} and \emph{recall} to find the nodes with the appropriate information; % explained in section 4
-and (2) the amount of information to transfer over the network (both requests and responses) and nodes have to process.
+\begin{enumerate*}[label=\itshape(\arabic*\upshape)]
+  \item the \emph{precision} and \emph{recall} to find the nodes with the appropriate information; and % explained in section 4
+  \item the amount of information to transfer over the network (both requests and responses) and nodes have to process.
+\end{enumerate*}
 Increasing \emph{precision} reduces the number of unsuccessful requests to handle and thus, it reduces the energy consumption. 
 Similarly, sending more information over the network implies more processing time and more energy consumed.
 
@@ -287,8 +289,10 @@ However, note that as explained above, our strategy does differ from \acl{nb} in
 The nodes announce records during the start up or whenever they have a resource record with new data.
 Therefore, each time a record is updated, we send a multicast message that increases the network traffic.
 In our solution the TXT record may change 
-(1) when a new \ac{wp} is selected or
-(2) when we update the time elapsed since it joined the \Space{} and its battery charge level.
+\begin{enumerate*}[label=\itshape(\arabic*\upshape)]
+  \item when a new \ac{wp} is selected or
+  \item when we update the time elapsed since it joined the \Space{} and its battery charge level.
+\end{enumerate*}
 The last two parameters need to be updated to select an appropriate \ac{wp} but they do not need to change too frequently.
 
 % Regarding the first case,  % no pillo la introduccion del first case

@@ -56,8 +56,10 @@ However, other properties are derived from how \ac{tsc} is materialized. % mater
 This chapter focuses on this materialization, i.e. the design of our own space model.
 To that end, Section~\ref{sec:guiding_principles} discusses the principles which guide our proposal.
 Section~\ref{sec:hybrid_solution} proposes a mix model which encompasses
-(a) an independent space which can be used for coordination purposes, and
-(b) an enriched view of this space which also shows the information provided by autonomous devices.
+\begin{enumerate*}[label=\itshape(\alph*\upshape)]
+  \item an independent space which can be used for coordination purposes, and
+  \item an enriched view of this space which also shows the information provided by autonomous devices.
+\end{enumerate*}
 Section~\ref{sec:align_tsc_http} describes a \ac{rest}-like \ac{api} to access the first space.
 Section~\ref{sec:federated_space} details the additional extensions needed to support the enriched view.
 Finally, Section~\ref{sec:middleware_qualitative_evaluation} evaluates the properties achieved with this model.

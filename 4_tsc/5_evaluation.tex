@@ -7,8 +7,10 @@ With the model presented in this chapter, we aimed to retain the desirable prope
 % 2. que aporta unirlo bajo un mismo middleware?
 % 3. tiene beneficios?
 However, some questions arise from this integration:
-(1) does in fact retain all the properties of \ac{rest} and \ac{tsc} separately? Otherwise, which properties are affected?
-(2) which other benefits offers compared with the usage of separate \ac{tsc} and \ac{rest} middleware?
+\begin{enumerate*}[label=\itshape(\arabic*\upshape)]
+  \item does in fact retain all the properties of \ac{rest} and \ac{tsc} separately? Otherwise, which properties are affected?
+  \item which other benefits offers compared with the usage of separate \ac{tsc} and \ac{rest} middleware?
+\end{enumerate*}
 
 % Fielding distingue entre:
 %      + "distributed-system": hace que el usuario vea el sistema como un todo, sin saber cuando se realizan llamadas en remoto y cuando no
@@ -16,9 +18,11 @@ However, some questions arise from this integration:
 
 
 To answer these questions, we analyse the presented solution from different point-of-views:
-(1) its coordination properties (Section~\ref{sec:coordination_properties}),
-(2) its network-level properties (Section~\ref{sec:network_properties}),
-(3) how the latter work together to contribute to the challenges of an \ac{ubicomp} environment (Section~\ref{sec:middleware_properties}).
+\begin{enumerate*}[label=\itshape(\arabic*\upshape)]
+  \item its coordination properties (Section~\ref{sec:coordination_properties}),
+  \item its network-level properties (Section~\ref{sec:network_properties}),
+  \item how the latter work together to contribute to the challenges of an \ac{ubicomp} environment (Section~\ref{sec:middleware_properties}).
+\end{enumerate*}
 
 
 % Cosas rescatables del paper original de WoT 2011 que no son tocadas en este capítulo:
@@ -58,7 +62,7 @@ As a future work, this could be alleviated by a caching mechanism implemented in
 
 Section~\ref{sec:soa_tsc_discussion} described how \ac{tsc} does not intrinsically contradict any of the \ac{rest} principles.
 However, the adaptation presented in this thesis does not completely adhere to the \ac{rest} style.
-In this section we present how this divergences affect to \ac{rest}'s properties.
+This section presents how this divergences affect to \ac{rest}'s properties.
 % decir que el objetivo final es que pudiera ser REST
 
 
@@ -312,7 +316,7 @@ The high scalability of the chosen architectural network style is negatively aff
 
 Manageability helps to cope with a big number of devices allowing them to have an autonomous behaviour. % specially in environments where they cannot be controlled through centrality
 It encompasses self-management, self-configuration, self-healing, self-optimization and self-protection.
-In this thesis we propose self-managed architecture which eases searching self-managed graphs.
+This dissertation proposes a self-managed architecture which eases searching self-managed graphs.
 
 
 \subsubsection{Mobility}

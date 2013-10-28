@@ -1,7 +1,7 @@
 \section{Energy-aware super-peer architecture} % pensar titulo más sexy
 \label{proposal}
 
-% In this section, we discuss the content the clues should contain to make them suitable to the \ac{wot};
+% This section discusses the content the clues should contain to make them suitable to the \ac{wot};
 % we explain in detail the roles the nodes of our solution can have;
 % we overview the deployment issues related to these roles, such as discovery or role transition;
 % and we discuss how our solution can adapt multiple scenarios.
@@ -28,7 +28,7 @@ Thus, clients can use their own personal devices (e.g., smartphones) to interact
 Using this approach, a client, for example, can check the current swimming pool occupancy rate using his personal mobile phone.
 
 However, not all devices can afford the costs of fully managing the additional overhead of semantics.
-In this section, we present our architecture to manage such environments and deal with the limitations of resource-constrained devices.
+This section presents our architecture to manage such environments and deal with the limitations of resource-constrained devices.
 
 \subsection{Basic roles}
 As we introduced before, devices can be part of one or multiple \Spaces{}.
@@ -59,12 +59,14 @@ To reduce the load on such resource-constrained devices, we need to use intermed
 % No hacen tareas por ellos, más bien les evitan hacerlas.
 %   + Por que queremos que ellos administren su info?
 However, we do not want devices to completely rely on intermediaries for three reasons:
-(1) data consumers need to get fresh data and we can only get this by direct access to the actual \provider{},
-% We aim to promote the direct communication between devices to ensure that freshness of the information shared.
-(2) we must support mobile scenarios where personal devices carry their own data,
-%   + Explicar un poco la naturaleza dinámica de los escenarios (sensores que entran y salen del sistema)
-% In particular, we consider the dynamicity of WoT environments, where nodes can join and leave a space making their information available or unavailable at any time.
-and (3) we need to reduce the maintenance complexity (nodes may join or leave at any time).
+\begin{enumerate}
+  \item Data consumers need to get fresh data and we can only get this by direct access to the actual \provider{}.
+	% We aim to promote the direct communication between devices to ensure that freshness of the information shared.
+  \item We must support mobile scenarios where personal devices carry their own data.
+	% + Explicar un poco la naturaleza dinámica de los escenarios (sensores que entran y salen del sistema)
+	% In particular, we consider the dynamicity of WoT environments, where nodes can join and leave a space making their information available or unavailable at any time.
+  \item We need to reduce the maintenance complexity (nodes may join or leave at any time).
+\end{enumerate}
 
 For these reasons, we cannot rely on intermediaries to host and provide \emph{all} the semantic information.
 However, we use intermediaries as searching enablers in the semantic \Space{}.
@@ -118,8 +120,10 @@ This requires the clocks to be synchronized in all the nodes to avoid problems.
 In any case, the \ac{wp} must guarantee that the $g_{id}$ is higher than the one used by a previous \ac{wp}.
 
 The \ac{wp} maintains two version numbers:
-(1) the one used during the setup to do the first load (\emph{setup version}) and
-(2) the version of the last aggregated clue.
+\begin{enumerate*}[label=\itshape(\arabic*\upshape)]
+  \item the one used during the setup to do the first load (\emph{setup version}) and
+  \item the version of the last aggregated clue.
+\end{enumerate*}
 The first one is shared through the discovery mechanism.
 The second one is shared with both \providers{} and \consumers{} in \acs{http} responses.
 The versioning is used to improve the \ac{wp} selection process explained in Section~\ref{sec:selection}.
@@ -132,9 +136,11 @@ In our architecture, when a \consumer{} joins the \Space{} it relies on a \ac{wp
 Hence, the first thing a node needs to do afterwards is discovering who is the \ac{wp} in that \Space{}.
 
 To run our proposal, we require a discovery system able to
-(1) get the \Spaces{} that a particular node belongs to,
-(2) identify the \ac{wp} in the system and its \emph{setup version}, and
-(3) provide additional information about nodes to decide which one can be the next \ac{wp}.
+\begin{enumerate*}[label=\itshape(\arabic*\upshape)]
+  \item get the \Spaces{} that a particular node belongs to,
+  \item identify the \ac{wp} in the system and its \emph{setup version}, and
+  \item provide additional information about nodes to decide which one can be the next \ac{wp}.
+\end{enumerate*}
 To implement our architecture, the information about the nodes must include:
 % Estos parámetros se vuelven a explicar en la sección de "Selección de WP"!
 battery level, available memory, storage space and the approximate time passed since the node joined the \Space{} for the last time (to estimate its reliability).
@@ -191,9 +197,11 @@ They manage their own semantic information and generate \clues{} about the infor
 Then, they send these \clues{} to the \Space{} \ac{wp}.
 As a response, they receive the last version of the aggregated clue they have contributed to.
 \providers{} will send their \clues{} to the \ac{wp}
-(1) every time a \emph{clue} is updated,
-(2) before the lifetime of a \emph{clue} expires, or
-(3) whenever there is a new \ac{wp} in the \Space{} with a lower \emph{setup version} than the one in the \provider{}.
+\begin{enumerate*}[label=\itshape(\arabic*\upshape)]
+  \item every time a \emph{clue} is updated,
+  \item before the lifetime of a \emph{clue} expires, or
+  \item whenever there is a new \ac{wp} in the \Space{} with a lower \emph{setup version} than the one in the \provider{}.
+\end{enumerate*}
 Note that \clues{} do not change frequently since they represent the type of information the nodes host rather than the specific data which is constantly generated.
 
 \noindent\textbf{Consumers.}
@@ -237,7 +245,11 @@ On the contrary, having multiple dedicated servers implies a high management ove
 Our architecture is flexible and any node can be a \provider{}, a \consumer{}, a \ac{wp} or any of them at the same time.
 
 \noindent\textbf{When does the \ac{wp} selection start?}
-The selection process can start (1) when no \ac{wp} is available or (2) when the current \ac{wp} gets a worse score than other nodes.
+The selection process can start
+\begin{enumerate*}[label=\itshape(\arabic*\upshape)]
+  \item when no \ac{wp} is available or
+  \item when the current \ac{wp} gets a worse score than other nodes.
+\end{enumerate*}
 In the first case, the first node to realize there is no \ac{wp} starts the selection process.
 In the second case, the current \ac{wp} periodically checks if there is another node with a better score.
 If this actually happens, it starts the process.
@@ -257,10 +269,12 @@ Doing so, \providers{} will realize if they must send their \clue{} again becaus
 
 % aclarado que facilitará esa información de cada nodo activo en el espacio
 Note that the discovery mechanism must provide the following information about each node in the \Space{} to the selection algorithm:
-(1) memory of the device,
-(2) storage capacity of the device,
-(3) time since it joined the \Space{}, and % esto no debería cambiar a menudo para no generar mucho trafico
-(4) its battery charge.
+\begin{enumerate*}[label=\itshape(\arabic*\upshape)]
+  \item memory of the device,
+  \item storage capacity of the device,
+  \item time since it joined the \Space{}, and % esto no debería cambiar a menudo para no generar mucho trafico
+  \item its battery charge.
+\end{enumerate*}
 We use the algorithm detailed in Listing~\ref{list:selectionAlgorithm} to rank the nodes.
 
 \begin{listing}
@@ -318,7 +332,7 @@ Using a \emph{clue}, a \consumer{} can find which node (or nodes) is the \provid
 Thanks to these \clues{}, resource constrained devices do not have to process unnecessary requests.
 We also limit the length of the \clues{} to reduce the bandwidth, the memory, and the storage overhead on these devices.
 
-In this section, we describe in detail these \clues{}, the information they contain and their format.
+This section describes in detail these \clues{}, the information they contain and their format.
 
 
 \subsection{Querying Basics} % Querying assumptions
@@ -442,8 +456,10 @@ This limitation will be further analysed in Section~\ref{sec:clues_eval}.
 % location, individual en base al cual se generan todos los elementos.
 As stated before, in general terms, we want to avoid the use of \emph{ABox} \acp{uri} (individuals) in our clues.
 Thus, we fulfil two goals:
-(1) we generate smaller \clues{} and
-(2) the \clues{} will not change too frequently and therefore, we will require less communication to update clues.
+\begin{enumerate*}[label=\itshape(\arabic*\upshape)]
+  \item we generate smaller \clues{} and
+  \item the \clues{} will not change too frequently and therefore, we will require less communication to update clues.
+\end{enumerate*}
 However, in some cases, the use of \emph{ABox} content in the \clues{} may be beneficial.
 For instance, assume a \ac{uri} that refers to the specific location \emph{L}.
 If we want to search for devices in location \emph{L}, we cannot deduce anything about it using the proposed \clues{}.

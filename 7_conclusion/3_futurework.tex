@@ -38,8 +38,10 @@ This goal can be seen as a two-fold strategy: ease the access to the data and ma
   \item[Reusing the data.] The semantic knowledge contributes to that goal.
 			  However, as \citet{barnaghi_semantics_2012} point out, the use of semantic descriptions alone does not ensure interoperability.
 			  Additionally, they suggest the need of:
-			  (1) standardizing ontologies and using them (or at least when using own ontologies, referencing an upper ontology); and
-			  (2) interpreting the annotations effectively. % efectivamente: con razonadores que funcionen bien
+			  \begin{enumerate*}[label=\itshape(\arabic*\upshape)]
+			    \item standardizing ontologies and using them (or at least when using own ontologies, referencing an upper ontology); and
+			    \item interpreting the annotations effectively. % efectivamente: con razonadores que funcionen bien
+			  \end{enumerate*}
 			  While the first one requires the consensus of the community, the second demands for efficient reasoners for mobile and embedded platforms.
 			  This efficiency is particularly important since it directly influences their energy consumption.
 			  % TODO Mencionar que estamos trabajando en ello?
@@ -116,8 +118,10 @@ How to reuse actuation mechanisms of nodes using \ac{ts} patterns from \ac{wot} 
 
 % si no, es un poco fiesta y cualquiera podría poner datos falsos
 Two key aspect for \ac{ubicomp} deployments are
-(1) to authenticate the parts involved in the communication; and
-(2) to ensure the privacy of the message being transmitted.
+\begin{enumerate*}[label=\itshape(\arabic*\upshape)]
+  \item to authenticate the parts involved in the communication; and
+  \item to ensure the privacy of the message being transmitted.
+\end{enumerate*}
 % Ya hemos hecho algo para dispositivos limitados y móviles
 Although both problems have been deeply discussed in the literature,
 the nodes in an \ac{ubicomp} environment face severe computing and energy restrictions.
@@ -151,7 +155,7 @@ For that, we have implemented most of the ideas in the \emph{Otsopack} middlewar
 This has helped us to identify the key problems to solve.
 
 Besides, to efficiently evaluate our solution under very different and extreme circumstances, in some occasions we have simulated the scenarios. % con muchos cacharros
-In this simulations we have tried to present always realistic assumptions.
+In this simulations, we have tried to present always realistic assumptions.
 % de simulaciones => a la realidad
 However, there is always a gap between what is perceived as realistic and the reality.
 

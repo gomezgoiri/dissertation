@@ -15,7 +15,7 @@ This section presents the most relevant ones. % que sean más relevantes o no, e
 
 % TODO leer artículos que me faltan y corregir
 The \emph{event heap} \citep{johanson_extending_2004} is a system used for a specific \ac{ubicomp} sub-domain: interactive workspaces.
-In this scenario there are rooms with different devices deployed and where mobile devices can enter.
+In this scenario, there are rooms with different devices deployed and where mobile devices can enter.
 Each room has its own space where the devices exchange tuples to cooperate.
 % For example, a video can be presented in a display and through a remote controller, the user can place the tuple for pausing it.
 % The display consumes these kind of tuples, so it pauses the video whenever somebody places that tuple on the space.
@@ -48,9 +48,11 @@ These assumptions are the uniform multicast connectivity between devices whose t
 
 In the \emph{TOTA} (Tuples On The Air) Project \citep{mamei_programming_2009} tuples are disseminated to different devices.
 To that end, each tuple has 3 fields:
-1) the content of the tuple;
-2) a rule which defines how it should be propagated; and
-3) a rule to define its maintenance.
+\begin{enumerate*}[label=\itshape(\arabic*\upshape)]
+  \item the content of the tuple;
+  \item a rule which defines how it should be propagated; and
+  \item a rule to define its maintenance.
+\end{enumerate*}
 
 For instance, they consider a museum where a visitor writes a query tuple describing a piece of art he wants to see.
 The propagation rule defines that it should be propagated to all nodes in the vicinity, increasing the distance by one each time.
@@ -82,10 +84,12 @@ This response tuple jumps from a device to another until it reaches the device w
 
 % vemos el espacio necesario para:
 The space can be used to
-%    escribir y extraer para coordinarse con otros
-(1) coordinate with other devices by writing and extracting content and
-%    consultar que pasa en un entorno
-(2) check what happens in the environment by reading.
+\begin{enumerate*}[label=\itshape(\arabic*\upshape)]
+  % escribir y extraer para coordinarse con otros
+  \item coordinate with other devices by writing and extracting content and
+  % consultar que pasa en un entorno
+  \item check what happens in the environment by reading.
+\end{enumerate*}
 % sin embargo, hay veces donde esa escritura y extraccion es mejor delegarla a los responsables de ella
 The solutions presented integrate both uses in the same space, which can be distributed or not.
 However, we argue that these uses face different needs and, therefore, should be treated separately.

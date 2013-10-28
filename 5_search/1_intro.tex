@@ -20,10 +20,12 @@ A way to solve this problem is annotating the data semantically as proposed by t
 
 Adding semantics to the \ac{iot} works well for devices with high computational capacity but it adds too much overhead for most of the devices composing the \ac{iot}.
 To reduce this overhead in such devices, part of this computation is usually delegated to intermediaries \citep{honkola_smart-m3_2010}.
-This approach reduces the overhead of semantically annotated data but brings other problems.
-(1) When devices rely on others to provide information, it is not guarantee that the information accessed will accurately represent the last information available in the data providers (e.g., the sensors).
-(2) Once we rely on those intermediaries, it is required that they are available at all time.
-Otherwise, the devices would not be able to talk to each other.
+This approach reduces the overhead of semantically annotated data but brings other problems:
+\begin{enumerate}
+  \item When devices rely on others to provide information, it is not guarantee that the information accessed will accurately represent the last information available in the data providers (e.g., the sensors).
+  \item Once we rely on those intermediaries, it is required that they are available at all time.
+	Otherwise, the devices would not be able to talk to each other.
+\end{enumerate}
 
 We propose a solution where we use intermediaries to release some workload from the less powerful devices, but at the same time, we promote the direct communication between the devices.
 In particular, our system uses intermediaries to search where the data is located in the \Space{} and queries the final devices directly.
