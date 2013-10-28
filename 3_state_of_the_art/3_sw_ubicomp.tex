@@ -4,7 +4,7 @@
 % Sin entrar en distinciones tipo: REST (o WoT) + SW y Ubicomp + SW
 % Sólo complicarían el índice y la redacción
 
-This section analyses some notable works for \ac{ubicomp} environments which use the \ac{sw} to represent the contextual information.
+This section analyses some notable works for \ac{ubicomp} environments which use the \acl{sw} to represent the contextual information.
 Rather than presenting an in-depth analysis of different architectures or their applications to concrete \ac{ubicomp} scenarios,
 we focus on the resource constrained devices' perspective.
 We scrutinize the role of the mobile and embedded devices in the systems which use the \ac{sw}.
@@ -49,13 +49,13 @@ In addition, a centralized intermediary can gather all the information and thus,
 
 However, using intermediaries to store the semantic data of resource constrained devices also has some drawbacks.
 On the one hand, centralization does not faithfully represent mobility situations were individuals carry their own semantic information in their personal devices.
-In addition, the data obtained from an intermediary will always be less fresh than the one obtained where it is generated (i.e., sensors).
+In addition, the data obtained from an intermediary will always be less fresh than the one obtained where it is actually being generated (i.e., sensors).
 On the other hand, the servers are critical in centralized systems and therefore, their availability determines the operation of these solutions.
 They also impose a burden on the maintenance which may be worthless in some simple scenarios.
 
 
 
-\subsection{\acl{sw} in Providers}
+\subsection{\acl{sw} applied to Data Providers}
 \label{sec:sw_providers}
 
 % pero ahora los cacharros cada vez son más potentes y no es difícil imaginar un mundo poblado por ellos blablah
@@ -90,7 +90,7 @@ Besides, the particularities of the semantic annotations are hidden to searchers
 
 
 A more general way to represent semantic data is using RDF \citeweb{rdf2004} based representations (i.e., full semantics). % más general que los microformatos que usan Guinard y compañía
-SPITFIRE European project \citeweb{spitfire} represents the most remarkable effort on gathering full semantics and the \ac{wot}.
+The SPITFIRE European project \citeweb{spitfire} represents the most remarkable effort on gathering full semantics and the \ac{wot}.
 It focuses on fully integrating sensor data with the \ac{lod}. 
 The \ac{lod} are datasets which follow a series of principles on how to open and publish data.
 The goal of the \ac{lod} is to publish linked terms using full semantics.
@@ -100,7 +100,7 @@ Therefore, many of their efforts are complimentary to this work.
 %This is done by defining an ontology for mapping other common ontologies and providing semi-automatic generation of semantic annotations from raw data.
 %They also propose an abstraction to represent real-world entities (virtual sensors) using data provided by low-level sensors.
 %Finally, and more specific to this work, they propose a searching model which predicts the current state of things by computing their periodic patterns in past states.
-To search within these providers, \citet{pfisterer_spitfire:_2011} proposes a model which predicts the current state of things by computing their periodic patterns in past states.
+To search within these providers, \citet{pfisterer_spitfire:_2011} propose a model which predicts the current state of things by computing their periodic patterns in past states.
 Again, the goal of this method is to adapt search engines to the new fashion of data provided on the \emph{\acl{sw} of Things}.
 
 
@@ -114,7 +114,7 @@ This completely distributed approach tries to simplify the maintenance burden an
 
 
 This dissertation aims to explore this path.
-Specifically, the search architecture presented in Chapter~\ref{cha:searching}, tries to enhance searching capability of web-connected devices.
+Specifically, the search architecture presented in Chapter~\ref{cha:searching}, tries to enhance the searching capability of web-connected devices.
 It leads to environments where Internet-connected objects, mobile devices or regular computers directly interact and collaborate with each other. % que se note que no sólo hablamos de WoT
 This contrast with the searching mechanisms presented by equivalent solutions in Section~\ref{sec:sw_providers}.
 They assume that these limited devices need more powerful machines to search, which is not always true. % o third party search services.

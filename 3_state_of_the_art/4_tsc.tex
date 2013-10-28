@@ -14,7 +14,7 @@ Particularly, it benefits from the autonomies introduced by both \ac{ts} and the
 \begin{itemize}
   \item Space uncoupling.
   \item Time uncoupling.
-  \item Data-schema uncoupling. % explicar?
+  \item Data-schema uncoupling. % TODO TODO TODO explicar!!!! No se menciona en ningún otro lado!!!
 % 	enhances the interoperability of the
 % 	applications built on top of TSC. This way, two applications using standard ontologies can interact among them
 % 	automatically enriching one each other, as long as they use the same space and standard and linked ontologies.
@@ -52,8 +52,8 @@ The works analysed present two strategies to semantically annotate data: the use
 % theoretical counterpart of OWL DL [7]. Since OWL is the W3C standard ontology description language for the Semantic Web,
 % and the standard de-facto for semantic applications in general, we adopt OWL as the ontology language for the domain
 % ontologies associated to ReSpecT semantic tuple centres in TuCSoN. While for the details of OWL we forward interested
-However, these works have to face an inconvenience: most of the libraries and tools available are based on the \ac{sw} standards. % concretamente cuando quieren usar reasoners!
-Therefore, they have to internally translate between both worlds in a not-straightforward way. % son cosas distintas!
+However, these works face an inconvenience: most of the libraries and tools available are based on the \ac{sw} standards. % concretamente cuando quieren usar reasoners!
+Therefore, they have to internally translate between both worlds in a not-straightforward and resource consuming manner. % son cosas distintas!
 
 
 % TODO explicar diferencias, citar o evitar verengenales que no comprendo y que sólo me complican la vida?
@@ -78,7 +78,7 @@ In any case, it is by no means mandatory in our solution because:
 \begin{itemize}
   \item The devices which may provide information to our \emph{federated space} are autonomous.
 	They share a minimal contract with our middleware where we cannot define how they manage/provide their information.
-  \item It is limited by the availability of reasoners, and nowadays there is no reasoner light enough to run in a reasonable time span in small devices.
+  \item It is limited by the availability of reasoners, and nowadays there is no light enough reasoner to run in a reasonable time span in small devices.
         % TODO citar algo? quizá nuestro propio trabajo?
 \end{itemize}
 %For our solution, describing the data semantically is a first step towards semantically interpreting it.
@@ -91,8 +91,8 @@ In any case, it is by no means mandatory in our solution because:
 
 % presentamos distintos modelos
 On the one hand, several works embed semantic content in one of the fields of a common tuple.
-\ac{cspaces} \citep{martinrecuerda_towards_2005} defines seven-field tuple.
-\ac{stuples}\citep{khushraj_stuples:_2004} extend the \emph{JavaSpace} \citep{freeman_javaspaces_1999} middleware adding a field with semantic content to the tuple object.
+\ac{cspaces} \citep{martinrecuerda_towards_2005} defines seven-field tuples.
+\ac{stuples} \citep{khushraj_stuples:_2004} extend the \emph{JavaSpace} \citep{freeman_javaspaces_1999} middleware adding a field with semantic content associated to the tuple object.
 This content follows the DAML+OIL language (the \ac{owl} precursor).
 \citet{nardini_semantic_2013} use the concept of \emph{semantic tuples} which are expressed in logic terms.
 
@@ -108,21 +108,21 @@ However, a triple by itself cannot express much information \citep{krummenacher2
 To solve this limitation, semantic \acp{ts} have usually adopted the concept of \ac{rdf} graphs too.
 % En SWS usan algo muy parecido pero a lo que llaman subspace.
 A \ac{rdf} graph is a set of \ac{rdf} triples identified by an \ac{uri}. % TSC distinguen entre NamedGraph (grafo con URI) y Graph (conjunto de grafos)
-Although they can be accessed by their \ac{uri}, more interestingly, these middlewares also guarantee the associative access. % see the next section
+Although they can be accessed by their \ac{uri}, more interestingly, these middlewares also guarantee associative access. % see the next section
 
 \input{\pathchapthree/tables/tuple_model}
 
 
 \subsection{Query model}
 
-Originally, in \ac{ts} tuples were selected using special tuples where wildcard values were allowed in the fields. % simplificado, a veces también tipos
+In \ac{ts}, originally tuples were selected using special tuples where wildcard values were allowed in the fields. % simplificado, a veces también tipos
 All the studied works which use a \ac{rdf} triple as a tuple follow this approach.
 Beside, they provide access to the \ac{rdf} graphs by their \acp{uri}.
 
 Most of these works also offer advanced query languages (e.g. SPARQL \citeweb{sparql2008}) as a more expressive way to match graphs.
 These languages can be decomposed in plain triple patterns.
 However, this requires a parser which may not be available for resource constrained platforms.
-This dissertation focuses on queries based on graph patterns and left the adoption of more complex querying languages as a future enhancement.
+This dissertation focuses on queries based on graph patterns and leaves the adoption of more complex querying languages as a future enhancement.
 
 \ac{cspaces}, \ac{stuples} and \citeauthor{nardini_semantic_2013} use less standard querying approaches.
 \ac{cspaces} \citep{martinrecuerda_towards_2005} and \citet{nardini_semantic_2013} offer a formal language to select appropriate tuples.
@@ -141,7 +141,7 @@ The \emph{flat} model offers independent disjoint spaces.
 %    Está basado en Javaspaces, que por lo que puedo ver es flat
 %    En nixon2008 sólo dicen que es centralized
 % decir que quiere decir: Tuple Centres Spread over the Network ?
-Within them, \citet{nardini_semantic_2013} presents the most singular model.
+Within them, \citet{nardini_semantic_2013} present the most singular model.
 It extends TuCSoN \cite{omicini_tucson:_1998}, which presents an evolution of the \ac{ts} called \emph{tuple centre}.
 A \emph{tuple centre} can be adapted to the application needs through reactions to communication operations.
 These reactions allow to trigger behaviours in response to any primitives or to define new ones.
@@ -156,7 +156,7 @@ More sophisticated models allow to create hierarchies of spaces.
 Three examples are \ac{sws}, \ac{tripcom} \citep{simperl_coordination_2007} and \ac{cspaces}.
 % SWS -> Disjoinnt nested
 % cosas relativas al despliegue
-\ac{sws} \citep{tolksdorf_coordination_2006} propose two ways to partition the spaces: sub-spaces and contexts.
+\ac{sws} \citep{tolksdorf_coordination_2006} proposes two ways to partition the spaces: sub-spaces and contexts.
 Sub-spaces are disjoint partitions of the main space.
 Contexts enable to virtually divide the space into overlapping partitions.
 These partitions are used to enable particular clients' views of the space.
@@ -205,11 +205,11 @@ Furthermore, to the best of our knowledge, this conceptual exercise never went b
 %	2. centralizado / distribuído
 %	4. basado en clientes tontos
 
-Participant nodes usually access to semantic spaces through client/server basis.
+Participant nodes usually access to semantic spaces on client/server basis.
 % no puedo usar \ac{} por la mayúscula
 Tsc++\citep{krummenacher_open_2009,blunder_distributed_2009} proposes an exception to the client/server access to the space.
 It relies on the Jxta P2P framework \citeweb{jxta} to propagate queries using different strategies.
-In \acs{tscpp} spaces correspond to groups of nodes which locally manage their data.
+In \acs{tscpp}, spaces correspond to groups of nodes which locally manage their data.
 
 
 In client/server spaces, the back-end of the server can be distributed or centralized in a single machine.
@@ -221,7 +221,7 @@ However, they also impose a single-point-of-failure.
 Within the distributed approaches we can distinguish those works which replicate data and those which do not.
 \acs{tscm} belongs to the first group, and replicates all the triples in each deployed kernel.
 In \ac{tripcom} each kernel stores one or more subspaces and can contact other kernels responsible for different spaces.
-To do that, if the space \ac{url} is provided, it simply resolves this \ac{url} using \ac{dns} and contacts the other kernel.
+To do that, if the space's \ac{url} is provided, it simply resolves this \ac{url} using \ac{dns} and contacts the other kernel.
 Otherwise, the kernel uses three additional strategies:
 \begin{itemize}
   \item Triple Provider.
@@ -281,12 +281,12 @@ Furthermore, the more features are added to the \ac{tsc} design (e.g. subscripti
 
 
 Regardless of their incompatibility with other features or practical technical difficulties, % e.g. conseguir HATEOAS o effective caching
-we defend that, \emph{per se}, \ac{tsc} does not contradict in any sense the \ac{rest} principles:
+we defend that, \emph{per se}, \ac{tsc} does not contradict in any sense the \ac{rest} principles described in Chapter~\ref{cha:background}:
 % Ver cómo TSC puede cumplir con todos los principios de diseño
 \begin{description}
  \item[\ac{restcs}.] Accessing to a space through a server in a \ac{restcs} fashion is completely feasible.
 		      Indeed, this does not prevent to use a distributed solution in the \emph{back end} (e.g. a distributed semantic repository).
- \item[\ac{rests}.] The primitives to access the space imply simple read and writes which do not store any state in the server.
+ \item[\ac{rests}.] The primitives to access the space imply simple reads and writes which do not store any state in the server.
  \item[\ac{restcache}. ] Despite of the difficulties detected by \citet{fensel_tsc_2007}, nothing prevents the semantic content stored in the space to be cached.
                           However, the dynamism of the knowledge can make effective caching challenging to achieve.
  %\item[\ac{rest_u}:] % lo quito porque si no, este punto sin texto con otros subpuntos queda feo
@@ -301,7 +301,7 @@ we defend that, \emph{per se}, \ac{tsc} does not contradict in any sense the \ac
 	\item[\ac{restdesc}.] The messages derived from the primitives are self-describing since they are expressed on standard \ac{rdf}-based languages. % including meta-data
 				Therefore the server and clients know how to process the content according to its language and certain vocabularies.
 				These vocabularies specifications (i.e. ontologies) are referenced in the content.
-	\item[\ac{resthateoas}.] The lack of native hypermedia support in \ac{rdf}-based representations make this the most challenging property to achieve \citep{page_rest_2011}. % compara LOD y REST
+	\item[\ac{resthateoas}.] The lack of native hypermedia support in \ac{rdf}-based representations makes this the most challenging property to achieve \citep{page_rest_2011}. % compara LOD y REST
 				  However, some recent works propose means to fulfil this property.
 				  \citet{kjernsmo_necessity_2012} proposes a vocabulary for hypermedia \ac{rdf}.
 				  \citet{steiner_fulfilling_2011} and \citet{verborgh_functional_2012} propose to enrich the \ac{http} header with hypermedia information.
@@ -330,13 +330,13 @@ we defend that, \emph{per se}, \ac{tsc} does not contradict in any sense the \ac
 
 
 Table~\ref{tab:rest_principles} shows the conflicts that the analysed works present with these principles.
-None of them achieves the \ac{resthateoas} principle.
+None of them achieve the \ac{resthateoas} principle.
 In fact, its use in the \ac{sw} is subject of current research.
 Most of them guarantee the access to the space in the \ac{restcs} basis.
 The only exception is \midtscpp{}, where each participant of the space is a peer in a \ac{p2p} network.
 Finally, the statefulness of these middlewares conflicts with additional features such as transactionality or subscriptions/notification systems.
 While the transactionality need in \ac{tsc} can be argued,
-the subscriptions are useful to ensure certain level of asynchrony in the system (see Section~\ref{sec:notification}).
+subscriptions are useful to ensure certain level of asynchrony in the system (see Section~\ref{sec:notification}).
 % explicar que lo nuestro al dividir en dos espacio en uno nos libramos de esto y en el otro es opcional para mejorar la eficiencia
 
 
@@ -346,7 +346,7 @@ the subscriptions are useful to ensure certain level of asynchrony in the system
 
 % Nosotros proponemos una vuelta a los origenes para recuperar una simplicidad de la que limited devices pueden beneficiarse
 %    => la clave para facilitar y en algunos casos posibilidar que los dispositivos constrained lo implementen
-This dissertation proposes a return to the origins to recover the simplicity loss in the successive works.
+This dissertation proposes a return to the origins to recover the simplicity loss in the previous works.
 The rationale behind this decision is that resource constrained devices will benefit from this simplicity.
 In the proposed middleware they will be able not only to write and read knowledge in an external space, but also to enrich it providing their own managed data.
 % In the rest of the cases, the nodes are head toward the use of the space as simple clients.

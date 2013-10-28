@@ -42,8 +42,10 @@ They also proposed a new writing primitive to insert tuples in remote spaces.
 % ejemplo de service discovery?
 \emph{LIME} has subsequently been adapted to limited platforms \citep{murphy_transiently_2006} with TinyLIME \citep{curino_tinylime:_2005} and TeenyLIME \citep{costa_programming_2007}.
 
+\begin{sloppypar}
 However, \citet{coulouris_distributed_2012} complain about the unrealistic assumptions LIME's authors make to simplify the problem. % cita al libro
 These assumptions are the uniform multicast connectivity between devices whose tuple spaces are aggregated and the serialized and ordered connections and disconnections.
+\end{sloppypar}
 
 
 In the \emph{TOTA} (Tuples On The Air) Project \citep{mamei_programming_2009} tuples are disseminated to different devices.
@@ -57,7 +59,7 @@ To that end, each tuple has 3 fields:
 For instance, they consider a museum where a visitor writes a query tuple describing a piece of art he wants to see.
 The propagation rule defines that it should be propagated to all nodes in the vicinity, increasing the distance by one each time.
 The tuple is configured to be deleted after a time-to-live period using its maintenance rule.
-When the it reaches the room where the piece of art is located, this art work will write a response tuple.
+When it reaches the room where the piece of art is located, this art work writes a response tuple.
 This response tuple jumps from a device to another until it reaches the device which queried for it.
 
 
@@ -106,12 +108,12 @@ Whether the space itself is distributed and how, is out of the scope of this dis
 
 % 2do problema:
 %    queriamos hacer a los dispositivos todo lo dependientes que fuese posible del espacio
-For the second usage type, we pursued to integrate as many external data sources as possible.
+For the second usage type, we aim to integrate as many external data sources as possible.
 This integration demands to acknowledge their independence, and therefore limit the collaboration requirements imposed to them.
 %The rationale behind this decision is that we believe that some content may be better managed by the device which creates them.
 % ejemplo
 %For instance, measures of a sensor or a user profile in a smartphone.
-Consequently, for the second space we propose a distributed space which resembles more to \emph{LIME}'s \emph{federated spaces} than to \emph{TOTA} or \emph{L$^2$imbo}.
+Consequently, for the second usage we propose a distributed space which resembles more to \emph{LIME}'s \emph{federated spaces} than to \emph{TOTA} or \emph{L$^2$imbo}.
 
 
 In other words, each device locally manages its own part of the space and only collaborates with others to share content.
