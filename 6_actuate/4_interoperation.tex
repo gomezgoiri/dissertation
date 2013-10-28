@@ -1,19 +1,23 @@
-\section{Interoperation Example Between both Approaches}
+\section{Interoperation Between both Approaches}
 \label{sec:actuation_interoperation}
 
-In contrast, \ac{rest}-like services constitute an emerging mechanism to directly actuate in the physical environment. % REST-like, no compliant with Fielding
-Therefore, their seamless integration would open the door to reuse the capacities of many existing devices. % interoperate
-However, this requires applications to directly use the actuator's node \ac{http} \ac{api}.
 
-% TODO TODO TODO esto ya no es así!!!
-This section aims to experimentally proof the validity of the alignment presented in the previous section.
-To this end, we present two implementations of the same simple scenario.
+\ac{rest} and \ac{rest}-like services constitute an emerging mechanism to directly actuate in the physical environment.
+Therefore, their seamless integration opens the door to reuse the capacities of many existing devices. % interoperate
+Specifically, we aim to integrate \ac{rest} services in our space-based model. % integration, reuse, alignment, close the gap
+% we first need to close the gap between both approaches.
+%This section aims to experimentally proof the validity of the alignment presented in the previous section.
+
+
+This section explores this integration helped by a simple real-world scenario.
 The goal of the scenario is to remotely change the light of a lamp.
+Sections \ref{sec:actuation_scn1}, \ref{sec:actuation_scn2} and \ref{sec:actuation_scn3} present three different implementations of this scenario. % which guide the reader to the mentioned integration
 
-The first implementation uses the proof-based actuation mechanism presented in Section~\ref{sec:background_restdesc}.
-The second implementation uses a space-based one.
-Then, we mix nodes from the previous implementations and analyse the adjustments required to enable their interoperation.
-Sections \ref{sec:actuation_scn1}, \ref{sec:actuation_scn2} and \ref{sec:actuation_scn3} describe these scenarios respectively.
+
+The first implementation uses the proof-based actuation mechanism presented in Section~\ref{sec:restdesc}.
+The second implementation uses the space-based actuation mechanism presented in Section~\ref{sec:actuation_space}.
+Then, we mix nodes from the previous implementations in the third implementation.
+This lead us to analyse the adjustments required to enable their interoperation.
 % TODO TODO TODO The implementation is publicly available in URL.
 
 
