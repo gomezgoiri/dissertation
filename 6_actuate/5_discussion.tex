@@ -7,24 +7,77 @@ The space-mediated communication transparently invokes \ac{rest} services on beh
 This section scrutinizes the strengths and weaknesses of the presented design, in conjunction with some other design alternatives. % design, alternative, etc.
 
 
-%The \emph{glue} between both scenarios is the data used.
+% TODO poner aquí algunos indicadores de la implementación de escenarios?
+%   e.g. cuando código extra ha hecho falta añadir en el tercero para que se hablen entre sí
 
 
-% mejor igual ponerlo después?
+\subsection{Actuation Abstraction Level}
+
+% explain why like this? why not directly sensors/light?
+The most abstract way to act on the environment would be to directly actuate on a sensed value (e.g. stating ``set the \emph{room A} light-level to 19 luxes'').
+This would require the coordination of all the actuators which directly or indirectly affect this value (e.g. all the lamps of a room).
+Furthermore, even in this case, many other physical aspects would affect the value (e.g. the daylight at each time).
+As a consequence, we opt for clearly distinguishing between actuators and sensors.
+In our scenarios, the data measured by the sensors can only be indirectly affected by the actuators.
+
+
+This indirect effects on the sensed values could be modelled for each actuator.
+For example, to state that turning on a lamp increases the light measured by a sensor.
+However, precisely anticipating the exact value of the new measure is difficult if not impossible due to the mentioned external physical conditions.
+Considering this difficulty to predict their relationship and its tangential importance for the scenario, we simply ignore these relationships.
+
+
+\subsection{Knowledge Model}
 
 % Ontologies used
 % explicar por qué hemos modelado así los escenarios?
-% por qué con medidas?
-% por qué uso preferencias?
+The \emph{glue} between the two actuation worlds presented in Section~\ref{sec:actuation_interoperation} is the data they use. % o between both approaches, o yo qué sé
+Therefore, it must be modelled according to the same ontologies.
+This section provides the rationale behind the selection of the ontologies we used.
+Note that this selection does not pretend to be best or unique alternative.
 
-% TODO explain why like this? why not directly sensors/light?
+% por qué con medidas?
+To represent the value of a lamp actuator, we use the SSN ontology \citeweb{ssn}.
+The SSN ontology is intended to describe measures for sensors, so its use for actuators may sound contradictory.
+However, for the best of our knowledge, there is no more widely-accepted ontology to specifically describe actuators.
+Therefore, with this model we transmit things like ``the lamp actuator has a light value of \emph{N} luxes''.
+Note the difference with an order like the following ``the light sensed by a sensor located in the lamp has a value of \emph{N} luxes''.
+
+
+% por qué uso preferencias?
+Finally, there is the other core ontology in our scenario implementations: the preferences ontology.
+It is used to clearly distinguish between the value of an actuator and a consumer's intention or desire to change it.
+A preference can turn into an actuator's new state, but it is not always necessarily true.
+The actuator can discard a preference because of some policies, a malfunction or any other reason.
 
 % por qué no se tienen en cuenta otras características como la localización o lo que sea => por simplificar
 %   en el goal se podrían describir
 
 
-% luego posiblemente se podrían medir algunos indicadores de los mismos
-%   e.g. cuando código extra ha hecho falta añadir en el tercero para que se hablen entre sí
+\subsection{Obtaining Resource Descriptions}
+
+The core of the proof-based actuation mechanisms are the descriptions.
+They must be read from the actuation nodes prior to reasoning. % obvio
+This action corresponds to the consumer in the first scenario and to the agent which resides in the \Space{} in the third scenario.
+
+In both cases, they crawl over a given \ac{api} starting from a \ac{url}.
+The discovery of the \ac{url} is out of the scope.
+% Otra alternativa: An agent could discover the descriptions and simply write them in the coordination \Space{}.
+
+
+Another alternative to discover this descriptions is to make them part of the \clues{} presented in Chapter~\ref{cha:searching}.
+This option ensures that they will be available in any \consumer{}.
+Besides, the static nature of these descriptions does not break the stability assumption of the \clues{}. % explicar más?
+
+
+In any case, this chapter focuses on the interoperability problem, not on how to obtain the description.
+Consequently, we opted for the most simple alternative: the first one. % para no liar
+
+
+\subsection{Weaknesses}
+
+% qué pasa si el consumidor del escenario 2 no se suscribe a los resultados?
+% qué pasa si se suscribe a un patrón más general?
 
 
 
