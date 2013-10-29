@@ -71,78 +71,61 @@ Besides, the static nature of these descriptions does not break the stability as
 
 
 In any case, this chapter focuses on the interoperability problem, not on how to obtain the description.
-Consequently, we opted for the most simple alternative: the first one. % para no liar
-
-
-\subsection{Weaknesses}
-
-% qué pasa si el consumidor del escenario 2 no se suscribe a los resultados?
-% qué pasa si se suscribe a un patrón más general?
+Consequently, we opted for the most simple alternative: crawl the descriptions in an independent process. % simpler / more intuitive / easier to understand
 
 
 
-\subsection{Inputs for the Proof-based Actuation Mechanism}
-\label{sec:inputs_proof}
+\subsection{Obtaining Background Knowledge}
 
-The reasoning process presented by \citet{verborgh_ijcs_2014} uses as inputs: % presented by en vez de posesivo, porque "X et al.'s" queda como el culo
-an initial state,
-a goal state,
-Web \ac{api} descriptions using \restdesc{}, and
-optional background knowledge.
-% inputs: clues
-% goal: task
+Besides resource descriptions, \citeauthor{verborgh_ijcs_2014}'s proof-based mechanism also requires an initial state and background knowledge as inputs (see Section~\ref{sec:restdesc}).
+In the first scenario the consumer obtains this knowledge crawling over all the possible \acsp{api}.
+In the third scenario we also add all the knowledge from the space.
+This is feasible because it is located in the same machine as the agent which needs it, so does not demand any networking. % no es costoso obtenerla
 
 
-\begin{description}
-  \item[The descriptions] must be read from the actuation nodes prior to reasoning. % obvio
-        They can be read with a \emph{ad hoc} discovery mechanisms.
-        However, in order to simplify the design of the middleware, it is sensible to use one of the already existing mechanisms:
-        
-        \begin{itemize}
-	  \item An agent could discover the descriptions and simply write them in the coordination \Space{}. % y ahora habrá que definir que es un agente?
-		Then, any node willing to reason will read them from the \Space{}.
-	  \item The descriptions could be part of the \clues{} presented in Chapter~\ref{cha:searching}.
-		This option ensures that they will be available in any \consumer{}.
-		Besides, the static nature of these descriptions does not break the stability assumption of the \clues{}. % explicar más?
-        \end{itemize}
-
-  % TODO TODO TODO especificar que este mecanismo adicional de usar clues es optional y no el usado en nuestro escenario simple
-  \item[The initial state and background knowledge] can be acquired both from the coordination space and the outer space.
-	However, reading all the space would be highly inefficient.
-	To reduce readings on the space (i.e. network usage), we propose a procedure composed by two reasoning steps.
-	In the first one we only use local incomplete knowledge derived from the \clues{}.
-	Then, we read from the \Space{} just the knowledge needed to confirm the pre-proofs obtained in the first reasoning.
-	The second reasoning uses this knowledge to get real pre-proofs. % real o actual pre-proofs
-	
-	% Y ahora explicado en mayor detalle:
-	Therefore, a node which wants to actuate over the space will need to obtain the \emph{clues} from the \ac{wp}.
-	%These clues, as explained before, tell what kind of content other nodes provide. % un poco redundante
-	Let us assume that these \emph{clues} are composed by the predicates used by the nodes which provide content. % es una de las alternativas que se planteaban
-	The existence of a predicate used in a premise does not necessarily imply that this rule can be used.
-	Nevertheless, its absence does imply that it will not be used (see Figure~\ref{fig:activation_rules}).
-	Therefore, we can create temporary \emph{activation rules} from \clues{} which activate those potential rules. % latter rules las que se han mencionado primero
-
-	\InsertFig{activation_rules}{fig:activation_rules}{
-	  Sample clues, two rules and the activation rule created from the first rule.
-	}{
-	  According to the clues shown, the second rule will never be invoked.
-	}{0.8}{}
-
-	An \emph{activation rule} for a rule R contains a \emph{true} in the premise.
-	The conclusion is made by R's premise substituting the variables with fictitious \acsp{uri} with a common prefix (see Figure~\ref{fig:activation_rules}).
-	These fictitious \acsp{uri} are used to distinguish when a triple should be replaced by actual knowledge from the space. % explicar mejor?
+However, as explained in Chapter~\ref{cha:searching}, the data of the providers in \ac{ubicomp} is too dynamic to simply crawl it from time to time.
+% Reading all the space would be highly inefficient.
+Crawling all the \acsp{api} each time a change needs to be done is also highly inefficient.
+Hence, the proposed approach to obtain knowledge is a clear simplification.
+This simplification is justified because this chapter is centred on the interoperability rather than in the efficient communication mechanisms.
 
 
-  \item[The goal state] should be created from the task to reuse the primitives and the data from the \ac{ts}-based actuation mechanism.
-	For instance, from a task of \emph{regulate temperature to 6ºC} we can deduce the goal state of \emph{temperature of 6ºC}.
-	This translation is out of the scope of the dissertation.
-\end{description}
+\bigskip
+
+
+A possible optimization would be to benefit from the search architecture presented in Chapter~\ref{cha:searching}.
+To reduce readings on the space (i.e. network usage), we propose a procedure composed by two reasoning steps.
+In the first one we only use local incomplete knowledge derived from the \clues{}.
+Then, we read from the \Space{} just the knowledge needed to confirm the pre-proofs obtained in the first reasoning.
+The second reasoning uses this knowledge to get real pre-proofs. % real o actual pre-proofs
+
+
+% Y ahora explicado en mayor detalle:
+Therefore, a node which wants to actuate over the space will need to obtain the \emph{clues} from the \ac{wp}.
+%These clues, as explained before, tell what kind of content other nodes provide. % un poco redundante
+Let us assume that these \emph{clues} are composed by the predicates used by the nodes which provide content. % es una de las alternativas que se planteaban
+The existence of a predicate used in a premise does not necessarily imply that this rule can be used.
+Nevertheless, its absence does imply that it will not be used (see Figure~\ref{fig:activation_rules}).
+Therefore, we can create temporary \emph{activation rules} from \clues{} which activate those potential rules. % latter rules las que se han mencionado primero
+
+
+\InsertFig{activation_rules}{fig:activation_rules}{
+  Sample clues, two rules and the activation rule created from the first rule.
+}{
+  According to the clues shown, the second rule will never be invoked.
+}{0.8}{}
+
+
+An \emph{activation rule} for a rule R contains a \emph{true} in the premise.
+The conclusion is made by R's premise substituting the variables with fictitious \acsp{uri} with a common prefix (see Figure~\ref{fig:activation_rules}).
+These fictitious \acsp{uri} are used to distinguish when a triple should be replaced by actual knowledge from the space. % explicar mejor?
+
 
 
 \subsection{Responsibility for Triggering the Proof-based Actuation Mechanism}
 \label{sec:responsible_proof}
 
-Section~\ref{sec:background_restdesc} described two coarse-grained steps:
+Section~\ref{sec:restdesc} described two coarse-grained steps:
 \begin{itemize}
   \item Reasoning over the descriptions, background knowledge, an initial state and a goal state.
         The result of the reasoning process if a pre-proof, which can be seen as a tentative \emph{execution plan} to achieve the goal.
@@ -150,22 +133,24 @@ Section~\ref{sec:background_restdesc} described two coarse-grained steps:
 \end{itemize}
 
 
-This mechanism can be performed by any node.
 % no obligamos a implementar una u otra, pero recomendamos esto: XXX
-This dissertation briefly explains three different alternatives and their trade offs.
-However, we do not adhere to any of them.
-We leave as a future work to implement and quantitatively compare them.
+The third scenario presented in the previous section opts for triggering the reasoning process when an agent receives a notification.
+Previously, it subscribes to any task written into the space.
+
+
+The reasoning can be performed in any node apart from the one which holds the \Space{}:
+%However, we do not adhere to any of them.
+%We leave as a future work to implement and quantitatively compare them.
 
 \begin{enumerate}
-  \item An agent which resides in the same machine as the \emph{coordination space} can trigger the process. % TODO buscar su nombre bueno
-	Doing so, it can locally consume the knowledge available in the \emph{coordination space}.
-  \item A more flexible approach would consist of letting any \consumer{} interested on changing the environment to trigger it.
+  \item Any \consumer{} interested on changing the environment could trigger the process.
 	If these \consumers{} use the search mechanism presented in the Chapter~\ref{cha:searching}, they will have background knowledge about other nodes.
 	This reduces the dependency on the node providing the \emph{coordination space}. % TODO buscar su nombre bueno
 	However, it requires them to perform tasks such as reasoning and checking the pre-proofs.
 	While the latter increases the network usage, the first increases the computation.
 	As we already mentioned in previous chapters, these tasks severely affect to the energy consumption.
 	Furthermore, some resource platforms will not be even able to reason.
+	
   \item To mitigate that problem, we could delegate this task only on the nodes able to perform such tasks.
 	In fact, these nodes could follow the \emph{replicated-worker pattern}.
 	They could read from the space goals to trigger the process (i.e. \emph{reasoning tasks}).
@@ -174,14 +159,39 @@ We leave as a future work to implement and quantitatively compare them.
 \end{enumerate}
 
 
-% Poner ejemplo adaptado del paper de WoT2013?
+Although both alternatives avoid the dependency on the \Space{}, the space-based actuation mechanism intrinsically depends on the \Space{}.
+Therefore, it makes sense that the unavailability of the space will cause the unavailability of actuating on the space.
+On the contrary, it simplifies the consumers' responsibilities, which just need to worry about writing a task in the space.
 
 
-%Proceso de suggest:
 
-%\begin{itemize}
-% \item obtener todo el conocimiento necesario para el proceso?
-% \item razonamiento sobre conocimiento
-% \item parsear el resultado para invocar servicios HTTP
-% \item monitorizar que se ha complido el cambio?
-%\end{itemize}
+\subsection{Interoperation Weakness}
+
+The previous sections presented various alternative designs and their likely impacts on the actuation performance.
+However, none of them addresses the interoperability flaws of the third scenario.
+
+
+In this regard, the conversion of a consumer subscription into a goal is probably the most evident interoperability flaw of the third scenario.
+Although in the scenario both aspects match, there is no guarantee that the consumer will use a subscription which matches with a goal.
+For instance, she could use a more general subscription and then just treat the concrete tasks.
+Even worse, there is no guarantee that the consumer would subscribe to any result.
+Thus, the universality of the proposed alignment can be easily affected.
+
+
+% qué pasa si el consumidor del escenario 2 no se suscribe a los resultados?
+% qué pasa si se suscribe a un patrón más general?
+A more universal approach would be to deduce the goal from the task. % universal, generalizable
+For instance, from a task of \emph{regulate temperature to 6ºC} the \Space{} could deduce the goal state of \emph{temperature of 6ºC}.
+In this case, the mapping should be either
+\begin{enumerate*}[label=\itshape(\arabic*\upshape)]
+  \item provided by the consumer or
+  \item pre-set in the space.
+\end{enumerate*}
+The first choice demands to provide additional information to the \Space{}. % to the middleware
+This is very inflexible and differs little from manually programming a gateway with each provider.
+The second choice assumes a concrete ontology must used or extended by the user to represent tasks.
+Therefore, it would limit the freedom of choosing any vocabulary to define a task.
+
+
+Due to that reason and taking into account that this chapter simply wants to remark the potential interoperability of the presented approaches,
+we opted for selecting the automatic translation from a subscription to a goal.
