@@ -11,12 +11,16 @@ This section scrutinizes the strengths and weaknesses of the presented design, i
 %   e.g. cuando código extra ha hecho falta añadir en el tercero para que se hablen entre sí
 
 
-\subsection{Actuation Abstraction Level}
+\subsection{Actuation Modelling}
 
 % explain why like this? why not directly sensors/light?
-The most abstract way to act on the environment would be to directly actuate on a sensed value (e.g. stating ``set the \emph{room A} light-level to 19 luxes'').
-This would require the coordination of all the actuators which directly or indirectly affect this value (e.g. all the lamps of a room).
-Furthermore, even in this case, many other physical aspects would affect the value (e.g. the daylight at each time).
+The most abstract way to actuate on the environment would be to invoke a change referring to the sensed values (e.g. stating ``set the \emph{room A} light-level to 19 luxes'').
+This would require the coordination of all the actuators which directly or indirectly affect this value.
+For instance, the lamps of a room and the curtains of this room's windows should coordinate to give the exact desired value.
+
+
+Even in this case, many other physical aspects would affect the value.
+For example, the daylight at each time of the day or the location of the light sensors.
 As a consequence, we opt for clearly distinguishing between actuators and sensors.
 In our scenarios, the data measured by the sensors can only be indirectly affected by the actuators.
 
@@ -25,9 +29,10 @@ This indirect effects on the sensed values could be modelled for each actuator.
 For example, to state that turning on a lamp increases the light measured by a sensor.
 However, precisely anticipating the exact value of the new measure is difficult if not impossible due to the mentioned external physical conditions.
 Considering this difficulty to predict their relationship and its tangential importance for the scenario, we simply ignore these relationships.
+We assume that the consumer previously determined which actuators it should change to fulfil its initial abstract goal.
 
 
-\subsection{Knowledge Model}
+\subsection{Ontologies Used}
 
 % Ontologies used
 % explicar por qué hemos modelado así los escenarios?
