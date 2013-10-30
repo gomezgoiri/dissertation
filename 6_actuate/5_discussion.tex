@@ -65,22 +65,22 @@ The actuator can discard a preference due to an usage policy, a malfunction or a
 
 \subsection{Obtaining Resource Descriptions}
 
-The core of the proof-based actuation mechanisms are the descriptions.
-They must be read from the actuation nodes prior to reasoning. % obvio
-This action corresponds to the consumer in the first scenario and to the agent which resides in the \Space{} in the third scenario.
-
-In both cases, they crawl over a given \ac{api} starting from a \ac{url}.
-The discovery of the \ac{url} is out of the scope.
+The core of the proof-based actuation mechanisms are the resource descriptions.
+They must be read from the nodes willing to actuate prior to reasoning. % obvio
+This action is performed by the consumer in the first scenario and by the agent which resides in the \Space{} in the third scenario.
+Both nodes crawl a given \ac{api} starting from an \ac{url} to obtain the descriptions.
+The discovery of the \ac{url} is out of the scope of this chapter.
 % Otra alternativa: An agent could discover the descriptions and simply write them in the coordination \Space{}.
 
 
-Another alternative to discover this descriptions is to make them part of the \clues{} presented in Chapter~\ref{cha:searching}.
+Another alternative to discover these descriptions is to make them part of the \clues{} presented in Chapter~\ref{cha:searching}.
 This option ensures that they will be available in any \consumer{}.
-Besides, the static nature of these descriptions does not break the stability assumption of the \clues{}. % explicar más?
+Besides, the static nature of these descriptions does not break the \clues{} stability assumption in which our architecture is founded. % explicar más?
 
 
-In any case, this chapter focuses on the interoperability problem, not on how to obtain the description.
-Consequently, we opted for the most simple alternative: crawl the descriptions in an independent process. % simpler / more intuitive / easier to understand
+In any case, this chapter focuses on the interoperability problem, not on how to obtain the descriptions.
+Consequently, for the sake of clarity, we opted for the more intuitive and common alternative. % simpler / more intuitive / easier to understand
+That is, we assume that a process crawls the descriptions in the background.
 
 
 
