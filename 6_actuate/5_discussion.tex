@@ -164,6 +164,9 @@ Therefore, it makes sense that the unavailability of the space will cause the un
 On the contrary, it simplifies the consumers' responsibilities, which just need to worry about writing a task in the space.
 
 
+% TODO DISCUTIR ESTO
+However, some questions remain still unsolved: will both methods be triggered indistinctly or will the first prevail over the second?
+
 
 \subsection{Interoperation Weakness}
 
@@ -195,3 +198,18 @@ Therefore, it would limit the freedom of choosing any vocabulary to define a tas
 
 Due to that reason and taking into account that this chapter simply wants to remark the potential interoperability of the presented approaches,
 we opted for selecting the automatic translation from a subscription to a goal.
+
+
+
+\subsection{Advanced Limitations}
+
+The scenario presented is quite limited.
+Consequently, the interoperation example shown requires further work to check its feasibility in more advanced scenarios.
+We anticipate the following problems:
+
+\begin{itemize}
+  \item When there are two or more paths to a goal, how can we discern which one to follow?
+	This problem is specific from the proof-based mechanism.
+  \item How does the middleware deal with the coexistence of both mechanisms.
+	When both methods can be applied, which one is triggered? Will one of them prevail over the second?
+\end{itemize}

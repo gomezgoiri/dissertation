@@ -1,4 +1,4 @@
-\section{Summary}
+\section{Summary and Future Work}
 \label{sec:actuation_summary}
 
 This chapter presented two ways to actuate on the physical environment.
@@ -13,18 +13,18 @@ With that information, it is able to generate executions plans towards a goal.
 Following these plans implies different calls to the different services.
 
 
-We implemented the same scenario using two actuation mechanisms.
+We implemented the same scenario using these two actuation mechanisms.
 Besides, since interoperability is one of our middleware's guiding principles, we sketched how to reuse these \ac{rest}ful \acs{http} \acsp{api} in our \Space{} model in a third implementation.
 This reuse avoids any alteration on the space-based consumer or the \ac{http} provider.
-Instead, it improves the \Space{} implementation with an Agent in charge of generating execution plans.
-To aim this generation, the agent which reuses the information from the space-based actuation.
-Doing so, it avoids requiring any additional information from the developer.
+Instead, it improves the \Space{} implementation with an agent in charge of generating execution plans.
+This agent reuses the information from the space-based actuation not to require any additional information to the developer.
 
 
-There are other design alternatives to promote the reuse of \acs{http} \acsp{api} from a space-computing middleware.
-We described these alternatives and analyse their advantages and weaknesses.
-% regarding lo que sea?
-However, some questions remain still unsolved: will both methods be triggered indistinctly or will the first prevail over the second?
-% uso de nuestra actuación por parte de apps WoT
-Finally, the question of how to reuse actuation mechanisms of nodes using \ac{ts} patterns from \ac{wot} has not been addressed.
-However, this chapter has exposed, described and compared the key points towards the actuation through a \ac{tsc} middleware for \ac{ubicomp}.
+This implementation alignment between our space-based actuation and the proof-based one presents some limitations.
+For some of these limitations, we discuss other design alternatives and compare them with the chosen one.
+The rest of the limitations only appear in more complex scenarios.
+
+
+For our future work, we will implement these complex scenarios where advanced conflicts between the \ac{rest} and space-based computing worlds can arise.
+Besides, this dissertation does not answer how to reuse actuation mechanisms of the nodes using \ac{ts} patterns from \ac{rest}ful \acs{http} \acsp{api}.
+Specifically, it would be interesting to experimentally test what would be necessary to seamlessly use our middleware's capacities from  third \ac{wot} solutions.
