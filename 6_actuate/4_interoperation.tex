@@ -211,8 +211,12 @@ Therefore, the agent reuses all the information pieces it needs:
 \begin{enumerate}
   \item It uses the \noded{}'s subscription to the task result as a goal for the reasoning.
 	In our implementation, these correspondences need a minimal mapping between N3QL \citeweb{n3ql2004} and SPARQL \citeweb{sparql2008}.
-	The reason why we use both languages are the underlying frameworks: Euler \citeweb{euler} and RDFLib \citeweb{rdflib}. % TODO citar!
+	The reason why we use both languages are the underlying frameworks: EYE \citeweb{euler} and RDFLib \citeweb{rdflib}. % TODO citar!
   \item The agent uses all the content written into the space as \emph{additional knowledge} for the reasoning process.
 	This is feasible because it can locally obtain it because the agent resides in the same machine as the space.
 	Otherwise, obtaining this knowledge through the network would be too consuming both in bandwidth and in time.
 \end{enumerate}
+
+
+% TODO poner aquí algunos indicadores de la implementación de escenarios?
+%   e.g. cuando código extra ha hecho falta añadir en el tercero para que se hablen entre sí
