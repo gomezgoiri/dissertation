@@ -14,13 +14,14 @@ This section scrutinizes the strengths and weaknesses of the presented design, i
 \subsection{Actuation Modelling}
 
 % explain why like this? why not directly sensors/light?
-The most abstract way to actuate on the environment would be to invoke a change referring to the sensed values (e.g. stating ``set the \emph{room A} light-level to 19 luxes'').
+The most abstract way to actuate on the environment would be to invoke a change referring to the sensed values.
+For example, stating ``set \emph{Room A}'s light-level to 19 luxes''.
 This would require the coordination of all the actuators which directly or indirectly affect this value.
-For instance, the lamps of a room and the curtains of this room's windows should coordinate to give the exact desired value.
+Following the example, the lamps in \emph{Room A} and the curtains of \emph{Room A}'s windows should coordinate to give the exact desired value.
 
 
 Even in this case, many other physical aspects would affect the value.
-For example, the daylight at each time of the day or the location of the light sensors.
+For instance, the daylight at each time of the day or the location of the light sensor.
 As a consequence, we opt for clearly distinguishing between actuators and sensors.
 In our scenarios, the data measured by the sensors can only be indirectly affected by the actuators.
 
@@ -39,24 +40,27 @@ We assume that the consumer previously determined which actuators it should chan
 The \emph{glue} between the two actuation worlds presented in Section~\ref{sec:actuation_interoperation} is the data they use. % o between both approaches, o yo qué sé
 Therefore, it must be modelled according to the same ontologies.
 This section provides the rationale behind the selection of the ontologies we used.
-Note that this selection does not pretend to be best or unique alternative.
+Note that these ontologies are not the unique selection which could be made.
+Neither does it pretend to be the best one.
+
 
 % por qué con medidas?
 To represent the value of a lamp actuator, we use the SSN ontology \citeweb{ssn}.
-The SSN ontology is intended to describe measures for sensors, so its use for actuators may sound contradictory.
-However, for the best of our knowledge, there is no more widely-accepted ontology to specifically describe actuators.
-Therefore, with this model we transmit things like ``the lamp actuator has a light value of \emph{N} luxes''.
-Note the difference with an order like the following ``the light sensed by a sensor located in the lamp has a value of \emph{N} luxes''.
+For example, we express that ``the lamp actuator has a light value of \emph{N} luxes''.
+The SSN ontology is intended to describe measures for sensors, so its use for actuators can sound contradictory.
+Note how the previous statement differs from ``the light sensed by a sensor located near the lamp has a value of \emph{N} luxes''.
+However, to the best of our knowledge, there is no more widely-accepted ontology to specifically describe actuators.
 
 
 % por qué uso preferencias?
-Finally, there is the other core ontology in our scenario implementations: the preferences ontology.
+The preferences ontology is another of the core ontology used in our implementations.
 It is used to clearly distinguish between the value of an actuator and a consumer's intention or desire to change it.
 A preference can turn into an actuator's new state, but it is not always necessarily true.
-The actuator can discard a preference because of some policies, a malfunction or any other reason.
+The actuator can discard a preference due to an usage policy, a malfunction or any other reason.
 
 % por qué no se tienen en cuenta otras características como la localización o lo que sea => por simplificar
 %   en el goal se podrían describir
+
 
 
 \subsection{Obtaining Resource Descriptions}
