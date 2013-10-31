@@ -93,14 +93,14 @@ The \emph{marketplace pattern} allows negotiation of two entities through the sp
 Finally, the \emph{specialist pattern} allows nodes with distinct capacities to cooperate towards a common goal.
 
 
-% Posible TODO Un esquema dividido en 4 en el que aparecen todos los patrones explicados.
-% No es fácil mostrar el 2do y el 3ero.
-% Una intentona de estos y otros patrones inventados en Lancaster:
-%     https://docs.google.com/a/deusto.es/document/d/1QXGsQ4-wAByc_ByQ-Tts-TSphSQAzfO_c3mcgoZdloc/edit
+% Posibilidad: Un esquema dividido en 4 en el que aparecen todos los patrones explicados.
+%   No es fácil mostrar el 2do y el 3ero.
+%   Una intentona de estos y otros patrones inventados en Lancaster:
+%      https://docs.google.com/a/deusto.es/document/d/1QXGsQ4-wAByc_ByQ-Tts-TSphSQAzfO_c3mcgoZdloc/edit
 
 
 % IG: ves... esta seccion parece q sale de la nada y creo que es el objetivo principal del capitulo, no? a ver si puedes orientar la intro del capitulo para mostrar esto mas... basicament que se vea que esto es de implementar movidas.
-\subsection{Envisaged Scenarios} % IG: he aprendido palabro nuevo...
+\subsection{Envisaged Scenarios}
 \label{sec:envisaged_scenarios}
 % 1era iteración en reescritura, se puede mejorar mucho
 
@@ -110,10 +110,11 @@ Both scenarios emphasize how devices can coordinate in a decoupled mode using th
 Specifically, we believe that the \emph{specialist patterns} fit the best to the needs of \ac{ubicomp} environments:
 \begin{itemize}
   \item The devices in \ac{ubicomp} often serve to very specific needs.
-        For example, let us imagine a mobile phone showing a message or an embedded device turning on the lights of a room. % IG: lo de mobile es el estandard de la tesis? lo de cell no, no?
+        For example, let us imagine a mobile phone showing a message or an embedded device turning on the lights of a room.
         %Although there may exist some redundancy in the tasks which different nodes can be accomplish, the task are not nodes are not as interchangeable as in... son tareas simples, no necesitan optimizar ni lanzar muchas
-  \item These tasks are usually lightweight. % TODO primera vez que se habla de "task", comentar que para TripCom eran servicios web y que crearon un sistema (WXSW?)
-        They do not require large computation resources, but to achieve a concrete and simple goal. % IG: comor? frase rara
+  \item These tasks are usually lightweight. % do not require a lot of computation resources.
+	% TODO primera vez que se habla de "task", comentar que para TripCom eran servicios web y que crearon un sistema (WXSW?)
+        They intent to achieve concrete and simple goals which usually imply more I/O operations than processing ones.
 \end{itemize}
 Therefore, \ac{ubicomp} generally faces a problem of collaboration between nodes with different capacities.
 In this problem, computation or negotiation aspects are secondary. % se entenderá a qué me refiero con computation??
@@ -169,17 +170,20 @@ Third, there is a node in charge of generating the warnings.
 
 
 The application follows the \emph{blackboard pattern}.
-The node which generates the warnings is the \emph{teacher}.
-The \emph{problem} is the warning for the user.
-The \emph{students} are the devices which can warn the user. % IG: no es nada intuitivo. Leyendo despues lo entiendo, pero... es raro
+The node which generates the warnings resembles a \emph{teacher}.
+Each warning for a user resembles a \emph{problem} for the students.
+Finally, the \emph{students} are allegorically represented by the devices which can warn the user.
+% IG: no es nada intuitivo. Leyendo despues lo entiendo, pero... es raro
+% AG: reescrito para hacer ver que hablo de una metafora/analogía/alegoría
 
 
-When the \emph{teacher} writes a warning for a user, the devices able to warn the user write their characteristics into the space. % IG: alguna cosa mejor que characteristics?
-In this example, these characteristics are the device ownership and the intrusiveness of the warning method.
-The \emph{teacher} reads these characteristics, chooses the most appropriate \emph{student} to solve the \emph{problem} and updates the \emph{problem} to indicate the selection.
+When the \emph{teacher} writes a warning for a user, the devices able to warn the user write information about themselves into the space.
+This information helps the teacher to select the most appropriate \emph{student} for each task.
+In this example, the devices write their ownership and the intrusiveness level of their warning method.
+The \emph{teacher} reads these characteristics, chooses a \emph{student} to solve the \emph{problem} and updates the \emph{problem} to indicate the selection.
 %If no device writes their characteristics, the \emph{teacher} can wait longer.
-Finally, the selected device takes any warning for it and warns the user. % no tiene respuesta
-If the chosen device does not take messages, the \emph{teacher} can update the \emph{problem} with a new selection.
+Then, the selected device takes any warning for it and warns the user. % no tiene respuesta
+If the chosen device does not take the message in a time span, the \emph{teacher} can update the \emph{problem} with a new selection.
 
 
 With this application, if the priority level is low, the user receives the warning in a less intrusive way.
@@ -196,9 +200,8 @@ The remarkable characteristic of this mechanism is that the devices present in t
 In the scenarios described in the previous section, some writings in the space trigger other node's action.
 For example, a device must show a message whenever a new warning is written in the space. % e.g. a task or a result
 To be aware of these writings, the node can either poll the space or rely on a notification mechanism. % async or blocking
-Obviously, the later encourages a more efficient use of the network. % is more optimal and more scalable approach.
-% IG: comentario sobre el comentario, q me ensenyaste tu: closer to optimal, no more optimal.
-% IG: encourage no creo que sea la palabra...
+Obviously, the later leads to a more efficient use of the network. % is closer to optimal and more scalable approach.
+
 
 As a consequence, a notification mechanism is highly advisable to fulfil \ac{ts}'s patterns in a distributed environment.
 Although the implementation of this notification mechanism is out of the scope of this thesis,
