@@ -72,18 +72,22 @@ Two key aspects to take into account are the limited energy autonomy or computat
 Similarly, our solution should be flexible enough to support a wide range of scenarios and to reuse third applications' data.
 
 
-% hacer guiño a WoT por algún lado o va a quedar un poco cojo
 This thesis addresses different key aspects of this adaptation:
 \begin{itemize}
-  \item \ac{tsc}'s compatibility with the \acs{rest} style and the \ac{wot} vision.
-	Aligning the \ac{tsc} design with the \ac{rest} one can inherit many of the benefits provided by this style and interoperate with other \ac{rest}-based solutions.
+  \item \emph{\ac{tsc}'s compatibility with the \acs{rest} style and the \ac{wot} vision.}
+	Aligning the \ac{tsc} design with \ac{rest} one can inherit many of the benefits provided by this style and interoperate with other \ac{rest}-based solutions.
 	At the same time, the use of \ac{tsc} can help developers to focus on higher-level problems.
 	% problema: habría que probar o se da por sentado que es lo que hace un middleware?
-  \item The search process carried out by any participant of the space.
-	The singularity of this search is that we want to enable the direct communication between participants.
-	Furthermore, it aims to reduce the energy consumption of the resource-constrained devices.
-  \item How to change the environment in an indirect way through the space and an alignment of the latter approach with a direct one.
-	The goal of this alignment is to reuse existing semantically described \ac{rest} services.
+	
+  \item \emph{Decentralized search on the semantic content provided by federated devices.}
+	% TODO Se sobreentenderá lo de federated? es la primera vez que lo menciono, pero es un concepto común...
+	This search architecture enables the direct communication between participants.
+	Furthermore, it reduces the energy consumption of the resource-constrained devices.
+	
+  \item \emph{Actuation on the physical environment.}
+	We present common usage patterns for space-based computing and we analyse how they can be used in \ac{ubicomp}.
+	Besides, we propose a space enhancement which seamlessly reuses external \ac{rest} services.
+	This way, we build a bridge between our solution and other \ac{wot} and \ac{rest} solutions.
 \end{itemize}
 %Finally, we also present the incarnation of some of these ideas in a middleware,
 %and some scenarios where it has been used.
