@@ -31,22 +31,24 @@ Although this dissertation describes this problem less thoroughly, we consider i
 
 
 This chapter presents and compares two techniques to change the physical environment.
-Section~\ref{sec:actuation_space} describes the first one, which is based on common \ac{ts} usage patterns.
-Section~\ref{sec:direct_actuation} presents the second technique, which relies on semantically described \ac{rest} services to create a plan to fulfil a given goal.
-Section~\ref{sec:actuation_comparison} offers a comparison between them.
-
+The first technique is based on common \ac{ts} usage patterns while the second one relies on semantically described \ac{rest} services to create a plan to fulfil a given goal.
 
 Note that the second actuation technique is out the scope of the space-based communication covered in this dissertation.
 However, we propose to enhance the interoperability of our space-based model with existing data providers.
 Doing so, our model avoids their adaptation to the space-based computation. % a nivel practico hacemos más fácil empezar a usar nuestro middleware
 To sum up, we aim to transparently reuse the capacities of already existing semantically described providers' \acsp{api}.
 
+% IG: \ref{sec:actuation_interoperation} se tendria que presentar antes.
 
-Section~\ref{sec:actuation_interoperation} explores this reuse through a practical example.
+The rest of this chaper is organized as follows.
+Sections \ref{sec:actuation_space} and \ref{sec:direct_actuation} presents the two techniques while Section~\ref{sec:actuation_comparison} compares them.
+Section~\ref{sec:actuation_interoperation} explores this reuse through a practical example. % IG: reuse?
 First, it presents simple scenario and explains how to implement it using each of the techniques mentioned earlier.
 Then, it shows a third mixed implementation where a consumer indirectly actuates through a space in a semantically described \acs{http} provider. % no sé si queda muy claro
-Section~\ref{sec:actuation_discussion} deepens into the implementation alternatives of this mixed scenario
-and Section~\ref{sec:actuation_summary} concludes the chapter.
+% IG: es una tercera tecnica? Pues esto deberia presentarse junto a las otras dos...
+% IG: creo que esto del escenario se tendria que poner a parte de esta tercera movida
+Section~\ref{sec:actuation_discussion} defailts the implementation alternatives of this mixed scenario.
+Finally, Section~\ref{sec:actuation_summary} concludes the chapter.
 
 
 
