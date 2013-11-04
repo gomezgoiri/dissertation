@@ -24,15 +24,30 @@
 %   + Expressed in terms that can be measured.
 % - Often PhD dissertations fail to make explicit their hypothesis / thesis.
 
-% Mis otros intentos: https://dev.morelab.deusto.es/trac/aigomez/wiki/sugerencias
-This dissertation is guided by the following hypothesis:
+This dissertation has the following hypothesis:
 % aimed: porque lo he conseguido se supone
 % proof: porque se ha probado ya
 % guided: porque en este punto, es como que avanzo que esto será así
 
+% Mis otros intentos: https://dev.morelab.deusto.es/trac/aigomez/wiki/sugerencias#Hipótesis
+\noindent
 \fbox {
   \parbox{\linewidth}{
-The alignment of the \ac{tsc} paradigm with the web's principles and the consideration of its energy and computational impact,
-leads to an independent, decoupled and interoperable communication between any type of device in \ac{ubicomp}.
+The alignment of the \ac{tsc} paradigm with the web's principles together with the consideration of its energy and computational impact,
+leads to \ac{ubicomp} environments where heterogeneous devices communicate autonomously in a decoupled and interoperable fashion.
   }
 }
+
+\bigskip
+
+Note that the consequence of the hypothesis involves the following aspects:
+\begin{description}
+  \item[Heterogeneity]: Fully-fledged computers and resource constrained devices (e.g. mobile and embedded devices) must coexist in these environments.
+  \item[Autonomy]: The devices must not depend on third nodes to consume or provide data.
+                   However, they might be aided by other devices to complete some related tasks (e.g. search the appropriate nodes to request).
+                   %In these cases, the self-organization of the nodes involved in such task must be promoted to avoid human-intervention.
+  \item[Decoupling]: The communication must be driven by the data, from the user perspective devices do no directly refer to each other.
+		    Additionally, the provider and the consumer should not coexist in time.
+		    However, note that since this subaspect contradicts the autonomy principle, their selection might be left to the user choice.
+  \item[Interoperability]: Devices must be able to exchange information with other systems and to use that information. % exchange: HTTP APIs & REST, use: semantics
+\end{description}
