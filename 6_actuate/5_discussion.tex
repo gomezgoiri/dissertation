@@ -1,10 +1,66 @@
-\section{Discussion}
+\section{Interoperation between Actuation Approaches} % Usage of \acs{rest} \acsp{api} from \acs{tsc}}
 \label{sec:actuation_discussion}
 
+\ac{rest} and \ac{rest}-like services constitute an emerging mechanism to directly actuate in the physical environment.
+Therefore, their seamless integration opens the door to reuse the capacities of many existing devices. % interoperate
+Specifically, we aim to integrate semantically described \ac{rest} services in our space-based model. % integration, reuse, alignment, close the gap
+% we first need to close the gap between both approaches.
+%This section aims to experimentally proof the validity of the alignment presented in the previous section.
 
-In the previous section we presented how the space-based approach can interoperate with semantically described \ac{rest} services.
-The space-mediated communication transparently invokes \ac{rest} services on behalf of the consumer which follows the \ac{ts} usage patterns.
-This section scrutinizes the strengths and weaknesses of the presented design, in conjunction with some other design alternatives. % design, alternative, etc.
+
+This section explores this integration helped by the baseline scenario.
+Section~\ref{sec:actuation_scn3} presents a new implementation which mixes the nodes from the implementations presented in sections \ref{sec:actuation_scn1} and \ref{sec:actuation_scn2}.
+This implementation shows how the \Space{} can transparently invoke \ac{rest} services on behalf of any consumer following the \ac{ts} usage patterns. % esto es, discussion
+%This lead us to analyse the adjustments required to enable their interoperation.
+The following sub-sections scrutinize the strengths and weaknesses of the presented design, in conjunction with some other design alternatives. % design, alternative, etc.
+
+
+\subsection{Baseline Scenario}
+\label{sec:actuation_scn3}
+
+This scenario aims to proof that our space-based middleware can easily reuse third applications' providers capacities. % easily? transparently?
+The scenario presents the space and the consumer (\nodeConsSpace{}) from the second scenario, but it replaces the provider with the first scenario's one (\nodeProvRest{}).
+Both nodes have a good foundation for the interoperation since they use the same vocabularies. % to describe the knowledge they manage.
+However, the \nodeProvRest{} and the \nodeConsSpace{} rely on different communication mechanisms: direct communication and indirect communication.
+
+
+To close the gap between both worlds, we avoid changing the participant node's implementations.
+Instead, we make some few adjustments in the space implementation.
+These adjustments are performed by means of an agent which resides in the same machine as the space. % TODO describe what is an agent?
+
+
+This agent takes care of the tasks that \nodeConsRest{} does in the scenario 1.
+\begin{enumerate*}[label=\itshape(\arabic*\upshape)]
+  \item crawls the discovered \acsp{api}\footnote{The discovery process is out of the scope of this implementation.},
+  \item reasons about their data to get a plan, and
+  \item follows the resulting plan performing \acs{http} requests.
+\end{enumerate*}
+To trigger the reasoning, the agent awaits for new tasks written in the space (see Listing~\ref{lst:generic_task_subscription} for the used subscription template).
+Providing that after reasoning the agent does not find a plan to achieve a task, it will write it in the space again.
+This way, another node which may know how to process it may take the task. % TODO discutir porque reasoning va a tener preferencia sobre actuación indirecta!
+
+
+\begin{listing}
+  \input{\pathchapsix/code/scn3/generic_task_subscription.tex}
+  \caption{Subscription to any task written into the space.}
+  \label{lst:generic_task_subscription}
+\end{listing}
+
+
+Requiring new data from the developer, would impede the transparent reuse of the nodes from the first and second scenario.
+Therefore, the agent reuses all the information pieces it needs:
+\begin{enumerate}
+  \item It uses the \nodeConsSpace{}'s subscription to the task result as a goal for the reasoning.
+	In our implementation, these correspondences need a minimal mapping between N3QL \citeweb{n3ql2004} and SPARQL \citeweb{sparql2008}.
+	The reason why we use both languages are the underlying frameworks: EYE \citeweb{euler} and RDFLib \citeweb{rdflib}. % TODO citar!
+  \item The agent uses all the content written into the space as \emph{additional knowledge} for the reasoning process.
+	This is feasible because it can locally obtain it because the agent resides in the same machine as the space.
+	Otherwise, obtaining this knowledge through the network would be too consuming both in bandwidth and in time.
+\end{enumerate}
+
+
+% TODO poner aquí algunos indicadores de la implementación de escenarios?
+%   e.g. cuando código extra ha hecho falta añadir en el tercero para que se hablen entre sí
 
 
 \subsection{Actuation Modelling}

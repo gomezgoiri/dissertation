@@ -241,63 +241,72 @@ The main drawback of any subscription mechanism is that it breaks the \acl{rests
 According to Section~\ref{sec:network_properties}, this implies that network performance will improve at the cost of scalability, simplicity and reliability.
 
 
-% hasta AQUI!
-% Therefore, although it is not the main focus of this thesis, in this section we present a subscription mechanism which can be used on top of the \ac{tsc} middleware proposed.
-% The requirements that this mechanism needs to fulfil are the following ones:
-% \begin{itemize}
-%   \item It should be independent of \ac{tsc}'s writing and reading primitives.
-% 	This requirement ensures that frequent writings do not lead to excessive processing in resource constrained nodes.
-% 	The main drawback of this requirement is that a node does not now when relevant data is written in the space \emph{per se}.
-% 	A developer needs to advertise when it writes relevant data.
-%   \item Any node running our solution must be able to implement this mechanism.
-% 	In other words, no new dependencies should be added.
-%   \item The new primitives should use elements the current developer is used to (i.e. templates or RDF triples).
-% \end{itemize}
-% 
-% explicar cómo funciona
-% https://otsopack.readthedocs.org/en/latest/subscriptions.html
-% \subsubsection{Subscription primitives}
-% 
-% The subscription primitives the developer should use are the following ones:
-% \begin{itemize}
-%   \item \emph{Subscribe}. The node subscribes to the given template returning an URI which identifies the subscription.
-%     \begin{minted}{java}
-% URI subscribe(space_uri, template, listener)
-%     \end{minted}
-%   \item \emph{Unsubscribe}. Unsubscribes to a subscription given its subscription URI.
-%     \begin{minted}{java}
-% void unsubscribe(space_uri, String subscriptionURI)
-%     \end{minted}
-%   \item \emph{Notify}.
-%     \begin{minted}{java}
-% void notify(space_uri, template)
-%     \end{minted}
-% \end{itemize}
-% 
-% 
-% \subsubsection{Deployment}
-% 
-% The nodes responsible of handling subscriptions and notifications are called \emph{bulletin boards}.
-% Other nodes belonging to the same space, discover them using a out of scope method and publish their subscriptions and notifications using their HTTP API.
-% 
-% Each \emph{bulletin board}:
-% \begin{itemize}
-%   \item Belongs to a space.
-%   \item Exposes a subscription API.
-%   \item Shares its subscriptions with other bulletin boards which belong to the same space.
-%   \item Propagates the notifications to the relevant nodes using the \emph{callback url} provided by them.
-% \end{itemize}
-% 
-% 
-% The Figure~\ref{} describes a simple subscription use case.
-% \begin{enumerate}
-%   \item N1 subscribes to BB1 with a template t1.
-%   \item BB1 propagates the subscription provided by N1 to BB2 and BB3
-%   \item N3 notifies to BB3 about t2.
-%   \item Since t1 matches t2, BB3 tries to notify to N1 using the callback URI provided during the subscription process.
-%   \item Unfortunately, the BB3 cannot notify to N1 due to unexpected network problems.
-%   \item BB3 propagates the notification of t2 to BB2.
-%   \item BB2 reaches N1, so it notifies it about t2 using the callback URI.
-% \end{enumerate}
-% 
-% TODO poner la foto esquemática de https://otsopack.readthedocs.org/en/latest/subscriptions.html
+
+\subsection{Baseline Scenario}
+\label{sec:actuation_scn1}
+
+This section describes how to implement the baseline scenario using \ac{tsc}.
+The implementation presents the following nodes:
+\begin{enumerate}[label=\itshape(\Alph*\upshape)] % o \itshape(\Alph*\upshape~node)
+  \item A node which reacts to the tasks written into a shared semantic space.
+	The node running this implementation is aware of the tasks written into the space and changes the light's value accordingly. % esto es, se suscribe a ellas
+	Figure~\ref{fig:flow_space_prov} shows the initialization of this node and the process performed when a graph is detected.
+	
+  \item A node which writes tasks into a shared semantic space describing its desire to change the light's value.
+	Figure~\ref{fig:flow_space_cons} shows the actions taken by this node.
+	As it can be seen, the process is divided in two temporarily independent processes.
+	The first writes the task and the second processes the result whenever it is written in the space.
+	
+  \newcounter{enumNodes}
+  \setcounter{enumNodes}{\arabic{enumi}}
+\end{enumerate}
+
+% In advance, we will refer to these nodes as "A" and "B" using the following commands:
+\newcommand{\nodeProvSpace}{\emph{Node A}}
+\newcommand{\nodeConsSpace}{\emph{Node B}}
+
+
+\begin{figure}
+        \centering % proporción chachi: 40%, 20% y 20%
+	\subfigure[\nodeProvSpace] {
+                \includegraphics[width=0.22\linewidth]{flowSpaceProvider}
+                \label{fig:flow_space_prov}
+        }
+	~ %add desired spacing between images, e. g. ~, \quad, \qquad etc.
+          %(or a blank line to force the subfigure onto a new line)
+	\subfigure[\nodeConsSpace] {
+                \includegraphics[width=0.22\linewidth]{flowSpaceConsumer}
+                \label{fig:flow_space_cons}
+        }
+        \caption{Flow charts for \nodeProvSpace{} and \nodeConsSpace{}.}
+        \label{fig:flow_space}
+\end{figure}
+
+
+\nodeProvSpace{} first subscribes to changes in the space (see Listing~\ref{lst:task_subscription}).
+Then, \nodeConsSpace{} writes a task to be performed (see Listing~\ref{lst:task}) and subscribes to its result.
+As a consequence of the writing, \nodeProvSpace{} reacts by taking the task, interpreting it, changing the environment through its actuator and writing the result.
+Finally, \nodeConsSpace{} gets a notification of the written result, takes it and processes it.
+
+
+\begin{listing}
+  \input{\pathchapsix/code/scn2/task_subscription.tex}
+  \caption{Subscription to preferences written in the space.}
+  \label{lst:task_subscription}
+\end{listing}
+
+
+% dar detalles de cómo se ha implementado
+To simplify the implementation of the scenario, we considered a purely centralized space.
+% subscripciones SPARQL
+The subscription mechanism used by the space uses SPARQL \citeweb{sparql2008}.
+We offered two primitives to trigger the notifications.
+The first one takes into account the knowledge from the last graph written.
+% http://english.stackexchange.com/questions/2981/alternatives-to-computationally-expensive
+The second primitive considers the knowledge from the whole space and hence is more computationally costly.
+
+\begin{listing}
+  \input{\pathchapsix/code/scn2/task.tex}
+  \caption{The preference is conceptually equivalent to a task.}
+  \label{lst:task}
+\end{listing}

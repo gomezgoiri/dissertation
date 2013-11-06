@@ -85,3 +85,86 @@ Additionally, \citet{verborgh_ijcs_2014} distinguish between pre-proof and post-
 The first, are those which assume that the execution of all \acs{api} calls will behave as expected.
 The latter, can be seen as a \emph{revision} of the pre-proof.
 It executes the Web \acs{api} of the pre-proofs and uses actual execution results to generate a new proof.
+
+
+
+\subsection{Baseline Scenario}
+\label{sec:actuation_scn2}
+
+% poner un diagrama que presente el escenario?
+% En ppio no, porque sería muy sencillote, y el flujo del consumidor que es el complejo ya ha sido explicado.
+The proposed implementation for the baseline scenario using \restdesc{} presents the following nodes:
+\begin{enumerate}[resume,label=\itshape(\Alph*\upshape)]
+  \setcounter{enumi}{\theenumNodes}
+  \item A node which exposes the lamp and its actuators through a \ac{rest} \ac{api}.
+	This \ac{api} is described using \restdesc{}. % REST API seguro 100%? por si acaso decir HTTP API?
+	To physically change the light value, any client must send an \acs{http} request to the resource which represents the light actuator.
+	% Please note that \nodeProvRest{} is omitted because its operation is the usual for an \acs{http} server.
+	
+  \item A node which directly communicates with the desired provider.
+	To discern which provider's resources has to call and how to do it, this implementation reasons to obtain a plan.
+	This plan determines how to fulfil the node's initial goal invoking the needed \ac{http} \acsp{api}.
+	Figure~\ref{fig:flow_rest_prov} shows the actions performed by this node in detail.
+\end{enumerate}
+
+% In advance, we will refer to these nodes as "C" and "D" using the following commands:
+\newcommand{\nodeProvRest}{\emph{Node C}}
+\newcommand{\nodeConsRest}{\emph{Node D}}
+
+
+\InsertFig{flowRESTConsumer}{fig:flow_rest_prov}{
+  Flow chart for the \nodeConsRest{}.
+}{
+}{0.5}{}
+
+
+The \acs{http} \acs{api} provided by the \nodeProvRest{} is modelled using the following resources:
+\begin{itemize}
+  \item \emph{/lamp}: It provides basic information about the lamp.
+  \item \emph{/lamp/actuators}: It enumerates the actuators which compose the \emph{smart lamp}.
+  \item \emph{/lamp/actuators/light}: It represents the unique actuator which composes the lamp in our simple example (i.e. the lamp's light).
+  \item \emph{/lamp/actuators/light/01}: It represents a concrete preference to change the light.
+\end{itemize}
+
+
+% Aquí estoy explicando un poco el diagrama de flujo de la figura,
+% dando detalles de cómo se ha implementado y a qué me refiero con cada pieza de información
+% ¿Añadir descripciones y demás aquí o ponerlas como anexo?
+
+In order to instruct consumers on how to use the services provided, they are annotated using \restdesc{}.
+The \acs{http} OPTIONS returns listings~\ref{lst:light_descpost}~and~\ref{lst:measure_descget} for \emph{/lamp/actuators/light}.
+Thanks to these descriptions and to the dereferenceable \acsp{uri} \citep{sauermann_cool_2008}, starting from \emph{/lamp} any client can crawl the \acs{api} to autonomously learn how to use it. % TODO citar http://en.wikipedia.org/wiki/Dereferenceable_Uniform_Resource_Identifier
+% TODO TODO TODO citar a SIMON!
+
+
+\begin{listing}
+  \input{\pathchapsix/code/scn1/measure_descget.tex}
+  \caption{Rule which expresses that having a light sensor observation, one can obtain details about the observation through an \acs{http} GET.}
+  \label{lst:measure_descget}
+\end{listing}
+
+\begin{listing}
+  \input{\pathchapsix/code/scn1/light_descpost.tex}
+  \caption{Rule which expresses that having a preference which is measured in luxes, one can create a light observation using the \acs{http} POST.}
+  \label{lst:light_descpost}
+\end{listing}
+
+
+In addition to the crawled content, the \nodeConsRest{} provides two extra pieces of information to the reasoner: a preference and a goal (see listings~\ref{lst:additional_information} and~\ref{lst:light_goal}).
+The preference allows the consumer to express the interest on change a service, which may not always be feasible.
+The goal drives the reasoning, which tries to extract a plan to achieve it.
+
+\begin{listing}
+  \input{\pathchapsix/code/scn1/additional_info.tex}
+  \caption{A preference which expresses the interest on modifying the sensed value of a light.}
+  \label{lst:additional_information}
+\end{listing}
+
+\begin{listing}
+  \input{\pathchapsix/code/scn1/light_goal.tex}
+  \caption{A goal which expresses the interest on modifying the value for a light.}
+  \label{lst:light_goal}
+\end{listing}
+
+With that plan, the consumer just needs to complete it calling to different \acs{http} resources.
+If more than a resource needs to be called, the plan may also indicate how to use the information obtained from one to use it in the next call.

@@ -13,7 +13,6 @@ If you live among wolves you have to act like a wolf.
 \newcommand{\restdesc}{\emph{RESTdesc}}
 
 
-
 % the code below specifies where the figures are stored
 \ifpdf
     \graphicspath{{\pathchapsix/figures/PNG/}{\pathchapsix/figures/PDF/}{\pathchapsix/figures/JPG/}{\pathchapsix/figures/}}
@@ -41,11 +40,12 @@ Therefore, we propose reusing the \acs{http} \acsp{api} of already existing sema
 
 This chapter explores this reuse helped by a simple real-world scenario.
 The goal of the scenario is to remotely change the light of a lamp.
+% % TODO TODO TODO The implementation is publicly available at THIS URL.
 
 
 \bigskip
 
-The rest of this chaper is organized as follows.
+The rest of this chapter is organized as follows.
 Sections \ref{sec:actuation_space} and \ref{sec:direct_actuation} present the two techniques and their corresponding implementations of the baseline scenario. % se entiende que es de luces
 Section~\ref{sec:actuation_comparison} compares these techniques and Section~\ref{sec:actuation_discussion} explores how they can interoperate. % no funciona en ambos sentidos, igual habría que especificarlo!
 %Specifically, it presents a consumer willing to indirectly actuate through a space in a semantically described \acs{http} provider. % no sé si queda muy claro
@@ -60,6 +60,6 @@ Finally, Section~\ref{sec:actuation_summary} concludes the chapter.
 \input{\pathchapsix/1_ts_patterns}
 \input{\pathchapsix/2_goal_services}
 \input{\pathchapsix/3_comparison} % de los dos anteriores
-\input{\pathchapsix/4_interoperation}
+%\input{\pathchapsix/4_interoperation}
 \input{\pathchapsix/5_discussion}
 \input{\pathchapsix/6_summary}
