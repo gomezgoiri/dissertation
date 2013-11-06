@@ -29,25 +29,27 @@ In the previous chapter, we presented an energy-aware technique to search on the
 However, acting over an \ac{ubicomp} environment is as important as observing what happens on it.
 Although this dissertation describes this problem less thoroughly, we consider interesting to discuss it to provide the complete story. %not leave loose ends. % transmit a broader vision. % the big picture
 
+\bigskip
 
 This chapter presents and compares two techniques to change the physical environment.
 The first technique is based on common \ac{ts} usage patterns while the second one relies on semantically described \ac{rest} services to create a plan to fulfil a given goal.
 
 Note that the second actuation technique is out the scope of the space-based communication covered in this dissertation.
-However, we propose to enhance the interoperability of our space-based model with existing data providers.
-Doing so, our model avoids their adaptation to the space-based computation. % a nivel practico hacemos más fácil empezar a usar nuestro middleware
-To sum up, we aim to transparently reuse the capacities of already existing semantically described providers' \acsp{api}.
+However, the seamless integration of these \ac{rest} services opens the door to reuse the capacities of many existing devices.
+Therefore, we propose reusing the \acs{http} \acsp{api} of already existing semantically described providers.
+% without adapting them to the space-based computation. % a nivel practico hacemos más fácil empezar a usar nuestro middleware
 
-% IG: \ref{sec:actuation_interoperation} se tendria que presentar antes.
+This chapter explores this reuse helped by a simple real-world scenario.
+The goal of the scenario is to remotely change the light of a lamp.
+
+
+\bigskip
 
 The rest of this chaper is organized as follows.
-Sections \ref{sec:actuation_space} and \ref{sec:direct_actuation} presents the two techniques while Section~\ref{sec:actuation_comparison} compares them.
-Section~\ref{sec:actuation_interoperation} explores this reuse through a practical example. % IG: reuse?
-First, it presents simple scenario and explains how to implement it using each of the techniques mentioned earlier.
-Then, it shows a third mixed implementation where a consumer indirectly actuates through a space in a semantically described \acs{http} provider. % no sé si queda muy claro
-% IG: es una tercera tecnica? Pues esto deberia presentarse junto a las otras dos...
-% IG: creo que esto del escenario se tendria que poner a parte de esta tercera movida
-Section~\ref{sec:actuation_discussion} details the implementation alternatives of this mixed scenario.
+Sections \ref{sec:actuation_space} and \ref{sec:direct_actuation} present the two techniques and their corresponding implementations of the baseline scenario. % se entiende que es de luces
+Section~\ref{sec:actuation_comparison} compares these techniques and Section~\ref{sec:actuation_discussion} explores how they can interoperate. % no funciona en ambos sentidos, igual habría que especificarlo!
+%Specifically, it presents a consumer willing to indirectly actuate through a space in a semantically described \acs{http} provider. % no sé si queda muy claro
+After presenting a neat solution which only extends the \Space{} implementation, it discusses further implementation alternatives.
 Finally, Section~\ref{sec:actuation_summary} concludes the chapter.
 
 
