@@ -8,15 +8,19 @@
   \begin{center}
     \footnotesize
     \begin{tabular}{llp{4cm}p{4cm}}
-      Actuation &
-      Perspective &
-      Networking &
-      Computation \\
+      \hline
+      \multirow{2}{*}{Actuation} &
+      \multirow{2}{*}{Perspective} &
+      \multicolumn{2}{c}{Activity} \\
+      ~ &
+      ~ &
+      \multicolumn{1}{c}{Networking} &
+      \multicolumn{1}{c}{Computation} \\
       \hline
       \multirow{2}{*}{\ac{ts} patterns} & Provider & Proactive, limited activity & Limited: Pattern matching \\
-				    ~ & Consumer & Proactive, limited activity & Limited: Pattern matching \\
-      \multirow{2}{*}{Proof-based} & Provider & Reactive, limited activity & Limited: Handling requests \\
-                                  ~ & Consumer & Proactive, high activity &  Demanding: Reasoning \\ % Y comprobar planes...
+				    ~ & Consumer & Proactive, limited activity & Limited: Pattern matching \\[0.2cm]
+      \ac{rest} \acp{api} & Provider & Reactive, limited activity & Limited: Handling requests \\
+        consumption       & Consumer & Proactive, high activity &  Demanding: Reasoning \\ % Y comprobar planes...
       \hline
     \end{tabular}
   \end{center}

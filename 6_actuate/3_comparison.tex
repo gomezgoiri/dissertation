@@ -1,9 +1,9 @@
 \section{Comparison}
 \label{sec:actuation_comparison}
 
-The actuation procedure explained in Section~\ref{sec:actuation_space} requires a subscription mechanism, but in exchange it provides space and time autonomy.
-Obviously, it does that by creating a dependency on the \Space{}.
-Two nodes will not be able to communicate with each other without the \Space{}.
+The actuation procedure explained in Section~\ref{sec:actuation_space} requires a subscription mechanism, but in exchange it provides space and time decoupling.
+Obviously, this decoupling comes at the price of a dependency on the \Space{}.
+That is, two nodes will not be able to communicate with each other without the \Space{}.
 
 
 The second approach offers independence of the \Space{}: any node can directly invoke a service to act over the environment.
@@ -24,7 +24,7 @@ Thanks to this specificity, they are only affected by the contents they are inte
 Besides, they only perform trivial computing task: interpreting results and pattern matching. % pattern matching sólo en el caso del coordination space!
 
 
-The proof-based actuation mechanism requires the consumer to have prior knowledge about the environment to reason over it. % frase susceptible de simplificar
+The \ac{rest}-based actuation mechanism requires the consumer to have prior knowledge about the environment to reason over it. % frase susceptible de simplificar
 Since this knowledge must be acquired from remote nodes before reasoning, this approach demands an extra network usage that the first does not.
 % de pre-proof a post-proof se generará más networking activity seguro? por qué? por invocar servicios REST? Es equivalente a andar leyendo tareas y escribiendo resultados...
 Besides, the proof-based actuation itself also generates additional computation activity on the node responsible of reasoning.
