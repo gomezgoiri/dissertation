@@ -28,9 +28,9 @@ As Section~\ref{sec:network_properties} explained, semantic representations do n
 To solve this, three solutions can be adopted:
 % Unos proponen extender con ontologías
 \begin{enumerate}
-  \item To use an ontology to represent the hypertext \citep{kjernsmo_necessity_2012},
-  \item To embed the hypertext independently to the representations on the \ac{http} headers \citep{mark_web_2010}, and
-  \item To provide a description of the resources using the \ac{http} OPTIONS verb \citep{verborgh_functional_2012,verborgh_ijcs_2014}.
+  \item To use an ontology to represent the hypertext \citep{kjernsmo_necessity_2012}.
+  \item To embed the hypertext independently to the representations on the \ac{http} headers \citep{mark_web_2010}.
+  \item To provide a description of the state changes each \ac{http} request triggers \citep{verborgh_functional_2012,verborgh_ijcs_2014}.
 \end{enumerate}
 
 
@@ -66,6 +66,16 @@ Therefore, this chapter assumes that the \ac{http} \acsp{api} whose capacities w
 % he evitado explicar que las reglas tienen premisa y conclusión, porque me parece demasiado obvio
 A rule's \emph{premise} expresses the requirements to invoke a \ac{rest} service.
 A rule's \emph{conclusion} expresses both the \ac{rest} call that needs to be made and the description of that invocation result.
+
+
+\citet{verborgh_functional_2012} suggest three complementary alternatives to discover descriptions.
+The first alternatives use \ac{http} mechanisms: content negotiation and the \ac{http} OPTIONS verb.
+Using the content negotiation a client can obtain a dereferenceable link's representation which corresponds to the description. % puede ser comments#algo
+Requesting a resource using the \ac{http} OPTIONS verb a client can obtain the description in the response body.
+Finally, the third alternative is not \ac{http}-centric and it depends on repositories to store and retrieve the descriptions.
+% En el paper los autores no justifican bien porque es last resort, así que paso de meterme yo en berenjenales
+% This alternative should only be used as a last resort because it requires out-of-band information (e.g. the repository address and how to use it) to learn how to use an \acs{api}.
+% it separates the description of the \acp{api} functionality from the \acp{api} themselves. % dificultando el descubrimiento de las APIs usando sólo ellas
 
 
 \citet{verborgh_ijcs_2014} propose a service composition mechanism for Web \acp{api} using \restdesc{}.
@@ -151,8 +161,8 @@ Thanks to these descriptions and to the dereferenceable \acsp{uri} \citep{sauerm
 
 
 In addition to the crawled content, the \nodeConsRest{} provides two extra pieces of information to the reasoner: a preference and a goal (see listings~\ref{lst:additional_information} and~\ref{lst:light_goal}).
-The preference allows the consumer to express the interest on change a service, which may not always be feasible.
-The goal drives the reasoning, which tries to extract a plan to achieve it.
+The preference allows the consumer to express the interest on changing a resource, which may not always be feasible.
+The goal drives the reasoning process, which tries to extract a plan to achieve it.
 
 \begin{listing}
   \input{\pathchapsix/code/scn1/additional_info.tex}
@@ -166,5 +176,5 @@ The goal drives the reasoning, which tries to extract a plan to achieve it.
   \label{lst:light_goal}
 \end{listing}
 
-With that plan, the consumer just needs to complete it calling to different \acs{http} resources.
+With this plan, the consumer just needs to call to the different \acs{http} resources it defines.
 If more than a resource needs to be called, the plan may also indicate how to use the information obtained from one to use it in the next call.
