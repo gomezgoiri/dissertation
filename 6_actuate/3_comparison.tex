@@ -1,15 +1,15 @@
 \section{Comparison}
 \label{sec:actuation_comparison}
 
-The actuation procedure explained in Section~\ref{sec:actuation_space} requires a subscription mechanism, but in exchange it provides space and time decoupling.
+The actuation technique explained in Section~\ref{sec:actuation_space} requires a subscription mechanism, but in exchange it provides space and time decoupling.
 Obviously, this decoupling comes at the price of a dependency on the \Space{}.
 That is, two nodes will not be able to communicate with each other without the \Space{}.
 
 
-The second approach offers independence of the \Space{}: any node can directly invoke a service to act over the environment.
+The second approach presented in Section~\ref{sec:direct_actuation} offers independence of the \Space{}: any node can directly invoke a service to act over the environment.
 This approach allows reusing \ac{wot} applications' actuation capacities, providing they are properly described. % apps, APIs o services? % no digo integration/interop porque es sólo one-way
 To enable this reuse, it demands a rule-based reasoning engine. % reasoning engine ya queda bien?
-The unavailability of these engines in many computing platforms may impede its massive adoption. % como apunte de su practicalidad
+% The unavailability of these engines in many computing platforms may an obstacle for its massive adoption. % como apunte de su practicalidad, pero no sé si venía muy a cuento
 
 
 \input{\pathchapsix/tables/actuation_general_comparison}

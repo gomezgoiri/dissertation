@@ -2,8 +2,8 @@
 \label{sec:direct_actuation}
 
 
-The actuation mechanism presented in the previous section uses the \Space{} (i.e. it is indirect).
-This mechanism implies that the actuator must be aware of the content of the space.
+The actuation technique presented in the previous section uses the \Space{} (i.e. it is indirect).
+This technique implies that the actuator must be aware of the \Space{}'s content.
 For instance, a heater must check the space to find if a new desired temperature was written.
 % lo podrá reusar a través de un intermediario
 % interop era una de las cosas que queriamos cuidar
@@ -11,18 +11,29 @@ For instance, a heater must check the space to find if a new desired temperature
 
 
 % por qué? motivación: permitir a otras app integrarse en nuestro espacio
-In contrast, \ac{rest} services constitute an emerging mechanism to directly actuate in the physical environment.
-According to the \ac{rest} principles, a client should navigate through these resources with no prior knowledge of the \ac{api}.
+In contrast, this section presents a second technique which directly actuates in the environment without using any \Space{}.
+A consumer following this technique directly uses \ac{rest} \acp{api}. % i.e. it is the client of these \ac{api} <-- se entiende esto o hace falta dar el salto entre consumer y client?
+These \acp{api} expose the capabilities of some devices to make physical changes in the environment.
+
+
+However, this apparently simple mechanism hides a difficulty: the consumer needs to discern how to use these \acp{api} to make such changes.
+According to the \ac{rest} principles, a client should navigate through the resources of an \ac{api} with no prior knowledge of it.
 % Copiar esta explicación mejor de algún lado:
 The client should 
 \begin{enumerate*}[label=\itshape(\arabic*\upshape)]
   \item interpret the representations provided by the server and then
   \item choose the appropriate state transition from the hypertext according to its intention. % y su conocimiento básico del protocolo: CRUD
 \end{enumerate*}
+To do this, this section advocates for a semantic description of these \acp{api}' resources.
+
+
+Section~\ref{sec:actuation_rest_background} briefly presents different alternatives to build semantic \ac{rest} \acp{api}.
+Section~\ref{sec:restdesc} present the selected alternative and Section~\ref{sec:actuation_scn2} implements the baseline implementation using it.
+
 
 
 \subsection{Background}
-
+\label{sec:actuation_rest_background}
 
 As Section~\ref{sec:network_properties} explained, semantic representations do not include a native way to express the hypertext. % TODO realmente se explica?
 To solve this, three solutions can be adopted:
