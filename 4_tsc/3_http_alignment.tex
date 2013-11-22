@@ -18,7 +18,7 @@ Therefore, all the operations in \ac{tsc} are performed against a particular spa
 Within a space, the information is stored in sets of \textbf{triples} called \textbf{graphs}.
 Each graph can also be identified by an \acs{uri}.
 % The \acs{rdf} \textbf{triples} are the underlying concept of all the \ac{sw} languages. % a estas alturas esto está explicadísimo
-Each triple is composed by a subject (which is a \acs{uri} or a \emph{blank node}), a predicate (a \acs{uri}) and a value (which can be a \acs{uri}, a \emph{blank node} or a literal), as shown in the Figure~\ref{fig:triples_example}.
+Each triple is composed by a subject (which is a \acs{uri} or a \emph{blank node}), a predicate (a \acs{uri}) and an object (which can be a \acs{uri}, a \emph{blank node} or a literal), as shown in the Figure~\ref{fig:triples_example}.
 % TODO cuidado con los blank nodes!!! Los tenemos en cuenta? De ser así, cómo???
 
 As detailed later, \ac{tsc}'s primitives add or remove graphs.
@@ -97,7 +97,7 @@ Consequently, the translation between these two worlds is straightforward.
 According to the \ac{rest} principles the interaction with an API must be hypertext-driven \citep{fielding_rest_2008}.
 To ease its usage by developers, we provide a human-oriented \acs{html} representation of the \ac{api} which is completely \emph{browseable}.
 % un poco repetido de la parte de HATEOAS
-Regarding the machine-oriented (i.e. semantic) representation of the \ac{api}, several solutions to enable hypermedia driving have been proposed by \citet{verborgh_functional_2012} and \citet{kjernsmo_necessity_2012}. % mencionar que son experimentales?
+Regarding the machine-oriented representation of the \ac{api}, \citet{verborgh_functional_2012} and \citet{kjernsmo_necessity_2012} have proposed solutions to enable hypermedia driven semantic \acp{api}. % mencionar que son experimentales?
 Independently of the mechanism adopted, in this section we propose a optional \ac{api} which tries to stress \ac{tsc}'s compliance with \ac{http}.
 \end{sloppypar}
 

@@ -103,11 +103,11 @@ This section tries to clarify how the different behaviours coexist:
 
 \begin{description}
  \item[Writing.]
-      The most basic writing primitive allows a client to write a graph into the space hold by the server.
+      The most basic writing primitive allows a client to remotely write a graph into the \coordspace{}.
       However, we also presented the \emph{write\_self} primitive.
-      \emph{Write\_self} writes into the local device an externally untakeable graph (i.e. \selfgraphs{}).
+      \emph{Write\_self} locally writes into an \asteroid{} an externally untakeable graph (i.e. \selfgraphs{}).
  \item[Reading.]
-      \emph{Query} performs a traversal query which aggregates all the graphs of the space.
+      \emph{Query} performs a traversal query over the aggregated view of all the graphs in a space (including the \selfgraphs{}).
       \emph{Read} and \emph{take} work at resource level.
       \emph{Read\_self} and \emph{take\_self} are their equivalents for \selfgraphs{}.
       Finally, \emph{read} primitive's results will be enriched with \selfgraphs{} from the \outerspace{}. % mediante redirect o lo que sea
