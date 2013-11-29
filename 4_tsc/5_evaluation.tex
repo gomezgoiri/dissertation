@@ -304,19 +304,29 @@ Besides, in our \ac{http} \ac{api} the following issues remain unsolved:
 
 \subsubsection{Scalability}
 
-% HUGE TODO TODO TODO rewrite this!
-%  + Web es escalable
+%  + Web es escalable por diseño
+The web architecture is scalable by design.
+The server off-loads work on the clients and frees resources quickly thanks to its statelessness.
+This contributes to the coexistence of a huge number of components and interactions between them.
+
+% Me había metido en berenjenales, pero al final he simplificado:
+However, searching on the web (or in our model's \outerspace{}) unavoidably leads to scalability challenges on the search process. % porque tienes que preprocesar todo el contenido a buscar
+The cause is that the search process needs to previously process all the web (or at least the subset where it is searched).
+%    -> Esto es aún peor si los datos cambian con frecuencia
+Furthermore, when the data searched changes frequently as in \ac{ubicomp}, these challenges grow exponentially.
+Besides, the search process presented in the next chapter relies in each client to autonomously search for the appropriate servers to request.
+This leads to each device to manage some additional piece of information from each server in the space.
+To limit this negative impact, we limit the information written in the \outerspace{} using flat spaces. % i.e. groups of devices which share information
+
+Regarding the \coordspace{}, this dissertation simply ignores how it deals with the scalability issues (e.g. by distributing the space).
+
+%  Idea más compleja que se ha dejado de lado tras dar vueltas:
+%  + Buscar un punto de entrada inicial concreto no es tan sencillo/escalable: hay que hacer scrapping de todos los datos.
+%  + Problema añadido de la web semántica:
+%    -> se basa en enlaces, pero seguir una URI no necesariamente lleva al documento que tiene información sobre ella
+%    -> más de un dispositivo pueden hacer referencia a una web (DERREFERENCEABLE URI)
 %  + Hacer una visión del espacio, hace que no accedas por una dirección (URI), sino por un template o lo que sea.
 %  + La URI de una tripleta no te permite localizarla => necesario mecanismo de búsqueda.
-The high scalability of the chosen architectural network style is negatively affected by the combination of several features:
-\begin{itemize}
-  \item Data distribution (i.e. accessing to \emph{self-managed graphs})
-  \item Lack of hypermedia on the semantic representations cannot guide data discovery.
-        In other words, a triple location cannot always be discovered following any of its \ac{uri}. % relacionado con todo aquello de 303 y demás?
-        This means that we need an out-of-band searching mechanism as the one presented in the Chapter~\ref{cha:searching}.
-\end{itemize}
-
-% TODO TODO TODO resulta que si desacoplas la URI de un espacio de quien la proporciona, el searching mechanism también puede ayudar con eso!!!
 
 
 \subsubsection{Manageability}
