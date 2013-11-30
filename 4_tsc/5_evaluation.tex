@@ -303,22 +303,23 @@ Besides, in our \ac{http} \ac{api} the following issues remain unsolved:
 
 
 \subsubsection{Scalability}
+% ¿Cómo afecta la escalabilidad a la escalabilidad? => Directamente :-S
 
 %  + Web es escalable por diseño
 The web architecture is scalable by design.
-The server off-loads work on the clients and frees resources quickly thanks to its statelessness.
-This contributes to the coexistence of a huge number of components and interactions between them.
+Indeed, the huge number of components and interactions between them that coexist in the web are a good proof this.
+%The server off-loads work on the clients and frees resources quickly thanks to its statelessness. % Las causas
+%This contributes to the coexistence of a huge number of components and interactions between them.
+This components share an even bigger amount of data which leads to scalability challenges on the search process \citep{krummenacher_scalability_2008}. % porque tienes que preprocesar todo el contenido a buscar
+In fact, considering that in \ac{ubicomp} environments the data is constantly generated or updated this challenge can be harder.
+The search process is analysed in depth in the next chapter.
 
-% Me había metido en berenjenales, pero al final he simplificado:
-However, searching on the web (or in our model's \outerspace{}) unavoidably leads to scalability challenges on the search process. % porque tienes que preprocesar todo el contenido a buscar
-The cause is that the search process needs to previously process all the web (or at least the subset where it is searched).
-%    -> Esto es aún peor si los datos cambian con frecuencia
-Furthermore, when the data searched changes frequently as in \ac{ubicomp}, these challenges grow exponentially.
-Besides, the search process presented in the next chapter relies in each client to autonomously search for the appropriate servers to request.
-This leads to each device to manage some additional piece of information from each server in the space.
-To limit this negative impact, we limit the information written in the \outerspace{} using flat spaces. % i.e. groups of devices which share information
+% However, in our model we limit the search scope using flat spaces (see Section~\ref{sec:soa_tsc_space}). % i.e. groups of devices which share information
 
-Regarding the \coordspace{}, this dissertation simply ignores how it deals with the scalability issues (e.g. by distributing the space).
+% Para simplificar y no adelantar discusiones:
+% Besides, the search process presented in the next chapter relies in each client to autonomously search for the appropriate servers to request.
+% As a consequence, each device manages a piece of information for each server in the space.
+% Regarding the \coordspace{}, this dissertation simply ignores how it deals with the scalability issues (e.g. by distributing the space). % también le afecta lo del flat space
 
 %  Idea más compleja que se ha dejado de lado tras dar vueltas:
 %  + Buscar un punto de entrada inicial concreto no es tan sencillo/escalable: hay que hacer scrapping de todos los datos.
