@@ -17,7 +17,7 @@ Section~\ref{sec:notification} presents an additional requirement identified on 
 Finally, Section~\ref{sec:actuation_scn1} explains how to implement the baseline scenario according to the space usage patterns. % más que usage pattern, igual es app pattern
 
 
-\subsection{Application Patterns for \aclp{ts}}
+\subsection{Background}
 \label{sec:ts_patterns}
 
 According to \citet{freeman_javaspaces_1999}, there are four main application patterns which can be used in \ac{ts}:
@@ -97,106 +97,105 @@ Finally, the \emph{specialist pattern} allows nodes with distinct capacities to 
 %      https://docs.google.com/a/deusto.es/document/d/1QXGsQ4-wAByc_ByQ-Tts-TSphSQAzfO_c3mcgoZdloc/edit
 
 
-\subsection{Envisaged Scenarios}
-\label{sec:envisaged_scenarios}
+% \subsection{Envisaged Scenarios}
+% \label{sec:envisaged_scenarios}
 
-This section devises two stereotypical scenarios for home automation.
-Section~\ref{sec:envisaged_scn1} presents a scenario which regulates the temperature of a smart environment (e.g. a home or office) according to the user preferences.
-Section~\ref{sec:envisaged_scn2} describes a smart environment which warns the user using different mechanisms to help him avoid a sedentary lifestyle.
+% This section devises two stereotypical scenarios for home automation.
+% Section~\ref{sec:envisaged_scn1} presents a scenario which regulates the temperature of a smart environment (e.g. a home or office) according to the user preferences.
+% Section~\ref{sec:envisaged_scn2} describes a smart environment which warns the user using different mechanisms to help him avoid a sedentary lifestyle.
 
 
-Both scenarios emphasize how devices can coordinate in a decoupled mode using the patterns seen in the previous section. % más de uno?
-Specifically, we believe that the \emph{specialist patterns} fit the best to the needs of \ac{ubicomp} environments:
+% Both scenarios emphasize how devices can coordinate in a decoupled mode using the patterns seen in the previous section. % más de uno?
+Regarding the application of this patterns to \ac{ubicomp}, we observed that:
+% si hace falta argumento de autoridad, se puede comentar que esto emana de nuestra experiencia en distintos proyectos.
 \begin{itemize}
-  \item The devices in \ac{ubicomp} often serve to very specific and local needs.
-        For example, let us imagine a mobile phone showing a message or an embedded device turning on the lights of a room.
+  \item Devices in \ac{ubicomp} often serve to very specific and local needs.
+        For example, let us imagine a mobile phone showing a message or an embedded device turning on the air conditioning of a room.
         %Although there may exist some redundancy in the tasks which different nodes can be accomplish, the task are not nodes are not as interchangeable as in... son tareas simples, no necesitan optimizar ni lanzar muchas
   \item These tasks are usually lightweight. % do not require a lot of computation resources.
-	% TODO primera vez que se habla de "task", comentar que para TripCom eran servicios web y que crearon un sistema (WXSW?)
+	% Contrasta con TripCom, que manejaba servicios web potencialmente pesados y que crearon un sistema (WSMX)
         They intent to achieve concrete and simple goals which usually imply more I/O operations than processing ones.
 \end{itemize}
 Therefore, \ac{ubicomp} generally faces a problem of collaboration between nodes with different capacities.
 In this problem, computation or negotiation aspects are secondary. % se entenderá a qué me refiero con computation??
+Consequently, we believe that the \emph{specialist patterns} fit the best to \ac{ubicomp}'s needs.
 
-
-\subsubsection{Scenario 1: Temperature Regulation}
-\label{sec:envisaged_scn1}
-
-The first scenario presents a room populated with several kind of sensors such as Oracle's SunSPOTs \citeweb{sunspot},
-% TODO TODO TODO referenciar a la parte donde se hayan referenciado bien los dispositivos! (e.g. see ~\ref{environment})
-% Para el resto proveer al menos una URL!
-Digi's XBee sensors with an IP gateway,
-the sensors on a KNX domotic bus \citeweb{knx}, and a fan connected to a FoxG20 \citeweb{foxg20} embedded platform as an actuator (see Figure \ref{fig:devices_scenario}).
-In addition, an Android application \citeweb{android} semantically stores the temperature preferences of the user.
-
-
-\InsertFig{devices_scenario}{fig:devices_scenario}{
-  The devices used in the devised scenarios.
-}{
-}{0.7}{}
-
-
-An independent node (i.e. the master node) continuously reads from the space % using \emph{read primitive}
-\begin{enumerate*}[label=\itshape(\arabic*\upshape)]
-  \item the room's temperature, and
-  \item the user's desired temperature.
-\end{enumerate*}
-Note that the master node does not care about who exactly provides the temperature information.
-It just takes the first available graph from the space.
-When the second one is below the first one, it generates a ``\emph{decrease temperature during a certain period}'' task which can be consumed by different independent worker nodes.
-In this case, the FoxG20 periodically checks for orders it can fulfil extracting them from the space. % consumes them with a \textit{take primitive}.
-% zasca, acabamos de poner en bandeja que nos rechine lo de comprobar periodicamente
-
-
-
-\subsubsection{Scenario 2: Sedentary Lifestyle Checker}
-\label{sec:envisaged_scn2}
-
-The second scenario presents an application which helps the user to avoid a sedentary lifestyle by giving him different warnings.
-We consider the recommendation that states that an adult should walk at least 10.000 steps in an ordinary day \citep{tudor2002taking}.
-Taking into account the expected steps which should have been completed at each moment of the day, the application generates different priority level messages.
-
-There are several nodes involved in this task.
-Each node runs on a device. % which belongs to a user.
-First, an Android phone periodically updates the number of steps covered by a user that day \citeweb{pedometer}.
-%Besides, it writes her profile, more important to this problem: her age. % simplificado un poquillo
-Second, there is an undefined number of devices which know how to warn the user about her unhealthy behaviour.
-Third, there is a node in charge of generating the warnings.
-
-
-\medskip
-
-
-The application follows the \emph{blackboard pattern}.
-The node which generates the warnings resembles a \emph{teacher}.
-Each warning for a user resembles a \emph{problem} for the students.
-Finally, the \emph{students} are allegorically represented by the devices which can warn the user.
-% IG: no es nada intuitivo. Leyendo despues lo entiendo, pero... es raro
-% AG: reescrito para hacer ver que hablo de una metafora/analogía/alegoría
-
-
-When the \emph{teacher} writes a warning for a user, the devices able to warn the user write information about themselves into the space.
-This information helps the teacher to select the most appropriate \emph{student} for each task.
-In this example, the devices write their ownership and the intrusiveness level of their warning method.
-The \emph{teacher} reads these characteristics, chooses a \emph{student} to solve the \emph{problem} and updates the \emph{problem} to indicate the selection.
-%If no device writes their characteristics, the \emph{teacher} can wait longer.
-Then, the selected device takes any warning for it and warns the user. % no tiene respuesta
-If the chosen device does not take the message in a time span, the \emph{teacher} can update the \emph{problem} with a new selection.
-
-
-With this application, if the priority level is low, the user receives the warning in a less intrusive way.
-For example, room's light brightness can be increased for low priority notifications, a Chumby \citeweb{chumby} can show an icon for normal priority ones and the user's mobile phone show directly the message when it is a high priority warning. % IG: yo anyadiria una tablita para los dos scenarios mostrando los actuadores y los niveles. Aqui esto me salta un poco de repente.
-The remarkable characteristic of this mechanism is that the devices present in the environment at each moment can vary and the application will still fulfil its goal.
-
-
+% \subsubsection{Scenario 1: Temperature Regulation}
+% \label{sec:envisaged_scn1}
+% 
+% The first scenario presents a room populated with several kind of sensors such as Oracle's SunSPOTs \citeweb{sunspot},
+% % Si se recupera esto, habría un TODO de referenciar a la parte donde se hayan referenciado bien los dispositivos! (e.g. see ~\ref{environment})
+% % Para el resto proveer al menos una URL!
+% Digi's XBee sensors with an IP gateway,
+% the sensors on a KNX domotic bus \citeweb{knx}, and a fan connected to a FoxG20 \citeweb{foxg20} embedded platform as an actuator (see Figure \ref{fig:devices_scenario}).
+% In addition, an Android application \citeweb{android} semantically stores the temperature preferences of the user.
+% 
+% 
+% \InsertFig{devices_scenario}{fig:devices_scenario}{
+%   The devices used in the devised scenarios.
+% }{
+% }{0.7}{}
+% 
+% 
+% An independent node (i.e. the master node) continuously reads from the space % using \emph{read primitive}
+% \begin{enumerate*}[label=\itshape(\arabic*\upshape)]
+%   \item the room's temperature, and
+%   \item the user's desired temperature.
+% \end{enumerate*}
+% Note that the master node does not care about who exactly provides the temperature information.
+% It just takes the first available graph from the space.
+% When the second one is below the first one, it generates a ``\emph{decrease temperature during a certain period}'' task which can be consumed by different independent worker nodes.
+% In this case, the FoxG20 periodically checks for orders it can fulfil extracting them from the space. % consumes them with a \textit{take primitive}.
+% % zasca, acabamos de poner en bandeja que nos rechine lo de comprobar periodicamente
+% 
+% 
+% 
+% \subsubsection{Scenario 2: Sedentary Lifestyle Checker}
+% \label{sec:envisaged_scn2}
+% 
+% The second scenario presents an application which helps the user to avoid a sedentary lifestyle by giving him different warnings.
+% We consider the recommendation that states that an adult should walk at least 10.000 steps in an ordinary day \citep{tudor2002taking}.
+% Taking into account the expected steps which should have been completed at each moment of the day, the application generates different priority level messages.
+% 
+% There are several nodes involved in this task.
+% Each node runs on a device. % which belongs to a user.
+% First, an Android phone periodically updates the number of steps covered by a user that day \citeweb{pedometer}.
+% %Besides, it writes her profile, more important to this problem: her age. % simplificado un poquillo
+% Second, there is an undefined number of devices which know how to warn the user about her unhealthy behaviour.
+% Third, there is a node in charge of generating the warnings.
+% 
+% 
+% \medskip
+% 
+% 
+% The application follows the \emph{blackboard pattern}.
+% The node which generates the warnings resembles a \emph{teacher}.
+% Each warning for a user resembles a \emph{problem} for the students.
+% Finally, the \emph{students} are allegorically represented by the devices which can warn the user.
+% % IG: no es nada intuitivo. Leyendo despues lo entiendo, pero... es raro
+% % AG: reescrito para hacer ver que hablo de una metafora/analogía/alegoría
+% 
+% 
+% When the \emph{teacher} writes a warning for a user, the devices able to warn the user write information about themselves into the space.
+% This information helps the teacher to select the most appropriate \emph{student} for each task.
+% In this example, the devices write their ownership and the intrusiveness level of their warning method.
+% The \emph{teacher} reads these characteristics, chooses a \emph{student} to solve the \emph{problem} and updates the \emph{problem} to indicate the selection.
+% %If no device writes their characteristics, the \emph{teacher} can wait longer.
+% Then, the selected device takes any warning for it and warns the user. % no tiene respuesta
+% If the chosen device does not take the message in a time span, the \emph{teacher} can update the \emph{problem} with a new selection.
+% 
+% 
+% With this application, if the priority level is low, the user receives the warning in a less intrusive way.
+% For example, room's light brightness can be increased for low priority notifications, a Chumby \citeweb{chumby} can show an icon for normal priority ones and the user's mobile phone show directly the message when it is a high priority warning. % IG: yo anyadiria una tablita para los dos scenarios mostrando los actuadores y los niveles. Aqui esto me salta un poco de repente.
+% The remarkable characteristic of this mechanism is that the devices present in the environment at each moment can vary and the application will still fulfil its goal.
 
 
 \subsection{Notification mechanism}
 \label{sec:notification}
 
 
-In the scenarios described in the previous section, some writings in the space trigger other node's action.
-For example, a device must show a message whenever a new warning is written in the space. % e.g. a task or a result
+In the patterns described in the previous section, some writings in the space trigger other node's action.
+For example, a device might show a message whenever a new warning is written in the space. % e.g. a task or a result
 To be aware of these writings, the node can either poll the space or rely on a notification mechanism. % async or blocking
 Obviously, the later leads to a more efficient use of the network. % is closer to optimal and more scalable approach.
 
