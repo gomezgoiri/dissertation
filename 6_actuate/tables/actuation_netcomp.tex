@@ -7,7 +7,7 @@
   \caption{Foreseeable networking and computing impact on the nodes involved in the actuation mechanism.}
   \begin{center}
     \footnotesize
-    \begin{tabular}{llp{4cm}p{4cm}}
+    \begin{tabular}{llp{4cm}p{4.4cm}}
       \hline
       \multirow{2}{*}{Actuation} &
       \multirow{2}{*}{Perspective} &
@@ -17,8 +17,9 @@
       \multicolumn{1}{c}{Networking} &
       \multicolumn{1}{c}{Computation} \\
       \hline
-      \multirow{2}{*}{\ac{ts} patterns} & Provider & Proactive, limited activity & Limited: Pattern matching \\
-				    ~ & Consumer & Proactive, limited activity & Limited: Pattern matching \\[0.2cm]
+      \multirow{3}{*}{\ac{ts} patterns} & Provider & Proactive, limited activity & Limited: Results Interpretation \\
+				    ~ & Consumer & Proactive, limited activity & Limited: Results Interpretation \\
+				    ~ & Space & Reactive, high activity & Varies with the implementation \\[0.2cm]
       \ac{rest} \acp{api} & Provider & Reactive, limited activity & Limited: Handling requests \\
         consumption       & Consumer & Proactive, high activity &  Demanding: Reasoning \\ % Y comprobar planes...
       \hline
