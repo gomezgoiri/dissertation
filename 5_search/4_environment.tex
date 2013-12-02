@@ -2,7 +2,7 @@
 \label{environment}
 We use simulation to study the performance of our solution and compare it against a flooding-based one.
 Using a simulation, we can evaluate multiple scenarios and repeat experiments for different approaches under the same conditions.
-The source code for the evaluation is publicly available\footnote{\url{http://gomezgoiri.net/files/code/gomezgoiri201Xenergy.html}}.
+The source code for the evaluation has been made publicly available\footnote{\url{http://gomezgoiri.net/files/code/gomezgoiri201Xenergy.html}}.
 
 \subsection{Methodology}
 Table~\ref{tab:configurationParameters} shows the main parameters of our simulator.
@@ -39,9 +39,9 @@ We vary these parameters to simulate a wide range of scenarios.
 % AG: Ok, pero esta es una de las cosas que en el uptade debería volar o cambiar. Sobre todo, porque no hablamos de TSC
 %     en ningún otro lado. Puede ser más fácil aún, ya que como asumimos que queremos semántica en WoT, el HTTP está
 %     justificado per se.
-As we simulate \ac{http}, we assume a point to point communication between devices which exchange \ac{rdf} Triples.
+As we simulate \ac{http}, we assume point to point communication between devices which exchange \ac{rdf} Triples.
 We discuss how the discovery process affects the solution in Section~\ref{sec:dynamic}.
-In the rest of the sections we omit the node discovery process as it represents the same overhead for all strategies.
+In the remaining sections, the node discovery process is omitted as it represents the same overhead for all strategies.
 
 %To represent the data managed by each node, we first considered using LUBM\footnote{\url{http://swat.cse.lehigh.edu/projects/lubm/}}, a synthetic benchmark.
 %Unfortunately, it creates instances from very few classes for each node, which makes all the nodes to have the same TBox.
@@ -61,32 +61,79 @@ These datasets contain descriptions about the sensing stations and the data sens
 The analogy between stations which have different sensors and the \ac{iot} devices is reasonable.
 The datasets are adapted to provide just one measure of each sensor at each moment (to emulate the storage restrictions from embedded devices) and to use as many stations as nodes has the network (depending on the network size).
 
-However, not only sensors but also personal devices (e.g. mobile phones) usually populate AmI environments.
+However, not only sensors but also personal devices (e.g. mobile phones) usually populate \ac{ubicomp} environments.
 To represent such circumstance, we add semantic data of people to represent their profiles \citeweb{morelab_people}.
 
 % poner disponible el código
 We use SimPy \citeweb{simpy} to simulate each scenario.
 SimPy is a process-based discrete-event simulation language for Python.
-To accurately simulate the time needed by each node to provide a response, measures taken from real embedded web servers \citep{gomez-goiri_restful_2012}.
+To accurately simulate the time needed by each node to provide a response, we consider measures taken from real embedded web servers \citep{gomez-goiri_restful_2012}.
 These servers run on a \textit{ConnectPort X2} IP gateway \citeweb{connectportx2} for \textit{Digi}'s \textit{XBee sensors} \citeweb{digixbeesensors} (\textit{XBee} from now on),
 on a FoxG20 \citeweb{foxg20} and on a Samsung Galaxy Tab \citeweb{samsunggalaxytab}.
 Besides, we also provide measures taken from a regular computer.
-Table~\ref{tab:measures_embedded} shows the measures used for the parametrization.
+Table~\ref{tab:technicalDetails} shows the technical specifications of these devices.
 
+
+% http://www.gsmarena.com/samsung_p1000_galaxy_tab-3370.php
+\begin{table}
+  \caption{Technical characteristics of the assessed devices.}
+  \small
+  \begin{center}
+    \begin{tabular}{lccc}
+      \hline
+      Device & Processor & RAM \\
+      \hline
+      XBee &  - & 8 MB  \\
+      FoxG20 & 400Mhz Atmel ARM9 &  64 MB \\
+      Samsung Galaxy Tab & 1 GHz Cortex-A8  &  512 MB \\
+      Regular computer & 2.26 GHz Intel Core 2 Duo  &  4 GB \\
+      \hline
+    \end{tabular}
+  \end{center}
+  \label{tab:technicalDetails}
+\end{table}
+
+These devices serve semantic content through \acs{http}.
+Table~\ref{tab:deviceslibraries} shows the platforms and libraries used in each device to implement such servers.
 
 \begin{table}
+  \caption{Core libraries used in the semantic \acs{http} server implementations.}
+  \small
+  \label{tab:deviceslibraries}
+  \begin{center}
+    \begin{tabular}{lccc}
+      \hline
+      \multirow{2}{*}{Device} & ~Platform~ & \multirow{2}{*}{REST libraries} & ~~Semantic~~ \\
+      ~ & version & ~ & libraries \\
+      \hline
+      XBee & Python 2.4 & Python Std Lib & None \\
+      FoxG20 & Python 2.5 &  Python Std Lib & Fuxi \\
+      Samsung Galaxy Tab & Android 2.2 & Restlet & Sesame \\
+      Regular computer & Java SE 6.0 & Restlet & Rdf2Go (Sesame) \\
+      \hline
+      % TODO poner Rdf2Go también en Android? Técnicamente se puede...
+    \end{tabular}
+  \end{center}
+\end{table}
+
+
+Finally, Table~\ref{tab:measures_embedded} details the time needed by each device to answer a request depending on the number of concurrent requests.
+As mentioned, the next section's simulations are parametrized according to these measures.
+
+\begin{table}
+  \caption{Mean of the measurements taken in different devices with the standard deviation in parenthesis (milliseconds).}
   \begin{center}
 	\begin{tabular}{p{2.5cm} r r r r}
 	  \hline
 	  & \multicolumn{4}{c}{Devices} \\
 	  \cline{2-5}
-	  Concurrent & \multirow{2}{*}{XBee} & \multirow{2}{*}{FoxG20} & Regular  & Samsung \\
-	  requests   &  ~    &   ~     & computer & Galaxy tab \\
+	  Concurrent & \multirow{2}{*}{XBee} & \multirow{2}{*}{FoxG20} & Samsung & Regular  \\
+	  requests   &  ~    &   ~     & Galaxy tab & computer \\
 	  \hline
-	  1  &  77 (1)	&  17 ~(0)  &   5 ~(1)  &  223 (349) \\
-	  5  & 392 (8)	&  97 (16) &   8 ~(4)  &  256 ~(76)  \\
-	  10 & 775 (8)	& 174 (28) &  13 ~(8)  &  372 (171) \\
-	  15 &  -   	& 282 (43) &  18 (13) &  497 (191) \\
+	  1  &  77 (1)	&  17 ~(0)  &  223 (349) &   5 ~(1) \\
+	  5  & 392 (8)	&  97 (16)  &  256 ~(76) &   8 ~(4)  \\
+	  10 & 775 (8)	& 174 (28)  &  372 (171) &  13 ~(8) \\
+	  15 &  -   	& 282 (43)  &  497 (191) &  18 (13) \\
 % Tampoco creo que haga falta tanto detalle, ¿cuando se van a dar tantas peticiones concurrentes?
 %	  20 &  -	    & 375 (30) &  23 (13) &  661 (444) \\
 %	  25 &  -	    & 460 (30) &  30 (18) &  748 (288) \\
@@ -95,7 +142,6 @@ Table~\ref{tab:measures_embedded} shows the measures used for the parametrizatio
 	  \hline
 	\end{tabular}
   \end{center}
-  \caption{Mean of the measurements taken in different devices with the standard deviation in parenthesis (milliseconds).}
   \label{tab:measures_embedded}
 \end{table}
 

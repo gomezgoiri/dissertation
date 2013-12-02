@@ -26,7 +26,7 @@ Our solution proposes a federation infrastructure with some particularities:
   % Esto es, los índices están replicados, pero quien los usa siempre los coge de la misma máquina.
   % No se necesita coordinación entre quienes guardan los índices para balancear o obtener algunos índices que no tienen...
   \item There is a unique node in charge of managing the main version of the metadata needed to create indexes.
-	However, it is dynamically chosen between all the participants and can change over the time.
+	However, it is dynamically chosen among all the participants and can change over the time.
 	Consumers hold copies of the manager's metadata.
   \item Each consumer builds its own index from its metadata replica.
 	This allows consumers not to critically depend on the availability of any other node to search. % no depender => MUCHO
@@ -44,8 +44,8 @@ FedX \citep{schwarte_fedx_federation2011,schwarte_fedx_optimization_2011}, DARQ 
 %Although our solution also uses a \emph{top-down} strategy, we explicitly avoid human intervention to discover new data sources or providers. % a diferencia de FedX, por lo que ví en la demo % o si, en realidad no nos metemos mucho con eso
 %Instead, we rely on automatic discovery mechanisms which additionally must provide some additional information about the data providers. % BTW, esto es un problema para interoperabilidad!
 % esto está sacado sobre todo del estado del arte de schwarte_fedx_optimization_2011
-DARQ and SemWIQ require local preprocessed metadata about data sources, while Fedex uses on-demand queries together with a caching mechanism. % SPARQL ASK
-In that aspect, our solution resembles to DARQ and SemWIQ since it also requires this metadata (called \clues{} in our solution).
+DARQ and SemWIQ require locally preprocessed metadata about data sources, while Fedex uses on-demand queries together with a caching mechanism. % SPARQL ASK
+In that aspect, our solution resembles DARQ and SemWIQ since it also requires this metadata (called \clues{} in our solution).
 In fact, we propose two types of \clues{} which are equivalent to the metadata used by DARQ and SemWIQ.
 DARQ maintains predicate indexes to find relevant data sources.
 SemWIQ maintains a local catalog with the type information of RDF entities provided by data sources. % el tipo de cada sujeto se debe conocer de alguna forma
@@ -56,9 +56,9 @@ In contrast with our solution, DARQ and SemWIQ also use statistics about data so
 %            (y permitir optimizaciones si introducimos SPARQL en algunos nodos)
 % no hay ninguna solución global con una arquitectura que tenga en cuenta le energía
 % cómo el problema difiere: más fuentes de datos, menos info en cada una y dinamicas
-A key difference with the presented systems is the context where we have applied our solution.
-It is intended to serve in \ac{ami} environments.
-This means that there will be more data sources and with less information to process in each of them.
+A key difference with the mentioned systems is the context where we have applied our solution.
+It is intended to serve in \ac{ubicomp} environments.
+This means that there will be many more data sources and with less information to process in each of them.
 Furthermore, their nature also differs from the usual \ac{lod} endpoints' one: the mobile and embedded devices which may provide data are less reliable, more dynamic and more restricted in computation and energy.
 Therefore, we designed and evaluated our solution considering this nature and restrictions.
 To the best of our knowledge, this is the first approximation to the problem within the explained context.
@@ -66,12 +66,12 @@ To the best of our knowledge, this is the first approximation to the problem wit
 
 
 % pros y contras:
-Considering the constrained architecture of the data sources, we acknowledge that some them will not be able to process SPARQL.
+Considering the constrained architecture of the data sources, we acknowledge that some of them will not be able to process \acs{sparql} \citeweb{sparql2008}.
 Consequently, we require the lowest common denominator: basic triple patterns.
 This causes the main weakness of our solution compared to FedX, DARQ and SemWIQ: a less sophisticated querying mechanism.
 %This is because all these solutions assume that all data sources can process SPARQL and offer optimization techniques on top of it. % todo cita a SPARQL
 %In any case, SPARQL can always be decomposed into triple patterns.
-For our future work, we are considering using SPARQL just with the endpoints able to manage it as a halfway solution.
+For our future work, we are considering using \acs{sparql} just with the endpoints able to manage it as a halfway solution.
 This will allow us to introduce some of the optimization techniques presented by other solutions.
 
 

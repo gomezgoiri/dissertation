@@ -93,11 +93,10 @@
 \usepackage{amssymb}
 
 
-
-
-\usepackage[spanish,british,basque,activeacute]{babel}
-
-
+\usepackage[T1]{fontenc}
+% The last language in the option list will be active.
+\usepackage[basque,spanish,activeacute,USenglish,british]{babel}
+\selectlanguage{british} % use \languagename to check which one is active in each part of the text
 
 
 
@@ -532,7 +531,7 @@
 %the top of the page. The abstract itself appears in a quote environment,
 %i.e. tabbed in at both sides, and on its own page.
 
-\newenvironment{laburpena} {\begin{alwayssingle} \pagestyle{empty}
+\newenvironment{laburpena} {\begin{otherlanguage*}{basque}\begin{alwayssingle} \pagestyle{empty}
   \cleardoublepage
   \begin{center}
   \vspace*{1.5cm}
@@ -540,9 +539,9 @@
   \end{center}
   \vspace{0.5cm}
    \begin{quote}}
-{\end{quote}\end{alwayssingle}}
+{\end{quote}\end{alwayssingle}\end{otherlanguage*}}
 
-\newenvironment{resumen} {\begin{alwayssingle} \pagestyle{empty}
+\newenvironment{resumen} {\begin{otherlanguage*}{spanish}\begin{alwayssingle} \pagestyle{empty}
   \cleardoublepage
   \begin{center}
   \vspace*{1.5cm}
@@ -550,7 +549,7 @@
   \end{center}
   \vspace{0.5cm}
    \begin{quote}}
-{\end{quote}\end{alwayssingle}}
+{\end{quote}\end{alwayssingle}\end{otherlanguage*}}
 
 \newenvironment{abstracts} {\begin{alwayssingle} \pagestyle{empty}
    \cleardoublepage

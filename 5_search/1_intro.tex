@@ -22,33 +22,33 @@ Adding semantics to the \ac{iot} works well for devices with high computational 
 To reduce this overhead in such devices, part of this computation is usually delegated to intermediaries \citep{honkola_smart-m3_2010}.
 This approach reduces the overhead of semantically annotated data but brings other problems:
 \begin{enumerate}
-  \item When devices rely on others to provide information, it is not guarantee that the information accessed will accurately represent the last information available in the data providers (e.g., the sensors).
-  \item Once we rely on those intermediaries, it is required that they are available at all time.
+  \item When devices rely on others to provide information, it is not guaranteed that the information accessed will accurately represent the last information available in the data providers (e.g., the sensors).
+  \item Once they rely on intermediaries, these intermediaries must be available at all time.
 	Otherwise, the devices would not be able to talk to each other.
 \end{enumerate}
 
-We propose a solution where we use intermediaries to release some workload from the less powerful devices, but at the same time, we promote the direct communication between the devices.
-In particular, our system uses intermediaries to search where the data is located in the \Space{} and queries the final devices directly.
+We propose a solution where intermediaries are used to release some workload from the less powerful devices, but at the same time, the direct communication between the devices is promoted.
+In particular, our system uses intermediaries to search where the data is located in it and then queries the final devices directly. % esta frase es engañosa y da a entender algo que no es así!
 
 In our solution, the devices can become or stop being intermediaries dynamically.
 To decide which device will be an intermediary, we evaluate the state of a device (i.e., energy and computation capacity).
 Using this dynamic architecture, the absence of a particular intermediary does not collapse the system.
 In addition, our system is flexible enough to support a wide range of scenarios.
 
-To enable the search for information in this system, intermediaries need to know the information available in the \Space{}.
+To enable the search for information in this system, intermediaries need to know the information available in it.
 To do that, they aggregate summaries sent by each device.
-We propose alternatives to summarize and to aggregate this information taking into account the payload of the shared information and the accuracy of the search.
+We propose alternatives to summarize and aggregate this information taking into account the payload of the shared information and the accuracy of the search.
 
-We compare our approach against other common approaches.
+Our approach is compared against other common approaches.
 In particular, we focus on the energy aspect, demonstrating that our approach helps energy constrained devices to face fewer unnecessary requests.
-We also evaluate other important metrics like the number of messages a device has to exchange to perform a request, and the accuracy of the search results provided by the intermediaries.
+We also evaluate other important metrics like the number of messages that a device has to exchange to perform a request, and the accuracy of the search results provided by the intermediaries.
 We perform this evaluation under different scenarios to prove the flexibility of our proposal.
 
 In summary, we make the following contributions:
 \begin{itemize}
-\item We present a new architecture for managing semantics on the \ac{wot} which reduces the load for resource-constrained devices.
-\item We propose and evaluate different approaches to aggregate and summarize the semantic information available in the \Space{} and enable semantic search in this architecture.
-\item We demonstrate the advantages of our approach compared to other typical searching approaches under different scenarios.
+\item Present a new architecture for managing semantics on the \ac{wot} which reduces the load for resource-constrained devices.
+\item Propose and evaluate different approaches to aggregate and summarize the semantic information available in the devices and enable semantic search in this architecture.
+\item Demonstrate the advantages of our approach compared to other typical searching approaches under different scenarios.
 \end{itemize}
 
 % la explicación de la estructura del capítulo ya ha sido dada en "0_main"

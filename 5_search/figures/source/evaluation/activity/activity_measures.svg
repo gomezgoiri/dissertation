@@ -15,7 +15,7 @@
    viewBox="0 0 1066 456"
    width="1066pt"
    id="svg2"
-   inkscape:version="0.48.3.1 r9886"
+   inkscape:version="0.48.4 r9939"
    sodipodi:docname="activity_measures.svg">
   <metadata
      id="metadata505">
@@ -37,14 +37,14 @@
      guidetolerance="10"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:window-width="1400"
-     inkscape:window-height="1030"
+     inkscape:window-width="1680"
+     inkscape:window-height="995"
      id="namedview503"
      showgrid="false"
-     inkscape:zoom="0.48630394"
-     inkscape:cx="924.20448"
-     inkscape:cy="27.327425"
-     inkscape:window-x="1364"
+     inkscape:zoom="0.97260788"
+     inkscape:cx="1040.0493"
+     inkscape:cy="354.29345"
+     inkscape:window-x="-2"
      inkscape:window-y="-3"
      inkscape:window-maximized="1"
      inkscape:current-layer="axes_2" />
@@ -1069,35 +1069,39 @@
         </g>
       </g>
       <g
-         id="patch_7">
+         id="patch_7"
+         style="stroke:#000000;stroke-opacity:1">
         <path
            clip-path="url(#pc50195cd76)"
            d=" M653.625 415.693 L684.061 415.693 L684.061 326.951 L653.625 326.951 z "
-           style="fill:#e6da73;"
+           style="fill:#e6da73;stroke:#000000;stroke-opacity:1"
            id="path441" />
       </g>
       <g
-         id="patch_8">
+         id="patch_8"
+         style="stroke:#000000;stroke-opacity:1">
         <path
            clip-path="url(#pc50195cd76)"
            d=" M755.079 415.693 L785.516 415.693 L785.516 383.583 L755.079 383.583 z "
-           style="fill:#e6da73;"
+           style="fill:#e6da73;stroke:#000000;stroke-opacity:1"
            id="path444" />
       </g>
       <g
-         id="patch_9">
+         id="patch_9"
+         style="stroke:#000000;stroke-opacity:1">
         <path
            clip-path="url(#pc50195cd76)"
            d=" M856.534 415.693 L886.97 415.693 L886.97 106.862 L856.534 106.862 z "
-           style="fill:#e6da73;"
+           style="fill:#e6da73;stroke:#000000;stroke-opacity:1"
            id="path447" />
       </g>
       <g
-         id="patch_10">
+         id="patch_10"
+         style="stroke:#000000;stroke-opacity:1">
         <path
            clip-path="url(#pc50195cd76)"
            d=" M957.989 415.693 L988.425 415.693 L988.425 400.729 L957.989 400.729 z "
-           style="fill:#e6da73;"
+           style="fill:#e6da73;stroke:#000000;stroke-opacity:1"
            id="path450" />
       </g>
       <g

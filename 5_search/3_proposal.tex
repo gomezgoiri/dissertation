@@ -20,10 +20,15 @@
 %   + Vinculo rapido con la intro (1 o 2 frases) % igual también con el related work
 In a semantic \ac{wot}, nodes are part of a network where they share semantically described information.
 %   + Mencionar el uso de espacios
-These nodes gather their information in \Spaces{} which are useful to create \ac{ami} environments.
+These nodes gather their information in \Spaces{}
+\footnote{
+Note that in this chapter, the term \Space{} refers to a group of devices usually co-located which form an intelligent environment.
+It has an obvious correspondence with our solution's \outerspace{}.
+However, note that despite of this correspondence, the solution presented in this chapter transcends space-based computing.
+}.
 
 %   + Introducir ejemplo de hotel
-For example, a hotel can create its own semantic \Space{} with the semantically described information of its services and the data provided by devices (e.g., sensors) spread around the hotel.
+For example, a hotel can create its own semantic \Space{} with the semantically described information of its services and the data provided by its devices (e.g., sensors) spread around the hotel.
 Thus, clients can use their own personal devices (e.g., smartphones) to interact with the devices of the hotel and search useful information.
 Using this approach, a client, for example, can check the current swimming pool occupancy rate using his personal mobile phone.
 
@@ -31,7 +36,7 @@ However, not all devices can afford the costs of fully managing the additional o
 This section presents our architecture to manage such environments and deal with the limitations of resource-constrained devices.
 
 \subsection{Basic roles}
-As we introduced before, devices can be part of one or multiple \Spaces{}.
+Devices can be part of one or multiple \Spaces{}.
 A device can provide data (\providers{}), consume data (\consumers{}) or both at the same time.
 
 \begin{description}
@@ -98,7 +103,7 @@ Summarizing, the main tasks of a \ac{wp} are:
  % (con algún algoritmo de gossiping?)
  % Para simplificar el merging de los differentes gossipings agregados se podría hacer: 1 master, N slaves.
 
-\acp{wp} only store \clues{} for a period and they expire afterwards.
+\acp{wp} only store \clues{} for a period of time, expiring afterwards.
 Using this approach, we avoid storing information from no longer available nodes.
 
 % Si hubiese que dar detalles de implementación, había pensado en Redis para el \emph{WP} a poner en un server o cluster
@@ -114,7 +119,7 @@ Using this approach, we avoid storing information from no longer available nodes
 \subsection{Versioning Clues}
 As previously explained, the \ac{wp} aggregates clues sent by \providers{}.
 This aggregation is versioned using a \emph{version number} and a \emph{generation number}.
-The \emph{version number} increases each time the \ac{wp} receives a new clue.
+The \emph{version number} increases each time the \ac{wp} receives a new clue update.
 The \emph{generation number} ($g_{id}$) is a timestamp that represents the moment a new \ac{wp} was chosen.
 This requires the clocks to be synchronized in all the nodes to avoid problems.
 In any case, the \ac{wp} must guarantee that the $g_{id}$ is higher than the one used by a previous \ac{wp}.
@@ -160,7 +165,7 @@ In particular, in Section~\ref{sec:mdns} we use \ac{mdns} to evaluate our soluti
 % - Which is the topology of the network?
 % It is hard to evaluate the proposed solution in terms of overhead and energy consumption for performing necessary tasks (WP discovery, WP selection, clues updates,...)
 % without any knowledge of the network. Are there wired/fixed nodes? Are WP infrastructural nodes? Are the wireless nodes connected through multihop paths?
-Note that we assume that any node in the \Space{} can reach the other nodes.
+Note that we assume that any node in the \Space{} can reach to the other nodes.
 In particular, we assume IP addressability (no matter whether the node is wired or wireless).
 As a consequence, to use devices from Wireless Sensor Networks (e.g., Zigbee or 6LoWPAN) as \providers{}, one should rely on gateways.
 
@@ -207,7 +212,7 @@ Note that \clues{} do not change frequently since they represent the type of inf
 \noindent\textbf{Consumers.}
 When a \consumer{} needs to get information from the system, it first needs to find the \ac{wp} in the \Space{} and use this \ac{wp} to obtain an aggregated clue of all the nodes.
 Then, it processes this aggregated clue to decide which are the nodes to query.
-Finally, it sends the query through \acs{http} requests.
+Finally, it sends the query through \acs{http} requests, one per provider identified in the previous step.
 
 They perform this process synchronously for the first query and periodically in an asynchronous manner for the following ones.
 % cada cuanto? arbitrario? que lo decida en base a parámetros de funcionamiento? => Mi propuesta abajo
@@ -301,7 +306,7 @@ Lines 1 and 2 of the algorithm apply filters based on thresholds.
 In particular, the second threshold is variable and depends on the number of nodes (more nodes will generate more \clues{} to store).
 After that, we check the power availability of the devices.
 We first select the nodes connected to the power grid (represented by $Battery_{infinite}$).
-If there are devices connected to the electrical grid, we select devices which are steady enough to apply a filter by $joined\_since$ field.
+If there are not devices connected to the electrical grid, we select devices which are steady enough to apply a filter by $joined\_since$ field.
 Filters in lines 8 and 10 choose nodes with z-scores higher than one for the specified fields.
 If no node fits that filter, it returns the nodes with values higher or equal to the mean.
 
@@ -342,7 +347,7 @@ This section describes in detail these \clues{}, the information they contain an
 % O qué es un template y para qué se usa.
 
 A \consumer{} directly queries the information to the selected \providers{}.
-This selection is done using the \clues{} described in the rest of the Section.
+This selection is done using the \clues{} described in the rest of this Section.
 However, in this section we explain how \consumers{} directly query for information to the selected \providers{}.
 
 We assume that \providers{} offer an \ac{http} \ac{api} which accepts queries. % API o endpoint?
@@ -373,7 +378,7 @@ In any case, complex queries can be decomposed into wildcard templates and our s
 
 
 \subsection{Content of a Clue}
-To find out which is the most appropriate solution for \ac{ami} scenarios, we have to consider scenarios populated by mobile devices and sensors. % for \ac{iot} scenarios?
+To find out which is the most appropriate solution for \ac{ubicomp} scenarios, we have to consider scenarios populated by mobile devices and sensors. % for \ac{iot} scenarios?
 Mobile devices usually share data which rarely changes and is described using a few ontologies (e.g., the user profile and his preferences).
 On the other hand, sensors are constantly generating new instances of the same ontology (also called individuals).
 In both cases, the data shared by each node is described according to one or few vocabularies or taxonomies.
@@ -381,7 +386,7 @@ In both cases, the data shared by each node is described according to one or few
 At this point, it is important to define the \emph{TBox} and \emph{ABox} concepts following the definition of \citet{nardi2003introduction}.
 \emph{TBox} contains knowledge describing general properties of concepts or terminology and
 \emph{ABox} contains knowledge specific to the individuals of the domain of discourse.
-An example of \emph{TBox} information is the device type or the elements it is made of
+An example of \emph{TBox} information is the device type or the elements which is made of,
 while \emph{ABox} can describe the mobile phone brand or the temperature sensed by a thermometer.
 
 Each mobile device or sensor usually generates \emph{ABox} according to the same \emph{TBox}.
@@ -396,7 +401,7 @@ Specifically, we propose and evaluate three possible type of \clues{} to share.
 The individuals (\emph{ABox}) are described according to different ontologies (\emph{TBox}).
 Each ontology usually employs a common \emph{namespace}.
 This means that the URIs of the concepts in these ontologies share a unique \emph{prefix}.
-Besides, each \provider{} also uses few \emph{prefixes} to generate the URIs of its individuals.
+Besides, each \provider{} also uses a few \emph{prefixes} to generate the URIs of its individuals.
 In this type of clue, we propose a coarse-grained method to filter nodes which do not have individuals with the prefixes used by the query template.
 To create prefix-based clues, the \providers{} have to extract the prefixes used in their graphs. % obvio?
 
@@ -422,7 +427,7 @@ Using this information, they can be simply matched with the predicate defined in
 In the third approach, we propose sharing the classes of concepts (\textit{rdf:type}) provided by the nodes.
 Using this information and the \emph{TBox}, each node can check if the information matching certain query template is susceptible to be stored in other nodes.
 For this kind of clues, we assume that each node should have (or be able to obtain) the \emph{TBox} related to the template used for querying.
-This is a reasonable assumption since ontologies describing \emph{TBox} are usually accessible on the URL described by its prefix.
+This is a reasonable assumption since the ontologies which mainly describe the \emph{TBox} are usually accessible on the URL described by its prefix.
 
 To understand how it works, consider that, according to the \emph{TBox}, a predicate \emph{p} relates the concept \emph{A} with another concept.
 We assume that the nodes storing instances of the class \emph{A} are more likely to use this predicate in their graphs.
@@ -457,8 +462,8 @@ This limitation will be further analysed in Section~\ref{sec:clues_eval}.
 As stated before, in general terms, we want to avoid the use of \emph{ABox} \acp{uri} (individuals) in our clues.
 Thus, we fulfil two goals:
 \begin{enumerate*}[label=\itshape(\arabic*\upshape)]
-  \item we generate smaller \clues{} and
-  \item the \clues{} will not change too frequently and therefore, we will require less communication to update clues.
+  \item generate smaller \clues{} and
+  \item the \clues{} will not change too frequently and therefore, less communication to update clues will be required.
 \end{enumerate*}
 However, in some cases, the use of \emph{ABox} content in the \clues{} may be beneficial.
 For instance, assume a \ac{uri} that refers to the specific location \emph{L}.
@@ -484,9 +489,9 @@ The effectiveness of this method will depend on the number of queries using one 
 
 \subsection{Format}
 % Tras explicarlas, poner algunos fragmentos con las clues (JSON) para que se vea de que hablamos
-We can use many formats to represent the content of a clue.
+Many formats to represent the content of a clue can be used.
 % pongo esto de EXI porque se que a la gente del mundillo de IoT se le hace el culo chupicola con sus estandares
-One option is the ongoing \acf{exi} \citeweb{exi2011}. % o cite?
+One option is the ongoing \acf{exi} format \citeweb{exi2011}. % o cite?
 \ac{exi} is designed to efficiently interchange XML data and therefore, we could obtain better compression rates than with \ac{json}. % aseveracion cierta o solo para XML?
 However, we have chosen \ac{json} for its simplicity and its wide adoption in the \ac{www}.
 

@@ -9,15 +9,23 @@ As presented in Section~\ref{sec:clues}, the type of clue used will affect
   \item the amount of information to transfer over the network (both requests and responses) and nodes have to process.
 \end{enumerate*}
 Increasing \emph{precision} reduces the number of unsuccessful requests to handle and thus, it reduces the energy consumption. 
-Similarly, sending more information over the network implies more processing time and more energy consumed.
+Similarly, sending more information over the network implies more processing time and more energy consumption.
 
 \medskip
 
 \noindent\textbf{Precision and recall.}
 We evaluate the \emph{precision} and the \emph{recall} of the proposed algorithm in a network of 470 nodes issuing the query templates shown in Table~\ref{tab:evaluationTemplates}.
-In average, the nodes manage instances belonging to 6.34 different classes ($SD=1.31$) among a total of 17 distinct classes in the \Space{}.
+In average, the nodes manage instances belonging to 6.34 different classes (standard deviation, $SD=1.31$) among a total of 17 distinct classes in the \Space{}.
 %When these classes are expanded with a reasoning process, the nodes store 20 different concepts among a total of 113 classes in the space ($SD=4$). % TODO actualizar
 The distinct predicates managed by each node in average are 16.01 ($SD=1.53$) out of 68 different predicates in the \Space{}.
+
+
+\newcommand{\tplone}{\emph{T1}}
+\newcommand{\tpltwo}{\emph{T2}}
+\newcommand{\tplthree}{\emph{T3}}
+\newcommand{\tplfour}{\emph{T4}}
+\newcommand{\tplfive}{\emph{T5}}
+
 
 \begin{table}[h!tbp]
   \centering
@@ -25,11 +33,11 @@ The distinct predicates managed by each node in average are 16.01 ($SD=1.53$) ou
     \hline
     Name & Template \\
     \hline
-    t1 & ~~?s~~~rdf:type~~~ssn-weather:RainfallObservation~~ \\
-    t2 & ~~?s~~~wsg84:long~~~?o~~ \\
-    t3 & ~~?s~~~ssn:observedProperty~~~?o~~ \\
-    t4 & ~~bizkaisense:ABANTO~~~?p~~~?o~~ \\
-    t5 & ~~?s~~~dc:identifier~~~?o~~ \\
+    \tplone{} & ~~?s~~~rdf:type~~~ssn-weather:RainfallObservation~~ \\
+    \tpltwo{} & ~~?s~~~wsg84:long~~~?o~~ \\
+    \tplthree{} & ~~?s~~~ssn:observedProperty~~~?o~~ \\
+    \tplfour{} & ~~bizkaisense:ABANTO~~~?p~~~?o~~ \\
+    \tplfive{} & ~~?s~~~dc:identifier~~~?o~~ \\
     %t9 & ?s~~~foaf:family_name~~~?o \\ % Quizá en futura version del paper con perfiles de usuarios, para meter mas variabilidad en contenidos ;-)
     \hline
   \end{tabular}
@@ -39,15 +47,15 @@ The distinct predicates managed by each node in average are 16.01 ($SD=1.53$) ou
 % Las consultas se podrían sacar también de bizkaisense o alguna app que hayamos hecho para darle mayor verosimilitud
 
 % Explicar class based
-In Figures~\ref{fig:recall_measures}~and~\ref{fig:precision_measures}, class-based clue shows a good \emph{precision} and \emph{recall} for \emph{t1} and \emph{t2}.
-\emph{T1} asks exactly for the information this type of clues define (i.e. nodes having instances of a certain class).
-\emph{T2} evaluates which nodes have instances in the domain of the \emph{long} predicate (\emph{SpatialThing}).
+In Figures~\ref{fig:recall_measures}~and~\ref{fig:precision_measures}, the class-based clue shows a good \emph{precision} and \emph{recall} for \tplone{} and \tpltwo{}.
+\tplone{} asks exactly for the information this type of clues define (i.e. nodes having instances of a certain class).
+\tpltwo{} evaluates which nodes have instances in the domain of the \emph{long} predicate (\emph{SpatialThing}).
 Note that this works thanks to the \acs{rdfs} inference because some nodes in the \Space{} only write \emph{Point} instances (a subclass of \emph{SpatialThing}).
 % TODO esto no se entiende muy bien sin explicación extra!
-The domain of \emph{t3} and \emph{t5}'s predicates could not be inferred just using \acs{rdfs} inference. % (some properties of OWL are used => inverseof).
+The domain of \tplthree{} and \tplfive{}'s predicates could not be inferred just using \acs{rdfs} inference. % (some properties of OWL are used => inverseof).
 Even solving this limitation, we would expect a bad \emph{precision} since both predicates relate very general concepts.
 In addition, when a class-based clue has no enough information to predict the nodes, it simply floods the query.
-This is why the \emph{recall} of \emph{t4} is high.
+This is why the \emph{recall} of \tplfour{} is high.
 
 
 
@@ -63,14 +71,14 @@ This is why the \emph{recall} of \emph{t4} is high.
 % IG: TODO mencionar en el texto de referencia o en la caption algo como: The higher the better.
 
 % Explicar predicate-based
-We can see a bad prediction for \emph{t1} and \emph{t4} for predicate-based clues.
-\emph{T1} defines a very common predicate and therefore, it cannot discriminate any node.
-\emph{T4} suffers the same problem explained for the class-based clues.
+We can see a bad prediction for \tplone{} and \tplfour{} for predicate-based clues.
+\tplone{} defines a very common predicate and therefore, it cannot discriminate any node.
+\tplfour{} suffers the same problem explained for the class-based clues.
 We proposed a possible solution for this problem in Section~\ref{sec:aboxinclues}.
 
 % Explicar prefix-based
-Finally, prefix-based clue shows a slightly better \emph{precision} for \emph{t4}, since it can discriminate some nodes not using the \emph{bizkaisense} prefix.
-On the other hand, it obtains marginally worse \emph{precision} than predicate-based clues for \emph{t3} and \emph{t5}.
+Finally, prefix-based clue shows a slightly better \emph{precision} for \tplfour{}, since it can discriminate some nodes not using the \emph{bizkaisense} prefix.
+On the other hand, it obtains marginally worse \emph{precision} than predicate-based clues for \tplthree{} and \tplfive{}.
 % TODO reexplicar esto, no se entiende!
 This worsening could be greater if few nodes using the prefixes \emph{ssn} and \emph{dc} used the predicates defined in both templates.
 
@@ -212,7 +220,7 @@ The diagram on the right details the average activity for each type of device.
 In our solution, we can check how the load moves from the embedded devices (XBee and FoxG20) to the server (which is indeed chosen as a \ac{wp}).
 The exceptional activity registered by the Galaxy Tabs is caused by their extremely high response time.
 % This implies that handling a request in the Galaxy Tab takes much longer than the average.
-However, future work will cover the change of the \acs{http} library used in our Android implementation to reduce this response time.
+However, we plan to reduce this response time changing the \acs{http} library used in our Android implementation.
 
 
 \InsertFig{activity_measures}{fig:activity_measures}{
@@ -263,27 +271,31 @@ Note that we represent this scenario by configuring the drop-interval with a gre
 In Figure~\ref{fig:dynamic_situations}, we see the results of these simulations.
 These results show that even in such dynamic situations, our solution requires fewer communications than \acl{nb}.
 In our solution, most of the communications are between \consumers{} and \providers{}.
-To evaluate the overhead added by our solution, the right graphic shows the communications involving \acp{wp}.
+To evaluate the overhead added by our solution, the graphic on the right hand side shows the communications involving \acp{wp}.
 
 We can appreciate that the updates on \consumers{} are independent of the number of times the \ac{wp} changes.
 We can also see a minimal change between the scenario where the \ac{wp} is always available and the one with 5 minutes drop-interval.
 In this case, when the \ac{wp} drops, many \consumers{} have the latest version of the aggregated clue.
 % Dado que se parte del que tenia el WP o del que le ha dado el consumer que le ha elegido. Ambos tienen más opciones de tener una versión actualizada.
 This situation increases the chances of getting an updated version for the initialization of the new \ac{wp} (see Section~\ref{sec:selection}).
-Thus, it reduces the number of messages from the \providers{} to the new \ac{wp}.
+Thus, it reduces the number of messages from \providers{} to the new \ac{wp}.
 
 
 \subsection{Effects on Discovery Mechanisms}
 \label{sec:mdns}
+
 We want to prove the feasibility of our solution using a common discovery mechanism.
 To that end, we simulate the behaviour of the \ac{mdns} and \ac{dns-sd} \citeweb{dnssd2013} protocols.
 Both protocols are based on the well known and widely accepted \ac{dns}.
+\ac{dns} associates different pieces of information (i.e. records) with domain names in a distributed manner.
 
-On the one hand, \ac{dns-sd} proposes the use of the data field of TXT records to share key/values.
-We use these records to share the information needed by the selection algorithm among the nodes.
+On the one hand, \ac{dns-sd} proposes a new use for \ac{dns}'s TXT records.
+The TXT record was originally intended to associate an arbitrary human-readable text with a domain name.
+\ac{dns-sd} proposes to use this type of record, to share key-value pairs in its data field.
+We use these key-value pairs to share the information needed by the selection algorithm among the nodes.
 
 On the other hand, \ac{mdns} defines how this and other records are shared through UDP multicast (or unicast in certain situations).
-We ignore the cost of browsing the nodes to discover new nodes because is the same for both strategies.
+We ignore the cost of browsing the nodes to discover new nodes because it is the same for both strategies.
 However, note that as explained above, our strategy does differ from \acl{nb} in the use of TXT records.
 
 The nodes announce records during the start up or whenever they have a resource record with new data.
