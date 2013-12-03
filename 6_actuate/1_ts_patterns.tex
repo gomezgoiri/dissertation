@@ -5,15 +5,13 @@
 % requirements: sistema de suscripciones (out of the scope)
 % escenario de ejemplo en Ubicomp
 
-% TODO IG poner el nombrecico y tal
 This section presents the first technique to change the physical environment.
 This technique is space-based, i.e. participants coordinate by reading and writing in a shared \Space{}.
 This encourages an uncoupled communication between applications using the same \Space{}.
 
-% TODO IG aqui ninguno me guia en el famoso "Space actuation". A ver si puedes hacer que se oriente a esto. Imagino que el primero, por ejemplo, intenta presentar la base de como se actua, pero no me entra porque presentas esto asi.
-Section~\ref{sec:ts_patterns} briefly describes \acl{ts}'s most common application patterns. % according to the classification of \citet{freeman_javaspaces_1999}.
-Section~\ref{sec:envisaged_scenarios} illustrates with two sample scenarios how to apply some of these patterns to \ac{ubicomp} environments.
-Section~\ref{sec:notification} presents an additional requirement identified on these scenarios: a subscription mechanism for the \Space{}.
+Section~\ref{sec:ts_patterns} briefly describes \acl{ts}'s most common application patterns and discusses which ones are suitable for \ac{ubicomp} environments. % according to the classification of \citet{freeman_javaspaces_1999}.
+These patterns constitute the base of what we called \spaceActuation{}.
+Section~\ref{sec:notification} presents the \spaceActuation{}'s core requirement: a subscription mechanism.
 Finally, Section~\ref{sec:actuation_scn1} explains how to implement the baseline scenario according to the space usage patterns. % más que usage pattern, igual es app pattern
 
 
@@ -243,7 +241,7 @@ According to Section~\ref{sec:network_properties}, this implies that network per
 \label{sec:actuation_scn1}
 \newcommand{\implSpace}{\emph{Implementation 1}}
 
-This section describes how to implement the baseline scenario using \ac{tsc}.
+This section describes how to implement the baseline scenario using the \spaceActuation.
 The implementation presents the following nodes:
 \begin{enumerate}[label=\itshape(\Alph*\upshape)] % o \itshape(\Alph*\upshape~node)
   \item A node which reacts to the tasks written into a shared semantic space.
@@ -297,10 +295,11 @@ Finally, \nodeConsSpace{} gets a notification of the written result, takes it an
 % dar detalles de cómo se ha implementado
 To simplify the implementation of the scenario, we consider a purely centralized space with a subscription mechanism.
 % subscripciones SPARQL
-This mechanism uses SPARQL \citeweb{sparql2008} and defines two different primitives.
+This mechanism uses \acs{sparql} \citeweb{sparql2008} and defines two different primitives.
 The first one takes into account the knowledge from the last graph written to trigger the notifications.
 % http://english.stackexchange.com/questions/2981/alternatives-to-computationally-expensive
 The second primitive considers the knowledge from the whole space and hence is more computationally costly.
+
 
 \begin{listing}
   \input{\pathchapsix/code/scn2/task.tex}
@@ -329,7 +328,7 @@ In our implementations, the data measured by the sensors can only be indirectly 
 These indirect effects on the sensed values can be modelled for each actuator.
 For example, to state that turning on a lamp increases the light measured by a sensor.
 However, precisely anticipating the exact value of the new measure is difficult if not impossible due to the mentioned external physical conditions.
-Considering this difficulty to predict their relationship and its tangential importance for the implementations, we simply ignore these relationships.
+Considering this difficulty to predict their relationship and its tangential importance for the baseline scenario's implementations, we simply ignore these relationships.
 We assume that the consumer previously determined which actuators it should change to fulfil its initial abstract goal.
 
 
@@ -337,11 +336,10 @@ We assume that the consumer previously determined which actuators it should chan
 
 % Ontologies used
 % explicar por qué hemos modelado así los escenarios?
-The \emph{glue} between the two actuation worlds presented in this chapter is their data. % o between both approaches, o yo qué sé
-Therefore, it must be modelled according to the same ontologies.
-This section provides the rationale behind the selection of the ontologies we used.
-Note that these ontologies are not the unique selection which could be made.
-Neither does it pretend to be the best one.
+The \emph{glue} between the two actuation worlds presented in this chapter is their data.
+Therefore, the implementations presented in this chapter represent the environment according to the same ontologies. % u ontologías distintas con mapeo, pero paso de explicar eso.
+This section provides the rationale behind the selection of the ontologies used.
+% This selection does not pretend to be the best choice.
 
 
 % por qué con medidas?
@@ -353,7 +351,7 @@ However, to the best of our knowledge, there is no more widely-accepted ontology
 
 
 % por qué uso preferencias?
-The preferences ontology is another of the core ontology used in our implementations.
+The preferences ontology is another core ontology used in our implementations.
 It is used to clearly distinguish between the value of an actuator and a consumer's intention or desire to change it.
 A preference can turn into an actuator's new state, but it is not always necessarily true.
 The actuator can discard a preference due to an usage policy, a malfunction or any other reason.

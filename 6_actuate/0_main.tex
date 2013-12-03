@@ -11,6 +11,9 @@ If you live among wolves you have to act like a wolf.
 
 
 \newcommand{\restdesc}{\emph{RESTdesc}}
+\newcommand{\spaceActuation}{\emph{Space-based actuation}}
+\newcommand{\restActuation}{\emph{REST actuation}}
+\newcommand{\hybridActuation}{\emph{Hybrid actuation}}
 
 
 % the code below specifies where the figures are stored
@@ -24,7 +27,7 @@ If you live among wolves you have to act like a wolf.
 %------------------------------------------------------------------------- 
 
 
-In the previous chapter, we presented an energy-aware technique to search on the completely distributed semantic space. % technique, mechanism?
+In the previous chapter, we presented an energy-aware technique to search on the completely distributed semantic space. % technique, mechanism???
 %This search mechanism promotes the end-to-end interaction between the objects.
 However, acting over an \ac{ubicomp} environment is as important as observing what happens on it.
 Although this dissertation describes this problem less thoroughly, we consider interesting to discuss it to provide the complete story. %not leave loose ends. % transmit a broader vision. % the big picture
@@ -33,6 +36,7 @@ Although this dissertation describes this problem less thoroughly, we consider i
 
 This chapter presents and compares two techniques to change the physical environment.
 The first technique is based on common \ac{ts} usage patterns while the second one relies on semantically described \ac{rest} services to create a plan to fulfil a given goal.
+The rest of this chapter refers to them as \spaceActuation{} and \restActuation{} respectively.
 
 Note that the second actuation technique is out the scope of the space-based communication covered in this dissertation.
 However, the seamless integration of these \ac{rest} services opens the door to reuse the capacities of many existing devices.
@@ -41,18 +45,18 @@ Therefore, we propose reusing the \acs{http} \acsp{api} of already existing sema
 
 This chapter explores this reuse helped by a simple real-world scenario.
 The goal of the scenario is to remotely change the light of a lamp.
-% % TODO TODO TODO The implementation is publicly available at THIS URL.
-
 
 \bigskip
 
-The rest of this chapter is organized as follows.
-% IG TODO un problema global que veo es que no tienen nombrecitos intuitivos las tecnicas con su \emph{} y sus cosas. Los tienes mas o menos, pero ponerlos explicitos ayudaria. Ahora son "Space-based actuation" y el otro "Direct consumption of REST services" (creo que este deberia ser "Direct actuation" o asi), a ver si puedes encontrar algo que se vea que es una tecnica y otra (de hecho estaria tambien la tercera que seria algo como "Hybrid actuation").
-Sections \ref{sec:actuation_space} and \ref{sec:direct_actuation} present the two techniques and their corresponding implementations of the baseline scenario. % se entiende que es de luces
-Section~\ref{sec:actuation_comparison} compares these techniques and Section~\ref{sec:hybrid_actuation} explores how they can interoperate. % no funciona en ambos sentidos, igual habría que especificarlo!
+This chapter is organized as follows.
+Sections \ref{sec:actuation_space} and \ref{sec:direct_actuation} present the two techniques and their corresponding implementations of the baseline scenario\footnote{
+The implementations of the baseline scenario have been made public at \url{XXX}. % TODO TODO TODO Update the URL.
+\label{fn:impl_available}
+}.
+Section~\ref{sec:hybrid_actuation} compares these techniques and explores how they can interoperate. % no funciona en ambos sentidos, igual habría que especificarlo!
+This exploration is done by means of a new implementation\footref{fn:impl_available} which reuses much of the implementations from sections \ref{sec:actuation_space} and \ref{sec:direct_actuation}.
 %Specifically, it presents a consumer willing to indirectly actuate through a space in a semantically described \acs{http} provider. % no sé si queda muy claro
-% TODO IG ya te he comentado antes, pero esto de decir que antes presentas la implementacion que extiende el espacio, no me encaja aqui. Quitaria esta frase de entrada, y describiria mejor lo de discusses further...
-After presenting a neat solution which only extends the \Space{} implementation, Section~\ref{sec:actuation_discussion} discusses further implementation alternatives.
+After that, Section~\ref{sec:actuation_discussion} discusses the advantages and limitations of the previous implementation presenting further implementation alternatives.
 Finally, Section~\ref{sec:actuation_summary} concludes the chapter.
 
 

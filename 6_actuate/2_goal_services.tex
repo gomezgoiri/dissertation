@@ -1,4 +1,4 @@
-\section{Direct Consumption of \acs{rest} services}
+\section{REST Actuation}
 \label{sec:direct_actuation}
 
 
@@ -13,9 +13,7 @@ For instance, a heater must check the space to find if a new desired temperature
 % por qué? motivación: permitir a otras app integrarse en nuestro espacio
 In contrast, this section presents a second technique which directly actuates in the environment without using any \Space{}.
 A consumer following this technique directly uses \ac{rest} \acp{api}. % i.e. it is the client of these \ac{api} <-- se entiende esto o hace falta dar el salto entre consumer y client?
-These \acp{api} expose the capabilities of some devices to make physical changes in the environment.
-
-% TODO IG esta intro me gusta mas que la anterior... que sale un poco de la nada.
+These \acp{api} expose the devices' capabilities to make physical changes in the environment.
 
 However, this apparently simple mechanism hides a difficulty: the consumer needs to discern how to use these \acp{api} to make such changes.
 According to the \ac{rest} principles, a client should navigate through the resources of an \ac{api} with no prior knowledge of it.
@@ -27,9 +25,8 @@ The client should
 \end{enumerate*}
 To do this, this section advocates for a semantic description of these \acp{api}' resources.
 
-% TODO IG el primero deberia relacionarse con el direct consumption. Entiendo que es backgorund, pero como se relacion con el direct? De hecho en el 6.1.1 quiza tambien deberia llamarse background.
-Section~\ref{sec:actuation_rest_background} briefly presents different alternatives to build semantic \ac{rest} \acp{api}.
-Section~\ref{sec:restdesc} present the selected alternative and Section~\ref{sec:actuation_scn2} implements the baseline implementation using it.
+Section~\ref{sec:actuation_rest_background} briefly compares different alternatives to build semantic \ac{rest} \acp{api}.
+Section~\ref{sec:restdesc} presents the selected alternative and Section~\ref{sec:actuation_scn2} implements the baseline scenario using it.
 
 
 
@@ -58,7 +55,7 @@ This allows not only to describe semantic representations, but any type of forma
 It also allows to semantically describe the knowledge needed to use a concrete \acs{http} verb on a resource, and the content this request returns. % o precondition
 The materialization of this proposal is called \restdesc{} \citep{verborgh_functional_2012}.
 \citet{mayer_semantic_2013} use \restdesc{} in an environment populated by web-powered devices. % i.e. the \ac{wot}
-The environment it presents is equivalent to the ones envisioned by this dissertation.
+This environment is analogous to the ones envisioned by this dissertation. % analogous/equivalent
 
 
 \bigskip
@@ -81,7 +78,7 @@ A rule's \emph{conclusion} expresses both the \ac{rest} call that needs to be ma
 
 
 \citet{verborgh_functional_2012} suggest three complementary alternatives to discover descriptions.
-The first alternatives use \ac{http} mechanisms: content negotiation and the \ac{http} OPTIONS verb.
+The first and second alternatives use \ac{http} mechanisms: the content negotiation and the \ac{http} OPTIONS verb.
 Using the content negotiation a client can obtain a dereferenceable link's representation which corresponds to the description. % puede ser comments#algo
 Requesting a resource using the \ac{http} OPTIONS verb a client can obtain the description in the response body.
 Finally, the third alternative is not \ac{http}-centric and it depends on repositories to store and retrieve the descriptions.
@@ -99,11 +96,11 @@ This mechanism uses as inputs:
   \item optional background knowledge.
 \end{enumerate*}
 Each of these inputs are semantically expressed and therefore, they can be processed by standard \ac{n3} reasoners.
-The reasoners generate proofs about how to achieve the goal starting from the initial state using the rest of the inputs.
+These reasoners generate proofs about how to achieve the goal starting from the initial state and using the rest of the inputs.
 These proofs can be seen as steps that need to be made to reach a desired state.
 
 
-Additionally, \citet{verborgh_ijcs_2014} distinguish between pre-proof and post-proof.
+Additionally, \citeauthor{verborgh_ijcs_2014} distinguish between pre-proof and post-proof.
 The first, are those which assume that the execution of all \acs{api} calls will behave as expected.
 The latter, can be seen as a \emph{revision} of the pre-proof.
 It executes the Web \acs{api} of the pre-proofs and uses actual execution results to generate a new proof.
@@ -155,9 +152,7 @@ The \acs{http} \acs{api} provided by the \nodeProvRest{} is modelled using the f
 
 In order to instruct consumers on how to use the services provided, they are annotated using \restdesc{}.
 The \acs{http} OPTIONS returns listings~\ref{lst:light_descpost}~and~\ref{lst:measure_descget} for \emph{/lamp/actuators/light}.
-Thanks to these descriptions and to the dereferenceable \acsp{uri} \citep{sauermann_cool_2008}, starting from \emph{/lamp} any client can crawl the \acs{api} to autonomously learn how to use it. % TODO citar http://en.wikipedia.org/wiki/Dereferenceable_Uniform_Resource_Identifier
-% TODO TODO TODO citar a SIMON!
-
+Thanks to these descriptions and to the dereferenceable \acsp{uri} \citep{sauermann_cool_2008}, starting from \emph{/lamp} any client can crawl the \acs{api} to autonomously learn how to use it.
 
 \begin{listing}
   \input{\pathchapsix/code/scn1/measure_descget.tex}

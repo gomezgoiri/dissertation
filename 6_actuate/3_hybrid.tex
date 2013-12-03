@@ -4,16 +4,17 @@
 The actuation technique presented by Section~\ref{sec:actuation_space} constitutes the natural way of acting using a \Space{}.
 However, \ac{rest} and \ac{rest}-like services constitute an emerging mechanism to directly actuate in the physical environment.
 Therefore, their seamless integration (i.e. interoperation) opens the door to reuse the capacities of many existing devices.
-Consequently, we aim to integrate semantically described \ac{rest} services (i.e. the actuation technique presented in Section~\ref{sec:direct_actuation}) in our space-based model. % integration, reuse, alignment, close the gap
+Consequently, we aim to integrate semantically described \ac{rest} services in our space-based model. % integration, reuse, alignment, close the gap
+That is, mix \spaceActuation{} with \restActuation{}.
 % we first need to close the gap between both approaches.
 %This section aims to experimentally proof the validity of the alignment presented in the previous section.
 
 
 This section explores this integration.
-Section~\ref{sec:actuation_comparison} compares the techniques presented in the previous and argues their integration.
+Section~\ref{sec:actuation_comparison} compares \spaceActuation{} and \restActuation{} and argues the need of this integration.
 Then, Section~\ref{sec:actuation_scn3} presents a new implementation of the baseline scenario.
-This implementation shows how the \Space{} can transparently invoke \ac{rest} services on behalf of any consumer following the \ac{ts} usage patterns.
-To this end, it reuses the nodes from the implementations presented in sections \ref{sec:actuation_scn1} and \ref{sec:actuation_scn2}.
+This implementation shows how the \Space{} can transparently invoke \ac{rest} services on behalf of any consumer following the \spaceActuation{}.
+To this end, it reuses nodes from the implementations presented in sections \ref{sec:actuation_scn1} and \ref{sec:actuation_scn2}.
 %This lead us to analyse the adjustments required to enable their interoperation.
 
 
@@ -66,14 +67,14 @@ In contrast, this mechanism demands few things to the provider: to serve \ac{res
 
 As can be appreciated in Table~\ref{tab:actuation_networking_computing}, the providers in the second actuation mechanism are lightweight.
 They just attend to the request received using HTTP.
-As a consequence of these few requirements, exposing the actuation capacities of the limited devices making them part of the web is an upcoming tendency.
+As a consequence of these few requirements, exposing the actuation capacities of the limited devices with HTTP is an upcoming tendency.
 This tendency is backed by the \ac{wot} initiative.
 To become this web-enabled actuators automatically reusable by the consumers, the second mechanism only requires them to describe their resources semantically.
 This can be done before deploying them and does not affect to their usual operation.
 
 
 From the perspective of our space-based computing solution, reusing the existing HTTP providers will potentially open a new world of actuation possibilities.
-For that, the simplicity of the space-based consumer should be respected. % Simplicidad: networking y computing que aparecen en la tabla.
+For that, the simplicity of the consumers in \spaceActuation{} should be respected. % Simplicidad: networking y computing que aparecen en la tabla.
 
 
 % TODO podríamos decir que el proof-based es más genérico?
