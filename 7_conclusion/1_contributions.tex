@@ -9,10 +9,10 @@ This section presents a summary of the contributions explained in this dissertat
 \begin{itemize}
   \item Chapter~\ref{cha:stateoftheart} presents an in-depth state-of-the-art review.
     \begin{itemize}
-      \item It presents the research fields to which the dissertation contributes.
-      \item It portrays these related research fields by presenting some relevant works.
-      \item It introduces equivalent semantic space-based computing middleware.
-	    Later, it analyses their characteristics and how they do not address the problem tacked in this dissertation.
+      %\item It presents the research fields to which the dissertation contributes. % Background
+      \item It portrays this dissertation regarding the relevant works from related research fields.
+	    Particularly, it intensifies the analysis on the semantic space-based computing middleware. % deepen, intensify
+	    The analysis shows how they do not address the problems tacked by this dissertation.
     \end{itemize}
   
   \item Chapter~\ref{cha:tsc} depicts a two-space model which
@@ -22,8 +22,8 @@ This section presents a summary of the contributions explained in this dissertat
 	\end{enumerate*}
     % designs a middleware
     \begin{itemize}
-      \item It scrutinizes the \ac{rest} style and its compatibility with \ac{tsc}.
-      \item It describes the two-space model. % compromise between
+      %\item It scrutinizes the \ac{rest} style and its compatibility with \ac{tsc}.
+      \item It describes a dual space model. % compromise between
             The first space is a commonplace where all the participants can write and read.
             The second space is a \emph{read-only} virtual \Space{} formed by contents managed by the different participants.
             It is accessed by any node as a whole using the same primitives as the first one.
@@ -35,51 +35,52 @@ This section presents a summary of the contributions explained in this dissertat
     \end{itemize}
   
   \item Chapter~\ref{cha:searching} presents a searching architecture for semantic \ac{wot} solutions.
-        This architecture can be used in this dissertation's middleware, but its applicability is not limited to any specific solution.
+        This architecture suits into, but it is not only applicable to, the space model proposed.
     \begin{itemize}
-      \item It balances the load between devices depending on their computing and energy capacities.
+      \item It balances the load that the architecture management generates.
+	    This balance considers devices' computing and energy capacities.
       \item It structures the nodes in different dynamic roles with different responsibilities. % roles: WP, Provider y Consumer, dynamic: ppalmente WP
-      \item It enables end-to-end \ac{http} consumption without the need of an intermediary to search. % sé que esto es tricky, pero no lo necesita necesariamente
-      \item It presents and assesses different types of information summaries the nodes can use to better address their requests.
+      \item It promotes end-to-end \ac{http} requests between constrained devices.
+            They do not need an intermediary to search (i.e. to select the appropriate providers to request). % sé que esto es tricky, pero no lo necesita necesariamente
+      \item It presents and assesses different types of information summaries the nodes can use to improve their search.
       \item It evaluates the proposal with a simulated but yet realistic environment.
-      % TODO considerar poner:
-      %       This architecture tries to minimize the requests devices have to handle by enhancing their search mechanism.
-      %       The extra-tasks introduced by this enhancement are performed by nodes chosen according to their capacities.
     \end{itemize}
     
-  \item Chapter~\ref{cha:actuate} analyses and compares two mechanisms to actuate over the space. % uno direct y otro indirect
+  \item Chapter~\ref{cha:actuate} analyses and compares techniques to actuate over the physical environment using a space. % uno direct y otro indirect
     \begin{itemize}
-      \item It explains how to use \ac{tsc} to coordinate nodes willing to actuate over the physical environment and actuators.
+      \item It explains how to use \ac{tsc} to coordinate actuator nodes and nodes willing to actuate.
       \item It depicts the need of a subscription system and its key requirements.
-      \item It presents how to adopt a proof-based actuation mechanism in the middleware.
-      \item It compares the requirements and benefits of both approaches.
+      \item It compares the space-based actuation technique with a direct actuation one based on the \ac{rest} architectural style. % the requirements and benefits
+      \item It presents and discusses an alternative to seamlessly reuse \ac{rest} services from our space model.
     \end{itemize}
   
   % contribuciones técnicas: implementaciones varias
   \item Besides, as a result of the theoretical work made on this dissertation, we have done the following technical contributions:
     \begin{itemize}
-      \item Otsopack \citeweb{otsopack}: a \ac{tsc} middleware which works over \ac{http} and implements most of the ideas presented in the dissertation.
+      \item \emph{Otsopack} \citeweb{otsopack}: a \ac{tsc} middleware which works over \ac{http} and implements most of the ideas presented in the dissertation.
             This middleware is publicly available for different computing platforms and has been used in several research projects.
       % Esto deberiamos incluirlo aunque sea brevemente en algun lugar...
-      \item Exploration of the use of semantic content in several embedded platforms.
-	    We have tested several platforms, semantic frameworks and reasoners to verify the feasibility of the ideas and assumptions presented in the dissertation.
-      \item A fully parametrizable simulation framework to evaluate different communication strategies. % TODO open-sourcearlo y poner link!
-      % TODO open-sourcear WoT 2013 y comentarlo? No se si merece la pena
+      % \item Exploration of the use of semantic content in several embedded platforms.
+      %  We have tested several platforms, semantic frameworks and reasoners to verify the feasibility of the ideas and assumptions presented in the dissertation.
+      \item A fully parametrizable simulation framework to evaluate different communication strategies \citeweb{simulation}.
+      \item Three different implementations of the same simple \ac{ubicomp} scenario which illustrate the ideas explained in the Chapter~\ref{cha:actuate}.
+	    Much of these implementations are fully reusable for further future evaluations \citeweb{actuation}.
     \end{itemize}
 \end{itemize}
 
 
 % el tema de haber trabajado con otros
-Finally, parallel to this thesis, but deeply influenced by it, we have collaborated with other entities to:
+Finally, parallel to this dissertation, but deeply influenced by it, the author of this dissertation has collaborated with other academic institutions, research centres and companies to make the further scientific and technical contributions.
 \begin{itemize}
-  \item Analyse the security aspects which need to be addressed in these environments to present a solution. % que puede ser adaptada a esto
-  \item Apply the Otsopack middleware in several scenarios:
+  \item Lightweight user access control for resource constrained devices. % que puede ser adaptada a esto
+  \item Apply the \emph{Otsopack} middleware in several scenarios:
     \begin{itemize}
       \item Homes: automating them according to the user's preferences. % y lo del podometro?
                                                                         % en los escenarios de distintos papers
                                                                         % lo que se hizo en TALIS+Engine en Alicante o no se donde
       \item Hospitals and residences: tracking the evolution of patients with cognitive impairments.  % TODO traducir centro de día mejor que hospital
-      \item Supermarkets: aiding to buy and easing mobility through robots.
+      \item Supermarkets: aiding to buy and easing mobility using robots.
       \item Hotels: intelligently adapting it to the customers' needs.
     \end{itemize}
+  % Poner CLIPS4Android???
 \end{itemize}

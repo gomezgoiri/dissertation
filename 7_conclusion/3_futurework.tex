@@ -9,7 +9,7 @@ These limitations and issues open the door to interesting future work which is d
 
 \subsection{Closing the Gap with Third \acs{wot} Applications}
 
-One of the middleware's goals is to achieve interoperability with third applications.
+One of the middleware's goals is to achieve interoperability with third-party applications.
 In other words, to reuse their data transparently to the user from our middleware and vice-versa.
 This goal can be seen as a two-fold strategy: ease the access to the data and make them reusable.
 
@@ -19,7 +19,7 @@ This goal can be seen as a two-fold strategy: ease the access to the data and ma
 			    An adaptation to the upcoming \ac{coap} would ease its adoption by new limited platforms. % "base de usuarios"
 			    However, the most challenging aspect is not to replicate it in other suitable protocols.
 			    
-			    The most challenging aspect is to automatize the consumption of heterogeneous third \acp{api}.
+			    The most challenging aspect is to automatize the consumption of heterogeneous third-party \acp{api}.
 			    According to the \ac{rest} principles, the \ac{resthateoas} constraint can help automated the clients to use any \ac{api} independently of its specific shape. % shape or implementation
 			    Instead, this dissertation proposes a common \ac{api} that needs to be implemented in any device willing to share content. % TODO data api vs domain api => mirar el capitulo 3 y explicar esto
 			    
@@ -27,9 +27,9 @@ This goal can be seen as a two-fold strategy: ease the access to the data and ma
 			    And to reuse many \acp{api} without reimplementing the agent, the data types and states of a domain should be standardized. % TODO poner cita del blog de fielding sobre la discussion esa
 			    Therefore, any step in that direction would require the agreement of the community around the domain (e.g. the \ac{wot} community).
 			    
-			    The counter-pad of third \acp{api} automatic consumption would be to ensure that our \ac{tsc} \ac{api} complies with the \ac{resthateoas} constraint.
-			    Some steps have been done to make the \ac{api} human discoverable through \ac{html} representations.
-			    However, more effort needs to be done to ease its automatic consumption regardless of its specific shape. % shape or implementation? % which would depend on the version
+			    The counter-pad of third-party \acp{api} automatic consumption would be to ensure that our \ac{tsc} \ac{api} complies with the \ac{resthateoas} constraint.
+			    Currently, the \ac{api} is human browsable thanks to its \ac{html} representations.
+			    However, more effort needs to be done to enable its automatic consumption regardless of its specific shape. % shape or implementation? % which would depend on the version
 			    % se pueden usar varias estrategias en paralelo
 			    
 			    Finally, the \ac{resthateoas} constraint may lead to more network usage, which is particularly harmful for devices with energy autonomy limitations.
@@ -45,10 +45,8 @@ This goal can be seen as a two-fold strategy: ease the access to the data and ma
 			  While the first one requires the consensus of the community, the second demands for efficient reasoners for mobile and embedded platforms.
 			  This efficiency is particularly important since it directly influences their energy consumption.
 			  % TODO Mencionar que estamos trabajando en ello?
-			  % further assessment of existing ones, creating news for platforms
 			  % pero decir que lo nuestro es un primer paso en paralelo a otros que puedan solucionar los otros problemas
-			  % semantica y cacharros pequeños, sigue siendo algo difícil. Necesidad de razonadores ligeros.
-			  
+			  % semantica y cacharros pequeños, sigue siendo algo difícil. Necesidad de razonadores ligeros o específicos (citar al tipo del razonador para UbiComp).
 \end{description}
 
 
@@ -57,12 +55,12 @@ This goal can be seen as a two-fold strategy: ease the access to the data and ma
 % Searching: SPARQL y demás
 % 1ero: mayor eficiencia
 % reescritura puede mejorar interop
-We did not consider using query languages such as SPARQL because of the difficulties most constrained platforms may find in parsing them.
+We did not consider using query languages such as \acs{sparql} \citeweb{sparql2008} on the distributed search because of the difficulties most constrained platforms may find in parsing them.
 With this decision, we design a uniform \ac{api} for all the types of devices.
-However, for the future work, one can adopt SPARQL thanks to an optional \ac{api}.
-In that case, all the nodes should be aware that some of them are only able to interpret triple pattern templates.
+However, for the future work, one can adopt \acs{sparql} thanks to an optional \ac{api}.
+With such optional \ac{api}, the nodes should be aware that some of them are only able to interpret triple pattern templates.
 
-The use of SPARQL in some nodes would benefit the developers and improve the middleware performance. % searching
+The use of \acs{sparql} in some nodes would benefit the developers and improve the middleware performance. % searching
 The users of the middleware would be able to made more expressive queries.
 The performance could be enhanced by introducing optimization techniques from the distributed databases field \cite{schwarte_fedx_optimization_2011}. % see references from Section~\ref{background}) or reference them here?
 
@@ -70,29 +68,35 @@ The performance could be enhanced by introducing optimization techniques from th
 \subsection{Coordination Space's Distribution, Replication or Migration} % no se me ocurre un título más sexy
 
 The current design demands the coordination space to be accessible through an \ac{http} \ac{api}.
-For the sake of clarity, at some points of the dissertation we have assumed that this space is centralized in a unique machine.
-However, the access through an \ac{http} \ac{api} does not restrict that.
+For the sake of simplicity, at some points of the dissertation we have assumed that this space is centralized in a unique machine.
+However, the access through an \ac{http} \ac{api} does not impede the distribution of the \coordspace{}.
 Some alternatives that can be worth to explore are: % mencionar cloud para algo?
 \begin{itemize}
-  \item Replication of the space to increase the system performance (e.g. load balancing).
+  \item Replication of the space to increase the system performance (e.g. using load balancing).
   \item Distribution of the content over different machines to enhance its scalability. % TODO decir que ya ha sido tratado por más soluciones? (e.g. TripCom)
   \item Migration from a machine to another to avoid a single point of failure.
 	%No node is essential so the system will still work.
-        This strategy will allow, for example, to select the space holder dynamically easing the middleware manageability and deployment.
-        This would be similar to the \ac{wp} role of our searching architecture. % mencionar Chapter~\ref{cha:searching}?
+        For example, this strategy will allow to select the space holder dynamically, easing the \coordspace{} manageability and deployment.
+        This would be analogous to the \ac{wp} role of our searching architecture. % mencionar Chapter~\ref{cha:searching}?
 \end{itemize}
 
 % aquella idea que tenían los de Lancaster de que el middleware cambia de forma dependiendo del entorno
 Besides, monitoring the middleware usage, one alternative or another could be dynamically chosen depending on the specific needs of each situation.
 
 
-\subsection{Integration of the Proof-based Actuation Mechanism in the Space}
+\subsection{Integration of the \restActuation{} in the Space}
 
-Chapter~\ref{cha:actuate} presented an alignment between a proof-based mechanism and actuation through the space.
-However, its implementation and evaluation was left as future work.
-To enable the usage of the proof-based mechanism, tasks from the latter must be translated into goals.
-This translation must be generalizable to automatize it.
-However, it is not clear whether it will always be possible this direct translation for complex goals and tasks.
+Chapter~\ref{cha:actuate} presented an hybrid actuation technique which combines consumers using the \spaceActuation{} and \ac{rest} providers.
+The key for this integration is the direct translation of the \coordspace{}'s subscriptions into goals needed by the \restActuation{}.
+This avoids requiring any new piece of information to the developer which does not conceptually belong to \ac{tsc}.
+However, the consumer is not forced to perform any subscription.
+Therefore, the middleware should force the developer to use subscriptions for a task result or extract the goals from other pieces of information.
+
+
+An option would be to translate the tasks written into the space to trigger an actuator change into goals.
+This way, no new information would be required to the consumer following the \spaceActuation{}.
+This translation requires further work to ensure that it is generalizable.
+% it is not clear whether it will always be possible this direct translation for complex goals and tasks
 
 % Idea del fallido WoT2013:
 % Let us imagine that at the end of the previous section more than a path is found for the same desired goal.
@@ -117,18 +121,17 @@ How to reuse actuation mechanisms of nodes using \ac{ts} patterns from \ac{wot} 
 \subsection{Security for the Middleware}
 
 % si no, es un poco fiesta y cualquiera podría poner datos falsos
-Two key aspect for \ac{ubicomp} deployments are
+Two key aspects for \ac{ubicomp} deployments are
 \begin{enumerate*}[label=\itshape(\arabic*\upshape)]
   \item to authenticate the parts involved in the communication; and
   \item to ensure the privacy of the message being transmitted.
 \end{enumerate*}
 % Ya hemos hecho algo para dispositivos limitados y móviles
 Although both problems have been deeply discussed in the literature,
-the nodes in an \ac{ubicomp} environment face severe computing and energy restrictions.
-To solve that, we have already propose a solution appropriate for sensor networks and mobile devices.
+devices in \ac{ubicomp} face severe computing and energy restrictions.
+To solve that, we have already proposed a solution appropriate for sensor networks and mobile devices.
 
 The next step is to evaluate it in more demanding scenarios and the final goal is to integrate it in our \ac{tsc} middleware.
-
 
 
 %%% A partir de aquí, no son aspectos técnicos concretos
@@ -138,8 +141,8 @@ The next step is to evaluate it in more demanding scenarios and the final goal i
 
 A subtle goal of any middleware is to ease the development of applications by encapsulating complex tasks (i.e. searching on a distributed space).
 % Medir de forma objetiva aspectos del ser humano como la sencillez de uso o de implementación
-Some objective indicators can be extracted from the code by implementing the same application with and without the middleware (i.e. number of lines).
-However, from the human perspective these indicators do not necessarily express how easy, comfortable or pleasant was to use the middleware.
+Some objective indicators can be extracted from the code by implementing the same application with and without the middleware (e.g. the total number of lines needed).
+However, from the human perspective these indicators do not necessarily express how easy, comfortable or pleasant is to use the middleware.
 % facilitar modelado?? => el hecho de que sea difícil anotar, puede echar para atrás a desarrolladores: eso es problema de mi app o de quien?
 Although the primitives are rather simple, the configuration or just the semantic annotation can complicate the learning process of any developer.
 Future work could measure the impact the middleware has on them.

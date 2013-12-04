@@ -26,39 +26,38 @@ But it is, perhaps, the end of the beginning.
 % 3 ptos con los que quiero que el lector se quede: searching, acting y compatibility with WoT
 
 This dissertation explores the design of a distributed \ac{tsc} middleware suitable for \ac{ubicomp} environments.
-The middleware's most remarkable characteristic is its alignment with \ac{rest}-like services and the \ac{wot} world.
-This alignment pursues the interoperability of the middleware with other semantic \ac{wot} solutions.
-This way, it encourages the reuse of their data and eases the access to its own data.
-% Otra forma de vender explicitamente la importancia de integrarlo con WoT:
-% Besides, after an analysis we acknowledged the importance and benefits that the upcoming \ac{wot} has brought to the \acl{ubicomp}.
-% This has lead us to have make our final solution compatible with the \ac{wot} and other REST services.
+The middleware's most remarkable characteristic is its alignment with the web world.
+This alignment pursues the interoperability of the middleware with other semantic web applications and semantic \ac{wot} solutions.
+First, it reuses their data requiring them to implement a minimal \ac{rest}-like \ac{api}.
+Second, it enables these third party web applications to reuse the data written in the space by means of an analogous \ac{api}. % analogous, equivalent, similar
 
 
-To preserve as many beneficial properties as possible from \ac{wot} and \ac{ts} worlds, the middleware is divided in two \Spaces{}: the coordination space and the outer space. % TODO usar constantes
-The first one enables a completely indirect communication, time and space decoupled, between the nodes by writing and reading semantic content in it.
-The latter acknowledges the distributed nature of \ac{ubicomp} environments by letting the nodes manage their own semantic content.
+To preserve as many beneficial properties as possible from the web and \ac{ts} worlds, the middleware presents a conceptual division of each \Space{} (Chapter~\ref{cha:tsc}).
+Any \Space{} is composed by the \coordspace{} and the \outerspace{}.
+The \coordspace{} enables a completely indirect communication, time and space decoupled, between the nodes which write and read semantic content in it.
+The \outerspace{} acknowledges the distributed nature of \ac{ubicomp} environments by letting the nodes manage their own semantic content.
 However, this content is shared with the rest of nodes forming a \emph{virtual} space.
 Developers access to the content of the space in a associative manner keeping the space decoupling property.
-Both spaces are accessed through a resource-oriented \ac{http} \ac{api} to ease reusing contents by third \ac{rest}-like applications. % TODO se entiende REST-like?? habrá que explicarlo
+Both spaces are accessed through a resource-oriented \ac{http} \ac{api} to promote their data reuse by third \ac{rest} or \ac{rest}-like applications.
 
 
 The distribution of the information avoids participants' dependency on other devices, but arises other challenges.
-This dissertation tackles two main challenges: how to search in a decentralized way and how to act on the environment through the space.
+This dissertation tackles two main challenges: how to search in a decentralized way (Chapter~\ref{cha:searching}) and how to act on the physical environment through the space (Chapter~\ref{cha:actuate}).
 
 
-To enhance the search process between devices limiting their dependencies in others we propose an architecture.
+To enhance the search process between devices limiting their dependencies on others, this dissertation proposes an architecture.
 This architecture dynamically chooses an intermediary according to its capabilities to support the most limited devices.
 The final result is that less requests are required in overall, specifically reducing the load on resource constrained devices.
-This results in the reduction of their energy consumption.
+As a result, their energy consumption is also reduced.
 % es independiente de nuestra solucion: se puede aplicar a otras cosas
 
 
-To actuate on the physical environment we first presented how to apply \ac{ts} application patterns to the \ac{ubicomp} vision.
+To actuate on the physical environment, the dissertation explains how to apply \ac{ts} application patterns to the \ac{ubicomp} vision.
 %Specifically, tasks and results for these tasks are read and written into the space.
 % Necesidad de suscripciones
 Although these actuation mechanisms promote indirect communication between the nodes, they require them to use the coordination space.
 This impedes to seamlessly integrate actuators from the \ac{wot} world. % without a gateway.
-To avoid that, i.e. to promote the reuse of third \ac{wot} applications' actuation capacities, we presented how to integrate a proof-based mechanism with the regular \ac{tsc} usage.
+To avoid that, i.e. to promote the reuse of third \ac{wot} applications' actuation capacities, we suggest how to integrate a proof-based mechanism with the regular \ac{tsc} usage.
 %Finally, the advantages and drawbacks of both approaches are presented.
 
 
