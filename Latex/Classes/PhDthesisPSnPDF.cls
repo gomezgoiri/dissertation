@@ -211,7 +211,8 @@
 
 % Extra added
 %\usepackage[authoryear]{natbib}
-\usepackage{times}
+%\usepackage{times}
+\usepackage[bitstream-charter]{mathdesign}
 \usepackage{quotchap}
 \usepackage{titlesec}
 \usepackage{fancybox}
