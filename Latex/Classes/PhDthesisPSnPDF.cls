@@ -319,14 +319,14 @@
 %: section below defines fancy page layout options
 % ------------------------------
 \pagestyle{fancy}
-\renewcommand{\chaptermark}[1]{\markboth{\MakeUppercase{\thechapter. #1 }}{}}
-%\renewcommand{\chaptermark}[1]{\markboth{{\thechapter. #1 }}{}}
-\renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
+\renewcommand{\chaptermark}[1]{\markboth{Chapter \thechapter{}\ \textperiodcentered\ \ #1}{}}
+\renewcommand{\sectionmark}[1]{\markright{Section \thesection{}\ \textperiodcentered\ \ #1}} % \thesection.\ \ #1
 \fancyhf{}
-\fancyhead[RO]{\bfseries\rightmark}
-\fancyhead[LE]{\bfseries\leftmark}
-\fancyfoot[C]{\thepage}
-\renewcommand{\headrulewidth}{0.5pt}
+\fancyhead[LO]{} %\textsc{\nouppercase\rightmark}}
+\fancyhead[LE]{\textsc{\textbf{\thepage} \ \ \ \leftmark}}
+\fancyhead[RO]{\textsc{\rightmark \ \ \ \textbf{\thepage}}}
+\fancyhead[RE]{} %\textsc{\nouppercase\leftmark}}
+\renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{0pt}
 \addtolength{\headheight}{0.5pt}
 \fancypagestyle{plain}{
