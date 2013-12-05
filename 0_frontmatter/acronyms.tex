@@ -8,8 +8,9 @@
 %% http://staff.science.uva.nl/~polko/HOWTO/LATEX/acronym.html
 %\acrodef{label}[acronym]{written out form}
 
-\chapter*{Acronyms}
-\addcontentsline{toc}{chapter}{Acronyms}
+\chapter*{Acronyms} % Unnumbered heading
+\addcontentsline{toc}{chapter}{Acronyms} % Despite \chapter*, add it to the table of contents
+\markboth{Acronyms}{Acronyms} % Despite \chapter*, show "Acronyms" in the left and right-hand side headers
 
 \begin{acronym}
   \acro{ami}[AmI]{Ambient Intelligence}
