@@ -13,7 +13,7 @@ We vary these parameters to simulate a wide range of scenarios.
 
 \begin{table}
   \centering
-    \begin{tabular}{l p{7cm}}
+    \begin{tabular}{l p{8cm}}
       \hline
       Name & Description \\
       \hline
@@ -79,14 +79,14 @@ Table~\ref{tab:technicalDetails} shows the technical specifications of these dev
   \caption{Technical characteristics of the assessed devices.}
   \small
   \begin{center}
-    \begin{tabular}{lccc}
+    \begin{tabular}{llrl}
       \hline
-      Device & Processor & RAM \\
+      Device & Processor & RAM & Reference\\
       \hline
-      XBee &  - & 8 MB  \\
-      FoxG20 & 400Mhz Atmel ARM9 &  64 MB \\
-      Samsung Galaxy Tab & 1 GHz Cortex-A8  &  512 MB \\
-      Regular computer & 2.26 GHz Intel Core 2 Duo  &  4 GB \\
+      XBee &  - & 8 MB  & \citeweb{connectportx2} \\
+      FoxG20 & 400Mhz Atmel ARM9 &  64 MB & \citeweb{foxg20} \\
+      Samsung Galaxy Tab & 1 GHz Cortex-A8  &  512 MB & \citeweb{samsunggalaxytab} \\
+      Regular computer & 2.26 GHz Intel Core 2 Duo  &  4 GB & - \\
       \hline
     \end{tabular}
   \end{center}
@@ -101,17 +101,17 @@ Table~\ref{tab:deviceslibraries} shows the platforms and libraries used in each 
   \small
   \label{tab:deviceslibraries}
   \begin{center}
-    \begin{tabular}{lccc}
+    \begin{tabular}{llll}
       \hline
-      \multirow{2}{*}{Device} & ~Platform~ & \multirow{2}{*}{REST libraries} & ~~Semantic~~ \\
+      \multirow{2}{*}{Device} & Platform & \multirow{2}{*}{REST libraries} & Semantic \\
       ~ & version & ~ & libraries \\
       \hline
-      XBee & Python 2.4 & Python Std Lib & None \\
-      FoxG20 & Python 2.5 &  Python Std Lib & Fuxi \\
-      Samsung Galaxy Tab & Android 2.2 & Restlet & Sesame \\
-      Regular computer & Java SE 6.0 & Restlet & Rdf2Go (Sesame) \\
+      XBee & Python 2.4 \citeweb{python} & Python Std Lib & None \\
+      FoxG20 & Python 2.5 &  Python Std Lib & RDFLib \citeweb{rdflib} \\
+      Samsung Galaxy Tab & Android 2.2 \citeweb{android} & Restlet \citeweb{restlet} & Sesame \citeweb{sesame} \\
+      % Era técnicamente posible tener Rdf2Go en Android, pero no lo hicimos así.
+      Regular computer & Java SE 6.0 \citeweb{javasesix} & Restlet & Rdf2Go (Sesame) \citeweb{rdftogo} \\
       \hline
-      % TODO poner Rdf2Go también en Android? Técnicamente se puede...
     \end{tabular}
   \end{center}
 \end{table}
@@ -130,10 +130,10 @@ As mentioned, the next section's simulations are parametrized according to these
 	  Concurrent & \multirow{2}{*}{XBee} & \multirow{2}{*}{FoxG20} & Samsung & Regular  \\
 	  requests   &  ~    &   ~     & Galaxy tab & computer \\
 	  \hline
-	  1  &  77 (1)	&  17 ~(0)  &  223 (349) &   5 ~(1) \\
-	  5  & 392 (8)	&  97 (16)  &  256 ~(76) &   8 ~(4)  \\
-	  10 & 775 (8)	& 174 (28)  &  372 (171) &  13 ~(8) \\
-	  15 &  -   	& 282 (43)  &  497 (191) &  18 (13) \\
+	  1  &  77~(1) & 17~~~(0) & 223~(349) & 5~~~(1) \\
+	  5  & 392~(8) &  97~(16) & 256~~~(76) & 8~~~(4) \\
+	  10 & 775~(8) & 174~(28) & 372~(171) & 13~~~(8) \\
+	  15 &  -      & 282~(43) & 497~(191) & 18~(13) \\
 % Tampoco creo que haga falta tanto detalle, ¿cuando se van a dar tantas peticiones concurrentes?
 %	  20 &  -	    & 375 (30) &  23 (13) &  661 (444) \\
 %	  25 &  -	    & 460 (30) &  30 (18) &  748 (288) \\
