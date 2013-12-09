@@ -20,12 +20,12 @@ This goal can be seen as a two-fold strategy: ease the access to the data and ma
 			    However, the most challenging aspect is not to replicate it in other suitable protocols.
 			    
 			    The most challenging aspect is to automatize the consumption of heterogeneous third-party \acp{api}.
-			    According to the \ac{rest} principles, the \ac{resthateoas} constraint can help automated the clients to use any \ac{api} independently of its specific shape. % shape or implementation
+			    According to the \ac{rest} principles, the \ac{resthateoas} constraint can help to automate clients to use any \ac{api} independently of its specific shape. % shape or implementation
 			    Instead, this dissertation proposes a common \ac{api} that needs to be implemented in any device willing to share content. % TODO data api vs domain api => mirar el capitulo 3 y explicar esto
 			    
 			    In any case, an agent would need knowledge about the domain explored to reuse any \ac{api}.
 			    And to reuse many \acp{api} without reimplementing the agent, the data types and states of a domain should be standardized. % TODO poner cita del blog de fielding sobre la discussion esa
-			    Therefore, any step in that direction would require the agreement of the community around the domain (e.g. the \ac{wot} community).
+			    Therefore, any step in that direction would require the agreement of the community around the domain (e.g. home automation lighting).
 			    
 			    The counter-pad of third-party \acp{api} automatic consumption would be to ensure that our \ac{tsc} \ac{api} complies with the \ac{resthateoas} constraint.
 			    Currently, the \ac{api} is human browsable thanks to its \ac{html} representations.
@@ -33,13 +33,13 @@ This goal can be seen as a two-fold strategy: ease the access to the data and ma
 			    % se pueden usar varias estrategias en paralelo
 			    
 			    Finally, the \ac{resthateoas} constraint may lead to more network usage, which is particularly harmful for devices with energy autonomy limitations.
-			    Therefore, this trade-off between the interoperability and the network efficiency should be also assessed.
+			    Therefore, this trade-off between the interoperability and the network efficiency should also be assessed.
 			    
   \item[Reusing the data.] The semantic knowledge contributes to that goal.
 			  However, as \citet{barnaghi_semantics_2012} point out, the use of semantic descriptions alone does not ensure interoperability.
 			  Additionally, they suggest the need of:
 			  \begin{enumerate*}[label=\itshape(\arabic*\upshape)]
-			    \item standardizing ontologies and using them (or at least when using own ontologies, referencing an upper ontology); and
+			    \item standardizing ontologies and using them or referencing to standardized upper ontologies whenever custom ontologies are used; and
 			    \item interpreting the annotations effectively. % efectivamente: con razonadores que funcionen bien
 			  \end{enumerate*}
 			  While the first one requires the consensus of the community, the second demands for efficient reasoners for mobile and embedded platforms.
@@ -56,8 +56,8 @@ This goal can be seen as a two-fold strategy: ease the access to the data and ma
 % 1ero: mayor eficiencia
 % reescritura puede mejorar interop
 We did not consider using query languages such as \acs{sparql} \citeweb{sparql2008} on the distributed search because of the difficulties most constrained platforms may find in parsing them.
-With this decision, we design a uniform \ac{api} for all the types of devices.
-However, for the future work, one can adopt \acs{sparql} thanks to an optional \ac{api}.
+With this decision, we design a uniform \ac{api} for all types of devices.
+However, for future work, one could adopt \acs{sparql} thanks to an optional \ac{api}.
 With such optional \ac{api}, the nodes should be aware that some of them are only able to interpret triple pattern templates.
 
 The use of \acs{sparql} in some nodes would benefit the developers and improve the middleware performance. % searching
@@ -70,7 +70,7 @@ The performance could be enhanced by introducing optimization techniques from th
 The current design demands the coordination space to be accessible through an \ac{http} \ac{api}.
 For the sake of simplicity, at some points of the dissertation we have assumed that this space is centralized in a unique machine.
 However, the access through an \ac{http} \ac{api} does not impede the distribution of the \coordspace{}.
-Some alternatives that can be worth to explore are: % mencionar cloud para algo?
+Some alternatives that can be worth exploring are: % mencionar cloud para algo?
 \begin{itemize}
   \item Replication of the space to increase the system performance (e.g. using load balancing).
   \item Distribution of the content over different machines to enhance its scalability. % TODO decir que ya ha sido tratado por más soluciones? (e.g. TripCom)
@@ -81,12 +81,12 @@ Some alternatives that can be worth to explore are: % mencionar cloud para algo?
 \end{itemize}
 
 % aquella idea que tenían los de Lancaster de que el middleware cambia de forma dependiendo del entorno
-Besides, monitoring the middleware usage, one alternative or another could be dynamically chosen depending on the specific needs of each situation.
+Besides, by monitoring the middleware usage, one alternative or another could be dynamically chosen depending on the specific needs of each situation.
 
 
-\subsection{Integration of the \restActuation{} in the Space}
+\subsection{Integration of \restActuation{} in the Space}
 
-Chapter~\ref{cha:actuate} presented an hybrid actuation technique which combines consumers using the \spaceActuation{} and \ac{rest} providers.
+Chapter~\ref{cha:actuate} presented a hybrid actuation technique which combines consumers using the \spaceActuation{} and \ac{rest} providers.
 The key for this integration is the direct translation of the \coordspace{}'s subscriptions into goals needed by the \restActuation{}.
 This avoids requiring any new piece of information to the developer which does not conceptually belong to \ac{tsc}.
 However, the consumer is not forced to perform any subscription.
@@ -112,9 +112,9 @@ This translation requires further work to ensure that it is generalizable.
 % Besides, it will monitor the state to check if the state of the space is effectively changed or other actions need to be taken.
 Another interesting issue is to discern which path to follow to achieve a goal when two or more paths are available.
 We believe that additional high-level rules or policies can be defined (e.g. to select the path which consumed less energy).
-Storing them into the space may enable reusing this \emph{behaviours} by third applications' developers.
+Storing them into the space may enable reusing these \emph{behaviours} by third applications' developers.
 
-Finally, apart from reusing third \ac{wot} applications' actuation capacities in \ac{tsc}, the opposite question could also be explored:
+Finally, apart from reusing third \ac{wot} applications' actuation capabilities in \ac{tsc}, the opposite question should also be answered:
 How to reuse actuation mechanisms of nodes using \ac{ts} patterns from \ac{wot} solutions?
 
 
@@ -154,7 +154,7 @@ As a result, some improvements could be proposed (e.g. to create a version for a
 
 % muchas de nuestras decisiones en la implementación del middleware fueron guiadas por la realidad
 Rather than designing the best theoretical solution, in this dissertation we have tried to present a realizable solution.
-For that, we have implemented most of the ideas in the \emph{Otsopack} middleware and we have promote its use in different research projects.
+For that, we have implemented most of the ideas in the \emph{Otsopack} middleware and we have promoted its use in different research projects.
 This has helped us to identify the key problems to solve.
 
 Besides, to efficiently evaluate our solution under very different and extreme circumstances, in some occasions we have simulated the scenarios. % con muchos cacharros
@@ -166,13 +166,13 @@ To bridge both worlds, the next natural step would be assessing some aspects of 
 \begin{itemize}
 	% Big ecosystem of interconnected objects and devices
   \item The search architecture.
-        For that, we should deploy an scenario with a number of heterogeneous devices running a task in a long term.
+        For that, we should deploy an scenario with a considerable number of heterogeneous devices running a task during a long period.
         % viendo cuales son las necesidades reales de quienes lo usan
 	%    para justificar los parametros que se usaron
         Then, we could measure their network usage and energy consumption to either tune up some parameters of the architecture or redesign some aspects.
   % relacionado con el punto de interoperabilidad: reusar distintas applicaciones existentes y ver que realmente se cumple
   %    una forma de asegurarse, es haciendo que distintos usuarios las creen
-  \item The interoperability.
+  \item Interoperability.
 	New unconsidered problems could arise trying to reuse data from existing \ac{wot} applications.
 	Each manual intervention needed to make our middleware work together with these applications would be a sign of an interoperability problem.
 \end{itemize}
