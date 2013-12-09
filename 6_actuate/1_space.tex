@@ -6,7 +6,7 @@
 % escenario de ejemplo en Ubicomp
 
 This section presents the first technique to change the physical environment.
-This technique is space-based, i.e. participants coordinate by reading and writing in a shared \Space{}.
+That technique is space-based, i.e. participants coordinate by reading and writing in a shared \Space{}. % that y no this, para no confundir con la que se presenta en esta sección
 This encourages an uncoupled communication between applications using the same \Space{}.
 
 Section~\ref{sec:ts_patterns} briefly describes \acl{ts}'s most common application patterns and discusses which ones are suitable for \ac{ubicomp} environments. % according to the classification of \citet{freeman_javaspaces_1999}.
@@ -34,9 +34,9 @@ According to \citet{freeman_javaspaces_1999}, there are four main application pa
 % 				      \item The master collects the results for the tasks it wrote.
 % 				      \item Once the master has all the results, it combines them into a meaningful overall solution.
 % 				    \end{enumerate}  
-				    The master takes a problem, divides it into smaller tasks, and writes them tasks into the space.
+				    The master takes a problem, divides it into smaller tasks, and writes these tasks into the space.
 				    Any available worker takes a task, processes it, and writes the result back into the space.
-				    When all the workers have written their results, the master takes these results and combines them into a meaningful overall solution.
+				    When all the workers have written their results, the master takes these results and combines them into a meaningful merged solution.
 				    %Note that the workers accept new tasks whenever they are available and able to work.
 				    %Therefore, while a worker is busy computing a big task, another one can solve many small tasks.
 				    %In other words, this pattern naturally \emph{balances the load} on the space.
@@ -68,8 +68,8 @@ According to \citet{freeman_javaspaces_1999}, there are four main application pa
 					Following this analogy, the master is associated with a teacher, tasks with \emph{problems} and the specialized workers with \emph{students}.
 					The blackboard pattern starts when the \emph{teacher} writes a \emph{problem} in the \emph{blackboard}.
 					The \emph{students} observe the space and write their intention to contribute to solve the problem (i.e. \emph{raise their hands}).
-					The \emph{teacher} selects to the expert which will make a modification.
-					After the modification, the \emph{teacher} decides if it found the solution or another \emph{student} should contribute.
+					The \emph{teacher} selects an expert which will make a modification.
+					After the modification, the \emph{teacher} decides if it has found the solution or another \emph{student} should contribute.
 				  \item [Trellis pattern.]
 					In this pattern, the master arranges the problem into low-level, mid-level, and high-level pieces.
 					The workers of each level benefit from the refined data provided by the immediate level below.
@@ -86,7 +86,7 @@ To summarize, the \emph{replicated-worker pattern} is centred in optimizing the 
 The \emph{command pattern} can be seen as an abstraction of the latter where the behaviour is shipped in the tuples.
 The \emph{marketplace pattern} allows negotiation of two entities through the space.
 % Coño! pero si el especialista te permite colaborar...
-Finally, the \emph{specialist pattern} allows nodes with distinct capacities to cooperate towards a common goal.
+Finally, the \emph{specialist pattern} allows nodes with distinct capabilities to cooperate towards a common goal.
 
 
 % Posibilidad: Un esquema dividido en 4 en el que aparecen todos los patrones explicados.
@@ -104,7 +104,7 @@ Finally, the \emph{specialist pattern} allows nodes with distinct capacities to 
 
 
 % Both scenarios emphasize how devices can coordinate in a decoupled mode using the patterns seen in the previous section. % más de uno?
-Regarding the application of this patterns to \ac{ubicomp}, we observed that:
+Regarding the application of these patterns to \ac{ubicomp}, we observed that:
 % si hace falta argumento de autoridad, se puede comentar que esto emana de nuestra experiencia en distintos proyectos.
 \begin{itemize}
   \item Devices in \ac{ubicomp} often serve to very specific and local needs.
@@ -114,9 +114,9 @@ Regarding the application of this patterns to \ac{ubicomp}, we observed that:
 	% Contrasta con TripCom, que manejaba servicios web potencialmente pesados y que crearon un sistema (WSMX)
         They intent to achieve concrete and simple goals which usually imply more I/O operations than processing ones.
 \end{itemize}
-Therefore, \ac{ubicomp} generally faces a problem of collaboration between nodes with different capacities.
+Therefore, \ac{ubicomp} generally faces a problem of collaboration between nodes with different capabilities.
 In this problem, computation or negotiation aspects are secondary. % se entenderá a qué me refiero con computation??
-Consequently, we believe that the \emph{specialist patterns} fit the best to \ac{ubicomp}'s needs.
+Consequently, we believe that the \emph{specialist patterns} fit \ac{ubicomp} needs best.
 
 % \subsubsection{Scenario 1: Temperature Regulation}
 % \label{sec:envisaged_scn1}
@@ -199,7 +199,7 @@ Obviously, the later leads to a more efficient use of the network. % is closer t
 
 
 As a consequence, a notification mechanism is highly advisable to fulfil \ac{ts}'s application patterns in a distributed environment.
-Although the implementation of this notification mechanism is out of the scope of this thesis,
+Although the implementation of this notification mechanism is beyond the scope of this thesis,
 % Hablar de requisitos, describir nuevas primitivas de suscripciones o alternativas de implementación
 it should comply with the following aspects:
 \begin{itemize}
@@ -326,7 +326,7 @@ In our implementations, the data measured by the sensors can only be indirectly 
 
 
 These indirect effects on the sensed values can be modelled for each actuator.
-For example, to state that turning on a lamp increases the light measured by a sensor.
+For example, to state that switching on a lamp increases the light measured by a sensor.
 However, precisely anticipating the exact value of the new measure is difficult if not impossible due to the mentioned external physical conditions.
 Considering this difficulty to predict their relationship and its tangential importance for the baseline scenario's implementations, we simply ignore these relationships.
 We assume that the consumer previously determined which actuators it should change to fulfil its initial abstract goal.

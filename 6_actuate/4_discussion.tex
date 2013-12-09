@@ -6,8 +6,8 @@ Besides, they discuss other design alternatives. % design, alternative, etc.
 
 \subsection{Obtaining Resource Descriptions}
 
-The core of the proof-based actuation mechanism are the resource descriptions.
-They must be read from the nodes willing to actuate prior to reasoning. % obvio
+The core of the \restActuation{} is the descriptions of the resources.
+They must be read by the nodes willing to actuate prior to reasoning. % obvio
 This action is performed by the consumer in \implRest{} and by the agent in \implMix{}.
 Both nodes crawl a given \ac{api} starting from an \ac{url} to obtain the descriptions.
 The discovery of the initial \acp{url} is out of the scope of this chapter.
@@ -30,14 +30,15 @@ That is, we assume that a process crawls the descriptions in the background.
 Besides resource descriptions, \citeauthor{verborgh_ijcs_2014}'s actuation mechanism also requires an initial state and background knowledge as inputs (see Section~\ref{sec:restdesc}).
 In \implRest{}, the consumer obtains this knowledge crawling over all the possible \acsp{api}.
 In \implMix{}, we also add all the knowledge from the space.
-This is feasible because it is located in the same machine as the agent which needs it, so does not demand any network usage. % no es costoso obtenerla
+This is feasible because it is located in the same machine as the agent which needs it.
+So, it does not demand any network usage. % no es costoso obtenerla
 
 
 However, as explained in Chapter~\ref{cha:searching}, the data in \ac{ubicomp} changes too frequently to simply crawl it from time to time.
 % Reading all the space would be highly inefficient.
-Crawling all the \acsp{api} each time a change needs to be done is also highly inefficient.
+Crawling all the \acsp{api} each time a change occurs, it is also highly inefficient.
 Hence, the approach used to obtain knowledge is a clear simplification.
-This simplification is justified because this chapter is centred on the interoperability rather than in the efficient communication mechanisms.
+This simplification is justified because this chapter is centred on interoperability rather than on efficient communication mechanisms.
 
 
 \bigskip
@@ -93,8 +94,8 @@ The reasoning can be performed in any node apart from the one which holds the \S
 %We leave as a future work to implement and quantitatively compare them.
 
 \begin{itemize}
-  \item Any \consumer{} interested on changing the environment can trigger the process.
-	If these \consumers{} use the search mechanism presented in Chapter~\ref{cha:searching}, they will have background knowledge about other nodes.
+  \item Any \consumer{} interested in changing the environment can trigger the process.
+	\begin{sloppypar}If these \consumers{} use the search mechanism presented in Chapter~\ref{cha:searching}, they will have background knowledge about other nodes.\end{sloppypar}
 	This reduces the dependency on the node providing the \coordspace{}.
 	However, it requires them to perform tasks such as reasoning and checking the pre-proofs.
 	
@@ -123,12 +124,12 @@ However, none of them addresses the interoperability flaws of \implMix{}.
 In this regard, the simple mapping between a consumer's subscription and a goal is probably its most evident interoperability flaw.
 
 
-In \implMix{}, both the consumer subscription to a result and the goal for the reasoning match.
+In \implMix{}, the consumer subscription to a result and the goal the reasoning needs match.
 However, there is no guarantee that the consumer will always use a subscription which matches with a goal.
 For instance, the consumer could use a more general subscription and then filter the concrete tasks it is interested in.
 Even worse, there is no guarantee that the consumer will subscribe to any result.
 Thus, the universality of the proposed alignment can be easily affected.
-To avoid this undesired effect, any developer of a consumer node should need to take into account some good practices. % to increase the interoperability chances.
+To avoid this undesired effect, any developer of a consumer node should bear in mind some good practices. % to increase the interoperability chances.
 
 
 % qué pasa si el consumidor del escenario 2 no se suscribe a los resultados?
@@ -142,7 +143,7 @@ In this case, the mapping should be either
 \end{enumerate*}
 The first choice demands to feed the \Space{} with additional information. % to the middleware
 %This is very inflexible and differs little from manually programming a gateway with each provider. % REALMENTE?
-The second choice assumes a concrete ontology must used or extended by the user to represent tasks.
+The second choice assumes a concrete ontology must be used or extended by the user to represent tasks.
 Therefore, it would limit the freedom of choosing any vocabulary to define a task.
 
 
@@ -158,9 +159,9 @@ The scenario used as a guiding example is very basic.
 Consequently, the interoperation example shown requires further work to check its feasibility in more advanced scenarios.
 We anticipate the following challenges:
 \begin{itemize}
-  \item When there are two or more paths to a goal, how can we discern which one to follow?
-	This problem is specific to the proof-based mechanism.
-  \item How does the middleware deal with the coexistence of both mechanisms.
+  \item Providing there are two or more paths to a goal, how can we discern which one to follow?
+	This problem is specific to the \restActuation{}.
+  \item How does the middleware deal with the coexistence of both mechanisms?
 	When both methods can be applied, which one is triggered?
 	Will one of them prevail over the second?
 \end{itemize}

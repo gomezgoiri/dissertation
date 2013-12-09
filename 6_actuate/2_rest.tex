@@ -62,7 +62,7 @@ This environment is analogous to the ones envisioned by this dissertation. % ana
 
 
 We consider \restdesc{} the best current solution which helps to achieve truly \ac{rest}ful \acsp{api}.
-Therefore, this chapter assumes that the \ac{http} \acsp{api} whose capacities we want to reuse in our space model describe their \acsp{api} with \restdesc{}.
+Therefore, this chapter assumes that the \ac{http} \acsp{api} whose capabilities we want to reuse in our space model describe their \acsp{api} with \restdesc{}.
 
 
 \subsection{\restdesc{}}
@@ -78,8 +78,8 @@ A rule's \emph{conclusion} expresses both the \ac{rest} call that needs to be ma
 
 
 \citet{verborgh_functional_2012} suggest three complementary alternatives to discover descriptions.
-The first and second alternatives use \ac{http} mechanisms: the content negotiation and the \ac{http} OPTIONS verb.
-Using the content negotiation a client can obtain a dereferenceable link's representation which corresponds to the description. % puede ser comments#algo
+The first and second alternatives use \ac{http} mechanisms: content negotiation and the \ac{http} OPTIONS verb.
+Using content negotiation a client can obtain a dereferenceable link's representation which corresponds to the description. % puede ser comments#algo
 Requesting a resource using the \ac{http} OPTIONS verb a client can obtain the description in the response body.
 Finally, the third alternative is not \ac{http}-centric and it depends on repositories to store and retrieve the descriptions.
 % En el paper los autores no justifican bien porque es last resort, así que paso de meterme yo en berenjenales
@@ -183,5 +183,5 @@ The goal drives the reasoning process, which tries to extract a plan to achieve 
   \label{lst:light_goal}
 \end{listing}
 
-With this plan, the consumer just needs to call to the different \acs{http} resources it defines.
+With this plan, the consumer just needs to call to the different \acs{http} resources that it defines.
 If more than a resource needs to be called, the plan may also indicate how to use the information obtained from one to use it in the next call.
