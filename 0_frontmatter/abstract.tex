@@ -7,8 +7,9 @@
 
 \begin{abstracts}        %this creates the heading for the abstract page
 % Ubicomp, mobile e IoT
-Ubiquitous Computing envisions environments where devices interact among them to seamlessly work on behalf of the humans.
-In recent years, the emergence of the Internet of Things (IoT) concept, which opts for connecting everyday objects to the Internet, and the Mobile Computing paradigm have contributed to strengthen UbiComp in our days.
+\acf{ubicomp} envisions environments where devices interact among them to seamlessly work on behalf of the humans.
+% TODO TODO TODO In recent years,... in our days.
+In recent years, the emergence of the \acf{iot} concept, which opts for connecting everyday objects to the Internet, and the Mobile Computing paradigm have contributed to strengthen UbiComp in our days.
 For this reason, UbiComp environments are not necessarily populated by powerful computers.
 On the contrary, mainly resource constrained devices (e.g., embedded and mobile devices) are the main actors of these environments.
 % Retos de Ubicomp
@@ -25,8 +26,9 @@ Most of these semantic tuple spaces consider embedded and mobile devices as mere
 Such delegation helps to reduce the workload of devices with computing and energy limitations.
 However,  this delegation moves the data away from where it is physically generated.
 This creates a conflict between providing updated data and generating unnecessary network traffic for unused information.
+% TODO TODO TODO each other no!
 Besides, this delegation makes constrained devices intrinsically dependent on each other when it might not always be necessary.
-This thesis explores how these constrained devices can act as fully fledged semantic knowledge providers to create a more decentralized space.
+This dissertation explores how these constrained devices can act as fully fledged semantic knowledge providers to create a more decentralized space.
 
 % Aspectos que se analizan en la tesis
 In conclusion, this dissertation presents a novel adaptation of semantic tuple space which considers the energy and computational impact on the devices.
@@ -42,62 +44,33 @@ Specifically, this dissertation proposes the following contributions:
 
 
 \begin{resumen}        %this creates the heading for the abstract page
-% Pon tu resumen aquí.
-
-En los ultimos años el aumento de dispositivos móviles y embebidos conectados a Internet ha sido notable.
-En el futúro, se preveé que esta tendencia no haga más que aumentar.
-Por lo tanto, la forma de integrar eficazmente estos dispositivos y las aplicaciones construidas sobre ellos resulta vital.
-
-
-El paradigma de \aclp{ts} constituye una forma indirecta y altamente desacoplada de comunicación entre los dispositivos.
-En este paradigma los procesos se coordinan escribiendo y leyendo en un espacio común de forma asociativa.
+La computación ubicua (\acs{ubicomp}) vislumbra entornos donde los dispositivos interactuan entre sí para trabajar de forma imperceptible para los seres humanos.
+En los últimos años, la emergencia del Internet de las Cosas (\acs{iot}), que aboga por conectar objetos cotidianos a Internet, y la computación móvil han contribuído a fortalecer \ac{ubicomp}.
+Por ello, los entornos ubicuos no se componen necesariamente de computadoras potentes.
+Por el contrario, los actores principales de dichos entornos suelen ser en su mayor parte dispositivos con recursos limitados (p.e. dispositivos móviles y embebidos).
+Es por ello que es importante para estos entornos enfrentarse a la heterogeneidad, falta de fiabilidad y facilidad de reemplazo de estos dispositivos.
 
 
-%Otra piedra angular de esta tesis es el uso de 
-Por otro lado, la web semántica permite describir el conocimiento compartido en dichos espacios.
-De esta forma, se busca reaprovechar el conocimiento de forma que se promueve interoperabilidad a nivel de aplicación.
-De la conjunción entre la \acf{ws} y \acf{ts} nació \ac{tsc}.
+Para enfrentarse a la heterogeneidad, la web semántica propone diversos estándares y modelos para proveer un significado precido a los términos para que puedan reusarse más allá de las fronteras marcadas por las aplicaciones.
+Relativo a la falta de fiabilidad y facilidad de reemplazo, la computación basada en espacios (o \acl{ts}) promueve una coordinación desacoplada de los dispositivos.
+Las soluciones basadas en espacios de tuplas semánticos combinan estos tres aspectos beneficiosos para \ac{ubicomp} uniendo los dominios de la web semántica y los \acl{ts}.
 
 
-Tradicionalmente el espacio de \ac{tsc} se ha centralizado en uno o un subconjunto de los dispositivos/participantes.
-No obstante, en esta tesis exploramos la completa distribución del espacio entre todos los dispositivos, incluidos móviles y dispositivos embebidos.
-De esta forma se accede a los datos allí donde se generan, en los dispositivos directamente conectados a los sensores y actuadores.
-Además, se ajusta de forma natural a escenarios de movilidad donde los dispositivos transportan sus datos de un espacio a otro.
-Pero esta distribución conlleva no pocos retos.
-En esta tesis contemplamos ambas la búsqueda en dichos espacios y la actuación a través de la escritura en los mismos.
+Muchos de estos espacios de tuplas semánticos consideran a los dispositivos móviles y embebidos como meros clientes de un espacio gestionado por dispositivos más potentes.
+Dicha delegación ayuda a reducir la carga de trabajo de los dispositivos con limitaciones computacionales y energéticas.
+Sin embargo, esta delegación distancia los datos de donde son generados.
+Esto crea un conflicto entre proveer datos actualizados y generar tráfico de red innecesario para información no usada.
+Además, esta delegación hace a los dispositivos limitados intrinsicamente dependiente de otros cuando no siempre es necesario.
+Esta tesis explora cómo esos dispositivos limitados pueden actuar como autenticos proveedores de conocimiento semántico para crear un espacio más descentralizado.
 
 
-Para la búsqueda dentro de los espacios de conocimiento, proponemos una arquitectura que permita tener noción de lo que otros nodos comparten.
-De esta forma se puede dirigir la busqueda a aquellos dispositivos que tienen datos relevantes para una consulta dada.
-Así, se pretende perseguir un menor nivel de actividad en dispositivos con limitaciones de autonomía energética.
-Para la compartición de dichos datos, se elige dinámicamente un dispositivo acorde a sus capacidades.
-En cualquier caso, este nodo no intermedia entre los consumidores y los proveedores a la hora de realizar una consulta, de forma que se promueve la comunicación directa entre los dispositivos.
-
-
-Para actuar sobre el entorno a través de la escritura en el espacio proponemos y comparamos dos alternativas.
-La primera consiste en escribir tareas en el espacio que otros dispositivos leen y resuelven.
-Los resultados para dichas tareas son escritos de nuevo en el espacio y leídos por el dispositivo de origen.
-Para la correcta coordinación entre el nodo que realiza la tarea y el que la pide, se necesita un mecanismo de suscripción.
-
-
-La segunda aproximación trata de razonar sobre la descripción semántica de servicios REST de otros dispositivos.
-Con ellos, consigue saber de qué forma los debe invocar para conseguir el estado final deseado.
-
-
-\bigskip
-
-
-Además, en esta disertación exploramos la compatibilidad de \ac{tsc} con la web de las cosas (\acs{wot}).
-La web de las cosas busca integrar los dispositivos de forma natural con la web.
-Concretamente, propone embeber servidores web en los dispositivos para que estos faciliten sus recursos siguiendo el estilo RESTful.
-Esto tiene la ventaja de que se integra de forma natural con la web, un sistema que se ha mostrado eficaz en terminos de escalabilidad y con el que la mayoría de usuarios está habituado.
-En esta tesis defendemos que permitiendo que los dispositivos faciliten sus datos acorde con el estilo REST, podemos lograr compatibilidad con la inminente web de las cosas.
-
-
-Por otro lado, el uso de REST sobre HTTP, facilita la adopción de nuestro middleware en nuevas plataformas.
-La mayoría de plataformas móviles o embebidas ofrecen hoy en día multitud de herramientas y librerías HTTP.
-Finalmente, cabe destacar el hecho de que estas ideas han sido implementadas en un middleware open-source disponible para multiples plataforma denominado \emph{Otsopack}.
-
+En conclusión, esta tesis presenta una adaptación novedora de los espacios de tuplas semánticos que considera el impacto computacional y energético en los dispositivos.
+Especificamente, esta disertación propone las siguientes contribuciones:
+\begin{itemize}
+  \item Un modelo de espacio que considera los principios que han hecho florecer a la web en las últimas décadas, junto con las propiedades de desacoplamiento de la computación basada en espacios.
+  \item Un mecanismo de búsqueda energéticamente eficiente para dispositivos limitados autónomos.
+  \item Un alineamiento entre dos formas de actuar en un entorno físico: actuación indirecta basada en espacios y actuación directa basada en la web.
+\end{itemize}
 
 \end{resumen}
 
