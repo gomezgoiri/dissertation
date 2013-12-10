@@ -7,15 +7,15 @@
 
 This section presents a summary of the contributions explained in this dissertation.
 \begin{itemize}
-  \item Chapter~\ref{cha:stateoftheart} presents an in-depth state-of-the-art review.
+  \item Chapter~\ref{cha:stateoftheart} presented an in-depth state-of-the-art review.
     \begin{itemize}
       %\item It presents the research fields to which the dissertation contributes. % Background
-      \item It portrays this dissertation regarding the relevant works from related research fields.
-	    Particularly, it intensifies the analysis on the semantic space-based computing middleware. % deepen, intensify
-	    The analysis shows how existing works do not address the problems tacked by this dissertation.
+      \item It portrayed this dissertation regarding the relevant works from related research fields.
+	    Particularly, it intensified the analysis on the semantic space-based computing middleware. % deepen, intensify
+	    The analysis showed how existing works do not address the problems tacked by this dissertation.
     \end{itemize}
   
-  \item Chapter~\ref{cha:tsc} depicts a two-space model which
+  \item Chapter~\ref{cha:tsc} depicted a two-space model which
 	\begin{enumerate*}[label=\itshape(\arabic*\upshape)]
 	  \item preserves \ac{tsc}'s decoupling properties and
 	  \item respects \ac{ubicomp}'s distributed nature.
@@ -23,35 +23,39 @@ This section presents a summary of the contributions explained in this dissertat
     % designs a middleware
     \begin{itemize}
       %\item It scrutinizes the \ac{rest} style and its compatibility with \ac{tsc}.
-      \item It describes a dual space model. % compromise between
+      \item It described a dual space model. % compromise between
             The first space is a common place where all the participants can write and read.
             The second space is a \emph{read-only} virtual \Space{} formed by contents managed by the different participants.
             It is accessed by any node as a whole using the same primitives as the first one.
-      \item It designs the middleware by presenting the adopted primitives and how the spaces can be accessed through an \ac{http} \ac{api}.
+      \item It designed the middleware by presenting the adopted primitives and how the spaces can be accessed through an \ac{http} \ac{api}.
 	    %Doing so, we retain some of \ac{rest}'s properties and enable interoperability with other elements.
-      \item It analyses the properties of the designed middleware from different perspectives.
-	    Particularly, it scrutinizes which beneficial properties from \ac{tsc} or \ac{rest} are retained.
-	    Besides, it remarks the middleware's suitability for resource constrained devices.
+      \item It analysed the properties of the designed middleware from different perspectives.
+	    Particularly, it scrutinized which beneficial properties from \ac{tsc} or \ac{rest} are retained.
+	    Besides, it remarked the middleware's suitability for resource constrained devices.
     \end{itemize}
   
-  \item Chapter~\ref{cha:searching} presents a searching architecture for semantic \ac{wot} solutions.
+  \item Chapter~\ref{cha:searching} presented a search architecture for semantic \ac{wot} solutions.
         This architecture is compatible with, but it is not only applicable to, the space model proposed.
     \begin{itemize}
-      \item It balances the load that the architecture management generates.
-	    This balance considers devices' computing and energy capacities.
-      \item It structures the nodes in different dynamic roles with different responsibilities. % roles: WP, Provider y Consumer, dynamic: ppalmente WP
-      \item It promotes end-to-end \ac{http} requests between constrained devices.
-            They do not need an intermediary to search (i.e. to select the appropriate providers to request). % sé que esto es tricky, pero no lo necesita necesariamente
-      \item It presents and assesses different types of information summaries the nodes can use to improve their search.
-      \item It evaluates the proposal with a simulated but yet realistic environment.
+      \item This search architecture:
+      \begin{itemize}
+	\item Balances the load that the architecture management generates.
+	      This balance considers devices' computing and energy capacities.
+	\item Structures the nodes in different dynamic roles with different responsibilities. % roles: WP, Provider y Consumer, dynamic: ppalmente WP
+	\item Promotes end-to-end \ac{http} requests between constrained devices.
+	      They do not need an intermediary to search (i.e. to select the appropriate providers to request). % sé que esto es tricky, pero no lo necesita necesariamente
+      \end{itemize}
+      \item It assessed different types of information summaries the nodes can use to improve their search.
+      \item It evaluated the proposal with a simulated but yet realistic environment.
     \end{itemize}
     
-  \item Chapter~\ref{cha:actuate} analyses and compares techniques to actuate over the physical environment using a space. % uno direct y otro indirect
+  \item Chapter~\ref{cha:actuate} analysed how to actuate on the physical environment using a space. % uno direct y otro indirect
+	Particularly, it showed how to interoperate with existing \ac{rest}-based actuators from space-based computing.
     \begin{itemize}
-      \item It explains how to use \ac{tsc} to coordinate actuator nodes and nodes willing to actuate.
-      \item It depicts the need of a subscription system and its key requirements.
-      \item It compares the space-based actuation technique with a direct actuation one based on the \ac{rest} architectural style. % the requirements and benefits
-      \item It contributes with a hybrid approach which seamlessly reuses \ac{rest} services from our space model.
+      \item It explained how to use \ac{tsc} to coordinate actuator nodes and nodes willing to actuate.
+      \item It depicted the need of a subscription system and its key requirements.
+      \item It compared the space-based actuation technique with a direct actuation one based on the \ac{rest} architectural style. % the requirements and benefits
+      \item It contributed with a hybrid approach which seamlessly reuses \ac{rest} \acp{api} from our space model.
     \end{itemize}
   
   % contribuciones técnicas: implementaciones varias

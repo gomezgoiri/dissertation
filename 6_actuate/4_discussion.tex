@@ -28,7 +28,7 @@ That is, we assume that a process crawls the descriptions in the background.
 \subsection{Obtaining Background Knowledge}
 
 Besides resource descriptions, \citeauthor{verborgh_ijcs_2014}'s actuation mechanism also requires an initial state and background knowledge as inputs (see Section~\ref{sec:restdesc}).
-In \implRest{}, the consumer obtains this knowledge crawling over all the possible \acsp{api}.
+In \implRest{}, the consumer obtains this knowledge crawling all the possible \acsp{api}.
 In \implMix{}, we also add all the knowledge from the space.
 This is feasible because it is located in the same machine as the agent which needs it.
 So, it does not demand any network usage. % no es costoso obtenerla
@@ -52,7 +52,7 @@ The second reasoning uses this knowledge to get real pre-proofs. % real o actual
 
 
 % Y ahora explicado en mayor detalle:
-Therefore, a node which wants to actuate over the \Space{} will need to obtain the \emph{clues} from the \ac{wp}.
+Therefore, a node which wants to actuate will need to obtain the \emph{clues} from the \ac{wp}.
 %These clues, as explained before, tell what kind of content other nodes provide. % un poco redundante
 Let us assume that these \emph{clues} are composed by the predicates used by the nodes which provide content. % es una de las alternativas que se planteaban
 The existence of a predicate used in a premise does not necessarily imply that this rule can be used.
