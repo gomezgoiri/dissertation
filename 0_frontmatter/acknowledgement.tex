@@ -5,15 +5,23 @@
 
 %Sort version
 %this creates the heading for the acknowlegments
+
 \begin{acknowledgements}      
 %Long version
 %uncommenting this line, gives a different acknowledgements heading
 %\begin{acknowledgementslong} 
 
+\begin{flushright}
+\emph{Sometimes, there's so much beauty in the world - I feel like I can't take it, like my heart is just going to cave in.}
+\qauthor{Ricky Fitts (American Beauty, 1999).}
+\end{flushright}
+
+\bigskip
+
 Si debo a alguien la posibilidad de haber concluído esta aventura es sin duda a aita y ama.
-Esta posibilidad va más allá del mundano y sin embargo tan necesario hecho de haberme proporcionado una cómoda vida en la que pude elegir mi camino.
-Por vosotros soy como soy, y soy quien soy.
-Podía haber salido un hijo un poco más hablador y menos pedante, pero no será porque no os esforzastéis.
+Esta posibilidad va más allá del mundano y sin embargo tan necesario hecho de haberme proporcionado una cómoda vida en la que siempre pude elegir mi camino.
+Por vosotros soy como soy y soy quien soy.
+Podría haber salido un hijo un poco más hablador y menos pedante, pero no será porque no os esforzastéis.
 Echando la vista atrás no puedo sino estar orgullosísimo de la educación recibida.
 Por ello, vaya para vosotros mi primer agradecimiento.
 
@@ -24,33 +32,37 @@ Gracias Íñigo por soportarme en momentos de máxima incertidumbre y pesimismo.
 Gracias por servirme de guía.
 
 
-Gracias a todos mis compañeros y ex-compañeros de grupo.
+Gracias a todos mis compañeros y ex-compañeros.
 Gracias a mis compañeros de generación por compartir sufrimientos: Edu, Iván y Eguiluz.
-Gracias a esa infatigable e incansable máquina con piernas de la que tanto se aprende cuando te concede un ciclo de computación que es Pablo Orduña.
-Gracias a los poderes fáticos del laboratorio: Aitor y Unai.
-Gracias a la gente del Garilab por aceptarme en mi exilio.
-Gracias a tanta gente que ha pasado por la vida \emph{esmarlabense} estos últimos años: Don Jaime, Emaldi, Laiseca, el innombrable, Lázaro y un largo etc.
-Afortunadamente ese \emph{largo etc} se puede consultar cómodamente en la página web del grupo.
+Gracias a esa infatigable e incansable máquina con piernas de la que tanto se aprende que es Pablo Orduña.
+Gracias a los ancianos del lugar: Aitor y Unai.
+Gracias a la gente del Garilab por aceptarme durante mi exilio.
+En definitiva, gracias a tanta gente que ha pasado por la vida \emph{esmarlabense} estos últimos años: Don Jaime, Emaldi, Laiseca, el innombrable, Lázaro y un largo etc.
+Afortunadamente, ese ``\emph{largo etc}'' se puede consultar en la página web del grupo haciendo uso de la consulta mostrada por el \emph{Listing~\ref{lst:workmates_ack}} o siguiendo el siguiente \emph{QRCode}.
 % Poner el SPARQL para seleccionarlos!
 
 
-Thanks to all the inspiring people y meet in the scientific world.
-Thanks to Geoff and Barry for my stay in the Lancaster University.
-Thanks to the ETH's \emph{Distributed Systems group} members, specially to Simon Mayer, my Swiss cicerone. % TODO comprobar que exista eso
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.3\textwidth]{qrcode_acks}
+\end{figure}
+
+
+Thanks to all the inspiring people y met in the scientific world.
+Thanks to Geoff Coulson, Barry Porter and the rest of the people I met at the Lancaster University.
+Thanks to all the ETH's \emph{Distributed Systems group} members, specially to Simon Mayer, my cicerone in Zurich. % TODO comprobar que exista eso
 
 
 Gracias a todos mis compañeros de aventuras estos años.
 A los ocasionales y a los fieles.
-En viajes por el mundo, canchas de baloncesto, caminatas, \emph{boat parties},...
+En viajes por el mundo, canchas de baloncesto, senderos, \emph{boat parties},...
 Cada segundo en que mantuve la cabeza fuera de la tesis fue un respiro enorme.
 
 
 Gracias Mikel por todo eso, y más.
-% frase shotta
 Gracias abuela Teo.
 Gracias al resto de mi familia, la sanguinea y la \emph{circunstancial}.
-
-% Frase de American Beauty
 
 
 \begin{flushright}
@@ -61,17 +73,20 @@ Aitor Gómez Goiri
 % Month and year
 \monthname \ \the\year
 
-
-
 % Signature figure
 
 %\begin{figure}[htbp!]
 %\end{figure}
 %\includegraphics{signature}%
 
-
-
 \end{flushright}
+
+\begin{listing}
+  \scriptsize
+  \input{0_frontmatter/code/workmates.tex}
+  \caption{Consulta SPARQL para obtener la gente relacionada con el grupo MORElab a la que tengo que estar agradecido.}
+  \label{lst:workmates_ack}
+\end{listing}
 
 
 

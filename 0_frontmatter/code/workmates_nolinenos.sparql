@@ -1,0 +1,23 @@
+PREFIX swrcfe: <http://www.morelab.deusto.es/ontologies/swrcfe.owl#>
+
+SELECT COUNT(DISTINCT ?faname) WHERE {
+  ?job swrcfe:doneBy
+     <http://www.morelab.deusto.es/labman/resource/people/aitor-gomez-goiri> .
+  {
+    ?job2 swrcfe:doneBy ?formerworkmate .
+    ?formerworkmate foaf:familyName ?faname .
+    ?formerworkmate foaf:firstName ?finame .
+    ?job swrcfe:jobStartDate ?jobstartdate .
+
+    OPTIONAL { ?job2 swrcfe:jobEndDate  ?jobenddate }
+    FILTER(?jobstartdate < ?jobenddate)
+  } UNION {
+    ?job2 swrcfe:doneBy ?workmate .
+    ?workmate foaf:familyName ?faname .
+    ?workmate foaf:firstName ?finame .
+
+    OPTIONAL { ?job2 swrcfe:jobEndDate ?jobenddate }
+    FILTER(!bound(?jobenddate))
+  }
+  FILTER(?job != ?job2)
+} 

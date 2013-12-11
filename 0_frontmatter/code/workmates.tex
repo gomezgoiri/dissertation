@@ -1,0 +1,26 @@
+\expandafter\def\csname PY@tok@err\endcsname{}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k}{PREFIX }\PY{n+nv}{swrcfe:}\PY{n+nn}{ \PYZlt{}http://www.morelab.deusto.es/ontologies/swrcfe.owl\PYZsh{}\PYZgt{}}
+
+\PY{k}{SELECT }\PY{err}{C}\PY{err}{O}\PY{err}{U}\PY{err}{N}\PY{err}{T}\PY{err}{(}\PY{err}{D}\PY{err}{I}\PY{err}{S}\PY{err}{T}\PY{err}{I}\PY{err}{N}\PY{err}{C}\PY{err}{T}\PY{err}{ }\PY{err}{?}\PY{err}{f}\PY{err}{a}\PY{err}{n}\PY{err}{a}\PY{err}{m}\PY{err}{e}\PY{err}{)} \PY{k}{WHERE}\PY{p}{\PYZob{}}
+\PY{n+nv}{  ?job}\PY{o}{ swrcfe:doneBy}
+\PY{o}{     }\PY{n+na}{\PYZlt{}http://www.morelab.deusto.es/labman/resource/people/aitor\PYZhy{}gomez\PYZhy{}goiri\PYZgt{}} \PY{p}{.}
+  \PY{p}{\PYZob{}}
+    \PY{n+nv}{?job2}\PY{o}{ swrcfe:doneBy }\PY{n+nv}{?formerworkmate }\PY{p}{.}
+    \PY{n+nv}{?formerworkmate}\PY{o}{ foaf:familyName }\PY{n+nv}{?faname }\PY{p}{.}
+    \PY{n+nv}{?formerworkmate}\PY{o}{ foaf:firstName }\PY{n+nv}{?finame }\PY{p}{.}
+    \PY{n+nv}{?job}\PY{o}{ swrcfe:jobStartDate }\PY{n+nv}{?jobstartdate }\PY{p}{.}
+
+    \PY{k}{OPTIONAL} \PY{p}{\PYZob{}}\PY{n+nv}{ ?job2}\PY{o}{ swrcfe:jobEndDate  }\PY{n+nv}{?jobenddate }\PY{err}{\PYZcb{}}
+\PY{n+na}{    FILTER}\PY{p}{(}\PY{n+nv}{?jobstartdate }\PY{err}{\PYZlt{}}\PY{err}{ }\PY{n+nv}{?jobenddate}\PY{p}{)}
+  \PY{p}{\PYZcb{}}\PY{err}{ }\PY{err}{U}\PY{err}{N}\PY{err}{I}\PY{err}{O}\PY{err}{N} \PY{p}{\PYZob{}}
+\PY{n+nv}{    ?job2}\PY{o}{ swrcfe:doneBy }\PY{n+nv}{?workmate }\PY{p}{.}
+    \PY{n+nv}{?workmate}\PY{o}{ foaf:familyName }\PY{n+nv}{?faname }\PY{p}{.}
+    \PY{n+nv}{?workmate}\PY{o}{ foaf:firstName }\PY{n+nv}{?finame }\PY{p}{.}
+
+    \PY{k}{OPTIONAL} \PY{p}{\PYZob{}}\PY{n+nv}{ ?job2}\PY{o}{ swrcfe:jobEndDate }\PY{n+nv}{?jobenddate }\PY{err}{\PYZcb{}}
+\PY{n+na}{    FILTER}\PY{p}{(}\PY{err}{!}\PY{n+na}{bound}\PY{p}{(}\PY{n+nv}{?jobenddate}\PY{p}{)}\PY{p}{)}
+  \PY{p}{\PYZcb{}}
+\PY{err}{ }\PY{err}{ }\PY{err}{F}\PY{err}{I}\PY{err}{L}\PY{err}{T}\PY{err}{E}\PY{err}{R}\PY{err}{(}\PY{err}{?}\PY{err}{j}\PY{err}{o}\PY{err}{b}\PY{err}{ }\PY{err}{!}\PY{err}{=}\PY{err}{ }\PY{err}{?}\PY{err}{j}\PY{err}{o}\PY{err}{b}\PY{err}{2}\PY{err}{)}
+\PY{p}{\PYZcb{}}\PY{err}{ }
+\end{Verbatim}
