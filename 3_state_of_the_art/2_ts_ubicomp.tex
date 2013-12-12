@@ -94,7 +94,7 @@ The space can be used to
 \end{enumerate*}
 % sin embargo, hay veces donde esa escritura y extraccion es mejor delegarla a los responsables de ella
 The solutions presented integrate both uses in the same space, which can be distributed or not.
-However, we argue that these uses face different needs and, therefore, should be treated separately.
+However, we argue that these uses face different needs and, therefore, should be treated separately (i.e. using two types of spaces).
 
 
 % Teorema de CAP
@@ -116,9 +116,10 @@ This integration demands to acknowledge their independence, and therefore limit 
 Consequently, for the second usage we propose a distributed space which resembles more to \emph{LIME}'s \emph{federated spaces} than to \emph{TOTA} or \emph{L$^2$imbo}.
 
 
-In other words, each device locally manages its own part of the space and only collaborates with others to share content.
-This means that writing does not imply replication or migration of the \emph{tuples}.
-The main drawback of this decision is that the availability or the data depends only on its manager's availability.
-In other words, this second space sacrifices the \emph{time uncoupling}.
-However, this space reflects the current state of the environment and reduces the dependency of two devices in third ones.
-Besides, for those cases where \emph{time uncoupling} or \emph{data availability} are important, the first space can still be used.
+% He comentado lo siguiente, porque ya era como ponerse a hablar de nuestra solucion en detalle cuando aun no se ha presentado.
+% Specifically, in our proposal each device locally manages its own part of the space and only collaborates with others to share content.
+% This means that writing does not imply replication or migration of the \emph{tuples}.
+% The main drawback of this decision is that the availability or the data depends only on its manager's availability.
+% In other words, the space for the second usage sacrifices the \emph{time uncoupling}.
+% However, it reflects the current state of the environment and reduces the dependency of two devices in third ones.
+% Besides, for those cases where \emph{time uncoupling} or \emph{data availability} are important, the first space can still be used.

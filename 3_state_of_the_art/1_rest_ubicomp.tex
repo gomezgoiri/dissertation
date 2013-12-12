@@ -1,11 +1,11 @@
 \section{\acs{rest} on \acs{ubicomp}}
 \label{sec:soa_ubicomp}
 
-The \ac{ubicomp} idea is characterized by the presence and collaboration of a number of heterogeneous and often limited computing platforms.
-% REST está en todos los lados, pero...
-Dealing with this heterogeneity is probably the biggest benefit which \ac{rest} has brought to this field.
+\ac{rest} prioritizes the scalability and simplicity over other characteristics \citep{fielding_architectural_2000}.
+These two characteristics are particularly beneficial for \ac{ubicomp}.
+On the one hand, \ac{ubicomp} environments demand scalability as they are usually populated by a panoply of heterogeneous and limited devices.
+On the other hand, the simplicity helps these devices to overcome such limitations easing the adoption of the \ac{rest} style.
 A representative example of how \ac{rest} has influenced \ac{ubicomp} is the \acf{wot}.
-% \ac{wot} is probably the most prominent architectural solution used for smart-objects. % probably porque no tengo datos que lo defiendan
 
 
 \InsertFig{venn-sec1_1}{fig:venn_ubicomp}{
@@ -36,10 +36,10 @@ This integration brings the following benefits:
 \subsection{Discussion}
 
 
-In the last decade, probably because of its perceived simplicity \citep{guinard_search_2011}, \ac{rest} has gained adopters in the \ac{iot}.
+In the last decade, probably because of its perceived simplicity \citep{guinard_search_2011}, \ac{rest} and \ac{rest}-like \acp{api} have gained adopters in the \ac{iot}.
 Particularly, the \ac{wot} has emerged as a simple mechanism to integrate smart objects with each other, but also with existing web applications.
 
-However, as any remote invocation style \ac{rest} introduces coupling between senders and receivers.
+However, as any direct communication style \ac{rest} introduces coupling between senders and receivers.
 % de johanson_extending_2004 he sacado esas características, no la particularización a WoT
 These complicates the application changes both in the short-term and in the long-term \citep{johanson_extending_2004}.
 In the short-term because nodes constantly join and leave the environment due to mobility or to failures.
