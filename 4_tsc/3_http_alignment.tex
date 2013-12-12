@@ -39,7 +39,7 @@ For example, the template \texttt{?s foaf:knows gomezgoiri:aitor} could be emplo
 
 Note that this thesis does not consider using more sophisticated query languages like SPARQL \citeweb{sparql2008}. % sophisticated o expressive?
 The rationale behind this decision is that we wanted to avoid the complexity introduced by these languages in our \ac{api}.
-While the advanced query languages need to be interpreted with parsers not available in many embedded platforms,
+While the advanced query languages need to be interpreted by parsers not available in many embedded platforms,
 wildcard templates are straightforward to implement and to process.
 This simplicity eases the adoption of the \ac{api} by as many platforms as possible.
 However, since the wildcard templates are the base for the advanced query languages, our \ac{api} could be extended to allow their use.
@@ -63,7 +63,7 @@ In any case, this extension is left as a future work.
 
 
   \item The \textbf{read} returns a graph belonging to a given space which contains at least a triple matching the given template or has the given \acs{uri} as its identifier.
-	If more than one graph fulfil one of these conditions, just one of them is returned (nondeterministically).
+	If more than one graph fulfils one of these conditions, just one of them is returned (nondeterministically).
 	It should be remarked that it has been designed as a non blocking operation.
   \begin{lstlisting}
     read(space_URI, graph_URI): triples         [2]
@@ -98,7 +98,7 @@ According to the \ac{rest} principles the interaction with an API must be hypert
 To ease its usage by developers, we provide a human-oriented \acs{html} representation of the \ac{api} which is completely \emph{browseable}.
 % un poco repetido de la parte de HATEOAS
 Regarding the machine-oriented representation of the \ac{api}, \citet{verborgh_functional_2012} and \citet{kjernsmo_necessity_2012} have proposed solutions to enable hypermedia driven semantic \acp{api}. % mencionar que son experimentales?
-Independently of the mechanism adopted, in this section we propose a optional \ac{api} which tries to stress \ac{tsc}'s compliance with \ac{http}.
+Independently of the mechanism adopted, in this section we propose a optional \ac{api} which stresses \ac{tsc}'s compliance with \ac{http}.
 \end{sloppypar}
 
 The list of spaces a node is joined to are available under \textit{/spaces}.
@@ -148,10 +148,10 @@ This modularity becomes crucial to ease the partial adoption on new platforms.
 
 
 \subsubsection{Content Negotiation}
-Another key aspect of the \acs{http} protocol the \acs{api} should take advantage of is the \textit{content negotiation}.
+Another key aspect of the \acs{http} protocol that our \acs{api} should take advantage of is the \textit{content negotiation}.
 This mechanism allows to specify the desired representation for a content on the client side and to express what representation is sent as a response from the data provider side.
-For that purpose, the client adds an \textit{Accept} field to the \acs{http} header with a weighted list of media types it understands.
-Then, the server will answer with the best possible format it knows about, specifying the \textit{Content-type} in the response.
+For that purpose, the client adds an \textit{Accept} field to the \acs{http} header with a weighted list of media types it knows how to interpret.
+Then, the server will answer with the best possible format it understands, specifying the \textit{Content-type} in the response.
 
 The benefits of using this mechanism in the \ac{tsc} middleware presented are two-fold.
 Firstly, it enhances the browsability of the primitives with human understandable \acs{http} responses. % no sé si esto es de Content Negotiation per se

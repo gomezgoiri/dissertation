@@ -8,8 +8,8 @@ With the model presented in this chapter, we aimed to retain the desirable prope
 % 3. tiene beneficios?
 However, some questions arise from this integration:
 \begin{enumerate*}[label=\itshape(\arabic*\upshape)]
-  \item does in fact retain all the properties of \ac{rest} and \ac{tsc} separately? Otherwise, which properties are affected?
-  \item which other benefits offers compared with the usage of separate \ac{tsc} and \ac{rest} middleware?
+  \item does it in fact retain all the properties of \ac{rest} and \ac{tsc} separately? Otherwise, which properties are affected?
+  \item which other benefits does it offer compared with the usage of separate \ac{tsc} and \ac{rest} middleware?
 \end{enumerate*}
 
 % Fielding distingue entre:
@@ -17,7 +17,7 @@ However, some questions arise from this integration:
 %      + "networking-system": no necesariamente oculta las particularidades de la red <- el se centra en estos
 
 
-To answer these questions, we analyse the presented solution from different point-of-views:
+To answer these questions, we analyse the presented solution from different points-of-view:
 \begin{enumerate*}[label=\itshape(\arabic*\upshape)]
   \item its coordination properties (Section~\ref{sec:coordination_properties}),
   \item its network-level properties (Section~\ref{sec:network_properties}),
@@ -38,10 +38,10 @@ To answer these questions, we analyse the presented solution from different poin
 \label{sec:coordination_properties}
 
 % TODO añadir la autonomía que se refería a la semántica?
-As we have already discussed in Section~\ref{sec:soa_integration}, indirect communication middleware can have two key properties:
+As has already been discussed in Section~\ref{sec:soa_integration}, indirect communication middleware can have two key properties:
 \begin{itemize}
   \item The sender does not need to know the receiver or receivers and vice versa (i.e. \emph{space uncoupling}).
-  \item Senders and receivers do not need to exists in the same time to communicate with each other (i.e. \emph{time uncoupling}).
+  \item Senders and receivers do not need to exist at the same time to communicate with each other (i.e. \emph{time uncoupling}).
 \end{itemize}
 
 
@@ -72,7 +72,7 @@ In \citeauthor{fielding_architectural_2000}'s words, the relevant properties whi
   \item[Performance] is divided into network performance, user-perceived performance and efficiency.
     \begin{description}
       \item[Network performance] is affected by the number of interactions and the granularity of data elements.
-      \item[User-perceived performance] refers to the impact a user in front of an application perceives. % UP Performance es una feature que no aporta mucho a nuestro caso
+      \item[User-perceived performance] refers to the impact perceived by a user in front of an application. % UP Performance es una feature que no aporta mucho a nuestro caso
       \item[Efficiency] is achieved by minimizing the use of the network.
     \end{description}
   \item[Scalability] measures how an architecture supports a big amount of components and interactions between them.
@@ -84,7 +84,7 @@ In \citeauthor{fielding_architectural_2000}'s words, the relevant properties whi
       \item[Evolvability] refers to the degree in which a component can be implemented without negatively impacting on others.
       \item[Extensibility] measures the ability to add functionality to the system.
       \item[Customization] is the ability to adjust the behaviour of an architectural element temporarily.
-      \item[Configurability] is related with the extensibility and the reusability.
+      \item[Configurability] is related with extensibility and reusability.
       \item[Reusability] is the ability to reuse components, connectors or data elements without modifying other applications.
     \end{description}
   \item[Visibility] is the ability of a component of monitoring or mediating in the interaction between other two components.
@@ -98,7 +98,7 @@ In \citeauthor{fielding_architectural_2000}'s words, the relevant properties whi
 %   Distributed Hypermedia
 %   Internet-scale
 
-The Table~\ref{tab:network_properties} summarizes how different architectural styles achieve these properties.
+Table~\ref{tab:network_properties} summarizes how different architectural styles achieve these properties.
 Particularly, it shows the styles from which \ac{rest} derives (see Section~\ref{sec:rest}).
 The ultimate goal of the solution explained in Section~\ref{sec:hybrid_solution} is twofold:
 \begin{enumerate}
@@ -106,7 +106,7 @@ The ultimate goal of the solution explained in Section~\ref{sec:hybrid_solution}
        This would ease its integration with the rest of the web.
   \item Enrich that space with the knowledge provided by other \ac{rest} \acp{api}.
 \end{enumerate}
-Therefore, ideally, its networking properties would be the sames as the \ac{rest} style.
+Therefore, ideally, its networking properties would be the same as the \ac{rest} style.
 
 
 % TODO Comprobar que no se salga por el borde derecho!
@@ -155,7 +155,7 @@ In the \ac{ubicomp} both the efficiency on the communications and the reusabilit
 \end{itemize}
 
 
-We opt for promoting efficiency at expense of reusability.
+We opt for promoting efficiency at the expense of reusability.
 In other words, we use two \ac{rest}-like \acp{api} whose use is known out-of-band by the clients (i.e. they are not guided by the \emph{hypermedia}). % presented in Section~\ref{} and the \emph{OSAPI}
 However, we provide a human-oriented version of our \ac{api} to ease its use by developers which does comply with \ac{resthateoas}.% pero aún así el API de TSC seguirá siendo HATEOAS para los usuarios, no para las máquinas
 The evolution of the \acp{api} to fully \ac{rest}ful machine-oriented ones is left as future work. % as the \ac{sw} and \ac{hateoas} evolve
@@ -179,7 +179,7 @@ In conclusion, the properties achieved by the network communication style select
 \label{sec:middleware_properties}
 
 A middleware is a software layer which provides a higher level of abstraction and masks the underlying heterogeneity.
-The middleware presented in this thesis is oriented for \ac{ubicomp} environments and the devices which populate them (particularly mobile and embedded devices).
+The middleware presented in this dissertation is oriented to \ac{ubicomp} environments and the devices which populate them (particularly mobile and embedded devices).
 Whereas the devices part of the \ac{iot} are a subset of the ones present in \ac{ubicomp}, we observed that the challenges they have to face are the same ones.
 For instance, smartphones are not part of the \ac{iot}, but face similar energy and computational limitations as the embedded devices. % posiblemente no todas las propiedades!
 
@@ -187,7 +187,7 @@ For instance, smartphones are not part of the \ac{iot}, but face similar energy 
 Therefore, we will consider the challenges identified by the \emph{Internet-of-Things Architecture} European project \citep{walewski_project_2011} to analyse our solution.
 \citeauthor{walewski_project_2011} state that the \ac{iot} must overcome the following challenges:
 interoperability, scalability, manageability, mobility, security and privacy and reliability.
-Furthermore, we also consider energetic and computational constraints which devices in \ac{ubicomp} have to face. % ponerlo de forma que sea menos pegote?
+Furthermore, we also consider energy-related and computational constraints to be addressed by devices in \ac{ubicomp}. % ponerlo de forma que sea menos pegote?
 
 
 % TODO cómo las distintas propiedades vistas antes se combinan para aportar a estas
@@ -284,7 +284,7 @@ Besides, in our \ac{http} \ac{api} the following issues remain unsolved:
 	  These clients have the additional responsibility of discerning the next state transition from the representations obtained. % cacharros parseando HTML, interpretandolo, etc.
 	  
 	  Our middleware is not hypermedia-driven.
-	  As a consequence, it requires third party applications to implement a uniform \ac{api} (i.e. \osapi{}) on top of them to allow our middleware consume their data.
+	  As a consequence, it requires third party applications to implement a uniform \ac{api} (i.e. \osapi{}) on top of them to allow our middleware to consume their data.
 	  However, the \ac{api} is resource-oriented and simple to implement.
 	  
     \item Another obstacle for achieving a real application-level interoperability in our middleware is the use of distinct isolated spaces.
@@ -340,10 +340,10 @@ This dissertation proposes a self-managed architecture which eases searching sel
 \subsubsection{Mobility}
 
 The ability to face mobility situations can be improved through the decoupling brought by space-based computing.
-First, mobility situations may impede two nodes coexist at the same time.
+Firstly, mobility situations may impede two nodes to coexist at the same time.
 In this case, \emph{time uncoupling} enables their communication.
 
-Second, the provider of a piece of information may vary over the time.
+Secondly, the provider of a piece of information may vary over the time.
 The primitives used care about the data and not about the specific provider of these data (i.e. the nodes are \emph{space uncoupled}).
 This avoids any reconfiguration of the data consumer when the provider is replaced.
 In fact, a content can be also delivered by more than a provider.
@@ -372,11 +372,11 @@ Particularly, \ac{http} handles it through caching.
 Mobile and embedded devices impose computation restrictions.
 These restrictions result in unacceptable response times from the application perspective.
 Due to \ac{http}'s simplicity, computation complexity is found in semantic processing.
-For example, some really limited platforms may found difficult parsing long files.
+For example, some really limited platforms may find difficult parsing long files.
 However, we made the following assumptions:
 \begin{itemize}
   \item Data providers will be able to process wildcard-based templates and generate appropriate responses from their self-managed graphs.
-  \item Data consumers are able to process the responses they receive at least in one semantic format. % por ejemplo :-P
+  \item Data consumers are able to process the responses they receive at least in one semantic format, e.g. \acs{n3} \citeweb{n32011} or RDF/XML \citeweb{rdfxml2004}. % por ejemplo :-P
 \end{itemize}
 
 
@@ -384,12 +384,12 @@ Beyond that point, our middleware will not impose anything.
 This means that a developer using the middleware cannot assume:
 \begin{itemize}
   \item The inference process on data providers.
-        Reasoning over the content to provide unstated knowledge must be desirable.
-        Still, most of the mobile and embedded device are not able to process big amount of data. % TODO citar WoT2012
+        Reasoning over the content to provide unstated implicit knowledge must be desirable.
+        Still, most of the mobile and embedded devices are not able to process big amount of data. % TODO citar WoT2012
         Besides, reasoners are not available or optimized for many limited platforms.
   \item The inference process on data consumers.
         Another alternative or complement for inferring data on the providers is to do it in the consumers after receiving the responses.
-        Again, it is a desirable property, but our middleware does not require it.
+        Again, it is a desirable property, but our middleware does not force it.
         % también out of the scope: razonamiento distribuído
   \item General use of more complex query languages.
         Their expressibility benefits the network performance since they can restrict the results returned.
@@ -403,15 +403,15 @@ This means that a developer using the middleware cannot assume:
 
 
 % por eso, el mecanismo de búsqueda se hace en los cacharros más potentes
-The searching mechanism explained in the Chapter~\ref{cha:searching} takes into account computing limitations.
+The searching mechanism explained in the Chapter~\ref{cha:searching} takes into account the computing limitations of embedded and mobile devices.
 
 
 
 \subsubsection{Limited Energy}
 
 % 2 cosas contribuyen: computación y networking => TODO mostrar diagrama de FoxG20
-Both computing data and networking operations directly affect energy consumption.
-As an example, Figure~\ref{fig:energy_consumption_tsc_section} shows the energy consumption on an embedded platform in an inactivity period, doing networking operations and computing semantic data. % más detalles en la sección correspondiente
+Both data computation and networking operations directly affect energy consumption.
+As an example, Figure~\ref{fig:energy_consumption_tsc_section} shows the energy consumption on an embedded platform in an inactive period, whilst doing networking operations and when computing semantic data. % más detalles en la sección correspondiente
 There are some crucial characteristics which negatively affect energy autonomy of resource constrained devices:
 \begin{itemize}
   \item Too complex computation tasks.
@@ -430,7 +430,7 @@ There are some crucial characteristics which negatively affect energy autonomy o
 }{0.6}{}
 
 
-On the other hand, the reduction of the network usage contributes to energy savings (i.e. improves \emph{network efficiency}):
+On the other hand, the network usage reduction contributes to energy savings (i.e. improves \emph{network efficiency}):
 % efficiency: minimizar el uso de la red
 \begin{itemize}
   \item \ac{http}'s network \emph{efficiency} can be improved with \emph{code on demand} and \emph{caching}.

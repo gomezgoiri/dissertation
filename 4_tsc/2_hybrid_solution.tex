@@ -4,13 +4,13 @@
 We can distinguish two different usage patterns of a space:
 \begin{enumerate*}[label=\itshape(\arabic*\upshape)]
   %  escribir y extraer para coordinarse con otros
-  \item coordinating with other devices by writing and extracting content ; and % MISMA EXPLICACIÓN QUE EN 2_1
+  \item coordinating with other devices by writing and extracting content; and % MISMA EXPLICACIÓN QUE EN 2_1
   %  consultar que pasa en un entorno
   \item checking what happens in the environment by reading.
 \end{enumerate*}
 So far, other semantic space-based works have always tried to integrate both strategies within the same space.
 However, the needs of both usages are different.
-The first one demands availability of the data.
+The first one demands availability of the data regardless of its generator availability.
 The second does not. % se ha visto en el anterior
 Therefore, we propose a novel approach: to treat them independently.
 % To conserve the desirable uncoupling properties of a space
@@ -30,7 +30,7 @@ Summarizing, we propose to enrich the \ac{ts} view with autonomous federated sub
 
 Figure~\ref{fig:new_model} presents the key elements of this new model.
 The \coordspace{} is where the graphs can be written, read and taken by any participant.
-The \coordspace{} is hold by one or many devices called \coordinators{}.
+The \coordspace{} is held by one or many devices called \coordinators{}.
 The \outerspace{} is composed by the graphs managed by independent and probably limited devices.
 We call these devices \asteroids{} and their graphs \selfgraphs{}.
 
@@ -41,10 +41,10 @@ We call these devices \asteroids{} and their graphs \selfgraphs{}.
 
 At networking level, we define a minimal contract between the \asteroids{} and the \coordinators{} through two \acp{api}.
 Both are \ac{rest}-like \acp{api}.
-In our view, this choice appropriateness for resource constrained devices is endorsed by \ac{wot} initiative.
+In our view, this choice's appropriateness for resource constrained devices is endorsed by \ac{wot} initiative.
 
 
-For the \coordspace{}, we propose a uniform access to the space through an \acs{http} \ac{api} described in Section~\ref{sec:align_tsc_http}.
+For the \coordspace{}, we propose a uniform access to the space through the \acs{http} \ac{api} described in Section~\ref{sec:align_tsc_http}.
 This \ac{api} can provide data from a distributed space like some approaches in Section~\ref{sec:soa_tsc_distribution} do.
 However, this dissertation does not cope with this problem. % TODO cite
 Hence, the reader can assume that each space is managed by a unique server for the sake of clarity.

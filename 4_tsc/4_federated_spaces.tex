@@ -16,7 +16,7 @@ Therefore, they are \emph{second-class graphs} which provide information about t
 Each \asteroid{} makes these graphs accessible to others through \ac{http}.
 % objetivo: que se pueda acceder a estos grafos incluso si no son parte de nuestra app => interop
 The final goal is to potentially allow to reuse the data provided by any existing \ac{rest}ful service. % app level interop
-Therefore, the \ac{api} should be or trend to be \ac{rest}ful.
+Therefore, the \ac{api} should be or tend to be \ac{rest}ful.
 % para ello es importante usar un RESTful approach, como sabemos que es complejo ofrecemos otra opción en el siguiente capítulo
 However, we leave the \emph{hypermedia} \ac{api} as a future work.
 Instead, we require a mandatory \osapi{} to be implemented in each \asteroid{} to guarantee access to the \selfgraphs{}.
@@ -25,7 +25,7 @@ Instead, we require a mandatory \osapi{} to be implemented in each \asteroid{} t
 
 \subsection{New primitives}
 
-To make the most of the information in a space, we propose a new primitive to query all over the semantic information stored.
+To make the most of the information in a space, we propose a new primitive to query all the semantic information stored in the space.
 % esto puede ser relativo, al final devolver una lista completa de recursos (o parte de sus atributos) no deja de ser REST según los libros de hypermedia design...
 The \ac{rest}fulness of this primitive could be argued since it does not operate at resource level (i.e. returning graphs), but mixing several resources (i.e. triples from different graphs).
 However, we believe that it is useful to have an endpoint for the queries which involve many graphs.
@@ -66,7 +66,7 @@ The Table~\ref{tab:queryAPI} extends Table~\ref{tab:tscAPI} to include this new 
 
 A key point of the \ac{api} is that the \asteroids{} might not even follow the \ac{tsc} paradigm.
 For instance, the \osapi{} can encapsulate data provided by a third middleware.
-However, a primitive to ease that management can be a convenient for the developers which do not need a more customized behaviour.
+However, a primitive to ease that management can be a convenience for the developers which do not need a more customized behaviour.
 With that in mind, we propose another writing primitive.
 This primitive only has local effects and therefore has no HTTP equivalent:
 \begin{itemize}
@@ -92,7 +92,7 @@ This primitive only has local effects and therefore has no HTTP equivalent:
 
 
 
-\subsection{New behaviors}
+\subsection{New behaviours}
 
 % explicar cómo se escribe y lee en el espacio
 % solución enfoque híbrido:
@@ -112,5 +112,5 @@ This section tries to clarify how the different behaviours coexist:
       \emph{Query} performs a traversal query over the aggregated view of all the graphs in a space (including the \selfgraphs{}).
       \emph{Read} and \emph{take} work at resource level.
       \emph{Read\_self} and \emph{take\_self} are their equivalents for \selfgraphs{}.
-      Finally, \emph{read} primitive's results will be enriched with \selfgraphs{} from the \outerspace{}. % mediante redirect o lo que sea
+      Finally, the \emph{read} primitive's results will be enriched with \selfgraphs{} from the \outerspace{}. % mediante redirect o lo que sea
 \end{description}

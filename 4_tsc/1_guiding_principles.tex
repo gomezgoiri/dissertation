@@ -3,16 +3,16 @@
 
 % cómo y porqué hacer un TSC distribuído
 In Section~\ref{sec:soa_tsc_discussion} we showed how \ac{tsc} can comply with all the constraints of the \ac{rest} style.
-One of these constraints is that the access to a space is done in client-server basis.
+One of these constraints is that the access to a space is done in a client-server basis.
 The easiest way to achieve this constraint is by centralizing all the content of each space in the server itself.
 
 
 % Pero un entorno Ubicomp es eminentemente distribuído
 However, data in a \ac{ubicomp} environment is not generated at a single point. %  intelligent environment
 %   La información se genera en fuentes separadas, ¿cómo accedo a los últimos datos?
-In fact, the magnitude of the sensors where data are generated can be enormous. % are => data es plural
+In fact, the plethora of sensors where data are generated can be enormous. % are => data es plural
 Besides, each of these sensors may generate data continuously.
-This creates a trade off between efficiency and update difficult to overcome:
+This creates a trade off between efficiency and freshness difficult to overcome:
 \begin{itemize}
   \item The more frequently each sensor sends contents to the server, the more inefficient is the solution in terms of network usage.
   \item The less frequent this communication is, the less updated is the data in the server.
@@ -26,7 +26,7 @@ This creates a trade off between efficiency and update difficult to overcome:
 %        la información se transporta en dispositivos
 %        reusar datos en distintas apps
 Consequently, a sensible solution is to let these sensors manage their own information.
-This strategy is not only useful to ensure the access to updated data, but also for the following causes: % beneficios o razones?
+This strategy is not only useful to ensure the access to up-to-date data, but also for the following causes: % beneficios o razones?
 % This strategy == delegating responsibilities between the devices
 \begin{itemize}
   \item The devices directly connected to the sensors and actuators will know how to represent these contents better than others. % ejemplo en grados centigrados o celsius?
@@ -58,12 +58,12 @@ As a result, distributing the shared space among unreliable nodes comes with a n
         However, the efficient implementation of this system using unreliable devices is challenging. % no sé si esto último no sonará demasiado a mofa...
 \end{itemize}
 Overcoming the previous difficulties, usually implies a high network traffic.
-This traffic negatively influences the energy consumption of nodes whose energetic autonomy might be limited.
+This traffic negatively influences the energy consumption of nodes whose energy autonomy might be limited.
 
 \bigskip
 
 In conclusion, our design must face two apparently contradictory principles:
 \begin{itemize}
   \item To consider data from independent and limited data providers.
-  \item To avoid using them for coordination purposes.
+  \item To rely on the providers of the data which enables the coordination of the space participants.
 \end{itemize}
