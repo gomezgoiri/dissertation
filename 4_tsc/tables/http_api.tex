@@ -1,0 +1,19 @@
+\InsertTab{tab:tscAPI}{\acs{http} mapping for the primitives detailed in the Section~\ref{sec:primitives}}{
+  \textit{sp} is a space \acs{uri},
+  \textit{g} is a graph \acs{uri}, \textit{s}, \textit{p} and \textit{o-uri} are subject, predicate and object \acsp{uri} or wildcards (represented with an as \textit{*}).
+  When the template's object is a literal, it can be expressed specifying its value (\textit{o-val}) and its type (\textit{o-type}).
+}{
+  \begin{tabular}{llc}
+      \hline
+      \acs{http} request & \acs{url} & Returns \\
+      \hline
+      POST & \{sp\}/graphs/ & [1] \\
+      GET & \{sp\}/graphs/\{g\} & [2] \\
+      GET & \{sp\}/graphs/wildcards/\{s\}/\{p\}/\{o-uri\} & [3] \\
+      & \{sp\}/graphs/wildcards/\{s\}/\{p\}/\{o-type\}/\{o-val\} & \\
+      DELETE & \{sp\}/graphs/\{g\} & [4] \\
+      DELETE & \{sp\}/graphs/wildcards/\{s\}/\{p\}/\{o-uri\} & [5] \\
+      & \{sp\}/graphs/wildcards/\{s\}/\{p\}/\{o-type\}/\{o-val\} & \\
+      \hline
+  \end{tabular}
+}

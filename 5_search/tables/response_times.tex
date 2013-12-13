@@ -1,0 +1,20 @@
+\InsertTab{tab:measuresEmbedded}{Mean of the measurements taken in different devices with the standard deviation in parenthesis (milliseconds)}{}{
+  \begin{tabular}{p{2.5cm} r r r r}
+    \hline
+    & \multicolumn{4}{c}{Devices} \\
+    \cline{2-5}
+    Concurrent & \multirow{2}{*}{XBee} & \multirow{2}{*}{FoxG20} & Samsung & Regular  \\
+    requests   &  ~    &   ~     & Galaxy tab & computer \\
+    \hline
+    1  &  77~(1) & 17~~~(0) & 223~(349) & 5~~~(1) \\
+    5  & 392~(8) &  97~(16) & 256~~~(76) & 8~~~(4) \\
+    10 & 775~(8) & 174~(28) & 372~(171) & 13~~~(8) \\
+    15 &  -      & 282~(43) & 497~(191) & 18~(13) \\
+  % Tampoco creo que haga falta tanto detalle, ¿cuando se van a dar tantas peticiones concurrentes?
+  %	  20 &  -	    & 375 (30) &  23 (13) &  661 (444) \\
+  %	  25 &  -	    & 460 (30) &  30 (18) &  748 (288) \\
+  %	  30 &  -	    & 540 (35) &  38 (22) &  929 (805) \\
+  %	  35 &  -	    & 632 (29) &  38 (20) & 1029 (672) \\
+    \hline
+  \end{tabular}
+}

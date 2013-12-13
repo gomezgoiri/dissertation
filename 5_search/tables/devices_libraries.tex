@@ -1,0 +1,16 @@
+\InsertTab{tab:devicesLibraries}{Core libraries used in the semantic \acs{http} server implementations}{}{
+  \small
+  \begin{tabular}{llll}
+    \hline
+    \multirow{2}{*}{Device} & Platform & \multirow{2}{*}{REST libraries} & Semantic \\
+    ~ & version & ~ & libraries \\
+    \hline
+    XBee & Python 2.4 \citeweb{python} & Python Std Lib & None \\
+    FoxG20 & Python 2.5 &  Python Std Lib & RDFLib \citeweb{rdflib} \\
+    Samsung Galaxy Tab & Android 2.2 \citeweb{android} & Restlet \citeweb{restlet} & Sesame \citeweb{sesame} \\
+    % Era técnicamente posible tener Rdf2Go en Android, pero no lo hicimos así.
+    Regular computer & Java SE 6.0 \citeweb{javasesix} & Restlet & Rdf2Go (Sesame) \\
+    ~ & ~ & ~ & \citeweb{rdftogo} \\
+    \hline
+  \end{tabular}
+} 

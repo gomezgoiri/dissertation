@@ -11,26 +11,8 @@ We vary these parameters to simulate a wide range of scenarios.
 % We omit topology considerations as we assume devices have IP connectivity.
 
 
-\begin{table}
-  \centering
-    \begin{tabular}{l p{8cm}}
-      \hline
-      Name & Description \\
-      \hline
-      Network size & The number of nodes in a network. In the simulations conducted, all the nodes are \providers{}. \\
-      Number of writes & Amount of writes performed during the simulation period. \\
-      Number of queries & Amount of queries performed during the simulation period. \\
-      Number of \consumers{} & Amount of nodes querying to other nodes in the \Space{}. \\
-      Distribution strategy & Our solution or \ac{nb}. \\
-      & In \ac{nb} nodes write locally and spread the queries to the rest of the nodes in the \Space{}. \\
-      Drop interval & At the beginning of this interval a node abruptly leaves the network. \\
-      & At the end, the node joins the network and a new one is chosen to leave it. \\
-      % FUTURE WORK: añadir métrica de accuracy [ http://en.wikipedia.org/wiki/Recall_(information_retrieval) ]
-      \hline
-    \end{tabular}
-    \caption {Configuration parameters.}
-  \label{tab:configurationParameters}
-\end{table}
+\input{\pathchapfive/tables/configuration_parameters}
+
 
 % Since we wanted to simulate the Triple Space Computing paradigm over HTTP, the communication between the nodes was point to point and the data exchanged were RDF Triples.
 % The node discovery process was ignored since it will show similar additional overhead for each strategy.
@@ -74,76 +56,21 @@ Besides, we also provide measures taken from a regular computer.
 Table~\ref{tab:technicalDetails} shows the technical specifications of these devices.
 
 
-% http://www.gsmarena.com/samsung_p1000_galaxy_tab-3370.php
-\begin{table}
-  \caption{Technical characteristics of the assessed devices.}
-  \small
-  \begin{center}
-    \begin{tabular}{llrl}
-      \hline
-      Device & Processor & RAM & Reference\\
-      \hline
-      XBee &  - & 8 MB  & \citeweb{connectportx2} \\
-      FoxG20 & 400Mhz Atmel ARM9 &  64 MB & \citeweb{foxg20} \\
-      Samsung Galaxy Tab & 1 GHz Cortex-A8  &  512 MB & \citeweb{samsunggalaxytab} \\
-      Regular computer & 2.26 GHz Intel Core 2 Duo  &  4 GB & - \\
-      \hline
-    \end{tabular}
-  \end{center}
-  \label{tab:technicalDetails}
-\end{table}
+\input{\pathchapfive/tables/technical_details}
+
 
 These devices serve semantic content through \acs{http}.
-Table~\ref{tab:deviceslibraries} shows the platforms and libraries used in each device to implement such servers.
+Table~\ref{tab:devicesLibraries} shows the platforms and libraries used in each device to implement such servers.
 
-\begin{table}
-  \caption{Core libraries used in the semantic \acs{http} server implementations.}
-  \small
-  \label{tab:deviceslibraries}
-  \begin{center}
-    \begin{tabular}{llll}
-      \hline
-      \multirow{2}{*}{Device} & Platform & \multirow{2}{*}{REST libraries} & Semantic \\
-      ~ & version & ~ & libraries \\
-      \hline
-      XBee & Python 2.4 \citeweb{python} & Python Std Lib & None \\
-      FoxG20 & Python 2.5 &  Python Std Lib & RDFLib \citeweb{rdflib} \\
-      Samsung Galaxy Tab & Android 2.2 \citeweb{android} & Restlet \citeweb{restlet} & Sesame \citeweb{sesame} \\
-      % Era técnicamente posible tener Rdf2Go en Android, pero no lo hicimos así.
-      Regular computer & Java SE 6.0 \citeweb{javasesix} & Restlet & Rdf2Go (Sesame) \citeweb{rdftogo} \\
-      \hline
-    \end{tabular}
-  \end{center}
-\end{table}
+\input{\pathchapfive/tables/devices_libraries}
 
 
-Finally, Table~\ref{tab:measures_embedded} details the time needed by each device to answer a request depending on the number of concurrent requests.
+Finally, Table~\ref{tab:measuresEmbedded} details the time needed by each device to answer a request depending on the number of concurrent requests.
 As mentioned, the next section's simulations are parametrized according to these measures.
 
-\begin{table}
-  \caption{Mean of the measurements taken in different devices with the standard deviation in parenthesis (milliseconds).}
-  \begin{center}
-	\begin{tabular}{p{2.5cm} r r r r}
-	  \hline
-	  & \multicolumn{4}{c}{Devices} \\
-	  \cline{2-5}
-	  Concurrent & \multirow{2}{*}{XBee} & \multirow{2}{*}{FoxG20} & Samsung & Regular  \\
-	  requests   &  ~    &   ~     & Galaxy tab & computer \\
-	  \hline
-	  1  &  77~(1) & 17~~~(0) & 223~(349) & 5~~~(1) \\
-	  5  & 392~(8) &  97~(16) & 256~~~(76) & 8~~~(4) \\
-	  10 & 775~(8) & 174~(28) & 372~(171) & 13~~~(8) \\
-	  15 &  -      & 282~(43) & 497~(191) & 18~(13) \\
-% Tampoco creo que haga falta tanto detalle, ¿cuando se van a dar tantas peticiones concurrentes?
-%	  20 &  -	    & 375 (30) &  23 (13) &  661 (444) \\
-%	  25 &  -	    & 460 (30) &  30 (18) &  748 (288) \\
-%	  30 &  -	    & 540 (35) &  38 (22) &  929 (805) \\
-%	  35 &  -	    & 632 (29) &  38 (20) & 1029 (672) \\
-	  \hline
-	\end{tabular}
-  \end{center}
-  \label{tab:measures_embedded}
-\end{table}
+
+\input{\pathchapfive/tables/response_times}
+
 
 
 \subsection{Performance Metrics}

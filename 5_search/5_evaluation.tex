@@ -27,24 +27,9 @@ The distinct predicates managed by each node in average are 16.01 ($SD=1.53$) ou
 \newcommand{\tplfive}{\emph{T5}}
 
 
-\begin{table}[h!tbp]
-  \centering
-  \begin{tabular}{ll}
-    \hline
-    Name & Template \\
-    \hline
-    \tplone{} & \texttt{?s~~rdf:type~~ssn-weather:RainfallObservation} \\
-    \tpltwo{} & \texttt{?s~~wsg84:long~~?o} \\
-    \tplthree{} & \texttt{?s~~ssn:observedProperty~~?o} \\
-    \tplfour{} & \texttt{bizkaisense:ABANTO~~?p~~?o} \\
-    \tplfive{} & \texttt{?s~~dc:identifier~~?o} \\
-    %t9 & ?s~~~foaf:family_name~~~?o \\ % Quizá en futura version del paper con perfiles de usuarios, para meter mas variabilidad en contenidos ;-)
-    \hline
-  \end{tabular}
-  \caption{Templates used in the evaluation.}
-  \label{tab:evaluationTemplates}
-\end{table}
+\input{\pathchapfive/tables/evaluation_templates}
 % Las consultas se podrían sacar también de bizkaisense o alguna app que hayamos hecho para darle mayor verosimilitud
+
 
 % Explicar class based
 In Figures~\ref{fig:recall_measures}~and~\ref{fig:precision_measures}, the class-based clue shows a good \emph{precision} and \emph{recall} for \tplone{} and \tpltwo{}.
@@ -59,15 +44,9 @@ This is why the \emph{recall} of \tplfour{} is high.
 
 
 
-\InsertFig{clues_recall}{fig:recall_measures}{
-  \emph{Recall} for each type of clue used.
-}{
-}{1}{}
+\InsertFig{clues_recall}{fig:recall_measures}{\emph{Recall} for each type of clue used}{}{1}{}
 
-\InsertFig{clues_precision}{fig:precision_measures}{
-  \emph{Precision} for each type of clue used.
-}{
-}{1}{}
+\InsertFig{clues_precision}{fig:precision_measures}{\emph{Precision} for each type of clue used}{}{1}{}
 % IG: TODO mencionar en el texto de referencia o en la caption algo como: The higher the better.
 
 % Explicar predicate-based
@@ -185,10 +164,7 @@ The communications between \consumers{} and \providers{} assumes most of the tot
 This shows that the overhead added by the use of \ac{wp} on our solution is not significant and it is justified by the reduction of the total number of communications shown in Figure~\ref{fig:requestsByStrategies}.
 
 
-\InsertFig{requests_by_roles}{fig:requestsByRoles}{
-  Requests between roles in our solution in a \Space{} with 100 \consumers{}
-}{
-}{0.75}{}
+\InsertFig{requests_by_roles}{fig:requestsByRoles}{Requests between roles in our solution in a \Space{} with 100 \consumers{}}{}{0.75}{}
 
 
 
@@ -200,7 +176,7 @@ These savings contrast to the overhead added by the communication with the \ac{w
 However, our results demonstrate that this overhead is small in comparison to the total number of communications.
 
 The energy consumption in mobile and embedded devices increases each time a device needs to process something or communicate with another node (see Figure~\ref{fig:energy_consumption}).
-To analyse how communications impact their energy autonomy, we have to consider not only the number of communications but also their time length (see Table~\ref{tab:measures_embedded}).
+To analyse how communications impact their energy autonomy, we have to consider not only the number of communications but also their time length (see Table~\ref{tab:measuresEmbedded}).
 For example, a mobile phone will consume less energy asking clues to a server than asking them to an embedded device as it has to wait less for the response.
 
 

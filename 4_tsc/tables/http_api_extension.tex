@@ -1,0 +1,13 @@
+\InsertTab{tab:queryAPI}{\acs{http} mapping for the \emph{query} primitive}{
+  \textit{sp} is a space \acs{uri}, \textit{s}, \textit{p} and \textit{o-uri} are subject, predicate and object \acsp{uri} or wildcards (represented with an as \textit{*}).
+  When the template's object is a literal, it can be expressed specifying its value (\textit{o-val}) and its type (\textit{o-type}).
+}{ %http://en.wikibooks.org/wiki/LaTeX/Floats,_Figures_and_Captions#Wide_figures_in_two_column_documents
+  \begin{tabular}{llc}
+      \hline
+      \acs{http} request & \acs{url} & Returns \\
+      \hline
+      GET & \{sp\}/query/wildcards/\{s\}/\{p\}/\{o-uri\} &  [6] \\
+      & \{sp\}/query/wildcards/\{s\}/\{p\}/\{o-type\}/\{o-val\} & \\
+      \hline
+  \end{tabular}
+}
