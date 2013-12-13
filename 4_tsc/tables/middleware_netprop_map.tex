@@ -1,39 +1,30 @@
-
-% Tablita de cómo hereda propiedades de los estilos anteriores?
-% (y si quieren más información, que miren en la tesis de Fielding)
-\begin{savenotes} % to use footnotes inside
-  \begin{table}[htbp]
-    \caption{Direct relations between the properties analysed in previous sections and the challenges a lightweight middleware faces.}
-    \begin{center}
-      \begin{tabular}{lcccccccp{0.3cm}ccp{0.3cm}c}
-        ~ & \multicolumn{7}{c}{\multirow{2}{*}{Network prop.}}& ~ & \multicolumn{2}{c}{Coord.} & ~ & ~\\
-        ~ & \multicolumn{7}{c}{~} & ~ & \multicolumn{2}{c}{prop.} & ~ & ~\\[0.3cm]
-        \cline{2-8}\cline{10-11} % column 8 only exists to create that separation
-	~ &
-	\rotatebox{90}{Performance} &
-	\rotatebox{90}{Scalability} &
-	\rotatebox{90}{Simplicity} &
-	\rotatebox{90}{Modifiability} &
-	\rotatebox{90}{Visibility} &
-	\rotatebox{90}{Portability} &
-	\rotatebox{90}{Reliability} &
-	~ &
-	\rotatebox{90}{Space uncoupl.} &
-	\rotatebox{90}{Time uncoupl.} &
-	~ &
-	\rotatebox{90}{Semantic Web} \\ % TODO cómo hacer para que esto tenga sentido y esté a la misma altura
-	\hline
-	Interoperability & ~ & ~ & ~ & × & ~ & × & ~ & ~ & ~ & ~ & ~ & × \\ % ×
-	Scalability & ~ & × & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~\\
-	Manageability & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~\\
-	Mobility & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & × & × & ~ & ~\\
-	Security &  ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~\\
-	Reliability & ~ & ~ & ~ & ~ & ~ & ~ & × & ~ & ~ & × & ~ & ~\\
-	Limited comp. & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ×\\ % también simplicity
-	Limited energy & × & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & × \\
-	\hline
-      \end{tabular}
-    \end{center}
-    \label{tab:middleware_netprop}
-  \end{table}
-\end{savenotes}
+\InsertTab{tab:middleware_netprop}{Direct relations between the properties analysed in previous sections and the challenges a lightweight middleware faces}{}{
+  \begin{tabular}{lcccccccp{0.3cm}ccp{0.3cm}c}
+    ~ & \multicolumn{7}{c}{\multirow{2}{*}{Network prop.}}& ~ & \multicolumn{2}{c}{Coord.} & ~ & ~\\
+    ~ & \multicolumn{7}{c}{~} & ~ & \multicolumn{2}{c}{prop.} & ~ & ~\\[0.3cm]
+    \cline{2-8}\cline{10-11} % column 8 only exists to create that separation
+    ~ &
+    \rotatebox{90}{Performance} &
+    \rotatebox{90}{Scalability} &
+    \rotatebox{90}{Simplicity} &
+    \rotatebox{90}{Modifiability} &
+    \rotatebox{90}{Visibility} &
+    \rotatebox{90}{Portability} &
+    \rotatebox{90}{Reliability} &
+    ~ &
+    \rotatebox{90}{Space uncoupl.} &
+    \rotatebox{90}{Time uncoupl.} &
+    ~ &
+    \rotatebox{90}{Semantic Web} \\ % TODO cómo hacer para que esto tenga sentido y esté a la misma altura
+    \hline
+    Interoperability & ~ & ~ & ~ & × & ~ & × & ~ & ~ & ~ & ~ & ~ & × \\ % ×
+    Scalability & ~ & × & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~\\
+    Manageability & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~\\
+    Mobility & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & × & × & ~ & ~\\
+    Security &  ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~\\
+    Reliability & ~ & ~ & ~ & ~ & ~ & ~ & × & ~ & ~ & × & ~ & ~\\
+    Limited comp. & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ×\\ % también simplicity
+    Limited energy & × & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & × \\
+    \hline
+  \end{tabular}
+}{htbp}

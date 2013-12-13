@@ -37,13 +37,28 @@
 % \InsertFig{}{}{}{}{}{}
 %
 
-\newcommand{\InsertTab}[4]{
-  \begin{table}
-    \centering
-    \caption{#2}{\footnotesize{#3}\medskip}
-    #4
-    \label{#1}
-  \end{table}
+\newcommand{\InsertTab}[5]{
+  \ifthenelse{\isempty{#5}}
+  { % if empty
+    \begin{savenotes}
+    \begin{table}
+      \centering
+      \caption{#2}{\footnotesize{#3}\medskip}
+      #4
+      \label{#1}
+    \end{table}
+    \end{savenotes}
+  }
+  { % if not empty
+    \begin{savenotes}
+    \begin{table}[#5]
+      \centering
+      \caption{#2}{\footnotesize{#3}\medskip}
+      #4
+      \label{#1}
+    \end{table}
+    \end{savenotes}
+  }
 }
 
 \newcommand{\InsertFig}[6]{%

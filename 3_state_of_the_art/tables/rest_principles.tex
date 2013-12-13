@@ -1,25 +1,19 @@
-
-% Tablita de cómo hereda propiedades de los estilos anteriores?
-% (y si quieren más información, que miren en la tesis de Fielding)
-\begin{savenotes} % to use footnotes inside
-  \begin{table}[htbp]
-    \caption{\ac{tsc}'s middlewares potential conflicts with \ac{rest} style's principles.}
-    \centering
-    \begin{tabular}{lccc}
-	\hline
-	&
-	\ac{restcs} &
-	\ac{rests} &
-	\ac{resthateoas} \\
-	\hline
-	\midtsc{} & & × & × \\
-	\midsws{} & & × & × \\
-	\midtscpp{} & × & × & × \\
-	\midtripcom{} & & × & × \\
-	\midsmartmt{} & & × & × \\
+\InsertTab{tab:rest_principles}{\ac{tsc}'s middlewares potential conflicts with \ac{rest} style's principles}{}{
+  % Tablita de cómo hereda propiedades de los estilos anteriores?
+  % (y si quieren más información, que miren en la tesis de Fielding)
+  \begin{tabular}{lccc}
+      \hline
+      &
+      \ac{restcs} &
+      \ac{rests} &
+      \ac{resthateoas} \\
+      \hline
+      \midtsc{} & & × & × \\
+      \midsws{} & & × & × \\
+      \midtscpp{} & × & × & × \\
+      \midtripcom{} & & × & × \\
+      \midsmartmt{} & & × & × \\
 %	TSC (own) & × & × & × & × & × & × & × & × & × & × & × & × & ×\\ % mejor describirlo sólo con palabras que meterme en berenjenales
-	\hline
-    \end{tabular}
-    \label{tab:rest_principles}
-  \end{table}
-\end{savenotes}
+      \hline
+  \end{tabular}
+}{htbp}

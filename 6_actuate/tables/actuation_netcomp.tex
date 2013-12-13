@@ -1,29 +1,24 @@
-
-% Tabla: XXX
-% autonomía: poner o simplemente indirect vs direct?
-% requirements in consumers: estar pendiente del espacio vs razonar
-% requirements in providers: estar pendiente del espacio vs (describir semánticamente servicio => equivalente a tasks)
-\begin{table}[htbp]
-  \caption{Foreseeable networking and computing impact on the nodes involved in the actuation mechanism.}
-  \begin{center}
-    \footnotesize
-    \begin{tabular}{llp{4cm}p{4.4cm}}
-      \hline
-      \multirow{2}{*}{Actuation} &
-      \multirow{2}{*}{Perspective} &
-      \multicolumn{2}{c}{Activity} \\
-      &
-      ~ &
-      \multicolumn{1}{c}{Networking} &
-      \multicolumn{1}{c}{Computation} \\
-      \hline
-      \multirow{3}{*}{Space-based} & Provider & Proactive, limited activity & Limited: Results Interpretation \\
-				    ~ & Consumer & Proactive, limited activity & Limited: Results Interpretation \\
-				    ~ & Space & Reactive, high activity & Varies with the implementation \\[0.2cm]
-      \multirow{2}{*}{REST-based} & Provider & Reactive, limited activity & Limited: Handling requests \\
-       ~       & Consumer & Proactive, high activity &  Demanding: Reasoning \\ % Y comprobar planes...
-      \hline
-    \end{tabular}
-  \end{center}
-  \label{tab:actuation_networking_computing}
-\end{table}
+\InsertTab{tab:actuation_networking_computing}{Foreseeable networking and computing impact on the nodes involved in the actuation mechanism}{}{
+  % Tabla: XXX
+  % autonomía: poner o simplemente indirect vs direct?
+  % requirements in consumers: estar pendiente del espacio vs razonar
+  % requirements in providers: estar pendiente del espacio vs (describir semánticamente servicio => equivalente a tasks)
+  \footnotesize
+  \begin{tabular}{llp{4cm}p{4.4cm}}
+    \hline
+    \multirow{2}{*}{Actuation} &
+    \multirow{2}{*}{Perspective} &
+    \multicolumn{2}{c}{Activity} \\
+    &
+    ~ &
+    \multicolumn{1}{c}{Networking} &
+    \multicolumn{1}{c}{Computation} \\
+    \hline
+    \multirow{3}{*}{Space-based} & Provider & Proactive, limited activity & Limited: Results Interpretation \\
+				  ~ & Consumer & Proactive, limited activity & Limited: Results Interpretation \\
+				  ~ & Space & Reactive, high activity & Varies with the implementation \\[0.2cm]
+    \multirow{2}{*}{REST-based} & Provider & Reactive, limited activity & Limited: Handling requests \\
+      ~       & Consumer & Proactive, high activity &  Demanding: Reasoning \\ % Y comprobar planes...
+    \hline
+  \end{tabular}
+}{htbp}
