@@ -15,7 +15,7 @@
    viewBox="0 0 695.27402 561.66963"
    width="869.09253"
    id="svg2"
-   inkscape:version="0.48.3.1 r9886"
+   inkscape:version="0.48.4 r9939"
    sodipodi:docname="requests_by_strategies.svg">
   <metadata
      id="metadata1854">
@@ -37,17 +37,17 @@
      guidetolerance="10"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:window-width="1400"
+     inkscape:window-width="1680"
      inkscape:window-height="995"
      id="namedview1852"
      showgrid="false"
-     inkscape:zoom="0.74589928"
-     inkscape:cx="515.85921"
-     inkscape:cy="371.8615"
+     inkscape:zoom="0.81276985"
+     inkscape:cx="492.97701"
+     inkscape:cy="244.36032"
      inkscape:window-x="-2"
      inkscape:window-y="-3"
      inkscape:window-maximized="1"
-     inkscape:current-layer="legend_1"
+     inkscape:current-layer="layer4"
      fit-margin-top="0"
      fit-margin-left="0"
      fit-margin-right="0"
@@ -6438,6 +6438,99 @@
         </g>
       </g>
     </g>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer4"
+     inkscape:label="hidde_original_numbers"
+     style="stroke-linecap:square;stroke-linejoin:round;display:inline">
+    <rect
+       style="fill:#ffffff;fill-opacity:1;stroke:none"
+       id="rect4019"
+       width="113.96952"
+       height="394.97833"
+       x="16.52993"
+       y="158.33932"
+       transform="matrix(0.8,0,0,0.8,-2.3957102e-6,0)" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer3"
+     inkscape:label="numbers"
+     style="stroke-linecap:square;stroke-linejoin:round;display:inline"
+     sodipodi:insensitive="true">
+    <text
+       xml:space="preserve"
+       style="font-size:32px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="27.877775"
+       y="148.73805"
+       id="text4014"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4016"
+         x="27.877775"
+         y="148.73805"
+         style="font-size:17.60000038px">300.000</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:32px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Sans"
+       x="27.529772"
+       y="206.5058"
+       id="text4014-3"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4016-3"
+         x="27.529772"
+         y="206.5058"
+         style="font-size:17.60000038px">250.000</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:32px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Sans"
+       x="27.877773"
+       y="264.09955"
+       id="text4014-5"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4016-2"
+         x="27.877773"
+         y="264.09955"
+         style="font-size:17.60000038px">200.000</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:32px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Sans"
+       x="28.399771"
+       y="321.6933"
+       id="text4014-58"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4016-4"
+         x="28.399771"
+         y="321.6933"
+         style="font-size:17.60000038px">150.000</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:32px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Sans"
+       x="28.625284"
+       y="379.28708"
+       id="text4014-58-7"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4016-4-2"
+         x="28.625284"
+         y="379.28708"
+         style="font-size:17.60000038px">100.000</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:32px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Sans"
+       x="38.927597"
+       y="436.8179"
+       id="text4014-58-8"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4016-4-7"
+         x="38.927597"
+         y="436.8179"
+         style="font-size:17.60000038px">50.000</tspan></text>
   </g>
   <defs
      id="defs1847">

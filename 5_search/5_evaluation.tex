@@ -97,7 +97,7 @@ In any case, the diagram shows a similar verbosity for all the clues for the sem
 \InsertFig{clues_length}{fig:clueSize}{
   Length of the clues alternatives
 }{
-}{0.7}{}
+}{0.6}{}
 
 % Añadir nuevas barras: Predicate+schema y predicate+schema+MostCommonsIndividuals
 % Poner otra barra para saber cuanto contenido semántico guarda un nodo de media en el experimento?
@@ -166,7 +166,7 @@ In the same situation, our solution handles better an increase on the number of 
 \InsertFig{requests_by_strategies}{fig:requestsByStrategies}{
   Required requests for \acf{nb}, \ac{nb} with caching with 1 and 100 \consumers{} and our solution with 1 and 100 \consumers{}
 }{
-}{0.7}{}
+}{0.75}{}
 
 
 In Figure~\ref{fig:requestsByRoles}, we take a closer look to the origin of the traffic of our approach in a \Space{} with 100 \consumers{}.
@@ -188,7 +188,7 @@ This shows that the overhead added by the use of \ac{wp} on our solution is not 
 \InsertFig{requests_by_roles}{fig:requestsByRoles}{
   Requests between roles in our solution in a \Space{} with 100 \consumers{}
 }{
-}{0.7}{}
+}{0.75}{}
 
 
 
@@ -204,10 +204,7 @@ To analyse how communications impact their energy autonomy, we have to consider 
 For example, a mobile phone will consume less energy asking clues to a server than asking them to an embedded device as it has to wait less for the response.
 
 
-\InsertFig{energy_consumption}{fig:energy_consumption}{
-  Average power consumption for FoxG20 during different activity periods
-}{
-}{0.8}{}
+\InsertFig{energy_consumption}{fig:energy_consumption}{Average power consumption for FoxG20 during different activity periods}{}{0.6}{}
 
 
 The experiment consists of 300 nodes joined to a \Space{} running on 1 server, 30 galaxy tabs, 75 FoxG20 and 194 XBees.
@@ -223,12 +220,10 @@ The exceptional activity registered by the Galaxy Tabs is caused by their extrem
 However, we plan to reduce this response time changing the \acs{http} library used in our Android implementation.
 
 
-\InsertFig{activity_measures}{fig:activity_measures}{
-  Activity time for each strategy
-}{
+\InsertFig{activity_measures}{fig:activity_measures}{Activity time for each strategy}{
   The first part shows the average active time a node spends on each strategy.
   The second one shows the active time classified by the type of device each node has run on.
-}{0.8}{}
+}{1}{}
 % TODO añadir a la derecha los valores en NB?
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% QUIZA para 2da VERSION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -255,11 +250,9 @@ Nevertheless, we do not evaluate scenarios where the nodes frequently join and l
 In such situation, the communication needed to manage the clues might be a burden.
 
 
-\InsertFig{dynamism}{fig:dynamic_situations}{
-  Effects of dynamic scenarios in our solution
-}{
+\InsertFig{dynamism}{fig:dynamic_situations}{Effects of dynamic scenarios in our solution}{
   Note that the last interval in the x-axis represents a simulation with no drops.
-}{0.8}{}
+}{1}{}
 
 
 To assess the effect of dynamic networks on the performance of our solution, we used the scenario presented in Section~\ref{sec:energyConsumption},
