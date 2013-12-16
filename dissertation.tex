@@ -39,6 +39,9 @@
 % My cousin *really* hates overindentations in descriptions
 \setlist[description]{labelindent=5pt,leftmargin=0.5cm} % ,style=multiline
 
+% Metadata of the dissertation
+\input{metadata}
+
 
 %: ----------------------------------------------------------------------
 %:                  TITLE PAGE: name, degree,..
@@ -46,15 +49,17 @@
 % below is to generate the title page with crest and author name
 
 % if output to PDF then put the following in PDF header
-\ifpdf  
-    \pdfinfo { /Title  (PhD)
-               /Creator (TeX)
-               /Producer (pdfTeX)
-               /Author (Name surname)
-               /CreationDate (D:YYYYMMDDhhmmss)  %format D:YYYYMMDDhhmmss
-               /ModDate (D:YYYYMMDDhhmm)
-               /Subject (xyz)
-               /Keywords (keyword1, keyword2, keyword3) }
+\ifpdf
+  \hypersetup{ % because hyperref package is used
+    pdfinfo = { Title = {\Title},
+                Creator = {\Author},
+                Producer = {pdfTeX},
+                Author = {\Author},
+                CreationDate = {D:YYYYMMDDhhmmss},  %format D:YYYYMMDDhhmmss
+                ModDate = {D:YYYYMMDDhhmm},
+                Subject = {xyz},
+                Keywords = {keyword1, keyword2, keyword3}
+  }}
     \pdfcatalog { /PageMode (/UseOutlines)
                   /OpenAction (fitbh)  }
 \fi
@@ -69,7 +74,6 @@
 \crest{\includegraphics[width=2cm]{Deusto_Shield}}
 % Full logo
 %\crest{\includegraphics[width=6cm]{UDeusto}}
-\input{metadata}
 
 
 % ----------------------------------------------------------------------
