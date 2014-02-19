@@ -193,7 +193,7 @@ Consequently, we believe that the \emph{specialist patterns} fit \ac{ubicomp} ne
 
 
 In the patterns described in the previous section, some writings in the space trigger other node's action.
-For example, a device might show a message whenever a new warning is written in the space. % e.g. a task or a result
+For example, a device might show a message whenever a new warning is written into the space. % e.g. a task or a result
 To be aware of these writings, the node can either poll the space or rely on a notification mechanism. % async or blocking
 Obviously, the later leads to a more efficient use of the network. % is closer to optimal and more scalable approach.
 
@@ -251,7 +251,7 @@ The implementation presents the following nodes:
   \item A node which writes tasks into a shared semantic space describing its desire to change the light's value.
 	Figure~\ref{fig:flow_space_cons} shows the actions taken by this node.
 	As it can be seen, the process is divided in two temporarily independent processes.
-	The first writes the task and the second processes the result whenever it is written in the space.
+	The first writes the task and the second processes the result whenever it is written into the space.
 	
   \newcounter{enumNodes}
   \setcounter{enumNodes}{\arabic{enumi}}
@@ -287,7 +287,7 @@ Finally, \nodeConsSpace{} gets a notification of the written result, takes it an
 
 \begin{listing}
   \input{\pathchapsix/code/scn2/task_subscription.tex}
-  \caption{Subscription to preferences written in the space.}
+  \caption{Subscription to preferences written into the space.}
   \label{lst:task_subscription}
 \end{listing}
 

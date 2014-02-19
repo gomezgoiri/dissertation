@@ -28,12 +28,12 @@ This dissertation explores the design of a distributed \ac{tsc} middleware suita
 The middleware's most remarkable characteristic is its alignment with the web world.
 This alignment pursues the interoperability of the middleware with other semantic web applications and semantic \ac{wot} solutions.
 Firstly, it reuses their data requiring them to implement a minimal \ac{rest}-like \ac{api}.
-Secondly, it enables these third party web applications to reuse the data written in the space by means of an analogous \ac{api}. % analogous, equivalent, similar
+Secondly, it enables these third party web applications to reuse the data written into the space by means of an analogous \ac{api}. % analogous, equivalent, similar
 
 
 To preserve as many beneficial properties as possible from the web and \ac{ts} worlds, the middleware presents a conceptual division of each \Space{} (Chapter~\ref{cha:tsc}).
 Any \Space{} is composed by the \coordspace{} and the \outerspace{}.
-The \coordspace{} enables a completely indirect communication, time and space decoupled, between the nodes which write and read semantic content in it.
+The \coordspace{} enables a completely indirect communication, time and space decoupled, between the nodes which write and read semantic content into it.
 The \outerspace{} acknowledges the distributed nature of \ac{ubicomp} environments by letting the nodes manage their own semantic content.
 However, this content is shared with the rest of nodes forming a \emph{virtual} space.
 Developers access to the content of the space in a associative manner keeping the space decoupling property.

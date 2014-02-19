@@ -38,7 +38,7 @@ This reuse is enabled by a rule-based reasoning engine. % reasoning engine ya qu
 \bigskip
 
 The impact of both mechanisms in resource constrained devices will be affected by their computing and networking activities.
-\ac{ts}-based patterns require all the participants to be aware of what is written in the space to react (i.e. be proactive).
+\ac{ts}-based patterns require all the participants to be aware of what is written into the space to react (i.e. be proactive).
 Both consumers and providers read and write from the space, subscribe to specific changes and receive notifications.
 Thanks to this specificity, they are only affected by the contents they are interested in. % reduciendo la actividad
 Besides, they only perform trivial computing task: interpreting results. % pattern matching sólo en el caso del coordination space!
@@ -110,9 +110,9 @@ The agent takes care of the tasks that \nodeConsRest{} does in the \implRest:
 \end{enumerate*}
 
 
-To trigger the reasoning, the agent awaits for new tasks written in the space.
+To trigger the reasoning, the agent awaits for new tasks written into the space.
 Listing~\ref{lst:generic_task_subscription} shows the subscription template used by the agent.
-Providing that after reasoning the agent does not find a plan to achieve a task, it will write it in the space again.
+Providing that after reasoning the agent does not find a plan to achieve a task, it will write it into the space again.
 This way, another node which may know how to process it may take the task. % TODO discutir porque reasoning va a tener preferencia sobre actuación indirecta!
 
 
