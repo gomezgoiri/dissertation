@@ -150,7 +150,7 @@ In the same situation, our solution handles better an increase on the number of 
 
 In Figure~\ref{fig:requestsByRoles}, we take a closer look to the origin of the traffic of our approach in a \Space{} with 100 \consumers{}.
 The communication between the \providers{} and the \ac{wp} is much more infrequent than the other communication types.
-The reason is that writing to a node only results in a clue update when the structure of the managed information changes.
+The reason is that writing into a node only results in a clue update when the structure of the managed information changes.
 The first time the metadata about the node (sensor) is written, the second time the first measure and following writings, just add or replace a measure.
 Therefore, the clue does not change after the second step.
 This matches with the assumption made to share \emph{TBox} information in our clues.
