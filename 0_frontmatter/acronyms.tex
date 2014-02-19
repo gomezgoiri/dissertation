@@ -12,7 +12,14 @@
 \addcontentsline{toc}{chapter}{Acronyms} % Despite \chapter*, add it to the table of contents
 \markboth{Acronyms}{Acronyms} % Despite \chapter*, show "Acronyms" in the left and right-hand side headers
 
-\begin{acronym}
+% "The standard format of the acronym list is a \description environment"
+% By default acronym item is bold and set in sans serif.
+% \setdescription{font=\normalfont\scshape} % set the acronym item in serif and small caps % TODO doesn't work!
+
+% "If you pass an optional parameter to the acronym environment,
+% the width of the acronym-column will be fitted to the width of the given parameter
+% (which should be the longest acronym)."
+\begin{acronym}[resthateoas]  
   \acro{ami}[AmI]{Ambient Intelligence}
   \acro{api}[API]{application programming interface}
   \acro{coap}[CoAP]{Constrained Application Protocol}
