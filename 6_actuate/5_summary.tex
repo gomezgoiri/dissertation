@@ -4,11 +4,12 @@
 This chapter presented two techniques to actuate on the physical environment.
 The first is the usual way to operate through spaces and provides a higher degree of decoupling.
 However, it requires actuator nodes to use our middleware's primitives. % requiere la cooperación de los proveedores...
+% TODO TODO TODO flojo (eso es verdad para cualquier alternativa), cambiar
 In other words, the actuators must be programmed according to this technique, the middleware cannot reuse third applications' actuation capabilities.
 
 
 The second actuation mechanism directly consumes \ac{rest}ful \acs{http} \acsp{api}.
-This mechanism relies in the semantic description of the services, additional background knowledge and in a reasoning process. % additional knowledge: background + initial
+This mechanism relies in the semantic description of the services, additional background knowledge and a goal state. % additional knowledge: background + initial
 With that information, it is able to generate executions plans towards a goal.
 Following these plans implies different calls to the different services.
 
