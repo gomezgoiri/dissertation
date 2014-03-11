@@ -111,7 +111,7 @@ The rest of the mappings are shown in the Table~\ref{tab:tscAPI}.
 \input{\pathchapfour/tables/http_api}
 
 
-\subsubsection{Status Codes}
+\subsubsection{Status codes}
 \label{sec:status_codes}
 The \acs{api} should be compliant with the standardized \acs{http} status codes \citeweb{http2008status}.
 These codes are sent back in the response as part of the header.
@@ -124,7 +124,7 @@ The participants would then be aware of the problem and use an alternative primi
 This modularity becomes crucial to ease the partial adoption on new platforms.
 
 
-\subsubsection{Content Negotiation}
+\subsubsection{Content negotiation}
 Another key aspect of the \acs{http} protocol that our \acs{api} should take advantage of is the \textit{content negotiation}.
 This mechanism allows to specify the desired representation for a content on the client side and to express what representation is sent as a response from the data provider side.
 For that purpose, the client adds an \textit{Accept} field to the \acs{http} header with a weighted list of media types it knows how to interpret.

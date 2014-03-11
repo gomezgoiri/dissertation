@@ -56,7 +56,7 @@ For example, a \provider{} could become a \consumer{} to get data from the syste
 % To not-consumer: "t" without querying anything (it does not worth to update the clues if we won't query).
 
 
-\subsection{Use of Intermediaries: \acl{wp}}
+\subsection{Use of intermediaries: \acl{wp}}
 %   + Intermediaries
 %   + Necesidad de tener white pages, mención de roles. => subsección N
 Tasks involving the use of semantics can be expensive for some devices.
@@ -114,7 +114,7 @@ Using this approach, we avoid storing information from no longer available nodes
 %  hacer.
 
 
-\subsection{Versioning Clues}
+\subsection{Versioning clues}
 As previously explained, the \ac{wp} aggregates clues sent by \providers{}.
 This aggregation is versioned using a \emph{version number} and a \emph{generation number}.
 The \emph{version number} increases each time the \ac{wp} receives a new clue update.
@@ -326,7 +326,7 @@ Other nodes will be aware of these changes through the discovery mechanism.
 
 
 
-\section{Shared Clues}
+\section{Shared clues}
 \label{sec:clues}
 As we introduced before, \acp{wp} host \clues{} about the information in the \Space{}.
 Using a \emph{clue}, a \consumer{} can find which node (or nodes) is the \provider{} of a piece of information.
@@ -338,7 +338,7 @@ We also limit the length of the \clues{} to reduce the bandwidth, the memory, an
 This section describes in detail these \clues{}, the information they contain and their format.
 
 
-\subsection{Querying Basics} % Querying assumptions
+\subsection{Querying basics} % Querying assumptions
 
 % Por qué una nueva sección?
 % Porque estaba quedando muy abstracto todo y cosas básicas como cómo un consumidor consulta a un proveedor podía no quedar claro.
@@ -375,7 +375,7 @@ In any case, complex queries can be decomposed into wildcard templates and our s
 
 
 
-\subsection{Content of a Clue}
+\subsection{Content of a clue}
 To find out which is the most appropriate solution for \ac{ubicomp} scenarios, we have to consider scenarios populated by mobile devices and sensors. % for \ac{iot} scenarios?
 Mobile devices usually share data which rarely changes and is described using a few ontologies (e.g., the user profile and his preferences).
 On the other hand, sensors are constantly generating new instances of the same ontology (also called individuals).

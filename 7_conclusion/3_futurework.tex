@@ -1,4 +1,4 @@
-\section{Future Work}
+\section{Future work}
 
 % Limitations => Future Work
 % ¿Poner lista de la compra o sólo las cosas que se destilen de las limitaciones del trabajo?
@@ -7,7 +7,7 @@ Previous chapters of this dissertation have pointed out several limitations and 
 These limitations and issues open the door to interesting future work which is detailed below.
 
 
-\subsection{Closing the Gap with Third \acs{wot} Applications}
+\subsection{Closing the gap with third \acs{wot} applications}
 
 One of the middleware's goals is to achieve interoperability with third-party applications.
 In other words, to reuse their data transparently to the user from our middleware and vice-versa.
@@ -50,7 +50,7 @@ This goal can be seen as a two-fold strategy: ease the access to the data and ma
 \end{description}
 
 
-\subsection{Increasing Search Expressibility and Efficiency}
+\subsection{Increasing search expressibility and efficiency}
 
 % Searching: SPARQL y demás
 % 1ero: mayor eficiencia
@@ -65,7 +65,7 @@ The users of the middleware would be able to made more expressive queries.
 The performance could be enhanced by introducing optimization techniques from the distributed databases field \cite{schwarte_fedx_optimization_2011}. % see references from Section~\ref{background}) or reference them here?
 
 
-\subsection{Coordination Space's Distribution, Replication or Migration} % no se me ocurre un título más sexy
+\subsection{Coordination space's distribution, replication or migration} % no se me ocurre un título más sexy
 
 The current design demands the coordination space to be accessible through an \ac{http} \ac{api}.
 For the sake of simplicity, at some points of the dissertation we have assumed that this space is centralized in a unique machine.
@@ -84,7 +84,7 @@ Some alternatives that can be worth exploring are: % mencionar cloud para algo?
 Besides, by monitoring the middleware usage, one alternative or another could be dynamically chosen depending on the specific needs of each situation.
 
 
-\subsection{Integration of \restActuation{} in the Space}
+\subsection{Integration of \restActuation{} in the space}
 
 Chapter~\ref{cha:actuate} presented a hybrid actuation technique which combines consumers using the \spaceActuation{} and \ac{rest} providers.
 The key for this integration is the direct translation of the \coordspace{}'s subscriptions into goals needed by the \restActuation{}.
@@ -118,7 +118,7 @@ Finally, apart from reusing third \ac{wot} applications' actuation capabilities 
 How to reuse actuation mechanisms of nodes using \ac{ts} patterns from \ac{wot} solutions?
 
 
-\subsection{Security for the Middleware}
+\subsection{Security for the middleware}
 
 % si no, es un poco fiesta y cualquiera podría poner datos falsos
 Two key aspects for \ac{ubicomp} deployments are
@@ -137,7 +137,7 @@ The next step is to evaluate it in more demanding scenarios and the final goal i
 %%% A partir de aquí, no son aspectos técnicos concretos
 
 
-\subsection{Measuring Ease of Usage}
+\subsection{Measuring ease of usage}
 
 A subtle goal of any middleware is to ease the development of applications by encapsulating complex tasks (i.e. searching on a distributed space).
 % Medir de forma objetiva aspectos del ser humano como la sencillez de uso o de implementación
@@ -150,7 +150,7 @@ As a result, some improvements could be proposed (e.g. to create a version for a
 
 
 % Al final, a modo de colofón
-\subsection{Further Evaluation on Real Deployments}
+\subsection{Further evaluation on real deployments}
 
 % muchas de nuestras decisiones en la implementación del middleware fueron guiadas por la realidad
 Rather than designing the best theoretical solution, in this dissertation we have tried to present a realizable solution.
