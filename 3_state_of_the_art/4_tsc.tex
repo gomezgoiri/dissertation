@@ -31,13 +31,13 @@ the review is divided in sections which describe the main aspects of a Semantic 
 
 
 % Definir constantes para referirnos a los distintos middlewares analizados
-\newcommand{\midtsc}{\acs{tscm} \citep{fensel_tsc_2007}}
+\newcommand{\midtsc}{\acs{tsc} \citep{fensel_tsc_2007}}
 \newcommand{\midsws}{\acs{sws} \citep{tolksdorf_coordination_2006}}
 \newcommand{\midstuples}{\acs{stuples} \citep{khushraj_stuples:_2004}}
 \newcommand{\midcspaces}{\acs{cspaces} \citep{martinrecuerda_towards_2005}}
-\newcommand{\midtscpp}{\acs{tscpp} \citep{krummenacher_open_2009,blunder_distributed_2009}}
+\newcommand{\midtscpp}{tsc++ \citep{krummenacher_open_2009,blunder_distributed_2009}}
 \newcommand{\midtripcom}{\acs{tripcom} \citep{simperl_coordination_2007}}
-\newcommand{\midsmartmt}{\acs{smartm3} \citep{honkola_smart-m3_2010}}
+\newcommand{\midsmartmt}{Smart-M3 \citep{honkola_smart-m3_2010}}
 \newcommand{\midnardini}{\citet{nardini_semantic_2013}}
 
 
@@ -217,7 +217,7 @@ However, they also impose a single-point-of-failure.
 
 
 Within the distributed approaches we can distinguish those works which replicate data and those which do not.
-\acs{tscm} belongs to the first group, and replicates all the triples in each deployed kernel.
+\acs{tsc} belongs to the first group, and replicates all the triples in each deployed kernel.
 In \ac{tripcom} each kernel stores one or more subspaces and can contact other kernels responsible for different spaces.
 To do that, if the space's \ac{url} is provided, it simply resolves this \ac{url} using \ac{dns} and contacts the other kernel.
 Otherwise, the kernel uses three additional strategies:
@@ -263,6 +263,8 @@ The authors defend that this protocol is communication agnostic because it can b
 \label{sec:soa_tsc_discussion}
 
 % Model: Triple Space
+% TODO TODO TODO el haber pasado de hablar de TSC sin explicar que de ahí viene el nombre puede hacer que ahora te explote la cabeza al hablar de TSC como modelo!
+% Poner footnote o algo!
 The use of standard semantic protocols and \ac{rdf} triple-like tuples characterizes \acl{tsc}. % restringido a subconjunto de los trabajos analizados
 % Originalmente TSC estaba basado en REST
 \ac{tsc} was born to realign web services (WS-*) with the web.
