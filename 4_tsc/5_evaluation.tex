@@ -276,7 +276,7 @@ At a finer grained level, there are several properties which help different \ac{
 Besides, in our \ac{http} \ac{api} the following issues remain unsolved:
 % estos 2 últimos son como redefinir interop
 \begin{itemize} % posiblemente incluir lo que se explica aquí en otro punto
-  \item \emph{Using third party applications' data}:
+  \item \emph{Using third-party applications' data}:
   \begin{enumerate}
     \item Section~\ref{sec:network_properties} details how a pure \ac{rest} \ac{api} contributes to a higher decoupling between clients and servers.
 	  In \ac{rest} architectures clients can autonomously adapt to use different \acp{api} or to different \ac{api} versions. % i.e. evolvable
@@ -284,7 +284,7 @@ Besides, in our \ac{http} \ac{api} the following issues remain unsolved:
 	  These clients have the additional responsibility of discerning the next state transition from the representations obtained. % cacharros parseando HTML, interpretandolo, etc.
 	  
 	  Our middleware is not hypermedia-driven.
-	  As a consequence, it requires third party applications to implement a uniform \ac{api} (i.e. \osapi{}) on top of them to allow our middleware to consume their data.
+	  As a consequence, it requires third-party applications to implement a uniform \ac{api} (i.e. \osapi{}) on top of them to allow our middleware to consume their data.
 	  However, the \ac{api} is resource-oriented and simple to implement.
 	  
     \item Another obstacle for achieving a real application-level interoperability in our middleware is the use of distinct isolated spaces.
@@ -292,12 +292,12 @@ Besides, in our \ac{http} \ac{api} the following issues remain unsolved:
 	  Although this could be avoided by defining a default space, as explained in Section~\ref{sec:soa_tsc_space}, their use is justified in terms of scalability.
   \end{enumerate}
   
-  \item \emph{Making our data reusable by third party applications}:
+  \item \emph{Making our data reusable by third-party applications}:
 	
 	We encourage sharing data in resource constrained devices through an \ac{http} \ac{api}.
 	Using this \ac{api} any other application able to use \ac{http} and to manage semantics can reuse data from our middleware.
 	However, since this \ac{api} is not hypermedia-driven either, 
-	third party applications must know how to use it beforehand. % con todo lo que ello conlleva, no quiero volver a aburrir al lector contandolo otra vez
+	third-party applications must know how to use it beforehand. % con todo lo que ello conlleva, no quiero volver a aburrir al lector contandolo otra vez
 	% In other words, out-of-band information drives the \acs{http} interaction with this \ac{api}.
 \end{itemize}
 
