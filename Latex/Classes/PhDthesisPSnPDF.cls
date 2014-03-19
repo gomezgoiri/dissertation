@@ -1,5 +1,6 @@
 %---------------------------------------------------------------
 % PhDthesis
+% version 4 by Aitor Gómez-Goiri 2014
 % version 3 by Igor Ruiz-Agundez 2011
 % version 2 by Jakob Suckale 2007
 % version 1 by Harish Bhanderi 2002
