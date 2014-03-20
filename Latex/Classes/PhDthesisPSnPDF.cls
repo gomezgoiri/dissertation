@@ -443,8 +443,7 @@
     {\@collegeordept \par}
 	\vspace*{1ex}
     {\@textadvisor \@advisor \par}
-    %{\@textadvisor \@advisortwo \par}
-    {\@advisortwo \par}
+    {\@textadvisortwo ~ \@advisortwo \par}
 	\vspace*{4ex}
     {\@textsignaturecandidate \hspace*{15ex}\@textsignatureadvisor \hspace*{15ex}\@textsignatureadvisor \par}
 	\vspace*{15ex}
