@@ -36,7 +36,9 @@ def generate_pygments_tex_file( input_file_path, output_file_path ):
 	
 	# super-ugly fix to hidde syntax errors.
 	# It would be better to simply fix the lesser
-	highlighted_code = r"\expandafter\def\csname PY@tok@err\endcsname{}" + "\n" + highlighted_code
+	# I really hate setting the font here, but I wasn't able to do it in the main document :-S
+	highlighted_code = r"\expandafter\def\csname PY@tok@err\endcsname{}" + "\n{\small\n" + highlighted_code
+	highlighted_code += "\n}"
 	
 	print "Generating pygmented file: " + output_file_path
 	with open (output_file_path, "w") as output_file:
