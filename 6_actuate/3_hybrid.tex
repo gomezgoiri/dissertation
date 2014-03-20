@@ -3,7 +3,7 @@
 
 The actuation technique presented by Section~\ref{sec:actuation_space} constitutes the natural way of acting using a \Space{}.
 However, \ac{rest} and \ac{rest}-like services constitute an emerging mechanism to directly actuate in the physical environment.
-Therefore, their seamless integration (i.e. interoperation) opens the door to reuse the capabilities of many existing devices.
+Therefore, their seamless integration (i.e., interoperation) opens the door to reuse the capabilities of many existing devices.
 Consequently, we aim to integrate semantically described \ac{rest} services in our space-based model. % integration, reuse, alignment, close the gap
 That is, mix \spaceActuation{} with \restActuation{}.
 % we first need to close the gap between both approaches.
@@ -38,7 +38,7 @@ This reuse is enabled by a rule-based reasoning engine. % reasoning engine ya qu
 \bigskip
 
 The impact of both mechanisms in resource constrained devices will be affected by their computing and networking activities.
-\ac{ts}-based patterns require all the participants to be aware of what is written into the space to react (i.e. be proactive).
+\ac{ts}-based patterns require all the participants to be aware of what is written into the space to react (i.e., be proactive).
 Both consumers and providers read and write from the space, subscribe to specific changes and receive notifications.
 Thanks to this specificity, they are only affected by the contents they are interested in. % reduciendo la actividad
 Besides, they only perform trivial computing task: interpreting results. % pattern matching sólo en el caso del coordination space!
@@ -90,7 +90,7 @@ For that, the simplicity of the consumers in \spaceActuation{} should be respect
 \newcommand{\implMix}{\emph{Implementation 3}}
 
 This implementation aims to prove that our space-based middleware can easily reuse third-party applications' providers capabilities. % easily? transparently?
-It presents the space and the consumer (i.e. \nodeConsSpace{}) from the \implSpace{}, but it replaces the provider with the one from the \implRest{} (i.e. \nodeProvRest{}).
+It presents the space and the consumer (i.e., \nodeConsSpace{}) from the \implSpace{}, but it replaces the provider with the one from the \implRest{} (i.e., \nodeProvRest{}).
 Both nodes have a good foundation for the interoperation because they use the same vocabularies. % to describe the knowledge they manage.
 However, the \nodeProvRest{} and the \nodeConsSpace{} rely on different communication mechanisms: direct communication and indirect communication.
 

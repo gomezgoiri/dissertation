@@ -40,16 +40,16 @@ To answer these questions, we analyse the presented solution from different poin
 % TODO añadir la autonomía que se refería a la semántica?
 As has already been discussed in Section~\ref{sec:soa_integration}, indirect communication middleware can have two key properties:
 \begin{itemize}
-  \item The sender does not need to know the receiver or receivers and vice versa (i.e. \emph{space uncoupling}).
-  \item Senders and receivers do not need to exist at the same time to communicate with each other (i.e. \emph{time uncoupling}).
+  \item The sender does not need to know the receiver or receivers and vice versa (i.e., \emph{space uncoupling}).
+  \item Senders and receivers do not need to exist at the same time to communicate with each other (i.e., \emph{time uncoupling}).
 \end{itemize}
 
 
 The primitives used in our space-based computing implementation force it to be \emph{space uncoupled}.
 On the contrary, it is not always \emph{time uncoupled}.
 If two nodes write and read from the \coordspace{}, they are \emph{time uncoupled};
-but if a node accesses to others' content (i.e. \selfgraphs{}), they are not.
-In other words, \emph{time uncoupling} is not achieved by the extension of the model presented in Section~\ref{sec:federated_space} (i.e. in the \emph{outer space}).
+but if a node accesses to others' content (i.e., \selfgraphs{}), they are not.
+In other words, \emph{time uncoupling} is not achieved by the extension of the model presented in Section~\ref{sec:federated_space} (i.e., in the \emph{outer space}).
 As a future work, this could be alleviated by a caching mechanism implemented in the \coordinator{} or \coordinators{}. % TODO hablar con propiedad de esos elementos => nombrarlos antes
 % see \ref{tab:middleware_coordinationprop}
 
@@ -125,7 +125,7 @@ Most of them fail to achieve the \ac{resthateoas} constraint.
 Regarding the \ac{sw}, some recent efforts have tried to move closer to the \emph{hypermedia} constraint \citep{steiner_fulfilling_2011,kjernsmo_necessity_2012}.
 However, these worlds remain quite isolated.
 In fact, \ac{sw} \acp{api} usually present another main divergence with the \ac{rest} style: the use of query endpoints.
-% i.e. no devuelven listas de enlaces, sino todo a lo bruto
+% i.e., no devuelven listas de enlaces, sino todo a lo bruto
 % esto quiere decir que no se devuelve todo y ala, tu procesa esa burrada de datos, más bien se filtran
 These endpoints intend to solve some inefficiency issues which \ac{rest} shows when working with a big amount of data. % TODO mencionar \ac{lod} en algún punto de aquí?
 To that end, they allow expressive query languages and offer results where the boundaries of the different resources often blurs \citep{wilde_restful_2009}.
@@ -156,7 +156,7 @@ In the \ac{ubicomp} both the efficiency on the communications and the reusabilit
 
 
 We opt for promoting efficiency at the expense of reusability.
-In other words, we use two \ac{rest}-like \acp{api} whose use is known out-of-band by the clients (i.e. they are not guided by the \emph{hypermedia}). % presented in Section~\ref{} and the \emph{OSAPI}
+In other words, we use two \ac{rest}-like \acp{api} whose use is known out-of-band by the clients (i.e., they are not guided by the \emph{hypermedia}). % presented in Section~\ref{} and the \emph{OSAPI}
 However, we provide a human-oriented version of our \ac{api} to ease its use by developers which does comply with \ac{resthateoas}.% pero aún así el API de TSC seguirá siendo HATEOAS para los usuarios, no para las máquinas
 The evolution of the \acp{api} to fully \ac{rest}ful machine-oriented ones is left as future work. % as the \ac{sw} and \ac{hateoas} evolve
 
@@ -223,7 +223,7 @@ The use of both the \textbf{network style} and the \textbf{semantic data} contri
 \paragraph{Semantics}
 
 Using semantics we promote the reuse of data describing them in a more rich and abstract way.
-The semantic web is composed by a series of standardized technologies which allow to formally describe the models (i.e. the concepts and how they relate to each other).
+The semantic web is composed by a series of standardized technologies which allow to formally describe the models (i.e., the concepts and how they relate to each other).
 Two key mechanisms of the Semantic Web in this aspect are the inference of new data and the mapping of equivalent models.
 % hablar de cómo contribuye o no a su portabilidad??
 % Besides, the Semantic Web is built on top of well-defined and vastly supported tools.
@@ -279,12 +279,12 @@ Besides, in our \ac{http} \ac{api} the following issues remain unsolved:
   \item \emph{Using third-party applications' data}:
   \begin{enumerate}
     \item Section~\ref{sec:network_properties} details how a pure \ac{rest} \ac{api} contributes to a higher decoupling between clients and servers.
-	  In \ac{rest} architectures clients can autonomously adapt to use different \acp{api} or to different \ac{api} versions. % i.e. evolvable
+	  In \ac{rest} architectures clients can autonomously adapt to use different \acp{api} or to different \ac{api} versions. % i.e., evolvable
 	  Of course, this comes at the cost of more complex clients.
 	  These clients have the additional responsibility of discerning the next state transition from the representations obtained. % cacharros parseando HTML, interpretandolo, etc.
 	  
 	  Our middleware is not hypermedia-driven.
-	  As a consequence, it requires third-party applications to implement a uniform \ac{api} (i.e. \osapi{}) on top of them to allow our middleware to consume their data.
+	  As a consequence, it requires third-party applications to implement a uniform \ac{api} (i.e., \osapi{}) on top of them to allow our middleware to consume their data.
 	  However, the \ac{api} is resource-oriented and simple to implement.
 	  
     \item Another obstacle for achieving a real application-level interoperability in our middleware is the use of distinct isolated spaces.
@@ -314,7 +314,7 @@ These components share an even larger amount of data which leads to scalability 
 In fact, considering that in \ac{ubicomp} environments the data is constantly generated or updated, this challenge can be harder.
 However, these challenges and other considerations related to the search process are analysed in the next chapter.
 
-% However, in our model we limit the search scope using flat spaces (see Section~\ref{sec:soa_tsc_space}). % i.e. groups of devices which share information
+% However, in our model we limit the search scope using flat spaces (see Section~\ref{sec:soa_tsc_space}). % i.e., groups of devices which share information
 
 % Para simplificar y no adelantar discusiones:
 % Besides, the search process presented in the next chapter relies in each client to autonomously search for the appropriate servers to request.
@@ -344,7 +344,7 @@ Firstly, mobility situations may impede two nodes to coexist at the same time.
 In this case, \emph{time uncoupling} enables their communication.
 
 Secondly, the provider of a piece of information may vary over the time.
-The primitives used care about the data and not about the specific provider of these data (i.e. the nodes are \emph{space uncoupled}).
+The primitives used care about the data and not about the specific provider of these data (i.e., the nodes are \emph{space uncoupled}).
 This avoids any reconfiguration of the data consumer when the provider is replaced.
 In fact, a content can be also delivered by more than a provider.
 
@@ -429,7 +429,7 @@ Energy consumption for an embedded platform during different activity periods (m
 }{0.6}{}
 
 
-On the other hand, the network usage reduction contributes to energy savings (i.e. improves \emph{network efficiency}):
+On the other hand, the network usage reduction contributes to energy savings (i.e., improves \emph{network efficiency}):
 % efficiency: minimizar el uso de la red
 \begin{itemize}
   \item \ac{http}'s network \emph{efficiency} can be improved with \emph{code on demand} and \emph{caching}.

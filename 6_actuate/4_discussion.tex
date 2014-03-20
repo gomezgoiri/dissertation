@@ -45,7 +45,7 @@ This simplification is justified because this chapter is centred on interoperabi
 
 
 A possible optimization would be to benefit from the search architecture presented in Chapter~\ref{cha:searching}.
-To reduce readings on the space (i.e. network usage), we propose a procedure composed by two reasoning steps.
+To reduce readings on the space (i.e., network usage), we propose a procedure composed by two reasoning steps.
 In the first one, we only use local incomplete knowledge derived from the \clues{}.
 Then, we read from the \Space{} just the knowledge needed to confirm the pre-proofs obtained in the first reasoning.
 The second reasoning uses this knowledge to get real pre-proofs. % real o actual pre-proofs
@@ -106,7 +106,7 @@ The reasoning can be performed in any node apart from the one which holds the \S
 	
   \item To mitigate this problem, we can delegate this task only on the nodes able to perform such tasks.
 	In fact, these nodes can follow the \emph{replicated-worker pattern}.
-	That is, they can read from the space goals to trigger the process (i.e. \emph{reasoning tasks}).
+	That is, they can read from the space goals to trigger the process (i.e., \emph{reasoning tasks}).
 	Apart from balancing the load between all the worker nodes, any node can stop being worker at any time by not taking more \emph{tasks} (e.g., if it has low energy).
 	These nodes must be \consumers{} to use the \clues{} from the search mechanism as background knowledge.
 \end{itemize}

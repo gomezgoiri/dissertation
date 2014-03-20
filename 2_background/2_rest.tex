@@ -47,11 +47,11 @@ To achieve these properties, \ac{rest} establishes the following constraints fro
 
 \citet{richardson_introducing_2008} came up with a maturity model to help people understand the \ac{rest} principles in a less abstract manner.
 Instead of focusing on the presented constraints, the model identifies whether an \ac{api} properly uses the web's three most important protocols: \ac{uri}, \ac{http} and \ac{html}.
-Level zero encompasses those \acp{api} which use a unique \ac{uri} and \ac{http} method (i.e. use \ac{http} as a tunnelling mechanism).
+Level zero encompasses those \acp{api} which use a unique \ac{uri} and \ac{http} method (i.e., use \ac{http} as a tunnelling mechanism).
 Level one is formed by the \acp{api} which clearly identify several resources by providing an \acp{uri} to each of them.
-Level two uses \ac{http} as it was originally designed for, i.e. using its verbs, status codes, etc. appropriately. 
+Level two uses \ac{http} as it was originally designed for, i.e., using its verbs, status codes, etc. appropriately. 
 The correct use of \ac{http} forces a developer to comply with all the \ac{rest}'s constraints except for \ac{resthateoas} \citep{moore_hypermedia_2010}.
-Level three comprises the \acp{api} which return resources which describe their own capabilities and are interconnected using preferably standard representations (i.e. those which also address the \acf{resthateoas} constraint).
+Level three comprises the \acp{api} which return resources which describe their own capabilities and are interconnected using preferably standard representations (i.e., those which also address the \acf{resthateoas} constraint).
 
 
 According to \citet{fielding_architectural_2000}, only those in the third level can be considered \ac{rest} architectures.
@@ -180,7 +180,7 @@ However, we have chosen to work with \ac{http} for the following reasons:
 	This contrasts with \ac{coap}'s message size limitations.
 	Dealing with these limitations was not one of the main goals of the dissertation.
 	However, we have considered them at some points of the dissertation to avoid unrealistic assumptions.
-  \item \ac{coap} is an ongoing standard (i.e. its definition is currently subject to change).
+  \item \ac{coap} is an ongoing standard (i.e., its definition is currently subject to change).
         As a result of this immaturity, there are few libraries and tools to work with \ac{coap} at the moment \citep{villaverde_constrained_2012}. % y encima cada una en una versión...    
         This limits the range of platforms which could adopt any proposed solution. % practical limitation
 \end{itemize}

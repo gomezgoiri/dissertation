@@ -32,7 +32,7 @@ For example, the template \texttt{?s foaf:knows gomezgoiri:aitor} could be emplo
 
 % "Cartoon Cloud" by egyninja is marked as "public domain": http://openclipart.org/detail/25319/cartoon-cloud-by-egyninja
 \InsertFig{tsc_resources}{fig:tsc_resources}{Schematic view of a space with four graphs and sample triples for one of these graphs}{
-The figure uses prefixes, i.e. aliases for the beginning of the \acp{uri}, for the sake of clarity.
+The figure uses prefixes, i.e., aliases for the beginning of the \acp{uri}, for the sake of clarity.
 }{1}{}
 
 
@@ -103,7 +103,7 @@ Independently of the mechanism adopted, in this section we propose a optional \a
 The list of spaces a node is joined to are available under \textit{/spaces}.
 Each space is identified by an \acs{uri} (e.g., \url{http://space1}).
 If this \acs{uri} is also a \acs{url}, $/spaces/\{space\_uri\}$ (summarized by \emph{sp} from now on) can simply redirect to it.
-All the resources of that space, both real (i.e. graphs) or virtual (i.e. query) are listed under $\{sp\}/$.
+All the resources of that space, both real (i.e., graphs) or virtual (i.e., query) are listed under $\{sp\}/$.
 Each graph is available on ${\{sp\}/graph/\{graph\_uri\}}$.
 If we make an \acs{http} DELETE to that resource, under \ac{tsc}'s perspective, we take that graph from the space.
 The rest of the mappings are shown in the Table~\ref{tab:tscAPI}.
@@ -135,7 +135,7 @@ The benefits of using this mechanism in the \ac{tsc} middleware presented are tw
 Firstly, it enhances the browsability of the primitives with human understandable \acs{http} responses. % no sé si esto es de Content Negotiation per se
 Secondly, it allows different semantic representations (e.g., RDF/XML \citeweb{rdfxml2004}, N-Triples \citeweb{ntriples2004} or \acs{n3} \citeweb{n32011}).
 The latter characteristic becomes crucial since not all the nodes may understand all the formats (e.g., a mobile phone may not have a RDF/XML parser).
-%This is true even if all the languages use the same basic concepts (i.e. \acs{rdf} Triples).
+%This is true even if all the languages use the same basic concepts (i.e., \acs{rdf} Triples).
 In these cases, the compatibility of both sides can be ensured through a conversion carried out in the server side.
 Furthermore, expressing the preference for a semantic format can be useful too in other cases.
 For example, to obtain the less verbose answer.

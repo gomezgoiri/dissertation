@@ -27,7 +27,7 @@ Instead, we require a mandatory \osapi{} to be implemented in each \asteroid{} t
 
 To make the most of the information in a space, we propose a new primitive to query all the semantic information stored in the space.
 % esto puede ser relativo, al final devolver una lista completa de recursos (o parte de sus atributos) no deja de ser REST según los libros de hypermedia design...
-The \ac{rest}fulness of this primitive could be argued since it does not operate at resource level (i.e. returning graphs), but mixing several resources (i.e. triples from different graphs).
+The \ac{rest}fulness of this primitive could be argued since it does not operate at resource level (i.e., returning graphs), but mixing several resources (i.e., triples from different graphs).
 However, we believe that it is useful to have an endpoint for the queries which involve many graphs.
 \citet{kjernsmo_necessity_2012} discusses this topic in depth. % TODO Mirar otras citas???
 
@@ -91,7 +91,7 @@ This section tries to clarify how the different behaviours coexist:
  \item[Writing.]
       The most basic writing primitive allows a client to remotely write a graph into the \coordspace{}.
       However, we also presented the \emph{write\_self} primitive.
-      \emph{Write\_self} locally writes into an \asteroid{} an externally untakeable graph (i.e. \selfgraphs{}).
+      \emph{Write\_self} locally writes into an \asteroid{} an externally untakeable graph (i.e., \selfgraphs{}).
  \item[Reading.]
       \emph{Query} performs a traversal query over the aggregated view of all the graphs in a space (including the \selfgraphs{}).
       \emph{Read} and \emph{take} work at resource level.
