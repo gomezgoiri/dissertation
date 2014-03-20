@@ -8,14 +8,14 @@
 
 % AG: ¿node, peer y/o device? ¿Aclarar qué es un node?
 % IG: personalment peer no lo veo, y entre node y device, pues creo que usarlos indistintamente, pero aclarando eso en algun punto
-% AG: Crear comandos para asegurarnos de llamar a las cosas igual siempre (e.g. clues, acronimos, etc.)
+% AG: Crear comandos para asegurarnos de llamar a las cosas igual siempre (e.g., clues, acronimos, etc.)
 % IG: comandos? esa es muy de crack xD
 
 % En algún momento de la sección: CoAP vs HTTP
 % AG: Igual habría que comentar que asumimos HTTP por su estado de madurez, pero que podría aplicarse a CoAP en cuanto fuese un estandar y con implementaciones que lo implementasen por completo. Esto tendría ventajas a nivel de uso de Multicast para agrupar WP, consumidores, etc.
 %     Podríamos valorar su uso más minuciosamente en cada sección, pero igual en una primera versión no le daría mucho bombo.
 % IG: influye en algo de la solucion es algo particular del experimental environment?
-% AG: En su mayor parte no, pero habría algunas cosas que se simplificarían (e.g. comunicación con un grupo de nodos)
+% AG: En su mayor parte no, pero habría algunas cosas que se simplificarían (e.g., comunicación con un grupo de nodos)
 
 %   + Vinculo rapido con la intro (1 o 2 frases) % igual también con el related work
 In a semantic \ac{wot}, nodes are part of a network where they share semantically described information.
@@ -169,7 +169,7 @@ As a consequence, to use devices from Wireless Sensor Networks (e.g., Zigbee or 
 
 % IG el CoAP multicast no tiene una utilidad diferente a lo q se habla?
 % Se podría usar UPnP, mDNS o  incluso lo propuesto por Jara (lmDNS).
-% También se podría usar multicast CoAP (e.g. los que respondan a /\ac{wp} o /consumers)
+% También se podría usar multicast CoAP (e.g., los que respondan a /\ac{wp} o /consumers)
 
 
 % Partimos de la base de que el sistema de descubrimiento nos ha descubierto a otros nodos y los siguientes datos acerca de ellos:
@@ -358,7 +358,7 @@ In the context of this thesis, this \ac{api} corresponds with the one defined in
 % explicar query templates
 To perform the queries, which enable the selection of a subset of the semantic content hold in a given \Space{}, we require a \textbf{template}.
 We assume the use of wildcard templates, which are special triples with optional wildcard subject, predicate and/or object (see Figure~\ref{fig:semanticExample}). % TODO referencia al ejemplo o a figura de ejemplo
-We could use more sophisticated query languages (e.g. \ac{sparql} \citeweb{sparql2008}),
+We could use more sophisticated query languages (e.g., \ac{sparql} \citeweb{sparql2008}),
 but processing them may be too demanding for devices with constrained capabilities.
 On the other hand, simple wildcard templates can be managed by any node able to manage \ac{rdf} triples.
 In any case, complex queries can be decomposed into wildcard templates and our solution would still apply.

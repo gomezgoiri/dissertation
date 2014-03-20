@@ -101,7 +101,7 @@ Independently of the mechanism adopted, in this section we propose a optional \a
 \end{sloppypar}
 
 The list of spaces a node is joined to are available under \textit{/spaces}.
-Each space is identified by an \acs{uri} (e.g. \url{http://space1}).
+Each space is identified by an \acs{uri} (e.g., \url{http://space1}).
 If this \acs{uri} is also a \acs{url}, $/spaces/\{space\_uri\}$ (summarized by \emph{sp} from now on) can simply redirect to it.
 All the resources of that space, both real (i.e. graphs) or virtual (i.e. query) are listed under $\{sp\}/$.
 Each graph is available on ${\{sp\}/graph/\{graph\_uri\}}$.
@@ -133,8 +133,8 @@ Then, the server will answer with the best possible format it understands, speci
 
 The benefits of using this mechanism in the \ac{tsc} middleware presented are two-fold.
 Firstly, it enhances the browsability of the primitives with human understandable \acs{http} responses. % no sé si esto es de Content Negotiation per se
-Secondly, it allows different semantic representations (e.g. RDF/XML \citeweb{rdfxml2004}, N-Triples \citeweb{ntriples2004} or \acs{n3} \citeweb{n32011}).
-The latter characteristic becomes crucial since not all the nodes may understand all the formats (e.g. a mobile phone may not have a RDF/XML parser).
+Secondly, it allows different semantic representations (e.g., RDF/XML \citeweb{rdfxml2004}, N-Triples \citeweb{ntriples2004} or \acs{n3} \citeweb{n32011}).
+The latter characteristic becomes crucial since not all the nodes may understand all the formats (e.g., a mobile phone may not have a RDF/XML parser).
 %This is true even if all the languages use the same basic concepts (i.e. \acs{rdf} Triples).
 In these cases, the compatibility of both sides can be ensured through a conversion carried out in the server side.
 Furthermore, expressing the preference for a semantic format can be useful too in other cases.

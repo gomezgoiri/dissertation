@@ -116,7 +116,7 @@ In \ac{ts}, originally tuples were selected using special tuples where wildcard 
 All the studied works which use a \ac{rdf} triple as a tuple follow this approach.
 Beside, they provide access to the \ac{rdf} graphs by their \acp{uri}.
 
-Most of these works also offer advanced query languages (e.g. SPARQL \citeweb{sparql2008}) as a more expressive way to match graphs.
+Most of these works also offer advanced query languages (e.g., \acs{sparql} \citeweb{sparql2008}) as a more expressive way to match graphs.
 These languages can be decomposed in plain triple patterns.
 However, this requires a parser which may not be available for resource constrained platforms.
 This dissertation focuses on queries based on graph patterns and leaves the adoption of more complex querying languages as a future enhancement.
@@ -253,7 +253,7 @@ In other words, each client may access to various server to obtain a result for 
 However, to the best of our knowledge this idea has never been implemented or evaluated, making \acs{smartm3}'s space de facto centralized.
 For the communication between the clients and the space, \acs{smartm3} defines a stateful protocol called \emph{Smart Access Protocol (SSAP)}. % decir que está basado en XML?
 The authors defend that this protocol is communication agnostic because it can be implemented on top of different communication mechanisms
-(e.g. WS-* web services, XMPP \citeweb{xmpp}, Bluetooth \citeweb{bluetooth} or TCP/IP).
+(e.g., WS-* web services, XMPP \citeweb{xmpp}, Bluetooth \citeweb{bluetooth} or TCP/IP).
 \citet{kiljander_knowledge_2012} propose an enhanced stateless access protocol designed to fit the needs of low capacity devices.
 
 
@@ -275,18 +275,18 @@ However, \ac{tsc} has never been true to all these principles. % porque según e
 %fensel_tsc_2007
 % Luego ha ido derivando e implementando funcionalidades más complejas alejandose del diseño inicial
 %    => el interés por añadir features, hizo que la gente olvidase los ppios que guiaban la simplicidad de REST
-Furthermore, the more features are added to the \ac{tsc} design (e.g. subscriptions or transactions), the more difficult it is to reconciliate both worlds.
+Furthermore, the more features are added to the \ac{tsc} design (e.g., subscriptions or transactions), the more difficult it is to reconciliate both worlds.
 
 %\subsubsection{Additional features}
 %\input{\pathchapthree/tables/additional}
 
 
-Regardless of their incompatibility with other features or practical technical difficulties, % e.g. conseguir HATEOAS o effective caching
+Regardless of their incompatibility with other features or practical technical difficulties, % e.g., conseguir HATEOAS o effective caching
 we defend that, \emph{per se}, \ac{tsc} does not contradict in any sense the \ac{rest} principles described in Chapter~\ref{cha:background}:
 % Ver cómo TSC puede cumplir con todos los principios de diseño
 \begin{description}
  \item[\ac{restcs}.] Accessing to a space through a server in a \ac{restcs} fashion is completely feasible.
-		      Indeed, this does not prevent to use a distributed solution in the \emph{back end} (e.g. a distributed semantic repository).
+		      Indeed, this does not prevent to use a distributed solution in the \emph{back end} (e.g., a distributed semantic repository).
  \item[\ac{rests}.] The primitives to access the space imply simple reads and writes which do not store any state in the server.
  \item[\ac{restcache}. ] Despite of the difficulties detected by \citet{fensel_tsc_2007}, nothing prevents the semantic content stored in the space to be cached.
                           However, the dynamism of the knowledge can make effective caching challenging to achieve.
@@ -321,9 +321,9 @@ we defend that, \emph{per se}, \ac{tsc} does not contradict in any sense the \ac
 	            It is used to extract unstated information from the content received from the server.
 	            Therefore, the client downloads know-how to process the resource in the following situations:
 		    \begin{itemize}
-		      \item Through the taxonomies defined in ontology files. % e.g. para hacer un mapeo; en analogía a JS, da igual que tu tengas previamente el script o no
+		      \item Through the taxonomies defined in ontology files. % e.g., para hacer un mapeo; en analogía a JS, da igual que tu tengas previamente el script o no
 		            These taxonomies are modelled using standard semantic languages. % hablar de distintos niveles de expresividad?
-		      \item Through semantically expressed rules \citep{berners-lee_n3logic:_2008}. % (e.g. N3 rules)
+		      \item Through semantically expressed rules \citep{berners-lee_n3logic:_2008}. % (e.g., N3 rules)
 		    \end{itemize}
 	      % con nuevo TBox que te bajas??
             \end{enumerate}

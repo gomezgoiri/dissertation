@@ -1,6 +1,6 @@
 {
   # More things could be specified.
-  # E.g. location.
+  # E.g., location.
   
   actuators:light ssn:madeObservation ?light .
   

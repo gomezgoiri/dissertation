@@ -25,7 +25,7 @@ This goal can be seen as a two-fold strategy: ease the access to the data and ma
 			    
 			    In any case, an agent would need knowledge about the domain explored to reuse any \ac{api}.
 			    And to reuse many \acp{api} without reimplementing the agent, the data types and states of a domain should be standardized. % TODO poner cita del blog de fielding sobre la discussion esa
-			    Therefore, any step in that direction would require the agreement of the community around the domain (e.g. home automation lighting).
+			    Therefore, any step in that direction would require the agreement of the community around the domain (e.g., home automation lighting).
 			    
 			    The counter-pad of third-party \acp{api} automatic consumption would be to ensure that our \ac{tsc} \ac{api} complies with the \ac{resthateoas} constraint.
 			    Currently, the \ac{api} is human browsable thanks to its \ac{html} representations.
@@ -72,8 +72,8 @@ For the sake of simplicity, at some points of the dissertation we have assumed t
 However, the access through an \ac{http} \ac{api} does not impede the distribution of the \coordspace{}.
 Some alternatives that can be worth exploring are: % mencionar cloud para algo?
 \begin{itemize}
-  \item Replication of the space to increase the system performance (e.g. using load balancing).
-  \item Distribution of the content over different machines to enhance its scalability. % TODO decir que ya ha sido tratado por más soluciones? (e.g. TripCom)
+  \item Replication of the space to increase the system performance (e.g., using load balancing).
+  \item Distribution of the content over different machines to enhance its scalability. % TODO decir que ya ha sido tratado por más soluciones? (e.g., TripCom)
   \item Migration from a machine to another to avoid a single point of failure.
 	%No node is essential so the system will still work.
         For example, this strategy will allow to select the space holder dynamically, easing the \coordspace{} manageability and deployment.
@@ -111,7 +111,7 @@ This translation requires further work to ensure that it is generalizable.
 % After that, the developers will be able to consume the behaviors through another middleware abstraction.
 % Besides, it will monitor the state to check if the state of the space is effectively changed or other actions need to be taken.
 Another interesting issue is to discern which path to follow to achieve a goal when two or more paths are available.
-We believe that additional high-level rules or policies can be defined (e.g. to select the path which consumed less energy).
+We believe that additional high-level rules or policies can be defined (e.g., to select the path which consumed less energy).
 Storing them into the space may enable reusing these \emph{behaviours} by third-party applications' developers.
 
 Finally, apart from reusing third-party \ac{wot} applications' actuation capabilities in \ac{tsc}, the opposite question should also be answered:
@@ -141,12 +141,12 @@ The next step is to evaluate it in more demanding scenarios and the final goal i
 
 A subtle goal of any middleware is to ease the development of applications by encapsulating complex tasks (i.e. searching on a distributed space).
 % Medir de forma objetiva aspectos del ser humano como la sencillez de uso o de implementación
-Some objective indicators can be extracted from the code by implementing the same application with and without the middleware (e.g. the total number of lines needed).
+Some objective indicators can be extracted from the code by implementing the same application with and without the middleware (e.g., the total number of lines needed).
 However, from the human perspective these indicators do not necessarily express how easy, comfortable or pleasant is to use the middleware.
 % facilitar modelado?? => el hecho de que sea difícil anotar, puede echar para atrás a desarrolladores: eso es problema de mi app o de quien?
 Although the primitives are rather simple, the configuration or just the semantic annotation can complicate the learning process of any developer.
 Future work could measure the impact the middleware has on them.
-As a result, some improvements could be proposed (e.g. to create a version for a specific domain which masks all the semantic issues).
+As a result, some improvements could be proposed (e.g., to create a version for a specific domain which masks all the semantic issues).
 
 
 % Al final, a modo de colofón
