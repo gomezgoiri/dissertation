@@ -285,36 +285,36 @@ Regardless of their incompatibility with other features or practical technical d
 we defend that, \emph{per se}, \ac{tsc} does not contradict in any sense the \ac{rest} principles described in Chapter~\ref{cha:background}:
 % Ver cómo TSC puede cumplir con todos los principios de diseño
 \begin{description}
- \item[\ac{restcs}.] Accessing to a space through a server in a \ac{restcs} fashion is completely feasible.
+ \item[\acf{restcs}.] Accessing to a space through a server in a \ac{restcs} fashion is completely feasible.
 		      Indeed, this does not prevent to use a distributed solution in the \emph{back end} (e.g., a distributed semantic repository).
- \item[\ac{rests}.] The primitives to access the space imply simple reads and writes which do not store any state in the server.
- \item[\ac{restcache}. ] Despite of the difficulties detected by \citet{fensel_tsc_2007}, nothing prevents the semantic content stored in the space to be cached.
+ \item[\acf{rests}.] The primitives to access the space imply simple reads and writes which do not store any state in the server.
+ \item[\acf{restcache}. ] Despite of the difficulties detected by \citet{fensel_tsc_2007}, nothing prevents the semantic content stored in the space to be cached.
                           However, the dynamism of the knowledge can make effective caching challenging to achieve.
  %\item[\ac{rest_u}:] % lo quito porque si no, este punto sin texto con otros subpuntos queda feo
     %\begin{description}
-	\item[\ac{restid}.]
+	\item[\acf{restid}.]
 			 In \ac{tsc}, there can be up to three type of resources which can be identified by an URI : spaces, \ac{rdf} Graphs and certain elements of the \ac{rdf} Triples.
 	                 The space can be seen as a coarse-grained view of the underlying graphs.
 	                 The graphs have sets of triples which are usually related and describe a unit of knowledge. % A RDF triple by itself cannot transmit too much information
 	                 Self-identified triple's subjects, predicates or objects are the source of concept linking in the \ac{sw}.
-	\item[\ac{restrep}.] The \ac{rdf} graphs and triples mentioned above can be represented using different standard serializations.
+	\item[\acf{restrep}.] The \ac{rdf} graphs and triples mentioned above can be represented using different standard serializations.
 			      % TODO TODO TODO citar el paper que habla de cómo alinear LOD y REST
-	\item[\ac{restdesc}.] The messages derived from the primitives are self-describing since they are expressed on standard \ac{rdf}-based languages. % including meta-data
+	\item[\acf{restdesc}.] The messages derived from the primitives are self-describing since they are expressed on standard \ac{rdf}-based languages. % including meta-data
 				Therefore the server and clients know how to process the content according to its language and certain vocabularies.
 				These vocabularies specifications (i.e., ontologies) are referenced in the content.
-	\item[\ac{resthateoas}.] The lack of native hypermedia support in \ac{rdf}-based representations makes this the most challenging property to achieve \citep{page_rest_2011}. % compara LOD y REST
+	\item[\acf{resthateoas}.] The lack of native hypermedia support in \ac{rdf}-based representations makes this the most challenging property to achieve \citep{amundsen_api_2010, page_rest_2011}. % compara LOD y REST
 				  However, some recent works propose means to fulfil this property.
 				  \citet{kjernsmo_necessity_2012} proposes a vocabulary for hypermedia \ac{rdf}.
 				  \citet{steiner_fulfilling_2011} and \citet{verborgh_functional_2012} propose to enrich the \ac{http} header with hypermedia information.
 				  While the first changes representations, the latter is a more general way to provide hypermedia.
     %\end{description}
- \item[\ac{restl}.] Encapsulation of functionalities can be achieved through a layered system.
+ \item[\acf{restl}.] Encapsulation of functionalities can be achieved through a layered system.
                      For example, to balance the load to a space replicated in two machines.
  % TODO TODO repensar si ontologías, reglas y demás (personalizar behaviour) se puede entender cómo COD:
  % In the code-on-demand style [50], a client component has access to a set of resources, but
  %  not the know-how on how to process them. It sends a request to a remote server for the
  %  code representing that know-how, receives that code, and executes it locally.
- \item[\ac{restcod}.] There are several cases where the \emph{know how} can be downloaded from the server in \ac{tsc}: % ok, no tan común como scripting
+ \item[\acf{restcod}.] There are several cases where the \emph{know how} can be downloaded from the server in \ac{tsc}: % ok, no tan común como scripting
             \begin{enumerate}
 	      \item Modelling scripts using appropriate ontologies. % TODO cite
 	      \item A semantic reasoner can be considered an interpreter for the content downloaded from the server.
@@ -347,10 +347,12 @@ subscriptions are useful to ensure certain level of asynchrony in the system (se
 
 % Nosotros proponemos una vuelta a los origenes para recuperar una simplicidad de la que limited devices pueden beneficiarse
 %    => la clave para facilitar y en algunos casos posibilidar que los dispositivos constrained lo implementen
-This dissertation proposes a return to the origins to recover the simplicity loss in the previous works.
+This dissertation proposes a return to the origins to recover the simplicity loss in the previous works. % ¿Explicar en qué consiste esto de simplicidad y por qué no es stateful?
 The rationale behind this decision is that resource constrained devices will benefit from this simplicity.
 In the proposed middleware they will be able not only to write and read knowledge into an external space, but also to enrich it providing their own managed data.
 % In the rest of the cases, the nodes are head toward the use of the space as simple clients.
 % none of them has been specifically designed to be run in devices with constrained capabilities apart from our solution.
 %      => la prueba de eso podría ser un apéndice con cómo lo nuestro se ha implementado en distintos cacharros... ¿?
-% TODO TODO TODO explicar en qué consiste esto de simplicidad y por qué no es stateful?!
+Table~\ref{tab:summary_own} summarizes the features of this middleware.
+
+\input{\pathchapthree/tables/summary_own}
