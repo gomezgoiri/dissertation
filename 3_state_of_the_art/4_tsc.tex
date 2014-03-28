@@ -203,11 +203,11 @@ Furthermore, to the best of our knowledge, this conceptual exercise never went b
 %	4. basado en clientes tontos
 
 \begin{sloppypar}
-Participant nodes usually access to semantic spaces on client/server basis.
+Participant nodes usually access semantic spaces on client/server basis.
 % no puedo usar \ac{} por la mayúscula
 Tsc++\citep{krummenacher_open_2009,blunder_distributed_2009} proposes an exception to the client/server access to the space.
 It relies on the Jxta P2P framework \citeweb{jxta} to propagate queries using different strategies.
-In \acs{tscpp}, spaces correspond to groups of nodes which locally manage their data.
+In tsc++, spaces correspond to groups of nodes which locally manage their data.
 \end{sloppypar}
 
 
@@ -235,11 +235,11 @@ Otherwise, the kernel uses three additional strategies:
 
 
 As discussed in Section~\ref{sec:soa_ts_ubicomp}, we also deal with distribution of data in one of the spaces of our hybrid model.
-As detailed in the following sections, we locally manage the content and we distribute the queries.
+As detailed in the following chapters, we locally manage the content and we distribute the queries.
 This resembles to the \emph{tsc++}'s strategy.
-However, instead of using a \ac{p2p} framework to access to the contents,
-we individually access to them using several \ac{http} requests. % añadir que son "parallel" o sólo liará?
-In other words, each client may access to various server to obtain a result for a given primitive.
+However, instead of using a \ac{p2p} framework to access the contents,
+we individually access them using several \ac{http} requests. % añadir que son "parallel" o sólo liará?
+In other words, each client may access various servers to obtain a result for a given primitive.
 
 % TODO TODO TODO Smart-M3
 % De: http://www.diem.fi/files/KP_reference%20implementation.pdf
@@ -248,10 +248,10 @@ In other words, each client may access to various server to obtain a result for 
 %  entities. However, the SIB reference implementation does not currently support any 
 %  kind of interaction between different SIBs, which would enable distribution of the 
 %  Smart Space. On the IOP, the SIB is implemented as a NoTA SN.
-\citet{honkola_smart-m3_2010} defend that \acs{smartm3}'s space can be distributed using the \emph{distributed deductive closure protocol}.
- % TODO asegurarse 100% de esto que voy a decir!
-However, to the best of our knowledge this idea has never been implemented or evaluated, making \acs{smartm3}'s space de facto centralized.
-For the communication between the clients and the space, \acs{smartm3} defines a stateful protocol called \emph{Smart Access Protocol (SSAP)}. % decir que está basado en XML?
+\citet{honkola_smart-m3_2010} defend that Smart-M3's space can be distributed using the \emph{distributed deductive closure protocol}.
+ % TODO volver a asegurarse 100% de esto que voy a decir!
+However, to the best of our knowledge this idea has never been implemented or evaluated, making Smart-M3's space de facto centralized.
+For the communication between the clients and the space, Smart-M3 defines a stateful protocol called \emph{Smart Access Protocol (SSAP)}. % decir que está basado en XML?
 The authors defend that this protocol is communication agnostic because it can be implemented on top of different communication mechanisms
 (e.g., WS-* web services, XMPP \citeweb{xmpp}, Bluetooth \citeweb{bluetooth} or TCP/IP).
 \citet{kiljander_knowledge_2012} propose an enhanced stateless access protocol designed to fit the needs of low capacity devices.
