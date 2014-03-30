@@ -42,8 +42,9 @@
   { % if empty
     \begin{savenotes}
     \begin{table}
+      \caption{#2}{\footnotesize{#3} \medskip}
+      
       \centering
-      \caption{#2}{\footnotesize{#3}\medskip}
       #4
       \label{#1}
     \end{table}
@@ -52,7 +53,8 @@
   { % if not empty
     \begin{savenotes}
     \begin{table}[#5]
-      \caption{#2}{\footnotesize{#3}\medskip}
+      \caption{#2}{\footnotesize{#3} \medskip}
+      
       \centering
       #4
       \label{#1}
