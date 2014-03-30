@@ -334,8 +334,19 @@ Table~\ref{tab:rest_principles} shows the conflicts that the analysed works pres
 None of them achieve the \ac{resthateoas} principle.
 In fact, its use in the \ac{sw} is subject of current research.
 Most of them guarantee the access to the space in the \ac{restcs} basis.
+% Fensel2007tsc says that they break this with an hybrid architecture.
+% The point here would be to decide whether the distribution is introducced by an upper service such as the Triple store or by tuple space middleware
+% (analagously, think of a web architecture with a distributed DB at the application level).
 The only exception is \midtscpp{}, where each participant of the space is a peer in a \ac{p2p} network.
-Finally, the statefulness of these middlewares conflicts with additional features such as transactionality or subscriptions/notification systems.
+However, when the subscription/notification systems are offered as part of \ac{tsc}, the \ac{restcs} property is certainly affected.
+% Similarly, people argue that AJAX or WebSockets might be a concern to achieve REST architectures.
+% http://www.infoq.com/news/2012/02/websockets-rest
+% http://savas.me/2005/08/why-i-think-ajax-breaks-rest/
+Similarly, the statefulness of these middlewares conflicts with the transactionality feature.
+% This is certainly a hard issue to think of, at which level is the transactionality offered? I assume that at the middleware level.
+%     http://stackoverflow.com/questions/3105296/if-rest-applications-are-supposed-to-be-stateless-how-do-you-manage-sessions
+% It could be build uppon a REST architecture, just as HTTP is build on top of a stateful protocol, TCP on a stateless (IP), etc.
+%    http://whatis.techtarget.com/definition/stateless
 While the transactionality need in \ac{tsc} can be argued,
 subscriptions are useful to ensure certain level of asynchrony in the system (see Section~\ref{sec:notification}).
 % explicar que lo nuestro al dividir en dos espacio en uno nos libramos de esto y en el otro es opcional para mejorar la eficiencia
@@ -349,7 +360,7 @@ subscriptions are useful to ensure certain level of asynchrony in the system (se
 %    => la clave para facilitar y en algunos casos posibilidar que los dispositivos constrained lo implementen
 This dissertation proposes a return to the origins to recover the simplicity loss in the previous works. % ¿Explicar en qué consiste esto de simplicidad y por qué no es stateful?
 The rationale behind this decision is that resource constrained devices will benefit from this simplicity.
-In the proposed middleware they will be able not only to write and read knowledge into an external space, but also to enrich it providing their own managed data.
+In the proposed middleware they will be able not only to write and read knowledge into an external space, but also to enrich it providing their own managed data. % esto puede sonar a que se rompe CS 0:-)
 % In the rest of the cases, the nodes are head toward the use of the space as simple clients.
 % none of them has been specifically designed to be run in devices with constrained capabilities apart from our solution.
 %      => la prueba de eso podría ser un apéndice con cómo lo nuestro se ha implementado en distintos cacharros... ¿?

@@ -1,19 +1,21 @@
-\InsertTab{tab:rest_principles}{\ac{tsc}'s middlewares potential conflicts with \ac{rest} style's principles}{}{
+\InsertTab{tab:rest_principles}{\ac{tsc}'s middlewares potential conflicts with \ac{rest} style's principles}{
+  The crosses with an asterisk denote mainly \ac{restcs} middlewares which at some level break this property through asynchronous notifications to the clients.
+  
+}{
   % Tablita de cómo hereda propiedades de los estilos anteriores?
   % (y si quieren más información, que miren en la tesis de Fielding)
   \begin{tabular}{lccc}
       \hline
-      &
+      ~ &
       \ac{restcs} &
       \ac{rests} &
       \ac{resthateoas} \\
       \hline
-      \midtsc{} & & × & × \\
-      \midsws{} & & × & × \\
-      \midtscpp{} & × & × & × \\
-      \midtripcom{} & & × & × \\
-      \midsmartmt{} & & × & × \\
-%	TSC (own) & × & × & × & × & × & × & × & × & × & × & × & × & ×\\ % mejor describirlo sólo con palabras que meterme en berenjenales
+      \midtsc{} & ×$^*$ & × & × \\
+      \midsws{} & ~ & ~ & × \\
+      \midtscpp{} & ×~ & ~ & × \\
+      \midtripcom{} & ×$^*$ & × & × \\
+      \midsmartmt{} & ×$^*$ & ~ & × \\
       \hline
   \end{tabular}
-}{htbp}
+}{}
