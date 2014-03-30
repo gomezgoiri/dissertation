@@ -70,23 +70,23 @@ In \citeauthor{fielding_architectural_2000}'s words, the relevant properties whi
 % verificar que no se parece demasiado a sus definiciones o sino poner cursiva.
 \begin{description}
   \item[Performance] is divided into network performance, user-perceived performance and efficiency.
-    \begin{description}
-      \item[Network performance] is affected by the number of interactions and the granularity of data elements.
-      \item[User-perceived performance] refers to the impact perceived by a user in front of an application. % UP Performance es una feature que no aporta mucho a nuestro caso
-      \item[Efficiency] is achieved by minimizing the use of the network.
-    \end{description}
+    \begin{itemize}
+      \item \textbf{Network performance} is affected by the number of interactions and the granularity of data elements.
+      \item \textbf{User-perceived performance} refers to the impact perceived by a user in front of an application. % UP Performance es una feature que no aporta mucho a nuestro caso
+      \item \textbf{Efficiency} is achieved by minimizing the use of the network.
+    \end{itemize}
   \item[Scalability] measures how an architecture supports a big amount of components and interactions between them.
   \item[Simplicity] is achieved through the separation of concerns for the components and the generality of architectural elements.
   \item[Modifiability] indicates how easily gradual changes can be introduced in the system.
                        These changes contribute to form different implementations which should coexist.
                        % Dynamic modifiability avoids the whole system to restart.
-    \begin{description}
-      \item[Evolvability] refers to the degree in which a component can be implemented without negatively impacting on others.
-      \item[Extensibility] measures the ability to add functionality to the system.
-      \item[Customization] is the ability to adjust the behaviour of an architectural element temporarily.
-      \item[Configurability] is related with extensibility and reusability.
-      \item[Reusability] is the ability to reuse components, connectors or data elements without modifying other applications.
-    \end{description}
+    \begin{itemize}
+      \item \textbf{Evolvability} refers to the degree in which a component can be implemented without negatively impacting on others.
+      \item \textbf{Extensibility} measures the ability to add functionality to the system.
+      \item \textbf{Customization} is the ability to adjust the behaviour of an architectural element temporarily.
+      \item \textbf{Configurability} is related with extensibility and reusability.
+      \item \textbf{Reusability} is the ability to reuse components, connectors or data elements without modifying other applications.
+    \end{itemize}
   \item[Visibility] is the ability of a component of monitoring or mediating in the interaction between other two components.
   \item[Portability] is the ability of working in different environments.
   \item[Reliability] is the degree in which an architecture depends on the failures of the system or components, connectors or partially incorrect data.
