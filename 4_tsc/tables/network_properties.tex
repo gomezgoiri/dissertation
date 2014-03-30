@@ -1,6 +1,15 @@
 \InsertTab{tab:network_properties}{Properties of different architectural styles for network-based applications as defined by \citet{fielding_architectural_2000}}{
+  Each plus symbol (+) represents a positive influence and each minus symbol (-) a negative one.
+  Plus-minus (±) denotes that it depends on some aspect of the problem domain.
+  
+  The leftest column contains each of the network substyles \acs{rest} derives from:
+  \acf{restcs}, \acf{rests}, \acf{restcache}, \acf{restu}, \acf{restl} and \acf{restcod}.
+  
+  The horizontal line indicates that the inmediate row below is composed by all the rows from the upper level.
+  
   Note that the original table has been slightly adapted.
   These adaptations are remarked inside the table. % using several footnotes.
+
 }{
   % Tablita de cómo hereda propiedades de los estilos anteriores?
   % (y si quieren más información, que miren en la tesis de Fielding)
@@ -21,21 +30,21 @@
     \rotatebox{90}{Portability} &
     \rotatebox{90}{Reliability} \\
     \hline
-    CS & ~ & ~ & ~ & $+$ & $+$ & $+$ & ~ & ~ & ~ & ~ & ~ & ~ & ~ \\
-    S\footnote{\emph{S} represents the difference between \emph{CSS} and \emph{CS} in \citep{fielding_architectural_2000}.}
+    \acs{restcs} & ~ & ~ & ~ & $+$ & $+$ & $+$ & ~ & ~ & ~ & ~ & ~ & ~ & ~ \\
+    \acs{rests}\footnote{\emph{S} represents the difference between \emph{CSS} and \emph{CS} in \citep{fielding_architectural_2000}.}
       & $-$ & ~ & ~ & $+$ & ~ & ~ & ~ & ~ & ~ & ~ & $+$ & ~ & $+$ \\ % = CSS - CS
-    \$ & ~ & $+$ & $+$ & $+$ & $+$ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ \\
+    \acs{restcache} & ~ & $+$ & $+$ & $+$ & $+$ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ \\
     \hline
     Early web\footnote{Corresponds to the \emph{C\$SS} style in \citep{fielding_architectural_2000}.}
       & $-$ & $+$ & $+$ & $++$ & $+$ & $+$ & ~ & ~ & ~ & ~ & $+$ & ~ & $+$ \\ % = C$SS
-    L & ~ & $-$ & ~ & $+$ & ~ & $+$ & ~ & ~ & ~ & $+$ & ~ & $+$ & ~ \\ % = LS
-    COD & ~ & $+$ & $+$ & $+$ & $\pm$ & ~ & $+$ & ~ & $+$ & ~ & $-$ & ~ & ~ \\
+    \acs{restl} & ~ & $-$ & ~ & $+$ & ~ & $+$ & ~ & ~ & ~ & $+$ & ~ & $+$ & ~ \\ % = LS
+    \acs{restcod} & ~ & $+$ & $+$ & $+$ & $\pm$ & ~ & $+$ & ~ & $+$ & ~ & $-$ & ~ & ~ \\
     \hline
     LCODC\$SS & $-$ & $++$ & $++$ & $+4+$ & $+\pm+$ & $++$ & $+$ & ~ & $+$ & $+$ & $\pm$ & $+$ & $+$ \\
-    U\footnote{Although it is not explicitly included in the original table, \emph{U} has been derived from \citeauthor{fielding_architectural_2000}'s description.}
+    \acs{restu}\footnote{Although it is not explicitly included in the original table, \emph{U} has been derived from \citeauthor{fielding_architectural_2000}'s description.}
       & ~ & ~ & ~ & ~ & $+$ & ~ & ~ & ~ & ~ & $+$ & $+$ & ~ & ~ \\ % Uniform Interface (simple, visible, reusable) && en el texto dice que degrada efficiency
     \hline
-    REST\footnote{Derived from the addition of \emph{U} to \emph{LCODC\$SS}.} % esto se podría intuír por la línea, pero quién sabe..
+    \acs{rest}\footnote{Derived from the addition of \emph{U} to \emph{LCODC\$SS}.} % esto se podría intuír por la línea, pero quién sabe..
       & $-$ & $++$ & $++$ & $+4+$ & $+\pm++$ & $++$ & $+$ & ~ & $+$ & $++$ & $+\pm$ & $+$ & $+$ \\ % = LCODC$SS + U
 %	TSC (own) & × & × & × & × & × & × & × & × & × & × & × & × & ×\\ % mejor describirlo sólo con palabras que meterme en berenjenales
     \hline
