@@ -180,8 +180,8 @@ In conclusion, the properties achieved by the network communication style select
 
 A middleware is a software layer which provides a higher level of abstraction and masks the underlying heterogeneity.
 The middleware presented in this dissertation is oriented to \ac{ubicomp} environments and the devices which populate them (particularly mobile and embedded devices).
-Whereas the devices part of the \ac{iot} are a subset of the ones present in \ac{ubicomp}, we observed that the challenges they have to face are the same ones.
-For instance, smartphones are not part of the \ac{iot}, but face similar energy and computational limitations as the embedded devices. % posiblemente no todas las propiedades!
+Whereas the devices part of the \ac{iot} are a subset of the ones present in \ac{ubicomp}, we observed that the challenges they have to cope with are the same ones.
+For instance, smartphones are not part of the \ac{iot}, but cope with similar energy and computational limitations as the embedded devices. % posiblemente no todas las propiedades!
 
 % ¿Qué propiedades deseables para IoT añadiríamos?
 Therefore, we will consider the challenges identified by the \emph{Internet-of-Things Architecture} European project \citep{walewski_project_2011} to analyse our solution.
@@ -273,7 +273,7 @@ At a finer grained level, there are several properties which help different \ac{
 
 \bigskip
 
-Besides, in our \ac{http} \ac{api} the following issues remain unsolved:
+In addition, in our \ac{http} \ac{api} the following issues remain unsolved:
 % estos 2 últimos son como redefinir interop
 \begin{itemize} % posiblemente incluir lo que se explica aquí en otro punto
   \item \emph{Using third-party applications' data}:
@@ -339,7 +339,7 @@ This dissertation proposes a self-managed architecture which eases searching sel
 
 \subsubsection{Mobility}
 
-The ability to face mobility situations can be improved through the decoupling brought by space-based computing.
+The ability to cope with mobility situations can be improved through the decoupling brought by space-based computing.
 Firstly, mobility situations may impede two nodes to coexist at the same time.
 In this case, \emph{time uncoupling} enables their communication.
 
@@ -386,7 +386,7 @@ This means that a developer using the middleware cannot assume:
   \item The inference process on data providers.
         Reasoning over the content to provide unstated implicit knowledge must be desirable.
         Still, most of the mobile and embedded devices are not able to process big amount of data. % TODO citar WoT2012
-        Besides, reasoners are not available or optimized for many limited platforms.
+        Furthermore, reasoners are not available or optimized for many limited platforms.
   \item The inference process on data consumers.
         Another alternative or complement for inferring data on the providers is to do it in the consumers after receiving the responses.
         Again, it is a desirable property, but our middleware does not force it.
@@ -420,7 +420,7 @@ There are some crucial characteristics which negatively affect energy autonomy o
         % como se ha explicado: hemos limitado
         We have limited its impact on resource constrained platforms through the searching mechanism.
   \item Regarding \ac{http}, its statelessness contributes to a bad \textbf{network performance}.
-        Besides, the verboseness of most of the semantic formats also contributes negatively to that aspect.
+        In addition, the verboseness of most of the semantic formats also contributes negatively to that aspect.
 \end{itemize}
 
 
