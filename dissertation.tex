@@ -42,6 +42,11 @@
 % Metadata of the dissertation
 \input{metadata}
 
+% I cannot uppercase listing in the heading! :-S
+%\addto\captionsenglish{% to make it work with babel package
+%\renewcommand{\listlistingname}{List of Listings}} % To does not work!
+
+
 
 %: ----------------------------------------------------------------------
 %:                  TITLE PAGE: name, degree,..
@@ -95,7 +100,6 @@
 
 % Watermark
 %\watermark{DRAFT	DRAFT	DRAFT	DRAFT	DRAFT	DRAFT	DRAFT	DRAFT	DRAFT}
-
 
 %: ----------------------- generate cover page ------------------------
 
@@ -153,6 +157,7 @@
 
 \listoffigures	% print list of figures
 \listoftables  % print list of tables
+\listoflistings
 
 
 %: ----------------------- glossary ------------------------

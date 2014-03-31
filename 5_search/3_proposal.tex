@@ -296,7 +296,7 @@ We use the algorithm detailed in Listing~\ref{list:selectionAlgorithm} to rank t
   \EndIf
   \State \Return $nodes$
   \end{algorithmic}
-  \caption{\acl{wp} selection algorithm.}
+  \caption[\acl{wp} selection algorithm]{\acl{wp} selection algorithm.}
   \label{list:selectionAlgorithm}
 \end{listing}
 
@@ -511,12 +511,12 @@ It first defines the prefixes used and gives them a name and then, it specifies 
   }
 }
   \end{minted}
-  \caption{
+  \label{list:oneClue}
+  \caption[Representation of a predicate-based \clue{}]{
     Representation of a predicate-based \clue{} in \acs{json}.
     The node sending the \clue{} has \acs{rdf} triples which use the predicates
     \emph{so:result}, \emph{so:procedure}, \emph{so:observedProperty} and \emph{so:samplingTime}.
   }
-  \label{list:oneClue}
 \end{listing}
 
 \medskip
@@ -552,7 +552,7 @@ Finally, for each node, each prefix is related with the URI endings.
   }
 }
   \end{minted}
-  \caption{
+  \caption[Representation of an aggregated \clue{}]{
     Representation of an aggregated clue in \ac{json}.
     Line 2 defines that it embeds predicate \clues{} (i.e., type 1).
     Lines 3 and 4, contain the version of the aggregated clue.
