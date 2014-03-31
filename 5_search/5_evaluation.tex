@@ -44,9 +44,9 @@ This is why the \emph{recall} of \tplfour{} is high.
 
 
 
-\InsertFig{clues_recall}{fig:recall_measures}{\emph{Recall} for each type of clue used}{}{1}{}
+\InsertFig{clues_recall}{fig:recall_measures}{\emph{Recall} for each type of clue}{}{1}{}
 
-\InsertFig{clues_precision}{fig:precision_measures}{\emph{Precision} for each type of clue used}{}{1}{}
+\InsertFig{clues_precision}{fig:precision_measures}{\emph{Precision} for each type of clue}{}{1}{}
 % IG: TODO mencionar en el texto de referencia o en la caption algo como: The higher the better.
 
 % Explicar predicate-based
@@ -73,10 +73,7 @@ In any case, the diagram shows a similar verbosity for all the clues for the sem
 % No es adecuado para cacharros pequeños: poner evaluación de WoT de inferencia
 
 
-\InsertFig{clues_length}{fig:clueSize}{
-  Length of the clues alternatives
-}{
-}{0.6}{}
+\InsertFig{clues_length}{fig:clueSize}{Length for types of clues}{}{0.6}{}
 
 % Añadir nuevas barras: Predicate+schema y predicate+schema+MostCommonsIndividuals
 % Poner otra barra para saber cuanto contenido semántico guarda un nodo de media en el experimento?
@@ -142,9 +139,8 @@ When we increase the number of \consumers{} in the \Space{}, the caching strateg
 In the same situation, our solution handles better an increase on the number of \consumers{} in the \Space{}.
 
 
-\InsertFig{requests_by_strategies}{fig:requestsByStrategies}{
-  Required requests for \acf{nb}, \ac{nb} with caching with 1 and 100 \consumers{} and our solution with 1 and 100 \consumers{}
-}{
+\InsertFig{requests_by_strategies}{fig:requestsByStrategies}{Required requests for different search strategies}{
+Required requests for \acf{nb}, \ac{nb} with caching with 1 and 100 \consumers{} and our solution with 1 and 100 \consumers{}.
 }{0.75}{}
 
 
@@ -164,7 +160,12 @@ The communications between \consumers{} and \providers{} assumes most of the tot
 This shows that the overhead added by the use of \ac{wp} on our solution is not significant and it is justified by the reduction of the total number of communications shown in Figure~\ref{fig:requestsByStrategies}.
 
 
-\InsertFig{requests_by_roles}{fig:requestsByRoles}{Requests between roles in our solution in a \Space{} with 100 \consumers{}}{}{0.75}{}
+\InsertFig{requests_by_roles}{fig:requestsByRoles}{Requests between roles in our solution}{
+The \Space{} evaluated has 100 \consumers{} and from 105 to 295 nodes in total (including the \consumers{}).
+``\emph{Prov-WP}'' denotes the communication between \providers{} and the \acs{wp},
+``\emph{Cons-WP}'' the communication between \consumers{} and the \acs{wp},
+and ``\emph{Cons-Prov}'' \consumers{}' requests to \providers{}.
+}{0.8}{}
 
 
 

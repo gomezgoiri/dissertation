@@ -64,23 +64,24 @@
 }
 
 \newcommand{\InsertFig}[6]{%
+	\begin{figure}[htbp!]
+	\centering
 	\ifthenelse{\isempty{#5}}%
-	{% if #1 is empty
-		\begin{figure}[htbp!]
-		\centering
+	{
 		\includegraphics[#6]{#1}%
-		\caption{#3}{\footnotesize{#4}}
-		\label{#2}
-		\end{figure}    
 	}
 	{% if #1 is not empty
-		\begin{figure}[htbp!]
-		\centering
 		\includegraphics[width=#5\figwidth,#6]{#1}%
-		\caption{#3}{\footnotesize{#4}}
-		\label{#2}
-		\end{figure}
 	}
+	\ifthenelse{\isempty{#3}}%
+	{
+		\caption{#4}
+	}
+	{
+		\caption[#3]{#3.}{\footnotesize{#4}}
+	}
+	\label{#2}
+	\end{figure}
 }
 
 %% Simple version of \InsertFig
