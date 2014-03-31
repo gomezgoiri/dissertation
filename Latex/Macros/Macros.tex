@@ -38,29 +38,21 @@
 %
 
 \newcommand{\InsertTab}[5]{
-  \ifthenelse{\isempty{#5}}
-  { % if empty
-    \begin{savenotes}
-    \begin{table}
-      \caption{#2}{\footnotesize{#3} \medskip}
-      
+  \begin{savenotes}
+    \ifthenelse{\isempty{#5}}
+    { % if empty
+      \begin{table}
+    }
+    { % if not empty
+      \begin{table}[#5]
+    }
+      \caption[#2]{#2.}{\footnotesize{#3} \medskip}
+	
       \centering
       #4
       \label{#1}
     \end{table}
-    \end{savenotes}
-  }
-  { % if not empty
-    \begin{savenotes}
-    \begin{table}[#5]
-      \caption{#2}{\footnotesize{#3} \medskip}
-      
-      \centering
-      #4
-      \label{#1}
-    \end{table}
-    \end{savenotes}
-  }
+  \end{savenotes}
 }
 
 \newcommand{\InsertFig}[6]{%
