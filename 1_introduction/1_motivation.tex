@@ -11,9 +11,9 @@ Thanks to wireless technologies, devices can connect to the Internet without hav
 
 % IoT + mobile => UbiComp
 These technologies have contributed to the emergence of end-user devices such as smartphones or tablets.
-Furthermore, nowadays, everyday objects like cars or washing machines start to be connected to the Internet to exchange information.
+Furthermore, everyday objects like cars or washing machines are now starting to be connected to the Internet to exchange information.
 This is what is currently known as the \ac{iot} \citep{atzori_internet_2010}.
-The objects of the \ac{iot}, together with mobile devices, constitute the clearest sign of the \acf{ubicomp} prominence in our current lives \citep{caceres_ubicomp_2012}.
+The objects of the \ac{iot}, together with mobile devices, constitute the clearest sign of the importance of \acf{ubicomp} in our lives today \citep{caceres_ubicomp_2012}.
 
 % UbiComp & AmI
 The \ac{ubicomp} concept was envisioned by \citeauthor{weiser1991computer} in the early nineties \citep{weiser1991computer}. % y el term was coined
@@ -28,10 +28,10 @@ For instance, the washing machine could plan to finish washing the clothes two m
 % Cómo se pueden comunicar los cacharros?
 \citeauthor{weiser1991computer} remarked that the real power of \ac{ubicomp} ``\emph{comes not from any one of these devices, it emerges from the interaction of all of them}''.
 % WoT
-However, integrating devices to accomplish such task is not trivial as they usually communicate using different protocols.
-To solve this problem, the \ac{wot} initiative proposes to use well-established web standards to ease their communication \citep{guinard_thesis_2011}.
-This, together with the already existing tools and libraries from the web world, simplifies its adoption by developers \citep{guinard_search_2011}.
-Besides, the \ac{wot} naturally integrates with the currently widely used \acs{rest}ful web applications.
+However, integrating devices to accomplish such task is not simple as they usually communicate using different protocols.
+To solve this problem, the \ac{wot} initiative proposes using well-established web standards to ease their communication \citep{guinard_thesis_2011}.
+This, together with the already existing tools and libraries from the world of the web, simplifies its adoption by developers \citep{guinard_search_2011}.
+Furthermore, the \ac{wot} naturally integrates with widely used \acs{rest}ful web applications.
 
 % Debería hacer el salto de:
 % WoT problem coupling => TS ???
@@ -49,15 +49,15 @@ One common problem of both the \ac{wot} and \aclp{ts} is that the format of the 
 This implies that data will not be meaningful in other domains unless a specialized system converts and reinterprets them.
 A way to solve this problem is annotating the data semantically as proposed by the \ac{www} \citep{berners-lee_semantic_2001}.
 Specifically, the \ac{tsc} paradigm \citep{fensel_triple-space_2004} employs this semantic knowledge on shared spaces following the \aclp{ts} approach.
-Besides, we argue that \ac{tsc} can be designed to fulfil \ac{rest}'s principles.
+We also argue that \ac{tsc} can be designed to fulfil \ac{rest}'s principles.
 
 
-However, adding semantics may suppose a burden for resource constrained devices.
+However, adding semantics may impose a burden on resource constrained devices.
 To reduce this overhead in such devices, part of this computation is usually delegated to intermediaries \citep{honkola_smart-m3_2010}. % todavía no poner esta cita
 This approach reduces the overhead of semantically annotated data but brings other problems:
 \begin{enumerate}
  \item When devices rely on others to provide information, it is not guaranteed that the information accessed will accurately represent the last information available in the data providers (i.e., the sensors).
- \item Once we rely on those intermediaries, it is required for them to be available at all time.
+ \item Once we rely on those intermediaries, they must be available at all times.
 	Otherwise, the devices will not be able to talk to each other.
 \end{enumerate}
 
@@ -66,28 +66,28 @@ This approach reduces the overhead of semantically annotated data but brings oth
 
 
 % definir más claramente si IoT o AmI
-In this thesis, we propose to adapt \ac{tsc} to the \ac{ubicomp} environments, particularly involving limited devices in such task.
+In this thesis, we propose to adapt \ac{tsc} to the \ac{ubicomp} environments, particularly involving limited devices in such tasks.
 To fulfil such an ambitious goal, we need to carefully consider the restrictions imposed by such environments.
 Two key aspects to take into account are the limited energy autonomy or computational capacity of many devices.
-Similarly, our solution should be flexible enough to support a wide range of scenarios and to reuse third-party applications' data.
+Similarly, our solution should be flexible enough to support a wide range of scenarios and to reuse data from third-party applications.
 
 
 This thesis addresses different key aspects of this adaptation:
 \begin{itemize}
   \item \emph{\ac{tsc}'s compatibility with the \acs{rest} style and the \ac{wot} vision.}
-	Aligning the \ac{tsc} design with \ac{rest} one can inherit many of the benefits provided by this style and interoperate with other \ac{rest}-based solutions.
+	By aligning the \ac{tsc} design with \ac{rest} one can inherit many of the benefits provided by this style and interoperate with other \ac{rest}-based solutions.
 	At the same time, the use of \ac{tsc} can help developers to focus on higher-level problems.
 	% problema: habría que probar o se da por sentado que es lo que hace un middleware?
 	
   \item \emph{Decentralized search on the semantic content provided by federated devices.}
 	% TODO Se sobreentenderá lo de federated? es la primera vez que lo menciono, pero es un concepto común...
-	This search architecture enables the direct communication between participants.
+	This search architecture enables direct communication between participants.
 	Furthermore, it reduces the energy consumption of the resource-constrained devices.
 	
   \item \emph{Actuation on the physical environment.}
 	We present common usage patterns for space-based computing and we analyse how they can be used in \ac{ubicomp}.
-	Besides, we propose a space enhancement which seamlessly reuses external \ac{rest} services.
-	This way, we build a bridge between our solution and other \ac{wot} and \ac{rest} solutions.
+	We also propose a space enhancement which seamlessly reuses external \ac{rest} services.
+	This enable us to build a bridge between our solution and other \ac{wot} and \ac{rest} solutions.
 \end{itemize}
 %Finally, we also present the incarnation of some of these ideas in a middleware,
 %and some scenarios where it has been used.
