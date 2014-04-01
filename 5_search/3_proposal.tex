@@ -497,7 +497,7 @@ However, we have chosen \ac{json} for its simplicity and its wide adoption in th
 The prefix-based \clue{} is the easiest one to represent in \ac{json} since it is formed by a set of \acp{uri}.
 We can also represent the predicate-based and the class-based \clues{} using a set of \acp{uri}.
 However, the prefixes of those \acp{uri} are usually repeated and for this reason, we do not use plain \acp{uri} transmission for these clues.
-We show an example in Listing \ref{list:oneClue}.
+We show an example in Listing~\ref{list:oneClue}.
 It first defines the prefixes used and gives them a name and then, it specifies the \ac{uri} endings for each prefix.
 
 \begin{listing}
@@ -511,19 +511,19 @@ It first defines the prefixes used and gives them a name and then, it specifies 
   }
 }
   \end{minted}
-  \label{list:oneClue}
   \caption[Representation of a predicate-based \clue{}]{
     Representation of a predicate-based \clue{} in \acs{json}.
     The node sending the \clue{} has \acs{rdf} triples which use the predicates
     \emph{so:result}, \emph{so:procedure}, \emph{so:observedProperty} and \emph{so:samplingTime}.
   }
+  \label{list:oneClue}
 \end{listing}
 
 \medskip
 
 These are isolated \clues{} sent from a \provider{} to the \ac{wp}.
 However, the \ac{wp} gathers all these \clues{} in an aggregated clue which is sent to the \consumer{}.
-We show an example of an aggregated clue in Listing \ref{list:aggregatedClue}.
+We show an example of an aggregated clue in Listing~\ref{list:aggregatedClue}.
 As one can see, the aggregated clue defines the type of \clues{} wrapped through the numeric field \emph{i}.
 \emph{G} and \emph{v} form the version of this aggregated clue.
 The field \emph{s} defines the prefixes.
