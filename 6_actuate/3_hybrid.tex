@@ -92,16 +92,16 @@ For example in the \nodeProvRest{} executions with 1000 actuators, the \nodeCons
 Figure~\ref{fig:timeTechnique} shows the results of these executions (each case is executed N=20 times).
 Note that the time measured 
 \begin{enumerate*}[label=\itshape\bfseries(\arabic*\upshape)]
-  \item excludes the time needed to initialize the environment, i.e., only considers the time needed for a change to be made from \nodeConsSpace{} and \nodeConsRest{}'s  perspective, and
+  \item only includes the time \nodeConsSpace{} and \nodeConsRest{} need to make a change in the physical environment (i.e., it excludes actuators' previous writings and subscriptions), and
   \item ignores the delays added by the communication between nodes % networking time?
 \end{enumerate*}.
 
 
-\InsertFig{performance_by_techniques}{fig:timeTechnique}{Time needed to make a change in per technique}{}{0.7}{}
+\InsertFig{performance_by_techniques}{fig:timeTechnique}{Time needed to make a change in the environment per technique}{}{0.7}{}
 
 
 % There is much room for performance improvement in the mechanism
-Figure~\ref{fig:timeTechnique} shows that \spaceActuation{} needs much less time than \restActuation{} to make a change in the physical environment.
+Figure~\ref{fig:timeTechnique} shows that \spaceActuation{} needs much less time than \restActuation{} to make a change.
 Furthermore, consumers and providers in \spaceActuation{} only perform trivial computing tasks: interpreting results. % pattern matching sólo en el caso del coordination space!
 The space, which corresponds to our solution's \coordspace{}, will be in charge of querying and notification mechanisms.
 The computation activity in the space varies depending on the complexity of these mechanisms' implementation, which is beyond the scope of this dissertation.
