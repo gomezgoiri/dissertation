@@ -91,14 +91,16 @@ This additional actuators model smart-heaters and are equivalent to \nodeProvSpa
 That is, in the \spaceActuation{} executions each actuator writes 2 graphs (5 triples in total) and subscribes to temperature preference changes.
 In the \restActuation{} executions each actuator has an \ac{api} equivalent to \nodeProvRest{}'s \ac{api} (i.e., 2 rules and 14 triples are exposed).
 For example in the \nodeProvRest{} executions with 1000 actuators, the \nodeConsRest{} reasons over 2000 additional rules and 14000 additional triples.
-Figure~\ref{fig:timeTechnique} shows the results of these executions (each case is executed N=XX times).
+Figure~\ref{fig:timeTechnique} shows the results of these executions (each case is executed N=20 times).
 Note that the time measured 
 \begin{enumerate*}[label=\itshape\bfseries(\arabic*\upshape)]
   \item excludes the time needed to initialize the environment, i.e., only considers the time needed for a change to be made from \nodeConsSpace{} and \nodeConsRest{}'s  perspective, and
   \item ignores the delays added by the communication between nodes % networking time?
 \end{enumerate*}.
 
-\InsertFig{time_by_techniques}{fig:timeTechnique}{Time needed to make a change in per technique}{}{0.7}{}
+
+\InsertFig{performance_by_techniques}{fig:timeTechnique}{Time needed to make a change in per technique}{}{0.7}{}
+
 
 % There is much room for performance improvement in the mechanism
 Figure~\ref{fig:timeTechnique} shows that \spaceActuation{} needs much less time than \restActuation{} to make a change in the physical environment.
