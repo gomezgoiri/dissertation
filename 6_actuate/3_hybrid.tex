@@ -1,16 +1,14 @@
 \section{Hybrid actuation}
 \label{sec:hybrid_actuation}
 
-The actuation technique presented by Section~\ref{sec:actuation_space} is the natural way of acting using a \Space{}.
+The actuation technique presented in Section~\ref{sec:actuation_space} is the natural way of acting using a \Space{}.
 However, \ac{rest} and \ac{rest}-like services are well-accepted mechanisms to expose limited devices' actuation capabilities \citep{guinard_internet_2011}. %  in the physical environment
 Therefore, their seamless integration (i.e., interoperation) opens the door to reuse the capabilities of many existing devices.
-Consequently, we aim to integrate semantically described \ac{rest} services in our space-based model. % integration, reuse, alignment, close the gap
+This section aims to integrate semantically described \ac{rest} services in our space-based model. % integration, reuse, alignment, close the gap
 That is, mix \spaceActuation{} with \restActuation{}.
 % we first need to close the gap between both approaches.
 %This section aims to experimentally proof the validity of the alignment presented in the previous section.
 
-
-This section explores this integration.
 Section~\ref{sec:actuation_comparison} compares \spaceActuation{} and \restActuation{} and argues the need of this integration.
 Then, Section~\ref{sec:actuation_scn3} presents a new implementation of the baseline scenario.
 This implementation shows how the \Space{} can transparently invoke \ac{rest} services on behalf of any consumer following the \spaceActuation{}.
@@ -38,16 +36,16 @@ This reuse is enabled by a rule-based reasoning engine. % reasoning engine ya qu
 \bigskip
 
 The effect of both mechanisms in resource constrained devices is affected by their computing and networking activities.
-In order to analyse the impact on these metrics, we measure the time and total amount of request needed to execute each scenario.
-In addition,  how they scale to more complex scenariosas the number of additional actuators in the physical environment affects these measurements,
-we consider four additional variations of the scenarios previously explained to capture.
+In order to analyse their impact, we measure two metrics for each implementation: the time and total amount of requests.
+In addition, as the number of additional actuators in the physical environment affects these measurements,
+we consider four additional variations of the scenarios previously explained. % to capture how they scale to more complex scenarios?
 Apart from the scenario with 1 actuator, we contemplate scenarios with 200, 400, 600, 800 and 1000 actuators.
 
 
-In order to measure the networking activities, we calculate the total number of requests performed in each scenario.
-We assume that each new actuator will behave exactly as each of the actuators from \implSpace{} and \implRest{}.
+In order to measure the networking activity, we calculate the total number of requests performed in each scenario.
+We assume that each new actuator will behave exactly as each of the actuators described in \implSpace{} and in \implRest{}.
 Consequently, in \spaceActuation{} each new actuator writes 2 graphs into the space and in the \restActuation{} each \ac{api} is crawled once.
-The crawler checks each of the 5 different calls clients can make to each \ac{api} (4 \acs{http} GET requests and 1 \acs{http} OPTIONS request).
+The crawler checks each of the 5 different calls clients can make to each \ac{api} (1 \acs{http} OPTIONS request and 4 \acs{http} GET requests).
 Figure~\ref{fig:requestsTechnique} shows the estimations for these scenarios.
 
 
@@ -55,8 +53,8 @@ Figure~\ref{fig:requestsTechnique} shows the estimations for these scenarios.
 
 
 % Dado que depende de diseño, lo importante por tanto no es el número ese, sino quienes se ven afectados.
-The number of requests which need to be made per new provider depends on the parameters detailed above (i.e. graphs written, crawling times and calls needed to discover a whole \ac{api}).
-As these parameters are design-dependant, the slopes shown by the Figure~\ref{fig:requestsTechnique} might vary from one implementation to another.
+The number of requests which need to be made per new provider depends on the parameters detailed above (i.e. graphs written, times each \ac{api} is crawled and calls needed to discover a whole \ac{api}).
+As these parameters are design-dependent, the slopes shown by the Figure~\ref{fig:requestsTechnique} might vary from one implementation to another.
 % p.e. podriamos reducir el número de recursos por API o escribir un grafo en vez de dos
 In any case, the figure does show that none of the techniques behave in a scalable manner.
 However, if we analyse the nature of this network traffic, we can see that
@@ -66,7 +64,7 @@ However, if we analyse the nature of this network traffic, we can see that
 \end{enumerate*}.
 
 
-In the first case, i.e., \spaceActuation{}, all the participants must be aware of what is written into the space to react (i.e., they are proactive).
+In \spaceActuation{}, all the participants must be aware of what is written into the space to react (i.e., they are proactive).
 Both consumers and providers read and write from the space, subscribe to specific changes and receive notifications.
 Thanks to this specificity, they are only affected by the contents they are interested in. % reduciendo la actividad
 On the contrary, the \Space{} will be involved in any networking activity.
@@ -75,7 +73,7 @@ Therefore, although it depends on the number of providers and consumers' interac
 
 On the other hand, \restActuation{} requires consumers to have prior knowledge about the environment to reason over it. % frase susceptible de simplificar
 Since this knowledge must be acquired from remote nodes before reasoning, this approach demands an extra network usage that the first does not.
-Therefore, depending on the network size, this technique might not be appropriate for resource-constrained devices.
+Therefore, depending on the network size, this technique might not be appropriate for resource-constrained consumers.
 
 
 \bigskip
@@ -86,8 +84,8 @@ RAM Memory: 512MB.
 
 CPU: 700 MHz Low Power ARM1176JZ-F Applications Processor.
 }).
-Again, apart from the scenario with 1 actuator, we contemplate scenarios with 200, 400, 600, 800 and 1000 actuators.
-This additional actuators model smart-heaters and are equivalent to \nodeProvSpace{} and \nodeProvRest{} in each implementation.
+In this case, we also contemplate scenarios with 1, 200, 400, 600, 800 and 1000 actuators.
+The additional actuators represent smart-heaters and mimic \nodeProvSpace{} and \nodeProvRest{} in each implementation.
 That is, in the \spaceActuation{} executions each actuator writes 2 graphs (5 triples in total) and subscribes to temperature preference changes.
 In the \restActuation{} executions each actuator has an \ac{api} equivalent to \nodeProvRest{}'s \ac{api} (i.e., 2 rules and 14 triples are exposed).
 For example in the \nodeProvRest{} executions with 1000 actuators, the \nodeConsRest{} reasons over 2000 additional rules and 14000 additional triples.
@@ -104,10 +102,10 @@ Note that the time measured
 
 % There is much room for performance improvement in the mechanism
 Figure~\ref{fig:timeTechnique} shows that \spaceActuation{} needs much less time than \restActuation{} to make a change in the physical environment.
-Furthermore, consumers and providers in \spaceActuation{} only perform trivial computing task: interpreting results. % pattern matching sólo en el caso del coordination space!
+Furthermore, consumers and providers in \spaceActuation{} only perform trivial computing tasks: interpreting results. % pattern matching sólo en el caso del coordination space!
 The space, which corresponds to our solution's \coordspace{}, will be in charge of querying and notification mechanisms.
 The computation activity in the space varies depending on the complexity of these mechanisms' implementation, which is beyond the scope of this dissertation.
-However, note that due to the prototype nature of the subscription mechanism implemented, there is still room for a great performance improvement. % prototype, prototyping?
+However, note that due to the prototype nature of the subscription mechanism implemented, for the \spaceActuation{} implementation there is still room for a great performance improvement in this metric. % prototype, prototyping?
 
 
 Finally, from the time needed to complete the \restActuation{} executions, most of the time is spent reasoning in the consumer.
@@ -133,7 +131,7 @@ This can be done before deploying them and does not affect to their usual operat
 
 
 From the perspective of our space-based computing solution, reusing the existing HTTP providers will potentially open a new world of actuation possibilities.
-For that, the simplicity of the consumers in \spaceActuation{} should be respected. % Simplicidad: networking y computing que aparecen en la tabla.
+Preferably, we should do it keeping \spaceActuation{} consumers' simplicity. % Simplicidad: networking y computing que aparecen en la tabla.
 
 
 % ¿Podríamos decir que el proof-based es más genérico?
