@@ -38,16 +38,16 @@ This reuse is enabled by a rule-based reasoning engine. % reasoning engine ya qu
 \bigskip
 
 The effect of both mechanisms in resource constrained devices is affected by their computing and networking activities.
-Consequently, we measure their impact for both \spaceActuation{} and \restActuation{}.
-As the number of actuators in the physical environment affects this measures in a significant way,
-we consider four additional variations of the scenarios previously explained.
+In order to analyse the impact on these metrics, we measure the time and total amount of request needed to execute each scenario.
+In addition,  how they scale to more complex scenariosas the number of additional actuators in the physical environment affects these measurements,
+we consider four additional variations of the scenarios previously explained to capture.
 Apart from the scenario with 1 actuator, we contemplate scenarios with 200, 400, 600, 800 and 1000 actuators.
 
 
 In order to measure the networking activities, we calculate the total number of requests performed in each scenario.
 We assume that each new actuator will behave exactly as each of the actuators from \implSpace{} and \implRest{}.
-Consequently, each new actuator writes 2 graphs into the space in the \spaceActuation{} and each \ac{api} is crawled once in the \restActuation{}.
-Each crawling needs to make 5 different calls to check each \ac{api} offered by an actuator (4 \acs{http} GETs and 1 \acs{http} OPTIONS).
+Consequently, in \spaceActuation{} each new actuator writes 2 graphs into the space and in the \restActuation{} each \ac{api} is crawled once.
+The crawler checks each of the 5 different calls clients can make to each \ac{api} (4 \acs{http} GET requests and 1 \acs{http} OPTIONS request).
 Figure~\ref{fig:requestsTechnique} shows the estimations for these scenarios.
 
 
@@ -55,44 +55,47 @@ Figure~\ref{fig:requestsTechnique} shows the estimations for these scenarios.
 
 
 % Dado que depende de diseño, lo importante por tanto no es el número ese, sino quienes se ven afectados.
-The number of requests which need to be made per new provider depends on the parameters detailed above.
-As these parameters depend on the concrete implementation of \nodeProvSpace{} and \nodeProvRest{}, the  concrete slope shown by the Figure~\ref{fig:requestsTechnique} is design-dependant.
+The number of requests which need to be made per new provider depends on the parameters detailed above (i.e. graphs written, crawling times and calls needed to discover a whole \ac{api}).
+As these parameters are design-dependant, the slopes shown by the Figure~\ref{fig:requestsTechnique} might vary from one implementation to another.
 % p.e. podriamos reducir el número de recursos por API o escribir un grafo en vez de dos
 In any case, the figure does show that none of the techniques behave in a scalable manner.
 However, if we analyse the nature of this network traffic, we can see that
-%\begin{enumerate*}[label=\itshape\bfseries(\arabic*\upshape)]
-\begin{enumerate}
-  \item in the \spaceActuation{} the \Space{} is involved in all the communications and
-  \item in the \restActuation{} \nodeConsRest{} is the source of every request.
-\end{enumerate}
+\begin{enumerate*}[label=\itshape\bfseries(\arabic*\upshape)]
+  \item in the \spaceActuation{} the \Space{} is involved in all the communications, and
+  \item in the \restActuation{} \nodeConsRest{} is the source of every request
+\end{enumerate*}.
 
 
-On the one hand, the reason for the first is that \ac{ts}-based patterns require all the participants to be aware of what is written into the space to react (i.e., be proactive).
+In the first case, i.e., \spaceActuation{}, all the participants must be aware of what is written into the space to react (i.e., they are proactive).
 Both consumers and providers read and write from the space, subscribe to specific changes and receive notifications.
 Thanks to this specificity, they are only affected by the contents they are interested in. % reduciendo la actividad
-The \Space{} will be involved in any networking activity.
+On the contrary, the \Space{} will be involved in any networking activity.
 Therefore, although it depends on the number of providers and consumers' interactions, the networking activity will presumably be high for the node hosting the \Space{}.
 
 
-On the other hand, \restActuation{} requires the consumer to have prior knowledge about the environment to reason over it. % frase susceptible de simplificar
+On the other hand, \restActuation{} requires consumers to have prior knowledge about the environment to reason over it. % frase susceptible de simplificar
 Since this knowledge must be acquired from remote nodes before reasoning, this approach demands an extra network usage that the first does not.
-Therefore, depending on the scale of the network, this technique might not be appropriate for resource-constrained devices.
+Therefore, depending on the network size, this technique might not be appropriate for resource-constrained devices.
 
 
 \bigskip
 
 
-Regarding the computation activity of these devices, we measure the time needed to run both implementations of the scenario in a \emph{Raspberry Pi} (Model B\footnote{RAM Memory: 512MB. \linebreak CPU: 700 MHz Low Power ARM1176JZ$-$F Applications Processor.}).
-Apart from the scenario with 1 actuator, we contemplate scenarios with 200, 400, 600, 800 and 1000 actuators.
-This additional actuators represent heaters and are equivalent to \nodeProvSpace{} and \nodeProvRest{} in each implementation.
+In order to analyse the computation activity in the scenarios' implementations, we measure the time needed to run both implementations of the scenario in a \emph{Raspberry Pi} (Model B\footnote{
+RAM Memory: 512MB.
+
+CPU: 700 MHz Low Power ARM1176JZ-F Applications Processor.
+}).
+Again, apart from the scenario with 1 actuator, we contemplate scenarios with 200, 400, 600, 800 and 1000 actuators.
+This additional actuators model smart-heaters and are equivalent to \nodeProvSpace{} and \nodeProvRest{} in each implementation.
 That is, in the \spaceActuation{} executions each actuator writes 2 graphs (5 triples in total) and subscribes to temperature preference changes.
-In the \restActuation{} executions each actuator has an equivalent \ac{api} to \nodeProvRest{} (i.e., 2 rules and 14 triples are exposed by the \ac{api}).
+In the \restActuation{} executions each actuator has an \ac{api} equivalent to \nodeProvRest{}'s \ac{api} (i.e., 2 rules and 14 triples are exposed).
 For example in the \nodeProvRest{} executions with 1000 actuators, the \nodeConsRest{} reasons over 2000 additional rules and 14000 additional triples.
-Figure~\ref{XX} shows the results of these executions (each case is executed N=XX times).
+Figure~\ref{fig:timeTechnique} shows the results of these executions (each case is executed N=XX times).
 Note that the time measured 
 \begin{enumerate*}[label=\itshape\bfseries(\arabic*\upshape)]
-  \item excludes the time needed to initialize the environment, i.e., only considers the time needed for a change to be made from the \nodeConsSpace{} and \nodeConsRest{}  perspective, and
-  \item ignores the time spent in networking
+  \item excludes the time needed to initialize the environment, i.e., only considers the time needed for a change to be made from \nodeConsSpace{} and \nodeConsRest{}'s  perspective, and
+  \item ignores the delays added by the communication between nodes % networking time?
 \end{enumerate*}.
 
 \InsertFig{time_by_techniques}{fig:timeTechnique}{Time needed to make a change in per technique}{}{0.7}{}
@@ -108,7 +111,7 @@ However, note that due to the prototype nature of the subscription mechanism imp
 Finally, from the time needed to complete the \restActuation{} executions, most of the time is spent reasoning in the consumer.
 % Furthermore, this actuation technique also generates additional computation activity on the node responsible for reasoning.
 %Both aspects have a negative impact in the energy consumption.
-Consequently, from the data consumer perspective, this approach will be generally more energy demanding than the first one. % might porque no está medido, pero es algo intuitivo
+Consequently, from the data consumer perspective, this approach will generally be more energy demanding than the first one. % might porque no está medido, pero es algo intuitivo
 In contrast, this mechanism demands few things to the provider: to serve \ac{http} resources and provide their descriptions. % aclarar quien es el provider/actuator?
 
 
