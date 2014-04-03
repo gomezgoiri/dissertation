@@ -446,7 +446,8 @@
     {\@textadvisortwo ~ \@advisortwo \par}
 	\vspace*{4ex}
     {\@textsignaturecandidate \hspace*{15ex}\@textsignatureadvisor \hspace*{15ex}\@textsignatureadvisor \par}
-	\vspace*{15ex}
+    {\hspace*{55ex}\includegraphics[width=0.3\textwidth]{/home/tulvur/documentos/docu_doctorado/registro/firma_primo.jpg}}
+    \vspace*{10ex}
     {\@cityofbirth, \@degreedate}
 }%end large
   \end{center}

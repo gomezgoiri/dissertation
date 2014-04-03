@@ -24,7 +24,7 @@ Obviously, this decoupling comes at the price of dependency on the \Space{}.
 That is, two nodes will not be able to communicate with each other without the \Space{}.
 
 
-The second approach presented in Section~\ref{sec:direct_actuation} offers independence of the \Space{}: any node can directly invoke a service to act over the environment.
+The second approach presented in Section~\ref{sec:direct_actuation} offers independence of the \Space{}: any node can directly invoke a service to act on the environment.
 This approach allows reusing \ac{wot} applications' actuation capabilities, providing they are properly described. % apps, APIs o services? % no digo integration/interop porque es sólo one-way
 This reuse is enabled by a rule-based reasoning engine. % reasoning engine ya queda bien?
 % The unavailability of these engines in many computing platforms may an obstacle for its massive adoption. % como apunte de su practicalidad, pero no sé si venía muy a cuento
@@ -33,19 +33,20 @@ This reuse is enabled by a rule-based reasoning engine. % reasoning engine ya qu
 \input{\pathchapsix/tables/actuation_general_comparison}
 
 
-\bigskip
-
-The effect of both mechanisms in resource constrained devices is affected by their computing and networking activities.
-In order to analyse their impact, we measure two metrics for each implementation: the time and total amount of requests.
+The effect of both mechanisms in resource-constrained devices is affected by their computing and networking activities.
+In order to analyse these activities, we measure the time needed to make a change and the total amount of requests.
 In addition, as the number of additional actuators in the physical environment affects these measurements,
 we consider four additional variations of the scenarios previously explained. % to capture how they scale to more complex scenarios?
 Apart from the scenario with 1 actuator, we contemplate scenarios with 200, 400, 600, 800 and 1000 actuators.
 
 
+\bigskip
+
+
 In order to measure the networking activity, we calculate the total number of requests performed in each scenario.
 We assume that each new actuator will behave exactly as each of the actuators described in \implSpace{} and in \implRest{}.
 Consequently, in \spaceActuation{} each new actuator writes 2 graphs into the space and in the \restActuation{} each \ac{api} is crawled once.
-The crawler checks each of the 5 different calls clients can make to each \ac{api} (1 \acs{http} OPTIONS request and 4 \acs{http} GET requests).
+The crawler checks the 5 different calls clients can make to each \ac{api} (1 \acs{http} OPTIONS request and 4 \acs{http} GET requests).
 Figure~\ref{fig:requestsTechnique} shows the estimations for these scenarios.
 
 
@@ -53,15 +54,15 @@ Figure~\ref{fig:requestsTechnique} shows the estimations for these scenarios.
 
 
 % Dado que depende de diseño, lo importante por tanto no es el número ese, sino quienes se ven afectados.
-The number of requests which need to be made per new provider depends on the parameters detailed above (i.e. graphs written, times each \ac{api} is crawled and calls needed to discover a whole \ac{api}).
+The number of requests which need to be made per new provider depends on the parameters previously detailed (i.e. graphs written, times each \ac{api} is crawled and calls needed to discover a whole \ac{api}).
 As these parameters are design-dependent, the slopes shown by the Figure~\ref{fig:requestsTechnique} might vary from one implementation to another.
 % p.e. podriamos reducir el número de recursos por API o escribir un grafo en vez de dos
-In any case, the figure does show that none of the techniques behave in a scalable manner.
-However, if we analyse the nature of this network traffic, we can see that
-\begin{enumerate*}[label=\itshape\bfseries(\arabic*\upshape)]
-  \item in the \spaceActuation{} the \Space{} is involved in all the communications, and
-  \item in the \restActuation{} \nodeConsRest{} is the source of every request
-\end{enumerate*}.
+In any case, the figure shows that none of the techniques behave in a scalable manner.
+%However, if we analyse the nature of this network traffic, we can see that
+%\begin{enumerate*}[label=\itshape\bfseries(\arabic*\upshape)]
+%  \item in the \spaceActuation{} the \Space{} is involved in all the communications, and
+%  \item in the \restActuation{} \nodeConsRest{} is the source of every request
+%\end{enumerate*}.
 
 
 In \spaceActuation{}, all the participants must be aware of what is written into the space to react (i.e., they are proactive).
@@ -86,9 +87,9 @@ CPU: 700 MHz Low Power ARM1176JZ-F Applications Processor.
 }).
 In this case, we also contemplate scenarios with 1, 200, 400, 600, 800 and 1000 actuators.
 The additional actuators represent smart-heaters and mimic \nodeProvSpace{} and \nodeProvRest{} in each implementation.
-That is, in the \spaceActuation{} executions each actuator writes 2 graphs (5 triples in total) and subscribes to temperature preference changes.
-In the \restActuation{} executions each actuator has an \ac{api} equivalent to \nodeProvRest{}'s \ac{api} (i.e., 2 rules and 14 triples are exposed).
-For example in the \nodeProvRest{} executions with 1000 actuators, the \nodeConsRest{} reasons over 2000 additional rules and 14000 additional triples.
+That is, in \spaceActuation{}'s executions each actuator writes 2 graphs (5 triples in total) and subscribes to temperature preference changes.
+In the \restActuation{}'s executions each actuator has an \ac{api} equivalent to \nodeProvRest{}'s \ac{api} (i.e., 2 rules and 14 triples are exposed).
+For example, in \restActuation{}'s executions with 1000 actuators, \nodeConsRest{} reasons over 2000 additional rules and 14000 additional triples.
 Figure~\ref{fig:timeTechnique} shows the results of these executions (each case is executed N=50 times).
 Note that the time measured 
 \begin{enumerate*}[label=\itshape\bfseries(\arabic*\upshape)]
@@ -105,14 +106,14 @@ Figure~\ref{fig:timeTechnique} shows that \spaceActuation{} needs much less time
 Furthermore, consumers and providers in \spaceActuation{} only perform trivial computing tasks: interpreting results. % pattern matching sólo en el caso del coordination space!
 The space, which corresponds to our solution's \coordspace{}, will be in charge of querying and notification mechanisms.
 The computation activity in the space varies depending on the complexity of these mechanisms' implementation, which is beyond the scope of this dissertation.
-However, note that due to the prototype nature of the subscription mechanism implemented, for the \spaceActuation{} implementation there is still room for a great performance improvement in this metric. % prototype, prototyping?
+However, note that due to the prototype nature of the subscription mechanism implemented, the \spaceActuation{} has still room for a great performance improvement in this metric. % prototype, prototyping?
 
 
-Finally, from the time needed to complete the \restActuation{} executions, most of the time is spent reasoning in the consumer.
+Finally, regarding the time needed to complete \restActuation{}'s executions, the consumer spends most of it reasoning.
 % Furthermore, this actuation technique also generates additional computation activity on the node responsible for reasoning.
 %Both aspects have a negative impact in the energy consumption.
 Consequently, from the data consumer perspective, this approach will generally be more energy demanding than the first one. % might porque no está medido, pero es algo intuitivo
-In contrast, this mechanism demands few things to the provider: to serve \ac{http} resources and provide their descriptions. % aclarar quien es el provider/actuator?
+In contrast, this mechanism demands few things to the provider: to serve \ac{http} resources and to provide their descriptions. % aclarar quien es el provider/actuator?
 
 
 \bigskip
@@ -124,7 +125,7 @@ In contrast, this mechanism demands few things to the provider: to serve \ac{htt
 Table~\ref{tab:actuation_networking_computing} summarizes the previous discussion.
 As can be appreciated, the providers in the second actuation mechanism are more lightweight.
 They just attend to the request received using HTTP.
-As a consequence of these few requirements, exposing the actuation capabilities of the limited devices with HTTP is a consolidated trend.
+Probably as a consequence of these few requirements, exposing the actuation capabilities of the limited devices with HTTP is a consolidated trend.
 This tendency is backed by the \ac{wot} initiative.
 To make these web-enabled actuators automatically reusable by consumers, the second mechanism only requires them to describe their resources semantically.
 This can be done before deploying them and does not affect to their usual operation.
