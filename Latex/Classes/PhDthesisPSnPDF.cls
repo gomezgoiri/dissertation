@@ -418,43 +418,48 @@
     {\@textadvisor \@advisor \par}
     {\@textadvisortwo ~ \@advisortwo \par}
     %{\@advisortwo \par}
-	\vspace*{4ex}
-}%end large
-  \end{center}
-  \null\vfill
-\end{alwayssingle}
-% Blank page
-\cleardoublepage
-% Second cover front (internal)
-\begin{alwayssingle}
-    \renewcommand{\footnotesize}{\small}
-    \renewcommand{\footnoterule}{\relax}
-    \thispagestyle{empty}
-  \begin{center}
-    { \Large {\bfseries {\@crest}} \par}
-	{\vspace*{0.5ex}
-    {{\textsc{\@university}} \par}}
-    % Title style
-    {\huge \vspace*{15mm} { \par} \textsc{\@title}\vspace*{15mm}\par} 
-{\normalsize 
-	\vspace*{1ex}
-    {\@degree \@author \par}
-	\vspace*{0.5ex}
-    {\@collegeordept \par}
-	\vspace*{1ex}
-    {\@textadvisor \@advisor \par}
-    {\@textadvisortwo ~ \@advisortwo \par}
-	\vspace*{4ex}
-    {\@textsignaturecandidate \hspace*{15ex}\@textsignatureadvisor \hspace*{15ex}\@textsignatureadvisor \par}
-    {\hspace*{55ex}\includegraphics[width=0.3\textwidth]{/home/tulvur/documentos/docu_doctorado/registro/firma_primo.jpg}}
-    \vspace*{10ex}
+    % FOR PRINTED VERSION:
+    % --- BEGIN COMMENT
+    \vspace*{15ex}
     {\@cityofbirth, \@degreedate}
+    % --- END COMMENT
 }%end large
   \end{center}
   \null\vfill
 \end{alwayssingle}
-%
-%
+
+% FOR PRINTED VERSION:
+% --- BEGIN UNCOMMENT
+% Blank page
+%\cleardoublepage
+% Second cover front (internal)
+% \begin{alwayssingle}
+%     \renewcommand{\footnotesize}{\small}
+%     \renewcommand{\footnoterule}{\relax}
+%     \thispagestyle{empty}
+%   \begin{center}
+%     { \Large {\bfseries {\@crest}} \par}
+% 	{\vspace*{0.5ex}
+%     {{\textsc{\@university}} \par}}
+%     % Title style
+%     {\huge \vspace*{15mm} { \par} \textsc{\@title}\vspace*{15mm}\par} 
+% {\normalsize 
+% 	\vspace*{1ex}
+%     {\@degree \@author \par}
+% 	\vspace*{0.5ex}
+%     {\@collegeordept \par}
+% 	\vspace*{1ex}
+%     {\@textadvisor \@advisor \par}
+%     {\@textadvisortwo ~ \@advisortwo \par}
+% 	\vspace*{4ex}
+%     {\@textsignaturecandidate \hspace*{15ex}\@textsignatureadvisor \hspace*{15ex}\@textsignatureadvisor \par}
+%     \vspace*{15ex}
+%     {\@cityofbirth, \@degreedate}
+% }%end large
+%   \end{center}
+%   \null\vfill
+% \end{alwayssingle}
+% --- END UNCOMMENT
 }
 
 % page number for cover back side should have page number blanked
