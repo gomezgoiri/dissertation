@@ -7,7 +7,7 @@ For more information about the dissertation, please check [this page](http://gom
 
 I have opened this repository mainly for those of you who are interested in LaTeX related issues and want to learn by example.
 
-If (after googling it) you don't understand how something works, ask on the [forums](http://tex.stackexchange.com/).
+If (after googling it) you don't understand how something works, consider asking on the [forums](http://tex.stackexchange.com/).
 If this doesn't work either, then, and only then, you can try asking me 0:-)
 
 
